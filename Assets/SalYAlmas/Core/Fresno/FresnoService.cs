@@ -507,6 +507,7 @@ namespace SalYAlmas.Core.Fresno
             };
             d.Weaknesses.AddRange(src.Weaknesses);
             foreach (var kv in src.Res) d.Res[kv.Key] = kv.Value;
+            d.Traits = src.Traits;
             return d;
         }
 

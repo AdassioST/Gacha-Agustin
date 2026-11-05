@@ -51,6 +51,7 @@ namespace SalYAlmas.Core.Magic
                 case HybridReaction.HeladaNegra: return "Helada Negra";
                 case HybridReaction.EspinasRojas: return "Espinas Rojas";
                 case HybridReaction.Tempestad: return "Tempestad";
+                case HybridReaction.None: return "Sin carta";
                 default: return "";
             }
         }

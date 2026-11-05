@@ -125,6 +125,8 @@ namespace SalYAlmas.Core.Events
                     return $"[Cancelado] {e.SkillName} {DeName(e.UnitName)} se deshace: {e.Reason}.";
                 case PhaseChanged e:
                     return $"[Fase] {TheName(e.UnitName)}: {e.Text}";
+                case UnitRevived e:
+                    return $"[Regreso] {e.UnitName} vuelve del agua con {e.Hp} de vida.";
                 case UnitDefeated e:
                     return e.Side == Side.Enemy ? $"[Caída] {TheName(e.UnitName)} se deshace en sal." : $"[Caída] {e.UnitName} cae.";
                 case ChainStarted e:

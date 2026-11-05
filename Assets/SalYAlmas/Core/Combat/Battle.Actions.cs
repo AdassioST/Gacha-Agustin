@@ -379,6 +379,12 @@ namespace SalYAlmas.Core.Combat
         {
             var app = new AspectApplication();
             var a = Rules.Aspects;
+            if (target != null && target.Def.Traits.AspectImmune)
+            {
+                // Los Sin Carta (GDD 6.5): sin carta natal, los Aspectos no tienen dónde agarrarse.
+                Emit(new ReactionTriggered { Reaction = HybridReaction.None, TargetId = target.Id, TargetName = target.Name, Detail = "no tiene carta natal: el Aspecto se pierde" });
+                return app;
+            }
             switch (aspect)
             {
                 case Aspect.Conjuncion:

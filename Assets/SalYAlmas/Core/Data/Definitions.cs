@@ -42,7 +42,10 @@ namespace SalYAlmas.Core.Data
         InvertHealing,   // Turns
         FreeVislumbre,   // Filtro de Pureza
         NextToughness,   // Value: +% de Firmeza a la siguiente acción con golpes
-        Paralaje         // Fuera de combate (Agua de Olvido)
+        Paralaje,        // Fuera de combate (Agua de Olvido)
+        Taunt,           // Turns: los enemigos la atacan a ella (Guardianas)
+        MaxHpBurst,      // Value: % de la vida máxima del objetivo. Consume la intoxicación propia (Salitre)
+        StealGrains,     // Value: Granos que se roba (enemigos)
     }
 
     public enum EffectTarget { Target, Self, AllAllies, OtherAllies, AllEnemies }
@@ -136,6 +139,10 @@ namespace SalYAlmas.Core.Data
         public string PassiveDescription = "";
         /// <summary>Topo: sus golpes no hacen daño (sí quitan Firmeza y sí cuentan para el Spark).</summary>
         public bool DealsNoDamage;
+        /// <summary>Axa: al caer revive una vez con este % de vida y la Salinidad en cero.</summary>
+        public double ReviveOnceHp;
+        /// <summary>Salitre: se intoxica al empezar el combate. Coeficiente del veneno sobre su ATQ.</summary>
+        public double StartPoison;
         public SelfCastForm SelfCast;
         public string SelfCastName = "";
         public MoveDef Basic;
@@ -162,6 +169,32 @@ namespace SalYAlmas.Core.Data
     }
 
     public enum EnemyTargetRule { Random, LowestHp, HighestSalinity, All, Self }
+
+    /// <summary>
+    /// Mecánicas que vuelven distinto a un enemigo. Se combinan; las declara enemies.json o fresno_enemies.json.
+    /// Con todo en cero, el enemigo se comporta como en la Fase 1.
+    /// </summary>
+    public sealed class EnemyTraits
+    {
+        /// <summary>Devuelve este % del daño directo a quien lo golpea (Espejos).</summary>
+        public double ReflectPct;
+        /// <summary>Los Sin Carta: los Aspectos no le afectan (GDD 6.5).</summary>
+        public bool AspectImmune;
+        /// <summary>Mientras viva, sus compañeros reciben este % menos de daño (hay que matarlo primero).</summary>
+        public double ProtectAllies;
+        /// <summary>Cuando alguien le pega con un Hechizo, gana este % de ataque por 2 turnos.</summary>
+        public double SpellEnrage;
+        /// <summary>Gana este % de ataque al final de cada turno que sigue viva (Soldada de Crisol).</summary>
+        public double RampAtk;
+        /// <summary>Al actuar, cura este % de su vida máxima a la aliada con menos vida (Novicia sin Alma).</summary>
+        public double HealAllies;
+        /// <summary>Efectos que suelta al caer. Golpean a las brujas aunque ya haya muerto.</summary>
+        public readonly List<EffectDef> OnDeath = new List<EffectDef>();
+        /// <summary>Forma de la silueta de prueba: cristal, bestia, ave, masa, torre, cangrejo, ojo, espejo, sombra, flor.</summary>
+        public string Shape = "";
+        /// <summary>Texto para la placa: qué hace y cómo se le gana.</summary>
+        public string Hint = "";
+    }
 
     public sealed class EnemySkillDef
     {
@@ -205,6 +238,7 @@ namespace SalYAlmas.Core.Data
         public Dictionary<Planet, double> Res = new Dictionary<Planet, double>();
         public Planet AttackPlanet;
         public bool IsBoss;
+        public EnemyTraits Traits = new EnemyTraits();
         /// <summary>Acciones por turno. Los jefes pueden actuar dos veces para no quedar abrumados por cuatro brujas.</summary>
         public int ActionsPerTurn = 1;
         public List<EnemySkillDef> Skills = new List<EnemySkillDef>();

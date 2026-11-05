@@ -62,6 +62,7 @@ namespace SalYAlmas.Core.Combat
         public Grade Grade { get; internal set; }
         public Via Via { get; internal set; }
         public bool VislumbreUsed { get; internal set; }
+        public bool ReviveUsed { get; internal set; }
         public int FrameShift { get; internal set; }
         /// <summary>Arma, progreso y talentos de la Fase 2 (null = la bruja del JSON).</summary>
         public WitchLoadout Loadout { get; internal set; }

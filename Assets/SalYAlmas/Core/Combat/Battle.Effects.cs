@@ -293,6 +293,9 @@ namespace SalYAlmas.Core.Combat
                     return;
                 case EffectType.Paralaje:
                     return; // Solo fuera de combate (GDD 6.5).
+                case EffectType.StealGrains:
+                    AddGrains(-(int)Math.Round(fx.Value), name, allowBoost: false);
+                    return;
             }
 
             foreach (var u in Recipients(fx, actor, target))
@@ -362,8 +365,31 @@ namespace SalYAlmas.Core.Combat
                     case EffectType.NextToughness:
                         AddStatus(u, StatusKind.NextToughness, fx.Value, -1, name, isBuff: true, source: actor);
                         break;
+                    case EffectType.Taunt:
+                        AddStatus(u, StatusKind.Taunt, 0, Math.Max(1, fx.Turns), name, isBuff: true, source: actor);
+                        break;
+                    case EffectType.MaxHpBurst:
+                        MaxHpBurst(u, actor, fx.Value, name);
+                        break;
                 }
             }
+        }
+
+        /// <summary>
+        /// El truco de Salitre (GDD 17): convierte su intoxicación en una explosión que escala con la vida máxima del objetivo.
+        /// Sin intoxicación vale la mitad. Queda topada por su ATQ para no borrar jefes de un golpe.
+        /// </summary>
+        private void MaxHpBurst(Unit target, Unit actor, double fraction, string name)
+        {
+            if (target == null || !target.IsAlive) return;
+            bool intoxicated = false;
+            if (actor != null)
+                intoxicated = RemoveMatching(actor, s => s.Kind == StatusKind.Poison, 99, "se vuelve explosión") > 0;
+            double raw = target.MaxHp * fraction * (intoxicated ? 1.0 : 0.5);
+            double cap = actor != null ? Atk(actor) * 12.0 : raw; // TUNING
+            int dmg = (int)Math.Round(Math.Min(raw, cap), MidpointRounding.AwayFromZero);
+            int dealt = ApplyDamage(target, dmg, out _);
+            Emit(new DotTicked { UnitId = target.Id, UnitName = target.Name, StatusName = name, Planet = Planet.Venus, Damage = dealt, Hp = target.Hp });
         }
 
         /// <summary>Quita hasta count estados que cumplan la condición, empezando por el más reciente.</summary>
