@@ -145,9 +145,14 @@ def env_exp(dur, t60, ataque=0.001):
 
 
 def env_campana(dur, pico=0.5, forma=2.0):
-    """Envolvente que sube y baja (un 'swell'): pico en fracción `pico` de la duración."""
+    """Envolvente que sube y baja (un 'swell'): pico en fracción `pico` de la duración.
+
+    Sube con una curva de potencia y cae en exponencial (unos −40 dB al final), como un barrido real.
+    """
     t = np.linspace(0.0, 1.0, n_(dur))
-    e = np.where(t < pico, (t / pico) ** forma, ((1 - t) / (1 - pico)) ** forma)
+    sube = (t / max(pico, 1e-6)) ** forma
+    baja = np.exp(-4.6 * (t - pico) / max(1 - pico, 1e-6)) * np.clip((1 - t) / 0.08, 0, 1)
+    e = np.where(t < pico, sube, baja)
     return np.clip(e, 0.0, 1.0)
 
 
@@ -535,13 +540,14 @@ def _granos(dur, ctx, tasa_env, f_lo=2500, f_hi=12000, dur_grano=(0.0002, 0.0012
     x = np.zeros(n + n_(0.02))
     t = 0.0
     k = 0
+    ultimo = dur - 0.008  # ningún grano nace si no alcanza a terminar dentro del búfer
     while t < dur:
         tasa = max(float(tasa_env(t)), 1e-3)
         t += ctx.rng.exponential(1.0 / tasa)
-        if t >= dur:
+        if t >= ultimo:
             break
         i = n_(t)
-        a = math.exp(ctx.rng.normal(0, amp_sigma))
+        a = math.exp(ctx.rng.normal(0, amp_sigma)) * min(1.0, (dur - t) / (0.25 * dur))
         dg = ctx.u(*dur_grano)
         m = max(n_(dg), 4)
         g = ctx.normal(m) * np.exp(-np.linspace(0, 5, m))
@@ -610,14 +616,14 @@ def papel(dur, ctx, densidad=180, f_lo=900, f_hi=7000, suavidad=0.0):
     t = 0.0
     while True:
         t += ctx.rng.exponential(1.0 / densidad)
-        if t >= dur:
+        if t >= dur - 0.015:
             break
         m = n_(ctx.u(0.002, 0.014))
         g = ctx.normal(m) * np.exp(-np.linspace(0, ctx.u(2, 6), m))
         fc = ctx.u(f_lo, f_hi)
         g = bp(g, fc * 0.6, min(fc * 1.8, 20000), 1)
         i = n_(t)
-        x[i:i + m] += math.exp(ctx.rng.normal(0, 0.7)) * g
+        x[i:i + m] += math.exp(ctx.rng.normal(0, 0.7)) * g * min(1.0, (dur - t) / (0.25 * dur))
     x = x[:n]
     if suavidad > 0:
         x = lp(x, f_hi * (1 - 0.5 * suavidad), 1)
@@ -657,7 +663,9 @@ def pluma(dur, ctx, trazos=2, fuerza=1.0, punto=True):
     x = bp(x, 1800, 8000, 2)
     x = x + 0.6 * resonador(x, ctx.u(3800, 5200), 6)
     friccion = bp(blanco(dur, ctx.hijo("fr")), 2500, 9000) * 0.015
-    x = x / (np.max(np.abs(x)) + 1e-9) + friccion * (np.abs(x) > 0.01)
+    x = x / (np.max(np.abs(x)) + 1e-9)
+    seguidor = lp(np.abs(x), 30, 1)
+    x = x + friccion * np.clip(seguidor / (np.max(seguidor) + 1e-9) * 3, 0, 1)
     if punto:
         tk = chasquido(ctx.hijo("punto"), 0.002, 2000, 9000)
         x = Lienzo(dur).add(x).add(tk / (np.max(np.abs(tk)) + 1e-9), dur * 0.9, -6).senal()
@@ -716,11 +724,19 @@ def whoosh(dur, ctx, f0=400, f1=2500, q=1.5, pico=0.6, forma=1.8, rosa_=True):
     return y * env_campana(dur, pico, forma)
 
 
-def golpe_sordo(ctx, f_ini=120, f_fin=48, dur=0.25, click=0.3):
-    """Golpe de cuerpo grave: senoidal que cae de tono, con un clic opcional."""
+def golpe_sordo(ctx, f_ini=120, f_fin=48, dur=0.25, click=0.3, armonicos=0.6):
+    """Golpe de cuerpo grave: senoidal que cae de tono, con un clic opcional.
+
+    armonicos: saturación suave del cuerpo para que tenga armónicos de 100 a 300 Hz y exista en la bocina
+    de un teléfono, que no reproduce el fundamental.
+    """
     t = tiempo(dur)
     f = f_fin + (f_ini - f_fin) * np.exp(-t / 0.035)
-    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / (dur * 0.28))
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR)
+    if armonicos > 0:
+        k = 1 + 3 * armonicos
+        x = np.tanh(k * x) / np.tanh(k)
+    x = x * np.exp(-t / (dur * 0.22)) * np.clip((dur - t) / (dur * 0.2), 0, 1)
     if click > 0:
         c = chasquido(ctx, 0.003, 300, 4000)
         x[: len(c)] += click * c / (np.max(np.abs(c)) + 1e-9)
@@ -852,11 +868,11 @@ def burbujeo(dur, ctx, tasa=40.0, f_lo=500, f_hi=3500, tasa_env=None, xi=0.1):
     k = 0
     while True:
         r = tasa * (tasa_env(t) if tasa_env else 1.0)
-        t += ctx.rng.exponential(1.0 / max(r, 1e-3))
+        t += min(ctx.rng.exponential(1.0 / max(r, 1e-3)), 0.25)  # nunca un hueco de más de 250 ms
         if t >= dur:
             break
         f = math.exp(ctx.u(math.log(f_lo), math.log(f_hi)))
-        a = (f_lo / f) ** 0.4 * ctx.u(0.3, 1.0)
+        a = (f_lo / f) ** 0.4 * ctx.u(0.3, 1.0) * min(1.0, (dur - t) / (0.25 * dur))
         lz.add(burbuja(f, ctx, a, xi), t)
         k += 1
     return lz.senal()
@@ -901,7 +917,7 @@ def escurrir(dur, ctx, tasa=25.0, f_lo=1200, f_hi=4500):
 
 def hervor(dur, ctx, intensidad=1.0):
     """Hervor: burbujas graves y densas con un rumor de fondo."""
-    b = burbujeo(dur, ctx, 30 + 120 * intensidad, 140, 900 + 600 * intensidad, xi=0.05)
+    b = ajustar(burbujeo(dur, ctx, 30 + 120 * intensidad, 140, 900 + 600 * intensidad, xi=0.05), n_(dur))
     rumor = lp(marron(dur, ctx.hijo("r")), 250) * 0.15 * intensidad
     return b / (np.max(np.abs(b)) + 1e-9) + rumor
 
@@ -918,11 +934,12 @@ def crepitar(dur, ctx, tasa=40.0, f_lo=1200, f_hi=9000):
     t = 0.0
     while True:
         t += ctx.rng.exponential(1.0 / tasa)
-        if t >= dur:
+        if t >= dur - 0.0015:
             break
         m = ctx.i(8, 60)
         i = n_(t)
-        x[i:i + m] += (ctx.rng.pareto(2.5) + 0.2) * ctx.normal(m) * np.exp(-np.linspace(0, 6, m))
+        cola = min(1.0, (dur - t) / (0.25 * dur))
+        x[i:i + m] += cola * (ctx.rng.pareto(2.5) + 0.2) * ctx.normal(m) * np.exp(-np.linspace(0, 6, m))
     return bp(x[:n], f_lo, f_hi, 2)
 
 
@@ -1009,7 +1026,7 @@ def susurro(dur, ctx, silabas=5, reves=False, registro=1.0):
     def fc(t):
         return [np.interp(t, tt, centros[j]) for j in range(3)]
     base = rosa(dur, ctx.hijo("r"))
-    x = formantes(base, fc, (90, 140, 220), (1.0, 0.6, 0.35))
+    x = formantes(base, fc, (200, 280, 380), (1.0, 0.6, 0.35))  # anchos de susurro: aire, no tono
     sib = hp(blanco(dur, ctx.hijo("s")), 4500, 2) * 0.12
     x = x / (np.max(np.abs(x)) + 1e-9) + sib
     x = x * env
@@ -1072,8 +1089,15 @@ def _ir(rt60, canales, brillo, semilla):
     return np.stack(irs, axis=1) if canales == 2 else irs[0]
 
 
-def sala(x, mezcla=0.2, rt60=1.2, predelay=0.012, estereo=False, brillo=1.0, semilla=7):
-    """Reverb de convolución de la 'capilla pequeña de piedra' (la misma sala de la música)."""
+SALA_RT60_MAX = 0.8  # la reverb real la ponen los retornos de FMOD (rv_combate, rv_termas, rv_astral)
+
+
+def sala(x, mezcla=0.2, rt60=0.6, predelay=0.012, estereo=False, brillo=1.0, semilla=7):
+    """Reverb de convolución de la 'capilla pequeña de piedra' (la misma sala de la música).
+
+    Se queda corta a propósito (máximo 0.8 s): solo pega las capas. La sala de verdad la pone FMOD.
+    """
+    rt60 = min(rt60, SALA_RT60_MAX)
     canales = 2 if estereo else 1
     ir = _ir(round(rt60, 3), canales, round(brillo, 3), semilla)
     mono = a_mono(x) if x.ndim == 2 else x
@@ -1172,3 +1196,31 @@ def fuente(nombre, velocidad=1.0, hp_hz=None, lp_hz=None, recorte=None):
     if lp_hz:
         x = lp(x, lp_hz, 2)
     return x / (np.max(np.abs(x)) + 1e-12)
+
+
+def env_de(x, puntos):
+    """Envolvente lineal por puntos con el largo exacto de x."""
+    t = np.arange(len(x)) / SR
+    return np.interp(t, [p[0] for p in puntos], [p[1] for p in puntos])
+
+
+def exp_de(x, t60, ataque=0.0005):
+    """Envolvente exponencial con el largo exacto de x."""
+    t = np.arange(len(x)) / SR
+    e = np.exp(-6.9078 * t / max(t60, 1e-4))
+    na = min(n_(ataque), len(e))
+    if na > 1:
+        e[:na] *= np.linspace(0.0, 1.0, na)
+    return e
+
+
+def tramo(x, dur, fin=None, inicio=0.0):
+    """Toma un tramo de una señal con caída exponencial al final (para no cortar colas en seco).
+
+    fin: segundos de la caída; por omisión, el 40 % del tramo.
+    """
+    y = np.array(x[n_(inicio):n_(inicio + dur)], dtype=float, copy=True)
+    nf = min(n_(fin) if fin else int(len(y) * 0.4), len(y))
+    if nf > 1:
+        y[-nf:] *= np.exp(-np.linspace(0, 6.0, nf))
+    return y

@@ -221,12 +221,16 @@ namespace SalYAlmas.Presentation
             }
         }
 
+        /// <summary>Se dispara cada vez que el jugador presiona un botón (para el sonido de la interfaz).</summary>
+        public static event System.Action ButtonPressed;
+
         public static bool Button(Rect r, string text, bool enabled = true, int size = 22)
         {
             bool old = GUI.enabled;
             GUI.enabled = old && enabled;
             bool pressed = GUI.Button(r, text, ButtonStyle(size));
             GUI.enabled = old;
+            if (pressed) ButtonPressed?.Invoke();
             return pressed;
         }
 

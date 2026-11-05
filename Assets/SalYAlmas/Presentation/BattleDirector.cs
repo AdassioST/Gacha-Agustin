@@ -49,6 +49,9 @@ namespace SalYAlmas.Presentation
 
         public float Speed = 1f;
         public bool Auto;
+
+        /// <summary>Se dispara cuando un evento se muestra en pantalla (después de su espera). Lo usan el sonido y otros oyentes.</summary>
+        public event Action<BattleEvent> EventPresented;
         public bool ShowHits;
 
         // Espejo de lo que se ve en pantalla (avanza con los eventos, no con el estado final).
@@ -256,6 +259,7 @@ namespace SalYAlmas.Presentation
 
         private void Apply(BattleEvent e)
         {
+            EventPresented?.Invoke(e);
             AddLog(e);
             switch (e)
             {

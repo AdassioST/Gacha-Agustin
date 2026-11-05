@@ -46,6 +46,8 @@ namespace SalYAlmas.Presentation
         private string _lastFingerprint = "";
         private string _savedReportPath = "";
         private TempMusicPlayer _music;
+        private TempSfxPlayer _sfx;
+        private bool _chainWasOpen;
 
         public BattleDirector Director => _director;
         public GameDatabase Database => _db;
@@ -54,6 +56,8 @@ namespace SalYAlmas.Presentation
         {
             if (BattleCamera == null) BattleCamera = Camera.main;
             _music = gameObject.AddComponent<TempMusicPlayer>();
+            _sfx = gameObject.AddComponent<TempSfxPlayer>();
+            GuiKit.ButtonPressed += _sfx.OnButtonPressed;
             _saved.Load();
             LoadData();
         }
@@ -108,6 +112,12 @@ namespace SalYAlmas.Presentation
             _lastSetup = setup.Clone();
             _savedReportPath = "";
             _director = new BattleDirector(_db, setup, _saved.Items, replay);
+            if (_sfx != null)
+            {
+                _sfx.Bind(_director.Battle);
+                _director.EventPresented += _sfx.OnEvent;
+            }
+            _chainWasOpen = false;
             _chain = new ChainScreen(_director, _saved);
             _hud = new BattleHud(_director, _chain, BattleCamera);
             SpawnUnits();
@@ -192,6 +202,17 @@ namespace SalYAlmas.Presentation
         {
             if (_mode == Mode.Battle) _director?.Tick(Time.unscaledDeltaTime);
             if (_music != null) _music.SetState(CurrentMusic(), _mode == Mode.Battle && _chain != null && _chain.IsOpen);
+            bool chainOpen = _mode == Mode.Battle && _chain != null && _chain.IsOpen;
+            if (chainOpen != _chainWasOpen)
+            {
+                _chainWasOpen = chainOpen;
+                if (_sfx != null) _sfx.NotifyChainScreen(chainOpen);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (_sfx != null) GuiKit.ButtonPressed -= _sfx.OnButtonPressed;
         }
 
         /// <summary>
@@ -211,11 +232,19 @@ namespace SalYAlmas.Presentation
 
         private void OnGUI()
         {
-            // M silencia o activa la música, salvo que se esté escribiendo en un campo de texto.
-            if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.M && GUIUtility.keyboardControl == 0 && _music != null)
+            // M silencia o activa la música y N los efectos, salvo que se esté escribiendo en un campo de texto.
+            if (Event.current.type == EventType.KeyDown && GUIUtility.keyboardControl == 0)
             {
-                _music.ToggleMute();
-                Event.current.Use();
+                if (Event.current.keyCode == KeyCode.M && _music != null)
+                {
+                    _music.ToggleMute();
+                    Event.current.Use();
+                }
+                else if (Event.current.keyCode == KeyCode.N && _sfx != null)
+                {
+                    _sfx.ToggleMute();
+                    Event.current.Use();
+                }
             }
 
             // Toque sobre el mundo antes de escalar el lienzo (coordenadas reales de pantalla).

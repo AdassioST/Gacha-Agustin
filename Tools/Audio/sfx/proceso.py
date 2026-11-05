@@ -98,7 +98,7 @@ def recortar(x, fundido_ini=0.0015, preroll=0.001):
     i0 = max(int(sobre_ini[0]) - n_(preroll), 0)
     i1 = min(int(sobre_fin[-1]) + n_(0.01), len(x))
     y = np.array(x[i0:i1], dtype=float, copy=True)
-    nf = min(max(n_(0.012), int(len(y) * 0.06)), n_(0.12), len(y) // 2)
+    nf = min(max(n_(0.015), int(len(y) * 0.12)), n_(0.15), len(y) // 2)
     ni = min(n_(fundido_ini), len(y) // 4)
     if ni > 1:
         w = 0.5 - 0.5 * np.cos(np.linspace(0, math.pi, ni))
@@ -120,23 +120,39 @@ def bucle(x, cruce=0.25):
     return cuerpo
 
 
-def limitar(x, techo_lin, liberacion=0.06):
-    """Limitador con anticipación: la ganancia baja antes del pico y sube despacio. Nunca recorta."""
-    env = np.abs(x) if x.ndim == 1 else np.max(np.abs(x), axis=1)
-    sobre = signal.resample_poly(env, 4, 1)
-    sobre = np.max(np.abs(sobre).reshape(-1, 4), axis=1)[: len(env)]
-    env = np.maximum(env, sobre) * 1.05
-    g = np.minimum(1.0, techo_lin / np.maximum(env, 1e-12))
-    anti = n_(0.0015)
-    g = minimum_filter1d(g, size=2 * anti + 1, mode="nearest")
+def limitar(x, techo_lin, liberacion=0.05, anticipacion=0.0015):
+    """Limitador de pico real con anticipación. Nunca recorta: la ganancia baja antes del pico y sube despacio.
+
+    1. Envolvente de pico real (sobremuestreo ×4) y la ganancia que haría falta en cada muestra.
+    2. Liberación recursiva: la ganancia solo sube a la velocidad de `liberacion`.
+    3. Mínimo móvil de 2L y media móvil de L: la curva empieza a bajar L muestras antes del pico y el
+       promedio nunca queda por encima de la ganancia requerida.
+    """
+    n = len(x)
+    env = np.zeros(n)
+    for c in _canales(x):
+        up = signal.resample_poly(c, 4, 1)
+        pk = np.max(np.abs(up[: 4 * n]).reshape(-1, 4), axis=1) if len(up) >= 4 * n else np.abs(c)
+        env = np.maximum(env, np.maximum(np.abs(c), pk))
+    req = np.minimum(1.0, techo_lin / np.maximum(env, 1e-12))
     a = math.exp(-1.0 / (liberacion * SR))
-    g = signal.lfilter([1 - a], [1, -a], g - 1.0) + 1.0
-    g = np.minimum(g, minimum_filter1d(g, size=2 * anti + 1, mode="nearest"))
-    g = np.convolve(g, np.ones(anti) / anti, mode="same")
-    return (x.T * g).T
+    g = np.empty(n)
+    previo = 1.0
+    for i in range(n):  # liberación: la ganancia sube despacio y baja al instante (la anticipación la suaviza)
+        previo = min(req[i], 1.0 - (1.0 - previo) * a)
+        g[i] = previo
+    L = max(n_(anticipacion), 2)
+    h = minimum_filter1d(g, size=2 * L + 1, mode="nearest")
+    h = np.convolve(h, np.ones(L) / L, mode="same")
+    return (x.T * h).T
 
 
-def acabar(x, objetivo, metrica="M", es_bucle=False, hp_hz=25.0, limite_db=3.0):
+def exceso_total(g, objetivo, actual):
+    """Cuánto se pasó la ganancia de lo que pedía el objetivo (lo que el limitador tuvo que absorber de más)."""
+    return g - (objetivo - actual)
+
+
+def acabar(x, objetivo, metrica="M", es_bucle=False, hp_hz=25.0, limite_db=6.0, liberacion=0.03):
     """Cadena completa de acabado. Devuelve (señal, informe)."""
     x = np.asarray(x, dtype=float)
     if not es_bucle:
@@ -146,26 +162,30 @@ def acabar(x, objetivo, metrica="M", es_bucle=False, hp_hz=25.0, limite_db=3.0):
     # 2. Recorte y fundidos
     if not es_bucle:
         x = recortar(x)
-    # 3. Ganancia hacia el objetivo de sonoridad
-    if metrica == "I":
-        actual = integrada(x)
-    else:
-        actual = sonoridad(x, 0.4 if metrica == "M" else 3.0)
-    g = objetivo - actual
-    x = x * 10 ** (g / 20)
-    # 4. Pico real
-    tp = pico_real(x)
-    exceso = tp - TECHO_DBTP
-    if exceso > 0:
-        if exceso <= limite_db:
-            x = limitar(x, 10 ** ((TECHO_DBTP - 0.2) / 20))
-        else:
-            x = limitar(x * 10 ** (-(exceso - limite_db) / 20), 10 ** ((TECHO_DBTP - 0.2) / 20))
-        for _ in range(6):
-            tp = pico_real(x)
-            if tp <= TECHO_DBTP:
-                break
-            x = x * 10 ** ((TECHO_DBTP - tp - 0.05) / 20)
+    # 3. Ganancia hacia el objetivo de sonoridad y 4. pico real. Si el limitador come sonoridad, se compensa
+    #    (hasta tres vueltas) sin pasar de `limite_db` de ganancia extra sobre lo que pide el objetivo.
+    medir = (lambda y: integrada(y)) if metrica == "I" else (lambda y: sonoridad(y, 0.4 if metrica == "M" else 3.0))
+    base = x
+    g = objetivo - medir(base)
+    techo = 10 ** ((TECHO_DBTP - 0.2) / 20)
+    for _ in range(3):
+        y = base * 10 ** (g / 20)
+        if pico_real(y) > TECHO_DBTP:
+            # nunca más de `limite_db` de reducción: el resto se quita con ganancia
+            exceso = pico_real(y) - TECHO_DBTP
+            if exceso > limite_db:
+                y = y * 10 ** (-(exceso - limite_db) / 20)
+            y = limitar(y, techo, liberacion=liberacion)
+        falta = objetivo - medir(y)
+        if falta < 0.4 or exceso_total(g, objetivo, medir(base)) > limite_db:
+            break
+        g += falta
+    x = y
+    for _ in range(6):
+        tp = pico_real(x)
+        if tp <= TECHO_DBTP:
+            break
+        x = x * 10 ** ((TECHO_DBTP - tp - 0.05) / 20)
     inf = dict(
         duracion=len(x) / SR,
         m_max=sonoridad(x, 0.4),
@@ -181,17 +201,18 @@ def revisar(x, es_bucle=False):
     """Pruebas automáticas: DC, bordes, saturación, cola cortada y costura del bucle."""
     avisos = []
     canales = _canales(x)
+    if np.max(np.abs(x)) < 1e-3:
+        avisos.append("silencio")
     for c in canales:
-        if abs(float(np.mean(c))) > 2e-3:
+        # DC: desplazamiento sostenido, no la asimetría de un golpe grave corto
+        if len(c) > n_(0.5) and abs(float(np.mean(c))) > max(2e-3, 0.1 * float(np.sqrt(np.mean(c ** 2)))):
             avisos.append("DC")
         if np.max(np.abs(c)) >= 0.999:
             avisos.append("saturación")
         if not es_bucle:
             if abs(c[0]) > 2e-3 or abs(c[-1]) > 2e-3:
                 avisos.append("borde con clic")
-            pico = np.max(np.abs(c)) + 1e-12
-            cola = c[-n_(0.03):-n_(0.012)] if len(c) > n_(0.05) else c[-5:]
-            if len(cola) and np.sqrt(np.mean(cola ** 2)) / pico > 10 ** (-38 / 20):
+            if corte_brusco(c):
                 avisos.append("cola cortada")
         else:
             d0 = abs(c[0] - c[-1])
@@ -199,6 +220,39 @@ def revisar(x, es_bucle=False):
             if d0 > 6 * esc * 0.2 + 0.02:
                 avisos.append("costura del bucle")
     return sorted(set(avisos))
+
+
+def corte_brusco(c, caida_db=35.0, ventana=0.008, piso_db=-24.0):
+    """Busca un corte: la envolvente cae más de `caida_db` en `ventana` segundos desde un nivel alto.
+
+    Una caída natural (cristal, golpe seco) baja unos 20 dB cada 10 ms; un corte en seco baja de golpe.
+    """
+    e = _envolvente(c, 3)
+    mx = float(np.max(e)) + 1e-12
+    L = 20 * np.log10(e / mx + 1e-9)
+    d = n_(ventana)
+    if len(L) <= d:
+        return False
+    caida = L[:-d] - L[d:]
+    alto = L[:-d] > piso_db
+    # Solo cuenta si el sonido venía sostenido (30 ms sin bajar más de 4 dB): así un transitorio que cae
+    # rápido, como la fractura de un cristal o un grano suelto de una textura, no se confunde con un corte.
+    w = n_(0.03)
+    previo = minimum_filter1d(L, size=w, origin=(w - 1) // 2, mode="nearest")[:-d]
+    sostenido = previo > L[:-d] - 4.0
+    return bool(np.any(caida[alto & sostenido] > caida_db))
+
+
+def tope_duracion(x, max_dur):
+    """Limita la duración: fundido exponencial en el último 35 % hasta el tope (presupuesto de tamaño)."""
+    n = n_(max_dur)
+    if len(x) <= n:
+        return x
+    y = np.array(x[:n], dtype=float, copy=True)
+    nf = int(n * 0.35)
+    w = np.exp(-np.linspace(0, 7.0, nf))  # unos −60 dB al final
+    y[-nf:] = (y[-nf:].T * w).T
+    return y
 
 
 def escribir(ruta, x):
