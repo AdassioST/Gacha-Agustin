@@ -107,7 +107,13 @@ namespace SalYAlmas.Presentation
             if (story.CurrentZone != null)
                 GuiKit.Label(new Rect(30, 20, 900, 40), $"{story.CurrentRegion.Name} · {story.CurrentZone.Name} · nivel {story.ZoneLevel(story.CurrentRegion, story.CurrentZone)}", 22, Palette.Parchment, TextAnchor.MiddleLeft, true);
             string portrait = scene.Portrait;
-            if (portrait.Length > 0)
+            if (portrait.StartsWith("npc_"))
+            {
+                // Personaje que no es bruja: su retrato (Art/Npc) o, mientras no exista, su recorte de enemigo.
+                var npc = _art?.Get(portrait) ?? _art?.Enemy(NpcEnemy(portrait));
+                if (npc != null) PortraitBank.Fit(new Rect(90, 60, 640, 1000), npc);
+            }
+            else if (portrait.Length > 0)
             {
                 var body = _art.Body(portrait);
                 var box = new Rect(90, 60, 640, 1000);
@@ -188,6 +194,8 @@ namespace SalYAlmas.Presentation
         }
 
         private bool _afterPrologue;
+
+        private static string NpcEnemy(string npc) => npc == "npc_duquesa" ? "duquesa_fiel" : npc.Substring(4);
 
         private void AutoStoryBattle(System.Collections.Generic.List<string> party)
         {

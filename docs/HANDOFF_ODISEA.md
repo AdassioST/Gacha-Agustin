@@ -1,5 +1,26 @@
 # Traspaso: Odisea, misiones y kits de las 24 brujas
 
+## Actualización (2026-11-05, madrugada, Claude Code). Léela primero
+
+La sesión se cortó por límite de uso. **Lo de abajo de esta sección es el traspaso anterior y en buena parte ya está hecho.**
+
+| Pieza | Estado | Dónde |
+| --- | --- | --- |
+| Diseño híbrido: lugar libre desde tu signo, nivel lineal por la Marea de Sal | Hecho; pide aprobación del texto para el GDD 6 | `docs/propuestas/ODISEA.md` (sección 11 trae el párrafo propuesto) |
+| Parche de trucos y rasgos de enemigos | Aplicado y conectado | `Core/Combat` |
+| Kits de las 18 brujas | Hecho, por plantilla | `Tools/Content/gen_kits.py`, `Data/witches_ext.json` |
+| Anillo, zonas, secciones, botín, Expediciones, 4 regiones cardinales, 25 enemigos | Hecho | `StoryService.Odyssey.cs`, `Tools/Content/gen_odyssey.py` y `odyssey_story.py`, `Data/odyssey.json` |
+| Encargos, logros y Altura | Hecho | `QuestService.cs`, `Data/quests.json` |
+| Interfaz: mapa, zonas, Expedición, encargos, fondos y enemigos en combate | Hecho | `Presentation/Meta/MetaHub.Odyssey.cs` |
+| Arte | Codex trabaja en `Assets/SalYAlmas/Art/Ambientes` y `Enemigos` con `docs/Ambientes para Codex.md`. **Sin confirmar en git** (unos 150 MB) |
+
+Verificado en `8279383` y después: `dotnet test` 309 de 309; Unity EditMode 311 de 311 (`Logs/odisea-20261105/editmode.xml`); jugador de Windows con 26 capturas sin excepciones (`Logs/odisea-20261105/shots2`); `Core.Sim historia 3` termina las ocho rutas.
+
+**Lo último, a medias:** retratos `npc_<id>` para Ferrán, Tecuani, Corvina, Maela, Aduanera y la Duquesa. El código y Aries/Capricornio ya los usan; en `gen_odyssey.py` falló el reemplazo que reescribe Cáncer y Libra (assert "no match"), así que esas dos regiones todavía no llevan `portrait`. Falta también pedirle a Codex esos retratos (prioridad 4, sin escribir en su documento).
+
+**Siguiente:** arreglar ese reemplazo; confirmar el arte de Codex cuando termine; interludios del eclipse, folios y Descendente (ODISEA 12); alinear el Fresno con la Marea; recompilar y revisar capturas. Choque esperado con `ui/interfaz` en `MetaHub.cs`, `MetaHub.Home.cs`, `MetaHub.Story.cs` y `SalYAlmasGame.cs`.
+
+
 Este documento es para el agente que siga. La cuenta anterior se quedó sin crédito a media tarea. **Casi nada de este encargo está construido:** aquí está la investigación, el diseño y un parche sin aplicar.
 
 ## Dónde trabajar

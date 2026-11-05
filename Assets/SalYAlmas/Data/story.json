@@ -130,9 +130,9 @@
           "id": "aries_4", "name": "La capitana Ferrán", "description": "Enfrentar a quien manda la Casa en estos montes.", "start": "d1",
           "rewards": { "res": { "almitas": 10000, "sales_de_bano": 80 } },
           "scenes": [
-            { "id": "d1", "speaker": "Ferrán", "text": "Una contadora. Pensé que mandarían a una santa. Dime, ¿cuántos de los míos valen uno de los tuyos? Tú eres quien lleva las cuentas.",
+            { "id": "d1", "speaker": "Ferrán", "portrait": "npc_ferran", "text": "Una contadora. Pensé que mandarían a una santa. Dime, ¿cuántos de los míos valen uno de los tuyos? Tú eres quien lleva las cuentas.",
               "battle": { "enemies": ["ferran"], "strength": 1.0, "boss": true, "next": "d2" } },
-            { "id": "d2", "speaker": "Ferrán", "text": "Está bien. Termina. Pero sabe esto: el Carnero que me dieron no es un signo. Lo sentí mirar a través de mí. Algo me usaba de ventana.", "effects": { "paralaje": 10 },
+            { "id": "d2", "speaker": "Ferrán", "portrait": "npc_ferran", "text": "Está bien. Termina. Pero sabe esto: el Carnero que me dieron no es un signo. Lo sentí mirar a través de mí. Algo me usaba de ventana.", "effects": { "paralaje": 10 },
               "choices": [
                 { "text": "Perdonarla y dejarla ir", "stat": "encanto", "need": 5, "effects": { "marks": ["perdono_capitana"], "title": "perdon_de_hierro" }, "next": "d3" },
                 { "text": "Quitarle el mando y entregarla a Valdehierro", "effects": { "marks": ["entrego_capitana"], "souls": 5 }, "next": "d4" }
@@ -242,12 +242,12 @@
           "id": "cap_5", "name": "La Casa de la Cabra", "description": "Lo que sorbe desde abajo.", "start": "j1",
           "rewards": { "witch": "cempa", "res": { "almitas": 12000, "sales_de_bano": 160, "quintaesencia.saturno": 1 } },
           "scenes": [
-            { "id": "j1", "speaker": "Doña Tecuani", "text": "Nosotras no alimentamos a la Boca porque seamos crueles, {nombre}. La alimentamos porque hicimos las cuentas. Una barca de cada cinco. ¿Tienes mejores números?",
+            { "id": "j1", "speaker": "Doña Tecuani", "portrait": "npc_tecuani", "text": "Nosotras no alimentamos a la Boca porque seamos crueles, {nombre}. La alimentamos porque hicimos las cuentas. Una barca de cada cinco. ¿Tienes mejores números?",
               "variants": [ { "when": { "marks": ["vio_cuentas"] }, "text": "Doña Tecuani te mira con las cuentas de la Casa en tu mano. «Ya las leíste. Entonces sabes que una barca de cada cinco es lo que evita que la Boca suba a la ciudad. ¿Tienes mejores números, {nombre}?»" } ],
               "next": "j2" },
             { "id": "j2", "text": "La matriarca de la Casa baja a la poza. Su Ascendente se levanta detrás de ella, y por un momento tiene demasiados ojos.", "effects": { "paralaje": 10 },
               "battle": { "enemies": ["boca_vieja", "boca_nueva"], "strength": 1.0, "boss": true, "next": "j3" } },
-            { "id": "j3", "speaker": "Doña Tecuani", "text": "Mírala. Mira hacia abajo. La Boca no es un remolino. Es una raíz, y está bebiendo. Y mira hacia arriba: ¿quién crees que tiene sed?",
+            { "id": "j3", "speaker": "Doña Tecuani", "portrait": "npc_tecuani", "text": "Mírala. Mira hacia abajo. La Boca no es un remolino. Es una raíz, y está bebiendo. Y mira hacia arriba: ¿quién crees que tiene sed?",
               "choices": [
                 { "text": "Cerrar la Boca Vieja y romper el tributo", "effects": { "marks": ["cerro_boca"], "paralaje": 5, "souls": -20 }, "next": "j4" },
                 { "text": "Mantener el tributo con cuentas más justas", "stat": "calculo", "need": 6, "effects": { "marks": ["tributo_justo"] }, "next": "j4" },

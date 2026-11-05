@@ -321,7 +321,8 @@ namespace SalYAlmas.Core.World
                     Id = r.Str(sn, "id"), Speaker = r.Str(sn, "speaker", false), Portrait = r.Str(sn, "portrait", false), Text = r.Str(sn, "text", false), Next = r.Str(sn, "next", false),
                     Effects = ReadEffects(sn.Get("effects"), s, meta, r),
                 };
-                if (scene.Portrait.Length > 0 && !meta.Roster.ContainsKey(scene.Portrait)) r.Error(sn, "retrato desconocido: " + scene.Portrait);
+                // Los personajes que no son brujas usan "npc_<id>"; su arte es opcional.
+                if (scene.Portrait.Length > 0 && !scene.Portrait.StartsWith("npc_") && !meta.Roster.ContainsKey(scene.Portrait)) r.Error(sn, "retrato desconocido: " + scene.Portrait);
                 foreach (var vn in r.Arr(sn, "variants", false))
                     scene.Variants.Add(new StoryVariant { When = ReadCondition(vn.Get("when"), r), Text = r.Str(vn, "text") });
                 foreach (var cn in r.Arr(sn, "choices", false))

@@ -4,7 +4,7 @@
 # Uso, desde la raíz del repositorio:  python Tools/Content/gen_odyssey.py
 import json, os, re, sys
 sys.path.insert(0, os.path.dirname(__file__))
-from odyssey_story import CANCER, LIBRA
+from odyssey_story import CANCER, LIBRA, NPC
 
 DATA = 'Assets/SalYAlmas/Data/'
 
@@ -279,7 +279,10 @@ def patch_story():
         nb = re.sub(r'"enemies": \[[^\]]*\]', '"enemies": ' + json.dumps(enemies, ensure_ascii=False), body)
         if strength is not None: nb = re.sub(r'"strength": [\d.]+', '"strength": %s' % strength, nb)
         s = s[:m.start(1)] + nb + s[m.end(1):]
-    # 4. Cáncer y Libra, antes del cierre de "regions".
+    # 4. Retratos de los personajes que no son brujas (Ferrán, Doña Tecuani…).
+    for name, pid in NPC.items():
+        s = s.replace('"speaker": "%s", "text"' % name, '"speaker": "%s", "portrait": "%s", "text"' % (name, pid))
+    # 5. Cáncer y Libra, antes del cierre de "regions".
     if '"id": "can_1"' not in s:
         tail = '\n    }\n  ]\n}'
         i = s.rstrip().rfind(tail.strip()[:1])

@@ -1,7 +1,11 @@
 # Guion de Cáncer y Libra para story.json. BORRADOR de Claude Code (HUECOS H-14): falta la aprobación del usuario.
 # Lo usa gen_odyssey.py. Cada región: cinco misiones repartidas en orilla, subsuelo y corazón (odyssey.json).
 
+# Personajes que no son brujas: su retrato sale de Art/Ambientes o Art/Npc (encargo de Codex, prioridad 4).
+NPC = {'Ferrán': 'npc_ferran', 'Doña Tecuani': 'npc_tecuani', 'Almiranta Corvina': 'npc_corvina', 'Maela': 'npc_maela', 'Aduanera': 'npc_aduanera', 'La Duquesa': 'npc_duquesa'}
+
 def sc(id_, text, speaker=None, portrait=None, nxt=None, variants=None, choices=None, battle=None, effects=None):
+    if speaker in NPC and not portrait: portrait = NPC[speaker]
     d = {'id': id_}
     if speaker: d['speaker'] = speaker
     if portrait: d['portrait'] = portrait
