@@ -1,0 +1,856 @@
+{
+  "schema_version": 1,
+  "project": "Sal y Almas: La Odisea del Fresno",
+  "tool": "image_gen.imagegen (integrated)",
+  "requested_model": "gpt-image-2",
+  "requested_size": [
+    1024,
+    1024
+  ],
+  "model_control": "The integrated tool exposes no model or pixel-size parameter; record returned metadata and validate output dimensions.",
+  "prompt_source": "docs/Bustos para Codex.md sections 7-9",
+  "prompt_source_sha256": "77f0ea34e466c979185c0e13f01d03286f01cd8c84e140ed72161c51aed1f9c5",
+  "status": "generating_neutral_variants",
+  "interactive": true,
+  "expected_neutrals": 36,
+  "expected_expressions": 126,
+  "total_generation_calls": 10,
+  "successful_generations": 10,
+  "entries": [
+    {
+      "id": "marisal",
+      "phase": 1,
+      "scale": "ANTHRO",
+      "references": [
+        "art/recortes/marisal/marisal_f1_busto.png",
+        "art/retratos/marisal/marisal_f1_v3.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Marisal Hojadelobo, a grey mountain she-wolf witch in her thirties, tall and muscular. Steel-grey fur with pale cream fur on the muzzle, cheeks and chest, a thin pale scar across her left brow, narrow amber eyes with tiny Mars glyphs in the pupils, long wavy dark-grey hair with a thick braid over her shoulder tied with small iron rings. Hat: tall charcoal pointed witch hat with a wide ragged brim, iron bands and a curled ram-horn ornament on the side. Collar: thick grey fur mantle over an iron-red and charcoal coat with leather straps and iron buckles. Accent colors: iron red #8E2B22 and lead grey #3F4150. Expression: stoic and protective, half-lidded eyes, mouth closed. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "selenia",
+      "phase": 1,
+      "scale": "KEMONOMIMI",
+      "references": [
+        "art/recortes/selenia/selenia_f1_busto.png",
+        "art/retratos/selenia/selenia_f1_v1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. KEMONOMIMI: human woman with a human face and skin, plus only the species traits described below. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Selenia de Plata, a lunar moth witch, slender and tall. Pale skin, long straight silver-lilac hair with a loose braid, heavy-lidded grey-violet eyes with crescent-moon glyphs, two feathery silver moth antennae rising from her hat. Hat: very wide brim shaped like dusky grey moth wings with pale moon eye-spots, a silver lace veil hanging from the brim. Collar: fluffy white moth-fur collar over layered funeral-grey robes with lace. Accent colors: silver #C9CED8 and lead grey #3F4150. Expression: melancholic and distant, a faint sad smile, like a poet who talks to the dead. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "solenne",
+      "phase": 1,
+      "scale": "ANTHRO",
+      "references": [
+        "art/recortes/solenne/solenne_f1_busto.png",
+        "art/retratos/solenne/solenne_f1_v1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Solenne, a fennec fox witch, petite and curvy adult. Cream-sand fur with a few freckles on the muzzle, enormous fennec ears with pink inner fur, golden eyes with sun glyphs, a small gold sun glyph painted on her cheek under one eye, long wavy pale-blonde hair with a braid, teal bead earrings. Hat: tall witch hat wrapped like a turban in striped crimson, teal and cream cloth, with a wide dark-crimson brim fringed with small hanging gold coins. Collar: layered dusty ochre and sun-faded crimson merchant robes, gold bangles. Accent colors: gold #C9A227 and quicksilver teal #5E9C97. Expression: mischievous wink, grin with one small fang showing. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "cervanda",
+      "phase": 1,
+      "scale": "ANTHRO",
+      "references": [
+        "art/recortes/cervanda/cervanda_f1_busto.png",
+        "art/retratos/cervanda/cervanda_f1_v1_r1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Cervanda, a red-deer doe witch, statuesque. Rich chestnut fur with a black nose, white spots on the shoulders, dark amber eyes with Saturn glyphs and sharp eyeliner, long wavy chestnut-brown hair with a braid, elegant branching antlers passing through slits in the hat. Hat: tall black witch hat with lead-grey and tin-blue ribbons and a small gold ringed sphere ornament like Saturn. Collar: austere high-collared black and lead-grey robes with a small white lace ruff. Accent colors: lead grey #3F4150 and tin blue #6B7E9E. Expression: calm, cold and aristocratic, half-lidded eyes, a hint of secret kindness. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "tormentina",
+      "phase": 1,
+      "scale": "KEMONOMIMI",
+      "references": [
+        "art/recortes/tormentina/tormentina_f1_busto.png",
+        "art/retratos/tormentina/tormentina_f1_v2_r1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. KEMONOMIMI: human woman with a human face and skin, plus only the species traits described below. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Tormentina, a hare witch with an athletic runner build. Warm tan skin with freckles across the nose and cheeks, exactly two long upright hare ears with grey-white fur and pink insides and no human ears, short wind-swept white hair with storm-blue streaks, bright golden eyes with Jupiter glyphs. Hat: short crooked dark tin-blue witch hat with holes for her ears and gold lightning-bolt pins. Collar: worn tin-blue courier jacket, a teal scarf and a leather satchel strap. Accent colors: tin blue #6B7E9E and quicksilver teal #5E9C97. Expression: energetic wide grin showing teeth. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "cupria",
+      "phase": 1,
+      "scale": "ANTHRO",
+      "references": [
+        "art/recortes/cupria/cupria_f1_busto.png",
+        "art/retratos/cupria/cupria_f1_v2.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Cupria, a serpent witch. Snake head with a long reptilian snout, dark verdigris-green scales with a peach-copper throat and underside, golden slit-pupil eyes with Venus glyphs, a pink forked tongue, long wavy dark-green hair woven with herbs and lavender sprigs. Hat: wide witch hat woven from copper vines, dried herbs, wheat ears and small white flowers. Collar: faded green and copper herbalist robes with a dark leather harness. Accent colors: verdigris #4F9A78 and copper #B4683A. Expression: calm, ambiguous closed-mouth smile, the tongue tip flicking out. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "brea",
+      "phase": 1,
+      "scale": "KEMONOMIMI",
+      "references": [
+        "art/recortes/brea/brea_f1_busto.png",
+        "art/retratos/brea/brea_f1_v1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. KEMONOMIMI: human woman with a human face and skin, plus only the species traits described below. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Brea, a black cat witch, lithe. Olive skin, exactly two black cat ears with grey inner fur and no human ears, a messy short black bob with long side bangs, green eyes with Saturn glyphs, a small gold Saturn glyph painted on her cheek under one eye. Hat: floppy black witch hat with a bent tip and a silver crescent-moon brooch with hanging crystal drops. Collar: worn grey layered shawl over a black witch dress, leather straps and a small gold wheel brooch. Accent colors: lead grey #3F4150 and silver #C9CED8. Expression: dry and sarcastic, half-lidded eyes, slight smirk. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "cempa",
+      "phase": 1,
+      "scale": "ANTHRO",
+      "references": [
+        "art/recortes/cempa/cempa_f1_busto.png",
+        "art/retratos/cempa/cempa_f1_v1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Cempa, a coyote witch, lean adult. Tawny and grey-brown fur with a cream muzzle, amber trickster eyes with Mercury glyphs, a small gold Mercury glyph painted on her cheek, long brown hair with a braid bound in gold rings. Hat: wide black witch hat crowned with orange marigold flowers and a band of colorful cut-paper banners in red, teal, orange and yellow. Collar: travel-worn dark poncho with gold geometric embroidery and a gold Mercury pendant. Accent colors: quicksilver teal #5E9C97 and gold #C9A227. Expression: open-mouthed laugh showing fangs, mischievous. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "muertita",
+      "phase": 1,
+      "scale": "ANTHRO",
+      "references": [
+        "art/recortes/muertita/muertita_f1_busto.png",
+        "art/retratos/muertita/muertita_f1_v1_r1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Muertita, an opossum witch, short with a soft round figure and a clearly adult face. White face fur fading to grey-white, a pink nose, round pink ears, long whiskers, messy grey hair, big tired eyes with amber irises and Saturn glyphs. Hat: squashed, battered black witch hat with white fake funeral lilies. Collar: mourning-black witch dress with a grey lace shawl. Accent colors: lead grey #3F4150 and silver #C9CED8. Expression: deadpan, one eye shut and the other peeking open, as if pretending to be dead. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "salitre",
+      "phase": 1,
+      "scale": "ANTHRO",
+      "references": [
+        "art/recortes/salitre/salitre_f1_busto.png",
+        "art/retratos/salitre/salitre_f1_v2.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Salitre, a goat witch, lanky and tall. Cream fur with brown patches and long floppy brown ears, ridged curved horns through holes in the hat, amber eyes with rectangular goat pupils and Venus glyphs, long wavy cream-blonde hair with a braid and small brass bells. Hat: dark witch hat crusted with white salt, a teal band and a gold Venus pendant. Collar: rustic shepherd-witch dress with a patched shawl. Accent colors: verdigris #4F9A78 and lead grey #3F4150. Expression: dizzy and flushed, deep blush, tongue slightly out, comically overwhelmed by salt. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "topacia",
+      "phase": 1,
+      "scale": "ANTHRO",
+      "references": [
+        "art/recortes/topacia/topacia_f1_busto.png",
+        "art/retratos/topacia/topacia_f1_v1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Topacia, a mole witch, short and sturdy with broad shoulders. Velvety dark-grey fur, a long pink snout, tiny eyes behind small round gold-rimmed glasses on a thin gold chain, long dark wavy hair with a braid. Hat: miner's witch hat with a brass candle lantern hanging from the brim and a brass star-compass badge, dusted with salt. Collar: short rust-red cloak crusted with salt over miner overalls and leather straps. Accent colors: iron red #8E2B22 and lead grey #3F4150. Expression: shy but proud small smile. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "axa",
+      "phase": 1,
+      "scale": "ANTHRO",
+      "references": [
+        "art/recortes/axa/axa_f1_busto.png",
+        "art/retratos/axa/axa_f1_v2_r2.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Axa, an axolotl witch from a lake of canals and floating gardens, soft and curvy. Smooth pastel pink-lilac skin, a wide gentle axolotl face, three feathery pink external gills on each side of her head, large round black eyes with a white crescent-moon glyph in each pupil, long silver-lilac hair with a braid and pearls. Hat: wide pink-lilac hat with frilly gill-like trim, a white lily and strings of pearls. Collar: faded lilac and teal lake-witch robe, hems ringed with salt. Accent colors: silver #C9CED8 and verdigris #4F9A78. Expression: gentle, sleepy smile. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "marisal",
+      "phase": 3,
+      "scale": "ANTHRO",
+      "references": [
+        "art/recortes/marisal/marisal_f3_busto.png",
+        "art/retratos/marisal/marisal_f3_v1_r1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 3 QUINTESSENCE: regal astral-silk clothing with gold filigree and a tasteful neckline, faint glowing constellation lines in her fur or skin, a thin halo-like glow in her planet's metal behind her head, a radiant, commanding look. Character: Marisal Hojadelobo at her peak, the same grey she-wolf: steel-grey fur with pale cream muzzle and chest, thin pale scar across her left brow, narrow amber eyes with Mars glyphs, long dark-grey braided hair with iron rings. Hat: the same charcoal pointed hat with the curled ram horn, now edged with gold filigree and a red gem. Collar: crimson and gold astral armor-gown with a gold-trimmed corset neckline under a grey fur mantle; red Mars constellation lines glowing in the fur of her neck and cheek; a halo glow of red iron. Accent colors: iron red #8E2B22 and gold #B8913A. Expression: fierce and confident, a slight half smile. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "selenia",
+      "phase": 3,
+      "scale": "KEMONOMIMI",
+      "references": [
+        "art/recortes/selenia/selenia_f3_busto.png",
+        "art/retratos/selenia/selenia_f3_v2.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. KEMONOMIMI: human woman with a human face and skin, plus only the species traits described below. PHASE 3 QUINTESSENCE: regal astral-silk clothing with gold filigree and a tasteful neckline, faint glowing constellation lines in her fur or skin, a thin halo-like glow in her planet's metal behind her head, a radiant, commanding look. Character: Selenia de Plata at her peak, the same moth witch: pale skin, long silver-lilac hair with a braid, heavy-lidded grey-violet eyes, feathery silver antennae. Hat: the moth-wing hat now silver-white with white lilies, a crescent moon ornament and softly glowing moon-phase patterns along the brim. Collar: luminous silver-white astral silk gown with a silver and gold filigree choker, pearl chains and white moth fur on the shoulders; a pale silver halo glow. Accent colors: silver #C9CED8 and gold #B8913A. Expression: serene, eyes half closed, lips slightly parted. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "solenne",
+      "phase": 3,
+      "scale": "ANTHRO",
+      "references": [
+        "art/recortes/solenne/solenne_f3_busto.png",
+        "art/retratos/solenne/solenne_f3_v1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 3 QUINTESSENCE: regal astral-silk clothing with gold filigree and a tasteful neckline, faint glowing constellation lines in her fur or skin, a thin halo-like glow in her planet's metal behind her head, a radiant, commanding look. Character: Solenne at her peak, the same fennec: cream-sand fur, enormous ears with pink insides, golden eyes, gold sun glyph on her cheek, long pale-blonde hair with a braid. Hat: the same striped turban witch hat with the coin-fringed crimson brim, and a ring of solar flame behind her head like a halo. Collar: sun-gold dancer-witch top with layered coin necklaces and a gold sun medallion, glowing gold patterns in the fur of her neck. Accent colors: gold #C9A227 and quicksilver teal #5E9C97. Expression: playful wink and confident grin. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "cervanda",
+      "phase": 3,
+      "scale": "ANTHRO",
+      "references": [
+        "art/recortes/cervanda/cervanda_f3_busto.png",
+        "art/retratos/cervanda/cervanda_f3_v2.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 3 QUINTESSENCE: regal astral-silk clothing with gold filigree and a tasteful neckline, faint glowing constellation lines in her fur or skin, a thin halo-like glow in her planet's metal behind her head, a radiant, commanding look. Character: Cervanda at her peak, the same red-deer doe: chestnut fur, black nose, dark amber eyes, long chestnut braided hair, branching antlers. Golden rings orbit her antlers like Saturn's rings. Hat: the same tall black witch hat, now edged with gold and hung with tiny gold crescent moons. Collar: regal black and gold gown with gold filigree and a lead-grey cape, faint gold constellation lines on the fur of her neck; a lead-grey halo glow that bends the light. Accent colors: lead grey #3F4150 and gold #B8913A. Expression: perfectly still, regal and unreadable. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "tormentina",
+      "phase": 3,
+      "scale": "KEMONOMIMI",
+      "references": [
+        "art/recortes/tormentina/tormentina_f3_busto.png",
+        "art/retratos/tormentina/tormentina_f3_v1_r1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. KEMONOMIMI: human woman with a human face and skin, plus only the species traits described below. PHASE 3 QUINTESSENCE: regal astral-silk clothing with gold filigree and a tasteful neckline, faint glowing constellation lines in her fur or skin, a thin halo-like glow in her planet's metal behind her head, a radiant, commanding look. Character: Tormentina at her peak, the same hare witch: tan freckled skin, exactly two long hare ears and no human ears, short white hair with storm-blue streaks, golden eyes. Her hair and ear tips crackle with faint blue static and a thin crackling halo glows behind her head. Hat: the same short crooked tin-blue hat with gold lightning-bolt pins. Collar: tailored storm-blue coat with gold lightning trims and a gold sun-wheel brooch. Accent colors: tin blue #6B7E9E and quicksilver teal #5E9C97. Expression: thrilled grin, eyes bright. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    },
+    {
+      "id": "cupria",
+      "phase": 3,
+      "scale": "ANTHRO",
+      "references": [
+        "art/recortes/cupria/cupria_f3_busto.png",
+        "art/retratos/cupria/cupria_f3_v1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 3 QUINTESSENCE: regal astral-silk clothing with gold filigree and a tasteful neckline, faint glowing constellation lines in her fur or skin, a thin halo-like glow in her planet's metal behind her head, a radiant, commanding look. Character: Cupria at her peak, the same serpent witch: snake head, dark verdigris scales with a peach-copper throat, golden slit-pupil eyes, pink forked tongue, long wavy dark-green hair with herbs. Gold constellation patterns shimmer on her scales. Hat: the woven copper-vine hat now crowned with copper leaves and white flowers. Collar: verdigris and copper astral gown with flowering vines and gold filigree, golden wheat ears at the lower edge; a copper halo glow. Accent colors: verdigris #4F9A78 and copper #B4683A. Expression: serene, closed-mouth smile. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes."
+    }
+  ],
+  "images": [
+    {
+      "id": "marisal",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 1,
+      "file": "art/bustos/marisal/marisal_f1_neutral_v1.png",
+      "original_file": "art/bustos/_originales/marisal/marisal_f1_neutral_v1.png",
+      "generated_source": "C:\\Users\\Adass\\.codex\\generated_images\\01a1aac7-c824-7e92-8cfe-27db701e6660\\exec-059c288c-7e5c-4965-b6bd-3b36e3de3c9d.png",
+      "original_size": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "original_sha256": "8f07f04e02e4b14aa419afb81d3e81140a637af43bbf68f809cb23d452360484",
+      "sha256": "2d9be77c8613dd5e9a193e2a1c520e22e87e1a67898f677e47ad0bb6b8663a61",
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Marisal Hojadelobo, a grey mountain she-wolf witch in her thirties, tall and muscular. Steel-grey fur with pale cream fur on the muzzle, cheeks and chest, a thin pale scar across her left brow, narrow amber eyes with tiny Mars glyphs in the pupils, long wavy dark-grey hair with a thick braid over her shoulder tied with small iron rings. Hat: tall charcoal pointed witch hat with a wide ragged brim, iron bands and a curled ram-horn ornament on the side. Collar: thick grey fur mantle over an iron-red and charcoal coat with leather straps and iron buckles. Accent colors: iron red #8E2B22 and lead grey #3F4150. Expression: stoic and protective, half-lidded eyes, mouth closed. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes.",
+      "references": [
+        "art/recortes/marisal/marisal_f1_busto.png",
+        "art/retratos/marisal/marisal_f1_v3.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "reference_roles": [
+        "character close-up",
+        "full character",
+        "pixel-art style",
+        "style and framing"
+      ],
+      "date": "2026-11-05",
+      "ingested_at_utc": "2026-11-05T08:21:22.629331+00:00",
+      "selected": false,
+      "model": "not verifiable through integrated tool",
+      "normalized_to_1024": true,
+      "normalization_authorized_by_user": true,
+      "processing_status": "complete",
+      "review_status": "passed",
+      "observations": [
+        "Identidad de loba adulta, hocico real, ojos ambar y cicatriz conservados; cara libre, acentos rojos y sombrero legibles a 160 px. Recorte sin restos grises visibles."
+      ],
+      "outputs": {
+        "recorte": "art/bustos/marisal/marisal_f1_neutral_v1_recorte.png",
+        "160": "art/bustos/marisal/marisal_f1_neutral_v1_160.png",
+        "320": "art/bustos/marisal/marisal_f1_neutral_v1_320.png"
+      },
+      "reviewed_files": [
+        "art/bustos/marisal/marisal_f1_neutral_v1_recorte.png",
+        "art/bustos/marisal/marisal_f1_neutral_v1_320.png"
+      ],
+      "reviewed_at_utc": "2026-11-05T08:30:06.399026+00:00",
+      "review_method": "view_image against section 9 and source references"
+    },
+    {
+      "id": "marisal",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 2,
+      "file": "art/bustos/marisal/marisal_f1_neutral_v2.png",
+      "original_file": "art/bustos/_originales/marisal/marisal_f1_neutral_v2.png",
+      "generated_source": "C:\\Users\\Adass\\.codex\\generated_images\\01a1aac7-c824-7e92-8cfe-27db701e6660\\exec-25c3ba2e-f4af-4135-afed-db39197e6634.png",
+      "original_size": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "original_sha256": "acda44211534443b3009ca9a8b6989ef0ab891274f7053262f08ac7bafcb37cf",
+      "sha256": "f5a482911b3f23b7b80f6c3d2e90c664230f800c05375a7d8e48f3047dc0e1ae",
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Marisal Hojadelobo, a grey mountain she-wolf witch in her thirties, tall and muscular. Steel-grey fur with pale cream fur on the muzzle, cheeks and chest, a thin pale scar across her left brow, narrow amber eyes with tiny Mars glyphs in the pupils, long wavy dark-grey hair with a thick braid over her shoulder tied with small iron rings. Hat: tall charcoal pointed witch hat with a wide ragged brim, iron bands and a curled ram-horn ornament on the side. Collar: thick grey fur mantle over an iron-red and charcoal coat with leather straps and iron buckles. Accent colors: iron red #8E2B22 and lead grey #3F4150. Expression: stoic and protective, half-lidded eyes, mouth closed. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes.",
+      "references": [
+        "art/recortes/marisal/marisal_f1_busto.png",
+        "art/retratos/marisal/marisal_f1_v3.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "reference_roles": [
+        "character close-up",
+        "full character",
+        "pixel-art style",
+        "style and framing"
+      ],
+      "date": "2026-11-05",
+      "ingested_at_utc": "2026-11-05T08:23:30.333039+00:00",
+      "selected": false,
+      "model": "not verifiable through integrated tool",
+      "normalized_to_1024": true,
+      "normalization_authorized_by_user": true,
+      "processing_status": "complete",
+      "review_status": "passed",
+      "observations": [
+        "Identidad, hocico y sombrero conservados; trenza y abrigo rojo legibles a 160 px. Encuadre algo mas abierto que v1, cara libre y recorte limpio."
+      ],
+      "outputs": {
+        "recorte": "art/bustos/marisal/marisal_f1_neutral_v2_recorte.png",
+        "160": "art/bustos/marisal/marisal_f1_neutral_v2_160.png",
+        "320": "art/bustos/marisal/marisal_f1_neutral_v2_320.png"
+      },
+      "reviewed_files": [
+        "art/bustos/marisal/marisal_f1_neutral_v2_recorte.png",
+        "art/bustos/marisal/marisal_f1_neutral_v2_320.png"
+      ],
+      "reviewed_at_utc": "2026-11-05T08:30:06.612312+00:00",
+      "review_method": "view_image against section 9 and source references"
+    },
+    {
+      "id": "selenia",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 1,
+      "file": "art/bustos/selenia/selenia_f1_neutral_v1.png",
+      "original_file": "art/bustos/_originales/selenia/selenia_f1_neutral_v1.png",
+      "generated_source": "C:\\Users\\Adass\\.codex\\generated_images\\01a1aac7-c824-7e92-8cfe-27db701e6660\\exec-472d2f06-a307-420b-abf1-9cd29ce9c4f0.png",
+      "original_size": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "original_sha256": "efaf55bce6f83cc6badf097ee627ae7d8d9576bb882c6edeb465cc32cde241fb",
+      "sha256": "35be0ab0abd672d5aed9ee984327352580c7c666c73cb7d76257f90893f1cc48",
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. KEMONOMIMI: human woman with a human face and skin, plus only the species traits described below. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Selenia de Plata, a lunar moth witch, slender and tall. Pale skin, long straight silver-lilac hair with a loose braid, heavy-lidded grey-violet eyes with crescent-moon glyphs, two feathery silver moth antennae rising from her hat. Hat: very wide brim shaped like dusky grey moth wings with pale moon eye-spots, a silver lace veil hanging from the brim. Collar: fluffy white moth-fur collar over layered funeral-grey robes with lace. Accent colors: silver #C9CED8 and lead grey #3F4150. Expression: melancholic and distant, a faint sad smile, like a poet who talks to the dead. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes.",
+      "references": [
+        "art/recortes/selenia/selenia_f1_busto.png",
+        "art/retratos/selenia/selenia_f1_v1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "reference_roles": [
+        "character close-up",
+        "full character",
+        "pixel-art style",
+        "style and framing"
+      ],
+      "date": "2026-11-05",
+      "ingested_at_utc": "2026-11-05T08:26:19.243489+00:00",
+      "selected": false,
+      "model": "not verifiable through integrated tool",
+      "normalized_to_1024": true,
+      "normalization_authorized_by_user": true,
+      "processing_status": "complete",
+      "review_status": "passed",
+      "observations": [
+        "Cara humana adulta, ojos gris violeta con lunas, dos antenas y sombrero de polilla conservados; sin taza, lectura clara a 160 px y alfa limpio."
+      ],
+      "outputs": {
+        "recorte": "art/bustos/selenia/selenia_f1_neutral_v1_recorte.png",
+        "160": "art/bustos/selenia/selenia_f1_neutral_v1_160.png",
+        "320": "art/bustos/selenia/selenia_f1_neutral_v1_320.png"
+      },
+      "reviewed_files": [
+        "art/bustos/selenia/selenia_f1_neutral_v1_recorte.png",
+        "art/bustos/selenia/selenia_f1_neutral_v1_320.png"
+      ],
+      "reviewed_at_utc": "2026-11-05T08:34:17.006562+00:00",
+      "review_method": "view_image against section 9 and source references"
+    },
+    {
+      "id": "selenia",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 2,
+      "file": "art/bustos/selenia/selenia_f1_neutral_v2.png",
+      "original_file": "art/bustos/_originales/selenia/selenia_f1_neutral_v2.png",
+      "generated_source": "C:\\Users\\Adass\\.codex\\generated_images\\01a1aac7-c824-7e92-8cfe-27db701e6660\\exec-1a9b44aa-edd9-4d1c-95ad-6ef185e3e709.png",
+      "original_size": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "original_sha256": "fa77a774eddccf6a50497424d3bf8b833e1ec1b0206489ab1bea6c30dc72ab81",
+      "sha256": "a7b809594b3fc7bc4c821549746f63493f3f86bd9caacf744bd30b893cb0cb76",
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. KEMONOMIMI: human woman with a human face and skin, plus only the species traits described below. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Selenia de Plata, a lunar moth witch, slender and tall. Pale skin, long straight silver-lilac hair with a loose braid, heavy-lidded grey-violet eyes with crescent-moon glyphs, two feathery silver moth antennae rising from her hat. Hat: very wide brim shaped like dusky grey moth wings with pale moon eye-spots, a silver lace veil hanging from the brim. Collar: fluffy white moth-fur collar over layered funeral-grey robes with lace. Accent colors: silver #C9CED8 and lead grey #3F4150. Expression: melancholic and distant, a faint sad smile, like a poet who talks to the dead. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes.",
+      "references": [
+        "art/recortes/selenia/selenia_f1_busto.png",
+        "art/retratos/selenia/selenia_f1_v1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "reference_roles": [
+        "character close-up",
+        "full character",
+        "pixel-art style",
+        "style and framing"
+      ],
+      "date": "2026-11-05",
+      "ingested_at_utc": "2026-11-05T08:29:09.745217+00:00",
+      "selected": false,
+      "model": "not verifiable through integrated tool",
+      "normalized_to_1024": true,
+      "normalization_authorized_by_user": true,
+      "processing_status": "complete",
+      "review_status": "passed",
+      "observations": [
+        "Identidad humana adulta y paleta plata-lila conservadas; rostro mas grande que v1, ojos y antenas legibles a 160 px; sin manos ni taza."
+      ],
+      "outputs": {
+        "recorte": "art/bustos/selenia/selenia_f1_neutral_v2_recorte.png",
+        "160": "art/bustos/selenia/selenia_f1_neutral_v2_160.png",
+        "320": "art/bustos/selenia/selenia_f1_neutral_v2_320.png"
+      },
+      "reviewed_files": [
+        "art/bustos/selenia/selenia_f1_neutral_v2_recorte.png",
+        "art/bustos/selenia/selenia_f1_neutral_v2_320.png"
+      ],
+      "reviewed_at_utc": "2026-11-05T08:34:17.222555+00:00",
+      "review_method": "view_image against section 9 and source references"
+    },
+    {
+      "id": "solenne",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 1,
+      "file": "art/bustos/solenne/solenne_f1_neutral_v1.png",
+      "original_file": "art/bustos/_originales/solenne/solenne_f1_neutral_v1.png",
+      "generated_source": "C:\\Users\\Adass\\.codex\\generated_images\\01a1aac7-c824-7e92-8cfe-27db701e6660\\exec-1fe3dec4-1947-4833-924c-9ee0cb8f6589.png",
+      "original_size": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "original_sha256": "d1675f51d159e2d27fa859eba52efe90b7ba7b6476162d7e732fe08258712abe",
+      "sha256": "7634bb7d6de18d45283d1dfe0f3bc51a40364d56f433698a57ea92bfef3b89a6",
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Solenne, a fennec fox witch, petite and curvy adult. Cream-sand fur with a few freckles on the muzzle, enormous fennec ears with pink inner fur, golden eyes with sun glyphs, a small gold sun glyph painted on her cheek under one eye, long wavy pale-blonde hair with a braid, teal bead earrings. Hat: tall witch hat wrapped like a turban in striped crimson, teal and cream cloth, with a wide dark-crimson brim fringed with small hanging gold coins. Collar: layered dusty ochre and sun-faded crimson merchant robes, gold bangles. Accent colors: gold #C9A227 and quicksilver teal #5E9C97. Expression: mischievous wink, grin with one small fang showing. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes.",
+      "references": [
+        "art/recortes/solenne/solenne_f1_busto.png",
+        "art/retratos/solenne/solenne_f1_v1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "reference_roles": [
+        "character close-up",
+        "full character",
+        "pixel-art style",
+        "style and framing"
+      ],
+      "date": "2026-11-05",
+      "ingested_at_utc": "2026-11-05T08:33:47.087355+00:00",
+      "selected": false,
+      "model": "not verifiable through integrated tool",
+      "normalized_to_1024": true,
+      "normalization_authorized_by_user": true,
+      "processing_status": "complete",
+      "review_status": "passed",
+      "observations": [
+        "Fennec adulta con hocico, orejas enormes, guino, glifo solar en mejilla y sombrero de monedas; oro y teal visibles. Sin limon ni manos, alfa y lectura a 160 px correctos."
+      ],
+      "outputs": {
+        "recorte": "art/bustos/solenne/solenne_f1_neutral_v1_recorte.png",
+        "160": "art/bustos/solenne/solenne_f1_neutral_v1_160.png",
+        "320": "art/bustos/solenne/solenne_f1_neutral_v1_320.png"
+      },
+      "reviewed_files": [
+        "art/bustos/solenne/solenne_f1_neutral_v1_recorte.png",
+        "art/bustos/solenne/solenne_f1_neutral_v1_320.png"
+      ],
+      "reviewed_at_utc": "2026-11-05T08:43:39.901267+00:00",
+      "review_method": "view_image against section 9 and source references"
+    },
+    {
+      "id": "solenne",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 2,
+      "file": "art/bustos/solenne/solenne_f1_neutral_v2.png",
+      "original_file": "art/bustos/_originales/solenne/solenne_f1_neutral_v2.png",
+      "generated_source": "C:\\Users\\Adass\\.codex\\generated_images\\01a1aac7-c824-7e92-8cfe-27db701e6660\\exec-1c9b6a9e-d49a-4c65-b95a-8fa75dc7004d.png",
+      "original_size": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "original_sha256": "878eb93f7014de9370ee9b68b0bc75bf55915158eaf3e90a2a9e510096c465cf",
+      "sha256": "aac43d735661f18a9dd20f8ce65037fcacd81952cb5a7006bb7b3f03cfbb3252",
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Solenne, a fennec fox witch, petite and curvy adult. Cream-sand fur with a few freckles on the muzzle, enormous fennec ears with pink inner fur, golden eyes with sun glyphs, a small gold sun glyph painted on her cheek under one eye, long wavy pale-blonde hair with a braid, teal bead earrings. Hat: tall witch hat wrapped like a turban in striped crimson, teal and cream cloth, with a wide dark-crimson brim fringed with small hanging gold coins. Collar: layered dusty ochre and sun-faded crimson merchant robes, gold bangles. Accent colors: gold #C9A227 and quicksilver teal #5E9C97. Expression: mischievous wink, grin with one small fang showing. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes.",
+      "references": [
+        "art/recortes/solenne/solenne_f1_busto.png",
+        "art/retratos/solenne/solenne_f1_v1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "reference_roles": [
+        "character close-up",
+        "full character",
+        "pixel-art style",
+        "style and framing"
+      ],
+      "date": "2026-11-05",
+      "ingested_at_utc": "2026-11-05T08:33:48.088032+00:00",
+      "selected": false,
+      "model": "not verifiable through integrated tool",
+      "normalized_to_1024": true,
+      "normalization_authorized_by_user": true,
+      "processing_status": "complete",
+      "review_status": "passed",
+      "observations": [
+        "Identidad fennec, glifo solar y paleta conservados; guino y colmillo segun prompt neutral. Encuadre algo mas abierto y trenza mas visible que v1; recorte limpio."
+      ],
+      "outputs": {
+        "recorte": "art/bustos/solenne/solenne_f1_neutral_v2_recorte.png",
+        "160": "art/bustos/solenne/solenne_f1_neutral_v2_160.png",
+        "320": "art/bustos/solenne/solenne_f1_neutral_v2_320.png"
+      },
+      "reviewed_files": [
+        "art/bustos/solenne/solenne_f1_neutral_v2_recorte.png",
+        "art/bustos/solenne/solenne_f1_neutral_v2_320.png"
+      ],
+      "reviewed_at_utc": "2026-11-05T08:43:40.070150+00:00",
+      "review_method": "view_image against section 9 and source references"
+    },
+    {
+      "id": "cervanda",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 1,
+      "file": "art/bustos/cervanda/cervanda_f1_neutral_v1.png",
+      "original_file": "art/bustos/_originales/cervanda/cervanda_f1_neutral_v1.png",
+      "generated_source": "C:\\Users\\Adass\\.codex\\generated_images\\01a1aac7-c824-7e92-8cfe-27db701e6660\\exec-17dcaad9-fa1e-4697-bdaf-01db5f936549.png",
+      "original_size": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "original_sha256": "4ab4c2b56dac3bb32b2a546922a830cef74c570eab8659fa797c1b00d90cc1d5",
+      "sha256": "7ff253db3aff71df3c053c079d97fb83ff1bed79100cec421231fd062c30eb8d",
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Cervanda, a red-deer doe witch, statuesque. Rich chestnut fur with a black nose, white spots on the shoulders, dark amber eyes with Saturn glyphs and sharp eyeliner, long wavy chestnut-brown hair with a braid, elegant branching antlers passing through slits in the hat. Hat: tall black witch hat with lead-grey and tin-blue ribbons and a small gold ringed sphere ornament like Saturn. Collar: austere high-collared black and lead-grey robes with a small white lace ruff. Accent colors: lead grey #3F4150 and tin blue #6B7E9E. Expression: calm, cold and aristocratic, half-lidded eyes, a hint of secret kindness. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes.",
+      "references": [
+        "art/recortes/cervanda/cervanda_f1_busto.png",
+        "art/retratos/cervanda/cervanda_f1_v1_r1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "reference_roles": [
+        "character close-up",
+        "full character",
+        "pixel-art style",
+        "style and framing"
+      ],
+      "date": "2026-11-05",
+      "ingested_at_utc": "2026-11-05T08:41:43.686558+00:00",
+      "selected": false,
+      "model": "not verifiable through integrated tool",
+      "normalized_to_1024": true,
+      "normalization_authorized_by_user": true,
+      "processing_status": "complete",
+      "review_status": "passed",
+      "observations": [
+        "Cierva adulta con hocico real, cornamenta, manchas blancas en hombros, trenza castana y ornamentos de Saturno; cuello alto y cintas azules legibles, sin objetos frente a la cara."
+      ],
+      "outputs": {
+        "recorte": "art/bustos/cervanda/cervanda_f1_neutral_v1_recorte.png",
+        "160": "art/bustos/cervanda/cervanda_f1_neutral_v1_160.png",
+        "320": "art/bustos/cervanda/cervanda_f1_neutral_v1_320.png"
+      },
+      "reviewed_files": [
+        "art/bustos/cervanda/cervanda_f1_neutral_v1_recorte.png",
+        "art/bustos/cervanda/cervanda_f1_neutral_v1_320.png"
+      ],
+      "reviewed_at_utc": "2026-11-05T08:49:59.565208+00:00",
+      "review_method": "view_image against section 9 and source references"
+    },
+    {
+      "id": "cervanda",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 2,
+      "file": "art/bustos/cervanda/cervanda_f1_neutral_v2.png",
+      "original_file": "art/bustos/_originales/cervanda/cervanda_f1_neutral_v2.png",
+      "generated_source": "C:\\Users\\Adass\\.codex\\generated_images\\01a1aac7-c824-7e92-8cfe-27db701e6660\\exec-2f1aa015-0524-4ce0-9595-9d23d69635b5.png",
+      "original_size": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "original_sha256": "3f85bcc16643c3bfccc5d8730bf95c6f983ad40832c693d90b62610c9500557d",
+      "sha256": "793da0581c4e284ef0ff376bb3418c2c15762eb4ed407ea24a83738e1d10ec1d",
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. ANTHRO: fully anthropomorphic animal woman. Animal head with a real muzzle and animal nose, fur or scales covering the face and neck, large expressive anime eyes, long hair growing from the head in addition to the fur. Keep the animal head shape; never a human face with animal ears. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Cervanda, a red-deer doe witch, statuesque. Rich chestnut fur with a black nose, white spots on the shoulders, dark amber eyes with Saturn glyphs and sharp eyeliner, long wavy chestnut-brown hair with a braid, elegant branching antlers passing through slits in the hat. Hat: tall black witch hat with lead-grey and tin-blue ribbons and a small gold ringed sphere ornament like Saturn. Collar: austere high-collared black and lead-grey robes with a small white lace ruff. Accent colors: lead grey #3F4150 and tin blue #6B7E9E. Expression: calm, cold and aristocratic, half-lidded eyes, a hint of secret kindness. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes.",
+      "references": [
+        "art/recortes/cervanda/cervanda_f1_busto.png",
+        "art/retratos/cervanda/cervanda_f1_v1_r1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "reference_roles": [
+        "character close-up",
+        "full character",
+        "pixel-art style",
+        "style and framing"
+      ],
+      "date": "2026-11-05",
+      "ingested_at_utc": "2026-11-05T08:41:44.749910+00:00",
+      "selected": false,
+      "model": "not verifiable through integrated tool",
+      "normalized_to_1024": true,
+      "normalization_authorized_by_user": true,
+      "processing_status": "complete",
+      "review_status": "passed",
+      "observations": [
+        "Especie, cornamenta, ojos ambar y ropa de fase Turbia conservados; mirada mas entrecerrada que v1. Recorte limpio, rostro y sombrero legibles a 160 px."
+      ],
+      "outputs": {
+        "recorte": "art/bustos/cervanda/cervanda_f1_neutral_v2_recorte.png",
+        "160": "art/bustos/cervanda/cervanda_f1_neutral_v2_160.png",
+        "320": "art/bustos/cervanda/cervanda_f1_neutral_v2_320.png"
+      },
+      "reviewed_files": [
+        "art/bustos/cervanda/cervanda_f1_neutral_v2_recorte.png",
+        "art/bustos/cervanda/cervanda_f1_neutral_v2_320.png"
+      ],
+      "reviewed_at_utc": "2026-11-05T08:50:08.082543+00:00",
+      "review_method": "view_image against section 9 and source references"
+    },
+    {
+      "id": "tormentina",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 1,
+      "file": "art/bustos/tormentina/tormentina_f1_neutral_v1.png",
+      "original_file": "art/bustos/_originales/tormentina/tormentina_f1_neutral_v1.png",
+      "generated_source": "C:\\Users\\Adass\\.codex\\generated_images\\01a1aac7-c824-7e92-8cfe-27db701e6660\\exec-100e827f-3db2-415a-89af-c024a7447c47.png",
+      "original_size": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "original_sha256": "6b167cf128552fb5320c4419caf5e7197347562de842eb699f53da32f78b01d8",
+      "sha256": "6f3c01c471fbcb642797e55afc89e64470dd7a25d42e82e97c9d3e3c45fa4633",
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. KEMONOMIMI: human woman with a human face and skin, plus only the species traits described below. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Tormentina, a hare witch with an athletic runner build. Warm tan skin with freckles across the nose and cheeks, exactly two long upright hare ears with grey-white fur and pink insides and no human ears, short wind-swept white hair with storm-blue streaks, bright golden eyes with Jupiter glyphs. Hat: short crooked dark tin-blue witch hat with holes for her ears and gold lightning-bolt pins. Collar: worn tin-blue courier jacket, a teal scarf and a leather satchel strap. Accent colors: tin blue #6B7E9E and quicksilver teal #5E9C97. Expression: energetic wide grin showing teeth. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes.",
+      "references": [
+        "art/recortes/tormentina/tormentina_f1_busto.png",
+        "art/retratos/tormentina/tormentina_f1_v2_r1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "reference_roles": [
+        "character close-up",
+        "full character",
+        "pixel-art style",
+        "style and framing"
+      ],
+      "date": "2026-11-05",
+      "ingested_at_utc": "2026-11-05T08:48:28.790999+00:00",
+      "selected": false,
+      "model": "not verifiable through integrated tool",
+      "normalized_to_1024": true,
+      "normalization_authorized_by_user": true,
+      "processing_status": "pending",
+      "review_status": "pending",
+      "observations": []
+    },
+    {
+      "id": "tormentina",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 2,
+      "file": "art/bustos/tormentina/tormentina_f1_neutral_v2.png",
+      "original_file": "art/bustos/_originales/tormentina/tormentina_f1_neutral_v2.png",
+      "generated_source": "C:\\Users\\Adass\\.codex\\generated_images\\01a1aac7-c824-7e92-8cfe-27db701e6660\\exec-7b9f2c95-a03b-4607-b37a-aea96298ce4b.png",
+      "original_size": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "original_sha256": "5398a5f72d922238881a3e116b9d3e84342624d624b001fc0bd4d3827a0d0a29",
+      "sha256": "fdbf2845c9ca34ee21c5a78a2584bb1cdb2913f50b0c91390139b3836abc06cf",
+      "prompt": "Premium gacha character bust portrait for dialogue and HUD, square 1:1 composition. Head and shoulders only, cropped at the upper chest; the face sits slightly above the center and the head fills most of the frame, so the hat brim and the hair may be cut by the edges. Three-quarter view, head slightly tilted, eyes toward the viewer. Painted pixel art: soft anime painting rendered on a coarse, even pixel grid of about 160 by 160 pixels, every pixel a crisp square, clean clusters of color, no blur, no noisy dithering. Large detailed anime eyes with a two-tone iris, a bright catchlight and a dark upper lash line; soft blush on the cheeks and nose; hair and fur in large readable clumps with four or five value steps and bright edge highlights. Warm key light from the upper left and a soft cool rim light on the far side, neutral and even, not tinted by any sky. Muted dark fantasy palette of pale parchment, abyssal black, astrological gold and turbid salt crimson plus her accent colors; dark clothing with gold trim and small jewels. She is clearly an adult woman with an adult face and adult proportions. Background: a single flat uniform mid-grey #808080, no gradient, no texture, no shadow, no scenery, nothing behind her. KEMONOMIMI: human woman with a human face and skin, plus only the species traits described below. PHASE 1 TURBID: worn, heavy medieval witch clothing in muted tones, coarse salt crusted on the hat brim and the collar, slightly dull fur or hair, a reserved look. Character: Tormentina, a hare witch with an athletic runner build. Warm tan skin with freckles across the nose and cheeks, exactly two long upright hare ears with grey-white fur and pink insides and no human ears, short wind-swept white hair with storm-blue streaks, bright golden eyes with Jupiter glyphs. Hat: short crooked dark tin-blue witch hat with holes for her ears and gold lightning-bolt pins. Collar: worn tin-blue courier jacket, a teal scarf and a leather satchel strap. Accent colors: tin blue #6B7E9E and quicksilver teal #5E9C97. Expression: energetic wide grin showing teeth. Avoid: childlike features or proportions, nudity, see-through clothing, sexualized posing, full body, hands or objects covering the face, scenery, natal chart wheel, guardian spirit, other characters, text, letters, logos, watermarks, signatures, UI frames or borders, blurry or smeared pixels, noisy dithering, extra ears, extra eyes, malformed muzzle, characters or costumes from existing franchises. Reference images: the first two show this exact character; keep her species, head shape, fur or skin colors, markings, eye color, hair, hat and outfit. The last two are style references only: match their bust framing, painted pixel-art rendering, eye and hair detail and lighting; do not copy their faces, species, hair colors or clothes.",
+      "references": [
+        "art/recortes/tormentina/tormentina_f1_busto.png",
+        "art/retratos/tormentina/tormentina_f1_v2_r1.png",
+        "art/referencias/bustos/busto_pixel.webp",
+        "art/referencias/bustos/hoja_160.webp"
+      ],
+      "reference_roles": [
+        "character close-up",
+        "full character",
+        "pixel-art style",
+        "style and framing"
+      ],
+      "date": "2026-11-05",
+      "ingested_at_utc": "2026-11-05T08:48:30.012848+00:00",
+      "selected": false,
+      "model": "not verifiable through integrated tool",
+      "normalized_to_1024": true,
+      "normalization_authorized_by_user": true,
+      "processing_status": "pending",
+      "review_status": "pending",
+      "observations": []
+    }
+  ],
+  "generation_attempts": [
+    {
+      "id": "marisal",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 1,
+      "status": "generated",
+      "file": "art/bustos/marisal/marisal_f1_neutral_v1.png",
+      "recorded_at_utc": "2026-11-05T08:21:22.629368+00:00"
+    },
+    {
+      "id": "marisal",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 2,
+      "status": "generated",
+      "file": "art/bustos/marisal/marisal_f1_neutral_v2.png",
+      "recorded_at_utc": "2026-11-05T08:23:30.333063+00:00"
+    },
+    {
+      "id": "selenia",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 1,
+      "status": "generated",
+      "file": "art/bustos/selenia/selenia_f1_neutral_v1.png",
+      "recorded_at_utc": "2026-11-05T08:26:19.243531+00:00"
+    },
+    {
+      "id": "selenia",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 2,
+      "status": "generated",
+      "file": "art/bustos/selenia/selenia_f1_neutral_v2.png",
+      "recorded_at_utc": "2026-11-05T08:29:09.745238+00:00"
+    },
+    {
+      "id": "solenne",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 1,
+      "status": "generated",
+      "file": "art/bustos/solenne/solenne_f1_neutral_v1.png",
+      "recorded_at_utc": "2026-11-05T08:33:47.087383+00:00"
+    },
+    {
+      "id": "solenne",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 2,
+      "status": "generated",
+      "file": "art/bustos/solenne/solenne_f1_neutral_v2.png",
+      "recorded_at_utc": "2026-11-05T08:33:48.088053+00:00"
+    },
+    {
+      "id": "cervanda",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 1,
+      "status": "generated",
+      "file": "art/bustos/cervanda/cervanda_f1_neutral_v1.png",
+      "recorded_at_utc": "2026-11-05T08:41:43.686580+00:00"
+    },
+    {
+      "id": "cervanda",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 2,
+      "status": "generated",
+      "file": "art/bustos/cervanda/cervanda_f1_neutral_v2.png",
+      "recorded_at_utc": "2026-11-05T08:41:44.749931+00:00"
+    },
+    {
+      "id": "tormentina",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 1,
+      "status": "generated",
+      "file": "art/bustos/tormentina/tormentina_f1_neutral_v1.png",
+      "recorded_at_utc": "2026-11-05T08:48:28.791024+00:00"
+    },
+    {
+      "id": "tormentina",
+      "phase": 1,
+      "expression": "neutral",
+      "variant": 2,
+      "status": "generated",
+      "file": "art/bustos/tormentina/tormentina_f1_neutral_v2.png",
+      "recorded_at_utc": "2026-11-05T08:48:30.012869+00:00"
+    }
+  ],
+  "failures": [],
+  "contact_sheets": [],
+  "normalization": {
+    "authorized": true,
+    "target_size": [
+      1024,
+      1024
+    ],
+    "method": "Pillow Lanczos; original preserved without modification",
+    "model": "not verifiable through integrated tool"
+  }
+}

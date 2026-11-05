@@ -1,0 +1,263 @@
+// Historia (GDD 6 y 13). BORRADOR: no existe la biblia narrativa (HUECOS H-14). Todo el guion, los nombres de personajes
+// secundarios y los Títulos de este archivo son propuestas por aprobar. Los números son // TUNING salvo donde dice GDD.
+{
+  "calculista": {
+    "statMax": 20,      // HUECOS C-44
+    "statBase": 4,      // TUNING
+    "witchBonus": 2,    // TUNING: GDD 13.2 pide el bono, no su tamaño
+    "species": ["Lobo", "Zorro", "Gato", "Liebre", "Oso", "Ciervo", "Cuervo", "Murciélago", "Ajolote", "Coyote", "Serpiente", "Polilla"],
+    "pronouns": ["Ella", "Él", "Elle"],
+    // Solo dos regiones en esta versión: cada signo lleva a la más cercana por elemento (HUECOS C-36, D-13).
+    "signs": [
+      { "id": "aries", "name": "Aries", "element": "Fuego", "bonus": "temple", "region": "aries", "phrase": "Entras antes de preguntar." },
+      { "id": "tauro", "name": "Tauro", "element": "Tierra", "bonus": "oficio", "region": "capricornio", "phrase": "Lo tuyo no se mueve." },
+      { "id": "geminis", "name": "Géminis", "element": "Aire", "bonus": "calculo", "region": "aries", "phrase": "Siempre hay otra versión." },
+      { "id": "cancer", "name": "Cáncer", "element": "Agua", "bonus": "encanto", "region": "capricornio", "phrase": "Llevas la casa contigo." },
+      { "id": "leo", "name": "Leo", "element": "Fuego", "bonus": "temple", "region": "aries", "phrase": "Que te miren, entonces." },
+      { "id": "virgo", "name": "Virgo", "element": "Tierra", "bonus": "oficio", "region": "capricornio", "phrase": "Ya lo revisaste dos veces." },
+      { "id": "libra", "name": "Libra", "element": "Aire", "bonus": "calculo", "region": "aries", "phrase": "Todo tiene su contrapeso." },
+      { "id": "escorpio", "name": "Escorpio", "element": "Agua", "bonus": "encanto", "region": "capricornio", "phrase": "No se te olvida nada." },
+      { "id": "sagitario", "name": "Sagitario", "element": "Fuego", "bonus": "temple", "region": "aries", "phrase": "Allá, más lejos." },
+      { "id": "capricornio", "name": "Capricornio", "element": "Tierra", "bonus": "oficio", "region": "capricornio", "phrase": "Subes aunque nadie mire." },
+      { "id": "acuario", "name": "Acuario", "element": "Aire", "bonus": "calculo", "region": "aries", "phrase": "Ya lo viste venir." },
+      { "id": "piscis", "name": "Piscis", "element": "Agua", "bonus": "encanto", "region": "capricornio", "phrase": "Te quedas un poco más." }
+    ]
+  },
+  "paralaje": { "max": 100, "bands": [25, 50, 80] }, // HUECOS H-15
+  "eclipse": {
+    "everyRegions": 2,  // GDD 6: cada dos regiones hay un eclipse
+    "maxCorruption": 2, // HUECOS H-16 (tres estados)
+    "ring": ["aries", "tauro", "geminis", "cancer", "leo", "virgo", "libra", "escorpio", "sagitario", "capricornio", "acuario", "piscis"]
+  },
+  "sendero": {
+    "maxLevel": 10, "xpPerLevel": 100, "xpPerWin": 25, // HUECOS H-17 // TUNING
+    "growthPerLevel": 0.05,                            // TUNING
+    "list": [
+      { "id": "astrologa", "name": "Astróloga", "description": "Los Aspectos son 50 % más fuertes.", "mods": { "aspectBonus": 0.5 } },
+      { "id": "alquimista", "name": "Alquimista", "description": "Cinturón de cuatro ranuras.", "mods": { "extraBeltSlots": 1 },
+        "pending": "GDD 13.3: dos pociones por turno. El combate todavía no lo permite." },
+      { "id": "contadora", "name": "Contadora de Almas", "description": "+15 % de almitas; el Spark da más Resonancia.", "mods": { "almitasPct": 0.15, "resonanceGainPct": 0.10 } },
+      { "id": "directora", "name": "Directora de Coro", "description": "El Spark pega más fuerte.", "mods": { "sparkDamageBonus": 0.10 },
+        "pending": "GDD 13.3: mover un eslabón hasta 6 frames en la Partitura. La pantalla de Cadena todavía no lo permite." }
+    ]
+  },
+  "titles": [
+    { "id": "salada_nacimiento", "name": "Salada de Nacimiento", "description": "Despertaste con sal en la boca.", "mods": {} },
+    { "id": "contadora_sin_alma", "name": "Contadora sin Alma", "description": "El Libro Mayor no te tiene anotada.", "mods": { "almitasPct": 0.02 } },
+    { "id": "perdon_de_hierro", "name": "Perdón de Hierro", "description": "Dejaste viva a quien nadie perdonaría.", "mods": { "healingPct": 0.02 } },
+    { "id": "mordio_el_hierro", "name": "La que Mordió el Hierro", "description": "Sacaste a los mineros tú sola.", "mods": { "atkPct": 0.01 } },
+    { "id": "entre_remolinos", "name": "Entre Dos Remolinos", "description": "Elegiste a quién perder, y lo sabes.", "mods": {} },
+    { "id": "oido_de_obsidiana", "name": "Oído de Obsidiana", "description": "Escuchaste lo que la sal decía abajo.", "mods": {} }
+  ],
+  "regions": [
+    {
+      "id": "vado", "name": "El Vado de Sal", "prologue": true, "theme": "Prólogo: despertar en Halia",
+      "missions": [
+        {
+          "id": "prologo", "name": "El alma que se cayó", "description": "Despiertas en un río de leche que ya no corre.", "start": "p1",
+          "rewards": { "witch": "topo", "title": "salada_nacimiento", "res": { "almitas": 5000 } },
+          "scenes": [
+            { "id": "p1", "text": "Despiertas con la boca llena de sal. El río que te trajo se detuvo aquí: leche blanca, cuajada, que cruje bajo tus manos. Arriba, muy lejos, hay un árbol más alto que el cielo.", "next": "p2" },
+            { "id": "p2", "speaker": "Muertita", "portrait": "zarigueya", "text": "No te levantes de golpe, {nombre}. Sí, ya sé cómo te llamas. Está escrito en el aire, encima de tu cabeza. Nadie más puede leerlo, y por eso vas a ser un problema.", "next": "p3", "effects": { "witch": "zarigueya" } },
+            { "id": "p3", "speaker": "Libro Mayor", "text": "FOLIO SIN NÚMERO. Nombre: {nombre}. Signo: {signo}. Carta: ninguna. Almas digeridas: 0. Esta entrada no debería existir.", "next": "p4" },
+            { "id": "p4", "speaker": "Marisal", "portrait": "marisal", "text": "Alguien más viene. Esa figura de sal todavía susurra. Tú no sabes pelear, ¿verdad? Entonces dinos en qué orden. Dicen que los de tu clase ven los golpes antes de que caigan.",
+              "battle": { "enemies": ["cristalizado"], "team": ["marisal", "zarigueya", "topo"], "strength": 0.45, "tutorial": true, "next": "p5" } },
+            { "id": "p5", "speaker": "Topacia", "portrait": "topo", "text": "Dos golpes cayeron juntos. Lo oí desde abajo de la tierra. Vente con nosotras: la Tortuga pasa por aquí al anochecer, y tiene agua caliente.", "next": "p6" },
+            { "id": "p6", "speaker": "Marisal", "portrait": "marisal", "text": "Yo sigo mi camino. Pero a ver si es cierto lo que dices de las Termas. La sal se te pega hasta en los recuerdos." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aries", "sign": "aries", "name": "Montes de Hierro Rojo", "theme": "Fortalezas sobre minas de sal", "echo": "Los cícones",
+      "missions": [
+        {
+          "id": "aries_1", "name": "Humo sobre la mina", "description": "La Casa de Aries saquea las minas de sal.", "start": "a1",
+          "rewards": { "res": { "almitas": 6000, "sales_de_bano": 80 } },
+          "scenes": [
+            { "id": "a1", "text": "Las torres de hierro rojo salen de la montaña como dientes. Abajo arde el pueblo de Valdehierro, y la gente carga costales de sal hacia las carretas de la Casa de Aries.",
+              "variants": [
+                { "when": { "marks": ["primera_capricornio"] }, "text": "Todavía traes obsidiana en las botas. Aquí la sal es roja y huele a fragua. Abajo arde el pueblo de Valdehierro, y la gente carga costales hacia las carretas de la Casa de Aries. Alguien en la plaza ya habla de la caravana que volvió de los remolinos." },
+                { "when": { "marks": ["salvo_remeros"] }, "text": "En la plaza de Valdehierro hay una mujer con el remo roto de las Salinas al hombro. Te reconoce antes de que la veas. «Fuiste quien eligió a los remeros», dice. «Aquí también hay que elegir». Abajo, los costales de sal suben a las carretas de la Casa de Aries." }
+              ],
+              "next": "a2" },
+            { "id": "a2", "speaker": "Marisal", "portrait": "marisal", "text": "Otra vez. Cada invierno vienen, y cada invierno juran que es la última mina. Ayúdame a llegar a la boca del tiro antes que sus perros.",
+              "battle": { "enemies": ["cristalizado", "larva"], "strength": 0.5, "next": "a3" } },
+            { "id": "a3", "speaker": "Marisal", "portrait": "marisal", "text": "Hay gente adentro. Veinte, quizá. El techo no va a aguantar mucho, y la capitana de Aries está a dos colinas.",
+              "choices": [
+                { "text": "Bajar por los mineros ahora", "effects": { "marks": ["bajo_mina"], "souls": 20 }, "next": "a4" },
+                { "text": "Calcular primero el derrumbe", "stat": "calculo", "need": 5, "effects": { "marks": ["calculo_derrumbe"], "paralaje": 2 }, "next": "a4" }
+              ] },
+            { "id": "a4", "text": "El Libro Mayor te muestra una columna de nombres. Algunos ya están tachados. Bajas contando a los que faltan." }
+          ]
+        },
+        {
+          "id": "aries_2", "name": "Diecinueve", "description": "Sacar a los mineros antes del derrumbe.", "start": "b1",
+          "rewards": { "witch": "pua", "res": { "almitas": 7000, "sal_cruda.marte": 5 } },
+          "scenes": [
+            { "id": "b1", "text": "El túnel respira. La sal de las paredes se mueve cuando no la miras directamente.",
+              "variants": [ { "when": { "marks": ["calculo_derrumbe"] }, "text": "Ya sabes dónde va a ceder la viga. Lo dices en voz alta y Marisal te cree, aunque no te conoce. El túnel respira y la sal de las paredes se mueve cuando no la miras directamente." } ],
+              "next": "b2" },
+            { "id": "b2", "speaker": "Púa", "portrait": "pua", "text": "¡Aquí! ¡Quedamos unos! Yo los mantengo juntos, pero esas cosas no dejan de salir de la pared.",
+              "battle": { "enemies": ["larva", "larva", "corneja"], "strength": 0.5, "next": "b3" } },
+            { "id": "b3", "speaker": "Marisal", "portrait": "marisal", "text": "Son diecinueve. Había veinte. El último está atrás de la grieta, y la grieta se está cerrando.",
+              "choices": [
+                { "text": "Sostener la viga y sacar al último", "stat": "temple", "need": 6, "effects": { "marks": ["saco_veinte"], "title": "mordio_el_hierro", "souls": -5 }, "next": "b4" },
+                { "text": "Sacar a los diecinueve y sellar", "effects": { "marks": ["sello_mina"], "souls": 10 }, "next": "b5" }
+              ] },
+            { "id": "b4", "speaker": "Marisal", "portrait": "marisal", "text": "Veinte. Nadie había sacado a los veinte. Nadie. Muérdete el miedo después, ahora corre.", "next": "b6" },
+            { "id": "b5", "speaker": "Marisal", "portrait": "marisal", "text": "Lo oigo todavía. Voy a guardar una muesca para él. No digas nada.", "next": "b6" },
+            { "id": "b6", "speaker": "Púa", "portrait": "pua", "text": "Te debo el pellejo, {nombre}. Tu Tortuga tiene sitio para alguien con púas, ¿verdad? No muerdo si no me tocan el lomo." }
+          ]
+        },
+        {
+          "id": "aries_3", "name": "La sal que grita", "description": "Lo que la Casa hace con la sal robada.", "start": "c1",
+          "rewards": { "res": { "almitas": 8000, "sales_de_bano": 80 } },
+          "scenes": [
+            { "id": "c1", "text": "En el patio de la fortaleza de Rojaforja cargan la sal en crisoles. La funden sin refinar y se la dan a beber a las soldadas. Las ves crecer y las ves olvidar sus nombres.", "next": "c2" },
+            { "id": "c2", "speaker": "Libro Mayor", "text": "Almas digeridas por esta tropa: 40 311. Nombres recuperables: 0. Nota al margen, con otra letra: «Sigue contando».", "effects": { "paralaje": 8 }, "next": "c3" },
+            { "id": "c3", "speaker": "Muertita", "portrait": "zarigueya", "text": "No me mires así. Yo también me como a alguien cada que peleo. La diferencia es que yo les digo gracias. ¿Rompemos el crisol o aprendemos cómo lo hacen?",
+              "choices": [
+                { "text": "Romper el crisol", "effects": { "marks": ["rompio_crisol"], "souls": -10 }, "next": "c4" },
+                { "text": "Copiar la receta para refinarla", "stat": "oficio", "need": 5, "effects": { "marks": ["copio_receta"], "res": { "sal_destilada.marte": 3 } }, "next": "c4" }
+              ] },
+            { "id": "c4", "text": "Las guardias te vieron. Sus ojos ya no tienen a nadie adentro.",
+              "battle": { "enemies": ["recuerdo_atrapado", "corteza_hueca"], "strength": 0.55, "next": "c5" } },
+            { "id": "c5", "speaker": "Topacia", "portrait": "topo", "text": "Debajo del patio hay túneles más viejos que la fortaleza. Por ahí llegamos a la capitana sin pasar por sus puertas." }
+          ]
+        },
+        {
+          "id": "aries_4", "name": "La capitana Ferrán", "description": "Enfrentar a quien manda la Casa en estos montes.", "start": "d1",
+          "rewards": { "res": { "almitas": 10000, "sales_de_bano": 80 } },
+          "scenes": [
+            { "id": "d1", "speaker": "Ferrán", "text": "Una contadora. Pensé que mandarían a una santa. Dime, ¿cuántos de los míos valen uno de los tuyos? Tú eres quien lleva las cuentas.",
+              "battle": { "enemies": ["lenador_hueco"], "strength": 0.4, "boss": true, "next": "d2" } },
+            { "id": "d2", "speaker": "Ferrán", "text": "Está bien. Termina. Pero sabe esto: el Carnero que me dieron no es un signo. Lo sentí mirar a través de mí. Algo me usaba de ventana.", "effects": { "paralaje": 10 },
+              "choices": [
+                { "text": "Perdonarla y dejarla ir", "stat": "encanto", "need": 5, "effects": { "marks": ["perdono_capitana"], "title": "perdon_de_hierro" }, "next": "d3" },
+                { "text": "Quitarle el mando y entregarla a Valdehierro", "effects": { "marks": ["entrego_capitana"], "souls": 5 }, "next": "d4" }
+              ] },
+            { "id": "d3", "speaker": "Marisal", "portrait": "marisal", "text": "Si vuelve a pisar una mina, te la cobro a ti. ¿Te queda claro? Bien. Estas cuentas también son tuyas.", "next": "d5" },
+            { "id": "d4", "speaker": "Marisal", "portrait": "marisal", "text": "El pueblo decidirá. Eso no te limpia las manos, pero te las deja ocupadas en otra cosa.", "next": "d5" },
+            { "id": "d5", "text": "Sobre la fortaleza, entre las estrellas de Aries, hay una que no estaba en los mapas de nadie. Parpadea cuando dejas de mirarla." }
+          ]
+        },
+        {
+          "id": "aries_5", "name": "Lo que queda en la mina", "description": "Cerrar la herida de los Montes.", "start": "e1",
+          "rewards": { "res": { "almitas": 12000, "sales_de_bano": 160, "quintaesencia.marte": 1 } },
+          "scenes": [
+            { "id": "e1", "text": "En el fondo del tiro principal la sal forma una catedral. Las voces ya no son voces de mineros. Son más viejas.",
+              "variants": [ { "when": { "marks": ["saco_veinte"] }, "text": "Vuelves con los veinte a tu espalda. No los trajiste. Te siguieron. En el fondo del tiro principal la sal forma una catedral, y las voces ya no son voces de mineros: son más viejas." } ],
+              "next": "e2" },
+            { "id": "e2", "text": "De la pared se desprende algo que tiene forma de ave y no la ha entendido del todo.",
+              "battle": { "enemies": ["ave_eclipse", "viento_salino"], "strength": 0.6, "next": "e3" } },
+            { "id": "e3", "speaker": "Marisal", "portrait": "marisal", "text": "Esto es sal sin refinar de hace siglos. Si la dejamos, se la lleva otra Casa. Si la digerimos, nos volvemos ellas. Tú eres quien sabe hacer cuentas.",
+              "choices": [
+                { "text": "Refinarla toda y liberar las almas", "effects": { "marks": ["refino_aries"], "souls": -20, "paralaje": 5 }, "next": "e4" },
+                { "text": "Enterrarla otra vez bajo los Montes", "effects": { "marks": ["enterro_aries"] }, "next": "e4" },
+                { "text": "Escuchar lo que dicen antes de decidir", "when": { "minParalaje": 15 }, "effects": { "marks": ["escucho_aries"], "paralaje": 12, "souls": -5 }, "next": "e5" }
+              ] },
+            { "id": "e4", "speaker": "Marisal", "portrait": "marisal", "text": "Listo. Hazte la que no le pesa. Yo me quedo una noche más, y mañana a ver qué camino agarra tu Tortuga." },
+            { "id": "e5", "speaker": "Libro Mayor", "text": "Cuentan una temporada. Cuentan una cosecha. Cuentan algo que crece del otro lado del cielo. Al final de la columna, en una letra que no es la tuya, está escrito tu nombre, y luego tachado.", "next": "e4" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "capricornio", "sign": "capricornio", "name": "Salinas de Obsidiana", "theme": "Salinas, obsidiana y cacao", "echo": "Escila y Caribdis",
+      "missions": [
+        {
+          "id": "cap_1", "name": "La caravana de Zapotitlán", "description": "Los remolinos de sal se tragan las caravanas.", "start": "f1",
+          "rewards": { "res": { "almitas": 6000, "sales_de_bano": 80 } },
+          "scenes": [
+            { "id": "f1", "text": "Las salinas se abren como espejos negros hasta donde alcanza la vista. Huele a cacao tostado y a tormenta. Tras las pozas, dos columnas de sal giran sin moverse de sitio.",
+              "variants": [
+                { "when": { "marks": ["primera_aries"] }, "text": "Del hierro rojo a la obsidiana. Aquí nadie ha oído de la Casa de Aries, pero ya vieron el eclipse, y te miran como si lo hubieras traído en la caravana. Tras las pozas, dos columnas de sal giran sin moverse de sitio." },
+                { "when": { "marks": ["perdono_capitana"] }, "text": "En la entrada de las salinas hay una soldada sin insignia que sirve cacao a las remeras. Es Ferrán. Te saluda con la taza y no dice nada. Tras las pozas, dos columnas de sal giran sin moverse de sitio." }
+              ],
+              "next": "f2" },
+            { "id": "f2", "speaker": "Cempa", "portrait": "cempa", "text": "¡Mira nomás! Otra alma perdida. No te preocupes, yo cobro barato. Te llevo al otro lado de las pozas por un favor que todavía no se me ocurre.",
+              "battle": { "enemies": ["corneja", "cristalizado"], "strength": 0.5, "next": "f3" } },
+            { "id": "f3", "speaker": "Cempa", "portrait": "cempa", "text": "Bien, sabes contar. Pero sé honesta contigo: ¿confías en una coyota que te cobra por adelantado?",
+              "choices": [
+                { "text": "Pagarle el favor por adelantado", "effects": { "marks": ["confio_cempa"] }, "next": "f4" },
+                { "text": "Descubrirle la trampa y negociar", "stat": "calculo", "need": 5, "effects": { "marks": ["descubrio_cempa"] }, "next": "f4" }
+              ] },
+            { "id": "f4", "speaker": "Cempa", "portrait": "cempa", "text": "Ay, me caes bien. Eso nunca le ha salido barato a nadie." }
+          ]
+        },
+        {
+          "id": "cap_2", "name": "Las dos bocas", "description": "Entender los remolinos antes de cruzarlos.", "start": "g1",
+          "rewards": { "res": { "almitas": 7000, "sal_cruda.saturno": 5 } },
+          "scenes": [
+            { "id": "g1", "text": "Las remeras de sal cruzan entre las columnas en barcas de obsidiana. Una se llama la Boca Vieja y se traga barcas. La otra, la Boca Nueva, se traga a la gente y deja las barcas.", "next": "g2" },
+            { "id": "g2", "speaker": "Topacia", "portrait": "topo", "text": "Por abajo giran al revés. Puedo oírlo. No son remolinos: alguien está sorbiendo.", "effects": { "paralaje": 6 }, "next": "g3" },
+            { "id": "g3", "text": "Algo sube por la orilla, con los ojos llenos de sal.",
+              "battle": { "enemies": ["savia_errante", "larva"], "strength": 0.52, "next": "g4" } },
+            { "id": "g4", "speaker": "Cempa", "portrait": "cempa", "text": "La Casa de Capricornio cobra un tributo: una barca de cada cinco para la Boca Vieja. Así las demás pasan. Dicen que son matemáticas. Tú dirás.",
+              "choices": [
+                { "text": "Pedir ver las cuentas de la Casa", "stat": "calculo", "need": 6, "effects": { "marks": ["vio_cuentas"], "paralaje": 3 } },
+                { "text": "Hablar con las remeras", "stat": "encanto", "need": 5, "effects": { "marks": ["hablo_remeras"] } },
+                { "text": "Cruzar sin preguntar", "effects": { "marks": ["cruzo_sin_preguntar"], "souls": 10 } }
+              ] }
+          ]
+        },
+        {
+          "id": "cap_3", "name": "Cacao y obsidiana", "description": "El mercado negro de la sal.", "start": "h1",
+          "rewards": { "witch": "salitre", "res": { "almitas": 8000, "sales_de_bano": 80 } },
+          "scenes": [
+            { "id": "h1", "speaker": "Salitre", "portrait": "salitre", "text": "No me mires la lengua. Sí, lamo la sal. Sí, ya sé lo que es. Sabe a abuela de alguien. ¿Vienes a comprar o a sermonear?", "next": "h2" },
+            { "id": "h2", "text": "En el mercado de Cuyutlán venden sal por el nombre de quien fue: un puñado de maestra rural, una onza de capitán. Los compradores piden que se la envuelvan para regalo.", "effects": { "paralaje": 5 }, "next": "h3" },
+            { "id": "h3", "speaker": "Salitre", "portrait": "salitre", "text": "Los guardias del mercado no te dejan salir con preguntas. Te dejan salir con recibo.",
+              "battle": { "enemies": ["corteza_hueca", "corneja"], "strength": 0.55, "next": "h4" } },
+            { "id": "h4", "speaker": "Salitre", "portrait": "salitre", "text": "Hay una bodega atrás con sal sin nombre. La gente se la come barata. Si la comes, nadie te reclama nada. Podrías llevarte un costal para tus brujas. O prenderle fuego.",
+              "choices": [
+                { "text": "Llevarse el costal", "effects": { "marks": ["llevo_costal"], "souls": 25, "res": { "sal_negra": 3 } }, "next": "h5" },
+                { "text": "Quemar la bodega", "effects": { "marks": ["quemo_bodega"], "souls": -15 }, "next": "h5" },
+                { "text": "Preparar un antídoto con esa sal", "stat": "oficio", "need": 6, "effects": { "marks": ["antidoto_sal"], "res": { "sal_destilada.venus": 3 } }, "next": "h5" }
+              ] },
+            { "id": "h5", "speaker": "Salitre", "portrait": "salitre", "text": "Bueno. Ya te vi la cara con la que decides. Me voy con ustedes. Alguien tiene que enseñarles a no morir de esto." }
+          ]
+        },
+        {
+          "id": "cap_4", "name": "Entre dos remolinos", "description": "Solo una barca puede cruzar a tiempo.", "start": "i1",
+          "rewards": { "title": "entre_remolinos", "res": { "almitas": 10000, "sales_de_bano": 80 } },
+          "scenes": [
+            { "id": "i1", "speaker": "Cempa", "portrait": "cempa", "text": "Ya, ahora sí. Cruzan dos barcas: la de los niños del mercado y la de las remeras que nos ayudaron. Las bocas se abren al mismo tiempo. Yo cobro después.",
+              "variants": [ { "when": { "marks": ["perdono_capitana"] }, "text": "Ferrán deja la taza. «Yo sé lo que es mandar a alguien a morir», dice, y sube sin permiso a la barca de las remeras. Cempa la mira y se ríe sin ganas. «Ya, ahora sí. Cruzan dos barcas, y las bocas se abren al mismo tiempo. Yo cobro después»." } ],
+              "next": "i2" },
+            { "id": "i2", "text": "Los remolinos suben. El agua negra sabe a todas las personas que fue.",
+              "battle": { "enemies": ["viento_salino", "cuervo_sin_carta"], "strength": 0.6, "next": "i3" } },
+            { "id": "i3", "text": "Las dos bocas se abren. No hay tiempo para calcular todo. Solo para calcular algo.",
+              "choices": [
+                { "text": "Salvar la barca de los niños", "effects": { "marks": ["salvo_ninos"], "souls": 5 }, "next": "i5" },
+                { "text": "Salvar a las remeras, que saben volver por los otros", "effects": { "marks": ["salvo_remeros"], "souls": 5 }, "next": "i5" },
+                { "text": "Ferrán sostiene una barca: salvarlas a todas", "when": { "marks": ["perdono_capitana"] }, "effects": { "marks": ["ferran_murio", "salvo_ninos", "salvo_remeros"] }, "next": "i4" }
+              ] },
+            { "id": "i4", "text": "Ferrán clava el remo en la orilla y aguanta. Cuando la Boca Vieja se cierra, el remo sigue ahí, y ella no. El Libro Mayor escribe su nombre en la columna de los que no se pueden recuperar. Le pones una muesca.", "next": "i5" },
+            { "id": "i5", "speaker": "Cempa", "portrait": "cempa", "text": "Y ya está. Te dije que yo cobraba después. Te cobro esto: no me pidas que lo cuente como chiste." }
+          ]
+        },
+        {
+          "id": "cap_5", "name": "La Casa de la Cabra", "description": "Lo que sorbe desde abajo.", "start": "j1",
+          "rewards": { "witch": "cempa", "res": { "almitas": 12000, "sales_de_bano": 160, "quintaesencia.saturno": 1 } },
+          "scenes": [
+            { "id": "j1", "speaker": "Doña Tecuani", "text": "Nosotras no alimentamos a la Boca porque seamos crueles, {nombre}. La alimentamos porque hicimos las cuentas. Una barca de cada cinco. ¿Tienes mejores números?",
+              "variants": [ { "when": { "marks": ["vio_cuentas"] }, "text": "Doña Tecuani te mira con las cuentas de la Casa en tu mano. «Ya las leíste. Entonces sabes que una barca de cada cinco es lo que evita que la Boca suba a la ciudad. ¿Tienes mejores números, {nombre}?»" } ],
+              "next": "j2" },
+            { "id": "j2", "text": "La matriarca de la Casa baja a la poza. Su Ascendente se levanta detrás de ella, y por un momento tiene demasiados ojos.", "effects": { "paralaje": 10 },
+              "battle": { "enemies": ["corneja_eclipse"], "strength": 0.42, "boss": true, "next": "j3" } },
+            { "id": "j3", "speaker": "Doña Tecuani", "text": "Mírala. Mira hacia abajo. La Boca no es un remolino. Es una raíz, y está bebiendo. Y mira hacia arriba: ¿quién crees que tiene sed?",
+              "choices": [
+                { "text": "Cerrar la Boca Vieja y romper el tributo", "effects": { "marks": ["cerro_boca"], "paralaje": 5, "souls": -20 }, "next": "j4" },
+                { "text": "Mantener el tributo con cuentas más justas", "stat": "calculo", "need": 6, "effects": { "marks": ["tributo_justo"] }, "next": "j4" },
+                { "text": "Poner el oído en la obsidiana", "when": { "minParalaje": 20 }, "effects": { "marks": ["oyo_abajo"], "title": "oido_de_obsidiana", "paralaje": 15 }, "next": "j5" }
+              ] },
+            { "id": "j4", "speaker": "Cempa", "portrait": "cempa", "text": "Conque esa era la cuenta. Bueno. Me subo a tu Tortuga, porque aquí ya nadie me va a fiar. Y porque alguien tiene que cobrarte el favor." },
+            { "id": "j5", "speaker": "Libro Mayor", "text": "Se oye una señal lenta, como de algo que cuenta. El intervalo coincide con cada eclipse que has visto. Nota al margen: «Temporada de cosecha».", "next": "j4" }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+// Termas, tienda y cosméticos. Precios y catálogo: docs/propuestas/META_Y_ONBOARDING.md, sin aprobar // TUNING.
+// Nada aquí vende progreso (GDD 16.4), y un cosmético no puede llevar "mods": el cargador lo rechaza (GDD 16.5).
+{
+  "termas": {
+    "bathParalaje": -20,        // HUECOS H-15
+    "bathCooldownDays": 1,      // HUECOS H-15
+    "talkTrust": 20,            // Propuesta 10.3
+    "trustPerLevel": 400,       // Propuesta 10.3: 4 000 para el nivel 10
+    "trustMaxLevel": 10,
+    "defaultShake": "Se sacude el agua y te mira como si nada.",
+    "shake": {
+      "marisal": "Se sacude entera, como buena loba, y te salpica sin disculparse.",
+      "solenne": "Se sacude entera y luego se acomoda la cola con cuidado de comerciante.",
+      "cempa": "Se sacude entera y se ríe de lo que te mojó.",
+      "brea": "Se molesta, se lame la pata y finge que nunca estuvo en el agua.",
+      "ixbalam": "Se molesta, se lame la pata y te reta con la mirada a comentarlo.",
+      "tormentina": "Se sacude de arriba abajo en un segundo: ya está seca y ya se quiere ir.",
+      "selenia": "Esponja las alas despacio y deja caer gotas como polvo de plata.",
+      "estrige": "Esponja las plumas hasta parecer el doble de grande.",
+      "grajilla": "Esponja las plumas y se revisa cada una, por si acaso.",
+      "axa": "No se sacude. Es un ajolote: el agua es lo suyo.",
+      "charca": "Sacude la cola y las gotas ni la mojan."
+    },
+    "pullLine": {
+      "marisal": "Estas cuentas también son mías. Vamos.",
+      "selenia": "Me sacaste del agua a la hora del té. Espero que valga la pena.",
+      "solenne": "Te voy a cobrar el baño. Con intereses.",
+      "cervanda": "Respira. Nadie va a caer mientras yo esté aquí.",
+      "tormentina": "¿Ya? ¿Ya nos vamos? Tengo cartas.",
+      "cupria": "Te ves cansada. Déjame ver esa herida, aunque no la tengas.",
+      "zarigueya": "No estaba muerta. Estaba descansando en el agua.",
+      "topo": "Hay túneles abajo de tu manantial. Ya los revisé."
+    },
+    "genericTalk": [
+      "Dice que hoy el agua está más tibia que ayer. Te lo dice como quien da una noticia.",
+      "Te pregunta qué número ves encima de su cabeza. Le dices. Se queda callada un rato.",
+      "Te cuenta del Fresno como quien habla de un pariente enfermo.",
+      "Hoy no quiere hablar. Se sienta cerca, y eso cuenta."
+    ],
+    "genericTouch": [
+      "Te mira y mueve las orejas.",
+      "Te devuelve el saludo con la mano mojada.",
+      "Se ríe por lo bajo y se aparta un poco, sin irse."
+    ],
+    "talk": {
+      "marisal": [
+        "Muerde un cristal de sal y te ofrece otro. No es cortesía: quiere ver si lo aguantas.",
+        "Te pregunta cuántas muescas llevas. Le dices que no llevas. «Vas a llevar», dice.",
+        "Hoy talló su báculo en silencio. Hay un espacio vacío entre dos muescas, y no lo toca."
+      ],
+      "selenia": [
+        "Te sirve té frío y deja una taza de más para alguien que no ha llegado.",
+        "Te lee un poema a un muerto. Pregunta si lo entendiste. Ella tampoco."
+      ],
+      "solenne": [
+        "Te vende un limón que ya era tuyo y sales sintiendo que ganaste.",
+        "Te enseña a regatear. Pierdes. Te da las gracias por la lección."
+      ],
+      "tormentina": [
+        "Te trae una carta y se va antes de que la abras. Está en blanco. Regresa: «¿Ya?»",
+        "No se sienta. Corre alrededor de la poza y te cuenta tres chismes en cada vuelta."
+      ],
+      "zarigueya": [
+        "Se hace la muerta a media frase. Esperas. Termina la frase como si nada.",
+        "Te pregunta quién lloraría en tu velorio. Lo pregunta en serio."
+      ],
+      "topo": [
+        "Te muestra un mapa de túneles. Tu cuarto está marcado. No preguntes.",
+        "Te da un puñado de tierra tibia. Dice que es de abajo de todo esto."
+      ]
+    }
+  },
+  "shop": {
+    "paidGachaBlocked": ["BE"],   // GDD 16.6: versión sin gacha pagado para Bélgica
+    "products": [
+      { "id": "perlas_60", "name": "Puñado de Perlas", "kind": "perlas", "usd": 0.99, "perlas": 60 },
+      { "id": "perlas_300", "name": "Bolsa de Perlas", "kind": "perlas", "usd": 4.99, "perlas": 300, "bonus": 30 },
+      { "id": "perlas_980", "name": "Cofre de Perlas", "kind": "perlas", "usd": 14.99, "perlas": 980, "bonus": 110 },
+      { "id": "perlas_1980", "name": "Manantial de Perlas", "kind": "perlas", "usd": 29.99, "perlas": 1980, "bonus": 260 },
+      { "id": "diezmo", "name": "Diezmo de Sal", "kind": "diezmo", "usd": 4.99, "perlas": 300, "dailySales": 90, "days": 30 }, // GDD 16.4
+      { "id": "grimorio", "name": "Grimorio premium", "kind": "grimorio", "usd": 9.99 }
+    ],
+    "cosmetics": [
+      { "id": "manantial_volcanico", "name": "Manantial volcánico", "kind": "manantial", "perlas": 680, "color": "#C7301A", "description": "Roca negra y vapor con ceniza." },
+      { "id": "manantial_lunar", "name": "Manantial lunar", "kind": "manantial", "perlas": 680, "color": "#BFD8F0", "description": "Agua de plata bajo la luna." },
+      { "id": "manantial_cerezos", "name": "Manantial de cerezos", "kind": "manantial", "perlas": 680, "color": "#E8A0B8", "description": "Pétalos sobre el agua." },
+      { "id": "manantial_obsidiana", "name": "Manantial de obsidiana", "kind": "manantial", "perlas": 680, "polvo": 400, "color": "#3A3442", "description": "Espejos negros de Capricornio." },
+      { "id": "marco_cobre", "name": "Marco de cobre", "kind": "marco", "perlas": 200, "polvo": 120, "color": "#B87333", "description": "Folios del Libro Mayor en cobre viejo." },
+      { "id": "marco_plata", "name": "Marco de plata", "kind": "marco", "perlas": 300, "color": "#C8CCD4", "description": "Folios en plata lunar." },
+      { "id": "marco_obsidiana", "name": "Marco de obsidiana", "kind": "marco", "perlas": 300, "polvo": 180, "color": "#50485A", "description": "Folios negros con filo dorado." },
+      { "id": "sal_violeta", "name": "Sal violeta", "kind": "color_sal", "perlas": 240, "polvo": 150, "color": "#A77BEA", "description": "Recolorea los efectos de sal." },
+      { "id": "sal_ambar", "name": "Sal ámbar", "kind": "color_sal", "perlas": 240, "color": "#F5B02E", "description": "Recolorea los efectos de sal." },
+      { "id": "atuendo_marisal_yukata", "name": "Yukata de hierro", "kind": "atuendo", "witch": "marisal", "perlas": 980, "color": "#8E2430", "description": "Se ajusta a las tres fases. Marisal en las Termas." },
+      { "id": "atuendo_solenne_yukata", "name": "Yukata de caravana", "kind": "atuendo", "witch": "solenne", "perlas": 980, "color": "#F5B02E", "description": "Se ajusta a las tres fases. Solenne en las Termas." },
+      { "id": "atuendo_topo_grimorio", "name": "Overol de excavadora", "kind": "atuendo", "witch": "topo", "color": "#85608A", "description": "Solo del Grimorio. Las brujas modestas también reciben ropa." },
+      { "id": "ascendente_alas", "name": "Alas de ceniza", "kind": "ascendente", "witch": "marisal", "perlas": 680, "color": "#6B6358", "description": "Atuendo del Ascendente." }
+    ],
+    "grimorio": {
+      "xpPerLevel": 1000, // Propuesta 11.1
+      "days": 42,
+      "tiers": [
+        { "level": 2, "free": { "sales_de_bano": 80 }, "premium": { "sales_de_bano": 160 } },
+        { "level": 5, "free": { "sales_de_bano": 80 }, "premium": { "sales_de_bano": 160 } },
+        { "level": 10, "free": { "sales_de_bano": 160 }, "premium": { "sales_de_bano": 320 } },
+        { "level": 20, "free": { "sales_de_bano": 160 }, "premium": { "sales_de_bano": 320 } },
+        { "level": 30, "free": { "sales_de_bano": 0 }, "premium": { "sales_de_bano": 320 }, "premiumCosmetic": "atuendo_topo_grimorio" }
+      ]
+    }
+  }
+}
