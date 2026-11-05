@@ -39,7 +39,9 @@
 *.app
 crashlytics-build.properties
 
-# Pruebas del núcleo con dotnet (Tests/Core.Tests)
+# Pruebas del núcleo con dotnet (Tests/Core.Tests). Sus .csproj sí se versionan:
+# no los genera Unity, son los que compilan el núcleo fuera del motor.
+!/Tests/**/*.csproj
 /Tests/**/bin/
 /Tests/**/obj/
 /Tests/**/TestResults/
