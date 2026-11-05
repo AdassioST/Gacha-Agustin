@@ -215,7 +215,14 @@ namespace SalYAlmas.Presentation
                     if (isAvailable && GUI.Button(box, GUIContent.none, GUIStyle.none)) clicked = n.Lane;
                 }
             }
-            if (clicked.HasValue) { Apply(F.EnterNode(clicked.Value), "sfx_fresno_nodo_elegir"); _note = ""; }
+            if (clicked.HasValue)
+            {
+                Apply(F.EnterNode(clicked.Value), "sfx_fresno_nodo_elegir");
+                _note = "";
+                // Un toque menos: elegir un nodo de combate ya es la decisión de pelear. El panel "Pelear" queda de respaldo.
+                if (F.InRun && F.Run.Phase == RunPhase.Battle && StartBattle != null)
+                    StartBattle(F.PrepareBattle(), b => { Apply(F.ResolveBattle(b)); }, "");
+            }
         }
 
         private void DrawDecision(Rect r)

@@ -38,7 +38,7 @@ Otras personas y agentes trabajan a la vez:
 - **Worktree `gacha-ui` (rama `ui/interfaz`):** otra sesión está haciendo una interfaz en uGUI sobre `d4f6fb7`, con archivos en `Presentation/Ui/` y cambios sin confirmar en `GuiKit`, `Theme`, `MetaHub.cs` y `SalYAlmasGame`.
 - **Codex:** genera arte en `art/` y `Assets/SalYAlmas/Art/`.
 - **Instrucción del usuario:** "mantente en tu línea" y no interactúes con los otros agentes. Si tocas `Meta/`, espera un choque con `ui/interfaz` y déjalo anotado.
-- **Stash:** `stash@{0}` y la rama `respaldo/stash-github-desktop-0254` guardan lo que GitHub Desktop apartó el 5 de noviembre, incluido trabajo de Codex. No los sueltes ni los borres.
+- **Stash:** lo que GitHub Desktop apartó el 5 de noviembre (`640703f`) ya está en la historia de `main`. La entrada del stash y la rama de respaldo se retiraron con permiso del usuario tras comprobar que no faltaba nada.
 
 Commit y push: los commits de `fase/3` son locales. El usuario no ha aprobado subir ni fusionar.
 

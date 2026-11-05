@@ -28,7 +28,7 @@
  },
  "enemies": [
   {
-   "id": "figura_sal",
+   "id": "figura_sal", "size": "medium",
    "name": "Figura de Sal",
    "shortName": "Figura de Sal",
    "article": "la",
@@ -66,7 +66,7 @@
    }
   },
   {
-   "id": "escoria_viva",
+   "id": "escoria_viva", "size": "medium",
    "name": "Escoria Viva",
    "shortName": "Escoria Viva",
    "article": "la",
@@ -122,7 +122,7 @@
    }
   },
   {
-   "id": "perro_fragua",
+   "id": "perro_fragua", "size": "small",
    "name": "Perro de Fragua",
    "shortName": "Perro de Fragua",
    "article": "el",
@@ -168,7 +168,7 @@
    }
   },
   {
-   "id": "soldada_crisol",
+   "id": "soldada_crisol", "size": "large",
    "name": "Soldada de Crisol",
    "shortName": "Soldada de Crisol",
    "article": "la",
@@ -215,7 +215,7 @@
    }
   },
   {
-   "id": "ave_a_medias",
+   "id": "ave_a_medias", "size": "large",
    "name": "El Ave a Medias",
    "shortName": "El Ave a Medias",
    "article": "el",
@@ -262,7 +262,7 @@
    }
   },
   {
-   "id": "ferran",
+   "id": "ferran", "size": "large",
    "name": "Capitana Ferrán",
    "shortName": "Capitana Ferrán",
    "article": "la",
@@ -342,7 +342,7 @@
    }
   },
   {
-   "id": "carnero_hierro",
+   "id": "carnero_hierro", "size": "giant",
    "name": "Carnero de Hierro",
    "shortName": "Carnero de Hierro",
    "article": "el",
@@ -399,7 +399,7 @@
    }
   },
   {
-   "id": "medusa_salmuera",
+   "id": "medusa_salmuera", "size": "small",
    "name": "Medusa de Salmuera",
    "shortName": "Medusa de Salmuera",
    "article": "la",
@@ -446,7 +446,7 @@
    }
   },
   {
-   "id": "gaviota_hueca",
+   "id": "gaviota_hueca", "size": "small",
    "name": "Gaviota Hueca",
    "shortName": "Gaviota Hueca",
    "article": "la",
@@ -477,7 +477,7 @@
    }
   },
   {
-   "id": "cangrejo_salinero",
+   "id": "cangrejo_salinero", "size": "medium",
    "name": "Cangrejo Salinero",
    "shortName": "Cangrejo Salinero",
    "article": "el",
@@ -524,7 +524,7 @@
    }
   },
   {
-   "id": "madre_tenaza",
+   "id": "madre_tenaza", "size": "colossal",
    "name": "Madre Tenaza",
    "shortName": "Madre Tenaza",
    "article": "la",
@@ -602,7 +602,7 @@
    }
   },
   {
-   "id": "medusa_cielo",
+   "id": "medusa_cielo", "size": "giant",
    "name": "Medusa del Cielo",
    "shortName": "Medusa del Cielo",
    "article": "la",
@@ -671,7 +671,7 @@
    }
   },
   {
-   "id": "moneda_andante",
+   "id": "moneda_andante", "size": "small",
    "name": "Moneda Andante",
    "shortName": "Moneda Andante",
    "article": "la",
@@ -702,7 +702,7 @@
    }
   },
   {
-   "id": "guardia_contrapeso",
+   "id": "guardia_contrapeso", "size": "medium",
    "name": "Guardia de Contrapeso",
    "shortName": "Guardia de Contrapeso",
    "article": "el",
@@ -749,7 +749,7 @@
    }
   },
   {
-   "id": "tesorera_almas",
+   "id": "tesorera_almas", "size": "medium",
    "name": "Tesorera de Almas",
    "shortName": "Tesorera de Almas",
    "article": "la",
@@ -795,7 +795,7 @@
    }
   },
   {
-   "id": "duquesa_fiel",
+   "id": "duquesa_fiel", "size": "large",
    "name": "La Duquesa del Fiel",
    "shortName": "La Duquesa del Fiel",
    "article": "la",
@@ -876,7 +876,7 @@
    }
   },
   {
-   "id": "contador_sin_rostro",
+   "id": "contador_sin_rostro", "size": "large",
    "name": "Contador sin Rostro",
    "shortName": "Contador sin Rostro",
    "article": "el",
@@ -933,7 +933,7 @@
    }
   },
   {
-   "id": "gota_obsidiana",
+   "id": "gota_obsidiana", "size": "small",
    "name": "Gota de Obsidiana",
    "shortName": "Gota de Obsidiana",
    "article": "la",
@@ -971,7 +971,7 @@
    }
   },
   {
-   "id": "garza_obsidiana",
+   "id": "garza_obsidiana", "size": "medium",
    "name": "Garza de Obsidiana",
    "shortName": "Garza de Obsidiana",
    "article": "la",
@@ -1011,7 +1011,7 @@
    }
   },
   {
-   "id": "sorbedor",
+   "id": "sorbedor", "size": "small",
    "name": "Sorbedor de Poza",
    "shortName": "Sorbedor de Poza",
    "article": "el",
@@ -1056,7 +1056,7 @@
    }
   },
   {
-   "id": "boca_vieja",
+   "id": "boca_vieja", "size": "colossal",
    "name": "La Boca Vieja",
    "shortName": "Boca Vieja",
    "article": "la",
@@ -1113,7 +1113,7 @@
    }
   },
   {
-   "id": "boca_nueva",
+   "id": "boca_nueva", "size": "giant",
    "name": "La Boca Nueva",
    "shortName": "Boca Nueva",
    "article": "la",
@@ -1163,7 +1163,7 @@
    }
   },
   {
-   "id": "serpiente_nube",
+   "id": "serpiente_nube", "size": "colossal",
    "name": "Serpiente de Nube",
    "shortName": "Serpiente de Nube",
    "article": "la",
@@ -1222,7 +1222,7 @@
    }
   },
   {
-   "id": "sin_carta",
+   "id": "sin_carta", "size": "medium",
    "name": "Sin Carta",
    "shortName": "Sin Carta",
    "article": "el",
@@ -1261,7 +1261,7 @@
    }
   },
   {
-   "id": "huesped_menor",
+   "id": "huesped_menor", "size": "medium",
    "name": "Huésped Menor",
    "shortName": "Huésped Menor",
    "article": "el",

@@ -26,7 +26,7 @@ El manifiesto local tenía 39 imágenes registradas, frente a las 10 del respald
 ```powershell
 git merge-base --is-ancestor fase/3 main
 git merge-base --is-ancestor ui/interfaz main
-git merge-base --is-ancestor respaldo/stash-github-desktop-0254 main
+git merge-base --is-ancestor 640703f main  # el respaldo; su rama se retiró el 5 de noviembre
 ```
 
 Los tres comandos deben terminar con código 0. La auditoría y sus pruebas están en [README.md](README.md).

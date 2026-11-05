@@ -98,6 +98,9 @@ namespace SalYAlmas.Presentation
             string commands = string.Join("\n", commandLines);
             return $"Enemigo: {_hud.EnemyTarget} / {b.FindEnemy(_hud.EnemyTarget)?.Name}\nAliada: {_hud.AllyTarget} / {b.FindWitch(_hud.AllyTarget)?.Name}\nTurno: {b.TurnNumber}\nGranos: {b.Grains}\nÓrdenes:\n{commands}";
         }
+
+        /// <summary>Gestos simulados del HUD para el recorrido de capturas (BattleHud.DebugAction).</summary>
+        public string DebugHud(string action) => _hud != null ? _hud.DebugAction(action) : "sin combate";
 #endif
         public GameDatabase Database => _db;
 
@@ -206,6 +209,9 @@ namespace SalYAlmas.Presentation
             if (s == null) return;
             Application.targetFrameRate = s.BatterySaver || !s.HighQuality ? 30 : 60;
             BattleFx.Density = s.BatterySaver ? 0.4f : s.ReduceFlashes ? 0.6f : 1f; // TUNING
+            // La luz fija siempre integra las figuras; las dinámicas cuestan y se apagan con Ahorro de batería.
+            BattleLighting.DynamicLights = !s.BatterySaver;
+            BattleLighting.FlashScale = s.ReduceFlashes ? 0.45f : 1f; // TUNING
             int levels = QualitySettings.names.Length;
             if (levels > 0) QualitySettings.SetQualityLevel(s.HighQuality ? levels - 1 : 0, false);
         }
@@ -257,6 +263,12 @@ namespace SalYAlmas.Presentation
             // En el Fresno, el bioma es la zona de la run; fuera de él, las salinas.
             var fresno = _hub?.Game?.Fresno;
             _biome = fresno != null && fresno.InRun && fresno.Zone != null ? fresno.Zone.Id : "salinas";
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+            // Revisión de luz: "-bioma salinas" fuerza el fondo para comparar la integración en cada bioma.
+            var cli = Environment.GetCommandLineArgs();
+            int bi = Array.IndexOf(cli, "-bioma");
+            if (bi >= 0 && bi + 1 < cli.Length) _biome = cli[bi + 1];
+#endif
             StartBattle(setup, null);
         }
 
@@ -292,7 +304,10 @@ namespace SalYAlmas.Presentation
             }
             _chainWasOpen = false;
             _chain = new ChainScreen(_director, _saved);
-            _stage.Enter(_biome);
+            // Lo más grande del encuentro decide el encuadre: con un coloso, la cámara se abre y el aquelarre se ve pequeño.
+            var biggest = EnemySize.Small;
+            foreach (var e in _director.Battle.Enemies) if (e.Def.Size > biggest) biggest = e.Def.Size;
+            _stage.Enter(_biome, BattleStage.FovFor(biggest));
             _celebrated = false;
             _hud = new BattleHud(_director, _chain, BattleCamera);
             SpawnUnits();
@@ -307,6 +322,7 @@ namespace SalYAlmas.Presentation
             _spawned.Clear();
             foreach (var r in _hiddenFloor) if (r != null) r.enabled = true;
             _hiddenFloor.Clear();
+            BattleLighting.End();
             _stage?.Exit();
         }
 
@@ -316,13 +332,18 @@ namespace SalYAlmas.Presentation
         /// </summary>
         private Vector3 Anchor(int index, int count, bool enemy, bool boss) => _stage.Place(index, count, enemy, boss);
 
+        /// <summary>Escala de las brujas en el escenario: un 20 % más chicas que antes, para que el mundo se vea grande. // TUNING</summary>
+        private const float WitchScale = 0.8f;
+        /// <summary>Altura del recorte en unidades del mundo antes de escalar. // TUNING</summary>
+        private const float FigureHeight = 2.05f;
+
         private void SpawnUnits()
         {
             var b = _director.Battle;
             for (int i = 0; i < b.Witches.Count; i++)
             {
                 var w = b.Witches[i];
-                var view = CreateFigure(w.Name, Anchor(i, b.Witches.Count, false, false), Palette.Planet(w.Dominant), MaterialFor(w.Dominant), 1f, false, w.Id, _art?.Body(w.Key),
+                var view = CreateFigure(w.Name, Anchor(i, b.Witches.Count, false, false), Palette.Planet(w.Dominant), MaterialFor(w.Dominant), WitchScale, false, w.Id, _art?.Body(w.Key),
                     BattleStage.FacesLeft(PortraitBank.ArtId(w.Key)));
                 // Con arte, el Ascendente ya viene en el recorte. Sin arte: una esfera del planeta secundario detrás de la bruja.
                 if (_art?.Body(w.Key) != null) continue;
@@ -339,25 +360,101 @@ namespace SalYAlmas.Presentation
                 ascRenderer.SetPropertyBlock(block);
                 view.Ascendant = asc.transform;
             }
-            for (int i = 0; i < b.Enemies.Count; i++)
+            // Los gigantes toman la franja derecha; los demás enemigos se acomodan a sus lados o en las dos filas de siempre.
+            var big = new List<EnemyUnit>();
+            var rest = new List<EnemyUnit>();
+            foreach (var e in b.Enemies) (BattleStage.IsBig(e.Def.Size) ? big : rest).Add(e);
+            for (int i = 0; i < big.Count; i++)
+                SpawnEnemy(big[i], _stage.PlaceBig(i, big.Count, out float budget), budget);
+            for (int i = 0; i < rest.Count; i++)
+                SpawnEnemy(rest[i], _stage.Place(i, rest.Count, true, rest[i].IsBoss, big.Count > 0), 0f);
+            var front = SpawnBackdrop() ?? _stage.BackdropRenderer;
+            LightFigures(front);
+        }
+
+        /// <summary>Un enemigo a la escala de su tamaño (BattleStage.SizeFactor), encajado para que la cabeza no quede bajo el HUD.</summary>
+        private void SpawnEnemy(EnemyUnit e, Vector3 feet, float widthBudget)
+        {
+            var art = _art?.Enemy(e.Def.Id) ?? Resources.Load<Texture2D>("Ui/enemigos/" + BattleStage.EnemyArt(e.Def.Id));
+            float desired = WitchScale * BattleStage.SizeFactor(e.Def.Size);
+            float scale = art != null ? FitScale(feet, desired, art.width / (float)art.height, widthBudget) : 1.3f * BattleStage.SizeFactor(e.Def.Size) / 0.95f; // TUNING
+            Color c = Color.Lerp(Palette.Planet(e.Def.AttackPlanet), Palette.Abyss, 0.45f);
+            // Los dibujos de enemigos miran a la izquierda, hacia las brujas: no se voltean.
+            var view = CreateFigure(e.Name, feet, c, EnemyMaterial, scale, true, e.Id, art);
+            // A tamaño gigante, la neblina ya no cubre la base del dibujo: algunos recortes terminan en un corte recto
+            // (raíces, oleaje) que se vería pegado. La base se desvanece en el suelo. // TUNING
+            if (view != null && BattleStage.IsBig(e.Def.Size)) view.BaseFade = 0.08f;
+        }
+
+        /// <summary>
+        /// La escala deseada, recortada para que la figura quepa: la cabeza no sube de BattleStage.HeadLimit y, si hay
+        /// varios gigantes, cada uno respeta su ancho de franja.
+        /// </summary>
+        private float FitScale(Vector3 feet, float desired, float aspect, float widthBudget)
+        {
+            float perUnit = _stage.CanvasPerUnit(feet);
+            float maxHeight = (_stage.CanvasY(feet) - BattleStage.HeadLimit) / perUnit;
+            float scale = Mathf.Min(desired, maxHeight / FigureHeight);
+            if (widthBudget > 0f && aspect > 0f) scale = Mathf.Min(scale, widthBudget * 1.15f / perUnit / (FigureHeight * aspect));
+            return Mathf.Max(0.3f, scale);
+        }
+
+        /// <summary>
+        /// Monta la luz del combate sobre el fondo que queda al frente y le da a cada figura su fila (niebla), su sombra
+        /// proyectada y la línea de pies para la neblina. Ver BattleLighting.
+        /// </summary>
+        private void LightFigures(Renderer backdrop)
+        {
+            var lighting = BattleLighting.Begin(BattleCamera, backdrop);
+            float minZ = float.MaxValue, maxZ = float.MinValue;
+            var feet = new List<Vector3>();
+            foreach (var v in _director.Views.Values)
             {
-                var e = b.Enemies[i];
-                var art = _art?.Enemy(e.Def.Id) ?? Resources.Load<Texture2D>("Ui/enemigos/" + BattleStage.EnemyArt(e.Def.Id));
-                float scale = art != null ? (e.IsBoss ? 1.45f : 0.92f) : (e.IsBoss ? 2.1f : 1.3f); // TUNING
-                Color c = Color.Lerp(Palette.Planet(e.Def.AttackPlanet), Palette.Abyss, 0.45f);
-                // Los dibujos de enemigos miran a la izquierda, hacia las brujas: no se voltean.
-                CreateFigure(e.Name, Anchor(i, b.Enemies.Count, true, e.IsBoss), c, EnemyMaterial, scale, true, e.Id, art);
+                if (v == null) continue;
+                minZ = Mathf.Min(minZ, v.transform.position.z);
+                maxZ = Mathf.Max(maxZ, v.transform.position.z);
+                feet.Add(v.transform.position);
             }
-            SpawnBackdrop();
+            foreach (var v in _director.Views.Values)
+            {
+                if (v == null || !v.IsArt) continue;
+                v.SetDepth(maxZ - minZ > 0.01f ? Mathf.InverseLerp(minZ, maxZ, v.transform.position.z) : 0f);
+                v.CastShadow = CastShadow(v, lighting);
+            }
+            lighting.SetFeetLine(feet);
+        }
+
+        /// <summary>La silueta tendida en el suelo, lejos de la luz clave. Reemplaza a la mancha redonda como sombra principal.</summary>
+        private Renderer CastShadow(UnitView view, BattleLighting lighting)
+        {
+            var shader = BattleLighting.ShadowShader;
+            var body = view.Body;
+            if (shader == null || body == null || body.sharedMaterial == null) return null;
+            var tex = body.sharedMaterial.mainTexture;
+            var q = GameObject.CreatePrimitive(PrimitiveType.Quad);
+            q.name = "Sombra proyectada";
+            RemoveCollider(q);
+            q.transform.SetParent(view.transform, false);
+            var art = body.transform.localScale;
+            // TUNING: 62 % de la figura, pero nunca más de 1.7 m: la sombra de un coloso no debe tapar al aquelarre.
+            float length = Mathf.Min(Mathf.Abs(art.y) * 0.62f, 1.7f / Mathf.Max(0.01f, view.transform.localScale.x));
+            var dir = lighting.ShadowDir;
+            float yaw = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+            q.transform.localRotation = Quaternion.Euler(90f, yaw, 0f);
+            q.transform.localScale = new Vector3(art.x, length, 1f);
+            q.transform.localPosition = dir * (length * 0.5f) + Vector3.up * 0.015f;
+            var r = q.GetComponent<Renderer>();
+            r.material = new Material(shader) { mainTexture = tex, color = lighting.ShadowColor, renderQueue = 2950 };
+            lighting.TrackShadow(r);
+            return r;
         }
 
         /// <summary>El fondo de la zona (Art/Ambientes) en un plano lejano que llena la vista de la cámara.</summary>
-        private void SpawnBackdrop()
+        private Renderer SpawnBackdrop()
         {
-            if (_hub == null || BattleCamera == null) return;
+            if (_hub == null || BattleCamera == null) return null;
             var tex = _hub.CurrentBackdrop(out var tint);
-            var shader = Shader.Find("Sprites/Default");
-            if (tex == null || shader == null) return;
+            if (tex == null) return null;
             // Con fondo pintado, el suelo gris y los círculos de prueba estorban: se esconden mientras dure el combate.
             foreach (var name in new[] { "Suelo de sal", "Círculo del aquelarre", "Círculo de las raíces" })
             {
@@ -378,9 +475,9 @@ namespace SalYAlmas.Presentation
             quad.transform.rotation = Quaternion.LookRotation(t.forward, t.up);
             quad.transform.localScale = new Vector3(w * 1.04f, h * 1.04f, 1f);
             var renderer = quad.GetComponent<Renderer>();
-            renderer.material = new Material(shader) { mainTexture = tex, color = tint };
-            renderer.material.renderQueue = 2900;
+            renderer.material = BattleLighting.BackdropMaterial(tex, tint * new Color(0.92f, 0.92f, 0.92f, 1f), 2900); // TUNING
             _spawned.Add(quad);
+            return renderer;
         }
 
         private Material MaterialFor(Planet p)
@@ -394,7 +491,7 @@ namespace SalYAlmas.Presentation
             var root = new GameObject(name);
             root.transform.position = position;
             root.transform.localScale = Vector3.one * scale;
-            var shader = art != null ? Shader.Find("Sprites/Default") : null;
+            var shader = art != null ? (BattleLighting.FigureShader ?? Shader.Find("Sprites/Default")) : null;
             if (shader != null)
             {
                 // Con arte: un recorte que mira a la cámara. Sin arte: la cápsula de prueba de la Fase 1.
@@ -402,7 +499,7 @@ namespace SalYAlmas.Presentation
                 quad.name = "Recorte";
                 RemoveCollider(quad);
                 quad.transform.SetParent(root.transform, false);
-                const float height = 2.05f; // TUNING
+                const float height = FigureHeight;
                 float width = height * art.width / art.height;
                 // Volteado con escala negativa: el quad queda de espaldas y Sprites/Default no recorta caras traseras.
                 quad.transform.localScale = new Vector3(flip ? -width : width, height, 1f);
@@ -415,11 +512,17 @@ namespace SalYAlmas.Presentation
                     quad.transform.rotation = Quaternion.LookRotation(fwd.sqrMagnitude > 0.001f ? fwd : Vector3.forward, Vector3.up);
                 }
                 var quadRenderer = quad.GetComponent<Renderer>();
-                quadRenderer.material = new Material(shader) { mainTexture = art };
+                var figMat = new Material(shader) { mainTexture = art };
+                // Volteado: el borde y el contraluz se calculan en el sentido de pantalla.
+                if (figMat.HasProperty("_FlipX")) figMat.SetFloat("_FlipX", flip ? -1f : 1f);
+                quadRenderer.material = figMat;
                 var artView = root.AddComponent<UnitView>();
                 artView.IsArt = true;
                 artView.Shadow = ContactShadow(root.transform, width);
-                artView.Setup(unitId, enemy, _stage.Tint, quadRenderer, null, height * scale);
+                // Con la luz del combate el tinte del bioma ya viene en el shader; sin ella, el tinte fijo de antes.
+                bool lit = figMat.HasProperty("_FlipX");
+                artView.Setup(unitId, enemy, lit ? Color.white : _stage.Tint, quadRenderer, null, height * scale);
+                artView.Width = width * scale;
                 _spawned.Add(root);
                 _director.Views[unitId] = artView;
                 return artView;
@@ -449,9 +552,10 @@ namespace SalYAlmas.Presentation
             q.transform.SetParent(parent, false);
             q.transform.localPosition = new Vector3(0, 0.02f, 0);
             q.transform.localRotation = Quaternion.Euler(90f, 0, 0);
-            q.transform.localScale = new Vector3(width * 0.9f, width * 0.32f, 1f);
+            q.transform.localScale = new Vector3(width * 0.62f, width * 0.2f, 1f);
             var r = q.GetComponent<Renderer>();
-            r.material = new Material(shader) { mainTexture = tex, color = new Color(0, 0, 0, 0.75f), renderQueue = 2900 };
+            // Oclusión de contacto: pequeña y oscura justo bajo los pies; la sombra proyectada hace el resto. // TUNING
+            r.material = new Material(shader) { mainTexture = tex, color = new Color(0, 0, 0, 0.62f), renderQueue = 2960 };
             return r;
         }
 
@@ -584,14 +688,18 @@ namespace SalYAlmas.Presentation
         private void DrawResult()
         {
             var b = _director.Battle;
-            var r = new Rect(460, 200, 1000, 620);
+            // El panel mide lo que trae: antes era de 1000×620 aunque solo hubiera una línea. // TUNING
+            int lines = Mathf.Clamp(_director.Chains.Count, 1, 8);
+            float h = 330 + lines * 30 + (_director.IsReplay ? 40 : 0) + (string.IsNullOrEmpty(_savedReportPath) ? 0 : 44);
+            float w = _external != null ? 820 : 1000;
+            var r = new Rect((GuiKit.Width - w) / 2, (GuiKit.Height - h) / 2 - 30, w, h);
             GuiKit.Fill(new Rect(0, 0, GuiKit.Width, GuiKit.Height), Palette.WithAlpha(Palette.Abyss, 0.45f));
             GuiKit.PanelBox(r, 0.97f);
             bool win = b.Outcome == Core.Events.BattleOutcome.Victory;
-            GuiKit.Label(new Rect(r.x, r.y + 20, r.width, 60), win ? "Victoria" : "Derrota", 54, win ? Palette.FiveStar : Palette.Danger, TextAnchor.MiddleCenter, true);
+            GuiKit.Label(new Rect(r.x, r.y + 18, r.width, 60), win ? "Victoria" : "Derrota", 48, win ? Palette.FiveStar : Palette.Danger, TextAnchor.MiddleCenter, true);
             float time = _director.RealEndTime - _director.RealStartTime;
             string stats = $"Tiempo real: {BattleDirector.FormatTime(time)}   ·   Turnos: {b.TurnNumber}   ·   Spark: {b.TotalSparks}   ·   Almitas: {b.Almitas}\nSemilla: {_director.Setup.Seed}";
-            GuiKit.Label(new Rect(r.x + 40, r.y + 96, r.width - 80, 60), stats, 22, Palette.Parchment, TextAnchor.UpperCenter);
+            GuiKit.Label(new Rect(r.x + 40, r.y + 92, r.width - 80, 60), stats, 20, Palette.Parchment, TextAnchor.UpperCenter);
             GuiKit.Label(new Rect(r.x + 40, r.y + 164, r.width - 80, 30), "Cadenas", 22, Palette.GoldBright, TextAnchor.MiddleLeft, true);
             float y = r.y + 198;
             if (_director.Chains.Count == 0) GuiKit.Label(new Rect(r.x + 40, y, r.width - 80, 28), "No abriste ninguna Cadena.", 18, Palette.ParchmentShadow);
@@ -599,7 +707,7 @@ namespace SalYAlmas.Presentation
             {
                 GuiKit.Label(new Rect(r.x + 40, y, r.width - 80, 28), $"{c.Order}  ·  {c.Sparks} Spark (la mejor daba {c.BestPossibleSparks})  ·  {c.Damage:N0} de daño", 17, Palette.Parchment);
                 y += 30;
-                if (y > r.y + 470) break;
+                if (y > r.yMax - 130) break;
             }
             if (_director.IsReplay)
             {
@@ -614,7 +722,7 @@ namespace SalYAlmas.Presentation
             float bx = r.x + 30, by = r.yMax - 86;
             if (_external != null)
             {
-                if (GuiKit.Button(new Rect(r.x + 300, by, 400, 60), "Continuar", true, 24)) FinishExternal();
+                if (GuiKit.Button(new Rect(r.center.x - 200, by, 400, 60), "Continuar", true, 24)) FinishExternal();
                 return;
             }
             if (GuiKit.Button(new Rect(bx, by, 180, 60), "Jugar otra vez\n<size=13>misma semilla</size>", true, 17)) StartBattle(_lastSetup.Clone());

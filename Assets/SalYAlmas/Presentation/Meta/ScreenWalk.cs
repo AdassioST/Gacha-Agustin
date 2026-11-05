@@ -158,6 +158,26 @@ namespace SalYAlmas.Presentation
             StartBattle?.Invoke(Game.Story.PrepareExpeditionBattle(Party(), 7), b => Game.Story.ResolveExpeditionBattle(b), "");
         }
 
+        /// <summary>
+        /// Combate de revisión de escala: los enemigos pedidos, con sus números de origen, para ver juntos tamaños distintos
+        /// (un coloso con su escolta, dos gigantes, una oleada mixta). Solo en desarrollo; no toca la partida.
+        /// </summary>
+        public void DebugSizedBattle(params string[] enemies)
+        {
+            var setup = Game.Progress.BuildSetup(Party(), 7);
+            var enc = new SalYAlmas.Core.Data.EncounterDef { Id = "escala_" + string.Join("_", enemies), Name = "Revisión de escala" };
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                var src = _meta.Enemy(enemies[i]);
+                if (src == null) { Debug.LogError("Falta el enemigo " + enemies[i]); continue; }
+                var def = SalYAlmas.Core.Fresno.FresnoService.Scaled(src, $"{src.Id}#e{i}", 1.0, 1.0, 0, "");
+                enc.Enemies.Add(def.Id);
+                setup.CustomEnemies.Add(def);
+            }
+            setup.CustomEncounter = enc;
+            StartBattle?.Invoke(setup, b => { }, "");
+        }
+
         /// <summary>Termina el combate de prueba sin jugarlo, para seguir el recorrido.</summary>
         public System.Action EndBattleRequested;
         public void DebugEndBattle() => EndBattleRequested?.Invoke();

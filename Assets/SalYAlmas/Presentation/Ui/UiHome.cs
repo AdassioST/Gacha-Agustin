@@ -83,10 +83,11 @@ namespace SalYAlmas.Ui
 
             // Sombra de contacto y bruja. La sombra evita que parezca pegada.
             _shadow = U.Img(Root, "fx/soft_dot", new Color(0.05f, 0.01f, 0.05f, 0.62f), "Sombra");
-            U.At(_shadow.rectTransform, 0.36f, 0, 0, 225, 560, 110, 0.5f, 0.5f);
+            U.At(_shadow.rectTransform, 0.36f, 0, 0, 190, 560, 110, 0.5f, 0.5f);
             _hero = U.Img(Root, null, Color.white, "Favorita", true);
             _heroRt = _hero.rectTransform;
-            U.At(_heroRt, 0.36f, 0, 0, 165, 600, 880, 0.5f, 0);
+            // TUNING: la favorita baja y crece (antes 860 de alto desde y=165): el marco más delgado le deja sitio.
+            U.At(_heroRt, 0.36f, 0, 0, 128, 640, 930, 0.5f, 0);
             _heroMat = UiTheme.NewMat("Hero");
             _hero.material = _heroMat;
             var hb = _hero.gameObject.AddComponent<UiBtn>();
@@ -110,16 +111,16 @@ namespace SalYAlmas.Ui
 
         private void BuildNameAndBubble()
         {
-            _heroName = U.Txt(Root, "", 56, UiTheme.Spark, UiTheme.Gothic, TextAlignmentOptions.MidlineLeft);
+            _heroName = U.Txt(Root, "", 50, UiTheme.Spark, UiTheme.Gothic, TextAlignmentOptions.MidlineLeft);
             _heroName.fontSharedMaterial = UiTheme.Shadowed(UiTheme.Gothic, new Color(0.08f, 0.03f, 0.08f, 1), 0.5f, -1f, 0.12f);
-            U.At(_heroName.rectTransform, 0, 0, 36, 288, 620, 64, 0, 0);
-            _heroInfo = U.Txt(Root, "", 25, UiTheme.Parchment, UiTheme.Bold);
+            U.At(_heroName.rectTransform, 0, 0, 36, 248, 620, 58, 0, 0);
+            _heroInfo = U.Txt(Root, "", 23, UiTheme.Parchment, UiTheme.Bold);
             _heroInfo.fontSharedMaterial = UiTheme.Shadowed(UiTheme.Bold, new Color(0.08f, 0.03f, 0.08f, 1), 0.4f, -0.7f, 0.07f);
-            U.At(_heroInfo.rectTransform, 0, 0, 38, 252, 620, 34, 0, 0);
+            U.At(_heroInfo.rectTransform, 0, 0, 38, 214, 620, 32, 0, 0);
 
             _bubble = U.Paper(Root, "Diálogo");
             // Anclado a la favorita (x 0.36), no al borde: en pantallas 20:9 el ancla izquierda la ponía sobre su cara.
-            U.At(_bubble, 0.36f, 1, 222, -118, 330, 196, 0, 1);
+            U.At(_bubble, 0.36f, 1, 236, -104, 320, 186, 0, 1);
             var tail = U.Img(_bubble, "chrome/bubble_tail", null, "Cola");
             U.At(tail.rectTransform, 0, 0, 18, -20, 44, 30, 0, 0);
             _bubbleText = U.Txt(_bubble, "", 25, UiTheme.Ink, UiTheme.Body, TextAlignmentOptions.MidlineLeft, true);
@@ -133,20 +134,20 @@ namespace SalYAlmas.Ui
         private void BuildDayChip()
         {
             var chip = U.Node(Root, "Día planetario");
-            U.At(chip, 0, 1, 34, -134, 340, 62, 0, 1);
+            U.At(chip, 0, 1, 30, -112, 320, 52, 0, 1);
             _dayIcon = U.Img(chip, null, null, "Sello");
-            U.At(_dayIcon.rectTransform, 0, 0.5f, 0, 0, 62, 62, 0, 0.5f);
-            _dayText = U.Txt(chip, "", 28, UiTheme.Parchment, UiTheme.Title);
+            U.At(_dayIcon.rectTransform, 0, 0.5f, 0, 0, 52, 52, 0, 0.5f);
+            _dayText = U.Txt(chip, "", 24, UiTheme.Parchment, UiTheme.Title);
             _dayText.fontSharedMaterial = UiTheme.Shadowed(UiTheme.Title, new Color(0.05f, 0.02f, 0.06f, 1), 0.45f, -0.8f, 0.1f);
-            U.At(_dayText.rectTransform, 0, 0.5f, 72, 0, 280, 40, 0, 0.5f);
+            U.At(_dayText.rectTransform, 0, 0.5f, 62, 0, 260, 36, 0, 0.5f);
         }
 
         private void BuildParty()
         {
             _party = U.Node(Root, "Equipo");
-            U.At(_party, 0, 1, 30, -200, 130, 540, 0, 1);
+            U.At(_party, 0, 1, 30, -176, 112, 480, 0, 1);
             _actions = U.Node(Root, "Acciones");
-            U.At(_actions, 0, 0, 34, 164, 140, 0, 0, 0);
+            U.At(_actions, 0, 0, 34, 132, 140, 0, 0, 0);
         }
 
         private RectTransform MakeDestCard(string art, string title, string subtitle, MetaHub.Screen go, float x, float y, float w, float h, out TextMeshProUGUI sub, float titleSize = 42, string overlayWitch = null)
@@ -209,15 +210,16 @@ namespace SalYAlmas.Ui
         private void BuildDestinations()
         {
             _dest = U.Fill(U.Node(Root, "Destinos"));
-            const float W = 640, X = -30;
-            float y = -128;
-            MakeDestCard("cards/fresno", UiLoc.Get("dest.fresno"), UiLoc.Get("dest.fresno.sub"), MetaHub.Screen.Fresno, X, y, W, 310, out _fresnoSub, 54);
-            y -= 322;
-            MakeDestCard("cards/story", UiLoc.Get("dest.story"), UiLoc.Get("dest.story.sub"), MetaHub.Screen.Story, X - W / 2 - 6, y, W / 2 - 6, 226, out _storySub, 38);
-            MakeDestCard("cards/spring", UiLoc.Get("dest.summon"), UiLoc.Get("dest.summon.sub"), MetaHub.Screen.Summon, X, y, W / 2 - 6, 226, out _, 38);
-            y -= 238;
-            MakeDestCard("cards/trial", UiLoc.Get("dest.trials"), "", MetaHub.Screen.Coven, X - W / 2 - 6, y, W / 2 - 6, 92, out _, 32);
-            MakeDestCard("cards/story", UiLoc.Get("dest.ledger"), "", MetaHub.Screen.Ledger, X, y, W / 2 - 6, 92, out _, 32);
+            // TUNING: columna de destinos de 640 a 548 de ancho y unos 15 % más baja: la favorita manda en el centro.
+            const float W = 548, X = -28;
+            float y = -112;
+            MakeDestCard("cards/fresno", UiLoc.Get("dest.fresno"), UiLoc.Get("dest.fresno.sub"), MetaHub.Screen.Fresno, X, y, W, 262, out _fresnoSub, 48);
+            y -= 274;
+            MakeDestCard("cards/story", UiLoc.Get("dest.story"), UiLoc.Get("dest.story.sub"), MetaHub.Screen.Story, X - W / 2 - 6, y, W / 2 - 6, 192, out _storySub, 34);
+            MakeDestCard("cards/spring", UiLoc.Get("dest.summon"), UiLoc.Get("dest.summon.sub"), MetaHub.Screen.Summon, X, y, W / 2 - 6, 192, out _, 34);
+            y -= 204;
+            MakeDestCard("cards/trial", UiLoc.Get("dest.trials"), "", MetaHub.Screen.Coven, X - W / 2 - 6, y, W / 2 - 6, 80, out _, 28);
+            MakeDestCard("cards/story", UiLoc.Get("dest.ledger"), "", MetaHub.Screen.Ledger, X, y, W / 2 - 6, 80, out _, 28);
         }
 
         private List<string> Team()
@@ -242,7 +244,7 @@ namespace SalYAlmas.Ui
             {
                 if (shown++ >= 4) break;
                 var seal = U.Img(_party, "chrome/seal_dark", null, id, true);
-                U.At(seal.rectTransform, 0, 1, 0, y, 122, 122, 0, 1);
+                U.At(seal.rectTransform, 0, 1, 0, y, 104, 104, 0, 1);
                 var bust = U.Img(seal.transform, null, null, "Busto");
                 bust.sprite = UiWitchArt.Bust(G, id);
                 if (bust.sprite == null) { bust.sprite = UiTheme.Sp("fx/silhouette"); bust.color = UiTheme.Planet(G.Meta.Roster[id].Primary); }
@@ -252,14 +254,14 @@ namespace SalYAlmas.Ui
                 var ringImg = U.Img(seal.transform, "chrome/seal_dark", null, "Aro");
                 ringImg.color = new Color(1, 1, 1, 0);
                 var r = U.Img(_party, "fx/ring", id == _heroId ? UiTheme.Spark : new Color(1, 0.86f, 0.55f, 0.75f), "Aro");
-                U.At(r.rectTransform, 0, 1, -3, y + 3, 128, 128, 0, 1);
+                U.At(r.rectTransform, 0, 1, -3, y + 3, 110, 110, 0, 1);
                 var entry = G.Meta.Roster[id];
                 var pl = U.Img(_party, "seals/" + UiTheme.PlanetId(entry.Primary), null, "Planeta");
-                U.At(pl.rectTransform, 0, 1, 84, y - 84, 44, 44, 0, 1);
+                U.At(pl.rectTransform, 0, 1, 72, y - 72, 38, 38, 0, 1);
                 var b = seal.gameObject.AddComponent<UiBtn>();
                 var cap = id;
                 b.Click = () => SetHero(cap, true);
-                y -= 136;
+                y -= 116;
             }
 
             RefreshActions();
@@ -292,14 +294,14 @@ namespace SalYAlmas.Ui
             var rt = b.Background.rectTransform;
             rt.anchorMin = rt.anchorMax = new Vector2(0, 0);
             rt.pivot = new Vector2(0, 0);
-            rt.sizeDelta = new Vector2(84, 84);
-            rt.anchoredPosition = new Vector2(i * 98, 0);
+            rt.sizeDelta = new Vector2(74, 74);
+            rt.anchoredPosition = new Vector2(i * 90, 0);
             var ic = U.Img(rt, "iconsg/" + icon, null, "Icono");
             U.Fill(ic.rectTransform, 15, 15, 15, 15);
             var captionBacking = U.Img(rt, null, UiTheme.Abyss, "Fondo de etiqueta");
-            U.At(captionBacking.rectTransform, 0.5f, 0, 0, -28, 94, 28, 0.5f, 0);
-            var caption = U.Txt(rt, label, 22, UiTheme.Parchment, UiTheme.Body, TextAlignmentOptions.Center);
-            U.At(caption.rectTransform, 0.5f, 0, 0, -28, 94, 28, 0.5f, 0);
+            U.At(captionBacking.rectTransform, 0.5f, 0, 0, -26, 88, 26, 0.5f, 0);
+            var caption = U.Txt(rt, label, 20, UiTheme.Parchment, UiTheme.Body, TextAlignmentOptions.Center);
+            U.At(caption.rectTransform, 0.5f, 0, 0, -26, 88, 26, 0.5f, 0);
             badge = UiBadge.Make(rt, "", 30);
             return b;
         }
@@ -332,7 +334,7 @@ namespace SalYAlmas.Ui
             }
             else _hero.color = Color.white;
             _hero.sprite = sp;
-            UiWitchArt.FitHeight(_hero, 860, 860);
+            UiWitchArt.FitHeight(_hero, 930, 900);
             _shadow.rectTransform.sizeDelta = new Vector2(_heroRt.sizeDelta.x * 0.92f, 110);
             var e = G.Meta.Roster[id];
             string rarity = new string('★', e.Rarity);

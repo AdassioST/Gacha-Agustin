@@ -238,6 +238,8 @@ namespace SalYAlmas.Core.Data
         public Dictionary<Planet, double> Res = new Dictionary<Planet, double>();
         public Planet AttackPlanet;
         public bool IsBoss;
+        /// <summary>Escala en el escenario (presentación). Sin dato: Medium, o Large si es jefe.</summary>
+        public EnemySize Size = EnemySize.Medium;
         public EnemyTraits Traits = new EnemyTraits();
         /// <summary>Acciones por turno. Los jefes pueden actuar dos veces para no quedar abrumados por cuatro brujas.</summary>
         public int ActionsPerTurn = 1;
@@ -263,6 +265,12 @@ namespace SalYAlmas.Core.Data
     }
 
     public enum PotionTarget { Ally, AllAllies, Enemy, None }
+
+    /// <summary>
+    /// Tamaño de un enemigo en el escenario, de una gota de obsidiana a un cangrejo con un pueblo en el caparazón.
+    /// Solo lo usa la presentación para la escala y el encuadre; no cambia ninguna regla.
+    /// </summary>
+    public enum EnemySize { Small, Medium, Large, Giant, Colossal }
 
     public sealed class PotionDef
     {

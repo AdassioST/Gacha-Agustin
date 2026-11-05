@@ -60,7 +60,8 @@ namespace SalYAlmas.Ui
             UiAmbience.Almitas(Root, new Rect(-900, -460, 1800, 500), 1.8f);
 
             _tabs = U.Node(Root, "Manantiales");
-            U.At(_tabs, 0, 1, 30, -142, 370, 720, 0, 1);
+            U.At(_tabs, 0, 1, 26, -118, 370, 720, 0, 1);
+            _tabs.localScale = new Vector3(0.86f, 0.86f, 1); // TUNING: lista de manantiales más chica
 
             _heroName = U.Txt(Root, "", 76, UiTheme.Spark, UiTheme.Gothic, TextAlignmentOptions.Center);
             _heroName.fontSharedMaterial = UiTheme.Shadowed(UiTheme.Gothic, new Color(0.05f, 0.02f, 0.06f, 1), 0.5f, -1, 0.14f);
@@ -75,7 +76,8 @@ namespace SalYAlmas.Ui
         private void BuildInfo()
         {
             _info = U.Panel(Root, "Ficha del banner");
-            U.At(_info, 1, 1, -30, -138, 580, 766, 1, 1);
+            U.At(_info, 1, 1, -26, -116, 580, 766, 1, 1);
+            _info.localScale = new Vector3(0.88f, 0.88f, 1); // TUNING: ficha del banner más chica
             _bannerName = U.Txt(_info, "", 42, UiTheme.Spark, UiTheme.Title, TextAlignmentOptions.MidlineLeft);
             _bannerName.fontSharedMaterial = UiTheme.Shadowed(UiTheme.Title, new Color(0, 0, 0, 1), 0.35f, -0.8f, 0.08f);
             _bannerName.enableAutoSizing = true;

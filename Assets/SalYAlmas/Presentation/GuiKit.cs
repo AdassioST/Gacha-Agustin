@@ -227,7 +227,9 @@ namespace SalYAlmas.Presentation
             var oldColor = GUI.color;
             Vector2 d = b - a;
             float angle = Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg;
-            GUIUtility.RotateAroundPivot(angle, a);
+            // Rotación en el espacio del lienzo. GUIUtility.RotateAroundPivot no respeta la escala ni el corrimiento de
+            // BeginScreen: fuera de 16:9 exacto (casi todos los teléfonos) las líneas salían desplazadas.
+            GUI.matrix = old * Matrix4x4.Translate(new Vector3(a.x, a.y, 0)) * Matrix4x4.Rotate(Quaternion.Euler(0, 0, angle)) * Matrix4x4.Translate(new Vector3(-a.x, -a.y, 0));
             GUI.color = c;
             GUI.DrawTexture(new Rect(a.x, a.y - width / 2f, d.magnitude, width), White);
             GUI.matrix = old;
@@ -248,6 +250,9 @@ namespace SalYAlmas.Presentation
 
         /// <summary>Se dispara cada vez que el jugador presiona un botón (para el sonido de la interfaz).</summary>
         public static event System.Action ButtonPressed;
+
+        /// <summary>Un gesto que no es un botón (arrastre, toque en carta) también suena como uno.</summary>
+        public static void Pressed() => ButtonPressed?.Invoke();
 
         private static readonly Dictionary<string, string> LegibleCache = new Dictionary<string, string>();
         private static readonly System.Text.RegularExpressions.Regex SizeTag = new System.Text.RegularExpressions.Regex(@"<size=(\d+)>");

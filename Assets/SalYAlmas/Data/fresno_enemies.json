@@ -4,7 +4,7 @@
 {
   "enemies": [
     {
-      "id": "madre_raiz", "name": "La Madre Raíz", "shortName": "Madre Raíz", "article": "la", "boss": true, "actionsPerTurn": 2,
+      "id": "madre_raiz", "size": "giant", "name": "La Madre Raíz", "shortName": "Madre Raíz", "article": "la", "boss": true, "actionsPerTurn": 2,
       "description": "Jefa de las Raíces Putrefactas. Amamanta a las almas que no llegaron con savia negra.",
       "level": 52, "hp": 90000, "atk": 1450, "spd": 104, "toughness": 220,
       "weaknesses": ["sol", "marte", "jupiter"], "res": { "saturno": 0.2 }, "attackPlanet": "saturno",
@@ -24,7 +24,7 @@
                   "pattern": ["leche_negra", "abrazo_raices", "llanto_raiz"] }
     },
     {
-      "id": "corteza_hueca", "name": "Corteza Hueca", "shortName": "Corteza", "article": "la",
+      "id": "corteza_hueca", "size": "large", "name": "Corteza Hueca", "shortName": "Corteza", "article": "la",
       "description": "Un trozo de tronco que camina buscando el árbol del que se cayó.",
       "level": 55, "hp": 24000, "atk": 1150, "spd": 88, "toughness": 70,
       "weaknesses": ["sol", "marte"], "res": { "saturno": 0.15 }, "attackPlanet": "saturno",
@@ -36,7 +36,7 @@
       "pattern": ["astilla", "astilla", "endurecer"]
     },
     {
-      "id": "recuerdo_atrapado", "name": "Recuerdo Atrapado", "shortName": "Recuerdo", "article": "el",
+      "id": "recuerdo_atrapado", "size": "medium", "name": "Recuerdo Atrapado", "shortName": "Recuerdo", "article": "el",
       "description": "La memoria de alguien, cristalizada en savia. Repite lo último que dijo.",
       "level": 55, "hp": 17000, "atk": 1250, "spd": 116, "toughness": 50,
       "weaknesses": ["luna", "mercurio", "jupiter"], "attackPlanet": "luna",
@@ -48,7 +48,7 @@
       "pattern": ["eco_voz", "olvido", "eco_voz"]
     },
     {
-      "id": "savia_errante", "name": "Savia Errante", "shortName": "Savia", "article": "la",
+      "id": "savia_errante", "size": "small", "name": "Savia Errante", "shortName": "Savia", "article": "la",
       "description": "Savia negra que se escapó del tronco y aprendió a cazar.",
       "level": 55, "hp": 15000, "atk": 1300, "spd": 110, "toughness": 50,
       "weaknesses": ["sol", "venus"], "attackPlanet": "venus",
@@ -61,7 +61,7 @@
       "pattern": ["pegote", "brote", "pegote"]
     },
     {
-      "id": "lenador_hueco", "name": "El Leñador Hueco", "shortName": "Leñador", "article": "el", "boss": true, "actionsPerTurn": 2,
+      "id": "lenador_hueco", "size": "giant", "name": "El Leñador Hueco", "shortName": "Leñador", "article": "el", "boss": true, "actionsPerTurn": 2,
       "description": "Jefe del Tronco de Ceniza. Corta las ramas que tienen recuerdos para que el árbol no sufra.",
       "level": 58, "hp": 120000, "atk": 1650, "spd": 100, "toughness": 260,
       "weaknesses": ["luna", "jupiter", "venus"], "res": { "marte": 0.2 }, "attackPlanet": "marte",
@@ -79,7 +79,7 @@
                   "pattern": ["tala", "hachazo", "derribo", "afilar"] }
     },
     {
-      "id": "ave_eclipse", "name": "Ave del Eclipse", "shortName": "Ave", "article": "el",
+      "id": "ave_eclipse", "size": "medium", "name": "Ave del Eclipse", "shortName": "Ave", "article": "el",
       "description": "Vuela solo cuando el sol se tapa. En las Ramas, el sol siempre está tapado.",
       "level": 60, "hp": 18000, "atk": 1400, "spd": 128, "toughness": 55,
       "weaknesses": ["sol", "jupiter"], "attackPlanet": "saturno",
@@ -90,7 +90,7 @@
       "pattern": ["picada", "picada", "sombra_ala"]
     },
     {
-      "id": "viento_salino", "name": "Viento Salino", "shortName": "Viento", "article": "el",
+      "id": "viento_salino", "size": "medium", "name": "Viento Salino", "shortName": "Viento", "article": "el",
       "description": "Un remolino de sal que arranca la piel de las hojas.",
       "level": 60, "hp": 16000, "atk": 1350, "spd": 122, "toughness": 50,
       "weaknesses": ["mercurio", "venus", "luna"], "attackPlanet": "mercurio",
@@ -102,7 +102,7 @@
       "pattern": ["rafaga", "cortante", "cortante"]
     },
     {
-      "id": "cuervo_sin_carta", "name": "Cuervo sin Carta", "shortName": "Cuervo", "article": "el",
+      "id": "cuervo_sin_carta", "size": "small", "name": "Cuervo sin Carta", "shortName": "Cuervo", "article": "el",
       "description": "Nació sin cielo. Las estrellas no lo ven, y él tampoco a ellas.",
       "level": 60, "hp": 21000, "atk": 1450, "spd": 112, "toughness": 60,
       "weaknesses": ["saturno", "marte"], "res": { "luna": 0.2 }, "attackPlanet": "luna",
@@ -114,7 +114,7 @@
       "pattern": ["graznido_negro", "plumaje", "graznido_negro"]
     },
     {
-      "id": "corneja_eclipse", "name": "La Corneja del Eclipse", "shortName": "Corneja del Eclipse", "article": "la", "boss": true, "actionsPerTurn": 2,
+      "id": "corneja_eclipse", "size": "colossal", "name": "La Corneja del Eclipse", "shortName": "Corneja del Eclipse", "article": "la", "boss": true, "actionsPerTurn": 2,
       "description": "Jefa de las Ramas del Eclipse. Se come el sol a pedazos y escupe los huesos de luz.",
       "level": 63, "hp": 140000, "atk": 1800, "spd": 118, "toughness": 280,
       "weaknesses": ["sol", "luna", "jupiter"], "res": { "saturno": 0.25 }, "attackPlanet": "saturno",
@@ -132,7 +132,7 @@
                   "pattern": ["noche_alas", "picotazo_solar", "eclipse_total"] }
     },
     {
-      "id": "hoja_alma", "name": "Hoja-Alma", "shortName": "Hoja", "article": "la",
+      "id": "hoja_alma", "size": "small", "name": "Hoja-Alma", "shortName": "Hoja", "article": "la",
       "description": "Un alma madura. Cae despacio, como si no quisiera llegar.",
       "level": 66, "hp": 20000, "atk": 1500, "spd": 108, "toughness": 60,
       "weaknesses": ["marte", "saturno", "mercurio"], "attackPlanet": "venus",
@@ -144,7 +144,7 @@
       "pattern": ["caida_lenta", "savia_madura", "caida_lenta"]
     },
     {
-      "id": "constelacion_menor", "name": "Constelación Menor", "shortName": "Constelación", "article": "la",
+      "id": "constelacion_menor", "size": "medium", "name": "Constelación Menor", "shortName": "Constelación", "article": "la",
       "description": "Siete ojos que alguien confundió con estrellas.",
       "level": 66, "hp": 18000, "atk": 1550, "spd": 124, "toughness": 55,
       "weaknesses": ["saturno", "luna"], "attackPlanet": "jupiter",
@@ -156,7 +156,7 @@
       "pattern": ["mirada", "parpadeo", "mirada"]
     },
     {
-      "id": "podadora", "name": "Podadora", "shortName": "Podadora", "article": "la",
+      "id": "podadora", "size": "medium", "name": "Podadora", "shortName": "Podadora", "article": "la",
       "description": "Aprendiz de la Jardinera. Corta con cuidado; no quiere desperdiciar nada.",
       "level": 66, "hp": 22000, "atk": 1600, "spd": 114, "toughness": 65,
       "weaknesses": ["sol", "venus", "jupiter"], "attackPlanet": "saturno",
@@ -169,7 +169,7 @@
       "pattern": ["tijeretazo", "inventario", "tijeretazo"]
     },
     {
-      "id": "jardinera", "name": "La Jardinera", "shortName": "Jardinera", "article": "la", "boss": true, "actionsPerTurn": 2,
+      "id": "jardinera", "size": "giant", "name": "La Jardinera", "shortName": "Jardinera", "article": "la", "boss": true, "actionsPerTurn": 2,
       "description": "Jefa de la Copa Astral. Poda las almas maduras para los Huéspedes. Cambia cada temporada.",
       "level": 68, "hp": 170000, "atk": 1950, "spd": 120, "toughness": 300,
       "weaknesses": ["marte", "mercurio", "luna"], "res": { "saturno": 0.3, "venus": 0.15 }, "attackPlanet": "saturno",

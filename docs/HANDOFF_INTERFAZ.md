@@ -1,5 +1,7 @@
 # Handoff: interfaz de Sal y Almas
 
+> **Actualización.** La luz del combate, las órdenes por arrastre, los menús más ligeros y la escala por tamaño de enemigo (gigantes y colosos) están en la rama `combate/luz-y-gestos`, que ahora ocupa la carpeta `gacha-ui`. Su reporte es [FASE_LUZ_Y_GESTOS.md](FASE_LUZ_Y_GESTOS.md). Lo de abajo describe la rama `ui/interfaz`, ya integrada en `main`.
+
 Fecha: 5 de noviembre de 2026, segunda sesión. Lo construido y cómo correrlo está en [FASE_UI.md](FASE_UI.md). Este documento solo dice dónde quedó y qué falta.
 
 ## Empieza aquí
@@ -46,7 +48,7 @@ La segunda sesión compiló y verificó el agua, construyó el combate lateral, 
 
 ## Riesgos en el repositorio
 
-- **No sueltes ni borres `stash@{0}`.** A las 02:54, GitHub Desktop guardó ahí trabajo de la Fase 3 y de Codex. La rama `respaldo/stash-github-desktop-0254` es su ancla, y sobra en cuanto el usuario confirme que no falta nada.
+- **Stash de GitHub Desktop resuelto (5 de noviembre).** Su contenido (`640703f`) está en la historia de `main` desde `71bd38c`. Se comprobó archivo por archivo que nada falta, y con permiso del usuario se soltó la entrada y se borró la rama `respaldo/stash-github-desktop-0254`. El commit sigue accesible desde `main`.
 - **Choques al integrar.** `main` tiene cambios ajenos en `MetaHub.cs`, `SalYAlmasGame.cs` y `TempSfxPlayer`. Esta rama también los toca. Además, `fase/3` avanzó a 91e734e después de la base de esta rama. Decide el usuario.
 - **Unity reescribe `Assets/UniversalRenderPipelineGlobalSettings.asset`** en cada compilación. Es ruido: no lo confirmes.
 - **Un atasco sin reproducir.** El primer recorrido de combate en automático no avanzó y lo cortó el tiempo límite. Los tres siguientes terminaron. `UiCapture.Trace` deja el estado en el log por si vuelve.
