@@ -23,7 +23,8 @@ En Unity 6 LTS, abre la raíz del repositorio y usa el menú **Sal y Almas > Con
 | [docs/HOJA_DE_RUTA.md](docs/HOJA_DE_RUTA.md) | Cómo se integra cada sistema, plan de fases hasta el lanzamiento suave, decisiones pendientes y prompts |
 | [docs/propuestas/](docs/propuestas/) | Propuestas de contenido por aprobar: Fresno, crafting, meta-juego y onboarding |
 | [docs/audio/](docs/audio/) | Plan de integración de audio y banda sonora con prompts de Suno |
-| [docs/Retratos para Codex.md](docs/Retratos%20para%20Codex.md) | Prompts y control de calidad de los retratos 2D |
+| [docs/Retratos para Codex.md](docs/Retratos%20para%20Codex.md) | Prompts de los retratos de cuerpo completo de la primera ola |
+| [docs/Bustos para Codex.md](docs/Bustos%20para%20Codex.md) | Análisis del arte de Codex, recortes en `art/recortes/` y prompts de los bustos de diálogo |
 | [CLAUDE.md](CLAUDE.md) | Reglas para los agentes que trabajan en el repositorio |
 
 ## Cómo se construye

@@ -1,0 +1,482 @@
+{
+  "schema_version": 1,
+  "model": "birefnet-general",
+  "tool": "rembg + pymatting",
+  "script": "scripts/recortes.py",
+  "items": {
+    "marisal_f1": {
+      "source": "art/retratos/marisal/marisal_f1_v3.png",
+      "source_sha256": "c25f9abd2c93378eb49f1d70204b06cb9fa1c8f65a272f35c0261d9437024305",
+      "cuerpo": "art/recortes/marisal/marisal_f1_cuerpo.png",
+      "cuerpo_en_origen": [
+        0,
+        66,
+        977,
+        1498
+      ],
+      "cuerpo_size": [
+        977,
+        1432
+      ],
+      "alfa_descartado_en_islas": 0.0,
+      "busto_en_origen": [
+        240,
+        120,
+        640,
+        520
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/marisal/marisal_f1_busto.png",
+      "busto_160": "art/recortes/marisal/marisal_f1_busto_160.png",
+      "busto_320": "art/recortes/marisal/marisal_f1_busto_320.png"
+    },
+    "selenia_f1": {
+      "source": "art/retratos/selenia/selenia_f1_v1.png",
+      "source_sha256": "e7fc4f4e3a187d58081f3744bd165aa82ad4b40a2a1e15157191b28d37bc294e",
+      "cuerpo": "art/recortes/selenia/selenia_f1_cuerpo.png",
+      "cuerpo_en_origen": [
+        10,
+        203,
+        1024,
+        1509
+      ],
+      "cuerpo_size": [
+        1014,
+        1306
+      ],
+      "alfa_descartado_en_islas": 0.0,
+      "busto_en_origen": [
+        210,
+        230,
+        610,
+        630
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/selenia/selenia_f1_busto.png",
+      "busto_160": "art/recortes/selenia/selenia_f1_busto_160.png",
+      "busto_320": "art/recortes/selenia/selenia_f1_busto_320.png"
+    },
+    "solenne_f1": {
+      "source": "art/retratos/solenne/solenne_f1_v1.png",
+      "source_sha256": "36a2fd7ed450818374d88a5dcfd172c71244224535622cb42ad23c1a3c721ab6",
+      "cuerpo": "art/recortes/solenne/solenne_f1_cuerpo.png",
+      "cuerpo_en_origen": [
+        8,
+        102,
+        895,
+        1513
+      ],
+      "cuerpo_size": [
+        887,
+        1411
+      ],
+      "alfa_descartado_en_islas": 0.0,
+      "busto_en_origen": [
+        210,
+        215,
+        610,
+        615
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/solenne/solenne_f1_busto.png",
+      "busto_160": "art/recortes/solenne/solenne_f1_busto_160.png",
+      "busto_320": "art/recortes/solenne/solenne_f1_busto_320.png"
+    },
+    "cervanda_f1": {
+      "source": "art/retratos/cervanda/cervanda_f1_v1_r1.png",
+      "source_sha256": "c9c8c7c3b7943426f15a2fa188312f1c34fc25a8bebf581771487c99b5cfd846",
+      "cuerpo": "art/recortes/cervanda/cervanda_f1_cuerpo.png",
+      "cuerpo_en_origen": [
+        0,
+        31,
+        849,
+        1497
+      ],
+      "cuerpo_size": [
+        849,
+        1466
+      ],
+      "alfa_descartado_en_islas": 0.0,
+      "busto_en_origen": [
+        225,
+        140,
+        625,
+        540
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/cervanda/cervanda_f1_busto.png",
+      "busto_160": "art/recortes/cervanda/cervanda_f1_busto_160.png",
+      "busto_320": "art/recortes/cervanda/cervanda_f1_busto_320.png"
+    },
+    "tormentina_f1": {
+      "source": "art/retratos/tormentina/tormentina_f1_v2_r1.png",
+      "source_sha256": "17c52ad2092fae02ba5d83631457ce39f1cf3c7e72d858489c8609b7759911ef",
+      "cuerpo": "art/recortes/tormentina/tormentina_f1_cuerpo.png",
+      "cuerpo_en_origen": [
+        0,
+        65,
+        968,
+        1514
+      ],
+      "cuerpo_size": [
+        968,
+        1449
+      ],
+      "alfa_descartado_en_islas": 0.0,
+      "busto_en_origen": [
+        225,
+        240,
+        625,
+        640
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/tormentina/tormentina_f1_busto.png",
+      "busto_160": "art/recortes/tormentina/tormentina_f1_busto_160.png",
+      "busto_320": "art/recortes/tormentina/tormentina_f1_busto_320.png"
+    },
+    "cupria_f1": {
+      "source": "art/retratos/cupria/cupria_f1_v2.png",
+      "source_sha256": "8234abc804890097d3349e5c508369d7abc5fed7a5be0bbc818d04252227d976",
+      "cuerpo": "art/recortes/cupria/cupria_f1_cuerpo.png",
+      "cuerpo_en_origen": [
+        31,
+        158,
+        872,
+        1505
+      ],
+      "cuerpo_size": [
+        841,
+        1347
+      ],
+      "alfa_descartado_en_islas": 0.0,
+      "busto_en_origen": [
+        290,
+        130,
+        690,
+        530
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/cupria/cupria_f1_busto.png",
+      "busto_160": "art/recortes/cupria/cupria_f1_busto_160.png",
+      "busto_320": "art/recortes/cupria/cupria_f1_busto_320.png"
+    },
+    "brea_f1": {
+      "source": "art/retratos/brea/brea_f1_v1.png",
+      "source_sha256": "c447e2ed6880823617c21b19870f9ed3024191fac11054eaae3e4e5b098aa6e0",
+      "cuerpo": "art/recortes/brea/brea_f1_cuerpo.png",
+      "cuerpo_en_origen": [
+        0,
+        144,
+        1024,
+        1510
+      ],
+      "cuerpo_size": [
+        1024,
+        1366
+      ],
+      "alfa_descartado_en_islas": 0.0,
+      "busto_en_origen": [
+        280,
+        185,
+        680,
+        585
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/brea/brea_f1_busto.png",
+      "busto_160": "art/recortes/brea/brea_f1_busto_160.png",
+      "busto_320": "art/recortes/brea/brea_f1_busto_320.png"
+    },
+    "cempa_f1": {
+      "source": "art/retratos/cempa/cempa_f1_v1.png",
+      "source_sha256": "240a7417c21bd596bd29ab7e603caffd78c6936f1f2e7c96f69c54ffc94174cb",
+      "cuerpo": "art/recortes/cempa/cempa_f1_cuerpo.png",
+      "cuerpo_en_origen": [
+        0,
+        144,
+        867,
+        1518
+      ],
+      "cuerpo_size": [
+        867,
+        1374
+      ],
+      "alfa_descartado_en_islas": 0.0,
+      "busto_en_origen": [
+        250,
+        205,
+        650,
+        605
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/cempa/cempa_f1_busto.png",
+      "busto_160": "art/recortes/cempa/cempa_f1_busto_160.png",
+      "busto_320": "art/recortes/cempa/cempa_f1_busto_320.png"
+    },
+    "muertita_f1": {
+      "source": "art/retratos/muertita/muertita_f1_v1_r1.png",
+      "source_sha256": "bbc2a0569bf78f8d29ce92ba110b65bfb27fcc545cca447cb8bdd6cd12c77de0",
+      "cuerpo": "art/recortes/muertita/muertita_f1_cuerpo.png",
+      "cuerpo_en_origen": [
+        0,
+        401,
+        1024,
+        1365
+      ],
+      "cuerpo_size": [
+        1024,
+        964
+      ],
+      "alfa_descartado_en_islas": 0.0,
+      "busto_en_origen": [
+        170,
+        465,
+        570,
+        865
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/muertita/muertita_f1_busto.png",
+      "busto_160": "art/recortes/muertita/muertita_f1_busto_160.png",
+      "busto_320": "art/recortes/muertita/muertita_f1_busto_320.png"
+    },
+    "salitre_f1": {
+      "source": "art/retratos/salitre/salitre_f1_v2.png",
+      "source_sha256": "c28c1df67c5abcb329b5ed59d01fd43583dd428574b4e41562d45213e66eb849",
+      "cuerpo": "art/recortes/salitre/salitre_f1_cuerpo.png",
+      "cuerpo_en_origen": [
+        106,
+        94,
+        835,
+        1504
+      ],
+      "cuerpo_size": [
+        729,
+        1410
+      ],
+      "alfa_descartado_en_islas": 0.0,
+      "busto_en_origen": [
+        285,
+        76,
+        685,
+        476
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/salitre/salitre_f1_busto.png",
+      "busto_160": "art/recortes/salitre/salitre_f1_busto_160.png",
+      "busto_320": "art/recortes/salitre/salitre_f1_busto_320.png"
+    },
+    "topacia_f1": {
+      "source": "art/retratos/topacia/topacia_f1_v1.png",
+      "source_sha256": "7e6891898f6ce66c7378fad4ce8c109722d329932038b32b65cc52917077a4b6",
+      "cuerpo": "art/recortes/topacia/topacia_f1_cuerpo.png",
+      "cuerpo_en_origen": [
+        19,
+        245,
+        914,
+        1501
+      ],
+      "cuerpo_size": [
+        895,
+        1256
+      ],
+      "alfa_descartado_en_islas": 0.0,
+      "busto_en_origen": [
+        255,
+        316,
+        655,
+        716
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/topacia/topacia_f1_busto.png",
+      "busto_160": "art/recortes/topacia/topacia_f1_busto_160.png",
+      "busto_320": "art/recortes/topacia/topacia_f1_busto_320.png"
+    },
+    "axa_f1": {
+      "source": "art/retratos/axa/axa_f1_v2_r2.png",
+      "source_sha256": "e70a2bc2f6a95abe07cc4ac727a5e7ccd48f808e11f42719ac1ae433fc5498d5",
+      "cuerpo": "art/recortes/axa/axa_f1_cuerpo.png",
+      "cuerpo_en_origen": [
+        60,
+        164,
+        1012,
+        1458
+      ],
+      "cuerpo_size": [
+        952,
+        1294
+      ],
+      "alfa_descartado_en_islas": 0.0,
+      "busto_en_origen": [
+        250,
+        360,
+        650,
+        760
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/axa/axa_f1_busto.png",
+      "busto_160": "art/recortes/axa/axa_f1_busto_160.png",
+      "busto_320": "art/recortes/axa/axa_f1_busto_320.png"
+    },
+    "marisal_f3": {
+      "source": "art/retratos/marisal/marisal_f3_v1_r1.png",
+      "source_sha256": "110cbab378744f2ad606954221f45a7043b6cc695f52f1a9000326f989ff0349",
+      "cuerpo": "art/recortes/marisal/marisal_f3_cuerpo.png",
+      "cuerpo_en_origen": [
+        0,
+        20,
+        960,
+        1454
+      ],
+      "cuerpo_size": [
+        960,
+        1434
+      ],
+      "alfa_descartado_en_islas": 0.1476,
+      "busto_en_origen": [
+        230,
+        375,
+        630,
+        775
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/marisal/marisal_f3_busto.png",
+      "busto_160": "art/recortes/marisal/marisal_f3_busto_160.png",
+      "busto_320": "art/recortes/marisal/marisal_f3_busto_320.png"
+    },
+    "selenia_f3": {
+      "source": "art/retratos/selenia/selenia_f3_v2.png",
+      "source_sha256": "f94d2919fd660626b81c0daadb3d6ef35d6a905161406bba5305cafd327e43ac",
+      "cuerpo": "art/recortes/selenia/selenia_f3_cuerpo.png",
+      "cuerpo_en_origen": [
+        0,
+        142,
+        1018,
+        1415
+      ],
+      "cuerpo_size": [
+        1018,
+        1273
+      ],
+      "alfa_descartado_en_islas": 0.0028,
+      "busto_en_origen": [
+        290,
+        240,
+        690,
+        640
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/selenia/selenia_f3_busto.png",
+      "busto_160": "art/recortes/selenia/selenia_f3_busto_160.png",
+      "busto_320": "art/recortes/selenia/selenia_f3_busto_320.png"
+    },
+    "solenne_f3": {
+      "source": "art/retratos/solenne/solenne_f3_v1.png",
+      "source_sha256": "17dde9cce6ee18dca4378d37a9d4ae71765ce35ae0e037d7d099a3a5acb109b2",
+      "cuerpo": "art/recortes/solenne/solenne_f3_cuerpo.png",
+      "cuerpo_en_origen": [
+        28,
+        376,
+        966,
+        1479
+      ],
+      "cuerpo_size": [
+        938,
+        1103
+      ],
+      "alfa_descartado_en_islas": 0.0016,
+      "busto_en_origen": [
+        300,
+        375,
+        700,
+        775
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/solenne/solenne_f3_busto.png",
+      "busto_160": "art/recortes/solenne/solenne_f3_busto_160.png",
+      "busto_320": "art/recortes/solenne/solenne_f3_busto_320.png"
+    },
+    "cervanda_f3": {
+      "source": "art/retratos/cervanda/cervanda_f3_v2.png",
+      "source_sha256": "7c2170a79cba4ec19f942851d106c341d6c18a5ca90722624f498eacd03b39cc",
+      "cuerpo": "art/recortes/cervanda/cervanda_f3_cuerpo.png",
+      "cuerpo_en_origen": [
+        0,
+        359,
+        1024,
+        1446
+      ],
+      "cuerpo_size": [
+        1024,
+        1087
+      ],
+      "alfa_descartado_en_islas": 0.0,
+      "busto_en_origen": [
+        260,
+        425,
+        660,
+        825
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/cervanda/cervanda_f3_busto.png",
+      "busto_160": "art/recortes/cervanda/cervanda_f3_busto_160.png",
+      "busto_320": "art/recortes/cervanda/cervanda_f3_busto_320.png"
+    },
+    "tormentina_f3": {
+      "source": "art/retratos/tormentina/tormentina_f3_v1_r1.png",
+      "source_sha256": "3ef0346a34e361a7908fff005cb5bb43ebb595a52f8361d6049a14d5709677c0",
+      "cuerpo": "art/recortes/tormentina/tormentina_f3_cuerpo.png",
+      "cuerpo_en_origen": [
+        18,
+        372,
+        968,
+        1465
+      ],
+      "cuerpo_size": [
+        950,
+        1093
+      ],
+      "alfa_descartado_en_islas": 0.0321,
+      "busto_en_origen": [
+        300,
+        430,
+        700,
+        830
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/tormentina/tormentina_f3_busto.png",
+      "busto_160": "art/recortes/tormentina/tormentina_f3_busto_160.png",
+      "busto_320": "art/recortes/tormentina/tormentina_f3_busto_320.png"
+    },
+    "cupria_f3": {
+      "source": "art/retratos/cupria/cupria_f3_v1.png",
+      "source_sha256": "e02a9d958c42840d198b898560ed4cc6d6c3ca9f8c02cc128fdd6ed0d0236dd5",
+      "cuerpo": "art/recortes/cupria/cupria_f3_cuerpo.png",
+      "cuerpo_en_origen": [
+        8,
+        208,
+        894,
+        1461
+      ],
+      "cuerpo_size": [
+        886,
+        1253
+      ],
+      "alfa_descartado_en_islas": 0.0004,
+      "busto_en_origen": [
+        250,
+        170,
+        650,
+        570
+      ],
+      "busto_lado_origen": 400,
+      "busto": "art/recortes/cupria/cupria_f3_busto.png",
+      "busto_160": "art/recortes/cupria/cupria_f3_busto_160.png",
+      "busto_320": "art/recortes/cupria/cupria_f3_busto_320.png"
+    }
+  },
+  "native_size": 160,
+  "native_palette_colors": 0,
+  "contact_sheets": [
+    "art/recortes/hoja_cuerpos.png",
+    "art/recortes/hoja_bustos.png"
+  ]
+}
