@@ -1,11 +1,11 @@
 # Handoff: interfaz de Sal y Almas
 
-Fecha: 5 de noviembre de 2026. La sesión se cortó porque la cuenta se quedó sin crédito. **El trabajo no está terminado ni confirmado.**
+Fecha: 5 de noviembre de 2026. La sesión se cortó porque la cuenta se quedó sin crédito. **El trabajo no está terminado.**
 
 ## Empieza aquí
 
 1. Trabaja en `C:\Arcanoria Master\Gusi Gaming\gacha-ui`, rama `ui/interfaz`, basada en `fase/3` (d4f6fb7).
-2. **Nada de la interfaz nueva tiene commit:** está sin confirmar en ese worktree. El usuario no pidió commit. Pídele permiso, o confirma en esta rama si te lo autorizó. No pongas estos archivos en `main`.
+2. El avance está confirmado en `ui/interfaz` (commit ab3244d), sin push ni merge. No lo pongas en `main` sin que lo decida el usuario.
 3. Corre el ciclo de verificación (abajo) antes de tocar nada: los últimos cambios no se han compilado.
 4. Lee `CLAUDE.md`, y la dirección en `docs/REFERENCIAS.md` (paleta, tipografía y antirreferencias).
 
