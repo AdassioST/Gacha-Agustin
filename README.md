@@ -22,6 +22,7 @@ En Unity 6 LTS, abre la raíz del repositorio y usa el menú **Sal y Almas > Con
 | [docs/REFERENCIAS.md](docs/REFERENCIAS.md) | Referencias visuales, paleta, mapa de pantallas y antirreferencias |
 | [docs/FASE1.md](docs/FASE1.md) | Fase 1: qué se construyó, cómo probarlo, valores // TUNING y huecos del GDD |
 | [docs/FASE2.md](docs/FASE2.md) | Fase 2: qué se construyó, cómo probarlo, balance del Fresno, valores // TUNING, Injertos pendientes y huecos del GDD |
+| [docs/FASE3.md](docs/FASE3.md) | Fase 3: qué se construyó, qué quedó con placeholders, cómo compilar y riesgos para el lanzamiento suave |
 | [docs/HUECOS.md](docs/HUECOS.md) | Contradicciones del GDD, huecos de diseño y sistemas que faltan para un producto final |
 | [docs/HOJA_DE_RUTA.md](docs/HOJA_DE_RUTA.md) | Cómo se integra cada sistema, plan de fases hasta el lanzamiento suave, decisiones pendientes y prompts |
 | [docs/propuestas/](docs/propuestas/) | Propuestas de contenido por aprobar: Fresno, crafting, meta-juego y onboarding |

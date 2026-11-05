@@ -20,10 +20,13 @@ namespace SalYAlmas.Core.Meta
         public string Gacha;
         public string Fresno;
         public string FresnoEnemies;
+        public string Story;
+        public string Services;
+        public string Loc;
 
         public static readonly string[] FileNames =
         {
-            "economy.json", "roster.json", "progression.json", "weapons.json", "brewing.json", "gacha.json", "fresno.json", "fresno_enemies.json",
+            "economy.json", "roster.json", "progression.json", "weapons.json", "brewing.json", "gacha.json", "fresno.json", "fresno_enemies.json", "story.json", "services.json", "loc.json",
         };
 
         public static MetaDataSources FromDirectory(string directory)
@@ -39,6 +42,9 @@ namespace SalYAlmas.Core.Meta
                 Gacha = Read("gacha.json"),
                 Fresno = Read("fresno.json"),
                 FresnoEnemies = Read("fresno_enemies.json"),
+                Story = Read("story.json"),
+                Services = Read("services.json"),
+                Loc = Read("loc.json"),
             };
         }
     }
@@ -52,6 +58,8 @@ namespace SalYAlmas.Core.Meta
         public BrewingRules Brewing { get; } = new BrewingRules();
         public GachaRules Gacha { get; } = new GachaRules();
         public FresnoRules Fresno { get; } = new FresnoRules();
+        /// <summary>Contenido de la Fase 3: historia, Termas, tienda y localización.</summary>
+        public World.WorldDatabase World { get; internal set; } = new World.WorldDatabase();
 
         public readonly Dictionary<string, RosterEntry> Roster = new Dictionary<string, RosterEntry>();
         public readonly List<string> RosterOrder = new List<string>();

@@ -140,12 +140,97 @@ namespace SalYAlmas.Core.Save
         public List<string> Grafts = new List<string>();
     }
 
+    /// <summary>La o el Calculista: la protagonista, su historia y lo que ha visto (GDD 6 y 13).</summary>
+    public sealed class CalculistaState
+    {
+        public bool Created;
+        public string Name = "";
+        public string Pronouns = "";
+        public string Species = "";
+        public string Sign = "";
+        public Dictionary<string, int> Stats = new Dictionary<string, int>();
+        public string Sendero = "";
+        public Dictionary<string, int> SenderoXp = new Dictionary<string, int>();
+        public List<string> Marks = new List<string>();
+        public List<string> Titles = new List<string>();
+        public int Souls;
+        public int Paralaje;
+        public int Eclipses;
+        public List<string> RegionsVisited = new List<string>();
+        public List<string> RegionsDone = new List<string>();
+        public List<string> MissionsDone = new List<string>();
+        public Dictionary<string, int> Corruption = new Dictionary<string, int>();
+        public string Mission = "";
+        public string MissionRegion = "";
+        public string Scene = "";
+        /// <summary>La misión en curso es una Relectura: no vuelve a entregar recursos.</summary>
+        public bool Reread;
+    }
+
+    public sealed class TermasState
+    {
+        public string Favorite = "";
+        public Dictionary<string, int> Trust = new Dictionary<string, int>();
+        public Dictionary<string, int> TalkedDay = new Dictionary<string, int>();
+        public int LastBathDay = -1;
+    }
+
+    public sealed class PurchaseRecord
+    {
+        public string Receipt;
+        public string Product;
+        public double Usd;
+        public int Day;
+        public long Perlas;
+        public bool Refunded;
+    }
+
+    public sealed class StoreState
+    {
+        public List<PurchaseRecord> Purchases = new List<PurchaseRecord>();
+        public double SpendLimitUsd;
+        /// <summary>Sales de Baño que salieron de Perlas compradas (HUECOS C-25).</summary>
+        public long PurchasedSales;
+        public long PerlasDebt;
+        public bool GrimorioPremium;
+        public int GrimorioXp;
+        public List<int> PassFreeClaimed = new List<int>();
+        public List<int> PassPremiumClaimed = new List<int>();
+        public int DiezmoUntilDay;
+        public int DiezmoDaily;
+        public int DiezmoClaimedDay = -1;
+        public HashSet<string> Cosmetics = new HashSet<string>();
+        public Dictionary<string, string> Equipped = new Dictionary<string, string>();
+        public bool FirstFiveDone;
+        public bool FirstChainDone;
+    }
+
+    /// <summary>Ajustes y accesibilidad (GDD 23.3 y HUECOS S-17 y S-18).</summary>
+    public sealed class SettingsState
+    {
+        public string Language = "es";
+        public string Country = "MX";
+        public bool ModestMode;
+        public bool LargeText;
+        public bool ColorSafe;
+        public bool SkipCinematics;
+        public bool ReduceFlashes;
+        public bool BatterySaver;
+        public bool HighQuality = true;
+        public float MusicVolume = 0.7f;
+    }
+
     /// <summary>
     /// Todo el estado persistente de una cuenta. Se guarda en JSON detrás de ISaveStore (local hoy; servidor en la Fase 3).
     /// </summary>
     public sealed class PlayerProfile
     {
-        public const int CurrentVersion = 1;
+        public const int CurrentVersion = 2;
+
+        public CalculistaState Calculista = new CalculistaState();
+        public TermasState TermasBase = new TermasState();
+        public StoreState Store = new StoreState();
+        public SettingsState Settings = new SettingsState();
 
         public int Version = CurrentVersion;
         public string Name = "Calculista";
@@ -155,6 +240,8 @@ namespace SalYAlmas.Core.Save
         public Dictionary<string, WitchProgress> Witches = new Dictionary<string, WitchProgress>();
         public List<WeaponInstance> Weapons = new List<WeaponInstance>();
         public int NextWeaponUid = 1;
+        /// <summary>Equipo del home: se usa en la historia y en el Fresno. La primera es la favorita.</summary>
+        public List<string> Party = new List<string>();
         /// <summary>Recetas de armas conocidas.</summary>
         public HashSet<string> Recipes = new HashSet<string>();
         /// <summary>Recetario de Salmueras descubiertas (GDD 14.1).</summary>
