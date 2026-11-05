@@ -63,6 +63,11 @@ namespace SalYAlmas.Core.Combat
         public Via Via { get; internal set; }
         public bool VislumbreUsed { get; internal set; }
         public int FrameShift { get; internal set; }
+        /// <summary>Arma, progreso y talentos de la Fase 2 (null = la bruja del JSON).</summary>
+        public WitchLoadout Loadout { get; internal set; }
+        /// <summary>Ataque básico con el patrón de golpes de su arma (null = el del kit).</summary>
+        public MoveDef BasicOverride { get; internal set; }
+        public MoveDef BasicMove => BasicOverride ?? Def.Basic;
 
         public Planet Dominant => Via == Via.Mayor ? Def.Primary : Def.Secondary;
         public Planet Recessive => Via == Via.Mayor ? Def.Secondary : Def.Primary;

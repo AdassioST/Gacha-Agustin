@@ -27,6 +27,9 @@ namespace SalYAlmas.Core.Combat
             return "";
         }
 
+        /// <summary>Tope de Resonancia por Spark en una Cadena: el del GDD más el del Fruto de Júpiter.</summary>
+        public int SparkResonanceCap => Rules.Resonance.SparkCapPerChain + (int)Math.Round(_mods.Get(ModKeys.SparkResonanceCap));
+
         public bool CanUseGuestInChain => Guest != null && !GuestClosingUsed;
 
         /// <summary>Brujas que pueden entrar a una Cadena ahora.</summary>
@@ -66,10 +69,10 @@ namespace SalYAlmas.Core.Combat
             foreach (var id in order)
             {
                 var w = FindWitch(id);
-                list.Add(new ChainParticipant { UnitId = w.Id, Name = w.Name, Def = w.Def, Dominant = w.Dominant, FrameShift = w.FrameShift });
+                list.Add(new ChainParticipant { UnitId = w.Id, Name = w.Name, Def = w.Def, Dominant = w.Dominant, FrameShift = w.FrameShift, Echoes = w.Loadout?.ChainEchoes });
             }
             if (withGuest)
-                list.Add(new ChainParticipant { UnitId = Guest.Id, Name = Guest.Name, Def = Guest.Def, Dominant = Guest.Dominant, FrameShift = Guest.FrameShift, IsGuest = true });
+                list.Add(new ChainParticipant { UnitId = Guest.Id, Name = Guest.Name, Def = Guest.Def, Dominant = Guest.Dominant, FrameShift = Guest.FrameShift, Echoes = Guest.Loadout?.ChainEchoes, IsGuest = true });
             return list;
         }
 
@@ -188,13 +191,15 @@ namespace SalYAlmas.Core.Combat
                         ctx = HitContext.For(HitSource.Chain, hit.Frame);
                         ctx.ByAscendant = link.Move.ByAscendant;
                         ctx.ChainLink = link.Index;
-                        mHab = link.Move.Multiplier * hit.Share;
+                        ctx.Kind = link.Move.Kind;
+                        ctx.IsArea = link.Move.Target == TargetMode.AllEnemies;
+                        mHab = link.Move.Multiplier * hit.Share * (1.0 + Mod(witch, ModKeys.ChainMove(link.Role)));
                         tough = link.Move.Toughness * hit.Share;
                         if (witch.InVislumbre && (link.Role == ChainRole.Enlace || link.Role == ChainRole.Cierre))
                             ctx.SkillScale = 1.0 + Rules.Vislumbre.ChainMoveBonus;
                     }
                     ctx.IsSpark = hit.IsSpark;
-                    ctx.Aspect = app.DamageMultiplier;
+                    ctx.Aspect = app.DamageMultiplier + (link.Index > 0 ? Mod(witch, ModKeys.AspectBonus) : 0);
                     ctx.ToughnessMultiplier = app.ToughnessMultiplier;
 
                     if (hit.IsReaction || link.Move.Target == TargetMode.AllEnemies)
@@ -213,7 +218,7 @@ namespace SalYAlmas.Core.Combat
                         chainAlmitas += Rules.Chain.SparkAlmitas;
                         Almitas += Rules.Chain.SparkAlmitas;
                         ChangeAnima(witch, Rules.Anima.Spark);
-                        int res = Math.Min(Rules.Resonance.Spark, Rules.Resonance.SparkCapPerChain - sparkResonance);
+                        int res = Math.Min(Rules.Resonance.Spark, SparkResonanceCap - sparkResonance);
                         if (res > 0)
                         {
                             sparkResonance += res;

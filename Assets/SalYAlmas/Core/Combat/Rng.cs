@@ -32,6 +32,19 @@ namespace SalYAlmas.Core.Combat
             _s3 = SplitMix(ref x);
         }
 
+        /// <summary>Estado interno, para guardar el azar del perfil y retomarlo exactamente donde quedó.</summary>
+        public ulong[] GetState() => new[] { _s0, _s1, _s2, _s3 };
+
+        public static SeededRandom FromState(ulong[] state, ulong seed = 0)
+        {
+            var r = new SeededRandom(seed);
+            if (state != null && state.Length == 4 && (state[0] | state[1] | state[2] | state[3]) != 0)
+            {
+                r._s0 = state[0]; r._s1 = state[1]; r._s2 = state[2]; r._s3 = state[3];
+            }
+            return r;
+        }
+
         private static ulong SplitMix(ref ulong x)
         {
             x += 0x9E3779B97F4A7C15UL;

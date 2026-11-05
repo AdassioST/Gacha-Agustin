@@ -75,9 +75,14 @@ namespace SalYAlmas.Core.Combat
             Rules = db.Rules;
             _rng = rng ?? new SeededRandom(setup.Seed);
 
+            _mods = Setup.Modifiers ?? new StatBlock();
+
             var errors = new List<string>();
             if (Setup.Team.Count < 1 || Setup.Team.Count > 4) errors.Add("El equipo lleva de una a cuatro brujas.");
-            if (!db.Encounters.ContainsKey(Setup.EncounterId ?? "")) errors.Add("Encuentro desconocido: " + Setup.EncounterId);
+            if (Setup.CustomEncounter == null && !db.Encounters.ContainsKey(Setup.EncounterId ?? "")) errors.Add("Encuentro desconocido: " + Setup.EncounterId);
+            if (Setup.CustomEncounter != null)
+                foreach (var id in Setup.CustomEncounter.Enemies)
+                    if (FindEnemyDef(id) == null) errors.Add("Enemigo desconocido: " + id);
             var seen = new HashSet<string>();
             foreach (var id in Setup.Team)
             {
@@ -89,26 +94,38 @@ namespace SalYAlmas.Core.Combat
                 if (!db.Witches.ContainsKey(Setup.GuestId)) errors.Add("Invitada desconocida: " + Setup.GuestId);
                 if (seen.Contains(Setup.GuestId)) errors.Add("La Invitada no puede estar también en el equipo.");
             }
-            if (Setup.Belt.Count > Rules.Potions.BeltSlots) errors.Add($"El cinturón tiene {Rules.Potions.BeltSlots} ranuras.");
+            if (Setup.Belt.Count > BeltSlots) errors.Add($"El cinturón tiene {BeltSlots} ranuras.");
             foreach (var slot in Setup.Belt)
             {
-                if (!db.Potions.ContainsKey(slot.PotionId ?? "")) errors.Add("Poción desconocida: " + slot.PotionId);
+                if (PotionDef(slot.PotionId) == null) errors.Add("Poción desconocida: " + slot.PotionId);
                 if (slot.Charges < 0 || slot.Charges > Rules.Potions.MaxPerType) errors.Add($"Cada tipo de poción lleva de 0 a {Rules.Potions.MaxPerType}.");
             }
             if (errors.Count > 0) throw new ArgumentException(string.Join(" ", errors));
 
-            Encounter = db.Encounter(Setup.EncounterId);
+            Encounter = Setup.CustomEncounter ?? db.Encounter(Setup.EncounterId);
             for (int i = 0; i < Setup.Team.Count; i++)
                 _witches.Add(CreateWitch(db.Witch(Setup.Team[i]), i + 1, i, false));
             if (Setup.GuestId != null)
                 Guest = CreateWitch(db.Witch(Setup.GuestId), GuestId, 4, true);
             for (int i = 0; i < Encounter.Enemies.Count; i++)
-                _enemies.Add(CreateEnemy(db.Enemy(Encounter.Enemies[i]), FirstEnemyId + i, i));
+                _enemies.Add(CreateEnemy(FindEnemyDef(Encounter.Enemies[i]), FirstEnemyId + i, i));
             foreach (var slot in Setup.Belt) _belt.Add(new BeltSlot(slot.PotionId, slot.Charges));
         }
 
         private WitchUnit CreateWitch(WitchDef def, int id, int slot, bool guest)
         {
+            Setup.Loadouts.TryGetValue(def.Id, out var lo);
+            var mods = lo?.Mods ?? new StatBlock();
+            // Los modificadores de equipo (Injertos, Raíces) no tocan a la Invitada: es la bruja de otra persona.
+            double teamAtk = guest ? 0 : _mods.Get(ModKeys.AtkPct);
+            double teamHp = guest ? 0 : _mods.Get(ModKeys.HpPct);
+            double teamSpeed = guest ? 0 : _mods.Get(ModKeys.SpeedFlat);
+            int maxHp = def.MaxHp;
+            if (lo != null || teamHp != 0)
+                maxHp = Math.Max(1, (int)Math.Round(def.MaxHp * (lo?.HpMultiplier ?? 1.0) * (1.0 + mods.Get(ModKeys.HpPct) + teamHp), MidpointRounding.AwayFromZero));
+            double atk = (def.Atk * (lo?.AtkMultiplier ?? 1.0) + mods.Get(ModKeys.FlatAtk)) * (1.0 + mods.Get(ModKeys.AtkPct) + teamAtk);
+            double speed = def.Speed * (lo?.SpeedMultiplier ?? 1.0) + mods.Get(ModKeys.SpeedFlat) + teamSpeed;
+
             var w = new WitchUnit
             {
                 Id = id,
@@ -116,23 +133,45 @@ namespace SalYAlmas.Core.Combat
                 Name = string.IsNullOrEmpty(def.ShortName) ? def.Name : def.ShortName,
                 Side = Side.Ally,
                 Slot = slot,
-                Level = def.Level,
-                MaxHp = def.MaxHp,
-                Hp = def.MaxHp,
-                BaseAtk = def.Atk * def.PassiveAtkMultiplier,
-                BaseSpeed = def.Speed,
+                Level = lo?.Level ?? def.Level,
+                MaxHp = maxHp,
+                Hp = maxHp,
+                BaseAtk = atk * def.PassiveAtkMultiplier,
+                BaseSpeed = speed,
                 Distance = Rules.TurnOrder.AvBase,
                 Def = def,
                 IsGuest = guest,
                 Grade = Setup.GradeOverrides.TryGetValue(def.Id, out var g) ? g : def.Grade,
                 Via = Setup.ViaOverrides.TryGetValue(def.Id, out var v) ? v : def.Via,
-                FrameShift = Setup.FrameShifts.TryGetValue(def.Id, out var fs) ? fs : 0,
+                FrameShift = (Setup.FrameShifts.TryGetValue(def.Id, out var fs) ? fs : 0) + (int)Math.Round(mods.Get(ModKeys.FrameShift)),
+                Loadout = lo,
             };
+            if (lo?.BasicHits != null && lo.BasicHits.Count > 0)
+            {
+                var basic = new MoveDef
+                {
+                    Id = def.Basic.Id, Name = def.Basic.Name, Kind = def.Basic.Kind, Target = def.Basic.Target,
+                    Multiplier = def.Basic.Multiplier, Toughness = def.Basic.Toughness, ByAscendant = def.Basic.ByAscendant,
+                    Effects = def.Basic.Effects, Description = def.Basic.Description,
+                };
+                foreach (var h in lo.BasicHits) basic.Hits.Add(new HitDef(h.Frame, h.Share));
+                w.BasicOverride = basic;
+            }
+            if (!guest)
+            {
+                if (Setup.StartHp.TryGetValue(def.Id, out var frac))
+                    w.Hp = Math.Max(1, Math.Min(w.MaxHp, (int)Math.Round(w.MaxHp * frac, MidpointRounding.AwayFromZero)));
+                if (Setup.StartSalinity.TryGetValue(def.Id, out var sal))
+                    w.Salinity = Math.Max(0, Math.Min(Rules.Salinity.ExtasisAt - 1, sal));
+            }
             return w;
         }
 
         private EnemyUnit CreateEnemy(EnemyDef def, int id, int slot)
         {
+            int hp = def.MaxHp;
+            if (_mods.Has(ModKeys.EnemyHpPct)) hp = Math.Max(1, (int)Math.Round(hp * (1.0 + _mods.Get(ModKeys.EnemyHpPct)), MidpointRounding.AwayFromZero));
+            double tough = def.Toughness * (1.0 + _mods.Get(ModKeys.EnemyToughnessPct));
             return new EnemyUnit
             {
                 Id = id,
@@ -141,15 +180,47 @@ namespace SalYAlmas.Core.Combat
                 Side = Side.Enemy,
                 Slot = slot,
                 Level = def.Level,
-                MaxHp = def.MaxHp,
-                Hp = def.MaxHp,
-                BaseAtk = def.Atk,
-                BaseSpeed = def.Speed,
+                MaxHp = hp,
+                Hp = hp,
+                BaseAtk = def.Atk * (1.0 + _mods.Get(ModKeys.EnemyAtkPct)),
+                BaseSpeed = def.Speed * (1.0 + _mods.Get(ModKeys.EnemySpeedPct)),
                 Distance = Rules.TurnOrder.AvBase,
                 Def = def,
-                Toughness = def.Toughness,
-                MaxToughness = def.Toughness,
+                Toughness = tough,
+                MaxToughness = tough,
             };
+        }
+
+        // ------------------------------------------------------------------ Fase 2: modificadores
+
+        private readonly StatBlock _mods;
+
+        /// <summary>Modificadores de todo el combate (Injertos, Mutaciones, maldiciones, Raíces).</summary>
+        public StatBlock TeamModifiers => _mods;
+
+        /// <summary>Ranuras del cinturón: las del GDD más las de las Raíces.</summary>
+        public int BeltSlots => Rules.Potions.BeltSlots + (int)Math.Round(_mods.Get(ModKeys.ExtraBeltSlots));
+
+        /// <summary>Valor de un modificador para una unidad: el del equipo más el de su arma, prefijo y progreso.</summary>
+        public double Mod(Unit u, string key)
+        {
+            if (!(u is WitchUnit w)) return 0;
+            double team = w.IsGuest ? 0 : _mods.Get(key);
+            return team + (w.Loadout?.Mods.Get(key) ?? 0);
+        }
+
+        public EnemyDef FindEnemyDef(string id)
+        {
+            if (id == null) return null;
+            foreach (var e in Setup.CustomEnemies) if (e.Id == id) return e;
+            return Db.Enemies.TryGetValue(id, out var def) ? def : null;
+        }
+
+        public PotionDef PotionDef(string id)
+        {
+            if (id == null) return null;
+            foreach (var p in Setup.CustomPotions) if (p.Id == id) return p;
+            return Db.Potions.TryGetValue(id, out var def) ? def : null;
         }
 
         // ------------------------------------------------------------------ Consultas
@@ -220,7 +291,7 @@ namespace SalYAlmas.Core.Combat
 
         public double CritRate(WitchUnit w)
         {
-            double rate = w.Def.CritRate + w.Sum(StatusKind.CritRate);
+            double rate = w.Def.CritRate + w.Sum(StatusKind.CritRate) + Mod(w, ModKeys.CritRate);
             if (Band(w) == SalinityBand.Salobre) rate += Rules.Salinity.SalobreCritRate;
             return Math.Max(0.0, Math.Min(1.0, rate));
         }
@@ -236,13 +307,15 @@ namespace SalYAlmas.Core.Combat
                 if (band == SalinityBand.CristalizacionTurbia && byAscendant) b += Rules.Salinity.CristalizacionAscendantDamage;
                 if (Setup.PlanetaryDay.HasValue && Setup.PlanetaryDay.Value == w.Dominant) b += Rules.Combat.PlanetaryDayDamage;
                 if (w.InVislumbre && w.Grade == Grade.SS) b += Rules.Vislumbre.ApoteosisDamage;
+                b += Mod(w, ModKeys.DamagePct) + Mod(w, ModKeys.PlanetDamage(w.Dominant));
+                if (byAscendant) b += Mod(w, ModKeys.AscendantDamagePct);
             }
             return b;
         }
 
         public double DefenseReduction(Unit u)
         {
-            double r = u.Sum(StatusKind.DefenseDown);
+            double r = u.Sum(StatusKind.DefenseDown) + Mod(u, ModKeys.DefenseDown);
             if (u is WitchUnit w && Band(w) == SalinityBand.Sobresalada) r += Rules.Salinity.SobresaladaDefenseDown;
             return Math.Max(0.0, Math.Min(1.0, r));
         }
@@ -334,8 +407,9 @@ namespace SalYAlmas.Core.Combat
             });
 
             Grains = Math.Min(Rules.Grains.Max, Rules.Grains.Start);
-            BlackSalt = Setup.BlackSalt ?? Rules.Combat.StartingBlackSalt;
+            BlackSalt = (Setup.BlackSalt ?? Rules.Combat.StartingBlackSalt) + (int)Math.Round(_mods.Get(ModKeys.ExtraBlackSalt));
             ApplyRegencia();
+            ApplyStartModifiers();
             AdvanceToNextTurn();
         }
 
@@ -358,6 +432,25 @@ namespace SalYAlmas.Core.Combat
             if (reg.StartResonance > 0) ChangeResonance(reg.StartResonance, name);
             if (reg.StartEnemyDelay > 0)
                 foreach (var e in _enemies) ShiftAction(e, -reg.StartEnemyDelay, name);
+        }
+
+        /// <summary>Efectos de inicio de la Fase 2: Granos, Resonancia, Ánima, escudos y adelantos de Injertos y armas.</summary>
+        private void ApplyStartModifiers()
+        {
+            int grains = (int)Math.Round(_mods.Get(ModKeys.StartGrains));
+            foreach (var w in _witches) grains += (int)Math.Round(w.Loadout?.Mods.Get(ModKeys.StartGrains) ?? 0);
+            if (grains != 0) AddGrains(grains, "Injertos y armas", allowBoost: false);
+            int res = (int)Math.Round(_mods.Get(ModKeys.StartResonance));
+            if (res != 0) ChangeResonance(res, "Injertos");
+            double shield = _mods.Get(ModKeys.StartShieldPct);
+            double advance = _mods.Get(ModKeys.StartAdvance);
+            foreach (var w in _witches)
+            {
+                int anima = (int)Math.Round(Mod(w, ModKeys.StartAnima));
+                if (anima != 0) ChangeAnima(w, anima);
+                if (shield > 0) AddShield(w, (int)Math.Round(w.MaxHp * shield, MidpointRounding.AwayFromZero), 2, "Espejo de Marea", w);
+                if (advance > 0) ShiftAction(w, advance, "Mente Relámpago");
+            }
         }
 
         private void AdvanceToNextTurn()
@@ -509,6 +602,11 @@ namespace SalYAlmas.Core.Combat
         {
             if (u is WitchUnit w && !_isExtraTurn && w.IsAlive && !_magicThisTurn)
                 ChangeSalinity(w, Rules.Salinity.TurnWithoutMagic, "turno sin magia");
+            if (u is WitchUnit hw && !_isExtraTurn && hw.IsAlive)
+            {
+                double heal = Mod(hw, ModKeys.EndTurnHealPct);
+                if (heal > 0) Heal(hw, (int)Math.Round(hw.MaxHp * heal, MidpointRounding.AwayFromZero), "Jardín Esmeralda");
+            }
 
             if (!_isExtraTurn) TickStatuses(u);
 
