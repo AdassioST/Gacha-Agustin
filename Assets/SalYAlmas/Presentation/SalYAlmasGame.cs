@@ -283,8 +283,9 @@ namespace SalYAlmas.Presentation
         }
 
         /// <summary>
-        /// Música temporal según la pantalla. La formación hace de menú general: al abrir el juego suena primero
-        /// el tema de inicio y después las tres canciones del menú al azar (musica_temporal.json).
+        /// Música temporal según la pantalla. El hub y la formación son el menú general: al abrir el juego suena primero
+        /// el tema de inicio y después las tres canciones del menú al azar, sin cortarse al pasar de una a otra
+        /// (musica_temporal.json).
         /// </summary>
         private MusicContext CurrentMusic()
         {
