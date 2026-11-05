@@ -1,0 +1,71 @@
+{
+  "cue_id": "mus_titulo_tema",
+  "ficha": "P01",
+  "estado": "temporal: tomas del lote 1 sin elegir",
+  "toma_elegida": null,
+  "especificacion": {
+    "bpm": 72,
+    "tonalidad": "Re dórico",
+    "compas": "4/4",
+    "bucle": "32 compases (≈107 s)"
+  },
+  "suno": {
+    "modelo": "POR CONFIRMAR (v6 o v6-mini)",
+    "cuenta": "adassiost",
+    "plan_al_generar": "POR CONFIRMAR: los derechos comerciales solo cubren lo generado con plan de pago activo",
+    "canal_descarga": "POR CONFIRMAR",
+    "terminos_vigentes": null,
+    "estilo": "Main theme, slow hymn-like ballad, bittersweet and hopeful. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Fingerpicked guitar and lute open, low cello countermelody, psaltery shimmer, bells on phrase endings. Builds from solo voice to full choir, then falls back to voice and guitar. Soft frame drum only in the last chorus. Memorable, singable melody. D Dorian, 72 BPM, 4/4. Form: intro, verse, chorus, interlude, verse, chorus, bridge, outro.",
+    "excluir": "synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, fast tempo, heavy drums, rock ballad, musical theater belting",
+    "ajustes_ficha": "Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3:30)",
+    "ajustes_usados": "POR CONFIRMAR",
+    "audio_subido": null,
+    "semilla": null,
+    "operaciones": []
+  },
+  "tomas": [
+    {
+      "toma": "t01",
+      "archivo": "Audio/FMOD/Assets/Temporal/TEMP_mus_titulo_tema__t01__d4f143c4.mp3",
+      "archivo_original": "Main Theme 1.mp3",
+      "song_id": "d4f143c4-520a-4873-be75-9ddfb84a783b",
+      "url": "https://suno.com/song/d4f143c4-520a-4873-be75-9ddfb84a783b",
+      "titulo_suno": "Istal Yolma",
+      "fecha_generacion": "2026-11-05T07:31:51Z",
+      "formato": "MP3 48 kHz estéreo, ~190 kbps (descarga de Suno)",
+      "duracion_s": 198.8,
+      "medicion": {
+        "lufs": -15.5,
+        "lra": 5.7,
+        "pico_real_dbtp": -3.0,
+        "bpm_estimado": "72 (librosa da 143.6, el doble)",
+        "tonalidad_estimada": "Re menor / Fa mayor (mismas notas; compatible con Re dórico)"
+      },
+      "letra_usada": "[Intro]\n[Instrumental: guitar and lute, bells]\n[Verse 1]\nIstal yolma, cuetor frashna\nNantre ilcel, estlali nochual\nYolmime olvai, na remel\nNa olvai, ermai, neyo cuicant\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Instrumental: low cello and psaltery]\n[Verse 2]\nAtlua cochum, maresh olvai\nTleugo neshcen, eztre e micmor\nNosotl cuicant, nantre uarbe\nCuetor, cuetor, yolma\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Bridge]\nHuemag ishoc, ilcel blaztac\n(Aaah)\n[Outro]\nIstal yolma... cuetor\n[Outro]\nIstal yolma... cuetor\n[End]"
+    },
+    {
+      "toma": "t02",
+      "archivo": "Audio/FMOD/Assets/Temporal/TEMP_mus_titulo_tema__t02__0f9b9bd2.mp3",
+      "archivo_original": "Main Theme 2.mp3",
+      "song_id": "0f9b9bd2-edb9-49d2-9eac-ab897b053201",
+      "url": "https://suno.com/song/0f9b9bd2-edb9-49d2-9eac-ab897b053201",
+      "titulo_suno": "Istal Yolma",
+      "fecha_generacion": "2026-11-05T07:32:16Z",
+      "formato": "MP3 48 kHz estéreo, ~190 kbps (descarga de Suno)",
+      "duracion_s": 202.8,
+      "medicion": {
+        "lufs": -14.9,
+        "lra": 7.4,
+        "pico_real_dbtp": -2.5,
+        "bpm_estimado": "72 o 108 (ambiguo)",
+        "tonalidad_estimada": "Sol mayor (no coincide con Re dórico)"
+      },
+      "letra_usada": "[Intro]\n[Instrumental: guitar and lute, bells]\n[Verse 1]\nIstal yolma, cuetor frashna\nNantre ilcel, estlali nochual\nYolmime olvai, na remel\nNa olvai, ermai, neyo cuicant\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Instrumental: low cello and psaltery]\n[Verse 2]\nAtlua cochum, maresh olvai\nTleugo neshcen, eztre e micmor\nNosotl cuicant, nantre uarbe\nCuetor, cuetor, yolma\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Bridge]\nHuemag ishoc, ilcel blaztac\n(Aaah)\n[Outro]\nIstal yolma... cuetor\n[End]"
+    }
+  ],
+  "regiones_muestras": null,
+  "residuo_suma_db": null,
+  "intervencion_humana": [],
+  "revision_parecido": null,
+  "aprobado_por": null
+}

@@ -1,0 +1,71 @@
+{
+  "cue_id": "mus_combate_normal",
+  "ficha": "P07",
+  "estado": "temporal: tomas del lote 1 sin elegir",
+  "toma_elegida": null,
+  "especificacion": {
+    "bpm": 128,
+    "tonalidad": "Re menor con acentos frigios",
+    "compas": "4/4",
+    "bucle": "32 compases (60 s)"
+  },
+  "suno": {
+    "modelo": "POR CONFIRMAR (v6 o v6-mini)",
+    "cuenta": "adassiost",
+    "plan_al_generar": "POR CONFIRMAR: los derechos comerciales solo cubren lo generado con plan de pago activo",
+    "canal_descarga": "POR CONFIRMAR",
+    "terminos_vigentes": null,
+    "estilo": "Driving folk battle music for turn-based combat: urgent, tense, beautiful. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Fast strummed guitar ostinato, lute, aggressive low cello riffs, psaltery runs, iron bells, flute countermelody. Frame drums, deep bass drum, tambourine, claps. Wordless vocalise on the main section; choir answers with short chants. D minor with Phrygian accents, 128 BPM, 4/4. Form: 4-bar intro, 32-bar main section, 8-bar break of psaltery and bowls only, main section, short ending.",
+    "excluir": "synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, slow tempo, ballad, orchestral string section, timpani",
+    "ajustes_ficha": "Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 2:30)",
+    "ajustes_usados": "POR CONFIRMAR",
+    "audio_subido": null,
+    "semilla": null,
+    "operaciones": []
+  },
+  "tomas": [
+    {
+      "toma": "t01",
+      "archivo": "Audio/FMOD/Assets/Temporal/TEMP_mus_combate_normal__t01__bbba00ae.mp3",
+      "archivo_original": "Battle Theme 1.mp3",
+      "song_id": "bbba00ae-f514-4648-8984-f837273b2f3f",
+      "url": "https://suno.com/song/bbba00ae-f514-4648-8984-f837273b2f3f",
+      "titulo_suno": "Istal Yolma",
+      "fecha_generacion": "2026-11-05T07:30:42Z",
+      "formato": "MP3 48 kHz estéreo, ~190 kbps (descarga de Suno)",
+      "duracion_s": 174.0,
+      "medicion": {
+        "lufs": -15.6,
+        "lra": 10.5,
+        "pico_real_dbtp": -3.2,
+        "bpm_estimado": "≈129 (pedido 128)",
+        "tonalidad_estimada": "Re menor"
+      },
+      "letra_usada": "[Intro]\n[Instrumental: guitar and frame drums]\n[Verse]\nAaah... aaah...\n(Eztre! Istal!)\nAaah... ooh...\n(Tleugo! Eztre!)\n[Chorus]\nAaah... aaah...\n(Istal yolma, cuetor!)\nAaah... ooh...\n(Istal yolma, cuetor!)\n[Break]\n[Instrumental: psaltery and singing bowls only]\n[Verse]\nAaah... aaah...\n(Eztre! Istal!)\n[Chorus]\nAaah... ooh...\n(Istal yolma, cuetor!)\n[Outro]\n[End]"
+    },
+    {
+      "toma": "t02",
+      "archivo": "Audio/FMOD/Assets/Temporal/TEMP_mus_combate_normal__t02__e8b5d28f.mp3",
+      "archivo_original": "Battle Theme 2.mp3",
+      "song_id": "e8b5d28f-d8b4-4886-aa31-9a3a26b77310",
+      "url": "https://suno.com/song/e8b5d28f-d8b4-4886-aa31-9a3a26b77310",
+      "titulo_suno": "Istal Yolma",
+      "fecha_generacion": "2026-11-05T07:30:58Z",
+      "formato": "MP3 48 kHz estéreo, ~190 kbps (descarga de Suno)",
+      "duracion_s": 177.6,
+      "medicion": {
+        "lufs": -15.7,
+        "lra": 6.5,
+        "pico_real_dbtp": -3.7,
+        "bpm_estimado": "≈129 a 136 (menos estable)",
+        "tonalidad_estimada": "Re menor"
+      },
+      "letra_usada": "[Intro]\n[Instrumental: guitar and frame drums]\n[Verse]\nAaah... aaah...\n(Eztre! Istal!)\nAaah... ooh...\n(Tleugo! Eztre!)\n[Chorus]\nAaah... aaah...\n(Istal yolma, cuetor!)\nAaah... ooh...\n(Istal yolma, cuetor!)\n[Break]\n[Instrumental: psaltery and singing bowls only]\n[Verse]\nAaah... aaah...\n(Eztre! Istal!)\n[Chorus]\nAaah... ooh...\n(Istal yolma, cuetor!)\n[Outro]\n[End]"
+    }
+  ],
+  "regiones_muestras": null,
+  "residuo_suma_db": null,
+  "intervencion_humana": [],
+  "revision_parecido": null,
+  "aprobado_por": null
+}

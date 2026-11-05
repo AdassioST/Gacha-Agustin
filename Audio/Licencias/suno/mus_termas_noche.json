@@ -1,0 +1,71 @@
+{
+  "cue_id": "mus_termas_noche",
+  "ficha": "P03",
+  "estado": "temporal: tomas del lote 1 sin elegir",
+  "toma_elegida": null,
+  "especificacion": {
+    "bpm": "50 (negra con puntillo)",
+    "tonalidad": "Re menor que se abre a Fa mayor",
+    "compas": "6/8",
+    "bucle": "40 compases (96 s)"
+  },
+  "suno": {
+    "modelo": "POR CONFIRMAR (v6 o v6-mini)",
+    "cuenta": "adassiost",
+    "plan_al_generar": "POR CONFIRMAR: los derechos comerciales solo cubren lo generado con plan de pago activo",
+    "canal_descarga": "POR CONFIRMAR",
+    "terminos_vigentes": null,
+    "estilo": "Night hot-spring lullaby: tender, sleepy, safe, water that makes you forget. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. The voice is close and almost whispered. Slow arpeggiated guitar, plucked psaltery, sustained low cello, softly bowed singing bowls. No percussion. D minor opening into F major, 50 BPM in 6/8 (dotted quarter), gentle rocking. Form: guitar intro, two soft verses, humming section, guitar outro.",
+    "excluir": "synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, drums, percussion, belting, dramatic climax, horror",
+    "ajustes_ficha": "Instrumental no · Weirdness 20 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto",
+    "ajustes_usados": "POR CONFIRMAR",
+    "audio_subido": null,
+    "semilla": null,
+    "operaciones": []
+  },
+  "tomas": [
+    {
+      "toma": "t01",
+      "archivo": "Audio/FMOD/Assets/Temporal/TEMP_mus_termas_noche__t01__5fc7478b.mp3",
+      "archivo_original": "Night Theme 1.mp3",
+      "song_id": "5fc7478b-bb71-48e0-9691-34de4c6bcd20",
+      "url": "https://suno.com/song/5fc7478b-bb71-48e0-9691-34de4c6bcd20",
+      "titulo_suno": "Atlua Olvai",
+      "fecha_generacion": "2026-11-05T07:30:11Z",
+      "formato": "MP3 48 kHz estéreo, ~190 kbps (descarga de Suno)",
+      "duracion_s": 188.5,
+      "medicion": {
+        "lufs": -15.8,
+        "lra": 8.2,
+        "pico_real_dbtp": -3.8,
+        "bpm_estimado": "≈55 por negra con puntillo (pedido 50)",
+        "tonalidad_estimada": "Re menor"
+      },
+      "letra_usada": "[Intro]\n[Instrumental: slow guitar arpeggios]\n[Verse 1]\nAtlua cochum, atlua olvai\nNochual metzlu, cochum, ermai\nNa istal, na micmor\nAtlua olvai\n[Verse 2]\nYolmi cochum, nantre cuicant\nEstlali ilcel, na ishoc\nCochum, cochum, ermai\nAtlua olvai\n[Bridge]\nMmm... mmm...\nMmm... olvai...\n[Outro]\n[Instrumental: guitar and singing bowls]\n[End]"
+    },
+    {
+      "toma": "t02",
+      "archivo": "Audio/FMOD/Assets/Temporal/TEMP_mus_termas_noche__t02__7a9f3463.mp3",
+      "archivo_original": "Night Theme 2.mp3",
+      "song_id": "7a9f3463-2bd4-4d73-a780-bedef83af73b",
+      "url": "https://suno.com/song/7a9f3463-2bd4-4d73-a780-bedef83af73b",
+      "titulo_suno": "Atlua Olvai",
+      "fecha_generacion": "2026-11-05T07:29:28Z",
+      "formato": "MP3 48 kHz estéreo, ~190 kbps (descarga de Suno)",
+      "duracion_s": 127.7,
+      "medicion": {
+        "lufs": -12.2,
+        "lra": 4.3,
+        "pico_real_dbtp": -2.2,
+        "bpm_estimado": "≈54 por negra con puntillo (pedido 50)",
+        "tonalidad_estimada": "Re menor"
+      },
+      "letra_usada": "[Intro]\n[Instrumental: slow guitar arpeggios]\n[Verse 1]\nAtlua cochum, atlua olvai\nNochual metzlu, cochum, ermai\nNa istal, na micmor\nAtlua olvai\n[Verse 2]\nYolmi cochum, nantre cuicant\nEstlali ilcel, na ishoc\nCochum, cochum, ermai\nAtlua olvai\n[Bridge]\nMmm... mmm...\nMmm... olvai...\n[Outro]\n[Instrumental: guitar and singing bowls]\n[End]"
+    }
+  ],
+  "regiones_muestras": null,
+  "residuo_suma_db": null,
+  "intervencion_humana": [],
+  "revision_parecido": null,
+  "aprobado_por": null
+}
