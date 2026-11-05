@@ -3,7 +3,7 @@
 {
   "zones": [
     { "id": "raices", "name": "Raíces Putrefactas", "theme": "Almas que no llegaron, podredumbre, Sal Negra",
-      "boss": "madre_raiz", "enemies": ["cristalizado", "larva", "corneja"], "hpScale": 1.0, "atkScale": 1.0,
+      "boss": "madre_raiz", "enemies": ["cristalizado", "larva", "corneja"], "hpScale": 1.0, "atkScale": 0.9,
       "almitas": 1500, "savia": 400 },
     { "id": "tronco", "name": "Tronco de Ceniza", "theme": "Corteza, savia, recuerdos atrapados",
       "boss": "lenador_hueco", "enemies": ["corteza_hueca", "recuerdo_atrapado", "savia_errante"], "hpScale": 1.0, "atkScale": 1.0,

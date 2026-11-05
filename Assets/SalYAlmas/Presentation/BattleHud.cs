@@ -188,7 +188,7 @@ namespace SalYAlmas.Presentation
                     continue;
                 }
                 var belt = B.Belt[i];
-                var def = B.Db.Potion(belt.PotionId);
+                var def = B.PotionDef(belt.PotionId);
                 string target = def.Target == PotionTarget.Enemy ? "→ objetivo" : def.Target == PotionTarget.AllAllies ? "→ todas" : "→ " + (B.FindWitch(AllyTarget)?.Name ?? "");
                 string text = $"<b>{def.Name}</b> ×{belt.Charges}\n<size=13>{def.Description} {target}</size>";
                 if (GuiKit.Button(slot, text, canUse && belt.Charges > 0 && def.UsableInCombat, 15))

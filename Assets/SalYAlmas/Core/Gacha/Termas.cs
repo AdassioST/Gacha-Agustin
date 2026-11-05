@@ -105,7 +105,8 @@ namespace SalYAlmas.Core.Gacha
         {
             var pity = Pity(b);
             bool forceFive = b.Type == BannerType.Inicio && !State.StarterFiveStar && State.StarterPulls + 1 >= b.MaxPulls;
-            var roll = Roll(Rules, pity, _g.Rng, b.Type == BannerType.Limitado && !_g.Profile.Owns(b.Featured), forceFive);
+            bool canLose = StandardFiveStars().Exists(id => !_g.Profile.Owns(id));
+            var roll = Roll(Rules, pity, _g.Rng, b.Type == BannerType.Limitado && !_g.Profile.Owns(b.Featured), forceFive, canLose);
             if (b.Type == BannerType.Inicio) State.StarterPulls++;
             if (b.Type == BannerType.Estandar) State.StandardPulls++;
 
@@ -161,7 +162,7 @@ namespace SalYAlmas.Core.Gacha
         /// La parte aleatoria de una tirada: rareza y, en banners limitados, si la 5★ es la destacada.
         /// Actualiza el contador. Es la misma función que usa la simulación de un millón de tiradas.
         /// </summary>
-        public static RarityRoll Roll(GachaRules rules, GachaPity pity, IRandomSource rng, bool featuredBanner, bool forceFive = false)
+        public static RarityRoll Roll(GachaRules rules, GachaPity pity, IRandomSource rng, bool featuredBanner, bool forceFive = false, bool canLose = true)
         {
             pity.Since5++;
             pity.Since4++;
@@ -176,7 +177,8 @@ namespace SalYAlmas.Core.Gacha
                 pity.Since4 = 0;
                 if (featuredBanner)
                 {
-                    bool win = pity.Guaranteed || rng.NextDouble() < rules.FeaturedRate;
+                    // HUECOS C-23: el 25 % solo existe si queda alguna 5★ estándar que no tengas.
+                    bool win = !canLose || pity.Guaranteed || rng.NextDouble() < rules.FeaturedRate;
                     roll.Featured = win;
                     roll.LostFeatured = !win;
                     pity.Guaranteed = !win;

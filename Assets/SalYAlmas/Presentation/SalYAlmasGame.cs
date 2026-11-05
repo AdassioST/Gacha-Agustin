@@ -4,6 +4,8 @@ using System.IO;
 using SalYAlmas.Core.Combat;
 using SalYAlmas.Core.Data;
 using SalYAlmas.Core.Magic;
+using SalYAlmas.Core.Meta;
+using SalYAlmas.Core.Save;
 using UnityEngine;
 
 namespace SalYAlmas.Presentation
@@ -22,6 +24,16 @@ namespace SalYAlmas.Presentation
         public TextAsset EncountersJson;
         public TextAsset PotionsJson;
 
+        [Header("Datos de la Fase 2")]
+        public TextAsset EconomyJson;
+        public TextAsset RosterJson;
+        public TextAsset ProgressionJson;
+        public TextAsset WeaponsJson;
+        public TextAsset BrewingJson;
+        public TextAsset GachaJson;
+        public TextAsset FresnoJson;
+        public TextAsset FresnoEnemiesJson;
+
         [Header("Escena")]
         public Camera BattleCamera;
         [Tooltip("Un material por planeta en el orden Sol, Luna, Marte, Mercurio, Venus, Júpiter, Saturno.")]
@@ -30,9 +42,12 @@ namespace SalYAlmas.Presentation
         public Transform[] AllyAnchors = new Transform[0];
         public Transform[] EnemyAnchors = new Transform[0];
 
-        private enum Mode { Error, Formation, Battle }
+        private enum Mode { Error, Hub, Formation, Battle }
 
         private Mode _mode;
+        private MetaHub _hub;
+        /// <summary>Si no es null, el combate lo pidió el hub (Fresno o Juicio) y al terminar se le devuelve.</summary>
+        private Action<Battle> _external;
         private string _error = "";
         private GameDatabase _db;
         private FormationScreen _formation;
@@ -75,7 +90,13 @@ namespace SalYAlmas.Presentation
                 _db = DataLoader.Load(src);
                 _formation = new FormationScreen(_db);
                 _formation.OnStart += StartBattle;
-                _mode = Mode.Formation;
+                var meta = MetaLoader.Load(MetaSources(), _db);
+                _hub = new MetaHub(meta, new FileSaveStore(Path.Combine(Application.persistentDataPath, "guardado")))
+                {
+                    StartBattle = StartExternalBattle,
+                    OpenFormation = () => _mode = Mode.Formation,
+                };
+                _mode = Mode.Hub;
             }
             catch (DataValidationException ex)
             {
@@ -91,7 +112,53 @@ namespace SalYAlmas.Presentation
             }
         }
 
-        public void StartBattle(BattleSetup setup) => StartBattle(setup, null);
+        private MetaDataSources MetaSources()
+        {
+            if (EconomyJson == null || RosterJson == null || ProgressionJson == null || WeaponsJson == null ||
+                BrewingJson == null || GachaJson == null || FresnoJson == null || FresnoEnemiesJson == null)
+            {
+#if UNITY_EDITOR
+                // Una escena construida antes de la Fase 2 no tiene estos campos: en el Editor se leen de la carpeta de datos.
+                return MetaDataSources.FromDirectory(Path.Combine(Application.dataPath, "SalYAlmas", "Data"));
+#else
+                throw new InvalidOperationException("Faltan los JSON de la Fase 2 en SalYAlmasGame. Vuelve a construir la escena.");
+#endif
+            }
+            return new MetaDataSources
+            {
+                Economy = EconomyJson.text,
+                Roster = RosterJson.text,
+                Progression = ProgressionJson.text,
+                Weapons = WeaponsJson.text,
+                Brewing = BrewingJson.text,
+                Gacha = GachaJson.text,
+                Fresno = FresnoJson.text,
+                FresnoEnemies = FresnoEnemiesJson.text,
+            };
+        }
+
+        public void StartBattle(BattleSetup setup)
+        {
+            _external = null;
+            StartBattle(setup, null);
+        }
+
+        /// <summary>Combate pedido por el hub: mismo HUD y misma Cadena; al terminar, el botón Continuar devuelve el Battle.</summary>
+        private void StartExternalBattle(BattleSetup setup, Action<Battle> done)
+        {
+            _external = done;
+            StartBattle(setup, null);
+        }
+
+        private void FinishExternal()
+        {
+            var done = _external;
+            var battle = _director.Battle;
+            _external = null;
+            ClearSpawned();
+            _mode = Mode.Hub;
+            done(battle);
+        }
 
         /// <summary>Vuelve a jugar el último combate con sus órdenes grabadas y compara los eventos.</summary>
         private void StartReplay()
@@ -200,7 +267,7 @@ namespace SalYAlmas.Presentation
         /// </summary>
         private MusicContext CurrentMusic()
         {
-            if (_mode == Mode.Formation) return MusicContext.Menu;
+            if (_mode == Mode.Formation || _mode == Mode.Hub) return MusicContext.Menu;
             if (_mode != Mode.Battle || _director == null) return MusicContext.None;
             if (_director.ResultReady)
                 return _director.Battle.Outcome == Core.Events.BattleOutcome.Victory ? MusicContext.Victory : MusicContext.Defeat;
@@ -233,8 +300,12 @@ namespace SalYAlmas.Presentation
                     GuiKit.Label(new Rect(80, 60, 1760, 60), "Los datos no pasaron la validación", 36, Palette.Danger, TextAnchor.MiddleLeft, true);
                     GuiKit.Label(new Rect(80, 130, 1760, 900), _error, 20, Palette.Parchment, TextAnchor.UpperLeft, false, true);
                     break;
+                case Mode.Hub:
+                    _hub.Draw();
+                    break;
                 case Mode.Formation:
                     _formation.Draw();
+                    if (GuiKit.Button(new Rect(GuiKit.Width - 196, GuiKit.Height - 56, 180, 46), "Volver al hub", true, 18)) _mode = Mode.Hub;
                     break;
                 case Mode.Battle:
                     _hud.InputBlocked = _chain.IsOpen || _director.ResultReady;
@@ -276,6 +347,11 @@ namespace SalYAlmas.Presentation
                 GuiKit.Label(new Rect(r.x + 40, r.yMax - 130, r.width - 80, 40), "Registro guardado en: " + _savedReportPath, 14, Palette.ParchmentShadow, TextAnchor.UpperLeft, false, true);
 
             float bx = r.x + 30, by = r.yMax - 86;
+            if (_external != null)
+            {
+                if (GuiKit.Button(new Rect(r.x + 300, by, 400, 60), "Continuar", true, 24)) FinishExternal();
+                return;
+            }
             if (GuiKit.Button(new Rect(bx, by, 180, 60), "Jugar otra vez\n<size=13>misma semilla</size>", true, 17)) StartBattle(_lastSetup.Clone());
             if (GuiKit.Button(new Rect(bx + 188, by, 190, 60), "Ver repetición\n<size=13>mismas órdenes</size>", !_director.IsReplay, 17))
                 StartReplay();

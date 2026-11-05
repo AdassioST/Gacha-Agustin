@@ -13,6 +13,10 @@ namespace SalYAlmas.Sim
     ///   dotnet run --project Tests/Core.Sim -- log [encuentro] [semilla]   registro completo de un combate automático
     ///   dotnet run --project Tests/Core.Sim -- balance [encuentro] [n]     estadísticas de n combates
     ///   dotnet run --project Tests/Core.Sim -- chains                      Spark previstos de cada orden de Cadena
+    ///   dotnet run --project Tests/Core.Sim -- gacha [tiradas] [semilla]   promedios del gacha contra el GDD 16.2
+    ///   dotnet run --project Tests/Core.Sim -- fresno [campañas]           balance del Fresno: tres runs seguidas por campaña
+    ///   dotnet run --project Tests/Core.Sim -- fresno-log [semilla]        registro de tres runs seguidas
+    ///   dotnet run --project Tests/Core.Sim -- juicio [bruja] [n]          victorias y condiciones de cada Juicio
     /// </summary>
     public static class Program
     {
@@ -27,7 +31,11 @@ namespace SalYAlmas.Sim
                 case "balance": return Balance(db, encounter, args.Length > 2 ? int.Parse(args[2]) : 200);
                 case "chains": return Chains(db);
                 case "tiempo": return Timing(db, encounter, args.Length > 2 ? int.Parse(args[2]) : 50);
-                default: Console.Error.WriteLine("Modos: log, balance, chains"); return 1;
+                case "gacha": return MetaSim.Gacha(db, args.Length > 1 ? long.Parse(args[1]) : 1000000L, args.Length > 2 ? ulong.Parse(args[2]) : 2026UL);
+                case "fresno": return MetaSim.Fresno(db, args.Length > 1 ? int.Parse(args[1]) : 100);
+                case "fresno-log": return MetaSim.FresnoLog(db, args.Length > 1 ? ulong.Parse(args[1]) : 1UL);
+                case "juicio": return MetaSim.Trials(db, args.Length > 1 ? args[1] : "todas", args.Length > 2 ? int.Parse(args[2]) : 50);
+                default: Console.Error.WriteLine("Modos: log, balance, chains, tiempo, gacha, fresno, fresno-log, juicio"); return 1;
             }
         }
 

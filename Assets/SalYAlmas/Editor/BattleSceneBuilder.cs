@@ -132,6 +132,14 @@ namespace SalYAlmas.EditorTools
                 game.EnemiesJson = LoadJson("enemies.json");
                 game.EncountersJson = LoadJson("encounters.json");
                 game.PotionsJson = LoadJson("potions.json");
+                game.EconomyJson = LoadJson("economy.json");
+                game.RosterJson = LoadJson("roster.json");
+                game.ProgressionJson = LoadJson("progression.json");
+                game.WeaponsJson = LoadJson("weapons.json");
+                game.BrewingJson = LoadJson("brewing.json");
+                game.GachaJson = LoadJson("gacha.json");
+                game.FresnoJson = LoadJson("fresno.json");
+                game.FresnoEnemiesJson = LoadJson("fresno_enemies.json");
                 game.PlanetMaterials = planetMaterials ?? new Material[7];
                 game.EnemyMaterial = enemyMaterial;
                 return game;

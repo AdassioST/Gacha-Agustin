@@ -34,7 +34,9 @@ namespace SalYAlmas.Tests
         [Test]
         public void ElConstructorArmaLaEscenaConTodoAsignado()
         {
-            var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Additive);
+            // En modo batch la escena activa no tiene título y Unity no deja abrir otra aditiva junto a ella.
+            bool alone = UnityEngine.SceneManagement.SceneManager.GetActiveScene().path.Length == 0;
+            var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, alone ? NewSceneMode.Single : NewSceneMode.Additive);
             try
             {
                 var game = BattleSceneBuilder.Populate(scene, new Material[7], null, null);
@@ -44,12 +46,20 @@ namespace SalYAlmas.Tests
                 Assert.IsNotNull(game.EnemiesJson);
                 Assert.IsNotNull(game.EncountersJson);
                 Assert.IsNotNull(game.PotionsJson);
+                Assert.IsNotNull(game.EconomyJson);
+                Assert.IsNotNull(game.RosterJson);
+                Assert.IsNotNull(game.ProgressionJson);
+                Assert.IsNotNull(game.WeaponsJson);
+                Assert.IsNotNull(game.BrewingJson);
+                Assert.IsNotNull(game.GachaJson);
+                Assert.IsNotNull(game.FresnoJson);
+                Assert.IsNotNull(game.FresnoEnemiesJson);
                 Assert.AreEqual(7, game.PlanetMaterials.Length);
                 Assert.IsTrue(scene.GetRootGameObjects().Any(g => g.GetComponent<Light>() != null));
             }
             finally
             {
-                EditorSceneManager.CloseScene(scene, true);
+                if (!alone) EditorSceneManager.CloseScene(scene, true);
             }
         }
 
