@@ -1,7 +1,7 @@
 {
   "cue_id": "mus_termas_noche",
   "ficha": "P03",
-  "estado": "temporal: tomas del lote 1 sin elegir",
+  "estado": "temporal: tomas del lote 1 sin elegir; generadas con plan Pro",
   "toma_elegida": null,
   "especificacion": {
     "bpm": "50 (negra con puntillo)",
@@ -10,11 +10,11 @@
     "bucle": "40 compases (96 s)"
   },
   "suno": {
-    "modelo": "POR CONFIRMAR (v6 o v6-mini)",
+    "modelo": "POR CONFIRMAR: v6 o v6-wild (los dos están en Pro)",
     "cuenta": "adassiost",
-    "plan_al_generar": "POR CONFIRMAR: los derechos comerciales solo cubren lo generado con plan de pago activo",
-    "canal_descarga": "POR CONFIRMAR",
-    "terminos_vigentes": null,
+    "plan_al_generar": "Pro (confirmado por el usuario el 2026-11-05): da derechos de uso comercial",
+    "canal_descarga": "Descarga de Suno en MP3 (las etiquetas dicen \"made with suno\")",
+    "terminos_vigentes": "PENDIENTE: guardar en PDF con fecha los términos, precios y derechos de Suno vigentes el 2026-11-05",
     "estilo": "Night hot-spring lullaby: tender, sleepy, safe, water that makes you forget. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. The voice is close and almost whispered. Slow arpeggiated guitar, plucked psaltery, sustained low cello, softly bowed singing bowls. No percussion. D minor opening into F major, 50 BPM in 6/8 (dotted quarter), gentle rocking. Form: guitar intro, two soft verses, humming section, guitar outro.",
     "excluir": "synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, drums, percussion, belting, dramatic climax, horror",
     "ajustes_ficha": "Instrumental no · Weirdness 20 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto",

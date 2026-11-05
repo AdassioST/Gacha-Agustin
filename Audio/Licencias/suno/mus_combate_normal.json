@@ -1,7 +1,7 @@
 {
   "cue_id": "mus_combate_normal",
   "ficha": "P07",
-  "estado": "temporal: tomas del lote 1 sin elegir",
+  "estado": "temporal: tomas del lote 1 sin elegir; generadas con plan Pro",
   "toma_elegida": null,
   "especificacion": {
     "bpm": 128,
@@ -10,11 +10,11 @@
     "bucle": "32 compases (60 s)"
   },
   "suno": {
-    "modelo": "POR CONFIRMAR (v6 o v6-mini)",
+    "modelo": "POR CONFIRMAR: v6 o v6-wild (los dos están en Pro)",
     "cuenta": "adassiost",
-    "plan_al_generar": "POR CONFIRMAR: los derechos comerciales solo cubren lo generado con plan de pago activo",
-    "canal_descarga": "POR CONFIRMAR",
-    "terminos_vigentes": null,
+    "plan_al_generar": "Pro (confirmado por el usuario el 2026-11-05): da derechos de uso comercial",
+    "canal_descarga": "Descarga de Suno en MP3 (las etiquetas dicen \"made with suno\")",
+    "terminos_vigentes": "PENDIENTE: guardar en PDF con fecha los términos, precios y derechos de Suno vigentes el 2026-11-05",
     "estilo": "Driving folk battle music for turn-based combat: urgent, tense, beautiful. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Fast strummed guitar ostinato, lute, aggressive low cello riffs, psaltery runs, iron bells, flute countermelody. Frame drums, deep bass drum, tambourine, claps. Wordless vocalise on the main section; choir answers with short chants. D minor with Phrygian accents, 128 BPM, 4/4. Form: 4-bar intro, 32-bar main section, 8-bar break of psaltery and bowls only, main section, short ending.",
     "excluir": "synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, slow tempo, ballad, orchestral string section, timpani",
     "ajustes_ficha": "Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 2:30)",

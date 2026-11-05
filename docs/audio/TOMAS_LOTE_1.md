@@ -44,12 +44,15 @@ Las medidas no ven esto. Márcalo en cada toma antes de elegir:
 - [ ] Sin artefactos de IA: voces que se deshacen, colas metálicas, cortes de compás.
 - [ ] No se parece a una canción o banda sonora existente (sección 8 de SOUNDTRACK_SUNO.md).
 
-## Pendiente legal: con qué plan se generaron
+## Derechos: plan Pro
 
-Las seis tomas se generaron entre las 07:29 y las 07:32 UTC del 5 de noviembre de 2026 con la cuenta `adassiost`. Según lo que verificó SOUNDTRACK_SUNO.md (sección 2), **solo lo que se genera con un plan de pago activo trae derechos de uso comercial, y lo del plan gratuito nunca los gana, aunque te suscribas después.**
+Las seis tomas se generaron entre las 07:29 y las 07:32 UTC del 5 de noviembre de 2026 con la cuenta `adassiost` y **plan Pro**. Según lo que verificó SOUNDTRACK_SUNO.md (sección 2), lo generado con un plan de pago activo trae **derechos de uso comercial**, así que estas tomas pueden entrar al juego.
 
-- Si se generaron con Pro o Premier: sirven para el juego. Anota el plan en los metadatos.
-- Si se generaron con el plan gratuito: úsalas solo como pistas temporales y como referencia de lo que quieres. Las finales se vuelven a generar con Premier (D-11 de la hoja de ruta).
+Tres cosas para que siga así:
+
+- **Guarda hoy en PDF** los términos, la página de precios y la de derechos de Suno. Suno cambió sus términos el 3 de septiembre de 2026, y lo que cuenta es lo que estaba vigente al generar.
+- **Descargas:** Pro tiene un límite de unas 20 descargas al mes, y el lote 1 ya usó seis. Para los 66 cues con varias tomas cada uno, Premier (60 al mes) sigue siendo lo recomendado en la decisión D-11 de la hoja de ruta.
+- **Derechos de autor:** Suno da derechos de uso, no autoría. Para que la música tenga protección hace falta intervención humana sustancial, como una melodía compuesta por una persona o una voz grabada (sección 8 de SOUNDTRACK_SUNO.md).
 
 ## Dónde quedaron
 
@@ -58,12 +61,12 @@ Las seis tomas se generaron entre las 07:29 y las 07:32 UTC del 5 de noviembre d
 | Las seis tomas como pistas temporales de la Fase 3C | `Audio/FMOD/Assets/Temporal/TEMP_<cue_id>__t0N__<id8>.mp3` |
 | Ficha de trazabilidad de cada cue: ID y enlace de cada toma en Suno, fecha, estilo y exclusiones exactos, letra usada y medidas | `Audio/Licencias/suno/<cue_id>.json` |
 
-Los nombres siguen la sección 7.8 de SOUNDTRACK_SUNO.md. En las fichas quedan **por confirmar** el plan con el que se generaron, el modelo (v6 o v6-mini) y los ajustes que usaste. Llénalos tú, porque solo tú lo sabes.
+Los nombres siguen la sección 7.8 de SOUNDTRACK_SUNO.md. En las fichas ya está el plan Pro. Quedan **por confirmar** el modelo (v6 o v6-wild) y los ajustes que usaste: llénalos tú, porque solo tú lo sabes.
 
 ## Siguientes pasos
 
 1. Escucha las seis con la lista de arriba y elige una toma por cue. Anótala en `toma_elegida` de su ficha.
-2. Confirma el plan de Suno. Si era el gratuito, contrata Premier antes de generar más.
+2. Guarda en PDF los términos de Suno de hoy y considera pasar a Premier antes del lote 2 por el límite de descargas.
 3. Del tema principal, genera más tomas hasta tener de 10 a 12 (la ficha P01 lo pide porque es la ancla). Lo ideal es la ruta de la ficha: una persona compone la melodía, la subes y usas *Cover*.
 4. De la toma elegida, descarga el WAV por el canal de Suno (no el MP3) y saca los stems: base, percusión, voz y coro (sección 7.5).
 5. Edita el bucle en compases, ajusta la sonoridad a −18 LUFS y anota las regiones en la ficha (sección 7.6 y 7.7).
