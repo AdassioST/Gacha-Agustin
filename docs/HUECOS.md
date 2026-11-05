@@ -1,6 +1,6 @@
 # Huecos del diseño y sistemas por construir
 
-Revisión del 5 de noviembre de 2026. Cubre el GDD completo, las referencias visuales, el documento de retratos y la Fase 1, que se programa en paralelo. Responde dos preguntas: **qué está mal o falta en el diseño** y **qué hay que construir, además de las tres fases, para tener un producto que se pueda lanzar**. Cómo se integra cada cosa y en qué orden está en [HOJA_DE_RUTA.md](HOJA_DE_RUTA.md).
+Revisión del 5 de noviembre de 2026. Cubre el GDD completo, las referencias visuales, el documento de retratos, el reporte de la Fase 1 ([FASE1.md](FASE1.md)) y lo que encontraron las cinco propuestas de `docs/propuestas/` y `docs/audio/`. Responde dos preguntas: **qué está mal o falta en el diseño** y **qué hay que construir, además de las tres fases, para tener un producto que se pueda lanzar**. Cómo se integra cada cosa y en qué orden está en [HOJA_DE_RUTA.md](HOJA_DE_RUTA.md).
 
 Cómo leerlo:
 
@@ -15,12 +15,12 @@ Cómo leerlo:
 | GDD | Completo como concepto (25 secciones, 1 430 líneas). Tiene huecos de números y de contenido (secciones 3 a 5 de este documento) | `docs/GDD.md` |
 | Referencias visuales y paleta | Completas, con contraste y daltonismo medidos | `docs/REFERENCIAS.md`, `docs/paleta.svg` |
 | Retratos 2D | Primera ola en curso con Codex: 9 de 37 generaciones; ancla de estilo elegida (Marisal v3); Cervanda falló dos veces por cola de cánido | `docs/Retratos para Codex.md`, `art/retratos/` |
-| Fase 1: combate | En curso en otra sesión, rama `claude/youthful-dijkstra-hos1on`, todavía sin subir. El núcleo compila, los datos de 6 brujas, enemigos y jefe están escritos, y está afinando al jefe con un simulador de balance | Se integrará en `Assets/SalYAlmas/` |
+| Fase 1: combate | **Terminada y fusionada en `main`.** 140 pruebas pasan con `dotnet test`; simulador de balance; escena de prueba con IMGUI. Falta correr las pruebas EditMode en Unity y la prueba con jugadores | `docs/FASE1.md`, `Assets/SalYAlmas/`, `Tests/` |
 | Fases 2 y 3 | Prompts listos en el GDD 23. La 3 no cabe en una sesión (ver la hoja de ruta) | `docs/GDD.md` §23 |
-| Proyecto de Unity | Todavía no existe en `main`; lo crea la Fase 1 | — |
+| Proyecto de Unity | Creado y con sus `.meta` en `main`. Se abrió con Unity 6000.6.7f1; el reporte de la Fase 1 pedía 6000.0 LTS (ver D-14 en la hoja de ruta) | `ProjectSettings/` |
 | Guía para agentes y CI | Agregadas en esta revisión | `CLAUDE.md`, `.github/workflows/ci.yml` |
-| Propuestas de contenido | Agregadas en esta revisión: Fresno, crafting, meta-juego y onboarding | `docs/propuestas/` |
-| Audio y banda sonora | Agregados en esta revisión: plan de integración y prompts de Suno | `docs/audio/` |
+| Propuestas de contenido | Completas: Fresno (105 Injertos y economía de la run), crafting (12 familias con frames, 120 armas, 25 prefijos, Salmueras) y meta-juego (primera sesión, bucle diario, pase, tienda, social) | `docs/propuestas/` |
+| Audio y banda sonora | Completos: plan de integración con FMOD (unos 130 efectos, voces, mezcla, háptica) y 66 cues con 63 prompts para Suno v6 | `docs/audio/` |
 
 ## 2. Lo que comprobé con números
 
@@ -75,6 +75,74 @@ Las tres primeras ya están corregidas en el GDD en esta revisión.
 | C-28 | 21.2 y 23.3 | El backend puede ser UGS, Nakama o PlayFab, pero el prompt de la Fase 3 solo nombra UGS | Decidir antes de la Fase 3 (D-04 en la hoja de ruta) |
 | C-29 | 19 y 6 | "Combate, Termas y exploración son 3D", pero no hay diseño de exploración | Ver H-02 |
 
+### 3.1 Cómo las resolvió la Fase 1
+
+La Fase 1 tuvo que decidir muchas de estas para poder programar. Casi todas coinciden con la propuesta; donde no, su decisión ya está probada y conviene adoptarla en el GDD.
+
+| ID | Decisión de la Fase 1 | ¿Coincide? |
+| --- | --- | --- |
+| C-05 | Ascensión III implementada y probada con grado S forzado; en la prueba con jugadores nadie la verá | Sí |
+| C-07 | Magia es Hechizo, Autohechizo, Vislumbre, Ascensión, Éxtasis o ser eslabón de una Cadena que abre ella; el básico da −15 | Sí |
+| C-08 | Desalada: un turno sin magia, solo básico | Sí |
+| C-09 y C-10 | Hilos cuesta 10 % de la vida máxima y no puede matar; su turno extra no permite otros Hilos ni otra poción. Frenesí gasta 1 Sal Negra | Sí |
+| C-11 | Aspecto entre Ascensiones de brujas distintas en el mismo ciclo de AV | Sí |
+| C-12 | Ascensiones encimadas pueden hacer Spark; solo la segunda recibe el +50 % | Sí, más preciso |
+| C-13 | El Aspecto usa el planeta dominante | Sí |
+| C-14 | Crítico base de 5 % y +50 %; los enemigos no hacen crítico | Sí |
+| C-15 | El Quiebre dura hasta el siguiente turno del enemigo; daños por turno de 2 turnos con coeficientes por planeta | Sí |
+| C-18 | La Ascensión se lanza en cualquier punto de decisión, también antes de un turno enemigo, sin gastar turno | Sí |
+| C-19 | +8 de Ánima por golpe recibido, sin tope | Casi: adoptar 8 |
+| C-20 | Trígono cura a las dos brujas | Sí |
+
+Quedan abiertas C-16 (Resonancia al abrir), C-17 (si la Invitada tiene vida) y C-21 (Agua de Olvido en combate).
+
+### 3.2 Contradicciones que encontraron la Fase 1 y las propuestas
+
+Cada documento tiene su lista completa con más contexto; aquí están sin repetir y con la propuesta que cada uno ya aplica.
+
+| ID | Dónde | Problema | Propuesta | Fuente |
+| --- | --- | --- | --- | --- |
+| C-30 | 7.7 y 17.3 contra 10.7 y 22.1 | Los Tránsitos son semanales en unas secciones y de seis semanas en otras | Tránsito de temporada cada seis semanas, más un "cielo de la semana" con dos planetas favorecidos | Fresno, meta |
+| C-31 | 1 y 10.1 | "Un anillo del Fresno, 15 a 25 min" contra "una zona, 15 a 20 min" | Ascenso corto = una zona, 15 a 20 min | Fresno, meta |
+| C-32 | 10.1 y 23.2 | Con 10 nodos por zona no hay rutas que se bifurquen | 10 pisos con 3 carriles (28 nodos en el mapa, 10 por ruta) | Fresno |
+| C-33 | 10.4 | "Si llegas a ese nodo" no funciona si el mapa cambia en cada run | La Mancha se ancla a zona y piso | Fresno |
+| C-34 | 11.1 y 16.3 | Las Sales de Baño de logros y del pase gratuito no están en la tabla de ingreso | Reparto nuevo de las 70 tiradas que las incluye | Meta |
+| C-35 | 12.2 y 16.4 | Con las 3★ completas el gacha da Sal Cruda y recetas: es vender sal de forma indirecta | Polvo Astral | Crafting, meta |
+| C-36 | 6, 22.1 y 23.3 | Doce regiones iniciales posibles, pero se construyen dos y llegan más por versión | Decidir cuántas regiones salen al lanzamiento (D-13) | Meta, audio |
+| C-37 | 9.9 | Combate automático desde el principio: la primera Cadena la haría la máquina | El automático se abre después de la primera Cadena manual | Meta |
+| C-38 | 10.6 | Si el nivel de cuenta solo sube con la Ofrenda, no sube antes de abrir el Fresno | Altura con Crecimiento por todo lo que juegas, más la Ofrenda | Meta |
+| C-39 | 13.1 y 13.4 | Los Títulos aparecen en la ficha de una bruja, pero dan pasivas como si fueran de la Calculista | Títulos de la Calculista; las brujas tienen los suyos sin pasiva | Meta |
+| C-40 | 1 y 11.3 | Sesiones de 3 a 5 min no alcanzan para "nivel 70 en siete días" | Se resuelve con H-01 | Meta |
+| C-41 | 9.6 | "+1 almita" por Spark no pesa nada frente a 100 000 al día | 10 % de que sea una almita con nombre | Crafting, Fresno |
+| C-42 | 10.3 | La Bendición del Paria no tiene tope ni dice si cuenta la Invitada | Tope de 5 opciones; la Invitada no cuenta | Fresno |
+| C-43 | 14.2 | Júpiter es el único planeta sin Salmuera | Salmuera Estánnea: +20 de Resonancia | Fresno |
+| C-44 | 9.4, 6.5 y 13.2 | Firmeza, Paralaje y estadísticas de la Calculista sin escala | Calculista de 0 a 20; Paralaje según H-15 | Fresno |
+| C-45 | 10.5 | Un Eco con 3 Injertos de una Rama da su Fruto desde el primer nodo | Máximo 2 por Rama y 1 astral | Fresno |
+| C-46 | 17.4 | Nada prohíbe que un Injerto copie el truco de una bruja "kk" | Regla nueva: ningún Injerto lo copia | Fresno |
+| C-47 | 13.1, 7.4 y 9.8 | La ficha muestra DEF y la banda Sobresalada la baja, pero la fórmula de daño no usa DEF | Que R_DEF salga de la DEF, o quitar DEF de la ficha | Fase 1, crafting |
+| C-48 | 12.1 y 23.1 | El prompt pedía Autohechizo para las 3★; la 12.1 lo reserva a 4★ y 5★ | Las 3★ no tienen Autohechizo (así quedó la Fase 1) | Fase 1 |
+| C-49 | 7.2 y 18.2 | El nombre de la mezcla es del par sin orden: Muertita repite *Humo Óseo* y Topacia *Escarcha Sangrienta* | Nombre por par ordenado (dominante primero), para que cada bruja tenga el suyo | Fase 1 |
+| C-50 | 9.1 | ¿La líder del equipo propio también aporta Regencia? ¿Los jefes actúan más de una vez por turno? | Solo la Invitada; los jefes pueden tener varias acciones (el Guardián tiene dos) | Fase 1 |
+| C-51 | 15.3 y 6 | "Botín de la segunda región" no tiene sentido con regiones en orden libre | Nombrar la región: Tauro | Crafting |
+| C-52 | 15.1 y 17 | "El mejor para Spark" choca con la doctrina contra el power creep | El Grimorio queda solo 6 % arriba de la siguiente familia | Crafting |
+| C-53 | 14.1 y 15.5 | Las Salmueras se descubren experimentando, pero la Herbolaria muestra todo | La Herbolaria completa una casilla por cada ingrediente que ya tuviste | Crafting |
+| C-54 | 14.1 y 14.2 | El Filtro de Pureza pide Sal Destilada: no puede tener versión básica | Solo potencias mejorada y maestra | Crafting |
+| C-55 | 14.3 | "Máximo cinco de cada tipo" no contempla las tres potencias | Cinco por Salmuera y potencia | Crafting |
+| C-56 | 11.3 | No dice si *n* es el nivel al que llegas o del que sales | Costo de pasar de *n* a *n*+1 | Crafting |
+| C-57 | 4.4, 12.5 y 19.2 | Rechaza cinemáticas de 8 a 10 s, pero las transformaciones duran eso | La regla es para combate; la transformación pasa una vez, fuera de combate y se puede saltar | Audio |
+| C-58 | 19.3 y 7.5 | La versión corta de la Ascensión III pierde el canto, pero las Ascensiones son cantadas | La versión corta conserva un pedazo del canto | Audio, música |
+| C-59 | 7.5 y 20.3 | La Cadena es silente, pero lleva "voz solista" | Esa voz es de la música, sin palabras | Audio, música |
+| C-60 | 6 y 20.1 | Acuario es Escandinavia e Islandia, pero la música le pone "gélico" (errata de gaélico, que es celta) | Sabor nórdico; el celta, para Cáncer | Música |
+| C-61 | 20.2 | Violonchelo y flautas están en la base, pero son los solistas de Marisal y Tormentina | Reservar el registro solista de cada Regente | Música |
+| C-62 | 6 y 18.1 | La Calculista tiene voz personalizable pero calcula en silencio | Solo reacciones, cuatro voces por idioma | Audio |
+| C-63 | 5 | El modo recatado no dice qué cambia en el audio | Tabla del plan de audio, sección 4 | Audio |
+| C-64 | 21.1 | El ahorro de batería es "a 30 fps", pero la gama baja ya corre a 30 | Ahorro = 30 fps más menos resolución y efectos | Audio |
+| C-65 | 18.1 y 21.2 | Voces en "español latinoamericano" y textos en "español de México" | Un solo nombre: español de México | Audio |
+| C-66 | 10.1 | La Jardinera es la jefa de la Copa: son cuatro jefes, no cuatro más ella | Corregir la redacción | Música |
+| C-67 | 20.4 | Los Huéspedes suenan a "radiotelescopio", un sonido electrónico, en una banda sonora acústica | Va en el diseño sonoro, no en la música | Música |
+| C-68 | 24 | El GDD no dice nada del uso de IA en música e imágenes | Agregar una regla: qué se genera, con qué plan, cómo se declara en las tiendas y qué hace una persona | Música |
+| C-69 | 21.3 | El núcleo no emite eventos que necesitan el Fresno y el audio | Agregar BattleStarted, AVShifted, HealApplied, ShieldAbsorbed, UnitDefeated y la Salinidad como valor, no solo como banda | Fresno, audio |
+
 ## 4. Huecos de diseño
 
 Son reglas o contenido que el GDD nombra pero no define. Sin ellos, el agente de cada fase inventa en el código.
@@ -83,7 +151,7 @@ Son reglas o contenido que el GDD nombra pero no define. Sin ellos, el agente de
 
 | ID | Hueco | Propuesta |
 | --- | --- | --- |
-| H-01 | **Ingreso de almitas.** No hay tabla de cuánto da cada actividad, y las escalas de nivel y grado no cuadran (sección 2) | Tabla de fuentes por actividad y día, y reescalar: o el nivel cuesta menos (`40·n^1.5`, 640 000 al 70) o los grados cuestan más (base 80 000). Ver `docs/propuestas/CRAFTING.md`, sección de economía |
+| H-01 | **Ingreso de almitas.** No hay tabla de cuánto da cada actividad, y las escalas de nivel y grado no cuadran (sección 2) | Bajar el nivel a `40·n^1.5` (644 000 al 70). Con eso, un día de juego da unas 100 000 almitas y nivel, grados y arma pesan 2 : 1 : 1. Las tres propuestas ya usan esa escala o se ajustan con un solo factor (×0.4 en el Fresno). Falta tu decisión D-02 y una tabla única de ingresos por actividad en la Fase 2A |
 | H-02 | Contenido del Fresno: 105 Injertos (solo hay un Fruto de ejemplo), Mutaciones, maldiciones, Tránsitos, Raíces, enemigos por zona | `docs/propuestas/FRESNO.md` |
 | H-03 | Estado que persiste entre nodos de una run (vida, Salinidad, Ánima, Resonancia, Granos, pociones) | `docs/propuestas/FRESNO.md` |
 | H-04 | Maldiciones: ¿×1.25 multiplicativo (×3.05 con cinco) o aditivo (+125 %)? | `docs/propuestas/FRESNO.md` |

@@ -5,8 +5,8 @@ RPG gacha por turnos para móvil (iOS y Android, horizontal) en Unity 6 LTS con 
 ## Fuentes de verdad
 
 1. `docs/GDD.md` manda sobre todo lo demás. Si tu tarea lo contradice, gana el GDD y lo reportas.
-2. Las propuestas de `docs/propuestas/` solo cuentan cuando el GDD las cita o el usuario las aprueba. Mientras tanto son la mejor guía para llenar huecos, y cada valor que tomes de ellas lleva `// TUNING`.
-3. `docs/HUECOS.md` lista contradicciones y huecos conocidos del GDD. Revisa ahí antes de inventar un número.
+2. Las propuestas de `docs/propuestas/` y `docs/audio/` solo cuentan cuando el GDD las cita o el usuario las aprueba. Mientras tanto son la mejor guía para llenar huecos, y cada valor que tomes de ellas lleva `// TUNING`.
+3. `docs/HUECOS.md` lista contradicciones y huecos conocidos del GDD, y cómo los resolvió cada fase. Revisa ahí y en los reportes `docs/FASE*.md` antes de inventar un número.
 4. `docs/HOJA_DE_RUTA.md` dice en qué fase va cada sistema y cómo se integra.
 
 ## Reglas que no se negocian
@@ -48,17 +48,20 @@ Con la misma semilla y las mismas entradas, el núcleo da el mismo resultado eve
 
 ## Pruebas
 
+Requiere el SDK de .NET 8:
+
 ```bash
 dotnet test Tests/Core.Tests
+dotnet run --project Tests/Core.Sim -- balance guardian 100
 ```
 
-Las pruebas EditMode corren desde el Test Runner de Unity. La CI (`.github/workflows/ci.yml`) corre las pruebas del núcleo en cada push y pull request.
+`Tests/Core.Lib` compila el núcleo como .NET Standard 2.1 con C# 9, el perfil de Unity. No uses rasgos de C# más nuevos en el núcleo. Las pruebas compartidas viven en `Assets/SalYAlmas/Tests/EditMode/`; las que solo corren en Unity, en su carpeta `Unity/`, desde el Test Runner. La CI (`.github/workflows/ci.yml`) corre las pruebas del núcleo en cada push y pull request.
 
 Antes de entregar: todas las pruebas de las fases anteriores pasan, y si cambiaste reglas del núcleo, los combates grabados siguen dando el mismo resultado o explicas por qué cambiaron.
 
 ## Cómo se trabaja
 
 - Una fase por sesión, en su propia rama. La sección 23 del GDD y `docs/HOJA_DE_RUTA.md` tienen los prompts.
-- Al cerrar una fase, escribe su reporte en `docs/fases/FASE_<n>.md`: qué se construyó, cómo correrlo, valores `// TUNING`, huecos y contradicciones del GDD.
+- Al cerrar una fase, escribe su reporte en `docs/FASE<id>.md` (como `docs/FASE1.md`): qué se construyó, cómo correrlo, valores `// TUNING`, huecos y contradicciones del GDD.
 - No reescribas sistemas de fases anteriores sin decirlo en el reporte.
 - Los documentos se escriben en español de México, con tuteo, oraciones cortas, tablas Markdown y encabezados en tipo oración, como el GDD.

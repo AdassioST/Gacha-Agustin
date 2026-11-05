@@ -5,14 +5,15 @@ Cómo pasar del prototipo de combate a un juego que se pueda publicar. Lo que fa
 ## 1. Resumen
 
 - Las tres fases del GDD validan combate, progreso y producto, pero dejan fuera unos 30 sistemas que las tiendas o el servicio en vivo exigen (cuenta, borrar la cuenta, validación en servidor, tutorial, misiones, pase, localización con pipeline, herramientas de contenido). Ver HUECOS, sección 5.
-- Propongo **once sesiones de programación** en lugar de tres: la Fase 1 en curso, un cierre con herramientas (1.5), la Fase 2 partida en dos, la Fase 3 partida en tres, y tres fases nuevas de producto, servicio en vivo y contenido.
+- La **Fase 1 ya terminó** y está en `main`: 140 pruebas, simulador de balance y escena de prueba ([FASE1.md](FASE1.md)).
+- Propongo **once sesiones de programación** en lugar de tres: la Fase 1, un cierre con herramientas (1.5), la Fase 2 partida en dos, la Fase 3 partida en tres, y tres fases nuevas de producto, servicio en vivo y contenido.
 - Todo se integra con el mismo patrón que ya usa la Fase 1: **reglas en el núcleo, eventos tipados hacia fuera y servicios detrás de interfaces** con una implementación local para pruebas.
-- Hay **diez decisiones** que conviene tomar antes de la Fase 2 o la 3 (sección 4). Las dos más caras son cómo se explora una región y la escala de almitas.
+- Hay **quince decisiones** en la sección 4; dos ya están tomadas. Las más caras son cómo se explora una región, la escala de almitas y cuántas regiones salen al lanzamiento.
 - En paralelo a la programación corren cinco frentes que no son código: arte, audio y música, narrativa, legal y comunidad.
 
 ```mermaid
 flowchart LR
-    F1["F1 Aquelarre<br/>combate (en curso)"] --> F15["F1.5 Cierre<br/>y herramientas"]
+    F1["F1 Aquelarre<br/>combate (terminada)"] --> F15["F1.5 Cierre<br/>y herramientas"]
     F15 --> F2A["F2A Fresno<br/>y economía"]
     F15 --> F2B["F2B Progreso,<br/>crafting y gacha"]
     F2A --> F3A["F3A Servicios<br/>y cuenta"]
@@ -97,19 +98,21 @@ flowchart TB
 
 Con esto, agregar el audio, la analítica o los logros no cambia una sola regla de combate, y una prueba puede comprobar que **cada tipo de evento tiene su sonido, su evento de analítica o una excepción explícita**.
 
-### 2.5 Integrar la Fase 1 cuando llegue
+### 2.5 Integrar la Fase 1
 
-1. Subir la rama de la Fase 1 y abrir un pull request contra `main`. La CI corre `dotnet test` sola.
-2. Leer su reporte y cruzar sus contradicciones y valores `// TUNING` con HUECOS C-05 a C-21. Donde coincidan, adoptar una sola respuesta en el GDD.
-3. Renombrar los IDs de datos a los nombres canónicos (D-03, ya decidido): lo hace la Fase 1.5.
-4. Correr la prueba con jugadores (sección 7) antes de empezar la Fase 2: si la Cadena no se entiende, es más barato cambiarla ahora.
-5. Correr la Fase 1.5.
+La Fase 1 ya está en `main` con su `.meta` generado. Lo que falta antes de la Fase 2:
+
+1. Abrir el proyecto en Unity y correr las pruebas EditMode desde el Test Runner (la sesión que lo construyó no tenía Unity). Confirmar que la escena se construye con **Sal y Almas > Construir escena de combate**.
+2. Decidir la versión de Unity (D-14). El reporte pedía 6000.0 LTS y el proyecto se abrió con 6000.6.7f1.
+3. Correr la prueba con jugadores de la sección 7.
+4. Correr la Fase 1.5. Renombra `zarigueya` y `topo` (D-03), agrega los eventos que piden el Fresno y el audio (HUECOS C-69) y deja las herramientas de contenido.
+5. Pasar al GDD las interpretaciones de la Fase 1 que coinciden con HUECOS (sección 3.1), para que la Fase 2 no tenga que adivinarlas.
 
 ## 3. Plan de fases
 
 | Fase | Qué valida | Lo principal | Depende de |
 | --- | --- | --- | --- |
-| **1 Aquelarre** | El combate es divertido y la Cadena se entiende | Prompt del GDD 23.1, en curso | — |
+| **1 Aquelarre** | El combate es divertido y la Cadena se entiende | Prompt del GDD 23.1. **Terminada**; falta la prueba con jugadores | — |
 | **1.5 Cierre** | Lo construido es correcto y se puede producir contenido | Auditoría contra el GDD, combates grabados, validador de datos, editor de brujas, simulador en la CI | 1 |
 | **2A Fresno y economía** | El endgame se siente distinto en cada run | Fresno, libro contable, almitas, guardado versionado, reloj | 1.5 |
 | **2B Progreso, crafting y gacha** | Refinar y fabricar cambian cómo pelea la bruja | Grados y Juicios, armas, reforja, Salmueras, gacha local | 1.5 |
@@ -129,7 +132,7 @@ Cada fase es una sesión de Claude Code. Si una no cabe, aplica la regla del GDD
 | --- | --- | --- | --- |
 | Arte 2D | Retratos de las 12 brujas de la primera ola, luego bustos y fase Destilada | Antes de la 3B | `docs/Retratos para Codex.md` |
 | Arte 3D | Rig base compartido, morphs de fase, 12 rigs de Ascendente | Antes de la 3C | GDD 19 |
-| Audio y música | Pistas con Suno, efectos y voces | Temporales en la 3C, finales antes de la 4 | `docs/audio/` |
+| Audio y música | Pistas con Suno (empezar por las 22 del vertical slice), efectos y voces | Temporales en la 3C, finales antes de la 4 | `docs/audio/SOUNDTRACK_SUNO.md` §5 a §7 |
 | Narrativa | Biblia narrativa y guion de Aries y Capricornio | Antes de la 3B | H-14 |
 | Legal y marca | Búsqueda de marcas, privacidad, términos, clasificación, revisión de Japón | Antes de la 4 | HUECOS S-12 a S-15 |
 | Comunidad | Preinscripción, Discord, redes | Tres meses antes del lanzamiento suave | GDD 22.4 |
@@ -144,10 +147,15 @@ Cada fase es una sesión de Claude Code. Si una no cabe, aplica la regla del GDD
 | D-04 | Backend: UGS, Nakama o PlayFab (C-28) | 3A | **Unity Gaming Services.** Cloud Code acepta módulos en C#, así que el mismo núcleo determinista valida runs y tiradas en el servidor sin reescribirlo |
 | D-05 | Git LFS para arte y audio (S-29) | — | **Decidido: por ahora no.** Revisarlo antes de que entren modelos 3D o audio |
 | D-06 | Spine o Live2D para los retratos animados | 3B | Spine: licencia por puesto y sin regalías; Live2D cobra licencia de publicación según ingresos. Verifica los términos vigentes antes de firmar |
-| D-07 | Aceptar las propuestas de `docs/propuestas/` como base | 2A y 2B | Sí, como punto de partida marcado `// TUNING`; las ajustas con datos de las pruebas |
+| D-07 | Aceptar las propuestas de `docs/propuestas/` como base y responder sus preguntas (18 del Fresno, 13 de crafting, 15 de meta-juego) | 2A y 2B | Sí, como punto de partida marcado `// TUNING`. Cada propuesta trae su recomendación en cada pregunta; basta con marcar las que cambias |
 | D-08 | Orden de la Fase 3 | 3 | Servicios primero (3A): es el mayor riesgo técnico y define los contratos que usan las demás |
 | D-09 | Música con Suno: plan de pago, y si contratas voz humana para el tema principal | 3C | Ver `docs/audio/SOUNDTRACK_SUNO.md`, sección de riesgos |
 | D-10 | Cuentas y licencias: Unity, Apple Developer, Google Play, secretos de la CI | 4 | Abrir las de Apple y Google pronto; la verificación tarda |
+| D-11 | Plan de Suno y voz humana | Antes de generar música | **Premier** en una cuenta del estudio mientras dure la producción: solo lo generado con plan de pago activo da derechos comerciales, y Pro no alcanza por el límite de descargas. Modelo híbrido: una persona compone el tema y los 8 leitmotivs, y una vocalista canta el tema, las Termas de noche, los finales y las Ascensiones III. Así hay autoría humana que proteger |
+| D-12 | Presupuesto de FMOD | 3C | Presupuestar la licencia de FMOD por título según el presupuesto del juego (probablemente Premium) y confirmarla en fmod.com antes de firmar |
+| D-13 | Cuántas regiones salen al lanzamiento (C-36) | 3B, música, meta | Cuatro (Aries, Cáncer, Libra y Capricornio): el signo de la Calculista elige la más cercana por elemento. Las demás llegan por versión |
+| D-14 | Versión de Unity | Ya | Fijar la versión LTS vigente de Unity 6 para producción móvil; si 6000.6 no es LTS, volver a la LTS antes de la Fase 1.5 |
+| D-15 | Regla de uso de IA en el GDD 24 (C-68) | Antes de la 4 | Escribirla: qué se genera con IA (música, retratos), con qué plan, qué revisa una persona y cómo se declara en las tiendas |
 
 ## 5. Protocolo común de los prompts
 
@@ -156,13 +164,13 @@ Pega este bloque al inicio de cada prompt de las fases 1.5 a 6. Así cada sesió
 ```
 ANTES DE EMPEZAR
 1. Lee CLAUDE.md, docs/HUECOS.md, docs/HOJA_DE_RUTA.md y los reportes de docs/fases/. Del GDD (docs/GDD.md) lee completas las secciones que mandan en esta fase.
-2. Corre todas las pruebas existentes. Si alguna falla, detente y repórtalo antes de cambiar nada.
+2. Corre todas las pruebas existentes (`dotnet test Tests/Core.Tests`, con el SDK de .NET 8). Si alguna falla, detente y repórtalo antes de cambiar nada.
 3. Trabaja en tu propia rama. No reescribas sistemas de fases anteriores; si cambias una interfaz, hazlo de forma compatible y dilo en el reporte.
 4. Si un número o regla no está en el GDD, busca en docs/HUECOS.md y docs/propuestas/. Si tampoco está, propón uno. Todo valor que no venga del GDD lleva // TUNING.
 5. Si este prompt contradice al GDD, gana el GDD y me lo reportas.
 
 AL TERMINAR
-- Escribe docs/fases/FASE_<id>.md con: qué construiste, cómo correrlo y probarlo, la lista de valores // TUNING, los huecos y contradicciones del GDD que encontraste, y las decisiones que tomaste por tu cuenta.
+- Escribe docs/FASE<id>.md (por ejemplo docs/FASE2A.md, como docs/FASE1.md) con: qué construiste, cómo correrlo y probarlo, la lista de valores // TUNING, los huecos y contradicciones del GDD que encontraste, y las decisiones que tomaste por tu cuenta.
 - Todas las pruebas, nuevas y anteriores, pasan en la CI.
 ```
 
@@ -179,10 +187,11 @@ OBJETIVO
 Que el núcleo de combate sea correcto, repetible y fácil de llenar de contenido. No agregas mecánicas nuevas.
 
 ALCANCE
-1. Auditoría: tabla de cada regla de las secciones 7, 8, 9 y 14 → archivo donde vive → prueba que la cubre → estado. Incluye las decisiones C-05 a C-21 de docs/HUECOS.md. Corrige con prueba cada error que encuentres.
+1. Auditoría: tabla de cada regla de las secciones 7, 8, 9 y 14 → archivo donde vive → prueba que la cubre → estado. Parte de docs/FASE1.md y de docs/HUECOS.md (secciones 3, 3.1 y 3.2). Corrige con prueba cada error que encuentres.
 2. Grabación y repetición (Core/Replay): formato versionado de semilla + entradas + versión de datos. Graba 10 combates de referencia con su lista de eventos esperada y una prueba que los repite. Este formato es el que validará el servidor en la Fase 3A.
 3. Determinismo entre plataformas: redondea a entero en cada golpe y cada cambio de estado (vida, Firmeza, Salinidad, Ánima, Resonancia). Documenta qué cálculos siguen en double y por qué son seguros.
-4. IDs canónicos (decisión D-03): renombra en datos, pruebas y registro de combate zarigueya → muertita y topo → topacia, con sus nombres Muertita y Topacia. Los IDs están en el GDD 18.
+4. IDs canónicos (decisión D-03): renombra en datos, pruebas y registro de combate zarigueya → muertita y topo → topacia, con sus nombres Muertita y Topacia. Los IDs están en el GDD 18. Corrige el signo de Muertita: el GDD 17 le da Escorpio, no Cáncer.
+4b. Eventos nuevos (HUECOS C-69): BattleStarted, AVShifted (avances y retrasos con su causa), HealApplied, ShieldAbsorbed, UnitDefeated y SalinityChanged con el valor de 0 a 150. Los necesitan el Fresno (docs/propuestas/FRESNO.md) y el audio (docs/audio/INTEGRACION_AUDIO.md). Los combates grabados se actualizan una sola vez y se explica por qué.
 5. Validador de datos: IDs referenciados, frames dentro de rango, campos obligatorios, schemaVersion, y lista de valores TUNING. Corre en dotnet test y desde el menú Sal y Almas > Validar datos.
 6. Editor de brujas: ventana de Unity para ver y editar el kit de una bruja, con vista previa de la Partitura contra otra bruja y los Spark calculados con PreviewChain.
 7. Simulador de balance como herramienta de línea de comandos y como prueba de la regla del +5 % de la sección 17.1, con un reporte en Markdown por bruja y papel.
@@ -333,7 +342,7 @@ ALCANCE
 3. Vestidor: atuendos que se ajustan a las tres fases por blendshapes (con modelos temporales), atuendos de Ascendente, color de sal, Manantiales y marcos del Libro Mayor.
 4. Tienda de cosméticos con IStoreService.
 5. Presentación de combate: sombreado cel con Shader Graph, efectos de Spark y Quiebre, cámara de la Ascensión III (19.3), y la opción de reducir destellos (HUECOS S-18).
-6. Audio según docs/audio/INTEGRACION_AUDIO.md: FMOD, AudioDirector colgado del bus de eventos, música por capas con las pistas de docs/audio/SOUNDTRACK_SUNO.md, efectos y voces temporales.
+6. Audio según docs/audio/INTEGRACION_AUDIO.md, con su prompt detallado de la sección 13.3: FMOD, AudioDirector colgado del bus de eventos, música por capas con las pistas de docs/audio/SOUNDTRACK_SUNO.md, efectos y voces temporales.
 
 CRITERIOS DE ACEPTACIÓN
 - La escena de combate mantiene 60 fps en gama alta y 30 en gama baja con el presupuesto de la 19.5.
@@ -431,13 +440,14 @@ El criterio de la Fase 1 pide que alguien nuevo venza al jefe en menos de 15 min
     recursive = binary
 ```
 
-- **Ramas:** una rama por fase. Los reportes viven en `docs/fases/`.
+- **Ramas:** una rama por fase. Los reportes viven en `docs/FASE<id>.md`.
 - **Archivos grandes:** sin Git LFS por ahora (D-05). `.gitattributes` ya marca los binarios para que Git no intente fusionarlos.
 
 ## 9. Próximos pasos
 
-1. Cuando la Fase 1 termine, súbela y abre un pull request. La CI la prueba sola.
-2. Haz la prueba con jugadores de la sección 7.
-3. Revisa las propuestas de `docs/propuestas/` y responde sus preguntas (D-07).
-4. Corre la Fase 1.5 con su prompt.
-5. Mientras tanto, empieza la música con `docs/audio/SOUNDTRACK_SUNO.md` y la biblia narrativa (H-14).
+1. Abre el proyecto en Unity, corre las pruebas EditMode y decide la versión de Unity (D-14).
+2. Haz la prueba con jugadores de la sección 7 con la escena de la Fase 1.
+3. Decide la escala de almitas (D-02) y cuántas regiones salen al lanzamiento (D-13): las tres propuestas dependen de ellas.
+4. Revisa las preguntas de las propuestas (D-07). Cada una trae su recomendación.
+5. Corre la Fase 1.5 con su prompt.
+6. En paralelo: contrata Suno Premier (D-11) y genera las 22 pistas del vertical slice con `docs/audio/SOUNDTRACK_SUNO.md`; empieza la biblia narrativa (H-14).
