@@ -36,6 +36,8 @@ Se observaron las tres capturas que proporcionó el usuario. Son evidencia visua
 
 No se copiaron assets, tipografías ni composiciones completas de esas referencias. Tampoco se presentan como datos reales de velocidad o precisión del jugador.
 
+El contenido indexado del tutorial [Special Mechanism, HoYoWiki de Star Rail](https://wiki.hoyolab.com/pc/hsr/entry/1620?lang=en-us) explica que el orden incluye aliadas y enemigos y que ciertas cargas anticipan el siguiente ataque. Refuerza dos decisiones aplicadas aquí: marcar el bando dentro de la línea de turnos y mostrar la intención del enemigo seleccionado junto a las acciones. La página usa JavaScript y no devolvió texto completo al abrirla; esta comprobación se limita al contenido indexado del tutorial, sin atribuirle resultados de UX.
+
 ## Evidencia medible
 
 El contraste calculado de los antiguos textos planetarios sobre abismo era **3.61:1 para Marte** y **4.15:1 para Júpiter**. El texto de planeta actual en pergamino da **15.35:1** sobre ese mismo fondo. Los nuevos acentos de aliada y enemigo dan **11.06:1** y **8.78:1**. Son pares sRGB declarados; no una certificación del render completo.
