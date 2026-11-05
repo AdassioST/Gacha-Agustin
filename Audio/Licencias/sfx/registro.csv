@@ -1,0 +1,471 @@
+archivo,id,variante,metodo,fuentes,licencia_resultante,estado,nivel,nuevo_id
+sfx_combate_entrada__v1.wav,sfx_combate_entrada,v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_entrada__v2.wav,sfx_combate_entrada,v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_turno__aliada__v1.wav,sfx_combate_turno,aliada__v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_turno__aliada__v2.wav,sfx_combate_turno,aliada__v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_turno__enemiga__v1.wav,sfx_combate_turno,enemiga__v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_turno__enemiga__v2.wav,sfx_combate_turno,enemiga__v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_ataque__baculo.wav,sfx_combate_ataque,baculo,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_ataque__grimorio_agujas.wav,sfx_combate_ataque,grimorio_agujas,mezcla,kenney_rpg_audio/book_flip_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_ataque__guadana_sal.wav,sfx_combate_ataque,guadana_sal,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_ataque__incensario.wav,sfx_combate_ataque,incensario,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_ataque__astrolabio.wav,sfx_combate_ataque,astrolabio,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_ataque__rifle_alquimico.wav,sfx_combate_ataque,rifle_alquimico,mezcla,kenney_rpg_audio/metal_latch.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_ataque__escoba.wav,sfx_combate_ataque,escoba,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_ataque__campana_bronce.wav,sfx_combate_ataque,campana_bronce,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_ataque__tijeras_hilandera.wav,sfx_combate_ataque,tijeras_hilandera,mezcla,kenney_rpg_audio/draw_knife_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_ataque__caldero_mano.wav,sfx_combate_ataque,caldero_mano,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_ataque__varita.wav,sfx_combate_ataque,varita,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_ataque__daga_ritual.wav,sfx_combate_ataque,daga_ritual,mezcla,kenney_rpg_audio/knife_slice.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_ataque__natural.wav,sfx_combate_ataque,natural,mezcla,kenney_rpg_audio/cloth_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__ligero__v1.wav,sfx_combate_golpe,ligero__v1,mezcla,kenney_impact_sounds/impact_punch_medium_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__ligero__v2.wav,sfx_combate_golpe,ligero__v2,mezcla,kenney_impact_sounds/impact_punch_medium_003.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__ligero__v3.wav,sfx_combate_golpe,ligero__v3,mezcla,kenney_impact_sounds/impact_soft_medium_002.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__medio__v1.wav,sfx_combate_golpe,medio__v1,mezcla,kenney_impact_sounds/impact_punch_medium_003.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__medio__v2.wav,sfx_combate_golpe,medio__v2,mezcla,kenney_impact_sounds/impact_punch_heavy_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__medio__v3.wav,sfx_combate_golpe,medio__v3,mezcla,kenney_impact_sounds/impact_punch_medium_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__pesado__v1.wav,sfx_combate_golpe,pesado__v1,mezcla,kenney_impact_sounds/impact_punch_heavy_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__pesado__v2.wav,sfx_combate_golpe,pesado__v2,mezcla,kenney_impact_sounds/impact_punch_heavy_002.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__pesado__v3.wav,sfx_combate_golpe,pesado__v3,mezcla,kenney_impact_sounds/impact_soft_heavy_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__pelaje.wav,sfx_combate_golpe,pelaje,mezcla,kenney_impact_sounds/impact_soft_medium_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__sal.wav,sfx_combate_golpe,sal,mezcla,kenney_impact_sounds/impact_glass_light_002.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__metal_liquido.wav,sfx_combate_golpe,metal_liquido,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_golpe__madera.wav,sfx_combate_golpe,madera,mezcla,kenney_impact_sounds/impact_wood_medium_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__astral.wav,sfx_combate_golpe,astral,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_golpe__piedra.wav,sfx_combate_golpe,piedra,mezcla,kenney_impact_sounds/impact_mining_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__baculo.wav,sfx_combate_golpe,baculo,mezcla,kenney_impact_sounds/impact_wood_light_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__grimorio_agujas.wav,sfx_combate_golpe,grimorio_agujas,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_golpe__guadana_sal.wav,sfx_combate_golpe,guadana_sal,mezcla,kenney_rpg_audio/knife_slice_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__incensario.wav,sfx_combate_golpe,incensario,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_golpe__astrolabio.wav,sfx_combate_golpe,astrolabio,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_golpe__rifle_alquimico.wav,sfx_combate_golpe,rifle_alquimico,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_golpe__escoba.wav,sfx_combate_golpe,escoba,mezcla,kenney_impact_sounds/impact_wood_light_002.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__campana_bronce.wav,sfx_combate_golpe,campana_bronce,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_golpe__tijeras_hilandera.wav,sfx_combate_golpe,tijeras_hilandera,mezcla,kenney_rpg_audio/metal_click.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_golpe__caldero_mano.wav,sfx_combate_golpe,caldero_mano,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_golpe__varita.wav,sfx_combate_golpe,varita,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_golpe__daga_ritual.wav,sfx_combate_golpe,daga_ritual,mezcla,kenney_rpg_audio/knife_slice.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_critico__v1.wav,sfx_combate_critico,v1,mezcla,kenney_impact_sounds/impact_glass_light_000.ogg ; kenney_rpg_audio/knife_slice_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_critico__v2.wav,sfx_combate_critico,v2,mezcla,kenney_impact_sounds/impact_glass_light_001.ogg ; kenney_rpg_audio/knife_slice_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_critico__v3.wav,sfx_combate_critico,v3,mezcla,kenney_impact_sounds/impact_glass_light_002.ogg ; kenney_rpg_audio/knife_slice_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_dano_recibido__canida.wav,sfx_combate_dano_recibido,canida,mezcla,kenney_impact_sounds/impact_soft_medium_000.ogg ; kenney_rpg_audio/cloth_4.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_dano_recibido__felina.wav,sfx_combate_dano_recibido,felina,mezcla,kenney_impact_sounds/impact_soft_medium_000.ogg ; kenney_rpg_audio/cloth_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_dano_recibido__ave.wav,sfx_combate_dano_recibido,ave,mezcla,kenney_impact_sounds/impact_soft_medium_000.ogg ; kenney_rpg_audio/cloth_1.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_dano_recibido__alada.wav,sfx_combate_dano_recibido,alada,mezcla,kenney_impact_sounds/impact_soft_medium_002.ogg ; kenney_rpg_audio/cloth_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_dano_recibido__escamosa.wav,sfx_combate_dano_recibido,escamosa,mezcla,kenney_impact_sounds/impact_soft_medium_000.ogg ; kenney_rpg_audio/cloth_4.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_dano_recibido__ungulada.wav,sfx_combate_dano_recibido,ungulada,mezcla,kenney_impact_sounds/impact_soft_heavy_001.ogg ; kenney_rpg_audio/cloth_1.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_dano_recibido__pequena.wav,sfx_combate_dano_recibido,pequena,mezcla,kenney_impact_sounds/impact_soft_medium_000.ogg ; kenney_rpg_audio/cloth_4.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_dano_recibido__robusta.wav,sfx_combate_dano_recibido,robusta,mezcla,kenney_impact_sounds/impact_soft_heavy_001.ogg ; kenney_rpg_audio/cloth_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_estado_tick__quemadura.wav,sfx_combate_estado_tick,quemadura,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_estado_tick__sangrado.wav,sfx_combate_estado_tick,sangrado,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_estado_tick__veneno.wav,sfx_combate_estado_tick,veneno,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_estado_tick__electrocucion.wav,sfx_combate_estado_tick,electrocucion,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_escudo__poner.wav,sfx_combate_escudo,poner,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_escudo__romper.wav,sfx_combate_escudo,romper,mezcla,kenney_impact_sounds/impact_glass_heavy_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_caida__v1.wav,sfx_combate_caida,v1,mezcla,kenney_impact_sounds/impact_soft_heavy_001.ogg ; kenney_rpg_audio/cloth_1.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_caida__v2.wav,sfx_combate_caida,v2,mezcla,kenney_impact_sounds/impact_soft_heavy_001.ogg ; kenney_rpg_audio/cloth_1.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_revivir.wav,sfx_combate_revivir,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_jefe_aviso.wav,sfx_combate_jefe_aviso,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_jefe_fase.wav,sfx_combate_jefe_fase,—,mezcla,kenney_impact_sounds/impact_plank_medium_000.ogg ; kenney_rpg_audio/creak_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,sí
+sfx_combate_granos__sube__v1.wav,sfx_combate_granos,sube__v1,mezcla,kenney_impact_sounds/impact_glass_light_002.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_granos__sube__v2.wav,sfx_combate_granos,sube__v2,mezcla,kenney_impact_sounds/impact_glass_light_003.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_granos__baja__v1.wav,sfx_combate_granos,baja__v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_granos__baja__v2.wav,sfx_combate_granos,baja__v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_velocidad__1.wav,sfx_combate_velocidad,1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_velocidad__2.wav,sfx_combate_velocidad,2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_auto__activar.wav,sfx_combate_auto,activar,mezcla,kenney_rpg_audio/metal_latch.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_auto__quitar.wav,sfx_combate_auto,quitar,mezcla,kenney_rpg_audio/metal_click.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_combate_victoria.wav,sfx_combate_victoria,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_combate_derrota.wav,sfx_combate_derrota,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_resonancia_llena.wav,sfx_cadena_resonancia_llena,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_abrir.wav,sfx_cadena_abrir,—,mezcla,kenney_rpg_audio/book_open.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_cadena_cerrar.wav,sfx_cadena_cerrar,—,mezcla,kenney_rpg_audio/book_close.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,sí
+sfx_cadena_tomar__v1.wav,sfx_cadena_tomar,v1,mezcla,kenney_rpg_audio/book_flip_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_cadena_tomar__v2.wav,sfx_cadena_tomar,v2,mezcla,kenney_rpg_audio/book_flip_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_cadena_tomar__v3.wav,sfx_cadena_tomar,v3,mezcla,kenney_rpg_audio/book_flip_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_cadena_soltar__v1.wav,sfx_cadena_soltar,v1,mezcla,kenney_rpg_audio/book_place_1.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_cadena_soltar__v2.wav,sfx_cadena_soltar,v2,mezcla,kenney_rpg_audio/book_place_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_cadena_soltar__v3.wav,sfx_cadena_soltar,v3,mezcla,kenney_rpg_audio/book_place_1.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_cadena_spark_previsto__aparece.wav,sfx_cadena_spark_previsto,aparece,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_spark_previsto__desaparece.wav,sfx_cadena_spark_previsto,desaparece,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_confirmar.wav,sfx_cadena_confirmar,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_calculo.wav,sfx_cadena_calculo,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_eslabon__apertura__v1.wav,sfx_cadena_eslabon,apertura__v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_eslabon__apertura__v2.wav,sfx_cadena_eslabon,apertura__v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_eslabon__enlace__v1.wav,sfx_cadena_eslabon,enlace__v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_eslabon__enlace__v2.wav,sfx_cadena_eslabon,enlace__v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_eslabon__cierre__v1.wav,sfx_cadena_eslabon,cierre__v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_eslabon__cierre__v2.wav,sfx_cadena_eslabon,cierre__v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__sol__apertura.wav,sfx_partitura_nota,sol__apertura,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__sol__enlace.wav,sfx_partitura_nota,sol__enlace,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__sol__cierre.wav,sfx_partitura_nota,sol__cierre,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__luna__apertura.wav,sfx_partitura_nota,luna__apertura,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__luna__enlace.wav,sfx_partitura_nota,luna__enlace,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__luna__cierre.wav,sfx_partitura_nota,luna__cierre,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__marte__apertura.wav,sfx_partitura_nota,marte__apertura,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__marte__enlace.wav,sfx_partitura_nota,marte__enlace,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__marte__cierre.wav,sfx_partitura_nota,marte__cierre,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__mercurio__apertura.wav,sfx_partitura_nota,mercurio__apertura,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__mercurio__enlace.wav,sfx_partitura_nota,mercurio__enlace,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__mercurio__cierre.wav,sfx_partitura_nota,mercurio__cierre,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__venus__apertura.wav,sfx_partitura_nota,venus__apertura,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__venus__enlace.wav,sfx_partitura_nota,venus__enlace,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__venus__cierre.wav,sfx_partitura_nota,venus__cierre,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__jupiter__apertura.wav,sfx_partitura_nota,jupiter__apertura,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__jupiter__enlace.wav,sfx_partitura_nota,jupiter__enlace,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__jupiter__cierre.wav,sfx_partitura_nota,jupiter__cierre,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__saturno__apertura.wav,sfx_partitura_nota,saturno__apertura,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__saturno__enlace.wav,sfx_partitura_nota,saturno__enlace,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_partitura_nota__saturno__cierre.wav,sfx_partitura_nota,saturno__cierre,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_spark__1.wav,sfx_cadena_spark,1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_spark__2.wav,sfx_cadena_spark,2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_spark__3.wav,sfx_cadena_spark,3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_spark__4.wav,sfx_cadena_spark,4,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_spark__5.wav,sfx_cadena_spark,5,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_invitada.wav,sfx_cadena_invitada,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_fin__0.wav,sfx_cadena_fin,0,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_fin__1.wav,sfx_cadena_fin,1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_cadena_fin__3.wav,sfx_cadena_fin,3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_marisal__largo__v1.wav,sfx_ritual_marisal,largo__v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_marisal__largo__v2.wav,sfx_ritual_marisal,largo__v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_marisal__corto.wav,sfx_ritual_marisal,corto,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_selenia__largo__v1.wav,sfx_ritual_selenia,largo__v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_selenia__largo__v2.wav,sfx_ritual_selenia,largo__v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_selenia__corto.wav,sfx_ritual_selenia,corto,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_solenne__largo__v1.wav,sfx_ritual_solenne,largo__v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_solenne__largo__v2.wav,sfx_ritual_solenne,largo__v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_solenne__corto.wav,sfx_ritual_solenne,corto,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_solenne__recatado__largo.wav,sfx_ritual_solenne,recatado__largo,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_solenne__recatado__corto.wav,sfx_ritual_solenne,recatado__corto,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_cervanda__largo__v1.wav,sfx_ritual_cervanda,largo__v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_cervanda__largo__v2.wav,sfx_ritual_cervanda,largo__v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_cervanda__corto.wav,sfx_ritual_cervanda,corto,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_tormentina__largo__v1.wav,sfx_ritual_tormentina,largo__v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_tormentina__largo__v2.wav,sfx_ritual_tormentina,largo__v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_tormentina__corto.wav,sfx_ritual_tormentina,corto,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_tormentina__recatado__largo.wav,sfx_ritual_tormentina,recatado__largo,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_tormentina__recatado__corto.wav,sfx_ritual_tormentina,recatado__corto,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_cupria__largo__v1.wav,sfx_ritual_cupria,largo__v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_cupria__largo__v2.wav,sfx_ritual_cupria,largo__v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_cupria__corto.wav,sfx_ritual_cupria,corto,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ritual_muertita__largo__v1.wav,sfx_ritual_muertita,largo__v1,mezcla,kenney_impact_sounds/impact_soft_medium_002.ogg ; kenney_rpg_audio/cloth_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_ritual_muertita__largo__v2.wav,sfx_ritual_muertita,largo__v2,mezcla,kenney_impact_sounds/impact_soft_medium_002.ogg ; kenney_rpg_audio/cloth_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_ritual_muertita__corto.wav,sfx_ritual_muertita,corto,mezcla,kenney_impact_sounds/impact_soft_medium_002.ogg ; kenney_rpg_audio/cloth_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_ritual_topacia__largo__v1.wav,sfx_ritual_topacia,largo__v1,mezcla,kenney_impact_sounds/footstep_grass_000.ogg ; kenney_impact_sounds/footstep_grass_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_ritual_topacia__largo__v2.wav,sfx_ritual_topacia,largo__v2,mezcla,kenney_impact_sounds/footstep_grass_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_ritual_topacia__corto.wav,sfx_ritual_topacia,corto,mezcla,kenney_impact_sounds/footstep_grass_002.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_sal_crujido__sol__v1.wav,sfx_sal_crujido,sol__v1,mezcla,kenney_impact_sounds/impact_glass_light_002.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_sal_crujido__sol__v2.wav,sfx_sal_crujido,sol__v2,mezcla,kenney_impact_sounds/impact_glass_light_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_sal_crujido__luna__v1.wav,sfx_sal_crujido,luna__v1,mezcla,kenney_impact_sounds/impact_glass_light_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_sal_crujido__luna__v2.wav,sfx_sal_crujido,luna__v2,mezcla,kenney_impact_sounds/impact_glass_light_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_sal_crujido__marte__v1.wav,sfx_sal_crujido,marte__v1,mezcla,kenney_impact_sounds/impact_glass_light_002.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_sal_crujido__marte__v2.wav,sfx_sal_crujido,marte__v2,mezcla,kenney_impact_sounds/impact_glass_light_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_sal_crujido__mercurio__v1.wav,sfx_sal_crujido,mercurio__v1,mezcla,kenney_impact_sounds/impact_glass_light_002.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_sal_crujido__mercurio__v2.wav,sfx_sal_crujido,mercurio__v2,mezcla,kenney_impact_sounds/impact_glass_light_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_sal_crujido__venus__v1.wav,sfx_sal_crujido,venus__v1,mezcla,kenney_impact_sounds/impact_glass_light_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_sal_crujido__venus__v2.wav,sfx_sal_crujido,venus__v2,mezcla,kenney_impact_sounds/impact_glass_light_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_sal_crujido__jupiter__v1.wav,sfx_sal_crujido,jupiter__v1,mezcla,kenney_impact_sounds/impact_glass_light_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_sal_crujido__jupiter__v2.wav,sfx_sal_crujido,jupiter__v2,mezcla,kenney_impact_sounds/impact_glass_light_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_sal_crujido__saturno__v1.wav,sfx_sal_crujido,saturno__v1,mezcla,kenney_impact_sounds/impact_glass_light_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_sal_crujido__saturno__v2.wav,sfx_sal_crujido,saturno__v2,mezcla,kenney_impact_sounds/impact_glass_light_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_magia_canalizar__sol.wav,sfx_magia_canalizar,sol,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_canalizar__luna.wav,sfx_magia_canalizar,luna,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_canalizar__marte.wav,sfx_magia_canalizar,marte,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_canalizar__mercurio.wav,sfx_magia_canalizar,mercurio,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_canalizar__venus.wav,sfx_magia_canalizar,venus,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_canalizar__jupiter.wav,sfx_magia_canalizar,jupiter,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_canalizar__saturno.wav,sfx_magia_canalizar,saturno,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_ascendente_aparece__aries.wav,sfx_magia_ascendente_aparece,aries,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_ascendente_aparece__tauro.wav,sfx_magia_ascendente_aparece,tauro,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_ascendente_aparece__geminis.wav,sfx_magia_ascendente_aparece,geminis,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_ascendente_aparece__cancer.wav,sfx_magia_ascendente_aparece,cancer,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_ascendente_aparece__leo.wav,sfx_magia_ascendente_aparece,leo,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_ascendente_aparece__virgo.wav,sfx_magia_ascendente_aparece,virgo,mezcla,kenney_impact_sounds/footstep_grass_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_magia_ascendente_aparece__libra.wav,sfx_magia_ascendente_aparece,libra,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_ascendente_aparece__escorpio.wav,sfx_magia_ascendente_aparece,escorpio,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_ascendente_aparece__sagitario.wav,sfx_magia_ascendente_aparece,sagitario,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_ascendente_aparece__capricornio.wav,sfx_magia_ascendente_aparece,capricornio,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_ascendente_aparece__acuario.wav,sfx_magia_ascendente_aparece,acuario,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_ascendente_aparece__piscis.wav,sfx_magia_ascendente_aparece,piscis,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__sol__turbia.wav,sfx_magia_golpe_astral,sol__turbia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__sol__destilada.wav,sfx_magia_golpe_astral,sol__destilada,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__sol__quintaesencia.wav,sfx_magia_golpe_astral,sol__quintaesencia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__luna__turbia.wav,sfx_magia_golpe_astral,luna__turbia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__luna__destilada.wav,sfx_magia_golpe_astral,luna__destilada,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__luna__quintaesencia.wav,sfx_magia_golpe_astral,luna__quintaesencia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__marte__turbia.wav,sfx_magia_golpe_astral,marte__turbia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__marte__destilada.wav,sfx_magia_golpe_astral,marte__destilada,mezcla,kenney_impact_sounds/impact_metal_heavy_003.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_magia_golpe_astral__marte__quintaesencia.wav,sfx_magia_golpe_astral,marte__quintaesencia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__mercurio__turbia.wav,sfx_magia_golpe_astral,mercurio__turbia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__mercurio__destilada.wav,sfx_magia_golpe_astral,mercurio__destilada,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__mercurio__quintaesencia.wav,sfx_magia_golpe_astral,mercurio__quintaesencia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__venus__turbia.wav,sfx_magia_golpe_astral,venus__turbia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__venus__destilada.wav,sfx_magia_golpe_astral,venus__destilada,mezcla,kenney_impact_sounds/footstep_grass_002.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_magia_golpe_astral__venus__quintaesencia.wav,sfx_magia_golpe_astral,venus__quintaesencia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__jupiter__turbia.wav,sfx_magia_golpe_astral,jupiter__turbia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__jupiter__destilada.wav,sfx_magia_golpe_astral,jupiter__destilada,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__jupiter__quintaesencia.wav,sfx_magia_golpe_astral,jupiter__quintaesencia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__saturno__turbia.wav,sfx_magia_golpe_astral,saturno__turbia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__saturno__destilada.wav,sfx_magia_golpe_astral,saturno__destilada,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_golpe_astral__saturno__quintaesencia.wav,sfx_magia_golpe_astral,saturno__quintaesencia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_autohechizo__aguja_sello.wav,sfx_magia_autohechizo,aguja_sello,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_autohechizo__hilos.wav,sfx_magia_autohechizo,hilos,mezcla,kenney_rpg_audio/creak_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_magia_autohechizo__frenesi.wav,sfx_magia_autohechizo,frenesi,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_vislumbre__turbia.wav,sfx_magia_vislumbre,turbia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_vislumbre__destilada.wav,sfx_magia_vislumbre,destilada,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_vislumbre__quintaesencia.wav,sfx_magia_vislumbre,quintaesencia,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_sal_negra.wav,sfx_magia_sal_negra,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_magia_ascendente_retira.wav,sfx_magia_ascendente_retira,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_salinidad_baja.wav,sfx_salinidad_baja,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_salinidad_salobre.wav,sfx_salinidad_salobre,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_salinidad_sobresalada.wav,sfx_salinidad_sobresalada,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_salinidad_cristalizacion.wav,sfx_salinidad_cristalizacion,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_salinidad_cristal_bucle.wav,sfx_salinidad_cristal_bucle,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_salinidad_perdida_vida.wav,sfx_salinidad_perdida_vida,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_salinidad_extasis.wav,sfx_salinidad_extasis,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_salinidad_desalada.wav,sfx_salinidad_desalada,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_quiebre_firmeza__v1.wav,sfx_quiebre_firmeza,v1,mezcla,kenney_impact_sounds/impact_glass_heavy_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_quiebre_firmeza__v2.wav,sfx_quiebre_firmeza,v2,mezcla,kenney_impact_sounds/impact_glass_heavy_004.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_quiebre_firmeza__v3.wav,sfx_quiebre_firmeza,v3,mezcla,kenney_impact_sounds/impact_glass_heavy_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_quiebre_sol.wav,sfx_quiebre_sol,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_quiebre_luna.wav,sfx_quiebre_luna,—,mezcla,kenney_rpg_audio/metal_latch.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_quiebre_marte.wav,sfx_quiebre_marte,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_quiebre_mercurio.wav,sfx_quiebre_mercurio,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_quiebre_venus.wav,sfx_quiebre_venus,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_quiebre_jupiter__quiebre.wav,sfx_quiebre_jupiter,quiebre,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_quiebre_jupiter__salto__v1.wav,sfx_quiebre_jupiter,salto__v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_quiebre_jupiter__salto__v2.wav,sfx_quiebre_jupiter,salto__v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_quiebre_jupiter__salto__v3.wav,sfx_quiebre_jupiter,salto__v3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_quiebre_saturno.wav,sfx_quiebre_saturno,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_aspecto_conjuncion.wav,sfx_aspecto_conjuncion,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_aspecto_oposicion.wav,sfx_aspecto_oposicion,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_aspecto_sextil.wav,sfx_aspecto_sextil,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_aspecto_trigono.wav,sfx_aspecto_trigono,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_aspecto_cuadratura.wav,sfx_aspecto_cuadratura,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_reaccion_eclipse.wav,sfx_reaccion_eclipse,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_reaccion_helada_negra.wav,sfx_reaccion_helada_negra,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_reaccion_espinas_rojas.wav,sfx_reaccion_espinas_rojas,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_reaccion_tempestad.wav,sfx_reaccion_tempestad,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_carga__1.wav,sfx_ascension_carga,1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_carga__2.wav,sfx_ascension_carga,2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_carga__3.wav,sfx_ascension_carga,3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_lanzar__1.wav,sfx_ascension_lanzar,1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_lanzar__2.wav,sfx_ascension_lanzar,2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_lanzar__3.wav,sfx_ascension_lanzar,3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_i__sol.wav,sfx_ascension_i,sol,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_i__luna.wav,sfx_ascension_i,luna,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_i__marte.wav,sfx_ascension_i,marte,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_i__mercurio.wav,sfx_ascension_i,mercurio,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_i__venus.wav,sfx_ascension_i,venus,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_i__jupiter.wav,sfx_ascension_i,jupiter,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_i__saturno.wav,sfx_ascension_i,saturno,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_ii__sol.wav,sfx_ascension_ii,sol,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_ii__luna.wav,sfx_ascension_ii,luna,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_ii__marte.wav,sfx_ascension_ii,marte,mezcla,kenney_impact_sounds/impact_metal_heavy_003.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_ascension_ii__mercurio.wav,sfx_ascension_ii,mercurio,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_ii__venus.wav,sfx_ascension_ii,venus,mezcla,kenney_impact_sounds/footstep_grass_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_ascension_ii__jupiter.wav,sfx_ascension_ii,jupiter,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_ii__saturno.wav,sfx_ascension_ii,saturno,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_iii_marisal__largo.wav,sfx_ascension_iii_marisal,largo,mezcla,kenney_impact_sounds/impact_metal_heavy_001.ogg ; kenney_impact_sounds/impact_mining_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_ascension_iii_marisal__corto.wav,sfx_ascension_iii_marisal,corto,mezcla,kenney_impact_sounds/impact_metal_heavy_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_ascension_impacto__sol.wav,sfx_ascension_impacto,sol,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_impacto__luna.wav,sfx_ascension_impacto,luna,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_impacto__marte.wav,sfx_ascension_impacto,marte,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_impacto__mercurio.wav,sfx_ascension_impacto,mercurio,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_impacto__venus.wav,sfx_ascension_impacto,venus,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_impacto__jupiter.wav,sfx_ascension_impacto,jupiter,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_impacto__saturno.wav,sfx_ascension_impacto,saturno,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_duo.wav,sfx_ascension_duo,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ascension_saltar.wav,sfx_ascension_saltar,—,mezcla,kenney_rpg_audio/book_flip_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_pocion_cinturon__v1.wav,sfx_pocion_cinturon,v1,mezcla,kenney_rpg_audio/belt_handle_1.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_pocion_cinturon__v2.wav,sfx_pocion_cinturon,v2,mezcla,kenney_rpg_audio/belt_handle_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_pocion_destapar__agua_termal.wav,sfx_pocion_destapar,agua_termal,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_pocion_destapar__vinagre.wav,sfx_pocion_destapar,vinagre,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_pocion_destapar__leche_lunar.wav,sfx_pocion_destapar,leche_lunar,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_pocion_beber__v1.wav,sfx_pocion_beber,v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_pocion_beber__v2.wav,sfx_pocion_beber,v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_pocion_efecto__cura.wav,sfx_pocion_efecto,cura,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_pocion_efecto__escudo.wav,sfx_pocion_efecto,escudo,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_pocion_efecto__velocidad.wav,sfx_pocion_efecto,velocidad,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_pocion_efecto__retraso.wav,sfx_pocion_efecto,retraso,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_pocion_efecto__anima.wav,sfx_pocion_efecto,anima,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_pocion_efecto__salinidad.wav,sfx_pocion_efecto,salinidad,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_pocion_turbia.wav,sfx_pocion_turbia,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_fresno_zona_entrar__raices.wav,sfx_fresno_zona_entrar,raices,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_zona_entrar__tronco.wav,sfx_fresno_zona_entrar,tronco,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_zona_entrar__ramas.wav,sfx_fresno_zona_entrar,ramas,mezcla,kenney_impact_sounds/footstep_grass_002.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_fresno_zona_entrar__copa.wav,sfx_fresno_zona_entrar,copa,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_nodo_elegir__v1.wav,sfx_fresno_nodo_elegir,v1,mezcla,kenney_impact_sounds/footstep_grass_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_fresno_nodo_elegir__v2.wav,sfx_fresno_nodo_elegir,v2,mezcla,kenney_impact_sounds/footstep_grass_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_fresno_ruta.wav,sfx_fresno_ruta,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_injerto__sol.wav,sfx_fresno_injerto,sol,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_injerto__luna.wav,sfx_fresno_injerto,luna,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_injerto__marte.wav,sfx_fresno_injerto,marte,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_injerto__mercurio.wav,sfx_fresno_injerto,mercurio,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_injerto__venus.wav,sfx_fresno_injerto,venus,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_injerto__jupiter.wav,sfx_fresno_injerto,jupiter,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_injerto__saturno.wav,sfx_fresno_injerto,saturno,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_fruto__sol.wav,sfx_fresno_fruto,sol,mezcla,kenney_impact_sounds/footstep_grass_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_fresno_fruto__luna.wav,sfx_fresno_fruto,luna,mezcla,kenney_impact_sounds/footstep_grass_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_fresno_fruto__marte.wav,sfx_fresno_fruto,marte,mezcla,kenney_impact_sounds/footstep_grass_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_fresno_fruto__mercurio.wav,sfx_fresno_fruto,mercurio,mezcla,kenney_impact_sounds/footstep_grass_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_fresno_fruto__venus.wav,sfx_fresno_fruto,venus,mezcla,kenney_impact_sounds/footstep_grass_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_fresno_fruto__jupiter.wav,sfx_fresno_fruto,jupiter,mezcla,kenney_impact_sounds/footstep_grass_001.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_fresno_fruto__saturno.wav,sfx_fresno_fruto,saturno,mezcla,kenney_impact_sounds/footstep_grass_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_fresno_mutacion.wav,sfx_fresno_mutacion,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_maldicion__1.wav,sfx_fresno_maldicion,1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_maldicion__2.wav,sfx_fresno_maldicion,2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_maldicion__3.wav,sfx_fresno_maldicion,3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_maldicion__4.wav,sfx_fresno_maldicion,4,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_maldicion__5.wav,sfx_fresno_maldicion,5,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_santuario.wav,sfx_fresno_santuario,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_descanso.wav,sfx_fresno_descanso,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_entrenar.wav,sfx_fresno_entrenar,—,mezcla,kenney_impact_sounds/impact_wood_light_000.ogg ; kenney_impact_sounds/impact_wood_light_002.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_fresno_mancha_aparece.wav,sfx_fresno_mancha_aparece,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_mancha_recuperar.wav,sfx_fresno_mancha_recuperar,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_mancha_absorbida.wav,sfx_fresno_mancha_absorbida,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_eco.wav,sfx_fresno_eco,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_fresno_ofrenda.wav,sfx_fresno_ofrenda,—,mezcla,kenney_impact_sounds/footstep_grass_002.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_ambiente_raices.wav,sfx_ambiente_raices,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",borrador,B,no
+sfx_ambiente_tronco.wav,sfx_ambiente_tronco,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",borrador,B,no
+sfx_ambiente_ramas.wav,sfx_ambiente_ramas,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",borrador,B,no
+sfx_ambiente_copa.wav,sfx_ambiente_copa,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",borrador,B,no
+sfx_ambiente_termas_dia.wav,sfx_ambiente_termas_dia,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",borrador,B,no
+sfx_ambiente_termas_noche.wav,sfx_ambiente_termas_noche,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",borrador,B,no
+sfx_termas_tortuga_respira.wav,sfx_termas_tortuga_respira,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_termas_tocar__canida.wav,sfx_termas_tocar,canida,mezcla,kenney_rpg_audio/cloth_4.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_termas_tocar__felina.wav,sfx_termas_tocar,felina,mezcla,kenney_rpg_audio/cloth_4.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_termas_tocar__ave.wav,sfx_termas_tocar,ave,mezcla,kenney_rpg_audio/cloth_4.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_termas_tocar__alada.wav,sfx_termas_tocar,alada,mezcla,kenney_rpg_audio/cloth_4.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_termas_tocar__escamosa.wav,sfx_termas_tocar,escamosa,mezcla,kenney_rpg_audio/cloth_4.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_termas_tocar__ungulada.wav,sfx_termas_tocar,ungulada,mezcla,kenney_rpg_audio/cloth_4.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_termas_tocar__pequena.wav,sfx_termas_tocar,pequena,mezcla,kenney_rpg_audio/cloth_4.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_termas_tocar__robusta.wav,sfx_termas_tocar,robusta,mezcla,kenney_rpg_audio/cloth_4.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_termas_bano__entrar.wav,sfx_termas_bano,entrar,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_termas_bano__salir.wav,sfx_termas_bano,salir,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_termas_paralaje_baja.wav,sfx_termas_paralaje_baja,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_tomar__1.wav,sfx_tirada_tomar,1,mezcla,kenney_impact_sounds/footstep_snow_002.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_tirada_tomar__10.wav,sfx_tirada_tomar,10,mezcla,kenney_impact_sounds/footstep_snow_000.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_tirada_sales_caer__1__v1.wav,sfx_tirada_sales_caer,1__v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_sales_caer__1__v2.wav,sfx_tirada_sales_caer,1__v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_sales_caer__10.wav,sfx_tirada_sales_caer,10,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_burbujas.wav,sfx_tirada_burbujas,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_vapor__3.wav,sfx_tirada_vapor,3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_vapor__4.wav,sfx_tirada_vapor,4,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_vapor__5.wav,sfx_tirada_vapor,5,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_subida.wav,sfx_tirada_subida,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_quietud.wav,sfx_tirada_quietud,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_constelacion.wav,sfx_tirada_constelacion,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",borrador,B,no
+sfx_tirada_silueta.wav,sfx_tirada_silueta,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_emergencia__canida.wav,sfx_tirada_emergencia,canida,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_emergencia__felina.wav,sfx_tirada_emergencia,felina,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_emergencia__ave.wav,sfx_tirada_emergencia,ave,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_emergencia__alada.wav,sfx_tirada_emergencia,alada,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_emergencia__escamosa.wav,sfx_tirada_emergencia,escamosa,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_emergencia__ungulada.wav,sfx_tirada_emergencia,ungulada,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_emergencia__pequena.wav,sfx_tirada_emergencia,pequena,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_emergencia__robusta.wav,sfx_tirada_emergencia,robusta,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_sacudida__canida.wav,sfx_tirada_sacudida,canida,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_sacudida__felina.wav,sfx_tirada_sacudida,felina,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_sacudida__ave.wav,sfx_tirada_sacudida,ave,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_sacudida__alada.wav,sfx_tirada_sacudida,alada,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_sacudida__escamosa.wav,sfx_tirada_sacudida,escamosa,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_sacudida__ungulada.wav,sfx_tirada_sacudida,ungulada,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_sacudida__pequena.wav,sfx_tirada_sacudida,pequena,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_sacudida__robusta.wav,sfx_tirada_sacudida,robusta,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_tirada_tarjeta__3.wav,sfx_tirada_tarjeta,3,mezcla,kenney_rpg_audio/book_flip_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_tirada_tarjeta__4.wav,sfx_tirada_tarjeta,4,mezcla,kenney_rpg_audio/book_flip_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_tirada_tarjeta__5.wav,sfx_tirada_tarjeta,5,mezcla,kenney_rpg_audio/book_flip_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_tirada_saltar.wav,sfx_tirada_saltar,—,mezcla,kenney_rpg_audio/book_flip_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_tirada_termometro.wav,sfx_tirada_termometro,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",borrador,B,no
+sfx_tirada_polvo_astral.wav,sfx_tirada_polvo_astral,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+mus_tirada_vapor_blanco.wav,mus_tirada_vapor_blanco,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+mus_tirada_vapor_violeta.wav,mus_tirada_vapor_violeta,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+mus_tirada_vapor_dorado.wav,mus_tirada_vapor_dorado,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+mus_tirada_subida_dorada.wav,mus_tirada_subida_dorada,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_ui_tocar__v1.wav,sfx_ui_tocar,v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ui_tocar__v2.wav,sfx_ui_tocar,v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ui_tocar__v3.wav,sfx_ui_tocar,v3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ui_tocar__v4.wav,sfx_ui_tocar,v4,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ui_confirmar__v1.wav,sfx_ui_confirmar,v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ui_confirmar__v2.wav,sfx_ui_confirmar,v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ui_confirmar__v3.wav,sfx_ui_confirmar,v3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ui_cancelar__v1.wav,sfx_ui_cancelar,v1,mezcla,kenney_rpg_audio/book_flip_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_ui_cancelar__v2.wav,sfx_ui_cancelar,v2,mezcla,kenney_rpg_audio/book_flip_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_ui_cancelar__v3.wav,sfx_ui_cancelar,v3,mezcla,kenney_rpg_audio/book_flip_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,A,no
+sfx_ui_error__v1.wav,sfx_ui_error,v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ui_error__v2.wav,sfx_ui_error,v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_ui_pestana__v1.wav,sfx_ui_pestana,v1,mezcla,kenney_rpg_audio/book_flip_1.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_ui_pestana__v2.wav,sfx_ui_pestana,v2,mezcla,kenney_rpg_audio/book_flip_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_ui_pestana__v3.wav,sfx_ui_pestana,v3,mezcla,kenney_rpg_audio/book_flip_3.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_ui_deslizar__v1.wav,sfx_ui_deslizar,v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_ui_deslizar__v2.wav,sfx_ui_deslizar,v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_ui_deslizar__v3.wav,sfx_ui_deslizar,v3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_ui_astrolabio__v1.wav,sfx_ui_astrolabio,v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_ui_astrolabio__v2.wav,sfx_ui_astrolabio,v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_ui_astrolabio__v3.wav,sfx_ui_astrolabio,v3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_ui_notificacion__v1.wav,sfx_ui_notificacion,v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_ui_notificacion__v2.wav,sfx_ui_notificacion,v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_ui_recompensa__v1.wav,sfx_ui_recompensa,v1,mezcla,kenney_rpg_audio/book_place_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_ui_recompensa__v2.wav,sfx_ui_recompensa,v2,mezcla,kenney_rpg_audio/book_place_2.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_ui_compra.wav,sfx_ui_compra,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_libro_abrir__v1.wav,sfx_libro_abrir,v1,mezcla,kenney_rpg_audio/book_open.ogg ; kenney_rpg_audio/handle_small_leather.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_libro_abrir__v2.wav,sfx_libro_abrir,v2,mezcla,kenney_rpg_audio/book_open.ogg ; kenney_rpg_audio/handle_small_leather.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_libro_cerrar__v1.wav,sfx_libro_cerrar,v1,mezcla,kenney_rpg_audio/book_close.ogg ; kenney_rpg_audio/drop_leather.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_libro_cerrar__v2.wav,sfx_libro_cerrar,v2,mezcla,kenney_rpg_audio/book_close.ogg ; kenney_rpg_audio/drop_leather.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_libro_folio__v1.wav,sfx_libro_folio,v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_libro_folio__v2.wav,sfx_libro_folio,v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_libro_folio__v3.wav,sfx_libro_folio,v3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_libro_titulo__v1.wav,sfx_libro_titulo,v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_libro_titulo__v2.wav,sfx_libro_titulo,v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_libro_falla__v1.wav,sfx_libro_falla,v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_libro_falla__v2.wav,sfx_libro_falla,v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_libro_falla__v3.wav,sfx_libro_falla,v3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_libro_falla__v4.wav,sfx_libro_falla,v4,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_yunque__1.wav,sfx_taller_yunque,1,mezcla,kenney_impact_sounds/impact_metal_heavy_003.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_taller_yunque__2.wav,sfx_taller_yunque,2,mezcla,kenney_impact_sounds/impact_metal_heavy_003.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_taller_yunque__3.wav,sfx_taller_yunque,3,mezcla,kenney_impact_sounds/impact_metal_heavy_003.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_taller_yunque__4.wav,sfx_taller_yunque,4,mezcla,kenney_impact_sounds/impact_metal_heavy_003.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_taller_yunque__5.wav,sfx_taller_yunque,5,mezcla,kenney_impact_sounds/impact_metal_heavy_003.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_taller_reforja.wav,sfx_taller_reforja,—,mezcla,kenney_rpg_audio/metal_latch.ogg,Propia del estudio; incluye material CC0 1.0 de Kenney (sin atribución obligatoria),final temporal,B,no
+sfx_taller_fusion.wav,sfx_taller_fusion,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_caldero.wav,sfx_taller_caldero,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",borrador,B,no
+sfx_taller_ingrediente__base.wav,sfx_taller_ingrediente,base,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_ingrediente__sal.wav,sfx_taller_ingrediente,sal,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_ingrediente__reactivo.wav,sfx_taller_ingrediente,reactivo,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_ingrediente__almitas.wav,sfx_taller_ingrediente,almitas,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_salmuera_ok__basica.wav,sfx_taller_salmuera_ok,basica,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_salmuera_ok__mejorada.wav,sfx_taller_salmuera_ok,mejorada,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_salmuera_ok__maestra.wav,sfx_taller_salmuera_ok,maestra,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_salmuera_turbia.wav,sfx_taller_salmuera_turbia,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_altar__sol.wav,sfx_taller_altar,sol,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_altar__luna.wav,sfx_taller_altar,luna,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_altar__marte.wav,sfx_taller_altar,marte,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_altar__mercurio.wav,sfx_taller_altar,mercurio,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_altar__venus.wav,sfx_taller_altar,venus,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_altar__jupiter.wav,sfx_taller_altar,jupiter,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_altar__saturno.wav,sfx_taller_altar,saturno,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_taller_receta.wav,sfx_taller_receta,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_almita_soltar__v1.wav,sfx_almita_soltar,v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_almita_soltar__v2.wav,sfx_almita_soltar,v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_almita_soltar__v3.wav,sfx_almita_soltar,v3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_almita_soltar__v4.wav,sfx_almita_soltar,v4,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_almita_recoger__pocas.wav,sfx_almita_recoger,pocas,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_almita_recoger__varias.wav,sfx_almita_recoger,varias,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_almita_recoger__muchas.wav,sfx_almita_recoger,muchas,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_almita_nombre.wav,sfx_almita_nombre,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_almita_spark__v1.wav,sfx_almita_spark,v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_almita_spark__v2.wav,sfx_almita_spark,v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,A,no
+sfx_almita_ascendente.wav,sfx_almita_ascendente,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_almita_flotar.wav,sfx_almita_flotar,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",borrador,B,no
+sfx_horror_huesped.wav,sfx_horror_huesped,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_horror_salmodico_reves__v1.wav,sfx_horror_salmodico_reves,v1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_horror_salmodico_reves__v2.wav,sfx_horror_salmodico_reves,v2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_horror_grave.wav,sfx_horror_grave,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",borrador,B,no
+sfx_horror_cristalizado.wav,sfx_horror_cristalizado,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_horror_cielo.wav,sfx_horror_cielo,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_horror_caida.wav,sfx_horror_caida,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_paralaje_sube__1.wav,sfx_paralaje_sube,1,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_paralaje_sube__2.wav,sfx_paralaje_sube,2,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_paralaje_sube__3.wav,sfx_paralaje_sube,3,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no
+sfx_paralaje_baja.wav,sfx_paralaje_baja,—,sintético,—,"Propia del estudio (síntesis original, sin material de terceros)",final temporal,B,no

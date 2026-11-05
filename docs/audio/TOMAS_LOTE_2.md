@@ -9,7 +9,7 @@ Tu decisión: el tema nuevo suena al inicio, las otras dos canciones del tema pr
 | Pantalla | Modo | Pistas |
 | --- | --- | --- |
 | **Inicio** (`Title`) | Bucle | Tema de inicio (t03) |
-| **Menú general** (`Menu`; en el prototipo, la formación) | Al azar, una tras otra | La primera vez suena el tema de inicio; después, al azar, tema t01, tema t02 y tema t03, sin repetir la misma dos veces seguidas |
+| **Menú general** (`Menu`; en el prototipo, el hub y la formación) | Al azar, una tras otra | La primera vez suena el tema de inicio; después, al azar, tema t01, tema t02 y tema t03, sin repetir la misma dos veces seguidas |
 | **Combate normal** (`Battle`) | Al azar, una tras otra | Combate t01 y t02 |
 | **Jefe** (`Boss`) | Al azar, una tras otra | Jefe t01 y t02 |
 | **Victoria** (`Victory`) | Al azar, una tras otra | Victoria t01 y t02 |
@@ -17,7 +17,7 @@ Tu decisión: el tema nuevo suena al inicio, las otras dos canciones del tema pr
 | **Termas** (`Termas`, Fase 3C) | Bucle | Termas de noche t01 |
 | **Santuario del Fresno** (`FresnoSantuario`, Fase 2A) | Bucle | Termas de noche t02 |
 
-El prototipo todavía no tiene pantalla de inicio propia: la formación hace de menú general y arranca con el tema de inicio. Cuando exista la pantalla de título, usará el contexto `Title` sin cambiar código. Todo se configura en `Assets/SalYAlmas/Audio/Resources/MusicaTemporal/musica_temporal.json`.
+El prototipo todavía no tiene pantalla de inicio propia: el hub de la Fase 2 y la formación hacen de menú general y arrancan con el tema de inicio. La lista sigue sin cortarse al pasar de uno a otro. Cuando exista la pantalla de título, usará el contexto `Title` sin cambiar código. Todo se configura en `Assets/SalYAlmas/Audio/Resources/MusicaTemporal/musica_temporal.json`.
 
 ## Medidas
 
