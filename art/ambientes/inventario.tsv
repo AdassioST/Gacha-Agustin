@@ -1,0 +1,149 @@
+﻿id	prioridad	region	tipo	estado	dimensiones	modo	alfa	margen_min_px	sha256	ruta
+amb_vado	1	prologo	ambiente	entregado	1920x1080	RGBA			3e94dee40f59a2550e78d25064abaf7e854bd09f2a1ce50542782c3b8292b7a5	Assets/SalYAlmas/Art/Ambientes/amb_vado.png
+mapa_anillo	1	prologo	ambiente	entregado	1920x1080	RGBA			d35b2aea9ca931cd3e8c4f2068c777d6d6bf3f94f8cd03b09d4b9b9ceca080a5	Assets/SalYAlmas/Art/Ambientes/mapa_anillo.png
+amb_aries_orilla	1	aries	ambiente	entregado	1920x1080	RGBA			c65872b37ed7bc374e466cf8b1c38358394afa9483163b08c30dc18d79dc3f53	Assets/SalYAlmas/Art/Ambientes/amb_aries_orilla.png
+amb_aries_subsuelo	1	aries	ambiente	entregado	1920x1080	RGBA			7f7e424cf716773b254233c302c80e0a1fa8c8cd049f7a45e70088b7470f8cde	Assets/SalYAlmas/Art/Ambientes/amb_aries_subsuelo.png
+amb_aries_corazon	1	aries	ambiente	entregado	1920x1080	RGBA			01cb59690778f9c092bfbe4c13bda5e8b18da06a40f91403d914077bc52e30e3	Assets/SalYAlmas/Art/Ambientes/amb_aries_corazon.png
+amb_aries_cielo	1	aries	ambiente	entregado	1920x1080	RGBA			be07d1fe805e1ed5bb639a8063683717a3be1690b3ed90ec5a31721fc37c5c93	Assets/SalYAlmas/Art/Ambientes/amb_aries_cielo.png
+amb_cancer_orilla	1	cancer	ambiente	entregado	1920x1080	RGBA			b806d28f495588df9e95b6e6f0cde9b747ad6b6f0f1dec705f923e9423802a7f	Assets/SalYAlmas/Art/Ambientes/amb_cancer_orilla.png
+amb_cancer_subsuelo	1	cancer	ambiente	entregado	1920x1080	RGBA			3af177d97a5d942e6b64750491b564fbdc6a8ec16becfd8054f7779d795562c2	Assets/SalYAlmas/Art/Ambientes/amb_cancer_subsuelo.png
+amb_cancer_corazon	1	cancer	ambiente	entregado	1920x1080	RGBA			f62febfd7855a28d36ac0e3cdee4aedce82ba7f1d0ccddeb803c51e84dc35606	Assets/SalYAlmas/Art/Ambientes/amb_cancer_corazon.png
+amb_cancer_cielo	1	cancer	ambiente	entregado	1920x1080	RGBA			3eaa98c78642b230b489f6e0f033844f2d50f97bdc59fad29783d4c0edab35ff	Assets/SalYAlmas/Art/Ambientes/amb_cancer_cielo.png
+amb_libra_orilla	1	libra	ambiente	entregado	1920x1080	RGBA			17ea5187a16d1c9f7b2535c773bf36edf6dd5249286462fa879f89252188921a	Assets/SalYAlmas/Art/Ambientes/amb_libra_orilla.png
+amb_libra_subsuelo	1	libra	ambiente	entregado	1920x1080	RGBA			b8177dbbda43cd96291a67606c4aa978a25beac80bb56a8c2706838ace102e02	Assets/SalYAlmas/Art/Ambientes/amb_libra_subsuelo.png
+amb_libra_corazon	1	libra	ambiente	entregado	1920x1080	RGBA			030a2136c8302990ed63b9e212311ef96573cfbf63a101d50ecfccd5f8805558	Assets/SalYAlmas/Art/Ambientes/amb_libra_corazon.png
+amb_libra_cielo	1	libra	ambiente	entregado	1920x1080	RGBA			085df492078cb4a73fabb6c60373404011a2644ed54884987befdebb63fa2458	Assets/SalYAlmas/Art/Ambientes/amb_libra_cielo.png
+amb_capricornio_orilla	1	capricornio	ambiente	entregado	1920x1080	RGBA			91683826e0e6a49bc11a6969227f9496be49e492b17b6e55271959d78ab042de	Assets/SalYAlmas/Art/Ambientes/amb_capricornio_orilla.png
+amb_capricornio_subsuelo	1	capricornio	ambiente	entregado	1920x1080	RGBA			d1017a6b88bdf1ff62d4d1b5b963ca2e89edaf7a952bff0d9d1188fef977b24e	Assets/SalYAlmas/Art/Ambientes/amb_capricornio_subsuelo.png
+amb_capricornio_corazon	1	capricornio	ambiente	entregado	1920x1080	RGBA			60ad4f5365af867cc37848367e307220ab6750dc2c9a229b2f2180b1724abcdf	Assets/SalYAlmas/Art/Ambientes/amb_capricornio_corazon.png
+amb_capricornio_cielo	1	capricornio	ambiente	entregado	1920x1080	RGBA			9db035024ce01280eeefaff191765ac87f2505c4972d7e3c278c7937cc75c21f	Assets/SalYAlmas/Art/Ambientes/amb_capricornio_cielo.png
+enemigo_escoria_viva	1	Aries	enemigo	entregado	1024x1024	RGBA	0..255	64	5aa505d082bcaa529ddfc89c67241bca91af999ffce6c3f57b2a26515733c06c	Assets/SalYAlmas/Art/Enemigos/enemigo_escoria_viva.png
+enemigo_perro_fragua	1	Aries	enemigo	entregado	1024x1024	RGBA	0..255	65	c093e8ad40b04dce58d8142496f30253e5f567330d091f88ebba3e3471881797	Assets/SalYAlmas/Art/Enemigos/enemigo_perro_fragua.png
+enemigo_soldada_crisol	1	Aries	enemigo	entregado	1024x1024	RGBA	0..255	64	fa7a9ef355aaffbfa2d9fa26028ec5a9f179816a50f93757b5f7b0ebf1b52eed	Assets/SalYAlmas/Art/Enemigos/enemigo_soldada_crisol.png
+enemigo_ferran	1	Aries	enemigo	entregado	1024x1024	RGBA	0..255	64	981fb5c4e28d264baee5ce41165b9547f39277a12327df841cd26b6f2e42d7f1	Assets/SalYAlmas/Art/Enemigos/enemigo_ferran.png
+enemigo_carnero_hierro	1	Aries	enemigo	entregado	1024x1024	RGBA	0..255	65	794d2daab7ba5948132f38400c6b6e72bd8180a5655bf0c50d5f0ab33d24d284	Assets/SalYAlmas/Art/Enemigos/enemigo_carnero_hierro.png
+enemigo_ave_a_medias	1	Aries EX	enemigo	entregado	1024x1024	RGBA	0..255	65	48a16cbe09a6e7a7e23f55c07d99a2c3b452aa875433c0aad3f5ae09cfad4c01	Assets/SalYAlmas/Art/Enemigos/enemigo_ave_a_medias.png
+enemigo_medusa_salmuera	1	Cáncer	enemigo	entregado	1024x1024	RGBA	0..255	64	f6756b0c00af8f21a04bac63ebd8985d746d0bb5c790f7ba0257408b86cfc9d9	Assets/SalYAlmas/Art/Enemigos/enemigo_medusa_salmuera.png
+enemigo_gaviota_hueca	1	Cáncer	enemigo	entregado	1024x1024	RGBA	0..255	64	6249a8c3e2dc26c13f1b308182a9315e2fa9a6d02d681cf3a85f64bf991900eb	Assets/SalYAlmas/Art/Enemigos/enemigo_gaviota_hueca.png
+enemigo_cangrejo_salinero	1	Cáncer	enemigo	entregado	1024x1024	RGBA	0..255	64	a61ea6775c0f33753ed773446064375903c199b2d061ab885cd617ced0484dc4	Assets/SalYAlmas/Art/Enemigos/enemigo_cangrejo_salinero.png
+enemigo_madre_tenaza	1	Cáncer	enemigo	entregado	1024x1024	RGBA	0..255	64	ca24a93962695be7757d00e8c870924e60b0f0738642241006b8dffd52b82bd5	Assets/SalYAlmas/Art/Enemigos/enemigo_madre_tenaza.png
+enemigo_medusa_cielo	1	Cáncer EX	enemigo	entregado	1024x1024	RGBA	0..255	64	e35ed55cecc06bd9dc71466750f435ffd1ee0dab5c70c765d42edebda8e4fd39	Assets/SalYAlmas/Art/Enemigos/enemigo_medusa_cielo.png
+enemigo_moneda_andante	1	Libra	enemigo	entregado	1024x1024	RGBA	0..255	64	6c968a4a09d6b74e99eb1b38ffcde75e32e11a80d024582d7db3f99d04ea851f	Assets/SalYAlmas/Art/Enemigos/enemigo_moneda_andante.png
+enemigo_guardia_contrapeso	1	Libra	enemigo	entregado	1024x1024	RGBA	0..255	64	aa2c690f4a420f462f9698cdef6b94a5c11ac9d86c12dc0cec12e601453f07b9	Assets/SalYAlmas/Art/Enemigos/enemigo_guardia_contrapeso.png
+enemigo_tesorera_almas	1	Libra	enemigo	entregado	1024x1024	RGBA	0..255	64	624bed55134885b634ed9b16496aeb0365e70693acafc1c64aacc0495b9ce5df	Assets/SalYAlmas/Art/Enemigos/enemigo_tesorera_almas.png
+enemigo_duquesa_fiel	1	Libra	enemigo	entregado	1024x1024	RGBA	0..255	64	468a058e5b2f7fd273b91ae12b92f52a717446d509e3f9e98654f009ebe75663	Assets/SalYAlmas/Art/Enemigos/enemigo_duquesa_fiel.png
+enemigo_contador_sin_rostro	1	Libra EX	enemigo	entregado	1024x1024	RGBA	0..255	64	4b45ad36e4591acda2f3c968a45b13ebfb3274a423b7a463e18967f08257a444	Assets/SalYAlmas/Art/Enemigos/enemigo_contador_sin_rostro.png
+enemigo_gota_obsidiana	1	Capricornio	enemigo	entregado	1024x1024	RGBA	0..255	65	1822d99276cabf6c649637c4d20032286158684945731197bf6c8dda825f6bc5	Assets/SalYAlmas/Art/Enemigos/enemigo_gota_obsidiana.png
+enemigo_garza_obsidiana	1	Capricornio	enemigo	entregado	1024x1024	RGBA	0..255	64	ca90bd904480f9c4d6625d4b9368c10a1217d039fc461f29340c83a353565c62	Assets/SalYAlmas/Art/Enemigos/enemigo_garza_obsidiana.png
+enemigo_sorbedor	1	Capricornio	enemigo	entregado	1024x1024	RGBA	0..255	64	de78a06188a1c66c49a21aa04d4315a21ac5b8c8cd1c0dc33670a4736cfa3cf7	Assets/SalYAlmas/Art/Enemigos/enemigo_sorbedor.png
+enemigo_boca_vieja	1	Capricornio	enemigo	entregado	1024x1024	RGBA	0..255	64	a2d0744f9b343d606bcf016a0311fd2179b65de61506f109a0455506b8aaabbd	Assets/SalYAlmas/Art/Enemigos/enemigo_boca_vieja.png
+enemigo_boca_nueva	1	Capricornio	enemigo	entregado	1024x1024	RGBA	0..255	64	9f1a1d44c2b33c1a04fe717e70c542f53c4ae198bae89d7e8e586f32f1d0d635	Assets/SalYAlmas/Art/Enemigos/enemigo_boca_nueva.png
+enemigo_serpiente_nube	1	Capricornio EX	enemigo	entregado	1024x1024	RGBA	0..255	64	ebf83d3611f177e2ca9244dbfe77da3d8cd8285a52a602846e023f9f43de91a9	Assets/SalYAlmas/Art/Enemigos/enemigo_serpiente_nube.png
+enemigo_figura_sal	1	Prólogo	enemigo	entregado	1024x1024	RGBA	0..255	64	528b2b2424e2fdc9893d5f0c91dc42ceec7ff74283eb74422aa350c558c6a099	Assets/SalYAlmas/Art/Enemigos/enemigo_figura_sal.png
+enemigo_cristalizado	1	Invasor (Grieta)	enemigo	entregado	1024x1024	RGBA	0..255	64	0791ca9c89c549de56e5c312d12824e6d3e7456dc4df7f2d42f75dde549f736d	Assets/SalYAlmas/Art/Enemigos/enemigo_cristalizado.png
+enemigo_sin_carta	1	Invasor (Abismo)	enemigo	entregado	1024x1024	RGBA	0..255	64	c25cdad9a8e075499ea8b270146e1779a053f20d862360801313bca9a0806249	Assets/SalYAlmas/Art/Enemigos/enemigo_sin_carta.png
+enemigo_huesped_menor	1	Invasor (Abismo)	enemigo	entregado	1024x1024	RGBA	0..255	65	8b5736d9856a318f97660ecc1ef4dc21bc51a079ff269e2f92cb6423445f64ce	Assets/SalYAlmas/Art/Enemigos/enemigo_huesped_menor.png
+amb_tauro_orilla	2	tauro	ambiente	entregado	1920x1080	RGBA			c38a6471dfe59faef5e926ff892c7850b882e4bdd65cb3671d5644684029e9e9	Assets/SalYAlmas/Art/Ambientes/amb_tauro_orilla.png
+amb_tauro_subsuelo	2	tauro	ambiente	entregado	1920x1080	RGBA			7aed4527300b82ad45a1acf2ded1306696f23916013b398a0fdaea97cfd3bb9e	Assets/SalYAlmas/Art/Ambientes/amb_tauro_subsuelo.png
+amb_tauro_corazon	2	tauro	ambiente	entregado	1920x1080	RGBA			815d25713f832acd5f18fbfce3ff8bce76d3a9f9b8440cebd03e27ee9bf1ecd6	Assets/SalYAlmas/Art/Ambientes/amb_tauro_corazon.png
+amb_tauro_cielo	2	tauro	ambiente	entregado	1920x1080	RGBA			2f0e2420b425bf2ccfcbe4db2d578859cab0422750e95205451816b71c427e7a	Assets/SalYAlmas/Art/Ambientes/amb_tauro_cielo.png
+enemigo_molinero_sal_dulce	2	tauro	enemigo	entregado	1024x1024	RGBA	0..255	65	ee2adbd0dffa48294fe178d399db36be95ca835baa4fea369a620f5bd4b9f8e2	Assets/SalYAlmas/Art/Enemigos/enemigo_molinero_sal_dulce.png
+enemigo_liebre_cobriza	2	tauro	enemigo	entregado	1024x1024	RGBA	0..255	64	14fbf6c81a11b671b6a9b5d91b0f620d4477d22443db56df513b4e39a76c05da	Assets/SalYAlmas/Art/Enemigos/enemigo_liebre_cobriza.png
+enemigo_espantajo_olvido	2	tauro	enemigo	entregado	1024x1024	RGBA	0..255	64	62d44fa29c6b6d45b28328e41f30b0066fedfb079b32c549f66ab868dbeb1eb0	Assets/SalYAlmas/Art/Enemigos/enemigo_espantajo_olvido.png
+enemigo_madre_molienda	2	tauro	enemigo	entregado	1024x1024	RGBA	0..255	65	ebc23308e7817f9ab89f70df25b95fc9d1e9230ae04b19745da79a4c0c7b7fdd	Assets/SalYAlmas/Art/Enemigos/enemigo_madre_molienda.png
+enemigo_ciervo_sin_sombra	2	tauro	enemigo	entregado	1024x1024	RGBA	0..255	64	a2b4dd9582ef298ebd99ee017c0d8decbbf1c79db2917d620b45f656404a4f72	Assets/SalYAlmas/Art/Enemigos/enemigo_ciervo_sin_sombra.png
+amb_geminis_orilla	2	geminis	ambiente	entregado	1920x1080	RGBA			e4346fc9f08858a018c15b825e108f70bf5087dba115761b23121d9c32674334	Assets/SalYAlmas/Art/Ambientes/amb_geminis_orilla.png
+amb_geminis_subsuelo	2	geminis	ambiente	entregado	1920x1080	RGBA			5ba9d0f203a0364568c85d802bf0268ef2376567504604823ad0c120b2acb3a1	Assets/SalYAlmas/Art/Ambientes/amb_geminis_subsuelo.png
+amb_geminis_corazon	2	geminis	ambiente	entregado	1920x1080	RGBA			55449b651e163c6fd8c8328f89af005e44dbe512feb2f0591a5bfde4a269eb59	Assets/SalYAlmas/Art/Ambientes/amb_geminis_corazon.png
+amb_geminis_cielo	2	geminis	ambiente	entregado	1920x1080	RGBA			6e87f0869dd2c8fb767e5e0a3069e28888f3a2f7984bc3588c04bde5342f335b	Assets/SalYAlmas/Art/Ambientes/amb_geminis_cielo.png
+enemigo_doble_azogue	2	geminis	enemigo	entregado	1024x1024	RGBA	0..255	64	6985de02eb36ec836e2b45eb94eb291f7d74aeb064819fb4f8eeb7101a3f4e1b	Assets/SalYAlmas/Art/Enemigos/enemigo_doble_azogue.png
+enemigo_polilla_prisma	2	geminis	enemigo	entregado	1024x1024	RGBA	0..255	64	84d8cea4901cd32061f91a26b09d33ba253f56421ee595dec04db0f9e76647da	Assets/SalYAlmas/Art/Enemigos/enemigo_polilla_prisma.png
+enemigo_frasco_viento	2	geminis	enemigo	entregado	1024x1024	RGBA	0..255	64	b2d576bd9a9914de0cb5cf89b214b2d98c328550889f3d12996ad222a603b0e7	Assets/SalYAlmas/Art/Enemigos/enemigo_frasco_viento.png
+enemigo_hermana_reflejada	2	geminis	enemigo	entregado	1024x1024	RGBA	0..255	64	9f05e1d54b5a25771fa00bb13015ede5a54b85ab37b7865d6b0b97bbaca4bde5	Assets/SalYAlmas/Art/Enemigos/enemigo_hermana_reflejada.png
+enemigo_viento_sin_envase	2	geminis	enemigo	entregado	1024x1024	RGBA	0..255	64	9e2d379809f5ab2db38515f194b9f11b6b48932787ddde63b9cf0712e29cbde7	Assets/SalYAlmas/Art/Enemigos/enemigo_viento_sin_envase.png
+amb_leo_orilla	2	leo	ambiente	entregado	1920x1080	RGBA			35b94801020d877df6a8cb7e480bbf85b73e203c91a83dd9d787a4e5641d5353	Assets/SalYAlmas/Art/Ambientes/amb_leo_orilla.png
+amb_leo_subsuelo	2	leo	ambiente	provisional_rehacer_subsuelo	1920x1080	RGBA			fccf43cab20c3451355295114b42372be0871a21e4c6564b58d4e635deca801c	Assets/SalYAlmas/Art/Ambientes/amb_leo_subsuelo.png
+amb_leo_corazon	2	leo	ambiente	entregado	1920x1080	RGBA			946f01b005f6996e25531e6e7af2fa5abebc716a5c8c521c5b65cd09e8146b2b	Assets/SalYAlmas/Art/Ambientes/amb_leo_corazon.png
+amb_leo_cielo	2	leo	ambiente	entregado	1920x1080	RGBA			36b2564f635147cacaacfac3fb82ffa3a84490cd64ea2411d358282d51391ce5	Assets/SalYAlmas/Art/Ambientes/amb_leo_cielo.png
+enemigo_becerro_solar	2	leo	enemigo	entregado	1024x1024	RGBA	0..255	64	e9adb866e3e2f92f344341abf07a30a18eada87be975ddff6728af6ae2347c02	Assets/SalYAlmas/Art/Enemigos/enemigo_becerro_solar.png
+enemigo_escarabajo_aureo	2	leo	enemigo	entregado	1024x1024	RGBA	0..255	64	2ac2454943e480e27edcebba53cd4373ac132584fca37788ce99c229136a04b5	Assets/SalYAlmas/Art/Enemigos/enemigo_escarabajo_aureo.png
+enemigo_chacal_celosa	2	leo	enemigo	entregado	1024x1024	RGBA	0..255	65	fb6f9d4cf33dd4b3a8be661ed718dfe059267e79c5ada975ef9d9d0da4f0256c	Assets/SalYAlmas/Art/Enemigos/enemigo_chacal_celosa.png
+enemigo_pastora_ultimo_sol	2	leo	enemigo	entregado	1024x1024	RGBA	0..255	64	96a1fe50357592bbf70a21c785ba08860877e33bdd5af8ccda216c282a4d5656	Assets/SalYAlmas/Art/Enemigos/enemigo_pastora_ultimo_sol.png
+enemigo_leon_mediodia_vacio	2	leo	enemigo	entregado	1024x1024	RGBA	0..255	64	891a589b85606e08db2034c060962698a0cd93e5070e7838bb1bce0ddf4791af	Assets/SalYAlmas/Art/Enemigos/enemigo_leon_mediodia_vacio.png
+amb_virgo_orilla	2	virgo	ambiente	entregado	1920x1080	RGBA			016e3d1bb62881ebe97d5aad456287b7efa5041a03655f6986432dfdd3d25722	Assets/SalYAlmas/Art/Ambientes/amb_virgo_orilla.png
+amb_virgo_subsuelo	2	virgo	ambiente	provisional_rehacer_subsuelo	1920x1080	RGBA			22c8f976929a25015bfb4c978037b95c47082aa061561d12f5d13112fdef91a9	Assets/SalYAlmas/Art/Ambientes/amb_virgo_subsuelo.png
+amb_virgo_corazon	2	virgo	ambiente	entregado	1920x1080	RGBA			2fd87395accc6e865347bb11c3752a8b253412b57481bc7255a02ff5bedf5689	Assets/SalYAlmas/Art/Ambientes/amb_virgo_corazon.png
+amb_virgo_cielo	2	virgo	ambiente	entregado	1920x1080	RGBA			42d39e68ea273434d7c20a3f4ca8cbffbf4e26afe825002706cc302e4a94947b	Assets/SalYAlmas/Art/Ambientes/amb_virgo_cielo.png
+enemigo_novicia_sin_alma	2	virgo	enemigo	entregado	1024x1024	RGBA	0..255	64	d504780770d421f8e72c937f42af46351bbc9d065b4fdbfa3508597d520ffeb7	Assets/SalYAlmas/Art/Enemigos/enemigo_novicia_sin_alma.png
+enemigo_tijera_enredadera	2	virgo	enemigo	entregado	1024x1024	RGBA	0..255	65	33ddcd4611d7a5b1ec6e98126fcdddb4b948337f2d85da56c3f91d0e19800dcd	Assets/SalYAlmas/Art/Enemigos/enemigo_tijera_enredadera.png
+enemigo_corzo_injertado	2	virgo	enemigo	entregado	1024x1024	RGBA	0..255	64	4ee8f40741db08947a8f06816eaa1684cb6bd9866fce782ecfef8d4d8e74f0b6	Assets/SalYAlmas/Art/Enemigos/enemigo_corzo_injertado.png
+enemigo_abadesa_huerto	2	virgo	enemigo	entregado	1024x1024	RGBA	0..255	65	74d3040f671c953b59ea1109c098a3565462e60913aefc97e9da17b32d3fabc5	Assets/SalYAlmas/Art/Enemigos/enemigo_abadesa_huerto.png
+enemigo_flor_sin_alma	2	virgo	enemigo	entregado	1024x1024	RGBA	0..255	65	c9d136aba02b0e2e81b29a575c08e646ab2c7e2e0af6133006b9c7561b4775f6	Assets/SalYAlmas/Art/Enemigos/enemigo_flor_sin_alma.png
+amb_escorpio_orilla	2	escorpio	ambiente	entregado	1920x1080	RGBA			f50e4ea67778542ff660ab7e9d992b0ee88d6e2779ac052e3f43dd964e1a755f	Assets/SalYAlmas/Art/Ambientes/amb_escorpio_orilla.png
+amb_escorpio_subsuelo	2	escorpio	ambiente	entregado	1920x1080	RGBA			29a2a24e1573331c8e0ce13cda955ea3f73fd70ee37e9c41767a179340b2e1b8	Assets/SalYAlmas/Art/Ambientes/amb_escorpio_subsuelo.png
+amb_escorpio_corazon	2	escorpio	ambiente	entregado	1920x1080	RGBA			5318a546e9ba81217d0a4c4713a9f57e73a72a4455c339fa1331105fff5da494	Assets/SalYAlmas/Art/Ambientes/amb_escorpio_corazon.png
+amb_escorpio_cielo	2	escorpio	ambiente	entregado	1920x1080	RGBA			49fccdf386794b3709dc984ae27b984e79743123e00ad949736cce4b8bc90be7	Assets/SalYAlmas/Art/Ambientes/amb_escorpio_cielo.png
+enemigo_fatua_azufre	2	escorpio	enemigo	entregado	1024x1024	RGBA	0..255	64	3c91c0f9e0a75db5f656c9f8da6215f5dd2948ee99e913defbe09104385fd1d9	Assets/SalYAlmas/Art/Enemigos/enemigo_fatua_azufre.png
+enemigo_sapo_campanero	2	escorpio	enemigo	entregado	1024x1024	RGBA	0..255	65	d479fe174cefb9d514c41b982a92acb5aef31f8aa73f2202afebcbaf5bd692eb	Assets/SalYAlmas/Art/Enemigos/enemigo_sapo_campanero.png
+enemigo_barquero_juncos	2	escorpio	enemigo	entregado	1024x1024	RGBA	0..255	64	f355e213d2e08ad4e7c523c1c9d3ebcd0516f891d7a569ffebe1a779f5d92278	Assets/SalYAlmas/Art/Enemigos/enemigo_barquero_juncos.png
+enemigo_guardiana_vado_hondo	2	escorpio	enemigo	entregado	1024x1024	RGBA	0..255	65	357e74838e5a0a90319943b76c1c70c8bed23fa945707fd6ba704cdd7af5755c	Assets/SalYAlmas/Art/Enemigos/enemigo_guardiana_vado_hondo.png
+enemigo_campana_bajo_cielo	2	escorpio	enemigo	entregado	1024x1024	RGBA	0..255	64	4daf4e16b0a33ce360f98c798c0948cb3d1754547cc37e0797f17f19836cb0dd	Assets/SalYAlmas/Art/Enemigos/enemigo_campana_bajo_cielo.png
+amb_sagitario_orilla	2	sagitario	ambiente	entregado	1920x1080	RGBA			8338459723033876905bf785a874696042de77059b08172a5d2065c426415a64	Assets/SalYAlmas/Art/Ambientes/amb_sagitario_orilla.png
+amb_sagitario_subsuelo	2	sagitario	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_sagitario_subsuelo.png
+amb_sagitario_corazon	2	sagitario	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_sagitario_corazon.png
+amb_sagitario_cielo	2	sagitario	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_sagitario_cielo.png
+enemigo_cria_estrella	2	sagitario	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_cria_estrella.png
+enemigo_corcel_meteorico	2	sagitario	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_corcel_meteorico.png
+enemigo_arquera_fieltro	2	sagitario	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_arquera_fieltro.png
+enemigo_gigante_ojo_unico	2	sagitario	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_gigante_ojo_unico.png
+enemigo_centauro_horizonte_roto	2	sagitario	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_centauro_horizonte_roto.png
+amb_acuario_orilla	2	acuario	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_acuario_orilla.png
+amb_acuario_subsuelo	2	acuario	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_acuario_subsuelo.png
+amb_acuario_corazon	2	acuario	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_acuario_corazon.png
+amb_acuario_cielo	2	acuario	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_acuario_cielo.png
+enemigo_cantora_sumergida	2	acuario	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_cantora_sumergida.png
+enemigo_foca_escarcha	2	acuario	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_foca_escarcha.png
+enemigo_farol_iceberg	2	acuario	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_farol_iceberg.png
+enemigo_senora_agua_quieta	2	acuario	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_senora_agua_quieta.png
+enemigo_ballena_aurora	2	acuario	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_ballena_aurora.png
+amb_piscis_orilla	2	piscis	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_piscis_orilla.png
+amb_piscis_subsuelo	2	piscis	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_piscis_subsuelo.png
+amb_piscis_corazon	2	piscis	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_piscis_corazon.png
+amb_piscis_cielo	2	piscis	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_piscis_cielo.png
+enemigo_ninfa_hospitalaria	2	piscis	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_ninfa_hospitalaria.png
+enemigo_pez_micelio	2	piscis	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_pez_micelio.png
+enemigo_anfora_esporas	2	piscis	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_anfora_esporas.png
+enemigo_anfitriona_sin_despedida	2	piscis	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_anfitriona_sin_despedida.png
+enemigo_sueno_dos_peces	2	piscis	enemigo	pendiente						Assets/SalYAlmas/Art/Enemigos/enemigo_sueno_dos_peces.png
+amb_aries_orilla_grieta	3	aries	ambiente	entregado	1920x1080	RGBA			b1994e071703d0ee33419d9bd781b7d5cb788e3e4890ed8987d5c49404cbed8a	Assets/SalYAlmas/Art/Ambientes/amb_aries_orilla_grieta.png
+amb_aries_orilla_abismo	3	aries	ambiente	entregado	1920x1080	RGBA			b748494efff1efef5ec0e3be6351d26c6132c3f7596e9cbb516de516a7e23be1	Assets/SalYAlmas/Art/Ambientes/amb_aries_orilla_abismo.png
+amb_aries_corazon_grieta	3	aries	ambiente	entregado	1920x1080	RGBA			ba4ea591b76b9becbeb6fcf3936bccb01e5c9527e0accb74c8a318f13ae7e92d	Assets/SalYAlmas/Art/Ambientes/amb_aries_corazon_grieta.png
+amb_aries_corazon_abismo	3	aries	ambiente	entregado	1920x1080	RGBA			a47ac7dfca65037f06ec3c51cddfcece99409d8da5158a8546ad88d877c8733e	Assets/SalYAlmas/Art/Ambientes/amb_aries_corazon_abismo.png
+amb_aries_subsuelo_grieta	3	aries	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_aries_subsuelo_grieta.png
+amb_aries_subsuelo_abismo	3	aries	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_aries_subsuelo_abismo.png
+amb_aries_cielo_grieta	3	aries	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_aries_cielo_grieta.png
+amb_aries_cielo_abismo	3	aries	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_aries_cielo_abismo.png
+amb_cancer_orilla_grieta	3	cancer	ambiente	entregado	1920x1080	RGBA			0ed3cb7ae625d1564d248d1e5a12a37ebe7f54edac2a531a7a90eabcf5451e46	Assets/SalYAlmas/Art/Ambientes/amb_cancer_orilla_grieta.png
+amb_cancer_orilla_abismo	3	cancer	ambiente	entregado	1920x1080	RGBA			5e992147c421124ed1d12e4d0014a3e0bb2d4c35c6244a98661843967a9fb8a9	Assets/SalYAlmas/Art/Ambientes/amb_cancer_orilla_abismo.png
+amb_cancer_corazon_grieta	3	cancer	ambiente	entregado	1920x1080	RGBA			59f8a9029d82e8f33ea6a456baba5d43cd341e4531defe8f60b6d6a875f016a8	Assets/SalYAlmas/Art/Ambientes/amb_cancer_corazon_grieta.png
+amb_cancer_corazon_abismo	3	cancer	ambiente	entregado	1920x1080	RGBA			20ef7bedaaf473852e73f7ecdeaf4f000f906add0f8f9d252f24efd3f262a1ce	Assets/SalYAlmas/Art/Ambientes/amb_cancer_corazon_abismo.png
+amb_cancer_subsuelo_grieta	3	cancer	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_cancer_subsuelo_grieta.png
+amb_cancer_subsuelo_abismo	3	cancer	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_cancer_subsuelo_abismo.png
+amb_cancer_cielo_grieta	3	cancer	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_cancer_cielo_grieta.png
+amb_cancer_cielo_abismo	3	cancer	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_cancer_cielo_abismo.png
+amb_libra_orilla_grieta	3	libra	ambiente	entregado	1920x1080	RGBA			137c453e39a09bf8ec3089ceb943a2554dcd8060c3444a4b21103a66e60cbd8e	Assets/SalYAlmas/Art/Ambientes/amb_libra_orilla_grieta.png
+amb_libra_orilla_abismo	3	libra	ambiente	entregado	1920x1080	RGBA			7f6d57610a631b2331fd7e2a965dfba8a1cfa6af1cc9c75fb3487f2c354d0a84	Assets/SalYAlmas/Art/Ambientes/amb_libra_orilla_abismo.png
+amb_libra_corazon_grieta	3	libra	ambiente	entregado	1920x1080	RGBA			47ed0efaa6f1dfe2d007acc3f83e7e68af2bef06fac3e389cd56c95e85dd229d	Assets/SalYAlmas/Art/Ambientes/amb_libra_corazon_grieta.png
+amb_libra_corazon_abismo	3	libra	ambiente	entregado	1920x1080	RGBA			64ba6422ec3c288754b43ee20d4c162662fc393d485805c926b6c59837b16a41	Assets/SalYAlmas/Art/Ambientes/amb_libra_corazon_abismo.png
+amb_libra_subsuelo_grieta	3	libra	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_libra_subsuelo_grieta.png
+amb_libra_subsuelo_abismo	3	libra	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_libra_subsuelo_abismo.png
+amb_libra_cielo_grieta	3	libra	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_libra_cielo_grieta.png
+amb_libra_cielo_abismo	3	libra	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_libra_cielo_abismo.png
+amb_capricornio_orilla_grieta	3	capricornio	ambiente	entregado	1920x1080	RGBA			60e3587271671681ab7a1d8f23934e3a4367d8d8dc161730ceeccb1b376d853e	Assets/SalYAlmas/Art/Ambientes/amb_capricornio_orilla_grieta.png
+amb_capricornio_orilla_abismo	3	capricornio	ambiente	entregado	1920x1080	RGBA			a656b2d46e6e12c3e18c87f03fec39c43593ba8733d34634d91632ab3f6b1189	Assets/SalYAlmas/Art/Ambientes/amb_capricornio_orilla_abismo.png
+amb_capricornio_corazon_grieta	3	capricornio	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_capricornio_corazon_grieta.png
+amb_capricornio_corazon_abismo	3	capricornio	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_capricornio_corazon_abismo.png
+amb_capricornio_subsuelo_grieta	3	capricornio	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_capricornio_subsuelo_grieta.png
+amb_capricornio_subsuelo_abismo	3	capricornio	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_capricornio_subsuelo_abismo.png
+amb_capricornio_cielo_grieta	3	capricornio	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_capricornio_cielo_grieta.png
+amb_capricornio_cielo_abismo	3	capricornio	ambiente	pendiente						Assets/SalYAlmas/Art/Ambientes/amb_capricornio_cielo_abismo.png
