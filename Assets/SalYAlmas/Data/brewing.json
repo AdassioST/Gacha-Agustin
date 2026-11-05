@@ -1,0 +1,57 @@
+// Salmueras (GDD 14.1): receta = base + sal + reactivo + almitas, en el Caldero de Bruja o en un nodo de Caldero del Fresno.
+// La pureza de la sal fija la potencia: Cruda básica, Destilada mejorada, Quintaesencia maestra.
+// Una mezcla que no corresponde a ninguna receta da una Salmuera Turbia con un efecto al azar.
+// Los ingredientes clave vienen de la tabla 14.2; los reactivos y costos son // TUNING.
+{
+  "bases": [
+    { "id": "agua_termal", "name": "Agua termal" },                              // gratis: sale del manantial de la Tortuga
+    { "id": "vinagre", "name": "Vinagre", "cost": { "mat.vinagre": 1 } },
+    { "id": "leche_lunar", "name": "Leche lunar", "cost": { "mat.leche_lunar": 1 } },
+    { "id": "savia", "name": "Savia del Fresno", "cost": { "savia": 50 } }      // GDD 14.2 pide savia en dos recetas
+  ],
+  "reagents": [
+    { "id": "flor_de_sal", "name": "Flor de Sal" },
+    { "id": "ceniza_fresno", "name": "Ceniza de Fresno" },
+    { "id": "ambar_savia", "name": "Ámbar de Savia" },
+    { "id": "pluma_corneja", "name": "Pluma de Corneja" },
+    { "id": "raiz_amarga", "name": "Raíz Amarga" }
+  ],
+  // Sal: un planeta (con su pureza), "sal_negra", "almitas" (almitas concentradas), "refinada" (cualquier sal Destilada o
+  // Quintaesencia) o "ninguna". Cada sal se gasta de a "saltAmount" unidades.
+  "saltAmount": 1,
+  "almitasPerBrew": 500,          // TUNING: almitas de cada preparación
+  "almitasConcentradas": 3000,    // TUNING: la Esencia de Alma no crea almitas de la nada (GDD 14.3): las consume
+  "potency": [
+    { "tier": 0, "name": "básica", "scale": 1.0 },
+    { "tier": 1, "name": "mejorada", "scale": 1.5 },   // TUNING
+    { "tier": 2, "name": "maestra", "scale": 2.0 }     // TUNING
+  ],
+  "recipes": [
+    { "potion": "salmuera_aurea",   "base": "agua_termal", "salt": "sol",       "reagent": "ambar_savia" },
+    { "potion": "destilado_rocio",  "base": "savia",       "salt": "luna",      "reagent": "flor_de_sal" },
+    { "potion": "elixir_sal_negra", "base": "vinagre",     "salt": "sal_negra", "reagent": "ceniza_fresno" },
+    { "potion": "esencia_alma",     "base": "agua_termal", "salt": "almitas",   "reagent": "pluma_corneja" },
+    { "potion": "filtro_pureza",    "base": "agua_termal", "salt": "refinada",  "reagent": "flor_de_sal" },
+    { "potion": "leche_luna",       "base": "leche_lunar", "salt": "luna",      "reagent": "ambar_savia" },
+    { "potion": "vinagre_marte",    "base": "vinagre",     "salt": "marte",     "reagent": "raiz_amarga" },
+    { "potion": "tonico_azogue",    "base": "agua_termal", "salt": "mercurio",  "reagent": "pluma_corneja" },
+    { "potion": "balsamo_cuprico",  "base": "savia",       "salt": "venus",     "reagent": "ambar_savia" },
+    { "potion": "plomo_liquido",    "base": "vinagre",     "salt": "saturno",   "reagent": "ceniza_fresno" },
+    { "potion": "agua_olvido",      "base": "agua_termal", "salt": "ninguna",   "reagent": "flor_de_sal" }
+  ],
+  // Salmuera Turbia: efectos al azar "y a veces graciosos" (GDD 14.1). // TUNING
+  "turbid": [
+    { "name": "Hipo Salado", "description": "+15 de Salinidad y +1 Grano de Sal.",
+      "effects": [ { "type": "salinity", "value": 15 }, { "type": "grains", "value": 1 } ] },
+    { "name": "Burbuja Tibia", "description": "Escudo del 5 % de la vida máxima por dos turnos.",
+      "effects": [ { "type": "shield", "value": 0.05, "turns": 2 } ] },
+    { "name": "Eructo de Sal", "description": "−10 de Salinidad. Nadie dice nada.",
+      "effects": [ { "type": "salinity", "value": -10 } ] },
+    { "name": "Mareo de Termas", "description": "Retrasa 10 % a quien la bebe, pero le da +20 de Ánima.",
+      "effects": [ { "type": "delay", "value": 0.10 }, { "type": "anima", "value": 20 } ] },
+    { "name": "Cosquillas Astrales", "description": "+10 de Ánima.",
+      "effects": [ { "type": "anima", "value": 10 } ] },
+    { "name": "Sabor a Nada", "description": "Cura un 3 %. Sabe a nada.",
+      "effects": [ { "type": "heal", "value": 0.03 } ] }
+  ]
+}

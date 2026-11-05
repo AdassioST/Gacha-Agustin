@@ -1,0 +1,35 @@
+// Elenco de lanzamiento (GDD 18): 6 Regentes 5★, 10 Oficialas 4★ y 8 Aprendizas 3★.
+// Solo las brujas con "kit": true tienen datos de combate en witches.json (las seis de la Fase 1);
+// las demás se pueden obtener y coleccionar, pero su kit llega después.
+// Los nombres de 4★ y 3★ vienen de docs/Retratos para Codex.md; los que faltan son propuestas // TUNING.
+// "limited": true = Regente limitada de la versión 1.0 (no está en el banner estándar).
+{
+  "witches": [
+    { "id": "marisal", "name": "Marisal Hojadelobo", "rarity": 5, "species": "Loba de las cumbres", "primary": "marte", "secondary": "saturno", "role": "Ofensiva", "limited": true, "kit": true },
+    { "id": "selenia", "name": "Selenia de Plata", "rarity": 5, "species": "Polilla lunar (kemonomimi)", "primary": "luna", "secondary": "saturno", "role": "Saboteadora", "limited": true, "kit": true },
+    { "id": "solenne", "name": "Solenne", "rarity": 5, "species": "Zorra del desierto", "primary": "sol", "secondary": "mercurio", "role": "Ofensiva en área", "kit": true },
+    { "id": "cervanda", "name": "Cervanda", "rarity": 5, "species": "Cierva con cornamenta", "primary": "saturno", "secondary": "jupiter", "role": "Guardiana" },
+    { "id": "tormentina", "name": "Tormentina", "rarity": 5, "species": "Liebre (kemonomimi)", "primary": "jupiter", "secondary": "mercurio", "role": "Tejedora", "kit": true },
+    { "id": "cupria", "name": "Cupria", "rarity": 5, "species": "Serpiente", "primary": "venus", "secondary": "luna", "role": "Sanadora" },
+
+    { "id": "brea", "name": "Brea", "rarity": 4, "species": "Gata negra (kemonomimi)", "primary": "saturno", "secondary": "luna", "role": "Rompedora" },
+    { "id": "grajilla", "name": "Grajilla", "rarity": 4, "species": "Cuerva", "primary": "mercurio", "secondary": "saturno", "role": "Saboteadora" },
+    { "id": "madrona", "name": "Madroña", "rarity": 4, "species": "Osa", "primary": "venus", "secondary": "marte", "role": "Guardiana" },
+    { "id": "risca", "name": "Risca", "rarity": 4, "species": "Hiena", "primary": "marte", "secondary": "mercurio", "role": "Ofensiva" },
+    { "id": "nacarina", "name": "Nacarina", "rarity": 4, "species": "Nutria (kemonomimi)", "primary": "luna", "secondary": "jupiter", "role": "Sanadora" },
+    { "id": "centella", "name": "Centella", "rarity": 4, "species": "Lince", "primary": "jupiter", "secondary": "marte", "role": "Rompedora" },
+    { "id": "vespera", "name": "Véspera", "rarity": 4, "species": "Murciélaga", "primary": "saturno", "secondary": "venus", "role": "Ofensiva con drenaje" },
+    { "id": "cempa", "name": "Cempa", "rarity": 4, "species": "Coyota", "primary": "mercurio", "secondary": "sol", "role": "Saboteadora" },
+    { "id": "ixbalam", "name": "Ixbalam", "rarity": 4, "species": "Jaguar", "primary": "sol", "secondary": "saturno", "role": "Ofensiva" },
+    { "id": "estrige", "name": "Estrige", "rarity": 4, "species": "Lechuza (kemonomimi)", "primary": "luna", "secondary": "mercurio", "role": "Tejedora" },
+
+    { "id": "zarigueya", "name": "Zarigüeya (Muertita)", "rarity": 3, "species": "Zarigüeya", "primary": "saturno", "secondary": "luna", "role": "Saboteadora", "kit": true },
+    { "id": "salitre", "name": "Salitre", "rarity": 3, "species": "Cabra", "primary": "venus", "secondary": "saturno", "role": "Ofensiva contra jefes" },
+    { "id": "topo", "name": "Topo (Topacia)", "rarity": 3, "species": "Topa", "primary": "saturno", "secondary": "marte", "role": "Tejedora", "kit": true },
+    { "id": "axa", "name": "Axa", "rarity": 3, "species": "Ajolote", "primary": "luna", "secondary": "venus", "role": "Sanadora" },
+    { "id": "migaja", "name": "Migaja", "rarity": 3, "species": "Ratona", "primary": "mercurio", "secondary": "luna", "role": "Tejedora" },
+    { "id": "vellon", "name": "Vellón", "rarity": 3, "species": "Oveja (kemonomimi)", "primary": "venus", "secondary": "luna", "role": "Sanadora" },
+    { "id": "pua", "name": "Púa", "rarity": 3, "species": "Eriza", "primary": "marte", "secondary": "sol", "role": "Rompedora" },
+    { "id": "charca", "name": "Charca", "rarity": 3, "species": "Pata", "primary": "luna", "secondary": "jupiter", "role": "Guardiana" }
+  ]
+}

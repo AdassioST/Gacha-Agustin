@@ -80,7 +80,7 @@ namespace SalYAlmas.Core.Events
         Basic, Spell, SelfCast, Vislumbre, Potion, ChainLink, Ascension, Ecstasy, EnemySkill, EnemyCharge
     }
 
-    public enum HitSource { Action, Chain, Ascension, Reaction, Ecstasy, Enemy }
+    public enum HitSource { Action, Chain, Ascension, Reaction, Ecstasy, Enemy, Graft }
 
     public enum BattleOutcome { None, Victory, Defeat }
 

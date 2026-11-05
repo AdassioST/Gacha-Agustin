@@ -203,7 +203,7 @@ namespace SalYAlmas.Core.Data
             return m;
         }
 
-        private static List<HitDef> ReadHits(Reader r, JsonNode n, bool required)
+        internal static List<HitDef> ReadHits(Reader r, JsonNode n, bool required)
         {
             var hits = new List<HitDef>();
             var arr = n.Get("hits");
@@ -249,7 +249,7 @@ namespace SalYAlmas.Core.Data
             return hits;
         }
 
-        private static List<EffectDef> ReadEffects(Reader r, JsonNode n)
+        internal static List<EffectDef> ReadEffects(Reader r, JsonNode n)
         {
             var list = new List<EffectDef>();
             var arr = n.Get("effects");
@@ -284,7 +284,11 @@ namespace SalYAlmas.Core.Data
 
         // ------------------------------------------------------------------ Enemigos
 
-        private static void LoadEnemies(JsonNode root, GameDatabase db, Reader r)
+        private static void LoadEnemies(JsonNode root, GameDatabase db, Reader r) =>
+            ReadEnemies(root, r, id => db.Enemies.ContainsKey(id), db.Add);
+
+        /// <summary>Lee y valida enemigos con el formato de enemies.json (también los del Fresno).</summary>
+        internal static void ReadEnemies(JsonNode root, Reader r, Func<string, bool> exists, Action<EnemyDef> add)
         {
             foreach (var n in r.Arr(root, "enemies"))
             {
@@ -369,8 +373,8 @@ namespace SalYAlmas.Core.Data
                 }
 
                 if (string.IsNullOrEmpty(e.Id)) continue;
-                if (db.Enemies.ContainsKey(e.Id)) { r.Error(n, "id de enemigo repetido: " + e.Id); continue; }
-                db.Add(e);
+                if (exists(e.Id)) { r.Error(n, "id de enemigo repetido: " + e.Id); continue; }
+                add(e);
             }
         }
 

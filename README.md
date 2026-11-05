@@ -12,6 +12,8 @@ dotnet test Tests/Core.Tests
 
 En Unity 6 LTS, abre la raíz del repositorio y usa el menú **Sal y Almas > Construir escena de combate**.
 
+**Fase 2 (La Ascensión) en curso.** El núcleo de progreso, Fresno, crafting, gacha, economía y guardado está escrito y compila; faltan las pruebas completas, el piloto de runs, el balance del Fresno y la interfaz de Unity. El estado y lo que falta están en [docs/FASE2_PROGRESO.md](docs/FASE2_PROGRESO.md).
+
 ## Documentos
 
 | Archivo | Contenido |
@@ -19,6 +21,7 @@ En Unity 6 LTS, abre la raíz del repositorio y usa el menú **Sal y Almas > Con
 | [docs/GDD.md](docs/GDD.md) | Documento de diseño. Manda sobre cualquier otro documento |
 | [docs/REFERENCIAS.md](docs/REFERENCIAS.md) | Referencias visuales, paleta, mapa de pantallas y antirreferencias |
 | [docs/FASE1.md](docs/FASE1.md) | Fase 1: qué se construyó, cómo probarlo, valores // TUNING y huecos del GDD |
+| [docs/FASE2_PROGRESO.md](docs/FASE2_PROGRESO.md) | Fase 2: qué está hecho, qué falta, decisiones y huecos del GDD (traspaso) |
 | [docs/HUECOS.md](docs/HUECOS.md) | Contradicciones del GDD, huecos de diseño y sistemas que faltan para un producto final |
 | [docs/HOJA_DE_RUTA.md](docs/HOJA_DE_RUTA.md) | Cómo se integra cada sistema, plan de fases hasta el lanzamiento suave, decisiones pendientes y prompts |
 | [docs/propuestas/](docs/propuestas/) | Propuestas de contenido por aprobar: Fresno, crafting, meta-juego y onboarding |

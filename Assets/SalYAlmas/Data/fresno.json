@@ -1,0 +1,296 @@
+// El Fresno (GDD 10). Los valores que dicen "GDD" son canon; el resto es // TUNING.
+// Los modificadores ("mods") usan las claves de SalYAlmas.Core.Combat.ModKeys; el cargador rechaza cualquier otra.
+{
+  "zones": [
+    { "id": "raices", "name": "Raíces Putrefactas", "theme": "Almas que no llegaron, podredumbre, Sal Negra",
+      "boss": "madre_raiz", "enemies": ["cristalizado", "larva", "corneja"], "hpScale": 1.0, "atkScale": 1.0,
+      "almitas": 1500, "savia": 400 },
+    { "id": "tronco", "name": "Tronco de Ceniza", "theme": "Corteza, savia, recuerdos atrapados",
+      "boss": "lenador_hueco", "enemies": ["corteza_hueca", "recuerdo_atrapado", "savia_errante"], "hpScale": 1.0, "atkScale": 1.0,
+      "almitas": 2200, "savia": 600 },
+    { "id": "ramas", "name": "Ramas del Eclipse", "theme": "Viento, aves, eclipses",
+      "boss": "corneja_eclipse", "enemies": ["ave_eclipse", "viento_salino", "cuervo_sin_carta"], "hpScale": 1.0, "atkScale": 1.0,
+      "almitas": 3000, "savia": 800 },
+    { "id": "copa", "name": "Copa Astral", "theme": "Hojas que son almas, constelaciones",
+      "boss": "jardinera", "enemies": ["hoja_alma", "constelacion_menor", "podadora"], "hpScale": 1.0, "atkScale": 1.0,
+      "almitas": 4000, "savia": 1200 }
+  ],
+  "map": {
+    "floors": 10,               // GDD 10: cuatro zonas de diez nodos (una ruta pasa por diez nodos de cada zona)
+    "lanes": 3,                 // TUNING: carriles en los pisos 2 a 9
+    "eliteFromFloor": 3,        // TUNING
+    "sanctuaryFloors": [5, 9],  // TUNING: piso 9 todo Santuario; piso 5 al menos uno
+    "weights": { "combate": 44, "elite": 10, "evento": 14, "caldero": 8, "mercader": 8, "nido": 9, "santuario": 7 } // TUNING
+  },
+  "encounters": {
+    "enemiesByFloor": [2, 2, 2, 3, 3, 3, 3, 3, 3, 1], // TUNING: el piso 10 es el jefe
+    "hpPerFloor": 0.03,          // TUNING: +3 % de vida por piso dentro de la zona
+    "eliteHp": 2.2, "eliteAtk": 1.25, // TUNING
+    "levelPerFloor": 0.3         // TUNING: niveles enemigos extra por piso
+  },
+  "rewards": {
+    "combatFloorBonus": 0.05,    // TUNING: +5 % de almitas por piso
+    "eliteMultiplier": 2.5,      // TUNING
+    "bossMultiplier": 6,         // TUNING
+    "nidoMultiplier": 2,         // TUNING
+    "eliteBlackSalt": 1,         // TUNING
+    "nidoSalt": 2,               // TUNING: Sal Cruda de un planeta al azar
+    "fullClearSavia": 3000       // TUNING
+  },
+  "souls": {
+    "manchaReturn": 0.30,        // GDD 10.4: el Fresno devuelve el 30 % como Savia
+    "reviveHpAfterWin": 0.10     // TUNING: las brujas caídas vuelven con 10 % de vida tras una victoria
+  },
+  "weekly": {
+    // GDD 10.4: sin energía; pasado el tope semanal, las almitas se convierten en Savia a una tasa menor.
+    "capAlmitas": 300000,        // TUNING
+    "overflowSaviaRate": 0.10,   // TUNING: menor que el 30 % de la Mancha
+    "bathSaltsPerBoss": 125,     // TUNING
+    "bathSaltsMax": 500          // GDD 16.3: Fresno semanal, 500 Sales de Baño
+  },
+  "santuario": {
+    "restSalinity": -40,         // GDD 10.2
+    "restHeal": 0.30,            // GDD 10.2
+    "trainBonus": 0.25           // TUNING: +25 % al movimiento de Cadena entrenado hasta el final de la run
+  },
+  "merchant": {
+    "graftPrice": 2500,          // TUNING: almitas sueltas × número de zona
+    "potionPrice": 1500,
+    "healPrice": 2000,
+    "healAmount": 0.30
+  },
+  "graftChoices": 3,             // GDD 10.2: eliges un Injerto entre tres
+  "fruitAt": 3,                  // GDD 10.3: tres de la misma Rama activan su Fruto
+  "curses": {
+    "maxPerZone": 5,             // GDD 10.3
+    "almitasMultiplier": 1.25,   // GDD 10.3
+    "list": [
+      { "id": "raices_hambrientas", "name": "Raíces Hambrientas", "mods": { "enemyHpPct": 0.20 } },
+      { "id": "savia_amarga", "name": "Savia Amarga", "mods": { "healingPct": -0.25 } },
+      { "id": "viento_ceniza", "name": "Viento de Ceniza", "mods": { "enemySpeedPct": 0.08 } },
+      { "id": "sal_pesada", "name": "Sal Pesada", "mods": { "salinityGainPct": 0.25 } },
+      { "id": "granos_humedos", "name": "Granos Húmedos", "mods": { "startGrains": -1 } },
+      { "id": "eclipse_perpetuo", "name": "Eclipse Perpetuo", "mods": { "resonanceGainPct": -0.25 } },
+      { "id": "corteza_dura", "name": "Corteza Dura", "mods": { "enemyToughnessPct": 0.30 } },
+      { "id": "cuervos", "name": "Cuervos en la Copa", "mods": { "enemyAtkPct": 0.15 } }
+    ]
+  },
+  "paria": {
+    // GDD 10.3: por cada 3★ una opción extra de Injerto y +10 % de almitas; por cada 4★, +5 %.
+    "threeStarChoices": 1, "threeStarAlmitas": 0.10, "fourStarAlmitas": 0.05
+  },
+  "eco": {
+    "slots": 3, "grafts": 3, "trainedMoves": 1,  // GDD 10.5
+    // TUNING: la ranura 1 está desde el inicio; la 2 al vencer al jefe del Tronco; la 3 al vencer a la Jardinera.
+    "unlocks": [ { "slot": 1, "rule": "inicio" }, { "slot": 2, "rule": "jefe:tronco" }, { "slot": 3, "rule": "jefe:copa" } ]
+  },
+  "ramas": [
+    { "planet": "sol", "name": "Rama Áurea", "unlockOfrenda": 0,
+      "fruit": { "name": "Corona del Mediodía", "description": "+30 % de daño contra enemigos con Quemadura y +5 % de daño.",
+                 "mods": { "burningTargetDamage": 0.30, "damagePct": 0.05 } },
+      "grafts": [
+        { "id": "brasa_salobre", "name": "Brasa Salobre", "mods": { "dotPct": 0.25 } },
+        { "id": "corona_palida", "name": "Corona Pálida", "mods": { "damagePct.sol": 0.20 } },
+        { "id": "hora_mediodia", "name": "Hora del Mediodía", "mods": { "areaDamagePct": 0.20 } },
+        { "id": "ceniza_fertil", "name": "Ceniza Fértil", "mods": { "spellDamagePct": 0.15 } },
+        { "id": "sol_naciente", "name": "Sol Naciente", "mods": { "startGrains": 1 } },
+        { "id": "espejismo", "name": "Espejismo de Arena", "pending": true },
+        { "id": "oro_viejo", "name": "Oro Viejo", "pending": true },
+        { "id": "lengua_fuego", "name": "Lengua de Fuego", "pending": true },
+        { "id": "sudor_leon", "name": "Sudor de León", "pending": true },
+        { "id": "ambar_solar", "name": "Ámbar Solar", "pending": true },
+        { "id": "hoguera_lenta", "name": "Hoguera Lenta", "pending": true },
+        { "id": "ojo_mediodia", "name": "Ojo del Mediodía", "pending": true },
+        { "id": "rey_sin_sombra", "name": "Rey sin Sombra", "pending": true },
+        { "id": "sal_aurea_pura", "name": "Sal Áurea Pura", "pending": true },
+        { "id": "ceniza_ofrenda", "name": "Ceniza de Ofrenda", "pending": true }
+      ] },
+    { "planet": "luna", "name": "Rama Argenta", "unlockOfrenda": 0,
+      "fruit": { "name": "Espejo de Marea", "description": "Todas empiezan cada combate con un escudo del 25 % de su vida.",
+                 "mods": { "startShieldPct": 0.25 } },
+      "grafts": [
+        { "id": "marea_plata", "name": "Marea de Plata", "mods": { "shieldPct": 0.25 } },
+        { "id": "bruma_salina", "name": "Bruma Salina", "mods": { "damagePct.luna": 0.20 } },
+        { "id": "velo_espejo", "name": "Velo de Espejo", "mods": { "hpPct": 0.10 } },
+        { "id": "sueno_ligero", "name": "Sueño Ligero", "mods": { "delayPct": 0.15 } },
+        { "id": "luna_llena", "name": "Luna Llena", "mods": { "healingPct": 0.20 } },
+        { "id": "cuarto_menguante", "name": "Cuarto Menguante", "pending": true },
+        { "id": "polilla_blanca", "name": "Polilla Blanca", "pending": true },
+        { "id": "agua_dormida", "name": "Agua Dormida", "pending": true },
+        { "id": "lago_plata", "name": "Lago de Plata", "pending": true },
+        { "id": "reflejo_infiel", "name": "Reflejo Infiel", "pending": true },
+        { "id": "cancion_cuna", "name": "Canción de Cuna", "pending": true },
+        { "id": "ojo_gato", "name": "Ojo de Gato", "pending": true },
+        { "id": "llanto_sal", "name": "Llanto de Sal", "pending": true },
+        { "id": "velo_novia", "name": "Velo de Novia", "pending": true },
+        { "id": "noche_sin_fin", "name": "Noche sin Fin", "pending": true }
+      ] },
+    { "planet": "marte", "name": "Rama Férrea", "unlockOfrenda": 0,
+      "fruit": { "name": "Sangre Llama Sangre", "description": "+25 % de crítico contra enemigos con Sangrado y +15 % de daño por turno.",
+                 "mods": { "bleedingTargetCrit": 0.25, "dotPct": 0.15 } },
+      "grafts": [
+        { "id": "herrumbre", "name": "Herrumbre", "mods": { "critRate": 0.08 } },
+        { "id": "sangre_ferrea", "name": "Sangre Férrea", "mods": { "damagePct.marte": 0.20 } },
+        { "id": "filo_carmesi", "name": "Filo Carmesí", "mods": { "critDamage": 0.25 } },
+        { "id": "embestida", "name": "Embestida", "mods": { "toughnessPct": 0.20 } },
+        { "id": "juramento_hierro", "name": "Juramento de Hierro", "mods": { "atkPct": 0.08 } },
+        { "id": "yunque_interior", "name": "Yunque Interior", "pending": true },
+        { "id": "cicatriz", "name": "Cicatriz", "pending": true },
+        { "id": "grito_guerra", "name": "Grito de Guerra", "pending": true },
+        { "id": "carnero_ciego", "name": "Carnero Ciego", "pending": true },
+        { "id": "mina_profunda", "name": "Mina Profunda", "pending": true },
+        { "id": "martillo", "name": "Martillo de Mina", "pending": true },
+        { "id": "hierro_viejo", "name": "Hierro Viejo", "pending": true },
+        { "id": "oxido_rojo", "name": "Óxido Rojo", "pending": true },
+        { "id": "guardia_mina", "name": "Guardia de Mina", "pending": true },
+        { "id": "fuerza_bruta", "name": "Fuerza Bruta", "pending": true }
+      ] },
+    { "planet": "mercurio", "name": "Rama de Azogue", "unlockOfrenda": 1,
+      "fruit": { "name": "Mente Relámpago", "description": "Todas adelantan 30 % su acción al empezar cada combate.",
+                 "mods": { "startAdvance": 0.30 } },
+      "grafts": [
+        { "id": "azogue_vivo", "name": "Azogue Vivo", "mods": { "speedFlat": 8 } },
+        { "id": "humo_acido", "name": "Humo Ácido", "mods": { "damagePct.mercurio": 0.20 } },
+        { "id": "mensaje_urgente", "name": "Mensaje Urgente", "mods": { "resonanceGainPct": 0.20 } },
+        { "id": "mente_rapida", "name": "Mente Rápida", "mods": { "animaGainPct": 0.15 } },
+        { "id": "trueque", "name": "Trueque", "mods": { "startResonance": 20 } },
+        { "id": "gota_plata", "name": "Gota de Plata", "pending": true },
+        { "id": "lengua_bifida", "name": "Lengua Bífida", "pending": true },
+        { "id": "mercado_negro", "name": "Mercado Negro", "pending": true },
+        { "id": "caduceo", "name": "Caduceo", "pending": true },
+        { "id": "paso_doble", "name": "Paso Doble", "pending": true },
+        { "id": "recado", "name": "Recado", "pending": true },
+        { "id": "alquimia_rapida", "name": "Alquimia Rápida", "pending": true },
+        { "id": "espejo_liquido", "name": "Espejo Líquido", "pending": true },
+        { "id": "chisme", "name": "Chisme", "pending": true },
+        { "id": "pie_alado", "name": "Pie Alado", "pending": true }
+      ] },
+    { "planet": "venus", "name": "Rama Cúprica", "unlockOfrenda": 2,
+      "fruit": { "name": "Jardín Esmeralda", "description": "Cada bruja se cura 4 % de su vida al terminar cada turno.",
+                 "mods": { "endTurnHealPct": 0.04 } },
+      "grafts": [
+        { "id": "cardenillo", "name": "Cardenillo", "mods": { "healingPct": 0.25 } },
+        { "id": "savia_cobre", "name": "Savia de Cobre", "mods": { "damagePct.venus": 0.20 } },
+        { "id": "encanto", "name": "Encanto", "mods": { "enemyAtkPct": -0.08 } },
+        { "id": "jardin_escondido", "name": "Jardín Escondido", "mods": { "hpPct": 0.12 } },
+        { "id": "flor_bebe_sal", "name": "Flor que Bebe Sal", "mods": { "salinityGainPct": -0.15 } },
+        { "id": "rosa_sal", "name": "Rosa de Sal", "pending": true },
+        { "id": "miel_amarga", "name": "Miel Amarga", "pending": true },
+        { "id": "enredadera", "name": "Enredadera", "pending": true },
+        { "id": "beso_cobre", "name": "Beso de Cobre", "pending": true },
+        { "id": "fruta_prohibida", "name": "Fruta Prohibida", "pending": true },
+        { "id": "perfume", "name": "Perfume", "pending": true },
+        { "id": "lazo_verde", "name": "Lazo Verde", "pending": true },
+        { "id": "espejo_venus", "name": "Espejo de Venus", "pending": true },
+        { "id": "hiedra", "name": "Hiedra", "pending": true },
+        { "id": "petalo", "name": "Pétalo", "pending": true }
+      ] },
+    { "planet": "jupiter", "name": "Rama Estánnea", "unlockOfrenda": 3,
+      "fruit": { "name": "Ley Tonante", "description": "Los Spark hacen +50 % de daño extra y el tope de Resonancia por Spark sube 10.",
+                 "mods": { "sparkDamageBonus": 0.50, "sparkResonanceCap": 10 } },
+      "grafts": [
+        { "id": "estatica_gris", "name": "Estática Gris", "mods": { "sparkDamageBonus": 0.20 } },
+        { "id": "trueno_estano", "name": "Trueno de Estaño", "mods": { "damagePct.jupiter": 0.20 } },
+        { "id": "orden_trono", "name": "Orden del Trono", "mods": { "damagePct": 0.06 } },
+        { "id": "ley_estano", "name": "Ley de Estaño", "mods": { "chainDamagePct": 0.12 } },
+        { "id": "corona_rayos", "name": "Corona de Rayos", "mods": { "ascensionDamagePct": 0.15 } },
+        { "id": "cetro", "name": "Cetro", "pending": true },
+        { "id": "nube_negra", "name": "Nube Negra", "pending": true },
+        { "id": "decreto", "name": "Decreto", "pending": true },
+        { "id": "relampago_quieto", "name": "Relámpago Quieto", "pending": true },
+        { "id": "toga", "name": "Toga de Estaño", "pending": true },
+        { "id": "aguila", "name": "Águila", "pending": true },
+        { "id": "tormenta_seca", "name": "Tormenta Seca", "pending": true },
+        { "id": "rayo_partido", "name": "Rayo Partido", "pending": true },
+        { "id": "banquete", "name": "Banquete", "pending": true },
+        { "id": "tronar", "name": "Tronar", "pending": true }
+      ] },
+    { "planet": "saturno", "name": "Rama Plúmbea", "unlockOfrenda": 0,
+      "fruit": { "name": "Cosecha de Saturno", "description": "GDD 10.3: cada retraso que causas hace daño igual al 20 % de tu ataque.",
+                 "mods": { "delayDamageCoef": 0.20 } },
+      "grafts": [
+        { "id": "plomo_lento", "name": "Plomo Lento", "mods": { "delayPct": 0.20 } },
+        { "id": "ceniza_gris", "name": "Ceniza Gris", "mods": { "damagePct.saturno": 0.20 } },
+        { "id": "hora_final", "name": "Hora Final", "mods": { "breakVulnerability": 0.10 } },
+        { "id": "reloj_arena", "name": "Reloj de Arena", "mods": { "enemySpeedPct": -0.06 } },
+        { "id": "hoz_paciente", "name": "Hoz Paciente", "mods": { "ascendantDamagePct": 0.12 } },
+        { "id": "anillo_polvo", "name": "Anillo de Polvo", "pending": true },
+        { "id": "tiempo_muerto", "name": "Tiempo Muerto", "pending": true },
+        { "id": "cronos", "name": "Cronos", "pending": true },
+        { "id": "plomo_fundido", "name": "Plomo Fundido", "pending": true },
+        { "id": "ceniza_fria", "name": "Ceniza Fría", "pending": true },
+        { "id": "ultimo_grano", "name": "Último Grano", "pending": true },
+        { "id": "lapida", "name": "Lápida", "pending": true },
+        { "id": "herencia", "name": "Herencia", "pending": true },
+        { "id": "pendulo_quieto", "name": "Péndulo Quieto", "pending": true },
+        { "id": "hoz_vieja", "name": "Hoz Vieja", "pending": true }
+      ] }
+  ],
+  "mutations": [
+    { "id": "savia_negra", "name": "Savia Negra", "description": "GDD 10.3: +30 % de daño pero −30 % de curación.",
+      "mods": { "damagePct": 0.30, "healingPct": -0.30 } },
+    { "id": "corteza_hueca", "name": "Corteza Hueca", "mods": { "hpPct": 0.25, "speedFlat": -10 } },
+    { "id": "raiz_sedienta", "name": "Raíz Sedienta", "mods": { "startGrains": 1, "salinityGainPct": 0.25 } },
+    { "id": "ojos_corteza", "name": "Ojos en la Corteza", "mods": { "critRate": 0.15, "enemyAtkPct": 0.15 } },
+    { "id": "hojas_plomo", "name": "Hojas de Plomo", "mods": { "enemySpeedPct": -0.10, "sparkDamageBonus": -0.20 } },
+    { "id": "flor_sal", "name": "Flor de Sal", "mods": { "almitasPct": 0.25, "enemyHpPct": 0.20 } },
+    { "id": "eclipse_interno", "name": "Eclipse Interno", "mods": { "startResonance": 40, "healingPct": -0.20 } },
+    { "id": "sal_madura", "name": "Sal Madura", "mods": { "extraBlackSalt": 1, "salinityGainPct": 0.20 } }
+  ],
+  "roots": [
+    // Raíces: talentos de cuenta con tope que se compran con Savia (GDD 10.6). // TUNING
+    { "id": "bolsa_raiz", "name": "Bolsa de Raíz", "description": "Una ranura más de poción en el Fresno.", "mods": { "extraBeltSlots": 1 }, "costs": [3000] },
+    { "id": "grano_raiz", "name": "Grano de Raíz", "description": "Empiezas cada combate del Fresno con un Grano extra.", "mods": { "startGrains": 1 }, "costs": [5000] },
+    { "id": "corteza_viva", "name": "Corteza Viva", "description": "+4 % de vida máxima en el Fresno por nivel.", "mods": { "hpPct": 0.04 }, "costs": [1500, 3000, 6000] },
+    { "id": "savia_tibia", "name": "Savia Tibia", "description": "Descansar en un Santuario cura 10 % más por nivel.", "mods": { "santuarioHealPct": 0.10 }, "costs": [1500, 4000] },
+    { "id": "rama_abierta", "name": "Rama Abierta", "description": "Una opción más al elegir Injerto.", "mods": { "graftChoices": 1 }, "costs": [6000] },
+    { "id": "raiz_avara", "name": "Raíz Avara", "description": "+5 % de almitas en el Fresno por nivel.", "mods": { "almitasPct": 0.05 }, "costs": [2000, 4000, 8000] },
+    { "id": "raiz_firme", "name": "Raíz Firme", "description": "+10 de Resonancia al iniciar cada combate por nivel.", "mods": { "startResonance": 10 }, "costs": [2500, 5000] }
+  ],
+  "ofrenda": {
+    // GDD 10.6: nunca se llena; sube el nivel de cuenta y desbloquea Ramas, historia y decoraciones. Bonos pequeños con tope.
+    "levelBase": 50000, "levelExponent": 1.5,     // TUNING: nivel n pide 50 000 · n^1.5 almitas ofrendadas en total
+    "perLevel": { "almitasPct": 0.01, "atkPct": 0.005 },
+    "caps": { "almitasPct": 0.10, "atkPct": 0.05 },
+    "dustEvery": 5, "dustAmount": 50,             // GDD 11.1: hitos de Ofrenda dan Polvo Astral
+    "unlocks": [
+      { "level": 1, "text": "Se abre la Rama de Azogue." },
+      { "level": 2, "text": "Se abre la Rama Cúprica. Decoración de las Termas: Farolillos de Savia." },
+      { "level": 3, "text": "Se abre la Rama Estánnea. Fragmento: «El árbol no recicla: cosecha»." },
+      { "level": 4, "text": "Decoración de las Termas: Hojas de Sal en el agua." },
+      { "level": 5, "text": "Fragmento: «La Jardinera no es una sola»." },
+      { "level": 6, "text": "Decoración de las Termas: Raíz que respira bajo el caparazón." }
+    ]
+  },
+  "calculista": { "base": 10, "witchBonus": 2 }, // TUNING: estadística base de la Calculista y bono por bruja (GDD 13.2)
+  "events": [
+    { "id": "mercader_sin_cara", "name": "El Mercader sin Cara", "text": "Un mercader sin rostro ofrece un Injerto. Dice que ya te conoce.",
+      "options": [
+        { "text": "Convencerlo de que te lo regale", "stat": "encanto", "need": 14, "outcomes": [ { "type": "graft" } ] },
+        { "text": "Pagarle 2 000 almitas sueltas", "costAlmitas": 2000, "outcomes": [ { "type": "graft" } ] },
+        { "text": "Seguir de largo", "outcomes": [] } ] },
+    { "id": "raiz_que_habla", "name": "La Raíz que Habla", "text": "Una raíz recita cifras del Libro Mayor. Si las entiendes, suelta lo que guarda.",
+      "options": [
+        { "text": "Descifrar las cifras", "stat": "calculo", "need": 14, "outcomes": [ { "type": "almitas", "value": 3000 } ] },
+        { "text": "Dejar que te injerte algo", "stat": "temple", "need": 12, "outcomes": [ { "type": "mutation" } ] },
+        { "text": "Tapar la raíz con sal", "outcomes": [ { "type": "salinity", "value": -15 } ] } ] },
+    { "id": "pozo_sal_negra", "name": "Pozo de Sal Negra", "text": "Un pozo de sal de almas podridas. Huele a promesa.",
+      "options": [
+        { "text": "Llenar los frascos (+1 Sal Negra, +20 de Salinidad a todas)", "outcomes": [ { "type": "blackSalt", "value": 1 }, { "type": "salinity", "value": 20 } ] },
+        { "text": "Llenarlos sin respirar", "stat": "temple", "need": 14, "outcomes": [ { "type": "blackSalt", "value": 2 } ] },
+        { "text": "Cerrar el pozo", "outcomes": [] } ] },
+    { "id": "altar_agrietado", "name": "Altar Agrietado", "text": "Un altar del Fresno, roto. Las herramientas siguen ahí.",
+      "options": [
+        { "text": "Repararlo", "stat": "oficio", "need": 12, "outcomes": [ { "type": "runMods", "mods": { "damagePct": 0.05 }, "name": "Altar reparado" } ] },
+        { "text": "Descansar a su sombra", "outcomes": [ { "type": "heal", "value": 0.25 } ] } ] },
+    { "id": "hojas_susurran", "name": "Las Hojas Susurran", "text": "Las hojas dicen tu nombre al revés.",
+      "options": [
+        { "text": "Contestarles en Salmódico", "stat": "calculo", "need": 16, "outcomes": [ { "type": "graft" }, { "type": "almitas", "value": 1500 } ] },
+        { "text": "Aceptar una maldición más en esta zona", "outcomes": [ { "type": "curse" } ] },
+        { "text": "Taparse los oídos", "outcomes": [] } ] },
+    { "id": "eco_ajeno", "name": "El Eco de Otra Run", "text": "Ves a un aquelarre igual al tuyo, más adelante, cayendo. No te ve.",
+      "options": [
+        { "text": "Aprender de su error", "stat": "temple", "need": 13, "outcomes": [ { "type": "heal", "value": 0.20 }, { "type": "salinity", "value": -20 } ] },
+        { "text": "Robarle las almitas que soltó", "outcomes": [ { "type": "almitas", "value": 2500 }, { "type": "salinity", "value": 15 } ] } ] }
+  ]
+}

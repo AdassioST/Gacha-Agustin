@@ -15,6 +15,8 @@ namespace SalYAlmas.Core.Chain
         /// <summary>Desfase de frames por arma (Fase 2: prefijos Rítmico y Pausado).</summary>
         public int FrameShift;
         public bool IsGuest;
+        /// <summary>Golpes extra de la familia de arma: uno por cada golpe del movimiento, Offset frames después.</summary>
+        public IReadOnlyList<Combat.ChainEcho> Echoes;
     }
 
     public sealed class ChainLinkPlan
@@ -136,6 +138,25 @@ namespace SalYAlmas.Core.Chain
                         Frame = Math.Max(0, link.StartFrame + hit.Frame + shift),
                         Share = hit.Share,
                     });
+                }
+                // Ecos del arma (Fase 2): después de los golpes del movimiento, con índices que siguen la numeración.
+                var echoes = participants[i].Echoes;
+                if (echoes == null) continue;
+                int index = link.Move.Hits.Count;
+                foreach (var echo in echoes)
+                {
+                    foreach (var hit in link.Move.Hits)
+                    {
+                        preview.Hits.Add(new ChainHitPlan
+                        {
+                            LinkIndex = i,
+                            OwnerId = link.UnitId,
+                            OwnerName = link.Name,
+                            HitIndex = index++,
+                            Frame = Math.Max(0, link.StartFrame + hit.Frame + shift + echo.Offset),
+                            Share = hit.Share * echo.Share,
+                        });
+                    }
                 }
             }
 
