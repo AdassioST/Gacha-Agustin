@@ -241,6 +241,8 @@ def escribir_catalogo(medidas):
 def comprobar(medidas):
     malos = []
     for a, m in sorted(medidas.items()):
+        if any(m.get(k) is None for k in ("m_max", "i", "tp")):
+            malos.append(f"{a}: faltan medidas de sonoridad o pico real")
         if m["tp"] is not None and m["tp"] > -1.0:
             malos.append(f"{a}: pico real {m['tp']:.2f} dBTP")
     total = sum(m["bytes"] for m in medidas.values()) / 1e6

@@ -270,6 +270,8 @@ def medir_ffmpeg(ruta):
     cmd = ["ffmpeg", "-nostats", "-hide_banner", "-i", ruta, "-af",
            "apad=pad_dur=0.5,ebur128=peak=true:framelog=info", "-f", "null", "-"]
     p = subprocess.run(cmd, capture_output=True, text=True)
+    if p.returncode != 0:
+        raise RuntimeError(f"ffmpeg no pudo medir {ruta}: {p.stderr[-1500:]}")
     salida = p.stderr
     ms, ss = [], []
     for m in _RE_M.finditer(salida):
@@ -279,6 +281,8 @@ def medir_ffmpeg(ruta):
     resumen = salida[salida.rfind("Summary:"):]
     mi = _RE_I.search(resumen)
     mt = _RE_TP.search(resumen)
+    if mi is None or mt is None or not ms:
+        raise RuntimeError(f"Medición incompleta de ffmpeg para {ruta}; no se puede aprobar el audio.")
     return dict(
         m_max=max(ms) if ms else None,
         s_max=max(ss) if ss else None,

@@ -63,7 +63,7 @@ def fusion(ctx, v):
         "Pantalla del Caldero", var(v=[1]), objetivo=-28, metrica="I", bucle=True, estado="borrador")
 def caldero(ctx, v):
     from proceso import bucle
-    d = 2.0
+    d = 4.0  # 3,4 s útiles tras la costura: menos repetición sin superar los 30 MB del catálogo.
     lz = Lienzo(d)
     lz.add(N(hervor(d, ctx.hijo("h"), 0.7)), 0, -2)
     lz.add(N(fuego(d, ctx.hijo("f"), 0.4, 0.8)), 0, -12)

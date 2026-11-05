@@ -37,7 +37,7 @@ def _agua_quieta(ctx, d):
         estado="borrador", notas="Bucle corto por el tope de tamaño; el lecho final es estéreo en streaming.")
 def amb_dia(ctx, v):
     from proceso import bucle
-    d = 2.2
+    d = 4.0
     lz = Lienzo(d)
     lz.add(_agua_quieta(ctx.hijo("a"), d), 0)
     lz.add(N(viento(d, ctx.hijo("w"), 700, 1.5, 0.4)), 0, -14)
@@ -49,7 +49,7 @@ def amb_dia(ctx, v):
         estado="borrador", notas="Bucle corto por el tope de tamaño; el lecho final es estéreo en streaming.")
 def amb_noche(ctx, v):
     from proceso import bucle
-    d = 2.2
+    d = 4.0
     lz = Lienzo(d)
     lz.add(_agua_quieta(ctx.hijo("a"), d), 0, -2)
     t = 0.1

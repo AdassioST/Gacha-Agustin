@@ -88,7 +88,7 @@ namespace SalYAlmas.Presentation
                 _belt.Clear();
                 _curses.Clear();
                 _ecoChoice = -1;
-                Apply(r);
+                Apply(r, "sfx_fresno_ruta");
             }
 
             DrawRootsAndOffering(new Rect(left.xMax + 12, a.y, 620, a.height));
@@ -105,7 +105,7 @@ namespace SalYAlmas.Presentation
                 int level = F.RootLevel(root.Id);
                 string cost = level < root.Max ? $"{root.Costs[level]:N0}" : "tope";
                 if (GuiKit.Button(new Rect(r.x + 16, y, r.width - 32, 62), $"{root.Name}  {level}/{root.Max}  ·  {cost}\n<size=14>{root.Description}</size>", level < root.Max, 18))
-                    Apply(F.BuyRoot(root.Id));
+                    Apply(F.BuyRoot(root.Id), "sfx_ui_compra");
                 y += 66;
             }
             y += 8;
@@ -114,7 +114,7 @@ namespace SalYAlmas.Presentation
             long[] amounts = { 5000, 25000, 100000 };
             for (int i = 0; i < amounts.Length; i++)
                 if (GuiKit.Button(new Rect(r.x + 16 + i * 196, y, 190, 48), $"Entregar {amounts[i]:N0}", Game.Ledger.Balance(Res.Almitas) >= amounts[i], 17))
-                    Apply(F.Offer(amounts[i]));
+                    Apply(F.Offer(amounts[i]), "sfx_fresno_ofrenda");
             y += 56;
             GuiKit.Label(new Rect(r.x + 16, y, r.width - 32, 56), "Bonos: " + F.OfrendaBonus(), 16, Palette.Parchment, TextAnchor.UpperLeft, false, true);
         }
@@ -206,7 +206,7 @@ namespace SalYAlmas.Presentation
                     if (isAvailable && GUI.Button(box, GUIContent.none, GUIStyle.none)) clicked = n.Lane;
                 }
             }
-            if (clicked.HasValue) { Apply(F.EnterNode(clicked.Value)); _note = ""; }
+            if (clicked.HasValue) { Apply(F.EnterNode(clicked.Value), "sfx_fresno_nodo_elegir"); _note = ""; }
         }
 
         private void DrawDecision(Rect r)
@@ -266,7 +266,7 @@ namespace SalYAlmas.Presentation
             double mult = Math.Pow(_meta.Fresno.CurseAlmitasMultiplier, _curses.Count);
             if (GuiKit.Button(new Rect(r.xMax - 360, r.yMax - 60, 360, 56), $"Entrar a la zona  ·  almitas ×{mult:0.##}", true, 20))
             {
-                Apply(F.ChooseCurses(_curses.OrderBy(x => x, StringComparer.Ordinal).ToList()));
+                Apply(F.ChooseCurses(_curses.OrderBy(x => x, StringComparer.Ordinal).ToList()), "sfx_fresno_zona_entrar", ZoneSound(F.Run.Zone));
                 _curses.Clear();
             }
         }
@@ -291,7 +291,7 @@ namespace SalYAlmas.Presentation
                     {
                         var g = _meta.Fresno.Graft(id);
                         return $"{g.Name}  ·  {_meta.Fresno.Rama(g.Rama).Name}  ({F.GraftsOf(g.Rama)}/{_meta.Fresno.FruitAt})\n<size=14>{g.Description}</size>";
-                    }, id => Apply(F.ChooseGraft(id)));
+                    }, id => Apply(F.ChooseGraft(id), "sfx_fresno_injerto", _meta.Fresno.Rama(_meta.Fresno.Graft(id).Rama).Planet.ToString().ToLowerInvariant()));
                     if (GuiKit.Button(new Rect(r.xMax - 220, r.yMax - 50, 220, 46), "Ninguno", true, 18)) Apply(F.ChooseGraft(null));
                     break;
                 case ChoiceKind.Mutation:
@@ -299,7 +299,7 @@ namespace SalYAlmas.Presentation
                     var m = _meta.Fresno.Mutation(run.Pending.Options[0]);
                     GuiKit.Label(new Rect(r.x, r.y, r.width, 34), "Mutación del Árbol: bendición y maldición a la vez", 24, Palette.GoldBright, TextAnchor.MiddleLeft, true);
                     GuiKit.Label(new Rect(r.x, r.y + 44, r.width, 80), $"{m.Name}\n<size=18>{m.Description}</size>", 26, Palette.Parchment, TextAnchor.UpperLeft, false, true);
-                    if (GuiKit.Button(new Rect(r.x, r.y + 130, 260, 60), "Aceptar", true, 24)) Apply(F.ChooseMutation(true));
+                    if (GuiKit.Button(new Rect(r.x, r.y + 130, 260, 60), "Aceptar", true, 24)) Apply(F.ChooseMutation(true), "sfx_fresno_mutacion");
                     if (GuiKit.Button(new Rect(r.x + 270, r.y + 130, 260, 60), "Rechazar", true, 24)) Apply(F.ChooseMutation(false));
                     break;
                 }
@@ -312,7 +312,7 @@ namespace SalYAlmas.Presentation
                         var box = new Rect(r.x, r.y + 44 + i * 52, 900, 48);
                         if (GuiKit.Button(box, $"{F.MerchantLabel(run.Pending.Options[i])}  ·  {run.Pending.Prices[i]:N0}", run.Loose >= run.Pending.Prices[i], 18))
                         {
-                            Apply(F.MerchantBuy(i));
+                            Apply(F.MerchantBuy(i), "sfx_ui_compra");
                             break;
                         }
                     }
@@ -359,7 +359,7 @@ namespace SalYAlmas.Presentation
         {
             var rules = _meta.Fresno;
             GuiKit.Label(new Rect(r.x, r.y, r.width, 34), "Santuario de Sal: tus almitas quedaron guardadas", 24, Palette.GoldBright, TextAnchor.MiddleLeft, true);
-            if (GuiKit.Button(new Rect(r.x, r.y + 44, 400, 60), $"Descansar\n<size=14>{rules.RestSalinity} de Salinidad y +{rules.RestHeal:P0} de vida</size>", true, 20)) { Apply(F.SantuarioRest()); return; }
+            if (GuiKit.Button(new Rect(r.x, r.y + 44, 400, 60), $"Descansar\n<size=14>{rules.RestSalinity} de Salinidad y +{rules.RestHeal:P0} de vida</size>", true, 20)) { Apply(F.SantuarioRest(), "sfx_fresno_descanso"); return; }
             GuiKit.Label(new Rect(r.x, r.y + 112, r.width, 30), $"O entrenar un movimiento de Cadena (+{rules.TrainBonus:P0} hasta el final de la run):", 18, Palette.Parchment);
             var run = F.Run;
             for (int i = 0; i < run.Team.Count; i++)
@@ -369,7 +369,7 @@ namespace SalYAlmas.Presentation
                 foreach (ChainRole role in new[] { ChainRole.Apertura, ChainRole.Enlace, ChainRole.Cierre })
                 {
                     var box = new Rect(r.x + (int)role * 310, r.y + 146 + i * 44, 304, 40);
-                    if (GuiKit.Button(box, $"{def.ShortName}: {def.MoveFor(role).Name}", true, 15)) { Apply(F.SantuarioTrain(id, role)); return; }
+                    if (GuiKit.Button(box, $"{def.ShortName}: {def.MoveFor(role).Name}", true, 15)) { Apply(F.SantuarioTrain(id, role), "sfx_fresno_entrenar"); return; }
                 }
             }
         }

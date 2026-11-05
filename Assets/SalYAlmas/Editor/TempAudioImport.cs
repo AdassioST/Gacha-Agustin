@@ -9,6 +9,8 @@ namespace SalYAlmas.EditorTools
     /// </summary>
     internal sealed class TempAudioImport : AssetPostprocessor
     {
+        public override uint GetVersion() => 2;
+
         private void OnPreprocessAudio()
         {
             bool music = assetPath.Contains("/Resources/MusicaTemporal/");
@@ -17,6 +19,9 @@ namespace SalYAlmas.EditorTools
 
             var importer = (AudioImporter)assetImporter;
             var settings = importer.defaultSampleSettings;
+            settings.sampleRateSetting = AudioSampleRateSetting.PreserveSampleRate;
+            importer.forceToMono = sfx;
+            importer.loadInBackground = false;
             if (music)
             {
                 settings.loadType = AudioClipLoadType.Streaming;
@@ -26,7 +31,8 @@ namespace SalYAlmas.EditorTools
             else
             {
                 settings.loadType = AudioClipLoadType.DecompressOnLoad;
-                settings.compressionFormat = AudioCompressionFormat.ADPCM;
+                // Las colas tonales y el grano de sal sufren con ADPCM. El catálogo completo ocupa menos de 30 MB.
+                settings.compressionFormat = AudioCompressionFormat.PCM;
             }
             importer.defaultSampleSettings = settings;
         }

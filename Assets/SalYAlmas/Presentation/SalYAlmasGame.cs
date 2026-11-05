@@ -72,6 +72,7 @@ namespace SalYAlmas.Presentation
             if (BattleCamera == null) BattleCamera = Camera.main;
             _music = gameObject.AddComponent<TempMusicPlayer>();
             _sfx = gameObject.AddComponent<TempSfxPlayer>();
+            _sfx.MusicDuckRequested += _music.DuckFor;
             GuiKit.ButtonPressed += _sfx.OnButtonPressed;
             _saved.Load();
             LoadData();
@@ -99,6 +100,8 @@ namespace SalYAlmas.Presentation
                 {
                     StartBattle = StartExternalBattle,
                     OpenFormation = () => _mode = Mode.Formation,
+                    SoundRequested = (id, parts) => _sfx.PlayCue(id, parts),
+                    PullRevealed = rarity => _sfx.NotifyPull(rarity),
                 };
                 _mode = Mode.Hub;
             }
@@ -269,6 +272,11 @@ namespace SalYAlmas.Presentation
         {
             if (_mode == Mode.Battle) _director?.Tick(Time.unscaledDeltaTime);
             if (_music != null) _music.SetState(CurrentMusic(), _mode == Mode.Battle && _chain != null && _chain.IsOpen);
+            if (_sfx != null)
+            {
+                _sfx.SetAmbience(_mode == Mode.Hub && _hub != null ? _hub.AmbienceId : null);
+                if (_mode != Mode.Battle) _sfx.LeaveBattle();
+            }
             bool chainOpen = _mode == Mode.Battle && _chain != null && _chain.IsOpen;
             if (chainOpen != _chainWasOpen)
             {
@@ -280,6 +288,7 @@ namespace SalYAlmas.Presentation
         private void OnDestroy()
         {
             if (_sfx != null) GuiKit.ButtonPressed -= _sfx.OnButtonPressed;
+            if (_sfx != null && _music != null) _sfx.MusicDuckRequested -= _music.DuckFor;
         }
 
         /// <summary>

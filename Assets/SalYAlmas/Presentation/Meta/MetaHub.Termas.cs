@@ -132,6 +132,7 @@ namespace SalYAlmas.Presentation
             _lastPull.Clear();
             _lastPull.AddRange(results);
             Apply(r);
+            if (r.Ok && results.Count > 0) PullRevealed?.Invoke(results.Max(p => p.Rarity));
         }
 
         // ------------------------------------------------------------------ Libro contable

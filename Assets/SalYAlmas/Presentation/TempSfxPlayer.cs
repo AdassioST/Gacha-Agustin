@@ -28,8 +28,9 @@ namespace SalYAlmas.Presentation
         private const string Folder = "SfxTemporal/";
         private const string IndexName = "sfx_indice";
         private const string MutedKey = "SalYAlmas.EfectosSilenciados";
+        public const int VoiceLimit = SfxVoicePool.Capacity;
 
-        [Range(0f, 1f)] public float MasterVolume = 0.85f; // TUNING
+        [Range(0f, 1f)] public float MasterVolume = 0.75f; // TUNING
         [Tooltip("Tiempo mínimo entre dos disparos del mismo efecto, para no saturar las Cadenas.")]
         public float MinRepeatSeconds = 0.03f; // TUNING
 
@@ -44,6 +45,11 @@ namespace SalYAlmas.Presentation
         private readonly Dictionary<string, AudioClip> _clips = new Dictionary<string, AudioClip>();
         private readonly Dictionary<string, float> _lastPlayed = new Dictionary<string, float>();
         private readonly List<Scheduled> _scheduled = new List<Scheduled>();
+        private readonly Dictionary<string, List<string>> _variants = new Dictionary<string, List<string>>();
+        private readonly Dictionary<string, string> _lastVariant = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _lastHeardVariant = new Dictionary<string, string>();
+        private readonly HashSet<string> _missing = new HashSet<string>();
+        private readonly System.Random _random = new System.Random();
 
         // Estado del combate que solo importa al sonido.
         private Battle _battle;
@@ -55,16 +61,30 @@ namespace SalYAlmas.Presentation
         private bool _chainWithGuest;
         private float _pendingCloseTime = -1f;
 
-        private AudioSource _oneShots;
+        private SfxVoicePool _voices;
         private AudioSource _crystalLoop;
+        private AudioSource _ambienceA, _ambienceB;
+        private string _ambienceId;
+        private bool _crystalWanted;
+
+        public event Action<float, float> MusicDuckRequested;
+        public int ActiveVoices => _voices != null ? _voices.ActiveCount : 0;
 
         public bool Muted { get; private set; }
 
+        private void DuckMusic(float seconds, float factor)
+        {
+            if (!Muted) MusicDuckRequested?.Invoke(seconds, factor);
+        }
+
         private void Awake()
         {
-            _oneShots = CreateSource("Efectos");
+            _voices = new SfxVoicePool(transform);
             _crystalLoop = CreateSource("Efectos: cristalización");
             _crystalLoop.loop = true;
+            _ambienceA = CreateSource("Ambiente A");
+            _ambienceB = CreateSource("Ambiente B");
+            _ambienceA.loop = _ambienceB.loop = true;
             Muted = PlayerPrefs.GetInt(MutedKey, 0) == 1;
             LoadIndex();
         }
@@ -76,6 +96,10 @@ namespace SalYAlmas.Presentation
             var source = go.AddComponent<AudioSource>();
             source.playOnAwake = false;
             source.spatialBlend = 0f;
+            source.dopplerLevel = 0f;
+            source.reverbZoneMix = 0f;
+            source.priority = 220;
+            source.volume = 0f;
             return source;
         }
 
@@ -88,7 +112,16 @@ namespace SalYAlmas.Presentation
                 return;
             }
             var index = JsonUtility.FromJson<TempSfxIndex>(asset.text);
-            if (index != null && index.files != null) _files.AddRange(index.files);
+            if (index == null || index.files == null) return;
+            _files.AddRange(index.files);
+            foreach (var file in _files)
+            {
+                string family = Family(file);
+                if (!_variants.TryGetValue(family, out var list)) _variants[family] = list = new List<string>();
+                list.Add(file);
+                // Precargar una vez evita disco y decodificación en el frame del golpe.
+                Clip(file);
+            }
         }
 
         public void ToggleMute()
@@ -96,7 +129,11 @@ namespace SalYAlmas.Presentation
             Muted = !Muted;
             PlayerPrefs.SetInt(MutedKey, Muted ? 1 : 0);
             PlayerPrefs.Save();
-            if (Muted) _crystalLoop.Stop();
+            _scheduled.Clear();
+            _pendingCloseTime = -1f;
+            if (Muted) _voices.Stop();
+            _crystalLoop.mute = _ambienceA.mute = _ambienceB.mute = Muted;
+            UpdateCrystalLoop();
         }
 
         // ------------------------------------------------------------------ Conexión con la escena
@@ -110,7 +147,11 @@ namespace SalYAlmas.Presentation
             _chainRole.Clear();
             _band.Clear();
             _scheduled.Clear();
+            _lastPlayed.Clear();
+            _pendingCloseTime = -1f;
             _sparkIndex = 0;
+            _crystalWanted = false;
+            _voices.Stop();
             _crystalLoop.Stop();
         }
 
@@ -130,6 +171,42 @@ namespace SalYAlmas.Presentation
         }
 
         public void OnButtonPressed() => Play("sfx_ui_tocar", 0.8f);
+
+        /// <summary>Acciones de la presentación; las variantes mantienen la afinación y no se repiten consecutivamente.</summary>
+        public void PlayCue(string id, params string[] parts) => Play(id, 1f, 0f, parts);
+
+        public void NotifyPull(int rarity)
+        {
+            int tier = Mathf.Clamp(rarity, 3, 5);
+            string color = tier == 5 ? "dorado" : tier == 4 ? "violeta" : "blanco";
+            // La lista actual muestra el resultado de inmediato: el vapor y su firma suenan en ese mismo frame.
+            Play("sfx_tirada_vapor", 0.7f, 0f, tier.ToString(CultureInfo.InvariantCulture));
+            Play("mus_tirada_vapor_" + color);
+            DuckMusic(rarity >= 5 ? 3.2f : 2f, 0.35f);
+        }
+
+        public void SetAmbience(string id)
+        {
+            if (id == _ambienceId) return;
+            _ambienceId = id;
+            var old = _ambienceA; _ambienceA = _ambienceB; _ambienceB = old;
+            _ambienceA.Stop();
+            _ambienceA.clip = null;
+            _ambienceA.volume = 0f;
+            if (string.IsNullOrEmpty(id)) return;
+            var name = Resolve(id);
+            _ambienceA.clip = name == null ? null : Clip(name);
+            if (_ambienceA.clip != null) _ambienceA.Play();
+        }
+
+        public void LeaveBattle()
+        {
+            _battle = null;
+            _band.Clear();
+            _scheduled.Clear();
+            _pendingCloseTime = -1f;
+            _crystalWanted = false;
+        }
 
         /// <summary>Traduce un evento del núcleo a sus efectos. Lo invoca BattleDirector.EventPresented.</summary>
         public void OnEvent(BattleEvent e)
@@ -235,12 +312,17 @@ namespace SalYAlmas.Presentation
                     break;
 
                 case UnitDefeated u:
+                    _band.Remove(u.UnitId);
+                    UpdateCrystalLoop();
                     Play("sfx_combate_caida");
                     if (u.Side == Side.Enemy) Play("sfx_almita_soltar", 0.9f, 0.25f);
                     break;
 
                 case BattleEnded end:
-                    _crystalLoop.Stop();
+                    _band.Clear();
+                    UpdateCrystalLoop();
+                    _scheduled.Clear();
+                    _pendingCloseTime = -1f;
                     Play(end.Outcome == BattleOutcome.Victory ? "sfx_combate_victoria" : "sfx_combate_derrota");
                     break;
             }
@@ -298,6 +380,7 @@ namespace SalYAlmas.Presentation
             {
                 if (h.IsSpark)
                 {
+                    DuckMusic(0.5f, 0.6f);
                     _sparkIndex = Mathf.Min(_sparkIndex + 1, 5);
                     Play("sfx_cadena_spark", 1f, 0f, _sparkIndex.ToString(CultureInfo.InvariantCulture));
                     Play("sfx_almita_spark", 0.7f, 0.05f);
@@ -346,6 +429,7 @@ namespace SalYAlmas.Presentation
 
         private void OnAscension(AscensionCast asc)
         {
+            DuckMusic(asc.Level == 1 ? 1.8f : asc.Level == 2 ? 2.6f : 3.4f, 0.4f);
             var witch = _battle != null ? _battle.FindWitch(asc.WitchId) : null;
             string planet = witch != null ? PlanetName(witch.Dominant) : "sol";
             Play("sfx_ascension_lanzar", 1f, 0f, asc.Level.ToString(CultureInfo.InvariantCulture));
@@ -360,20 +444,17 @@ namespace SalYAlmas.Presentation
         {
             bool any = false;
             foreach (var kv in _band) if (kv.Value == SalinityBand.CristalizacionTurbia) any = true;
-            if (any && !Muted && !_crystalLoop.isPlaying)
+            _crystalWanted = any;
+            if (any && !_crystalLoop.isPlaying)
             {
                 var name = Resolve("sfx_salinidad_cristal_bucle");
                 var clip = name != null ? Clip(name) : null;
                 if (clip != null)
                 {
                     _crystalLoop.clip = clip;
-                    _crystalLoop.volume = MasterVolume * 0.5f;
+                    _crystalLoop.volume = 0f;
                     _crystalLoop.Play();
                 }
-            }
-            else if (!any && _crystalLoop.isPlaying)
-            {
-                _crystalLoop.Stop();
             }
         }
 
@@ -381,6 +462,11 @@ namespace SalYAlmas.Presentation
 
         private void Update()
         {
+            float dt = Time.unscaledDeltaTime;
+            _voices.Tick(MasterVolume, Time.unscaledTime, Muted);
+            FadeLoop(_crystalLoop, _crystalWanted ? MasterVolume * 0.28f : 0f, dt, 0.25f);
+            FadeLoop(_ambienceA, string.IsNullOrEmpty(_ambienceId) ? 0f : MasterVolume * 0.42f, dt, 0.8f);
+            FadeLoop(_ambienceB, 0f, dt, 0.8f);
             if (_pendingCloseTime >= 0f && Time.unscaledTime >= _pendingCloseTime)
             {
                 _pendingCloseTime = -1f;
@@ -388,13 +474,20 @@ namespace SalYAlmas.Presentation
             }
 
             float now = Time.unscaledTime;
-            for (int i = _scheduled.Count - 1; i >= 0; i--)
+            for (int i = 0; i < _scheduled.Count;)
             {
-                if (_scheduled[i].Time > now) continue;
+                if (_scheduled[i].Time > now) { i++; continue; }
                 var s = _scheduled[i];
                 _scheduled.RemoveAt(i);
                 PlayNow(s.Name, s.Volume);
             }
+        }
+
+        private void FadeLoop(AudioSource source, float target, float dt, float seconds)
+        {
+            source.mute = Muted;
+            source.volume = Mathf.MoveTowards(source.volume, target, dt / seconds);
+            if (target <= 0f && source.volume <= 0f && source.isPlaying) source.Stop();
         }
 
         /// <summary>Busca la variante más específica que exista y la reproduce, ahora o con retraso.</summary>
@@ -402,7 +495,11 @@ namespace SalYAlmas.Presentation
         {
             if (Muted) return;
             var name = Resolve(id, parts);
-            if (name == null) return;
+            if (name == null)
+            {
+                if (_missing.Add(id)) Debug.LogWarning("Efectos: no hay variante para " + id + ".");
+                return;
+            }
             if (delay > 0f)
                 _scheduled.Add(new Scheduled { Time = Time.unscaledTime + delay, Name = name, Volume = volume });
             else
@@ -413,13 +510,22 @@ namespace SalYAlmas.Presentation
         {
             if (Muted) return;
             float now = Time.unscaledTime;
-            if (_lastPlayed.TryGetValue(name, out var last) && now - last < MinRepeatSeconds) return;
-            _lastPlayed[name] = now;
+            string family = Family(name);
+            float interval = family.StartsWith("sfx_ui_", StringComparison.Ordinal) ? Mathf.Max(0.08f, MinRepeatSeconds) : MinRepeatSeconds;
+            if (_lastPlayed.TryGetValue(family, out var last) && now - last < interval) return;
             var clip = Clip(name);
-            if (clip != null) _oneShots.PlayOneShot(clip, MasterVolume * volume);
+            if (clip != null && _voices.Play(clip, family, volume, MasterVolume, now))
+            {
+                _lastPlayed[family] = now;
+                _lastHeardVariant[family] = name;
+            }
         }
 
-        private bool Exists(string id) => Resolve(id) != null;
+        private bool Exists(string id)
+        {
+            foreach (var f in _files) if (f == id || f.StartsWith(id + "__", StringComparison.Ordinal)) return true;
+            return false;
+        }
 
         /// <summary>
         /// Prueba id__p1__p2, luego id__p1 y luego id, cada uno con o sin "__vN". Si nada coincide, cualquier variante del id.
@@ -427,22 +533,37 @@ namespace SalYAlmas.Presentation
         private string Resolve(string id, params string[] parts)
         {
             if (_files.Count == 0 || string.IsNullOrEmpty(id)) return null;
-            var candidates = new List<string>();
+            if (_clips.ContainsKey(id) && !_variants.ContainsKey(id)) return id; // Variante exacta del banco de pruebas.
             for (int k = parts != null ? parts.Length : 0; k >= 0; k--)
             {
                 var sb = new StringBuilder(id);
                 for (int i = 0; i < k; i++)
                     if (!string.IsNullOrEmpty(parts[i])) sb.Append("__").Append(parts[i]);
                 string prefix = sb.ToString();
-                candidates.Clear();
-                foreach (var f in _files)
-                    if (f == prefix || IsVariation(f, prefix)) candidates.Add(f);
-                if (candidates.Count > 0) return candidates[UnityEngine.Random.Range(0, candidates.Count)];
+                if (_variants.TryGetValue(prefix, out var variants)) return PickVariant(prefix, variants);
             }
-            candidates.Clear();
+            var candidates = new List<string>();
             foreach (var f in _files)
                 if (f.StartsWith(id + "__", StringComparison.Ordinal)) candidates.Add(f);
-            return candidates.Count > 0 ? candidates[UnityEngine.Random.Range(0, candidates.Count)] : null;
+            return candidates.Count > 0 ? PickVariant(id, candidates) : null;
+        }
+
+        private string PickVariant(string key, List<string> candidates)
+        {
+            int index = _random.Next(candidates.Count);
+            // Un intento descartado por el cooldown o por falta de voces no cuenta como una escucha.
+            if (!_lastHeardVariant.TryGetValue(key, out var last)) _lastVariant.TryGetValue(key, out last);
+            if (candidates.Count > 1 && candidates[index] == last)
+                index = (index + 1 + _random.Next(candidates.Count - 1)) % candidates.Count;
+            _lastVariant[key] = candidates[index];
+            return candidates[index];
+        }
+
+        private static string Family(string file)
+        {
+            int suffix = file.LastIndexOf("__v", StringComparison.Ordinal);
+            if (suffix >= 0 && IsVariation(file, file.Substring(0, suffix))) return file.Substring(0, suffix);
+            return file;
         }
 
         private static bool IsVariation(string file, string prefix)

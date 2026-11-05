@@ -38,7 +38,7 @@
     },
     {
       "context": "Victory",
-      "mode": "shuffle",
+      "mode": "once",
       "first": "",
       "tracks": [
         { "resource": "TEMP_mus_jingle_victoria__t01__308c6637", "gainDb": -1.8 },

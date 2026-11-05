@@ -60,7 +60,7 @@ namespace SalYAlmas.Presentation
                 + (prefix != null ? $"\nPrefijo: {prefix.Mods}" : "\nSin prefijo");
             GuiKit.Label(new Rect(x, y, width, 112), info, 17, Palette.Parchment, TextAnchor.UpperLeft, false, true);
             y += 118;
-            if (GuiKit.Button(new Rect(x, y, width, 56), $"Reforjar\n<size=14>{Game.Forge.ReforgeCost(sel.Uid).Describe(_meta.Catalog)}</size>", true, 20)) Apply(Game.Forge.Reforge(sel.Uid));
+            if (GuiKit.Button(new Rect(x, y, width, 56), $"Reforjar\n<size=14>{Game.Forge.ReforgeCost(sel.Uid).Describe(_meta.Catalog)}</size>", true, 20)) Apply(Game.Forge.Reforge(sel.Uid), "sfx_taller_reforja");
             y += 62;
             GuiKit.Label(new Rect(x, y, width, 26), "Equipar a:", 18, Palette.GoldBright, TextAnchor.MiddleLeft, true);
             y += 28;
@@ -73,7 +73,7 @@ namespace SalYAlmas.Presentation
                 if (GuiKit.Button(box, (hasIt ? "● " : "") + Game.Combat.Witch(id).ShortName, true, 16))
                 {
                     if (hasIt) { Game.Forge.Unequip(id); Save(); }
-                    else Apply(Game.Forge.Equip(id, sel.Uid));
+                    else Apply(Game.Forge.Equip(id, sel.Uid), "sfx_ui_confirmar");
                 }
                 k++;
             }
@@ -105,7 +105,7 @@ namespace SalYAlmas.Presentation
                 if (GuiKit.Button(box, text, check.CanCraft, 17))
                 {
                     var result = Game.Forge.Craft(id, out var made);
-                    Apply(result);
+                    Apply(result, rec.Kind == RecipeKind.Fusion ? "sfx_taller_fusion" : "sfx_taller_yunque", _meta.Weapon(rec.Output).Tier.ToString());
                     if (made != null) _selectedWeapon = made.Uid;
                 }
             });
@@ -133,7 +133,7 @@ namespace SalYAlmas.Presentation
             for (int tier = 1; tier <= 2; tier++)
             {
                 if (GuiKit.Button(new Rect(x, y, width, 66), $"Refinar a {names[tier]}\n<size=13>{Game.Forge.RefineCost(_refinePlanet, tier).Describe(_meta.Catalog)}</size>", l.CanAfford(Game.Forge.RefineCost(_refinePlanet, tier)), 17))
-                    Apply(Game.Forge.Refine(_refinePlanet, tier));
+                    Apply(Game.Forge.Refine(_refinePlanet, tier), "sfx_taller_altar", _refinePlanet.ToString().ToLowerInvariant());
                 y += 72;
             }
         }
@@ -162,7 +162,7 @@ namespace SalYAlmas.Presentation
             {
                 var b = rules.Bases[i];
                 var box = new Rect(x + i * 260, y, 254, 44);
-                if (GuiKit.Button(box, b.Name, true, 17)) _base = b.Id;
+                if (GuiKit.Button(box, b.Name, true, 17) && _base != b.Id) { _base = b.Id; Sound("sfx_taller_ingrediente", "base"); }
                 if (_base == b.Id) GuiKit.Frame(box, Palette.GoldBright, 3f);
             }
             y += 54;
@@ -173,7 +173,7 @@ namespace SalYAlmas.Presentation
             {
                 string label = i < 7 ? Planets.DisplayName(Planets.All[i]) : i == 7 ? "Sal Negra" : i == 8 ? "Almitas" : "Sin sal";
                 var box = new Rect(x + (i % 5) * 226, y + (i / 5) * 48, 220, 44);
-                if (GuiKit.Button(box, label, true, 17)) _saltChoice = i;
+                if (GuiKit.Button(box, label, true, 17) && _saltChoice != i) { _saltChoice = i; Sound("sfx_taller_ingrediente", i == 8 ? "almitas" : "sal"); }
                 if (_saltChoice == i) GuiKit.Frame(box, Palette.GoldBright, 3f);
             }
             y += 104;
@@ -192,7 +192,7 @@ namespace SalYAlmas.Presentation
             {
                 var re = rules.Reagents[i];
                 var box = new Rect(x + i * 226, y, 220, 44);
-                if (GuiKit.Button(box, re.Name, true, 16)) _reagent = re.Id;
+                if (GuiKit.Button(box, re.Name, true, 16) && _reagent != re.Id) { _reagent = re.Id; Sound("sfx_taller_ingrediente", "reactivo"); }
                 if (_reagent == re.Id) GuiKit.Frame(box, Palette.GoldBright, 3f);
             }
             y += 56;
@@ -209,7 +209,12 @@ namespace SalYAlmas.Presentation
             {
                 var result = Game.Cauldron.Brew(_base, salt, _reagent);
                 Note(result.Message, result.Ok);
-                if (result.Ok) Save();
+                if (result.Ok)
+                {
+                    Save();
+                    Sound(result.Turbid ? "sfx_taller_salmuera_turbia" : "sfx_taller_salmuera_ok", result.Potency.Length == 0 ? "basica" : result.Potency.ToLowerInvariant().Replace("á", "a"));
+                    if (result.Discovered) Sound("sfx_taller_receta");
+                }
             }
 
             var side = new Rect(r.xMax + 10, a.y, a.xMax - r.xMax - 10, a.height);

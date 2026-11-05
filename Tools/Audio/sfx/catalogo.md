@@ -2,7 +2,7 @@
 
 Lo escribe `sfx.py` después de medir cada WAV con ffmpeg (`ebur128=peak=true`). No lo edites a mano: cambia la receta y vuelve a correr `python -I Tools/Audio/sfx/sfx.py generar`.
 
-- **IDs:** 165 · **archivos:** 470 · **tamaño total:** 28.6 MB (tope 30 MB)
+- **IDs:** 165 · **archivos:** 470 · **tamaño total:** 29.6 MB (tope 30 MB)
 - **Formato:** WAV de 48 kHz y 16 bits. Todo es mono salvo donde dice estéreo; FMOD pone el paneo y la cola estéreo.
 - **Sonoridad:** máximo momentáneo (ventana de 400 ms, `M máx`) en LUFS; en los bucles, la integrada (`I`). El objetivo de cada familia está en el README.
 - **Pico real:** el más alto de las variantes, en dBTP. Ninguno pasa de −1 dBTP.
@@ -151,17 +151,17 @@ Lo escribe `sfx.py` después de medir cada WAV con ffmpeg (`ebur128=peak=true`).
 | `sfx_fresno_mancha_absorbida` | El Fresno absorbe la Mancha y devuelve 30 % como Savia: madera que gime, savia que baja y una campanita | `f2:mancha_absorbida` | 1 archivo | 0.95 | M máx -19.1 | -3.4 | B · final temporal |
 | `sfx_fresno_eco` | Guardar un Eco: nota de cristal que se repite en ecos que se apagan | `f2:eco_guardado` | 1 archivo | 0.64 | M máx -21.0 | -5.8 | B · final temporal |
 | `sfx_fresno_ofrenda` | Ofrenda: el árbol crece, madera que cruje hacia arriba, hojas y un acorde que se abre | `f2:ofrenda` | 1 archivo | 0.98 | M máx -19.0 | -6.9 | B · final temporal |
-| `sfx_ambiente_raices` | Lecho de las Raíces: humedad grave, gotas y madera que cruje lejos | Carga de escena | 1 archivo | 2.00 | I -30.4 | -10.1 | B · borrador · bucle |
-| `sfx_ambiente_tronco` | Lecho del Tronco: viento hueco y ceniza que crepita | Carga de escena | 1 archivo | 2.00 | I -30.4 | -15.8 | B · borrador · bucle |
-| `sfx_ambiente_ramas` | Lecho de las Ramas: viento entre hojas | Carga de escena | 1 archivo | 2.00 | I -30.4 | -17.8 | B · borrador · bucle |
-| `sfx_ambiente_copa` | Lecho de la Copa: aire alto y un cristal que respira | Carga de escena | 1 archivo | 2.00 | I -30.4 | -18.6 | B · borrador · bucle |
+| `sfx_ambiente_raices` | Lecho de las Raíces: humedad grave, gotas y madera que cruje lejos | Carga de escena | 1 archivo | 3.40 | I -30.3 | -7.9 | B · borrador · bucle |
+| `sfx_ambiente_tronco` | Lecho del Tronco: viento hueco y ceniza que crepita | Carga de escena | 1 archivo | 3.40 | I -30.2 | -16.0 | B · borrador · bucle |
+| `sfx_ambiente_ramas` | Lecho de las Ramas: viento entre hojas | Carga de escena | 1 archivo | 3.40 | I -30.2 | -16.9 | B · borrador · bucle |
+| `sfx_ambiente_copa` | Lecho de la Copa: aire alto y un cristal que respira | Carga de escena | 1 archivo | 3.40 | I -30.2 | -18.5 | B · borrador · bucle |
 
 ## 3.5.10 Termas y tirada del gacha
 
 | ID | Sonido | Disparador | Variantes | Duración (s) | Sonoridad (LUFS) | Pico real (dBTP) | Estado |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `sfx_ambiente_termas_dia` | Lecho de las Termas de día: agua que lame la piedra, gotas, vapor y una brisa | Carga de escena (hora local de 6:00 a 18:59) | 1 archivo | 1.60 | I -30.4 | -16.1 | B · borrador · bucle |
-| `sfx_ambiente_termas_noche` | Lecho de las Termas de noche: agua más quieta, gotas espaciadas y grillos lejanos | Carga de escena (hora local de 19:00 a 5:59) | 1 archivo | 1.60 | I -31.5 | -15.7 | B · borrador · bucle |
+| `sfx_ambiente_termas_dia` | Lecho de las Termas de día: agua que lame la piedra, gotas, vapor y una brisa | Carga de escena (hora local de 6:00 a 18:59) | 1 archivo | 3.40 | I -30.2 | -14.5 | B · borrador · bucle |
+| `sfx_ambiente_termas_noche` | Lecho de las Termas de noche: agua más quieta, gotas espaciadas y grillos lejanos | Carga de escena (hora local de 19:00 a 5:59) | 1 archivo | 3.40 | I -31.2 | -15.7 | B · borrador · bucle |
 | `sfx_termas_tortuga_respira` | La tortuga gigante respira: inhalación y exhalación lentas y graves, de aire, sin voz | Temporizador de escena (cada 20 a 40 s) | 1 archivo | 1.68 | M máx -26.2 | -14.1 | B · final temporal |
 | `sfx_termas_tocar` | Tocar a una bruja (cabeza, mano, sombrero, cola): una palmadita suave en pelaje, plumas, membranas, escamas o lana | `ui:termas_tocar` (`Especie`) | 8: `canida`, `felina`, `ave`, `alada`, `escamosa`, `ungulada`, `pequena`, `robusta` | 0.23 a 0.30 | M máx -22.0 | -2.3 | B · final temporal |
 | `sfx_termas_bano` | Entrar y salir del agua termal: chapoteo suave, burbujas y agua que escurre | `ui:bano` | 2: `entrar`, `salir` | 0.88 | M máx -21.4 a -21.0 | -3.8 | B · final temporal |
@@ -212,7 +212,7 @@ Lo escribe `sfx.py` después de medir cada WAV con ffmpeg (`ebur128=peak=true`).
 | `sfx_taller_yunque` | Martillo del Yunque Astral: golpe de forja en Re, más brillante por nivel del arma (Rústico, Forjado, Alquímico, Astral, Quintaesencia) | `f2:forja` (nivel 1 a 5) | 5: `1`, `2`, `3`, `4`, `5` | 0.26 a 0.64 | M máx -19.5 a -17.0 | -1.5 | B · final temporal |
 | `sfx_taller_reforja` | Reforja: el astrolabio gira, se frena y se detiene en un prefijo con un clic y una campanita | `f2:reforja` | 1 archivo | 1.30 | M máx -19.9 | -1.5 | B · final temporal |
 | `sfx_taller_fusion` | Fusión legendaria: cuencos que giran, un brillo que sube y un acorde de campanas de Re mayor con un golpe | `f2:fusion` | 1 archivo | 1.74 | M máx -15.0 | -3.0 | B · final temporal |
-| `sfx_taller_caldero` | Hervor del Caldero de Bruja (bucle): burbujas graves y un fuego bajo | Pantalla del Caldero | 1 archivo | 1.40 | I -28.4 | -15.6 | B · borrador · bucle |
+| `sfx_taller_caldero` | Hervor del Caldero de Bruja (bucle): burbujas graves y un fuego bajo | Pantalla del Caldero | 1 archivo | 3.40 | I -28.1 | -14.1 | B · borrador · bucle |
 | `sfx_taller_ingrediente` | Echar un ingrediente al caldero: base (chorro), sal (granos), reactivo (gota que burbujea) o almitas (campanitas que se hunden) | `ui:ingrediente` | 4: `base`, `sal`, `reactivo`, `almitas` | 0.44 a 0.53 | M máx -22.3 a -22.0 | -1.5 | B · final temporal |
 | `sfx_taller_salmuera_ok` | Salmuera lista: el burbujeo se resuelve en cuencos de cobre; una nota (básica), dos (mejorada) o una tríada con brillo (maestra) | `f2:salmuera_ok` | 3: `basica`, `mejorada`, `maestra` | 0.75 a 0.83 | M máx -19.0 | -5.9 | B · final temporal |
 | `sfx_taller_salmuera_turbia` | Falla: Salmuera Turbia; borbotones torpes, un cuenco desafinado y un 'plop' | `f2:salmuera_turbia` | 1 archivo | 0.78 | M máx -20.0 | -7.9 | B · final temporal |

@@ -217,7 +217,7 @@ for _z in ZONAS:
                                          "ramas": "Lecho de las Ramas: viento entre hojas",
                                          "copa": "Lecho de la Copa: aire alto y un cristal que respira"}[z],
                 "Carga de escena", var(v=[1]), objetivo=-30, metrica="I", bucle=True, estado="borrador",
-                notas="Bucle corto de 2 s por el tope de tamaño; el lecho final va en streaming (6.1).")
+                notas="Bucle de 3,4 s para el prototipo; el lecho final va en streaming (6.1).")
         def _fn(ctx, v):
-            return _lecho(ctx, 2.0, z)
+            return _lecho(ctx, 3.4, z)
     _reg(_z)

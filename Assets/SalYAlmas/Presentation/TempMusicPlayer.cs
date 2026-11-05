@@ -46,7 +46,7 @@ namespace SalYAlmas.Presentation
         private const string CatalogName = "musica_temporal";
         private const string MutedKey = "SalYAlmas.MusicaSilenciada";
 
-        [Range(0f, 1f)] public float MasterVolume = 0.7f; // TUNING
+        [Range(0f, 1f)] public float MasterVolume = 0.55f; // TUNING
         public float FadeSeconds = 1.5f; // TUNING
         [Tooltip("Volumen relativo mientras la pantalla de Cadena está abierta.")]
         [Range(0f, 1f)] public float DuckFactor = 0.45f; // TUNING
@@ -58,6 +58,9 @@ namespace SalYAlmas.Presentation
         private AudioSource _current;
         private AudioSource _previous;
         private float _currentGain = 1f;
+        private float _previousGain = 1f, _previousEnvelope;
+        private float _fadeElapsed, _envelope, _duck = 1f;
+        private float _duckUntil, _transientDuck = 1f;
         private bool _ducked;
         private bool _advancing;
         private MusicContext _context = MusicContext.None;
@@ -81,6 +84,9 @@ namespace SalYAlmas.Presentation
             source.playOnAwake = false;
             source.loop = false;
             source.spatialBlend = 0f;
+            source.priority = 0;
+            source.dopplerLevel = 0f;
+            source.reverbZoneMix = 0f;
             source.volume = 0f;
             return source;
         }
@@ -118,11 +124,23 @@ namespace SalYAlmas.Presentation
             Muted = !Muted;
             PlayerPrefs.SetInt(MutedKey, Muted ? 1 : 0);
             PlayerPrefs.Save();
+            _current.mute = _previous.mute = Muted;
+        }
+
+        /// <summary>Espacio para firmas, sin reiniciar la canción ni el fundido entre contextos.</summary>
+        public void DuckFor(float seconds, float factor)
+        {
+            _transientDuck = Time.unscaledTime >= _duckUntil ? Mathf.Clamp01(factor) : Mathf.Min(_transientDuck, Mathf.Clamp01(factor));
+            _duckUntil = Mathf.Max(_duckUntil, Time.unscaledTime + Mathf.Max(0f, seconds));
         }
 
         /// <summary>Elige la siguiente pista del contexto actual y hace el fundido cruzado hacia ella.</summary>
         private void PlayNext()
         {
+            _previousGain = _currentGain;
+            _previousEnvelope = _envelope;
+            _fadeElapsed = 0f;
+            _envelope = 0f;
             var old = _current;
             _current = _previous;
             _previous = old;
@@ -189,11 +207,17 @@ namespace SalYAlmas.Presentation
                 }
             }
 
-            float step = Time.unscaledDeltaTime / Mathf.Max(0.01f, FadeSeconds);
-            float target = Muted || _current.clip == null ? 0f : MasterVolume * _currentGain * (_ducked ? DuckFactor : 1f);
-            _current.volume = Mathf.MoveTowards(_current.volume, target, step);
-            _previous.volume = Mathf.MoveTowards(_previous.volume, 0f, step);
-            if (_previous.isPlaying && _previous.volume <= 0f)
+            float dt = Time.unscaledDeltaTime;
+            float targetDuck = _ducked ? DuckFactor : 1f;
+            if (Time.unscaledTime < _duckUntil) targetDuck = Mathf.Min(targetDuck, _transientDuck);
+            _duck = Mathf.Lerp(_duck, targetDuck, 1f - Mathf.Exp(-dt / (targetDuck < _duck ? 0.06f : 0.6f)));
+            _fadeElapsed += dt;
+            float progress = Mathf.Clamp01(_fadeElapsed / Mathf.Max(0.01f, FadeSeconds));
+            _envelope = Mathf.Sin(progress * Mathf.PI * 0.5f);
+            _current.mute = _previous.mute = Muted;
+            _current.volume = MasterVolume * _currentGain * _duck * _envelope;
+            _previous.volume = MasterVolume * _previousGain * _duck * _previousEnvelope * Mathf.Cos(progress * Mathf.PI * 0.5f);
+            if (_previous.isPlaying && progress >= 1f)
             {
                 _previous.Stop();
                 _previous.clip = null;

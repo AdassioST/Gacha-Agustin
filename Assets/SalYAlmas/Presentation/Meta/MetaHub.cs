@@ -18,6 +18,7 @@ namespace SalYAlmas.Presentation
 
         private const string Slot = "perfil";
         private static readonly DateTime Epoch = new DateTime(2026, 1, 1);
+        private static readonly string[] ZoneSounds = { "raices", "tronco", "ramas", "copa" };
 
         private readonly MetaDatabase _meta;
         private readonly ISaveStore _store;
@@ -28,6 +29,24 @@ namespace SalYAlmas.Presentation
         /// <summary>Pide a la escena un combate con el HUD real; al terminar devuelve el Battle.</summary>
         public Action<BattleSetup, Action<Battle>> StartBattle;
         public Action OpenFormation;
+        public Action<string, string[]> SoundRequested;
+        public Action<int> PullRevealed;
+
+        public string AmbienceId
+        {
+            get
+            {
+                if (_tab == Tab.Caldero) return "sfx_taller_caldero";
+                if (_tab == Tab.Termas) return DateTime.Now.Hour >= 19 || DateTime.Now.Hour < 7
+                    ? "sfx_ambiente_termas_noche" : "sfx_ambiente_termas_dia";
+                if (_tab == Tab.Fresno && Game.Fresno.InRun)
+                    return "sfx_ambiente_" + ZoneSound(Game.Fresno.Run.Zone);
+                return null;
+            }
+        }
+
+        private static string ZoneSound(int zone) => ZoneSounds[Mathf.Clamp(zone, 0, 3)];
+        private void Sound(string id, params string[] parts) => SoundRequested?.Invoke(id, parts);
 
         public MetaGame Game { get; private set; }
 
@@ -49,8 +68,8 @@ namespace SalYAlmas.Presentation
             }
             catch (Exception ex)
             {
-                Debug.LogWarning("No se pudo cargar el perfil: " + ex.Message);
-                Game = null;
+                // No sustituir un guardado incompatible o dañado por un perfil de prueba.
+                throw new InvalidOperationException("No se pudo cargar el perfil. El archivo se conserva sin cambios: " + ex.Message, ex);
             }
             if (Game == null) NewProfile();
             else Game.SetDay(Today());
@@ -74,12 +93,17 @@ namespace SalYAlmas.Presentation
         {
             _note = text ?? "";
             _noteColor = ok ? Palette.Parchment : Palette.Danger;
+            if (!ok) Sound("sfx_ui_error");
         }
 
-        private void Apply(OpResult r)
+        private void Apply(OpResult r, string sound = null, params string[] parts)
         {
             Note(r.Message, r.Ok);
-            if (r.Ok) Save();
+            if (r.Ok)
+            {
+                Save();
+                if (sound != null) Sound(sound, parts);
+            }
         }
 
         private void ResetSelections()
@@ -118,7 +142,11 @@ namespace SalYAlmas.Presentation
             for (int i = 0; i < names.Length; i++)
             {
                 var r = new Rect(16 + i * 142, 14, 134, 66);
-                if (GuiKit.Button(r, names[i], true, 24)) { _tab = (Tab)i; _note = ""; }
+                if (GuiKit.Button(r, names[i], true, 24) && _tab != (Tab)i)
+                {
+                    Sound((Tab)i == Tab.Libro ? "sfx_libro_abrir" : _tab == Tab.Libro ? "sfx_libro_cerrar" : "sfx_ui_pestana");
+                    _tab = (Tab)i; _note = "";
+                }
                 if ((int)_tab == i) GuiKit.Frame(r, Palette.GoldBright, 3f);
             }
             var l = Game.Ledger;

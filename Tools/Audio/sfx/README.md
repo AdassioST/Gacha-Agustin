@@ -146,7 +146,7 @@ El tope es de 30 MB para todos los WAV. Se cuida con tres perillas en `recetas/_
 - `TOPE_POR_NIVEL`: tope para los IDs que no están en la tabla.
 - Las variantes de cada receta: los eventos frecuentes (golpes, turnos, notas, crujido, rituales, Partitura, interfaz) tienen variaciones; los raros, una sola.
 
-Además, el recorte final quita la cola por debajo de −34 dB del pico y la funde. El total actual está al principio de [catalogo.md](catalogo.md).
+Además, el recorte final quita la cola por debajo de −62 dB del pico y aplica un fundido de coseno. El total actual está al principio de [catalogo.md](catalogo.md).
 
 ## Revisión sin escuchar
 
@@ -154,7 +154,7 @@ Además, el recorte final quita la cola por debajo de −34 dB del pico y la fun
 2. **Pico real y tamaño** con ffmpeg: la generación falla si algo se pasa.
 3. **Hojas de revisión** (`revision/<sistema>.png`): espectrograma logarítmico de 40 Hz a 20 kHz (72 dB de rango, contra el máximo de cada archivo), forma de onda (rojo si satura), duración, M máx y pico real. Un clic es una línea vertical de banda ancha; un corte, una cola que termina en seco; el DC, una forma de onda desplazada.
 
-Avisos que quedan y se revisaron a mano: `sfx_ritual_solenne` (los granos del jugo y la sal dejan huecos naturales a −23 dB) y `sfx_taller_altar__sol` (hueco entre dos crujidos). No son cortes.
+Quedan cinco avisos de «cola cortada»: cuatro variantes de `sfx_ritual_solenne` y `sfx_taller_altar__sol`. La inspección de la envolvente sitúa las caídas en huecos internos de los granos/crujidos o en el fundido final; los cinco WAV terminan en cero y los últimos 10 ms están a −88,7 dBFS RMS o menos. Son avisos del detector, no errores de borde. Se conservan para la escucha humana; no se han aprobado subjetivamente.
 
 ## Cómo agregar un sonido
 
