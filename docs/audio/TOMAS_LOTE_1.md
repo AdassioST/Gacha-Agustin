@@ -4,7 +4,9 @@ Revisión del 5 de noviembre de 2026 de las seis canciones generadas con Suno a 
 
 ## Resumen
 
-| Cue | Toma recomendada | Por qué |
+Por decisión del usuario se usan **las dos tomas de cada canción**: la recomendada como principal y la otra en otra pantalla (sección "Cómo se usan").
+
+| Cue | Toma principal | Por qué |
 | --- | --- | --- |
 | `mus_titulo_tema` (P01) | **t01**, con reservas | Es la única centrada en Re, como pide la ficha (Re dórico). La t02 sale en Sol mayor. Pero es la pista ancla de todo el juego y la ficha pide de 10 a 12 tomas para elegirla: dos no bastan |
 | `mus_combate_normal` (P07) | **t01** | Tempo estable en unos 129 BPM durante toda la canción (pedido: 128). La t02 se acelera a unos 136 BPM desde el segundo 40, y un bucle de combate necesita tempo fijo para que la Partitura caiga en el pulso |
@@ -54,20 +56,45 @@ Tres cosas para que siga así:
 - **Descargas:** Pro tiene un límite de unas 20 descargas al mes, y el lote 1 ya usó seis. Para los 66 cues con varias tomas cada uno, Premier (60 al mes) sigue siendo lo recomendado en la decisión D-11 de la hoja de ruta.
 - **Derechos de autor:** Suno da derechos de uso, no autoría. Para que la música tenga protección hace falta intervención humana sustancial, como una melodía compuesta por una persona o una voz grabada (sección 8 de SOUNDTRACK_SUNO.md).
 
+## Cómo se usan: las dos tomas de cada canción
+
+Por decisión del usuario se usan las seis tomas. La t01 de cada canción es la principal de su cue; la t02 cubre otra pantalla hasta que exista su pista propia.
+
+| Toma | Uso en el prototipo de la Fase 1 | Destino final |
+| --- | --- | --- |
+| Tema t01 | Pantalla de formación | `mus_titulo_tema` (pantalla de título) |
+| Tema t02 | Pantalla de victoria | Por decidir al escuchar: `mus_creditos` o una variante del título. Está en Sol mayor |
+| Combate t01 | Combates normales | `mus_combate_normal` |
+| Combate t02 | Combates contra jefe (el Guardián): su aceleración de 129 a 136 BPM sirve como escalada | Temporal hasta que exista `mus_jefe_casa` (P10, lote 2) |
+| Termas t01 | Todavía no hay pantalla de Termas; ya está en el catálogo con el contexto `Termas` | `mus_termas_noche` (Fase 3C) |
+| Termas t02 | Pantalla de derrota | `mus_fresno_santuario`, que la lista de cues define como Cover de P03 con más cuerpo |
+
+**Cómo funciona.** `TempMusicPlayer` (en `Assets/SalYAlmas/Presentation/`) lee `musica_temporal.json`, que asigna una pista y una ganancia a cada contexto. La ganancia baja cada toma a unos −18 LUFS para que todas suenen parejas. Cambia de pista con un fundido cruzado de 1.5 s, baja el volumen a 45 % mientras la pantalla de Cadena está abierta y la tecla **M** la silencia (se recuerda entre sesiones). La música vive en un `Resources` y se importa en streaming (`Assets/SalYAlmas/Editor/TempAudioImport.cs`). Todo esto es temporal: la Fase 3C lo reemplaza por FMOD sin tocar el núcleo.
+
+Para cambiar qué suena en cada pantalla, edita `musica_temporal.json`: no hace falta tocar código.
+
 ## Dónde quedaron
 
 | Qué | Ruta |
 | --- | --- |
-| Las seis tomas como pistas temporales de la Fase 3C | `Audio/FMOD/Assets/Temporal/TEMP_<cue_id>__t0N__<id8>.mp3` |
-| Ficha de trazabilidad de cada cue: ID y enlace de cada toma en Suno, fecha, estilo y exclusiones exactos, letra usada y medidas | `Audio/Licencias/suno/<cue_id>.json` |
+| Las seis tomas, listas para el prototipo | `Assets/SalYAlmas/Audio/Resources/MusicaTemporal/TEMP_<cue_id>__t0N__<id8>.mp3` |
+| Qué suena en cada pantalla | `Assets/SalYAlmas/Audio/Resources/MusicaTemporal/musica_temporal.json` |
+| Ficha de trazabilidad de cada cue: ID y enlace de cada toma en Suno, fecha, estilo y exclusiones exactos, letra usada, medidas y uso | `Audio/Licencias/suno/<cue_id>.json` |
 
 Los nombres siguen la sección 7.8 de SOUNDTRACK_SUNO.md. En las fichas ya está el plan Pro. Quedan **por confirmar** el modelo (v6 o v6-wild) y los ajustes que usaste: llénalos tú, porque solo tú lo sabes.
 
+## Lecciones para los siguientes lotes
+
+- **Tempo:** la t02 de combate se aceleró aunque el estilo decía 128 BPM. En las pistas que se vuelven bucle, el estilo ahora pide tempo estricto y la lista de exclusiones lleva `accelerando, tempo change`.
+- **Tonalidad:** la t02 del tema salió en Sol. El estilo ahora repite la tonalidad y pide quedarse en ella, y las exclusiones llevan `key change, modulation`.
+- **Percusión:** la t02 de Termas trajo percusión aunque el estilo decía "No percussion". En las pistas sin percusión, el estilo lo dice al principio y las exclusiones nombran los instrumentos (`frame drum, hand percussion, shaker, tambourine`).
+- **Efectos:** por decisión del usuario, Suno queda solo para canciones. Los stingers de vapor de la tirada (P05) ya no se hacen con Suno: se diseñan con los demás efectos.
+
 ## Siguientes pasos
 
-1. Escucha las seis con la lista de arriba y elige una toma por cue. Anótala en `toma_elegida` de su ficha.
-2. Guarda en PDF los términos de Suno de hoy y considera pasar a Premier antes del lote 2 por el límite de descargas.
-3. Del tema principal, genera más tomas hasta tener de 10 a 12 (la ficha P01 lo pide porque es la ancla). Lo ideal es la ruta de la ficha: una persona compone la melodía, la subes y usas *Cover*.
-4. De la toma elegida, descarga el WAV por el canal de Suno (no el MP3) y saca los stems: base, percusión, voz y coro (sección 7.5).
-5. Edita el bucle en compases, ajusta la sonoridad a −18 LUFS y anota las regiones en la ficha (sección 7.6 y 7.7).
-6. Las descargas crudas y las tomas descartadas van fuera de Git (sección 7.8). Estas seis se quedan como temporales hasta que existan los WAV editados.
+1. Abre el proyecto en Unity, deja que importe y prueba la música en la escena. Haz commit de los `.meta` que genere.
+2. Escucha las seis con la lista de arriba. Si prefieres otra asignación, cambia `musica_temporal.json`.
+3. Guarda en PDF los términos de Suno de hoy y considera pasar a Premier antes del lote 2 por el límite de descargas.
+4. Genera el lote 2 (P08, P09 y P10) con las fichas ya corregidas de SOUNDTRACK_SUNO.md.
+5. Del tema principal, genera más tomas hasta tener de 10 a 12 (la ficha P01 lo pide porque es la ancla). Lo ideal es la ruta de la ficha: una persona compone la melodía, la subes y usas *Cover*.
+6. De las tomas definitivas, descarga el WAV por el canal de Suno (no el MP3), saca los stems y edita el bucle a −18 LUFS (secciones 7.5 a 7.7).

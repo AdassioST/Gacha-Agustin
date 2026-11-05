@@ -45,6 +45,7 @@ namespace SalYAlmas.Presentation
         private List<BattleCommand> _lastCommands = new List<BattleCommand>();
         private string _lastFingerprint = "";
         private string _savedReportPath = "";
+        private TempMusicPlayer _music;
 
         public BattleDirector Director => _director;
         public GameDatabase Database => _db;
@@ -52,6 +53,7 @@ namespace SalYAlmas.Presentation
         private void Awake()
         {
             if (BattleCamera == null) BattleCamera = Camera.main;
+            _music = gameObject.AddComponent<TempMusicPlayer>();
             _saved.Load();
             LoadData();
         }
@@ -189,10 +191,30 @@ namespace SalYAlmas.Presentation
         private void Update()
         {
             if (_mode == Mode.Battle) _director?.Tick(Time.unscaledDeltaTime);
+            if (_music != null) _music.SetState(CurrentMusic(), _mode == Mode.Battle && _chain != null && _chain.IsOpen);
+        }
+
+        /// <summary>Música temporal según la pantalla: formación, combate, jefe, victoria o derrota.</summary>
+        private MusicContext CurrentMusic()
+        {
+            if (_mode == Mode.Formation) return MusicContext.Formation;
+            if (_mode != Mode.Battle || _director == null) return MusicContext.None;
+            if (_director.ResultReady)
+                return _director.Battle.Outcome == Core.Events.BattleOutcome.Victory ? MusicContext.Victory : MusicContext.Defeat;
+            foreach (var enemy in _director.Battle.Enemies)
+                if (enemy.IsBoss) return MusicContext.Boss;
+            return MusicContext.Battle;
         }
 
         private void OnGUI()
         {
+            // M silencia o activa la música, salvo que se esté escribiendo en un campo de texto.
+            if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.M && GUIUtility.keyboardControl == 0 && _music != null)
+            {
+                _music.ToggleMute();
+                Event.current.Use();
+            }
+
             // Toque sobre el mundo antes de escalar el lienzo (coordenadas reales de pantalla).
             if (_mode == Mode.Battle && Event.current.type == EventType.MouseDown && _hud != null && !_hud.InputBlocked)
             {

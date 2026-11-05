@@ -482,6 +482,8 @@ No llevan prompt propio: se hacen con *Cover* o *Extend* de una pista ya aprobad
 
 ## 6. Prompts de Suno
 
+> **Lecciones del lote 1** (`TOMAS_LOTE_1.md`): Suno a veces acelera el tempo, cambia de tonalidad o mete percusión aunque el estilo diga lo contrario. Las fichas P02, P04, P06, P08, P09 y P10 ya piden tempo estricto, tonalidad fija o ninguna percusión, y lo repiten en las exclusiones. Aplica lo mismo a las fichas que vayas a usar después.
+
 ### 6.0 Cómo usar las fichas
 
 - **Estilo, Excluir estilos y Letra** se copian tal cual en sus campos de Create, modo Custom. Los prompts van en inglés porque Suno los sigue mejor; la letra va en Salmódico.
@@ -606,13 +608,13 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 **Estilo**
 
 ```text
-Peaceful daytime hot-spring theme: safe, cozy, gentle humor with a faint wistfulness. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Warm fingerpicked guitar and lute duet, wooden flute melody, soft pizzicato low cello, psaltery sparkles, bell drops like water. Light hand percussion only: shaker and soft frame drum. Lilting waltz. F major with Lydian color, 90 BPM, 3/4. No tension, no dark turns. Form: short intro, 48-bar main theme that can repeat, soft ending.
+Peaceful daytime hot-spring theme: safe, cozy, gentle humor with a faint wistfulness. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Warm fingerpicked guitar and lute duet, wooden flute melody, soft pizzicato low cello, psaltery sparkles, bell drops like water. Light hand percussion only: shaker and soft frame drum. Lilting waltz. Stays in F major with Lydian color, steady 90 BPM, 3/4. No tension, no dark turns. Form: short intro, 48-bar main theme that can repeat, soft ending.
 ```
 
 **Excluir estilos**
 
 ```text
-synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, horror, dissonance, heavy drums, tension
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, horror, dissonance, heavy drums, tension, key change, accelerando
 ```
 
 **Letra (estructura)**
@@ -697,13 +699,13 @@ Mmm... olvai...
 **Estilo**
 
 ```text
-Suspense loop for a summon ritual at a hot spring: anticipation and warm mystery, not scary. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Low cello pedal on D, slow psaltery tremolo rising, soft heartbeat frame drum, bubbling bell figures, bowed singing bowls. Harmony hovers without resolving, like held breath. Second half simmers to a boil: faster psaltery, higher cello, stronger heartbeat. D pedal, 80 BPM, 4/4. Form: 8 calm bars, 8 intense bars, held unresolved chord.
+Suspense loop for a summon ritual at a hot spring: anticipation and warm mystery, not scary. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Low cello pedal on D, slow psaltery tremolo rising, soft heartbeat frame drum, bubbling bell figures, bowed singing bowls. Harmony hovers without resolving, like held breath. Second half simmers to a boil: faster psaltery, higher cello, stronger heartbeat. D pedal, same 80 BPM throughout, 4/4. Form: 8 calm bars, 8 intense bars, held unresolved chord.
 ```
 
 **Excluir estilos**
 
 ```text
-synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, horror, jump scare, catchy hook
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, horror, jump scare, catchy hook, accelerando, tempo change
 ```
 
 **Letra (estructura)**
@@ -726,6 +728,8 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 - Al revelarse el color del vapor, FMOD corta en el siguiente pulso y suena el stinger de P05.
 
 #### P05 · Stingers de vapor (modo Sounds)
+
+> **Ya no se hace con Suno.** El usuario decidió el 5 de noviembre de 2026 que Suno se usa solo para canciones: estos cuatro stingers se diseñan con los demás efectos de sonido (`Tools/Audio/sfx/`). Esta ficha queda como referencia de lo que deben expresar.
 
 Cuatro cues cortos. Se hacen en **Sounds** (Create → Custom → Sounds), tipo one-shot, con **tonalidad Re y 80 BPM** para que encajen sobre P04. Si Sounds no da el sonido de la ancla, genera P06 dos veces y corta los acordes de ahí.
 
@@ -767,13 +771,13 @@ Acoustic one-shot, about 5 seconds: starts as a soft B-flat major psaltery arpeg
 **Estilo**
 
 ```text
-Short cinematic choral revelation: a legendary witch rises from a hot spring. Awe, warmth, wonder. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Water-like bells and a held breath, psaltery tremolo rises, then choir and solo voice bloom together on a radiant D major chord with cascading bells, cello and guitar strums. No drums. D major with Lydian touches, 120 BPM, 4/4. Form: very short intro, one big choral bloom, long ringing ending.
+Short cinematic choral revelation: a legendary witch rises from a hot spring. Awe, warmth, wonder. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Water-like bells and a held breath, psaltery tremolo rises, then choir and solo voice bloom together on a radiant D major chord with cascading bells, cello and guitar strums. No drums, no percussion at all. D major with Lydian touches, 120 BPM, 4/4. Form: very short intro, one big choral bloom, long ringing ending.
 ```
 
 **Excluir estilos**
 
 ```text
-synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, drums, long song, many verses
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, drums, long song, many verses, frame drum, hand percussion, timpani
 ```
 
 **Letra**
@@ -869,13 +873,13 @@ Aaah... ooh...
 **Estilo**
 
 ```text
-Victory fanfare and results screen: relief and quiet pride, warm. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A bright 2-bar flourish of strummed guitar and bells ending on D major, then a calm lilting loop: lute melody, soft low cello, flute, light tambourine. D major, 96 BPM, 4/4. Form: 2-bar fanfare, 8-bar calm loop, gentle ending.
+Victory fanfare and results screen: relief and quiet pride, warm. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A bright 2-bar flourish of strummed guitar and bells ending on D major, then a calm lilting loop: lute melody, soft low cello, flute, light tambourine. Stays in D major throughout, strict steady 96 BPM, 4/4. Form: 2-bar fanfare, 8-bar calm loop, gentle ending.
 ```
 
 **Excluir estilos**
 
 ```text
-synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, minor key, long intro
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, minor key, long intro, key change, modulation, tempo change, accelerando
 ```
 
 **Letra (estructura)**
@@ -901,13 +905,13 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 **Estilo**
 
 ```text
-Short defeat jingle: sorrowful and gentle, never punishing. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A sighing low cello phrase over one soft guitar chord, a single low bell, a crystalline psaltery fading away like salt. D minor, 60 BPM, 3/4. Form: 3-bar phrase, long reverb tail, then silence.
+Short defeat jingle: sorrowful and gentle, never punishing. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A sighing low cello phrase over one soft guitar chord, a single low bell, a crystalline psaltery fading away like salt. Stays in D minor, steady 60 BPM, 3/4. Form: 3-bar phrase, long reverb tail, then silence.
 ```
 
 **Excluir estilos**
 
 ```text
-synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, drums, comedy, cartoon
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, drums, frame drum, hand percussion, comedy, cartoon, key change
 ```
 
 **Letra (estructura)**
@@ -932,13 +936,13 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 **Estilo**
 
 ```text
-Epic acoustic boss battle against a witch coven: grim, majestic, ritual intensity. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Phase one: relentless guitar and lute ostinato, heavy low cello, war frame drums, anvil and iron bells, psaltery runs. Phase two: same tempo, the full choir chants, the lead voice soars, drums double. E Phrygian, 144 BPM, 4/4. Form: 4-bar intro, 32-bar phase one, 4-bar drum-roll transition, 32-bar phase two, final hit.
+Epic acoustic boss battle against a witch coven: grim, majestic, ritual intensity. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Phase one: relentless guitar and lute ostinato, heavy low cello, war frame drums, anvil and iron bells, psaltery runs. Phase two: same tempo, the full choir chants, the lead voice soars, drums double. Strict steady 144 BPM with no accelerando, stays in E Phrygian throughout, 4/4. Form: 4-bar intro, 32-bar phase one, 4-bar drum-roll transition, 32-bar phase two, final hit.
 ```
 
 **Excluir estilos**
 
 ```text
-synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, slow tempo, ballad, orchestral string section
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, slow tempo, ballad, orchestral string section, tempo change, accelerando, key change, modulation
 ```
 
 **Letra**

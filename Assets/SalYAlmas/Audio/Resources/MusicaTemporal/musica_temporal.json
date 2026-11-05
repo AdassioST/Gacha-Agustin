@@ -1,0 +1,10 @@
+{
+  "entries": [
+    { "context": "Formation", "resource": "TEMP_mus_titulo_tema__t01__d4f143c4", "gainDb": -2.5 },
+    { "context": "Battle", "resource": "TEMP_mus_combate_normal__t01__bbba00ae", "gainDb": -2.4 },
+    { "context": "Boss", "resource": "TEMP_mus_combate_normal__t02__e8b5d28f", "gainDb": -2.3 },
+    { "context": "Victory", "resource": "TEMP_mus_titulo_tema__t02__0f9b9bd2", "gainDb": -3.1 },
+    { "context": "Defeat", "resource": "TEMP_mus_termas_noche__t02__7a9f3463", "gainDb": -5.8 },
+    { "context": "Termas", "resource": "TEMP_mus_termas_noche__t01__5fc7478b", "gainDb": -2.2 }
+  ]
+}

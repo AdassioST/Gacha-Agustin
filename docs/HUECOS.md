@@ -141,7 +141,7 @@ Cada documento tiene su lista completa con más contexto; aquí están sin repet
 | C-66 | 10.1 | La Jardinera es la jefa de la Copa: son cuatro jefes, no cuatro más ella | Corregir la redacción | Música |
 | C-67 | 20.4 | Los Huéspedes suenan a "radiotelescopio", un sonido electrónico, en una banda sonora acústica | Va en el diseño sonoro, no en la música | Música |
 | C-68 | 24 | El GDD no dice nada del uso de IA en música e imágenes | Agregar una regla: qué se genera, con qué plan, cómo se declara en las tiendas y qué hace una persona | Música |
-| C-69 | 21.3 | El núcleo no emite eventos que necesitan el Fresno y el audio | Agregar BattleStarted, AVShifted, HealApplied, ShieldAbsorbed, UnitDefeated y la Salinidad como valor, no solo como banda | Fresno, audio |
+| C-69 | 21.3 | Las propuestas de Fresno y audio piden eventos con nombres que no son los del núcleo | La mayoría ya existe en la Fase 1: BattleStarted, ActionShifted (avances y retrasos), Healed, ShieldGained, UnitDefeated y SalinityChanged (valor de 0 a 150). Falta la causa en ActionShifted y un evento de escudo absorbido. La Fase 1.5 alinea los nombres de las propuestas con los del núcleo | Fresno, audio |
 
 ## 4. Huecos de diseño
 

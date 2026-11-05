@@ -1125,6 +1125,8 @@ La háptica marca lo que importa, no cada golpe. Cuatro momentos: Spark, Quiebre
 
 ### 10.1 Efectos de sonido
 
+> **Decisión del usuario (5 de noviembre de 2026).** Suno se usa solo para canciones. Todos los efectos se diseñan en el estudio: síntesis procedural con un generador reproducible (`Tools/Audio/sfx/`) más grabaciones de bibliotecas con licencia CC0 o dominio público, combinadas. **No se usan generadores de efectos con IA**, así que la fila de abajo queda descartada. Las fuentes y la licencia de cada efecto se registran en `Audio/Licencias/sfx/`.
+
 | Fuente | Para qué | Licencia y riesgos |
 | --- | --- | --- |
 | **Grabación propia de foley** | Sal (halita, sal de grano de Cuyutlán, flor de sal, sal de Zapotitlán), los siete metales, agua termal con hidrófono, pelaje, plumas, ropa, papel, pluma, cuero | Del estudio. Contratos de obra por encargo con cesión de derechos patrimoniales con quien grabe y edite (Ley Federal del Derecho de Autor). Es la fuente de toda la identidad: sal, metales y Termas |

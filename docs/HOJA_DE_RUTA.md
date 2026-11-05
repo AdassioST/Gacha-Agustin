@@ -105,7 +105,7 @@ La Fase 1 ya está en `main` con su `.meta` generado. Lo que falta antes de la F
 1. Abrir el proyecto en Unity y correr las pruebas EditMode desde el Test Runner (la sesión que lo construyó no tenía Unity). Confirmar que la escena se construye con **Sal y Almas > Construir escena de combate**.
 2. Decidir la versión de Unity (D-14). El reporte pedía 6000.0 LTS y el proyecto se abrió con 6000.6.7f1.
 3. Correr la prueba con jugadores de la sección 7.
-4. Correr la Fase 1.5. Renombra `zarigueya` y `topo` (D-03), agrega los eventos que piden el Fresno y el audio (HUECOS C-69) y deja las herramientas de contenido.
+4. Correr la Fase 1.5. Renombra `zarigueya` y `topo` (D-03), alinea los eventos que piden el Fresno y el audio con los que ya emite el núcleo (HUECOS C-69) y deja las herramientas de contenido.
 5. Pasar al GDD las interpretaciones de la Fase 1 que coinciden con HUECOS (sección 3.1), para que la Fase 2 no tenga que adivinarlas.
 
 ## 3. Plan de fases
@@ -191,7 +191,7 @@ ALCANCE
 2. Grabación y repetición (Core/Replay): formato versionado de semilla + entradas + versión de datos. Graba 10 combates de referencia con su lista de eventos esperada y una prueba que los repite. Este formato es el que validará el servidor en la Fase 3A.
 3. Determinismo entre plataformas: redondea a entero en cada golpe y cada cambio de estado (vida, Firmeza, Salinidad, Ánima, Resonancia). Documenta qué cálculos siguen en double y por qué son seguros.
 4. IDs canónicos (decisión D-03): renombra en datos, pruebas y registro de combate zarigueya → muertita y topo → topacia, con sus nombres Muertita y Topacia. Los IDs están en el GDD 18. Corrige el signo de Muertita: el GDD 17 le da Escorpio, no Cáncer.
-4b. Eventos nuevos (HUECOS C-69): BattleStarted, AVShifted (avances y retrasos con su causa), HealApplied, ShieldAbsorbed, UnitDefeated y SalinityChanged con el valor de 0 a 150. Los necesitan el Fresno (docs/propuestas/FRESNO.md) y el audio (docs/audio/INTEGRACION_AUDIO.md). Los combates grabados se actualizan una sola vez y se explica por qué.
+4b. Eventos (HUECOS C-69): el núcleo ya emite BattleStarted, ActionShifted, Healed, ShieldGained, UnitDefeated y SalinityChanged. Agrega la causa a ActionShifted y un evento de escudo absorbido, y corrige en docs/propuestas/FRESNO.md y docs/audio/INTEGRACION_AUDIO.md los nombres que no coinciden (AVShifted, HealApplied, ShieldAbsorbed). Si cambian los eventos, los combates grabados se actualizan una sola vez y se explica por qué.
 5. Validador de datos: IDs referenciados, frames dentro de rango, campos obligatorios, schemaVersion, y lista de valores TUNING. Corre en dotnet test y desde el menú Sal y Almas > Validar datos.
 6. Editor de brujas: ventana de Unity para ver y editar el kit de una bruja, con vista previa de la Partitura contra otra bruja y los Spark calculados con PreviewChain.
 7. Simulador de balance como herramienta de línea de comandos y como prueba de la regla del +5 % de la sección 17.1, con un reporte en Markdown por bruja y papel.

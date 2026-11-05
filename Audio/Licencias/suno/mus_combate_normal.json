@@ -1,8 +1,8 @@
 {
   "cue_id": "mus_combate_normal",
   "ficha": "P07",
-  "estado": "temporal: tomas del lote 1 sin elegir; generadas con plan Pro",
-  "toma_elegida": null,
+  "estado": "temporal: se usan las dos tomas del lote 1 (plan Pro); t01 es la principal del cue y t02 tiene otro uso",
+  "toma_elegida": "t01",
   "especificacion": {
     "bpm": 128,
     "tonalidad": "Re menor con acentos frigios",
@@ -26,7 +26,7 @@
   "tomas": [
     {
       "toma": "t01",
-      "archivo": "Audio/FMOD/Assets/Temporal/TEMP_mus_combate_normal__t01__bbba00ae.mp3",
+      "archivo": "Assets/SalYAlmas/Audio/Resources/MusicaTemporal/TEMP_mus_combate_normal__t01__bbba00ae.mp3",
       "archivo_original": "Battle Theme 1.mp3",
       "song_id": "bbba00ae-f514-4648-8984-f837273b2f3f",
       "url": "https://suno.com/song/bbba00ae-f514-4648-8984-f837273b2f3f",
@@ -41,11 +41,16 @@
         "bpm_estimado": "≈129 (pedido 128)",
         "tonalidad_estimada": "Re menor"
       },
-      "letra_usada": "[Intro]\n[Instrumental: guitar and frame drums]\n[Verse]\nAaah... aaah...\n(Eztre! Istal!)\nAaah... ooh...\n(Tleugo! Eztre!)\n[Chorus]\nAaah... aaah...\n(Istal yolma, cuetor!)\nAaah... ooh...\n(Istal yolma, cuetor!)\n[Break]\n[Instrumental: psaltery and singing bowls only]\n[Verse]\nAaah... aaah...\n(Eztre! Istal!)\n[Chorus]\nAaah... ooh...\n(Istal yolma, cuetor!)\n[Outro]\n[End]"
+      "letra_usada": "[Intro]\n[Instrumental: guitar and frame drums]\n[Verse]\nAaah... aaah...\n(Eztre! Istal!)\nAaah... ooh...\n(Tleugo! Eztre!)\n[Chorus]\nAaah... aaah...\n(Istal yolma, cuetor!)\nAaah... ooh...\n(Istal yolma, cuetor!)\n[Break]\n[Instrumental: psaltery and singing bowls only]\n[Verse]\nAaah... aaah...\n(Eztre! Istal!)\n[Chorus]\nAaah... ooh...\n(Istal yolma, cuetor!)\n[Outro]\n[End]",
+      "uso": {
+        "cue": "mus_combate_normal",
+        "contexto_prototipo": "Battle",
+        "nota": "Combates normales: tempo estable de unos 129 BPM"
+      }
     },
     {
       "toma": "t02",
-      "archivo": "Audio/FMOD/Assets/Temporal/TEMP_mus_combate_normal__t02__e8b5d28f.mp3",
+      "archivo": "Assets/SalYAlmas/Audio/Resources/MusicaTemporal/TEMP_mus_combate_normal__t02__e8b5d28f.mp3",
       "archivo_original": "Battle Theme 2.mp3",
       "song_id": "e8b5d28f-d8b4-4886-aa31-9a3a26b77310",
       "url": "https://suno.com/song/e8b5d28f-d8b4-4886-aa31-9a3a26b77310",
@@ -60,7 +65,12 @@
         "bpm_estimado": "≈129 a 136 (menos estable)",
         "tonalidad_estimada": "Re menor"
       },
-      "letra_usada": "[Intro]\n[Instrumental: guitar and frame drums]\n[Verse]\nAaah... aaah...\n(Eztre! Istal!)\nAaah... ooh...\n(Tleugo! Eztre!)\n[Chorus]\nAaah... aaah...\n(Istal yolma, cuetor!)\nAaah... ooh...\n(Istal yolma, cuetor!)\n[Break]\n[Instrumental: psaltery and singing bowls only]\n[Verse]\nAaah... aaah...\n(Eztre! Istal!)\n[Chorus]\nAaah... ooh...\n(Istal yolma, cuetor!)\n[Outro]\n[End]"
+      "letra_usada": "[Intro]\n[Instrumental: guitar and frame drums]\n[Verse]\nAaah... aaah...\n(Eztre! Istal!)\nAaah... ooh...\n(Tleugo! Eztre!)\n[Chorus]\nAaah... aaah...\n(Istal yolma, cuetor!)\nAaah... ooh...\n(Istal yolma, cuetor!)\n[Break]\n[Instrumental: psaltery and singing bowls only]\n[Verse]\nAaah... aaah...\n(Eztre! Istal!)\n[Chorus]\nAaah... ooh...\n(Istal yolma, cuetor!)\n[Outro]\n[End]",
+      "uso": {
+        "cue": "jefe (temporal)",
+        "contexto_prototipo": "Boss",
+        "nota": "Combates contra jefe del prototipo (el Guardián). Acelera de 129 a 136 BPM y funciona como escalada; no sirve como bucle de combate normal. Se reemplaza con P10"
+      }
     }
   ],
   "regiones_muestras": null,

@@ -1,8 +1,8 @@
 {
   "cue_id": "mus_titulo_tema",
   "ficha": "P01",
-  "estado": "temporal: tomas del lote 1 sin elegir; generadas con plan Pro",
-  "toma_elegida": null,
+  "estado": "temporal: se usan las dos tomas del lote 1 (plan Pro); t01 es la principal del cue y t02 tiene otro uso",
+  "toma_elegida": "t01",
   "especificacion": {
     "bpm": 72,
     "tonalidad": "Re dórico",
@@ -26,7 +26,7 @@
   "tomas": [
     {
       "toma": "t01",
-      "archivo": "Audio/FMOD/Assets/Temporal/TEMP_mus_titulo_tema__t01__d4f143c4.mp3",
+      "archivo": "Assets/SalYAlmas/Audio/Resources/MusicaTemporal/TEMP_mus_titulo_tema__t01__d4f143c4.mp3",
       "archivo_original": "Main Theme 1.mp3",
       "song_id": "d4f143c4-520a-4873-be75-9ddfb84a783b",
       "url": "https://suno.com/song/d4f143c4-520a-4873-be75-9ddfb84a783b",
@@ -41,11 +41,16 @@
         "bpm_estimado": "72 (librosa da 143.6, el doble)",
         "tonalidad_estimada": "Re menor / Fa mayor (mismas notas; compatible con Re dórico)"
       },
-      "letra_usada": "[Intro]\n[Instrumental: guitar and lute, bells]\n[Verse 1]\nIstal yolma, cuetor frashna\nNantre ilcel, estlali nochual\nYolmime olvai, na remel\nNa olvai, ermai, neyo cuicant\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Instrumental: low cello and psaltery]\n[Verse 2]\nAtlua cochum, maresh olvai\nTleugo neshcen, eztre e micmor\nNosotl cuicant, nantre uarbe\nCuetor, cuetor, yolma\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Bridge]\nHuemag ishoc, ilcel blaztac\n(Aaah)\n[Outro]\nIstal yolma... cuetor\n[Outro]\nIstal yolma... cuetor\n[End]"
+      "letra_usada": "[Intro]\n[Instrumental: guitar and lute, bells]\n[Verse 1]\nIstal yolma, cuetor frashna\nNantre ilcel, estlali nochual\nYolmime olvai, na remel\nNa olvai, ermai, neyo cuicant\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Instrumental: low cello and psaltery]\n[Verse 2]\nAtlua cochum, maresh olvai\nTleugo neshcen, eztre e micmor\nNosotl cuicant, nantre uarbe\nCuetor, cuetor, yolma\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Bridge]\nHuemag ishoc, ilcel blaztac\n(Aaah)\n[Outro]\nIstal yolma... cuetor\n[Outro]\nIstal yolma... cuetor\n[End]",
+      "uso": {
+        "cue": "mus_titulo_tema",
+        "contexto_prototipo": "Formation",
+        "nota": "Pantalla de formación del prototipo; después, pantalla de título"
+      }
     },
     {
       "toma": "t02",
-      "archivo": "Audio/FMOD/Assets/Temporal/TEMP_mus_titulo_tema__t02__0f9b9bd2.mp3",
+      "archivo": "Assets/SalYAlmas/Audio/Resources/MusicaTemporal/TEMP_mus_titulo_tema__t02__0f9b9bd2.mp3",
       "archivo_original": "Main Theme 2.mp3",
       "song_id": "0f9b9bd2-edb9-49d2-9eac-ab897b053201",
       "url": "https://suno.com/song/0f9b9bd2-edb9-49d2-9eac-ab897b053201",
@@ -60,7 +65,12 @@
         "bpm_estimado": "72 o 108 (ambiguo)",
         "tonalidad_estimada": "Sol mayor (no coincide con Re dórico)"
       },
-      "letra_usada": "[Intro]\n[Instrumental: guitar and lute, bells]\n[Verse 1]\nIstal yolma, cuetor frashna\nNantre ilcel, estlali nochual\nYolmime olvai, na remel\nNa olvai, ermai, neyo cuicant\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Instrumental: low cello and psaltery]\n[Verse 2]\nAtlua cochum, maresh olvai\nTleugo neshcen, eztre e micmor\nNosotl cuicant, nantre uarbe\nCuetor, cuetor, yolma\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Bridge]\nHuemag ishoc, ilcel blaztac\n(Aaah)\n[Outro]\nIstal yolma... cuetor\n[End]"
+      "letra_usada": "[Intro]\n[Instrumental: guitar and lute, bells]\n[Verse 1]\nIstal yolma, cuetor frashna\nNantre ilcel, estlali nochual\nYolmime olvai, na remel\nNa olvai, ermai, neyo cuicant\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Instrumental: low cello and psaltery]\n[Verse 2]\nAtlua cochum, maresh olvai\nTleugo neshcen, eztre e micmor\nNosotl cuicant, nantre uarbe\nCuetor, cuetor, yolma\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Bridge]\nHuemag ishoc, ilcel blaztac\n(Aaah)\n[Outro]\nIstal yolma... cuetor\n[End]",
+      "uso": {
+        "cue": "mus_combate_resultados (temporal)",
+        "contexto_prototipo": "Victory",
+        "nota": "Pantalla de victoria del prototipo. Destino final por decidir al escuchar: mus_creditos o una variante del título. Está en Sol mayor, no en Re"
+      }
     }
   ],
   "regiones_muestras": null,

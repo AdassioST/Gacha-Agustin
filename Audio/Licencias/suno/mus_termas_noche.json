@@ -1,8 +1,8 @@
 {
   "cue_id": "mus_termas_noche",
   "ficha": "P03",
-  "estado": "temporal: tomas del lote 1 sin elegir; generadas con plan Pro",
-  "toma_elegida": null,
+  "estado": "temporal: se usan las dos tomas del lote 1 (plan Pro); t01 es la principal del cue y t02 tiene otro uso",
+  "toma_elegida": "t01",
   "especificacion": {
     "bpm": "50 (negra con puntillo)",
     "tonalidad": "Re menor que se abre a Fa mayor",
@@ -26,7 +26,7 @@
   "tomas": [
     {
       "toma": "t01",
-      "archivo": "Audio/FMOD/Assets/Temporal/TEMP_mus_termas_noche__t01__5fc7478b.mp3",
+      "archivo": "Assets/SalYAlmas/Audio/Resources/MusicaTemporal/TEMP_mus_termas_noche__t01__5fc7478b.mp3",
       "archivo_original": "Night Theme 1.mp3",
       "song_id": "5fc7478b-bb71-48e0-9691-34de4c6bcd20",
       "url": "https://suno.com/song/5fc7478b-bb71-48e0-9691-34de4c6bcd20",
@@ -41,11 +41,16 @@
         "bpm_estimado": "≈55 por negra con puntillo (pedido 50)",
         "tonalidad_estimada": "Re menor"
       },
-      "letra_usada": "[Intro]\n[Instrumental: slow guitar arpeggios]\n[Verse 1]\nAtlua cochum, atlua olvai\nNochual metzlu, cochum, ermai\nNa istal, na micmor\nAtlua olvai\n[Verse 2]\nYolmi cochum, nantre cuicant\nEstlali ilcel, na ishoc\nCochum, cochum, ermai\nAtlua olvai\n[Bridge]\nMmm... mmm...\nMmm... olvai...\n[Outro]\n[Instrumental: guitar and singing bowls]\n[End]"
+      "letra_usada": "[Intro]\n[Instrumental: slow guitar arpeggios]\n[Verse 1]\nAtlua cochum, atlua olvai\nNochual metzlu, cochum, ermai\nNa istal, na micmor\nAtlua olvai\n[Verse 2]\nYolmi cochum, nantre cuicant\nEstlali ilcel, na ishoc\nCochum, cochum, ermai\nAtlua olvai\n[Bridge]\nMmm... mmm...\nMmm... olvai...\n[Outro]\n[Instrumental: guitar and singing bowls]\n[End]",
+      "uso": {
+        "cue": "mus_termas_noche",
+        "contexto_prototipo": "Termas",
+        "nota": "Termas de noche, Fase 3C. Ya está en el catálogo del prototipo para cuando exista la pantalla"
+      }
     },
     {
       "toma": "t02",
-      "archivo": "Audio/FMOD/Assets/Temporal/TEMP_mus_termas_noche__t02__7a9f3463.mp3",
+      "archivo": "Assets/SalYAlmas/Audio/Resources/MusicaTemporal/TEMP_mus_termas_noche__t02__7a9f3463.mp3",
       "archivo_original": "Night Theme 2.mp3",
       "song_id": "7a9f3463-2bd4-4d73-a780-bedef83af73b",
       "url": "https://suno.com/song/7a9f3463-2bd4-4d73-a780-bedef83af73b",
@@ -60,7 +65,12 @@
         "bpm_estimado": "≈54 por negra con puntillo (pedido 50)",
         "tonalidad_estimada": "Re menor"
       },
-      "letra_usada": "[Intro]\n[Instrumental: slow guitar arpeggios]\n[Verse 1]\nAtlua cochum, atlua olvai\nNochual metzlu, cochum, ermai\nNa istal, na micmor\nAtlua olvai\n[Verse 2]\nYolmi cochum, nantre cuicant\nEstlali ilcel, na ishoc\nCochum, cochum, ermai\nAtlua olvai\n[Bridge]\nMmm... mmm...\nMmm... olvai...\n[Outro]\n[Instrumental: guitar and singing bowls]\n[End]"
+      "letra_usada": "[Intro]\n[Instrumental: slow guitar arpeggios]\n[Verse 1]\nAtlua cochum, atlua olvai\nNochual metzlu, cochum, ermai\nNa istal, na micmor\nAtlua olvai\n[Verse 2]\nYolmi cochum, nantre cuicant\nEstlali ilcel, na ishoc\nCochum, cochum, ermai\nAtlua olvai\n[Bridge]\nMmm... mmm...\nMmm... olvai...\n[Outro]\n[Instrumental: guitar and singing bowls]\n[End]",
+      "uso": {
+        "cue": "mus_jingle_derrota (temporal)",
+        "contexto_prototipo": "Defeat",
+        "nota": "Pantalla de derrota del prototipo. Destino final: mus_fresno_santuario, que la lista de cues define como Cover de P03 con más cuerpo"
+      }
     }
   ],
   "regiones_muestras": null,
