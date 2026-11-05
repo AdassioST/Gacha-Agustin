@@ -15,7 +15,7 @@
   "banners": [
     { "id": "inicio", "name": "Manantial de Bienvenida", "type": "inicio", "maxPulls": 20,
       "choices": ["solenne", "cervanda", "tormentina", "cupria"],
-      "description": "20 tiradas con una Regente garantizada a elegir entre cuatro (GDD 16.2)." },
+      "description": "20 tiradas con una Regente garantizada a elegir entre cuatro." },
     { "id": "estandar", "name": "Manantial Estándar", "type": "estandar",
       "description": "Regentes del banner estándar. A las 300 tiradas eliges una." },
     { "id": "limitado_marisal", "name": "Juramento de Hierro", "type": "limitado", "featured": "marisal",

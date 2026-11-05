@@ -43,6 +43,11 @@ namespace SalYAlmas.Core.Meta
         public Cauldron Cauldron { get; }
         public Termas Termas { get; }
         public FresnoService Fresno { get; }
+        public World.StoryService Story { get; }
+        public World.StoreService Store { get; }
+        public World.LocalGachaService GachaService { get; }
+        public World.TermasBase Base { get; }
+        public World.IAnalytics Analytics { get; set; } = new World.LocalAnalytics();
 
         public MetaGame(MetaDatabase meta, PlayerProfile profile)
         {
@@ -57,6 +62,10 @@ namespace SalYAlmas.Core.Meta
             Cauldron = new Cauldron(this);
             Termas = new Termas(this);
             Fresno = new FresnoService(this);
+            Story = new World.StoryService(this);
+            Store = new World.StoreService(this);
+            GachaService = new World.LocalGachaService(this);
+            Base = new World.TermasBase(this);
         }
 
         public void SetDay(int day)

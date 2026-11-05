@@ -356,14 +356,26 @@ En la expresión **ritual**, quita "hands or objects covering the face" del bloq
 **Hecho**
 
 - Los 18 recortes de cuerpo, los 18 bustos (400 px, 160 px y 320 px) y las dos hojas de contacto, en `art/recortes/`.
-- `scripts/recortes.py` con los comandos `cortar`, `limpiar`, `bustos`, `hojas`, `todo` y `procesar`.
+- `scripts/recortes.py` con los comandos `cortar`, `limpiar`, `bustos`, `hojas`, `todo`, `procesar` y `unity`.
 - Las referencias de estilo en `art/referencias/bustos/` y los 18 prompts de bustos (sección 7).
+- **Axa f1, cuerpo.** `encuadres.json` tiene `"corte_inferior": 1138`, y `cut_one` y `limpiar` borran el alfa desde esa línea. El cuerpo ya no incluye la parte sumergida ni el reflejo, y su busto no cambió de píxeles.
+- **Bustos de prueba en Unity.** Los 18 bustos de 160 px de `art/recortes/` están en `Assets/SalYAlmas/Art/Bustos/<id>/<id>_f<fase>_neutral.png`. `Assets/SalYAlmas/Editor/BustImport.cs` les fija filtro Point, sin compresión y sin mipmaps. Todavía ninguna pantalla los usa.
+
+**Revisión de los 18 cuerpos**
+
+Los revisé completos sobre fondo oscuro y claro, y a tamaño real solo en la zona con más borde suave de cada uno. No vi halo rosado. Cervanda f1 tenía restos de la rueda natal alrededor de la cornamenta: ya los borré con el campo `borrar` de `encuadres.json` (polígonos en píxeles del original), y eso cambió también su busto. Esto queda por decidir:
+
+| Bruja | Qué se ve | Causa |
+| --- | --- | --- |
+| Muertita f1 | El sombrero y los pies quedan cortados en línea recta | El retrato llega al borde de la imagen |
+| Selenia f1 y Marisal f1 | Un corte recto pequeño: el vestido a la derecha y la cola a la izquierda | El retrato llega al borde de la imagen |
+
+Los cortes por el borde no se arreglan con el script: hay que regenerar el retrato o evitar esos encuadres en pantallas de cuerpo completo. Las cartas que flotan alrededor de Tormentina f3 y las plumas de Selenia f3 son del diseño y se quedan.
 
 **Pendiente, en este orden**
 
-1. **Axa f1, cuerpo.** El recorte incluye la parte sumergida y el reflejo bajo la línea del agua, porque están pegados a la figura y `limpiar` no los separa. Hay que cortar el alfa por debajo de la línea del agua, por ejemplo con un campo `corte_inferior` (y en píxeles del original) en `encuadres.json` que `cut_one` y `clean` apliquen antes de `bbox`. Su busto no está afectado.
-2. **Revisión a tamaño real** de los 18 `_cuerpo.png` sobre fondo oscuro y claro: bordes de pelaje, halos y chispas sueltas que se hayan perdido.
-3. **Bustos nuevos con Codex.** Correr el prompt maestro de la sección 5: 36 bustos neutrales, `procesar`, elegir uno por bruja y fase, y después las 7 expresiones de la sección 8.
-4. **Unity.** `art/` está fuera de `Assets/`, así que Unity todavía no ve nada de esto. Al elegir los bustos, copiarlos a una carpeta de `Assets/` e importar los de 160 px con filtro Point, sin compresión y sin mipmaps.
+1. **Bustos nuevos con Codex.** Correr el prompt maestro de la sección 5: 36 bustos neutrales, `procesar`, elegir uno por bruja y fase, y después las 7 expresiones de la sección 8.
+2. **Pasar los elegidos a Unity.** `python scripts/recortes.py unity art/bustos/brea/brea_f1_neutral_v2_160.png` copia el elegido como `brea_f1_neutral.png`. Reemplaza al busto de prueba sin cambiar su GUID.
+3. **Conectar los bustos a la interfaz** cuando exista la pantalla que los use.
 
-**Para correr el script en local:** `pip install "rembg[cpu]"`. El primer `cortar` o `procesar` descarga BiRefNet (unos 970 MB) en `~/.u2net`. `limpiar`, `bustos` y `hojas` no usan el modelo y tardan segundos.
+**Para correr el script en local:** `pip install "rembg[cpu]"`. El primer `cortar` o `procesar` descarga BiRefNet (unos 970 MB) en `~/.u2net`. `limpiar`, `bustos`, `hojas` y `unity` no usan el modelo y tardan segundos.

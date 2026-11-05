@@ -17,24 +17,24 @@ namespace SalYAlmas.Presentation
         private TrialResult _trialResult;
         private string _trialTitle = "";
 
-        private void DrawGrades(Rect a)
+        private void DrawWitch(Rect a)
         {
-            var owned = _meta.RosterOrder.Where(id => Game.Profile.Owns(id)).ToList();
-            if (!owned.Contains(_witch)) _witch = owned.FirstOrDefault() ?? "";
-
-            var list = new Rect(a.x, a.y, 400, a.height);
-            GuiKit.PanelBox(list);
-            _witchPage = Paged(new Rect(list.x + 10, list.y + 10, list.width - 20, list.height - 20), owned, _witchPage, 56, (r, id) =>
+            if (_witch.Length == 0 || !Game.Profile.Owns(_witch)) { Back(); return; }
+            var body = Header(a, WitchName(_witch), $"{Stars(_meta.Roster[_witch].Rarity)}  ·  {_meta.Roster[_witch].Role}");
+            DrawWitchSheet(new Rect(body.x, body.y, 700, body.height));
+            DrawTrialPanel(new Rect(body.x + 710, body.y, 660, body.height));
+            var side = new Rect(body.x + 1380, body.y, body.width - 1380, body.height);
+            var bust = BustFor(_witch);
+            Theme.GoldPanel(new Rect(side.x, side.y, side.width, 300), 0.92f);
+            if (bust != null) GUI.DrawTexture(new Rect(side.x + 10, side.y + 10, side.width - 20, 280), bust, ScaleMode.ScaleToFit, true);
+            DrawFolio(new Rect(side.x, side.y + 310, side.width, 260), _witch);
+            bool inParty = Game.Profile.Party.Contains(_witch);
+            if (_meta.HasKit(_witch) && GuiKit.Button(new Rect(side.x, side.y + 580, side.width, 62), inParty ? "Quitar del equipo" : "Agregar al equipo", inParty || Game.Profile.Party.Count < 4, 21))
             {
-                var w = Game.Profile.Witches[id];
-                string kit = _meta.HasKit(id) ? "" : "  (sin kit)";
-                if (GuiKit.Button(r, $"{WitchName(id)}{kit}\n<size=13>{Stars(_meta.Roster[id].Rarity)} · nivel {w.Level} · grado {w.Grade}</size>", true, 17)) { _witch = id; _trialResult = null; _allies.Clear(); }
-                if (id == _witch) GuiKit.Frame(r, Palette.GoldBright, 3f);
-            });
-            if (_witch.Length == 0) return;
-
-            DrawWitchSheet(new Rect(list.xMax + 10, a.y, 720, a.height));
-            DrawTrialPanel(new Rect(list.xMax + 740, a.y, a.xMax - list.xMax - 740, a.height));
+                if (inParty) Game.Profile.Party.Remove(_witch);
+                else Game.Profile.Party.Add(_witch);
+                Save();
+            }
         }
 
         private void DrawWitchSheet(Rect r)
@@ -43,8 +43,6 @@ namespace SalYAlmas.Presentation
             var entry = _meta.Roster[_witch];
             var w = Game.Profile.Witches[_witch];
             float x = r.x + 16, width = r.width - 32, y = r.y + 8;
-            GuiKit.Label(new Rect(x, y, width, 40), entry.Name, 30, Palette.GoldBright, TextAnchor.MiddleLeft, true);
-            y += 42;
             GuiKit.Label(new Rect(x, y, width, 28), $"{Stars(entry.Rarity)}  ·  {entry.Species}  ·  {entry.Role}", 18, Palette.Parchment);
             y += 32;
             GuiKit.PlanetPill(new Rect(x, y, 170, 28), entry.Primary);
@@ -52,8 +50,8 @@ namespace SalYAlmas.Presentation
             GuiKit.Label(new Rect(x + 360, y, width - 360, 28), w.ViaChosen ? $"Vía {w.Via}" : "Sin Vía (se elige en B)", 18, Palette.Parchment);
             y += 38;
 
-            DrawPhases(new Rect(x, y, width, 200), w.Grade);
-            y += 208;
+            DrawPhases(new Rect(x, y, width, 170), w.Grade);
+            y += 178;
 
             GuiKit.Label(new Rect(x, y, width, 30), $"Nivel {w.Level} de {_meta.Progression.Level.Max}", 22, Palette.GoldBright, TextAnchor.MiddleLeft, true);
             y += 32;
@@ -107,8 +105,13 @@ namespace SalYAlmas.Presentation
                 GuiKit.Fill(box, Palette.WithAlpha(Palette.Abyss, 0.7f));
                 Color c = unlocked ? colors[i] : Palette.WithAlpha(colors[i], 0.2f);
                 var center = new Vector2(box.center.x, box.y + 62);
-                GuiKit.Dot(center, 26, c);
-                GuiKit.Fill(new Rect(center.x - 24, center.y + 22, 48, 74), c);
+                var phaseBust = _art.Bust(_witch, i == 2);
+                if (phaseBust != null && (i != 2 || !Game.Profile.Settings.ModestMode)) GUI.DrawTexture(new Rect(box.x + 8, box.y + 6, box.width - 16, box.height - 62), phaseBust, ScaleMode.ScaleToFit, true, 0f, unlocked ? Color.white : new Color(0.15f, 0.15f, 0.2f, 0.9f), 0f, 0f);
+                else
+                {
+                    GuiKit.Dot(center, 26, c);
+                    GuiKit.Fill(new Rect(center.x - 24, center.y + 22, 48, 74), c);
+                }
                 GuiKit.Label(new Rect(box.x, box.yMax - 54, box.width, 26), names[i], 18, unlocked ? Palette.Parchment : Palette.ParchmentShadow, TextAnchor.MiddleCenter, i == current);
                 GuiKit.Label(new Rect(box.x, box.yMax - 28, box.width, 24), unlocked ? grades[i] : grades[i] + " · bloqueada", 14, Palette.ParchmentShadow, TextAnchor.MiddleCenter);
                 if (i == current) GuiKit.Frame(box, Palette.GoldBright, 2f);
@@ -189,7 +192,7 @@ namespace SalYAlmas.Presentation
                         _trialResult = Game.Trials.Resolve(plan, b);
                         Note(_trialResult.GradeUp.Message, _trialResult.GradeUp.Ok);
                         Save();
-                    });
+                    }, "");
                 }
             }
             y += 70;

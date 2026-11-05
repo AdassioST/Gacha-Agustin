@@ -94,6 +94,67 @@ namespace SalYAlmas.Sim
             return 0;
         }
 
+        /// <summary>Juega la historia con una cuenta nueva, en los dos órdenes, y cuenta los intentos por combate.</summary>
+        public static int Story(GameDatabase db, int n)
+        {
+            var meta = Load(db);
+            foreach (var order in new[] { new[] { "aries", "capricornio" }, new[] { "capricornio", "aries" } })
+            {
+                var attempts = new Dictionary<string, List<int>>();
+                var keys = new List<string>();
+                int finished = 0;
+                for (int c = 0; c < n; c++)
+                {
+                    var g = new MetaGame(meta, MetaGame.NewProfile(meta, (ulong)(c + 1), 300));
+                    g.Story.Create("Sim", "Elle", meta.World.Story.Species[0], "aries");
+                    g.Story.StartMission("vado", "prologo");
+                    PlayMission(g, new[] { "marisal", "zarigueya", "topo" }, attempts, keys, c);
+                    g.Termas.SetStarterChoice("solenne");
+                    g.Termas.Pull("inicio", 20, out _);
+                    var team = g.Profile.Witches.Keys.Where(meta.HasKit).OrderBy(x => x, StringComparer.Ordinal).Take(4).ToArray();
+                    foreach (var region in order)
+                        foreach (var m in meta.World.Story.Region(region).Missions)
+                        {
+                            g.Story.StartMission(region, m.Id);
+                            PlayMission(g, team, attempts, keys, c);
+                        }
+                    if (g.Story.GameFinished) finished++;
+                }
+                Console.WriteLine($"== Historia {order[0]} → {order[1]} · {n} cuentas nuevas · terminadas {finished}/{n}");
+                foreach (var k in keys) Console.WriteLine($"   {k,-18} intentos: media {attempts[k].Average():0.0}  máximo {attempts[k].Max()}");
+            }
+            return 0;
+        }
+
+        private static void PlayMission(MetaGame g, IReadOnlyList<string> team, Dictionary<string, List<int>> attempts, List<string> keys, int c)
+        {
+            for (int guard = 0; guard < 400 && g.Story.InMission; guard++)
+            {
+                var scene = g.Story.CurrentScene;
+                if (scene.Battle != null)
+                {
+                    string key = g.Profile.Calculista.Mission + "/" + scene.Id;
+                    int tries = 0;
+                    Core.Meta.OpResult r;
+                    do
+                    {
+                        var b = new Battle(g.Combat, g.Story.PrepareBattle(team, (ulong)(c * 100 + ++tries)));
+                        b.Start();
+                        new AutoPilot().RunToEnd(b);
+                        r = g.Story.ResolveBattle(b);
+                    } while (!r.Ok && tries < 100);
+                    if (!attempts.ContainsKey(key)) { attempts[key] = new List<int>(); keys.Add(key); }
+                    attempts[key].Add(tries);
+                }
+                else if (scene.Choices.Count > 0)
+                {
+                    var o = g.Story.Choices(team).First(x => x.Available);
+                    g.Story.Choose(o.Index, team);
+                }
+                else g.Story.Continue();
+            }
+        }
+
         /// <summary>Juega cada Juicio con el piloto del combate e informa victorias y condiciones cumplidas.</summary>
         public static int Trials(GameDatabase db, string witch, int n)
         {

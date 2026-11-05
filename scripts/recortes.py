@@ -21,12 +21,18 @@ Uso:
   python scripts/recortes.py procesar art/bustos/brea/brea_f1_neutral_v1.png [...]
       bustos nuevos de docs/Bustos para Codex.md: escribe junto a cada imagen
       <nombre>_recorte.png, <nombre>_160.png y <nombre>_320.png
+  python scripts/recortes.py unity [ids]     # copia a Unity los bustos de 160 de art/recortes
+  python scripts/recortes.py unity art/bustos/brea/brea_f1_neutral_v2_160.png [...]
+      copia a Unity los bustos elegidos. Quedan como Art/Bustos/brea/brea_f1_neutral.png, así
+      que reemplazan al anterior sin cambiar su GUID ni las referencias que apunten a él
 
 [ids] filtra por clave, por ejemplo: marisal_f1 brea_f1
 """
 from pathlib import Path
 import hashlib
 import json
+import re
+import shutil
 import subprocess
 import sys
 
@@ -37,6 +43,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'art' / 'retratos'
 OUT = ROOT / 'art' / 'recortes'
 FRAMES = OUT / 'encuadres.json'
+UNITY = ROOT / 'Assets' / 'SalYAlmas' / 'Art' / 'Bustos'   # importa BustImport.cs
 MANIFEST = OUT / 'manifest.json'
 MODEL = 'birefnet-general'
 ALPHA_FLOOR = 10      # alfa por debajo de esto se vuelve 0 (ruido del modelo)
@@ -122,10 +129,31 @@ def body_row(image, box, removed):
             'alfa_descartado_en_islas': round(removed, 4)}
 
 
+def trim(image, key):
+    """Borra lo que BiRefNet pega a la figura y keep_main no puede separar, según el encuadre.
+
+    corte_inferior: y en píxeles del original desde la que se borra el alfa (reflejo de Axa).
+    borrar: polígonos [[x, y], ...] en píxeles del original (restos de la rueda natal en Cervanda).
+    """
+    frame = json.loads(FRAMES.read_text(encoding='utf-8')).get(key, {})
+    limit, polygons = frame.get('corte_inferior'), frame.get('borrar', [])
+    if limit is None and not polygons:
+        return image
+    alpha = image.getchannel('A')
+    draw = ImageDraw.Draw(alpha)
+    for polygon in polygons:
+        draw.polygon([tuple(point) for point in polygon], fill=0)
+    if limit is not None:
+        draw.rectangle((0, limit, image.width, image.height), fill=0)
+    result = image.copy()
+    result.putalpha(alpha)
+    return result
+
+
 def cut_one(item):
     """Recorta un retrato elegido. Corre en su propio proceso: BiRefNet usa mucha memoria."""
     src = ROOT / item['source']
-    image, removed = keep_main(matte(src))
+    image, removed = keep_main(trim(matte(src), item['key']))
     box = bbox(image)
     target = OUT / item['id'] / f"{item['key']}_cuerpo.png"
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -139,7 +167,7 @@ def clean(items):
     data = load_manifest()
     for item in items:
         row = data['items'][item['key']]
-        image, removed = keep_main(full_canvas(row))
+        image, removed = keep_main(trim(full_canvas(row), item['key']))
         box = bbox(image)
         image.crop(box).save(ROOT / row['cuerpo'], optimize=True)
         row.update(body_row(image, box, removed))
@@ -266,6 +294,26 @@ def process_one(path):
     return [f'{stem.name}_recorte.png', f'{stem.name}_160.png', f'{stem.name}_320.png']
 
 
+def unity_name(path):
+    """brea_f1_busto_160.png o brea_f1_neutral_v2_160.png -> ('brea', 'brea_f1_neutral.png')."""
+    match = re.fullmatch(r'(([a-z]+)_f\d+)_(?:busto|([a-z_]+)_v\d+)_160\.png', path.name)
+    if not match:
+        sys.exit(f'{path.name}: se esperaba un busto de 160 px, <id>_f<fase>_<expresion>_v<n>_160.png')
+    return match.group(2), f'{match.group(1)}_{match.group(3) or "neutral"}.png'
+
+
+def to_unity(sources):
+    for source in sources:
+        folder, name = unity_name(source)
+        with Image.open(source) as image:
+            if image.size != (NATIVE, NATIVE):
+                sys.exit(f'{source.name}: mide {image.size}, debe medir {NATIVE} px')
+        target = UNITY / folder / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, target)
+        print(f'{source.name} -> {target.relative_to(ROOT).as_posix()}', flush=True)
+
+
 def main(argv):
     if argv and argv[0] == '_uno':
         print(json.dumps(cut_one(json.loads(argv[1]))))
@@ -280,6 +328,9 @@ def main(argv):
                                     capture_output=True, text=True, check=True)
             print('  ' + ', '.join(json.loads(result.stdout.strip().splitlines()[-1])), flush=True)
         return
+    if argv and argv[0] == 'unity' and any(x.endswith('.png') for x in argv[1:]):
+        to_unity([Path(x).resolve() for x in argv[1:]])
+        return
     command, keys = (argv[0] if argv else 'todo'), set(argv[1:])
     items = [x for x in chosen() if not keys or x['key'] in keys]
     OUT.mkdir(parents=True, exist_ok=True)
@@ -291,6 +342,8 @@ def main(argv):
         busts(items)
     if command in ('hojas', 'todo'):
         sheets(chosen())
+    if command == 'unity':
+        to_unity([OUT / x['id'] / f"{x['key']}_busto_160.png" for x in items])
 
 
 if __name__ == '__main__':

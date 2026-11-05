@@ -323,6 +323,7 @@ namespace SalYAlmas.Core.Fresno
             foreach (var id in Run.Curses[Math.Min(Run.Zone, Run.Curses.Count - 1)]) { var c = R.Curse(id); if (c != null) mods.AddAll(c.Mods); }
             mods.AddAll(RootMods());
             mods.AddAll(OfrendaBonus());
+            mods.AddAll(_g.Story.CombatMods());
             foreach (var kv in Run.RunMods) mods.Add(kv.Key, kv.Value);
             return mods;
         }
@@ -672,6 +673,7 @@ namespace SalYAlmas.Core.Fresno
         /// <summary>Estadística de la Calculista para un chequeo: su base más el rasgo de cada bruja del equipo.</summary>
         public int Stat(CalculistaStat stat)
         {
+            if (_g.Story.Created) return _g.Story.Stat(stat, Run.Team);
             int v = R.CalculistaBase;
             foreach (var id in Run.Team)
             {

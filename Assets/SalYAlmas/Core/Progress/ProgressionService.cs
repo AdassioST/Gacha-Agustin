@@ -178,6 +178,7 @@ namespace SalYAlmas.Core.Progress
         public BattleSetup BuildSetup(IReadOnlyList<string> team, ulong seed)
         {
             var setup = new BattleSetup { Seed = seed };
+            setup.Modifiers.AddAll(_g.Story.CombatMods());
             foreach (var id in team)
             {
                 var w = Get(id);

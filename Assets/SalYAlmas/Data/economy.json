@@ -43,6 +43,7 @@
     "tirada": "Tiradas en las Termas",
     "cosmeticos": "Cosméticos",
     "conversion": "Conversión a Sales de Baño",
+    "reembolso": "Reembolso de una compra",
     "tienda_polvo": "Tienda cosmética rotativa",
     "vislumbre": "Vislumbre y Frenesí",
     "receta_maldita": "Recetas malditas"
@@ -60,17 +61,17 @@
     },
     {
       "id": "sal_destilada", "name": "Sal Destilada", "perPlanet": true, "sold": false,
-      "sources": ["altar.refinar", "prueba"],
+      "sources": ["altar.refinar", "historia", "prueba"],
       "sinks": ["destilacion", "forja", "salmuera", "altar.refinar"]
     },
     {
       "id": "quintaesencia", "name": "Quintaesencia", "perPlanet": true, "sold": false,
-      "sources": ["altar.refinar", "prueba"],
+      "sources": ["altar.refinar", "historia", "prueba"],
       "sinks": ["destilacion", "forja", "fusion", "salmuera"]
     },
     {
       "id": "sal_negra", "name": "Sal Negra", "sold": false,
-      "sources": ["fresno.elite", "fresno.nido", "fresno.evento", "luna_nueva", "prueba"],
+      "sources": ["fresno.elite", "fresno.nido", "fresno.evento", "luna_nueva", "historia", "prueba"],
       "sinks": ["vislumbre", "salmuera", "receta_maldita"]
     },
     {
@@ -86,7 +87,7 @@
     {
       "id": "perlas", "name": "Perlas del Manantial", "sold": true,
       "sources": ["compra", "prueba"],
-      "sinks": ["cosmeticos", "conversion"]
+      "sinks": ["cosmeticos", "conversion", "reembolso"]
     },
     {
       "id": "polvo_astral", "name": "Polvo Astral", "sold": false,

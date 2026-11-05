@@ -34,8 +34,9 @@ namespace SalYAlmas.Sim
                 case "gacha": return MetaSim.Gacha(db, args.Length > 1 ? long.Parse(args[1]) : 1000000L, args.Length > 2 ? ulong.Parse(args[2]) : 2026UL);
                 case "fresno": return MetaSim.Fresno(db, args.Length > 1 ? int.Parse(args[1]) : 100);
                 case "fresno-log": return MetaSim.FresnoLog(db, args.Length > 1 ? ulong.Parse(args[1]) : 1UL);
+                case "historia": return MetaSim.Story(db, args.Length > 1 ? int.Parse(args[1]) : 20);
                 case "juicio": return MetaSim.Trials(db, args.Length > 1 ? args[1] : "todas", args.Length > 2 ? int.Parse(args[2]) : 50);
-                default: Console.Error.WriteLine("Modos: log, balance, chains, tiempo, gacha, fresno, fresno-log, juicio"); return 1;
+                default: Console.Error.WriteLine("Modos: log, balance, chains, tiempo, gacha, fresno, fresno-log, juicio, historia"); return 1;
             }
         }
 
