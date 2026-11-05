@@ -19,6 +19,8 @@ En Unity 6 LTS, abre la raíz del repositorio y usa el menú **Sal y Almas > Con
 | [docs/GDD.md](docs/GDD.md) | Documento de diseño. Manda sobre cualquier otro documento |
 | [docs/REFERENCIAS.md](docs/REFERENCIAS.md) | Referencias visuales, paleta, mapa de pantallas y antirreferencias |
 | [docs/FASE1.md](docs/FASE1.md) | Fase 1: qué se construyó, cómo probarlo, valores // TUNING y huecos del GDD |
+| [docs/Retratos para Codex.md](docs/Retratos%20para%20Codex.md) | Prompts de los retratos de cuerpo completo de la primera ola |
+| [docs/Bustos para Codex.md](docs/Bustos%20para%20Codex.md) | Análisis del arte de Codex, recortes en `art/recortes/` y prompts de los bustos de diálogo |
 
 ## Cómo se construye
 
