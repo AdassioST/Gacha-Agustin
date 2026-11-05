@@ -49,6 +49,8 @@ namespace SalYAlmas.Presentation
 
         public float Speed = 1f;
         public bool Auto;
+        /// <summary>El jugador sostiene una carta: la pausa antes del turno enemigo espera a que suelte (Ascensión por arrastre).</summary>
+        public bool HoldDecision;
 
         /// <summary>Se dispara cuando un evento se muestra en pantalla (después de su espera). Lo usan el sonido y otros oyentes.</summary>
         public event Action<BattleEvent> EventPresented;
@@ -189,6 +191,7 @@ namespace SalYAlmas.Presentation
                 case DecisionKind.EnemyTurn:
                 case DecisionKind.AutoTurn:
                     // Pausa corta: deja una ventana para lanzar una Ascensión antes del turno enemigo.
+                    if (HoldDecision && !Auto) _decisionTimer = 0f;
                     if (_decisionTimer > (Auto ? 0.25f : 0.55f)) Submit(Auto ? (Pilot.Next(Battle) ?? BattleCommand.Advance()) : BattleCommand.Advance());
                     break;
                 case DecisionKind.AllyTurn:
@@ -267,11 +270,17 @@ namespace SalYAlmas.Presentation
                     if (ActiveId >= 0) View(ActiveId)?.SetActive(false);
                     ActiveId = t.UnitId;
                     View(t.UnitId)?.SetActive(true);
+                    BattleLighting.SetFocus(View(t.UnitId)?.transform);
                     break;
 
                 case ActionUsed a:
                     if (a.Action != ActionKind.Potion) View(a.ActorId)?.Lunge();
-                    if (a.Action == ActionKind.Spell || a.Action == ActionKind.SelfCast || a.Action == ActionKind.Ecstasy) View(a.ActorId)?.Glow(0.8f);
+                    if (a.Action == ActionKind.Spell || a.Action == ActionKind.SelfCast || a.Action == ActionKind.Ecstasy)
+                    {
+                        View(a.ActorId)?.Glow(0.8f);
+                        CastLight(a.ActorId, 1.4f, 0.3f, 0.75f);
+                    }
+                    else if (a.Action == ActionKind.EnemySkill || a.Action == ActionKind.EnemyCharge) CastLight(a.ActorId, 1.1f, 0.28f, 0.6f);
                     if (a.Action == ActionKind.EnemyCharge)
                     {
                         View(a.ActorId)?.SetCharging(true);
@@ -345,6 +354,7 @@ namespace SalYAlmas.Presentation
                     View(b.TargetId)?.SetBroken(true);
                     View(b.TargetId)?.SetCharging(false);
                     View(b.TargetId)?.AddFloat("¡Quiebre! " + b.EffectName, Palette.Planet(b.Planet), 36);
+                    if (View(b.TargetId) is UnitView broken) BattleLighting.Flash(broken.Head + Vector3.down * 0.6f, Palette.Planet(b.Planet), 1.8f, 0.34f, 0.8f); // TUNING
                     SetBanner("QUIEBRE · " + b.EffectName, Palette.Planet(b.Planet));
                     break;
 
@@ -398,6 +408,7 @@ namespace SalYAlmas.Presentation
 
                 case AscensionCast a:
                     View(a.WitchId)?.Glow(2.5f);
+                    CastLight(a.WitchId, 1.6f + 0.4f * a.Level, 0.38f + 0.12f * a.Level, 1.2f + 0.5f * a.Level); // TUNING
                     SetBanner("ASCENSIÓN " + (a.Level == 1 ? "I" : a.Level == 2 ? "II" : "III") + " · " + a.MoveName, Palette.FiveStar, 1.8f);
                     break;
 
@@ -421,6 +432,7 @@ namespace SalYAlmas.Presentation
 
                 case UnitDefeated u:
                     View(u.UnitId)?.Die();
+                    if (View(u.UnitId) is UnitView fallen) BattleLighting.Flash(fallen.Head + Vector3.down * 0.8f, Palette.SaltWhite, 1.2f, 0.26f, 0.7f);
                     break;
 
                 case BattleEnded b:
@@ -428,6 +440,17 @@ namespace SalYAlmas.Presentation
                         b.Outcome == BattleOutcome.Victory ? Palette.FiveStar : Palette.Danger, 3f);
                     break;
             }
+        }
+
+        /// <summary>Luz del color del planeta de quien lanza: hechizos, habilidades enemigas y Ascensiones.</summary>
+        private void CastLight(int unitId, float intensity, float radius, float life)
+        {
+            var v = View(unitId);
+            if (v == null) return;
+            Planet planet = Planet.Sol;
+            if (Battle.FindWitch(unitId) is WitchUnit w) planet = w.Dominant;
+            else if (Battle.FindEnemy(unitId) is EnemyUnit en) planet = en.Def.AttackPlanet;
+            BattleLighting.Flash(v.Head + Vector3.down * 0.5f, Palette.Planet(planet), intensity, radius, life, v.transform);
         }
 
         private void AddLog(BattleEvent e)

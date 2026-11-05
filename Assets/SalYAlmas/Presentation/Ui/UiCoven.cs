@@ -29,17 +29,19 @@ namespace SalYAlmas.Ui
             wheel.gameObject.AddComponent<UiSpin>().Speed = 0.8f;
             UiAmbience.Almitas(Root, new Rect(-1000, -540, 2000, 1000), 1.6f);
 
-            var title = U.Txt(Root, UiLoc.Get("coven.title"), 72, UiTheme.Spark, UiTheme.Gothic);
+            var title = U.Txt(Root, UiLoc.Get("coven.title"), 60, UiTheme.Spark, UiTheme.Gothic);
             title.fontSharedMaterial = UiTheme.Shadowed(UiTheme.Gothic, new Color(0, 0, 0, 1), 0.5f, -1, 0.12f);
-            U.At(title.rectTransform, 0, 1, 56, -118, 720, 84, 0, 1);
-            _count = U.Txt(Root, "", 27, UiTheme.ParchmentDim, UiTheme.Italic);
-            U.At(_count.rectTransform, 0, 1, 58, -200, 620, 36, 0, 1);
+            // TUNING: título y filtros más bajos de alto para que el folio de retratos tome la pantalla.
+            U.At(title.rectTransform, 0, 1, 52, -100, 620, 70, 0, 1);
+            _count = U.Txt(Root, "", 23, UiTheme.ParchmentDim, UiTheme.Italic);
+            U.At(_count.rectTransform, 0, 1, 380, -126, 420, 32, 0, 1);
 
             _filters = U.Node(Root, "Filtros");
-            U.At(_filters, 1, 1, -40, -142, 680, 66, 1, 1);
+            U.At(_filters, 1, 1, -36, -110, 680, 66, 1, 1);
+            _filters.localScale = new Vector3(0.84f, 0.84f, 1);
 
             var view = U.Node(Root, "Vista");
-            U.Fill(view, 0, 130, 0, 248);
+            U.Fill(view, 0, 108, 0, 178);
             view.gameObject.AddComponent<RectMask2D>();
             var hitImg = view.gameObject.AddComponent<Image>();
             hitImg.color = new Color(0, 0, 0, 0);
@@ -75,20 +77,22 @@ namespace SalYAlmas.Ui
 
             U.Clear(_content);
             _cards.Clear();
-            const float cw = 268, ch = 344, gap = 16, margin = 52;
+            // TUNING: los retratos crecen un 12 % con escala, sin rehacer el diseño interno de la carta (268×344).
+            const float cw = 268, ch = 344, gap = 14, margin = 48, k = 1.12f;
             int col = 0, row = 0;
             foreach (var id in G.Meta.RosterOrder)
             {
                 var e = G.Meta.Roster[id];
                 if (_filter == 1 && e.Rarity != 5 || _filter == 2 && e.Rarity != 4 || _filter == 3 && e.Rarity != 3) continue;
                 var card = BuildCard(id, e.Rarity);
-                U.At(card, 0, 1, margin + col * (cw + gap), -row * (ch + gap) - 6, cw, ch, 0, 1);
+                U.At(card, 0, 1, margin + col * (cw * k + gap), -row * (ch * k + gap) - 6, cw, ch, 0, 1);
+                card.localScale = new Vector3(k, k, 1);
                 _cards.Add(card);
                 row++;
                 if (row >= 2) { row = 0; col++; }
             }
             int cols = col + (row > 0 ? 1 : 0);
-            _content.sizeDelta = new Vector2(margin * 2 + cols * (cw + gap), 0);
+            _content.sizeDelta = new Vector2(margin * 2 + cols * (cw * k + gap), 0);
             _scroll.horizontalNormalizedPosition = 0;
         }
 

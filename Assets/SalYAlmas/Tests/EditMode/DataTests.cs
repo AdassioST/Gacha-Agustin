@@ -35,6 +35,34 @@ namespace SalYAlmas.Tests
         }
 
         [Test]
+        public void CadaEnemigoTieneTamanoEnElEscenario()
+        {
+            // El tamaño es solo de presentación (escala y encuadre), pero viene en los datos y el núcleo lo valida.
+            var db = RealDb();
+            Assert.AreEqual(EnemySize.Small, db.Enemy("larva").Size);
+            Assert.AreEqual(EnemySize.Giant, db.Enemy("guardian").Size);
+            var meta = Phase2Kit.Meta();
+            Assert.AreEqual(EnemySize.Colossal, meta.RegionEnemies["madre_tenaza"].Size, "un cangrejo con un pueblo en el caparazón");
+            Assert.AreEqual(EnemySize.Small, meta.RegionEnemies["gota_obsidiana"].Size);
+            foreach (var e in db.Enemies.Values.Concat(meta.FresnoEnemies.Values).Concat(meta.RegionEnemies.Values))
+                if (e.IsBoss) Assert.GreaterOrEqual((int)e.Size, (int)EnemySize.Large, e.Id + ": un jefe nunca se ve más chico que una bruja");
+        }
+
+        [Test]
+        public void ElTamanoInvalidoSeRechazaYElJefeSinTamanoEsGrande()
+        {
+            var bad = DataSources.FromDirectory(DataDir());
+            bad.Enemies = bad.Enemies.Replace("\"size\": \"small\"", "\"size\": \"enorme\"");
+            var ex = Assert.Throws<DataValidationException>(() => DataLoader.Load(bad));
+            StringAssert.Contains("'size'", string.Join("\n", ex.Errors));
+
+            var plain = DataSources.FromDirectory(DataDir());
+            plain.Enemies = plain.Enemies.Replace("\"id\": \"guardian\", \"size\": \"giant\",", "\"id\": \"guardian\",");
+            Assert.AreEqual(EnemySize.Large, DataLoader.Load(plain).Enemy("guardian").Size);
+            Assert.AreEqual(EnemySize.Medium, DataLoader.Load(plain).Enemy("cristalizado").Size);
+        }
+
+        [Test]
         public void MezclasYFormasDeAutohechizoDelGdd()
         {
             var db = RealDb();

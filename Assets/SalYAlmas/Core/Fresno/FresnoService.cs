@@ -503,7 +503,7 @@ namespace SalYAlmas.Core.Fresno
             {
                 Id = id, Name = prefix + src.Name, ShortName = prefix + src.ShortName, Article = src.Article, Description = src.Description,
                 Level = Math.Min(100, src.Level + levelAdd), MaxHp = Math.Max(1, (int)Math.Round(src.MaxHp * hp)), Atk = src.Atk * atk,
-                Speed = src.Speed, Toughness = src.Toughness, AttackPlanet = src.AttackPlanet, IsBoss = src.IsBoss,
+                Speed = src.Speed, Toughness = src.Toughness, AttackPlanet = src.AttackPlanet, IsBoss = src.IsBoss, Size = src.Size,
                 ActionsPerTurn = src.ActionsPerTurn, Skills = src.Skills, Pattern = src.Pattern, Phase2 = src.Phase2,
             };
             d.Weaknesses.AddRange(src.Weaknesses);

@@ -6,7 +6,7 @@
 {
   "enemies": [
     {
-      "id": "cristalizado",
+      "id": "cristalizado", "size": "medium",
       "name": "Cristalizado Errante",
       "shortName": "Cristalizado",
       "article": "el",
@@ -24,7 +24,7 @@
       "pattern": ["abrazo_sal", "abrazo_sal", "susurro"]
     },
     {
-      "id": "larva",
+      "id": "larva", "size": "small",
       "name": "Larva de Raíz",
       "shortName": "Larva",
       "article": "la",
@@ -40,7 +40,7 @@
       "pattern": ["mordida_podrida", "mordida_podrida", "chillido"]
     },
     {
-      "id": "corneja",
+      "id": "corneja", "size": "small",
       "name": "Corneja de Ceniza",
       "shortName": "Corneja",
       "article": "la",
@@ -57,7 +57,7 @@
       "pattern": ["picotazo", "graznido", "picotazo"]
     },
     {
-      "id": "guardian",
+      "id": "guardian", "size": "giant",
       "name": "Guardián Corrupto del Fresno",
       "shortName": "Guardián",
       "article": "el",

@@ -312,6 +312,7 @@ namespace SalYAlmas.Core.Data
                     IsBoss = r.Bool(n, "boss", false),
                 };
                 e.ShortName = r.Str(n, "shortName", required: false, def: e.Name);
+                e.Size = r.MapOf(n, "size", Reader.EnemySizes, e.IsBoss ? EnemySize.Large : EnemySize.Medium);
                 e.ActionsPerTurn = r.Int(n, "actionsPerTurn", 1, 3, required: false, def: 1);
 
                 foreach (var w in r.Arr(n, "weaknesses"))
@@ -555,6 +556,12 @@ namespace SalYAlmas.Core.Data
         {
             { "enemy", TargetMode.Enemy }, { "allEnemies", TargetMode.AllEnemies }, { "ally", TargetMode.Ally },
             { "allAllies", TargetMode.AllAllies }, { "self", TargetMode.Self }, { "none", TargetMode.None },
+        };
+
+        public static readonly Dictionary<string, EnemySize> EnemySizes = new Dictionary<string, EnemySize>
+        {
+            { "small", EnemySize.Small }, { "medium", EnemySize.Medium }, { "large", EnemySize.Large },
+            { "giant", EnemySize.Giant }, { "colossal", EnemySize.Colossal },
         };
 
         public static readonly Dictionary<string, EnemyTargetRule> EnemyTargets = new Dictionary<string, EnemyTargetRule>

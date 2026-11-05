@@ -175,6 +175,20 @@ namespace SalYAlmas.Ui
                 var game = FindAnyObjectByType<SalYAlmasGame>();
                 if (game != null && game.Director != null)
                 {
+                    // Gestos: el abanico abierto, un Hechizo arrastrado hasta el segundo enemigo y lo que llegó al núcleo.
+                    var log = new System.Text.StringBuilder();
+                    log.AppendLine("pin: " + game.DebugHud("pin"));
+                    yield return Shot("combate_1b_abanico", 0.6f);
+                    log.AppendLine("close: " + game.DebugHud("close"));
+                    log.AppendLine("hold: " + game.DebugHud("hold:Spell:1"));
+                    yield return Shot("combate_1c_apuntar", 0.5f);
+                    log.AppendLine("release: " + game.DebugHud("release"));
+                    yield return Shot("combate_1d_hechizo", 0.9f);
+                    log.AppendLine(game.DebugTargetState());
+                    File.WriteAllText(Path.Combine(_folder, "combate_gestos.txt"), log.ToString());
+                }
+                if (game != null && game.Director != null)
+                {
                     Debug.Log("Capturas: combate en automático.");
                     game.Director.Auto = true;
                     game.Director.Speed = 2f;
@@ -184,6 +198,32 @@ namespace SalYAlmas.Ui
                     float limit = Time.realtimeSinceStartup + 90f;
                     while (!game.Director.ResultReady && Time.realtimeSinceStartup < limit) yield return null;
                     yield return Shot("combate_4_resultado", 1.2f);
+                }
+            }
+            if (Want("escala"))
+            {
+                // Tamaños: coloso con escolta, dos gigantes lado a lado, jefe gigante solo y una oleada mixta.
+                var casos = new[]
+                {
+                    ("escala_1_coloso", new[] { "madre_tenaza", "cangrejo_salinero", "gaviota_hueca" }),
+                    ("escala_2_dos_gigantes", new[] { "carnero_hierro", "medusa_cielo" }),
+                    ("escala_3_jefe_gigante", new[] { "guardian" }),
+                    ("escala_4_mixta", new[] { "gota_obsidiana", "figura_sal", "soldada_crisol" }),
+                };
+                foreach (var (name, enemies) in casos)
+                {
+                    App.Hub.DebugSizedBattle(enemies);
+                    yield return Shot(name, 2.2f);
+                    var game = FindAnyObjectByType<SalYAlmasGame>();
+                    if (game != null && game.Director != null)
+                    {
+                        // El primer enemigo apuntado: el corchete debe abrazar su silueta entera.
+                        File.AppendAllText(Path.Combine(_folder, "escala.txt"), name + ": " + game.DebugHud("hold:Spell:0") + "\n");
+                        yield return Shot(name + "_apuntar", 0.5f);
+                        game.DebugHud("close");
+                    }
+                    App.Hub.DebugEndBattle();
+                    yield return new WaitForSecondsRealtime(0.4f);
                 }
             }
             if (_manual) yield break;

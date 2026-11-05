@@ -16,6 +16,9 @@ namespace SalYAlmas.Ui
 
         private readonly UiApp _app;
         private readonly RectTransform _top, _nav, _topRoot, _navRoot;
+        private RectTransform _topLeft, _topRight;
+        // TUNING: el marco ocupa menos alto para que las brujas tengan el centro. Antes 130 y 132 px; contenido al 82 %.
+        private const float TopHeight = 108f, NavHeight = 110f, ChromeScale = 0.82f, NavScale = 0.84f;
         private readonly List<Wallet> _wallets = new List<Wallet>();
         private readonly List<NavItem> _items = new List<NavItem>();
         private TextMeshProUGUI _name, _height;
@@ -29,7 +32,7 @@ namespace SalYAlmas.Ui
             U.At(_topRoot, 0.5f, 1, 0, 0, 0, 0, 0.5f, 1);
             _topRoot.anchorMin = new Vector2(0, 1);
             _topRoot.anchorMax = new Vector2(1, 1);
-            _topRoot.sizeDelta = new Vector2(0, 130);
+            _topRoot.sizeDelta = new Vector2(0, TopHeight);
             _top = _topRoot;
             var tbg = U.Img(_topRoot, "chrome/bar_top", null, "Fondo");
             U.Fill(tbg.rectTransform, -200, -10, -200, -60);
@@ -39,7 +42,7 @@ namespace SalYAlmas.Ui
             _navRoot.anchorMax = new Vector2(1, 0);
             _navRoot.pivot = new Vector2(0.5f, 0);
             _navRoot.anchoredPosition = Vector2.zero;
-            _navRoot.sizeDelta = new Vector2(0, 132);
+            _navRoot.sizeDelta = new Vector2(0, NavHeight);
             _nav = _navRoot;
             var nbg = U.Img(_navRoot, "chrome/bar_bottom", null, "Fondo");
             U.Fill(nbg.rectTransform, -200, -60, -200, 0);
@@ -48,25 +51,36 @@ namespace SalYAlmas.Ui
             BuildNav();
         }
 
+        /// <summary>Grupo que se encoge hacia su esquina: lo de la izquierda hacia la izquierda y las monedas hacia la derecha.</summary>
+        private RectTransform CornerGroup(string name, float pivotX)
+        {
+            var g = U.Fill(U.Node(_top, name));
+            g.pivot = new Vector2(pivotX, 1);
+            g.localScale = new Vector3(ChromeScale, ChromeScale, 1);
+            return g;
+        }
+
         private void BuildTop()
         {
+            _topLeft = CornerGroup("Cuenta y altura", 0);
+            _topRight = CornerGroup("Monedas", 1);
             // Cuenta
-            var crest = U.Btn(_top, "chrome/seal_dark", null, 0, () => _app.Go(MetaHub.Screen.Settings), null, null, "Cuenta");
+            var crest = U.Btn(_topLeft, "chrome/seal_dark", null, 0, () => _app.Go(MetaHub.Screen.Settings), null, null, "Cuenta");
             U.At(crest.Background.rectTransform, 0, 1, 26, -12, 92, 92, 0, 1);
             var hat = U.Img(crest.transform, "iconsg/settings", null, "Ajustes");
             U.Fill(hat.rectTransform, 19, 19, 19, 19);
-            _name = U.Txt(_top, "", 30, UiTheme.Parchment, UiTheme.Title);
+            _name = U.Txt(_topLeft, "", 30, UiTheme.Parchment, UiTheme.Title);
             _name.fontSharedMaterial = UiTheme.Shadowed(UiTheme.Title, new Color(0, 0, 0, 0.85f));
             U.At(_name.rectTransform, 0, 1, 132, -14, 380, 38, 0, 1);
-            _height = U.Txt(_top, "", 21, UiTheme.GoldBright, UiTheme.Bold);
+            _height = U.Txt(_topLeft, "", 21, UiTheme.GoldBright, UiTheme.Bold);
             _height.fontSharedMaterial = UiTheme.Shadowed(UiTheme.Bold, new Color(0, 0, 0, 0.85f));
             U.At(_height.rectTransform, 0, 1, 132, -52, 120, 28, 0, 1);
-            _heightBar = UiBar.Make(_top, UiTheme.Hex("#D08A4A"), "Altura");
+            _heightBar = UiBar.Make(_topLeft, UiTheme.Hex("#D08A4A"), "Altura");
             U.At(_heightBar.GetComponent<RectTransform>(), 0, 1, 232, -56, 250, 20, 0, 1);
 
             // Monedas, de mayor a menor peso.
             float x = -26;
-            var shop = U.Btn(_top, "chrome/seal_dark", null, 0, () => _app.Go(MetaHub.Screen.Shop), null, null, "Tienda");
+            var shop = U.Btn(_topRight, "chrome/seal_dark", null, 0, () => _app.Go(MetaHub.Screen.Shop), null, null, "Tienda");
             U.At(shop.Background.rectTransform, 1, 1, x, -18, 62, 62, 1, 1);
             var plus = U.Img(shop.transform, "iconsg/plus", null, "Más");
             U.Fill(plus.rectTransform, 15, 15, 15, 15);
@@ -78,7 +92,7 @@ namespace SalYAlmas.Ui
 
         private void AddWallet(ref float x, string res, string icon, float w)
         {
-            var pill = U.Img(_top, "chrome/btn_secondary", null, "Moneda " + res);
+            var pill = U.Img(_topRight, "chrome/btn_secondary", null, "Moneda " + res);
             U.At(pill.rectTransform, 1, 1, x, -24, w, 52, 1, 1);
             var im = U.Img(pill.transform, icon, null, "Icono");
             U.At(im.rectTransform, 0, 0.5f, -14, 0, 66, 66, 0, 0.5f);
@@ -95,7 +109,8 @@ namespace SalYAlmas.Ui
             bar.anchorMax = new Vector2(0.5f, 0);
             bar.pivot = new Vector2(0.5f, 0);
             bar.sizeDelta = new Vector2(1320, 120);
-            bar.anchoredPosition = new Vector2(0, 4);
+            bar.anchoredPosition = new Vector2(0, 2);
+            bar.localScale = new Vector3(NavScale, NavScale, 1);
             (MetaHub.Screen s, string icon, string key)[] defs =
             {
                 (MetaHub.Screen.Home, "home", "nav.home"), (MetaHub.Screen.Coven, "coven", "nav.coven"), (MetaHub.Screen.Summon, "spring", "dest.summon"),

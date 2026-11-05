@@ -151,6 +151,8 @@ namespace SalYAlmas.Core.Progress
                 Toughness = tr.Toughness,
                 AttackPlanet = dominant,
                 IsBoss = true,
+                // Un espíritu astral que pelea detrás de su bruja: en el escenario la sobrepasa.
+                Size = EnemySize.Giant,
                 ActionsPerTurn = tr.ActionsPerTurn,
             };
             // La Zarigüeya: su Ascendente se hace el muerto. Al usarlo en su contra recupera el ataque completo.

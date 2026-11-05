@@ -1,5 +1,7 @@
 # Handoff: interfaz de Sal y Almas
 
+> **Actualización.** La luz del combate, las órdenes por arrastre, los menús más ligeros y la escala por tamaño de enemigo (gigantes y colosos) están en la rama `combate/luz-y-gestos`, que ahora ocupa la carpeta `gacha-ui`. Su reporte es [FASE_LUZ_Y_GESTOS.md](FASE_LUZ_Y_GESTOS.md). Lo de abajo describe la rama `ui/interfaz`, ya integrada en `main`.
+
 Fecha: 5 de noviembre de 2026, segunda sesión. Lo construido y cómo correrlo está en [FASE_UI.md](FASE_UI.md). Este documento solo dice dónde quedó y qué falta.
 
 ## Empieza aquí

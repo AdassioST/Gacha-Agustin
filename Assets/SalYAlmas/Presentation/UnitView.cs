@@ -23,10 +23,16 @@ namespace SalYAlmas.Presentation
         public Renderer Body;
         public Transform Ascendant;
         public float Height = 2f;
+        /// <summary>Ancho de la figura en el mundo: corchetes de objetivo y toques sobre siluetas anchas (gigantes).</summary>
+        public float Width = 0.8f;
         /// <summary>Sombra de contacto en el suelo, si la figura es un recorte.</summary>
         public Renderer Shadow;
         /// <summary>Recorte con arte: el destello aclara en vez de teñir.</summary>
         public bool IsArt;
+        /// <summary>Fracción de la altura en la que la base del recorte se funde con el suelo. 0 = sin desvanecido.</summary>
+        public float BaseFade;
+        /// <summary>Silueta tendida en el suelo (BattleLighting). Se apaga al morir.</summary>
+        public Renderer CastShadow;
 
         public readonly List<FloatingText> Floats = new List<FloatingText>();
 
@@ -45,9 +51,14 @@ namespace SalYAlmas.Presentation
         private Vector3 _home;
         private Vector3 _baseScale;
         private MaterialPropertyBlock _block;
+        private float _depth;
+        private float _focus;
+        private float _focusShown;
 
         public bool IsDead => _dead;
         public Vector3 Head => transform.position + Vector3.up * Height;
+        /// <summary>De dónde salen los números: la cabeza, o el pecho de un gigante para que no tapen la barra de jefe.</summary>
+        public Vector3 FloatPoint => transform.position + Vector3.up * Mathf.Min(Height, 2.3f);
 
         public void Setup(int unitId, bool enemy, Color color, Renderer body, Transform ascendant, float height)
         {
@@ -69,14 +80,30 @@ namespace SalYAlmas.Presentation
             Body.GetPropertyBlock(_block);
             _block.SetColor("_BaseColor", c); // URP Lit
             _block.SetColor("_Color", c);     // Built-in y otros
+            _block.SetFloat("_Depth", _depth);
+            _block.SetFloat("_Focus", _focusShown);
+            _block.SetFloat("_BaseFade", BaseFade);
             Body.SetPropertyBlock(_block);
         }
+
+        /// <summary>Fila de la figura: 0 al frente, 1 al fondo. La de atrás toma más aire del bioma.</summary>
+        public void SetDepth(float depth) => _depth = Mathf.Clamp01(depth);
+
+        /// <summary>La figura elegida como objetivo o aliada recupera algo de su color propio.</summary>
+        public void SetFocus(bool focused) => _focus = focused ? 1f : 0f;
 
         public void Flash(Color c, float seconds = 0.25f)
         {
             _flashColor = IsArt ? new Color(c.r * 1.9f, c.g * 1.9f, c.b * 1.9f, 1f) : c;
             _flash = seconds;
-            if (IsArt) BattleFx.Hit(transform.position + Vector3.up * Height * 0.55f, c == Color.white ? Palette.GoldBright : c, seconds > 0.2f);
+            if (IsArt)
+            {
+                var at = transform.position + Vector3.up * Height * 0.55f;
+                var light = c == Color.white ? Palette.GoldBright : c;
+                BattleFx.Hit(at, light, seconds > 0.2f);
+                // El golpe ilumina a la figura, a sus vecinas y al suelo. // TUNING
+                BattleLighting.Flash(at, light, seconds > 0.2f ? 1.25f : 0.95f, 0.2f, 0.32f);
+            }
         }
 
         public void Shake(float seconds = 0.2f) => _shake = Mathf.Max(_shake, seconds);
@@ -99,7 +126,7 @@ namespace SalYAlmas.Presentation
         {
             // Escalona los textos que salen juntos para que no se encimen.
             float offset = 0.35f * (Floats.Count % 4);
-            Floats.Add(new FloatingText { Text = text, Color = color, Size = size, Age = 0, World = Head + Vector3.up * offset });
+            Floats.Add(new FloatingText { Text = text, Color = color, Size = size, Age = 0, World = FloatPoint + Vector3.up * offset });
         }
 
         private void Update()
@@ -136,6 +163,7 @@ namespace SalYAlmas.Presentation
                 _deadTime += dt;
                 transform.localScale = Vector3.Lerp(_baseScale, new Vector3(_baseScale.x * 1.3f, 0.05f, _baseScale.z * 1.3f), Mathf.Clamp01(_deadTime / 0.6f));
                 if (Shadow != null) Shadow.enabled = _deadTime < 0.6f;
+                if (CastShadow != null) CastShadow.enabled = _deadTime < 0.45f;
             }
             else if (_charging)
             {
@@ -153,6 +181,8 @@ namespace SalYAlmas.Presentation
                 _flash -= dt;
                 c = Color.Lerp(c, _flashColor, Mathf.Clamp01(_flash * 5f));
             }
+            float focusTarget = _active || _focus > 0 ? 1f : 0f;
+            _focusShown = Mathf.MoveTowards(_focusShown, focusTarget, dt * 4f);
             ApplyColor(c);
 
             if (Ascendant != null)
