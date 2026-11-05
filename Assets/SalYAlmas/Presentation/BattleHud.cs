@@ -372,7 +372,10 @@ namespace SalYAlmas.Presentation
                 var screen = _camera.WorldToScreenPoint(view.Head + Vector3.up * 0.25f);
                 if (screen.z < 0) continue;
                 var p = GuiKit.ScreenToCanvas(screen);
-                var r = resolved[order.IndexOf(e)];
+                int slot = order.IndexOf(e);
+                // El acomodo tiene seis puestos; un encuentro más grande no debe romper el HUD.
+                if (slot >= resolved.Count) continue;
+                var r = resolved[slot];
                 _plates.Add(r);
                 bool targeted = EnemyTarget == e.Id;
                 InkPanel(r, EnemyAccent);

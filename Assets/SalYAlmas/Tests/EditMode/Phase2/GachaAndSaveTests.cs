@@ -204,6 +204,25 @@ namespace SalYAlmas.Tests
         }
 
         [Test]
+        public void ElBannerDeInicioNoDaUnaSegundaRegente()
+        {
+            var g = new MetaGame(Meta(), MetaGame.NewProfile(Meta(), 12, 300));
+            Assert.IsTrue(g.Termas.SetStarterChoice("cupria").Ok);
+            var starter = g.Meta.Gacha.Banners.First(b => b.Type == BannerType.Inicio);
+            var pity = g.Termas.Pity(starter);
+            // Primera 5★ forzada por el contador; la siguiente también saldría 5★ por el contador.
+            pity.Since5 = 69;
+            Assert.IsTrue(g.Termas.Pull("inicio", 1, out var first).Ok);
+            Assert.AreEqual(5, first[0].Rarity);
+            Assert.IsTrue(g.Profile.Owns("cupria"));
+            int fiveStars = g.Profile.Witches.Keys.Count(id => g.Meta.Roster[id].Rarity == 5);
+            pity.Since5 = 69;
+            Assert.IsTrue(g.Termas.Pull("inicio", 1, out var second).Ok);
+            Assert.AreEqual(4, second[0].Rarity, "si sale antes, las tiradas que quedan ya no dan otra");
+            Assert.AreEqual(fiveStars, g.Profile.Witches.Keys.Count(id => g.Meta.Roster[id].Rarity == 5));
+        }
+
+        [Test]
         public void ElSelectorSeAbreALasTrescientasDelEstandar()
         {
             var g = Fresh();
@@ -388,7 +407,72 @@ namespace SalYAlmas.Tests
             var profile = NewGame().Profile;
             profile.Version = PlayerProfile.CurrentVersion + 1;
             var json = ProfileSerializer.ToJson(profile);
-            Assert.Throws<InvalidOperationException>(() => ProfileSerializer.FromJson(json));
+            Assert.Throws<NewerSaveException>(() => ProfileSerializer.FromJson(json));
+        }
+
+        [Test]
+        public void UnCorteEntreLosRenombresNoPierdeElPerfil()
+        {
+            string dir = Path.Combine(Path.GetTempPath(), "salyalmas_" + Guid.NewGuid().ToString("N"));
+            try
+            {
+                var store = new FileSaveStore(dir);
+                var g = BusyGame();
+                g.Save(store, "x");
+                string first = g.ToJson();
+                g.Ledger.Apply(Res.Almitas, 777, "prueba");
+                g.Save(store, "x");
+                string second = g.ToJson();
+                Assert.AreEqual(first, store.LoadBackup("x"), "la versión anterior queda de respaldo");
+
+                // Simula un corte después de mover el perfil al respaldo y antes de poner el temporal en su lugar.
+                string path = store.PathFor("x");
+                File.WriteAllText(path + ".tmp", second);
+                File.Delete(path + ".bak");
+                File.Move(path, path + ".bak");
+                Assert.IsTrue(store.Exists("x"));
+                Assert.AreEqual(second, store.Load("x"), "el temporal completo es el perfil vigente");
+
+                // El siguiente guardado lo pone en su lugar sin perder nada.
+                g.Save(store, "x");
+                Assert.AreEqual(second, store.Load("x"));
+                Assert.IsFalse(File.Exists(path + ".tmp"));
+            }
+            finally
+            {
+                if (Directory.Exists(dir)) Directory.Delete(dir, true);
+            }
+        }
+
+        [Test]
+        public void UnTemporalAMedioEscribirNoSustituyeAlPerfil()
+        {
+            string dir = Path.Combine(Path.GetTempPath(), "salyalmas_" + Guid.NewGuid().ToString("N"));
+            try
+            {
+                var store = new FileSaveStore(dir);
+                var g = BusyGame();
+                g.Save(store, "x");
+                g.Save(store, "x");
+                File.WriteAllText(store.PathFor("x") + ".tmp", "{\"Version\": 2, \"Ledg");
+                Assert.AreEqual(g.ToJson(), store.Load("x"));
+            }
+            finally
+            {
+                if (Directory.Exists(dir)) Directory.Delete(dir, true);
+            }
+        }
+
+        [Test]
+        public void UnBloqueEnNullVuelveASusValoresPorDefecto()
+        {
+            var json = ProfileSerializer.ToJson(NewGame().Profile)
+                .Replace("\"Settings\": {", "\"Settings\": null, \"SettingsViejo\": {")
+                .Replace("\"Store\": {", "\"Store\": null, \"StoreViejo\": {");
+            var p = ProfileSerializer.FromJson(json);
+            Assert.IsNotNull(p.Settings);
+            Assert.IsNotNull(p.Store);
+            Assert.AreEqual(ProfileSerializer.ToJson(p), ProfileSerializer.ToJson(ProfileSerializer.FromJson(ProfileSerializer.ToJson(p))));
         }
     }
 }

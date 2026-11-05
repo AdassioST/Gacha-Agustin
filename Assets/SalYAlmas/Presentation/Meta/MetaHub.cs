@@ -60,7 +60,25 @@ namespace SalYAlmas.Presentation
         private void Sound(string id, params string[] parts) => SoundRequested?.Invoke(id, parts);
         public Action ApplySettings;
 
-        public MetaGame Game { get; private set; }
+        private MetaGame _game;
+
+        public MetaGame Game
+        {
+            get => _game;
+            private set
+            {
+                _game = value;
+                // Fuera del desarrollo no hay tienda de plataforma conectada: nada se compra con dinero (ni gratis).
+                if (_game != null && !DevTools) _game.Store.Platform = new UnavailableStorePlatform();
+            }
+        }
+
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+        /// <summary>Perfil de prueba, combate libre, tienda de pruebas y reembolsos: solo en el Editor y en desarrollo.</summary>
+        public static readonly bool DevTools = true;
+#else
+        public static readonly bool DevTools = false;
+#endif
 
         public MetaHub(MetaDatabase meta, ISaveStore store, PortraitBank art)
         {
@@ -75,23 +93,65 @@ namespace SalYAlmas.Presentation
 
         private void LoadOrCreate()
         {
+            bool recovered = false;
             try
             {
                 Game = _store.Exists(Slot) ? MetaGame.Load(_meta, _store, Slot) : null;
             }
-            catch (Exception ex)
+            catch (Exception ex) when (!(ex is NewerSaveException))
             {
-                // No sustituir un guardado incompatible o dañado por un perfil de prueba.
+                // Perfil dañado: se intenta la copia anterior. Si tampoco sirve, no se sustituye por uno nuevo.
+                Debug.LogException(ex);
+                Game = TryLoadBackup();
+                if (Game == null)
+                    throw new InvalidOperationException("No se pudo cargar el perfil. El archivo se conserva sin cambios: " + ex.Message, ex);
+                recovered = true;
+            }
+            catch (NewerSaveException ex)
+            {
+                // Un guardado de una versión más nueva nunca se pisa con uno viejo.
                 throw new InvalidOperationException("No se pudo cargar el perfil. El archivo se conserva sin cambios: " + ex.Message, ex);
             }
             if (Game == null) NewPlayer();
             else
             {
                 Game.SetDay(Today());
+                if (recovered)
+                {
+                    Save();
+                    Note("El perfil estaba dañado: se recuperó la copia anterior.", false);
+                }
                 Current = Game.Story.Created ? Screen.Home : Screen.Creator;
                 if (Game.Story.InMission) Current = Screen.Scene;
                 ApplyAccessibility();
             }
+        }
+
+        private MetaGame TryLoadBackup()
+        {
+            try
+            {
+                var json = _store.LoadBackup(Slot);
+                return json == null ? null : new MetaGame(_meta, ProfileSerializer.FromJson(json));
+            }
+            catch (Exception ex)
+            {
+                Debug.LogException(ex);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// El día cambia aunque la app siga abierta (medianoche o al volver de segundo plano): encargos, Diezmo, charlas y
+        /// baño dependen de él. Solo avanza; un reloj que retrocede no regala un segundo reinicio en la misma sesión.
+        /// </summary>
+        public void CheckDay()
+        {
+            if (Game == null) return;
+            int today = Today();
+            if (today <= Game.Profile.Day) return;
+            Game.SetDay(today);
+            Save();
         }
 
         private static ulong NewSeed()
@@ -201,6 +261,22 @@ namespace SalYAlmas.Presentation
         {
             Current = _history.Count > 0 ? _history.Pop() : Screen.Home;
             _note = "";
+        }
+
+        /// <summary>La capa uGUI bloquea el botón atrás mientras corre una tirada o una transición.</summary>
+        public Func<bool> BackBlocked;
+
+        /// <summary>
+        /// Botón atrás de Android (Escape). Vuelve a la pantalla anterior. No hace nada en el inicio, la creación, una
+        /// escena de historia, una run del Fresno ni durante una tirada: ahí las salidas tienen su propio botón.
+        /// </summary>
+        public bool HandleBack()
+        {
+            if (Game == null || _pull != null || (BackBlocked != null && BackBlocked())) return false;
+            if (Current == Screen.Home || Current == Screen.Creator || Current == Screen.Scene) return false;
+            if (Current == Screen.Fresno && F.InRun) return false;
+            Back();
+            return true;
         }
 
         // ------------------------------------------------------------------ Marco

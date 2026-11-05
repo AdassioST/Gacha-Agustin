@@ -77,8 +77,21 @@ namespace SalYAlmas.Core.World
 
     public interface IStorePlatform
     {
+        /// <summary>La plataforma puede cobrar. Si es false, la tienda no ofrece compras con dinero.</summary>
+        bool Available { get; }
+
         /// <summary>Cobra en la plataforma y devuelve el recibo. Null si la compra se canceló.</summary>
         Receipt Charge(string productId);
+    }
+
+    /// <summary>
+    /// Sin tienda de plataforma conectada (versión de producción mientras no exista la integración de compras):
+    /// nunca cobra ni entrega nada. Evita que la tienda de pruebas regale Perlas fuera del desarrollo.
+    /// </summary>
+    public sealed class UnavailableStorePlatform : IStorePlatform
+    {
+        public bool Available => false;
+        public Receipt Charge(string productId) => null;
     }
 
     /// <summary>Tienda en modo de pruebas: firma recibos que solo el backend falso sabe validar.</summary>
@@ -87,6 +100,7 @@ namespace SalYAlmas.Core.World
         public const string Secret = "tienda-de-pruebas";
         private int _next = 1;
         public bool Cancel;
+        public bool Available => true;
 
         public Receipt Charge(string productId)
         {
@@ -191,6 +205,7 @@ namespace SalYAlmas.Core.World
         public string CanBuy(ProductDef product)
         {
             if (product == null) return "Producto desconocido.";
+            if (Platform == null || !Platform.Available) return "Las compras con dinero todavía no están disponibles.";
             if (S.SpendLimitUsd > 0 && SpentThisMonth() + product.PriceUsd > S.SpendLimitUsd)
                 return $"Pasarías tu límite mensual de {S.SpendLimitUsd:0.00} USD.";
             if (product.Kind == ProductKind.Grimorio && S.GrimorioPremium) return "Ya tienes el Grimorio premium.";

@@ -147,7 +147,8 @@ namespace SalYAlmas.Presentation
                     GuiKit.Label(new Rect(text.x + 840, y + 40, text.width - 880, 30), $"Sección {story.SectionNumber} de {sections} · la vida y la Salinidad se arrastran", 16, Palette.Ink, TextAnchor.MiddleCenter);
                 }
                 LootStrip(new Rect(text.x + 34, text.yMax - 64, text.width - 68, 50));
-                if (GuiKit.Button(new Rect(text.x + 34, y, 460, 76), sections > 1 ? $"Pelear · {story.SectionNumber}/{sections}" : "Pelear", true, 34))
+                bool canFight = scene.Battle.Team.Count > 0 || party.Count > 0;
+                if (GuiKit.Button(new Rect(text.x + 34, y, 460, 76), sections > 1 ? $"Pelear · {story.SectionNumber}/{sections}" : "Pelear", canFight, 34))
                 {
                     var setup = story.PrepareBattle(party, NewSeed());
                     string hint = tutorial ? "Abre la Cadena y ordena a las brujas: hay un orden donde dos golpes caen juntos." : "";
@@ -165,7 +166,7 @@ namespace SalYAlmas.Presentation
                         Save();
                     }, hint);
                 }
-                if (GuiKit.Button(new Rect(text.x + 510, y, 300, 76), "Combate automático", !tutorial, 20)) AutoStoryBattle(party);
+                if (GuiKit.Button(new Rect(text.x + 510, y, 300, 76), "Combate automático", !tutorial && canFight, 20)) AutoStoryBattle(party);
             }
             else if (scene.Choices.Count > 0)
             {

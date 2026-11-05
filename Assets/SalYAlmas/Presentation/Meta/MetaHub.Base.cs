@@ -178,12 +178,13 @@ namespace SalYAlmas.Presentation
 
         // ------------------------------------------------------------------ Tienda
 
+        private float _deleteArmedUntil;
         private int _shopTab;
         private int _shopPage;
 
         private void DrawShop(Rect a)
         {
-            var body = Header(a, L("nav.shop"), "Modo de pruebas: ninguna compra cobra dinero real. Nunca se vende progreso.");
+            var body = Header(a, L("nav.shop"), L(DevTools ? "shop.headerDev" : "shop.header"));
             string[] tabs = { "Perlas", "Cosméticos", "Grimorio y Diezmo" };
             for (int i = 0; i < 3; i++)
             {
@@ -215,7 +216,7 @@ namespace SalYAlmas.Presentation
                 Theme.Title(new Rect(card.x, card.y + 134, card.width, 40), p.Name, 24, Palette.Parchment);
                 GuiKit.Label(new Rect(card.x, card.y + 176, card.width, 30), $"{p.Perlas:N0}{(p.Bonus > 0 ? $" + {p.Bonus:N0}" : "")} Perlas", 21, Palette.GoldBright, TextAnchor.MiddleCenter, true);
                 string why = Game.Store.CanBuy(p);
-                if (GuiKit.Button(new Rect(card.x + 20, card.yMax - 78, card.width - 40, 62), $"{p.PriceUsd:0.00} USD", why.Length == 0, 24)) Apply(Game.Store.Buy(p.Id));
+                if (GuiKit.Button(new Rect(card.x + 20, card.yMax - 78, card.width - 40, 62), Game.Store.Platform.Available ? $"{p.PriceUsd:0.00} USD" : L("shop.soon"), why.Length == 0, 24)) Apply(Game.Store.Buy(p.Id));
             }
             float y = r.y + 316;
             GuiKit.Label(new Rect(r.x, y, r.width, 34), "Convertir Perlas en Sales de Baño (1 a 1)", 24, Palette.GoldBright, TextAnchor.MiddleLeft, true);
@@ -230,7 +231,7 @@ namespace SalYAlmas.Presentation
             double[] limits = { 0, 10, 30, 100 };
             for (int i = 0; i < limits.Length; i++)
                 if (GuiKit.Button(new Rect(r.x + i * 200, y, 190, 52), limits[i] == 0 ? "Sin límite" : limits[i].ToString("0") + " USD", true, 20)) Apply(Game.Store.SetSpendLimit(limits[i]));
-            if (st.Purchases.Count > 0)
+            if (DevTools && st.Purchases.Count > 0)
             {
                 var last = st.Purchases[st.Purchases.Count - 1];
                 if (GuiKit.Button(new Rect(r.xMax - 400, y, 400, 52), $"Reembolso de prueba: {last.Product}", !last.Refunded, 18)) Apply(Game.Store.Refund(last.Receipt));
@@ -263,14 +264,14 @@ namespace SalYAlmas.Presentation
             Theme.Panel(top, Palette.Hex("#4A3A20"), Palette.Hex("#1A1420"), Palette.GoldBright);
             Theme.Title(new Rect(top.x + 20, top.y + 8, top.width - 40, 40), diezmo.Name, 28, Palette.GoldBright, TextAnchor.MiddleLeft);
             GuiKit.Label(new Rect(top.x + 20, top.y + 50, top.width - 40, 54), $"{diezmo.Perlas} Perlas al comprar y {diezmo.DailySales} Sales de Baño diarias por {diezmo.Days} días." + (Game.Store.DiezmoActive ? $" Te quedan {st.DiezmoUntilDay - Game.Profile.Day} días." : ""), 18, Palette.Parchment, TextAnchor.UpperLeft, false, true);
-            if (GuiKit.Button(new Rect(top.x + 20, top.yMax - 62, 240, 52), $"{diezmo.PriceUsd:0.00} USD", Game.Store.CanBuy(diezmo).Length == 0, 21)) Apply(Game.Store.Buy(diezmo.Id));
+            if (GuiKit.Button(new Rect(top.x + 20, top.yMax - 62, 240, 52), Game.Store.Platform.Available ? $"{diezmo.PriceUsd:0.00} USD" : L("shop.soon"), Game.Store.CanBuy(diezmo).Length == 0, 21)) Apply(Game.Store.Buy(diezmo.Id));
             if (GuiKit.Button(new Rect(top.x + 270, top.yMax - 62, 240, 52), "Cobrar hoy", Game.Store.DiezmoActive && st.DiezmoClaimedDay != Game.Profile.Day, 21)) Apply(Game.Store.ClaimDiezmo());
 
             var pass = new Rect(r.x + r.width / 2 + 8, r.y, r.width / 2 - 8, 170);
             Theme.Panel(pass, Palette.Hex("#4A2C48"), Palette.Hex("#1A1420"), Palette.GoldBright);
             Theme.Title(new Rect(pass.x + 20, pass.y + 8, pass.width - 40, 40), $"Grimorio  ·  nivel {Game.Store.GrimorioLevel}", 28, Palette.GoldBright, TextAnchor.MiddleLeft);
             GuiKit.Label(new Rect(pass.x + 20, pass.y + 50, pass.width - 40, 54), $"Carril gratis para todas. El premium solo trae Sales de Baño y cosméticos. Experiencia: {st.GrimorioXp:N0}.", 18, Palette.Parchment, TextAnchor.UpperLeft, false, true);
-            if (GuiKit.Button(new Rect(pass.x + 20, pass.yMax - 62, 300, 52), st.GrimorioPremium ? "Premium activo" : $"Premium  ·  {grimorio.PriceUsd:0.00} USD", !st.GrimorioPremium, 21)) Apply(Game.Store.Buy(grimorio.Id));
+            if (GuiKit.Button(new Rect(pass.x + 20, pass.yMax - 62, 300, 52), st.GrimorioPremium ? "Premium activo" : $"Premium  ·  {(Game.Store.Platform.Available ? grimorio.PriceUsd.ToString("0.00") + " USD" : L("shop.soon"))}", !st.GrimorioPremium && Game.Store.Platform.Available, 21)) Apply(Game.Store.Buy(grimorio.Id));
 
             float y = r.y + 186, w = r.width / shop.Pass.Count;
             for (int i = 0; i < shop.Pass.Count; i++)
@@ -296,7 +297,7 @@ namespace SalYAlmas.Presentation
             var body = Header(a, L("menu.settings"));
             Theme.GoldPanel(body, 0.92f);
             var s = Game.Profile.Settings;
-            float x = body.x + 30, y = body.y + 22, w = 620;
+            float x = body.x + 30, y = body.y + 22;
             GuiKit.Label(new Rect(x, y, 260, 56), L("set.language"), 24, Palette.Parchment, TextAnchor.MiddleLeft, true);
             string[] langs = { "es", "en", "ja" }, names = { "Español", "English", "日本語" };
             for (int i = 0; i < 3; i++)
@@ -328,8 +329,15 @@ namespace SalYAlmas.Presentation
 
             var side = new Rect(body.x + 880, body.y + 170, body.width - 910, 420);
             Theme.Panel(side, Palette.Hex("#2C2234"), Palette.Hex("#17121E"), Theme.GoldDark);
-            GuiKit.Label(new Rect(side.x + 20, side.y + 14, side.width - 40, 36), "Cuenta y desarrollo", 24, Palette.GoldBright, TextAnchor.MiddleLeft, true);
-            if (GuiKit.Button(new Rect(side.x + 20, side.y + 60, side.width - 40, 62), "Borrar mi cuenta y empezar de nuevo", true, 20)) { _store.Delete(Slot); NewPlayer(); }
+            GuiKit.Label(new Rect(side.x + 20, side.y + 14, side.width - 40, 36), L(DevTools ? "set.accountDev" : "set.account"), 24, Palette.GoldBright, TextAnchor.MiddleLeft, true);
+            // Borrar la cuenta pide un segundo toque: no se puede deshacer.
+            bool armed = Time.unscaledTime < _deleteArmedUntil;
+            if (GuiKit.Button(new Rect(side.x + 20, side.y + 60, side.width - 40, 62), L(armed ? "set.deleteConfirm" : "set.delete"), true, 20))
+            {
+                if (armed) { _deleteArmedUntil = 0; _store.Delete(Slot); NewPlayer(); }
+                else { _deleteArmedUntil = Time.unscaledTime + 4f; Note(L("set.deleteWarn"), false); } // TUNING: 4 s para confirmar
+            }
+            if (!DevTools) return;
             if (GuiKit.Button(new Rect(side.x + 20, side.y + 132, side.width - 40, 62), "Cargar perfil de prueba", true, 20)) NewTestProfile();
             if (GuiKit.Button(new Rect(side.x + 20, side.y + 204, side.width - 40, 62), "Combate libre (Fase 1)", !F.InRun, 20)) OpenFormation?.Invoke();
             var an = Game.Analytics as LocalAnalytics;

@@ -44,6 +44,32 @@ namespace SalYAlmas.EditorTools
             if (report.summary.result != BuildResult.Succeeded) EditorApplication.Exit(1);
         }
 
+        /// <summary>
+        /// Compilación de producción, sin la opción Development: comprueba que compilan las ramas que solo existen fuera
+        /// del desarrollo (sin perfil de prueba, sin tienda de pruebas, sin capturas). Uso:
+        /// Unity -batchmode -quit -projectPath . -executeMethod SalYAlmas.EditorTools.UiBuild.Release -buildTarget Win64
+        /// (o -buildTarget Android). Deja el juego en Build/Produccion/.
+        /// </summary>
+        public static void Release()
+        {
+            EnsureTmp();
+            AssetDatabase.Refresh();
+            var scenes = EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
+            if (scenes.Length == 0) scenes = new[] { BattleSceneBuilder.ScenePath };
+            var target = EditorUserBuildSettings.activeBuildTarget;
+            string file = target == BuildTarget.Android ? "SalYAlmas.apk" : "SalYAlmas.exe";
+            var options = new BuildPlayerOptions
+            {
+                scenes = scenes,
+                locationPathName = Path.GetFullPath(Path.Combine("Build/Produccion", target.ToString(), file)),
+                target = target,
+                options = BuildOptions.None,
+            };
+            var report = BuildPipeline.BuildPlayer(options);
+            Debug.Log("Compilación de producción (" + target + "): " + report.summary.result + " en " + report.summary.totalTime + ", errores " + report.summary.totalErrors);
+            if (report.summary.result != BuildResult.Succeeded) EditorApplication.Exit(1);
+        }
+
         /// <summary>Reconstruye la escena con el constructor oficial y compila.</summary>
         public static void RebuildAndPlayer()
         {

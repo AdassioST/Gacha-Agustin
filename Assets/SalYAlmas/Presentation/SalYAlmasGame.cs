@@ -118,7 +118,8 @@ namespace SalYAlmas.Presentation
         private static ISaveStore ReviewSaveStore()
         {
 #if DEVELOPMENT_BUILD || UNITY_EDITOR
-            if (Array.IndexOf(Environment.GetCommandLineArgs(), "-capturas") >= 0) return new MemorySaveStore();
+            var args = Environment.GetCommandLineArgs();
+            if (Array.IndexOf(args, "-capturas") >= 0 || Array.IndexOf(args, "-recorrido") >= 0) return new MemorySaveStore();
 #endif
             return new FileSaveStore(Path.Combine(Application.persistentDataPath, "guardado"));
         }
@@ -460,8 +461,27 @@ namespace SalYAlmas.Presentation
             if (col != null) Destroy(col);
         }
 
+        private float _nextDayCheck;
+
+        private void OnApplicationFocus(bool focus)
+        {
+            if (focus) _nextDayCheck = 0f;
+        }
+
         private void Update()
         {
+            // El reinicio diario no espera a reabrir la app (TUNING: se revisa cada 5 s y al volver de segundo plano).
+            if (_hub != null && Time.unscaledTime >= _nextDayCheck)
+            {
+                _nextDayCheck = Time.unscaledTime + 5f;
+                _hub.CheckDay();
+            }
+            // Botón atrás de Android: navega hacia atrás en el hub y sale de la formación.
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (_mode == Mode.Hub && _hub != null) _hub.HandleBack();
+                else if (_mode == Mode.Formation) _mode = Mode.Hub;
+            }
             if (_mode == Mode.Battle) _director?.Tick(Time.unscaledDeltaTime);
             if (_mode == Mode.Battle && _director != null && _director.ResultReady && !_celebrated)
             {

@@ -292,7 +292,7 @@ namespace SalYAlmas.Presentation
                     Current = Screen.Scene;
                 }
             }
-            if (GuiKit.Button(new Rect(panel.xMax - 300, panel.yMax - 54, 280, 44), "Perfil de prueba", true, 16)) NewTestProfile();
+            if (DevTools && GuiKit.Button(new Rect(panel.xMax - 300, panel.yMax - 54, 280, 44), "Perfil de prueba", true, 16)) NewTestProfile();
         }
     }
 }
