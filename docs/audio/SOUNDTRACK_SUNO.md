@@ -478,4 +478,772 @@ No llevan prompt propio: se hacen con *Cover* o *Extend* de una pista ya aprobad
 
 **Por versión de seis semanas** (GDD 22.1) calcula: leitmotiv y Ascensión III de cada Regente nueva (dos fichas por Regente), región nueva si la hay (tema, combate y Casa), una Jardinera, un evento y, si sale, un Manantial. Son de 6 a 10 cues y unos 800 a 1,500 créditos por versión.
 
+---
+
+## 6. Prompts de Suno
+
+### 6.0 Cómo usar las fichas
+
+- **Estilo, Excluir estilos y Letra** se copian tal cual en sus campos de Create, modo Custom. Los prompts van en inglés porque Suno los sigue mejor; la letra va en Salmódico.
+- **Ajustes** van en Opciones avanzadas. Variety siempre en 0 (lo pide el FAQ de v6 para conservar tus etiquetas). Modelo v6, nunca v6-mini.
+- **Piezas instrumentales:** enciende Instrumental. Si tu app conserva el campo de letra con Instrumental encendido, pega la estructura de la ficha; si no, el estilo ya termina con la forma (*Form: ...*) y basta. El lote 0 sirve para saber cuál de las dos funciona mejor (sección 7.1).
+- **Persona de estilo:** en los cues con voz, usa la que creaste desde la ancla P01 (sección 7.3). No sirve en pistas instrumentales.
+- **Uso** dice cuántas tomas generar, qué compases forman el bucle, qué stems salen y cuándo entra cada capa. Los compases se cuentan desde el primer tiempo fuerte después de la intro, salvo que se diga otra cosa.
+- **Sentido** es la traducción interna de la letra. No va en Suno; es para el lingüista y la vocalista.
+
+### 6.1 Tema principal y menús
+
+#### P01 · `mus_titulo_tema` · Tema principal y pantalla de título
+
+**Título:** Istal Yolma
+**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3:30)
+
+**Estilo**
+
+```text
+Main theme, slow hymn-like ballad, bittersweet and hopeful. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Fingerpicked guitar and lute open, low cello countermelody, psaltery shimmer, bells on phrase endings. Builds from solo voice to full choir, then falls back to voice and guitar. Soft frame drum only in the last chorus. Memorable, singable melody. D Dorian, 72 BPM, 4/4. Form: intro, verse, chorus, interlude, verse, chorus, bridge, outro.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, fast tempo, heavy drums, rock ballad, musical theater belting
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: guitar and lute, bells]
+
+[Verse 1]
+Istal yolma, cuetor frashna
+Nantre ilcel, estlali nochual
+Yolmime olvai, na remel
+Na olvai, ermai, neyo cuicant
+
+[Chorus]
+Frashna, frashna, cuetor
+(Istal yolma)
+Nelradi e lucetl, cuetor
+(Istal yolma)
+
+[Instrumental: low cello and psaltery]
+
+[Verse 2]
+Atlua cochum, maresh olvai
+Tleugo neshcen, eztre e micmor
+Nosotl cuicant, nantre uarbe
+Cuetor, cuetor, yolma
+
+[Chorus]
+Frashna, frashna, cuetor
+(Istal yolma)
+Nelradi e lucetl, cuetor
+(Istal yolma)
+
+[Bridge]
+Huemag ishoc, ilcel blaztac
+(Aaah)
+
+[Outro]
+Istal yolma... cuetor
+[End]
+```
+
+**Sentido:** La sal es alma: vuelve al Fresno. Madre del cielo, estrella de la noche. Las almitas olvidan, no recuerdan. No olvides, hermana: yo canto. / Fresno, Fresno, vuelve. Raíz y luz, vuelve. / El agua duerme, el mar olvida. Fuego y ceniza, sangre y muerte. Nosotras cantamos, madre árbol. / Un ojo inmenso, el cielo en blanco.
+
+**Uso**
+
+- Es la **ancla**: genera de 10 a 12 tomas (5 o 6 pedidos) y elige con calma. Todo el juego se compara contra ella.
+- Ruta recomendada: una persona compone la melodía, la sube como audio y se usa *Cover* con este estilo y Audio Influence alrededor de 70 (sección 7.4).
+- Bucle de título: Verse 1 más Chorus (32 compases); la intro suena una vez.
+- Saca el stem de voz (V) para tráileres y para crear la Persona de estilo.
+- De esta pista salen por *Cover* P57 a P60 y el aniversario.
+
+#### P17 · `mus_libro_mayor` · Libro Mayor y menús
+
+**Título:** Folio Cuatrocientos Diecisiete
+**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
+
+**Estilo**
+
+```text
+Menu music for an ancient ledger of souls: quiet, studious, candlelit, faintly uncanny. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lute and guitar in slow clockwork-like counterpoint, pizzicato low cello, soft psaltery, ticking small bells like an abacus, very soft bowls. No drums, no vocals. G Dorian, 96 BPM, 4/4. Form: short intro, 32-bar loopable theme, gentle ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, drums, horror, epic
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: lute and guitar]
+[Verse]
+[Instrumental: clockwork counterpoint, ticking bells]
+[Chorus]
+[Instrumental: psaltery melody]
+[Outro]
+[End]
+```
+
+**Uso**
+
+- 6 tomas. Bucle: 32 compases (80 s). La intro suena al abrir el Libro.
+- Con Paralaje medio o alto, FMOD suma `mus_horror_capa_paralaje` y la Desafinación: es el momento en que la interfaz falla (GDD 6.5 y 13.1).
+
+### 6.2 Termas
+
+#### P02 · `mus_termas_dia` · Termas de día
+
+**Título:** Vapor y Caparazón
+**Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
+
+**Estilo**
+
+```text
+Peaceful daytime hot-spring theme: safe, cozy, gentle humor with a faint wistfulness. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Warm fingerpicked guitar and lute duet, wooden flute melody, soft pizzicato low cello, psaltery sparkles, bell drops like water. Light hand percussion only: shaker and soft frame drum. Lilting waltz. F major with Lydian color, 90 BPM, 3/4. No tension, no dark turns. Form: short intro, 48-bar main theme that can repeat, soft ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, horror, dissonance, heavy drums, tension
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: guitar and lute]
+[Verse]
+[Instrumental: flute melody, waltz]
+[Chorus]
+[Instrumental: flute and psaltery]
+[Verse]
+[Instrumental: lute melody]
+[Outro]
+[End]
+```
+
+**Uso**
+
+- 6 a 8 tomas. Bucle: 48 compases (96 s). Sin capas: es zona segura.
+- El cruce con P03 por hora del día es un fundido de 4 compases. Comparten armadura, así que no choca.
+
+#### P03 · `mus_termas_noche` · Termas de noche
+
+**Título:** Agua que Olvida
+**Ajustes:** Instrumental no · Weirdness 20 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Night hot-spring lullaby: tender, sleepy, safe, water that makes you forget. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. The voice is close and almost whispered. Slow arpeggiated guitar, plucked psaltery, sustained low cello, softly bowed singing bowls. No percussion. D minor opening into F major, 50 BPM in 6/8 (dotted quarter), gentle rocking. Form: guitar intro, two soft verses, humming section, guitar outro.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, drums, percussion, belting, dramatic climax, horror
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: slow guitar arpeggios]
+
+[Verse 1]
+Atlua cochum, atlua olvai
+Nochual metzlu, cochum, ermai
+Na istal, na micmor
+Atlua olvai
+
+[Verse 2]
+Yolmi cochum, nantre cuicant
+Estlali ilcel, na ishoc
+Cochum, cochum, ermai
+Atlua olvai
+
+[Bridge]
+Mmm... mmm...
+Mmm... olvai...
+
+[Outro]
+[Instrumental: guitar and singing bowls]
+[End]
+```
+
+**Sentido:** El agua duerme, el agua olvida. Noche de luna, duerme, hermana. Ni sal ni muerte. El agua olvida. / Almita, duerme; la madre canta. Estrella del cielo, no mires. Duerme, duerme, hermana.
+
+**Uso**
+
+- 8 tomas. Si la voz sale cantada a plena voz en vez de susurrada, baja Style Influence a 70 y repite.
+- Bucle: de Verse 1 a Bridge (40 compases, 96 s). La intro de guitarra suena al entrar desde el día.
+- Es la mejor candidata para la vocalista humana: es la canción que el jugador más escucha en reposo.
+
+### 6.3 Tirada
+
+#### P04 · `mus_tirada_suspenso` · Suspenso de la tirada
+
+**Título:** El Termómetro
+**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
+
+**Estilo**
+
+```text
+Suspense loop for a summon ritual at a hot spring: anticipation and warm mystery, not scary. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Low cello pedal on D, slow psaltery tremolo rising, soft heartbeat frame drum, bubbling bell figures, bowed singing bowls. Harmony hovers without resolving, like held breath. Second half simmers to a boil: faster psaltery, higher cello, stronger heartbeat. D pedal, 80 BPM, 4/4. Form: 8 calm bars, 8 intense bars, held unresolved chord.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, horror, jump scare, catchy hook
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: low cello pedal, heartbeat drum]
+[Verse]
+[Instrumental: psaltery tremolo rising, bubbling bells]
+[Bridge]
+[Instrumental: faster, simmering to a boil]
+[Outro]
+[Instrumental: held unresolved chord]
+[End]
+```
+
+**Uso**
+
+- 6 tomas. Región **tibia**: compases 1 a 8 (24 s), en bucle. Región **hirviendo**: compases 9 a 16, cuando el termómetro está en pity suave (GDD 16.1). El paso entre regiones cae en barra de compás.
+- Al revelarse el color del vapor, FMOD corta en el siguiente pulso y suena el stinger de P05.
+
+#### P05 · Stingers de vapor (modo Sounds)
+
+Cuatro cues cortos. Se hacen en **Sounds** (Create → Custom → Sounds), tipo one-shot, con **tonalidad Re y 80 BPM** para que encajen sobre P04. Si Sounds no da el sonido de la ancla, genera P06 dos veces y corta los acordes de ahí.
+
+**`mus_tirada_vapor_blanco`** (3★) · tonalidad Re menor · 80 BPM
+
+```text
+Acoustic one-shot, about 2 seconds: a soft nylon guitar strum of a D minor chord and one small bell, gentle and plain, natural stone chapel reverb tail.
+```
+
+**`mus_tirada_vapor_violeta`** (4★) · tonalidad Si♭ mayor · 80 BPM
+
+```text
+Acoustic one-shot, about 3 seconds: a rising plucked psaltery arpeggio landing on B-flat major then F major, a soft wordless female choir swell, small bells, natural stone chapel reverb tail.
+```
+
+**`mus_tirada_vapor_dorado`** (5★) · tonalidad Re mayor · 80 BPM
+
+```text
+Acoustic one-shot, about 4 seconds: a radiant D major chord blooms, full wordless choir swell, cascading high bells, psaltery tremolo, warm cello root, tender and triumphant, natural stone chapel reverb tail.
+```
+
+**`mus_tirada_subida_dorada`** (de violeta a dorado) · tonalidad Re mayor · 80 BPM
+
+```text
+Acoustic one-shot, about 5 seconds: starts as a soft B-flat major psaltery arpeggio, then lifts and modulates into a bright D major choir and bell bloom, joyful surprise, natural stone chapel reverb tail.
+```
+
+**Uso**
+
+- 4 a 6 tomas de cada uno. Recorta a la duración de la tabla con una cola de 1 s.
+- En una tirada de diez, las 3★ solo tienen su stinger; las 4★ y 5★ siguen con la emergencia (GDD 16.1).
+- La subida dorada se dispara en lugar del violeta cuando la presentación hace la subida sorpresa. Es solo presentación: el resultado ya estaba decidido.
+
+#### P06 · `mus_tirada_emergencia_5` · Emergencia de la 5★
+
+**Título:** Lo que Sube del Agua
+**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible (si no, auto y recorta)
+
+**Estilo**
+
+```text
+Short cinematic choral revelation: a legendary witch rises from a hot spring. Awe, warmth, wonder. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Water-like bells and a held breath, psaltery tremolo rises, then choir and solo voice bloom together on a radiant D major chord with cascading bells, cello and guitar strums. No drums. D major with Lydian touches, 120 BPM, 4/4. Form: very short intro, one big choral bloom, long ringing ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, drums, long song, many verses
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: water-like bells and breath]
+
+[Chorus]
+Aaah... estlali!
+(Aaah... lucetl!)
+
+[Outro]
+[Instrumental: bells ring out]
+[End]
+```
+
+**Sentido:** ¡Estrella! ¡Luz!
+
+**Uso**
+
+- 6 a 8 tomas. Corta el florecimiento: un compás antes del coro, dos compases de coro y 2 s de cola. Da unos 7 s, lo que dura la emergencia (GDD 19.2).
+- Al aparecer la tarjeta suena la **firma** de la bruja: los dos primeros compases de su leitmotiv, solo el instrumento solista. Las 5★ sin leitmotiv todavía usan `mus_tirada_vapor_dorado`.
+
+### 6.4 Combate
+
+#### P07 · `mus_combate_normal` y `mus_cadena_partitura` · Combate normal y Partitura
+
+**Título:** Eztre Istal
+**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 2:30)
+
+**Estilo**
+
+```text
+Driving folk battle music for turn-based combat: urgent, tense, beautiful. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Fast strummed guitar ostinato, lute, aggressive low cello riffs, psaltery runs, iron bells, flute countermelody. Frame drums, deep bass drum, tambourine, claps. Wordless vocalise on the main section; choir answers with short chants. D minor with Phrygian accents, 128 BPM, 4/4. Form: 4-bar intro, 32-bar main section, 8-bar break of psaltery and bowls only, main section, short ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, slow tempo, ballad, orchestral string section, timpani
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: guitar and frame drums]
+
+[Verse]
+Aaah... aaah...
+(Eztre! Istal!)
+Aaah... ooh...
+(Tleugo! Eztre!)
+
+[Chorus]
+Aaah... aaah...
+(Istal yolma, cuetor!)
+Aaah... ooh...
+(Istal yolma, cuetor!)
+
+[Break]
+[Instrumental: psaltery and singing bowls only]
+
+[Verse]
+Aaah... aaah...
+(Eztre! Istal!)
+
+[Chorus]
+Aaah... ooh...
+(Istal yolma, cuetor!)
+
+[Outro]
+[End]
+```
+
+**Sentido:** ¡Sangre! ¡Sal! ¡Fuego! / Sal y alma, ¡vuelve!
+
+**Uso**
+
+- Mínimo 8 tomas: es la pista más escuchada del juego. Descarta las que tengan una sección que se "canse" en menos de dos vueltas.
+- **Intro:** 4 compases. **Bucle:** Verse más Chorus, 32 compases (60 s). **Break:** 8 compases (15 s), es `mus_cadena_partitura`. **Outro:** cola hacia la victoria.
+- **Stems:** B (todo menos percusión y voces), P (Drums y Percussion), V (Lead Vocals: la vocalización) y C (Backing Vocals: los cantos cortos).
+- **Capas:** B y P desde el primer compás. V entra con `EnCadena` o `AscendenteActivo`, en el siguiente compás y con fundido de un compás; la vocalización sin palabras respeta la magia silente (GDD 7.5). C entra 8 compases después de cada Ascensión III. D, con Salinidad de 100 o Paralaje alto.
+- **Partitura:** al abrir la Cadena, transición al Break en la siguiente barra; al confirmar, regreso al bucle con V activa.
+- **Éxtasis:** P20 tiene el mismo tempo y tonalidad; el cambio es en barra de compás.
+
+#### P08 · `mus_jingle_victoria` y `mus_combate_resultados` · Victoria y resultados
+
+**Título:** Sal Guardada
+**Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode no · Duración auto
+
+**Estilo**
+
+```text
+Victory fanfare and results screen: relief and quiet pride, warm. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A bright 2-bar flourish of strummed guitar and bells ending on D major, then a calm lilting loop: lute melody, soft low cello, flute, light tambourine. D major, 96 BPM, 4/4. Form: 2-bar fanfare, 8-bar calm loop, gentle ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, minor key, long intro
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: bright guitar and bell flourish]
+[Verse]
+[Instrumental: calm lute melody, light tambourine]
+[Outro]
+[End]
+```
+
+**Uso**
+
+- 6 tomas. **Jingle:** compases 1 y 2 más la cola (unos 6 s). **Resultados:** compases 3 a 10 (20 s) en bucle, justo después del jingle.
+
+#### P09 · `mus_jingle_derrota` · Derrota
+
+**Título:** Mancha de Sal
+**Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode no · Duración personalizada lo más corta posible
+
+**Estilo**
+
+```text
+Short defeat jingle: sorrowful and gentle, never punishing. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A sighing low cello phrase over one soft guitar chord, a single low bell, a crystalline psaltery fading away like salt. D minor, 60 BPM, 3/4. Form: 3-bar phrase, long reverb tail, then silence.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, drums, comedy, cartoon
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: low cello sigh, one bell]
+[Outro]
+[End]
+```
+
+**Uso**
+
+- 6 tomas. Corta 3 compases más la cola (unos 9 s), sin bucle. Después, silencio o el Libro Mayor.
+- En el Fresno, la derrota deja una Mancha de Sal (GDD 10.4): el mismo jingle sirve; no la castigues con algo más duro.
+
+#### P10 · `mus_jefe_casa` · Jefe de Casa
+
+**Título:** La Casa del Signo
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+
+**Estilo**
+
+```text
+Epic acoustic boss battle against a witch coven: grim, majestic, ritual intensity. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Phase one: relentless guitar and lute ostinato, heavy low cello, war frame drums, anvil and iron bells, psaltery runs. Phase two: same tempo, the full choir chants, the lead voice soars, drums double. E Phrygian, 144 BPM, 4/4. Form: 4-bar intro, 32-bar phase one, 4-bar drum-roll transition, 32-bar phase two, final hit.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, slow tempo, ballad, orchestral string section
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: war drums and anvil]
+
+[Verse]
+(Eztre! Istal! Micmor!)
+Aaah... aaah...
+(Eztre! Istal! Micmor!)
+Aaah... aaah...
+
+[Pre-Chorus]
+[Instrumental: drum roll]
+
+[Chorus]
+Istal yolma, micmor cuetor!
+(Eztre, eztre, tleugo!)
+Frashna ishoc, huemag nelradi!
+(Eztre, eztre, tleugo!)
+
+[Outro]
+[End]
+```
+
+**Sentido:** ¡Sangre, sal, muerte! / Sal y alma: la muerte regresa. El Fresno mira, la raíz inmensa. ¡Sangre, fuego!
+
+**Uso**
+
+- 8 tomas. **Fase 1:** Verse, 32 compases (53 s). **Transición:** Pre-Chorus, 4 compases, una sola vez. **Fase 2:** Chorus, 32 compases.
+- El cambio de fase lo dispara el combate (vida o patrón del jefe) y cae en la siguiente barra.
+- Con `EsJefe` el coro suena todo el combate; en la fase 2 pasa al frente. V sigue la regla de la Cadena.
+- Las doce Casas usan esta pista al lanzamiento; después, cada una tiene su *Cover* (sección 5.3).
+
+### 6.5 Regiones del vertical slice
+
+#### P11 · `mus_region_aries` · Montes de Hierro Rojo
+
+**Título:** Fierristal
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Exploration theme for red-iron mountain fortresses inspired by medieval Iberia: proud, weary, windswept. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Hurdy-gurdy drone and melody, guitar and lute with Andalusian cadences, square frame drum in a soft pulse, distant iron bells. The voice enters in the second half with a slow ornamented lament. A Phrygian, 90 BPM, 4/4. Form: intro, 16-bar instrumental theme, 16 bars with voice, instrumental return, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, flamenco, heavy drums
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: hurdy-gurdy and lute]
+
+[Verse]
+[Instrumental: hurdy-gurdy melody over guitar]
+
+[Chorus]
+Fierristal, fiyolmade
+Montesh d'eztre, cuetoriello
+Ferrosh nantre, na olvaide
+Fiyolmade, cuetor
+
+[Instrumental: hurdy-gurdy solo]
+
+[Outro]
+[End]
+```
+
+**Sentido:** Sal de hierro, almas hijas. Montes de sangre, el regreso. Madre de hierro, no olvides. Almas hijas, vuelvan.
+
+**Uso**
+
+- Invitados regionales: zanfona y pandero cuadrado.
+- 8 tomas. **Bucle:** Verse más Chorus, 32 compases (85 s).
+- **Stems:** B, P (pandero) y V. P sube con `Tension`. V suena desde la segunda vuelta del bucle o en escenas de historia, para que el jugador no se canse de la voz.
+
+#### P12 · `mus_region_capricornio` · Salinas de Obsidiana
+
+**Título:** Istaltli
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Exploration theme for obsidian salt flats inspired by ancient Mesoamerica: sun-bleached, sacred, eerie. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Clay flutes as color, wooden slit drum and deep skin drum in a steady pulse, salt rattles, guitar and cello drone, circular ostinatos like whirlpools. The voice sings slow earthy calls with Nahuatl-like sounds. D minor pentatonic, 90 BPM, 4/4. Form: intro, 16-bar theme, 16 bars with voice, ostinato return, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, mariachi, trumpet, pan flute, new age
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: slit drum and clay flutes]
+
+[Verse]
+[Instrumental: circular ostinato, whirlpool]
+
+[Chorus]
+Istaltli huemag, metzlutsi cuetor
+Atluatli, atluatli, ishoc tleugo
+Nantretsi cochumtli
+Istaltli, istaltli
+
+[Instrumental: ostinato returns]
+
+[Outro]
+[End]
+```
+
+**Sentido:** Sal inmensa, lunita, vuelve. Agua, agua, mira el fuego. Madrecita dormida. Sal, sal.
+
+**Uso**
+
+- Invitados regionales: flautas de barro y tambor de hendidura de madera. La ocarina **no** lleva la melodía: es de la jaguar (P51).
+- 8 tomas. **Bucle:** Verse más Chorus, 32 compases (85 s). Stems y capas como en P11.
+- Los remolinos de sal (Escila y Caribdis) se oyen en los ostinatos circulares; si una toma no los tiene, no es esta.
+
+### 6.6 Fresno: Raíces y su jefa
+
+#### P13 · `mus_fresno_raices` · Raíces Putrefactas
+
+**Título:** Las que No Llegaron
+**Ajustes:** Instrumental no · Weirdness 35 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Dungeon theme for the rotten roots of a dying world tree: damp, sorrowful, oppressive, souls that never arrived. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Low cello drones and col legno taps, muted lute plucks, cracked low bells, slow heartbeat frame drum, breathy air. The distant voice sings almost wordless, like a lost soul. D Phrygian, 72 BPM, 4/4. Form: long dark intro, 32-bar slow theme, fading ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, fast tempo, bright major, jump scare
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: low cello drone and cracked bells]
+
+[Verse]
+Ooh... yolmime...
+Nelradi... micmor...
+Ooh... na cuetor...
+Nelradi... micmor...
+
+[Instrumental: heartbeat drum and muted lute]
+
+[Outro]
+[End]
+```
+
+**Sentido:** Las almitas... raíz, muerte... no vuelven.
+
+**Uso**
+
+- 6 a 8 tomas. **Bucle:** Verse más el instrumental, 32 compases (107 s).
+- **Stems:** B, P y V. P sube con `Tension` al acercarse a un nodo de Élite o de Jefe. V suena bajo desde la primera vuelta.
+- Tonalidad de zona: Re. El Fresno sube de tonalidad contigo (sección 3.7).
+
+#### P14 · `mus_jefe_madre_raiz` · La Madre Raíz
+
+**Título:** Cochum, Yolmi
+**Ajustes:** Instrumental no · Weirdness 35 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+
+**Estilo**
+
+```text
+Boss battle with a monstrous mother of roots: sorrowful, heavy, motherly and terrifying. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Grinding low cello ostinato, deep drums like falling earth, cracked bells, lute tremolo. The voice sings a twisted lullaby; the choir answers in deep slow chords. Phase two: double-time drums and full choir. D Phrygian, 120 BPM, 4/4. Form: intro, 32-bar phase one, 4-bar transition, 32-bar phase two, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, bright major, ballad
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: falling-earth drums, cracked bells]
+
+[Verse]
+Cochum, yolmi, nantre nelradi
+Cochum, cochum, na cuetor
+(Micmor... micmor...)
+Cochum, yolmi, na cuetor
+
+[Pre-Chorus]
+[Instrumental: drums double]
+
+[Chorus]
+Nantre! Nantre! Istal nelradi!
+(Cochum, yolmime, cochum!)
+Nantre! Nantre! Na cuetor!
+(Cochum, yolmime, cochum!)
+
+[Outro]
+[End]
+```
+
+**Sentido:** Duerme, almita, madre raíz. Duerme, no vuelvas. Muerte. / ¡Madre! Sal de raíz. Duerman, almitas.
+
+**Uso**
+
+- 8 tomas. Fases y capas como en P10: fase 1 en el Verse, transición de 4 compases, fase 2 en el Chorus.
+- La canción de cuna torcida es la misma idea que P03 vista desde el horror. Si una toma se parece demasiado a P03 en melodía, mejor: es intencional.
+
+### 6.7 Marisal, la 5★ del vertical slice
+
+#### P15 · `mus_leitmotiv_marisal` · Leitmotiv de Marisal
+
+**Título:** Hojadelobo
+**Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Character theme for a stoic, protective she-wolf warrior witch: noble, wounded, steady. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A solo cello carries the whole melody with a broad singing tone in tenor register. Guitar and lute accompany with slow arpeggios, soft frame drum in the second half, low iron bell on strong beats, flute only as an echo. No vocals. C minor, 64 BPM, 4/4. Form: 2-bar intro, 8-bar main motif on solo cello, 8-bar development, motif returns stronger, quiet ending on solo cello.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, violin solo, piano
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: guitar arpeggios]
+[Verse]
+[Instrumental: solo cello main motif]
+[Bridge]
+[Instrumental: development, soft frame drum]
+[Chorus]
+[Instrumental: solo cello motif returns stronger]
+[Outro]
+[Instrumental: solo cello alone]
+[End]
+```
+
+**Uso**
+
+- **Ruta recomendada:** una persona compone el motivo de 8 compases, lo graba simple (violonchelo o piano) y lo sube; *Cover* con este estilo y Audio Influence de 70 a 80. Sin melodía humana: 10 tomas y elige la más cantable.
+- **Firma:** los dos primeros compases del motivo, solo el stem de violonchelo (Split from Mix). Suena en la tarjeta de la tirada y en su ficha.
+- **Bucle de escena:** del motivo a su regreso, 16 compases (60 s).
+- Su Ascensión III (P16) y su Juicio posterior heredan esta tonalidad y este motivo.
+
+#### P16 · `mus_ascension_iii_marisal` · Ascensión III de Marisal
+
+**Título:** Eztre Istal, Cuetor
+**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+
+**Estilo**
+
+```text
+Ultimate attack sung invocation for a wolf witch and her iron ram spirit: brief, explosive, sacred. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. A breath and a low iron bell, then solo cello and the voice launch the invocation; full choir and war drums explode at the climax with anvil hits; one last impact, ringing bells. C Phrygian, 120 BPM, 4/4. Form: 3-beat preparation, 2-beat ritual, 6-beat sung climax, 3-beat impact, ring-out.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, long intro, many verses, ballad
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: breath and low iron bell]
+
+[Chorus]
+Eztre istal, tleugo, cuetor!
+(Aaah!)
+
+[Outro]
+[Instrumental: impact and ringing bells]
+[End]
+```
+
+**Sentido:** Sangre y sal, fuego: ¡vuelve!
+
+**Uso**
+
+- 8 tomas. Suno dará una pieza más larga: corta 7 s alrededor del clímax.
+- **Sincronía con la cámara (GDD 19.3):** a 120 BPM un pulso dura 0.5 s. Preparación de 0 a 1.5 s (3 pulsos), ritual de 1.5 a 2.5 s (2), manifestación cantada de 2.5 a 5.5 s (6) e impacto de 5.5 a 7 s (3). Marca los cortes del Timeline sobre esos pulsos.
+- **Versión corta (2 a 3 s):** ritual más impacto, como la cámara corta.
+- Candidata a vocalista humana: es el canto de firma de la Regente.
+
 <!-- CONTINUA -->

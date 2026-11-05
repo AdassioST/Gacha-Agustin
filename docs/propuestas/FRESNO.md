@@ -2,17 +2,17 @@
 
 Propuesta de contenido para la Fase 2 (sección 23.2 del GDD) · 5 de noviembre de 2026 · **por aprobar**
 
-Este documento propone el contenido que le falta al Fresno: Injertos, Frutos, Mutaciones, maldiciones, Tránsitos, Raíces, nodos, enemigos y la economía de una run. Amplía las secciones 10 (Fresno), 11 (economía), 13.2 (chequeos), 16.3 (ingreso gratuito) y 17 (doctrina contra el power creep) del GDD. No cambia el GDD: si algo de aquí choca con él, manda el GDD hasta que el diseñador apruebe el cambio. Las contradicciones que encontré están en la sección 13.
+Este documento propone el contenido que le falta al Fresno: Injertos, Frutos, Mutaciones, maldiciones, Tránsitos, Raíces, nodos, enemigos y la economía de una run. Amplía las secciones 10 (Fresno), 11 (economía), 13.2 (chequeos), 16.3 (ingreso gratuito) y 17 (doctrina contra el power creep) del GDD. No cambia el GDD: si algo de aquí choca con él, manda el GDD hasta que el diseñador apruebe el cambio. Donde toca los mismos temas, sigue a `docs/HUECOS.md` y a `docs/propuestas/META_Y_ONBOARDING.md`. Las contradicciones que encontré están en el apartado 13.
 
 ## Lo más importante
 
 - **105 Injertos en 7 Ramas, 35 de ellos marcados ★ para la Fase 2.** Los ★ usan casi solo eventos que la Fase 1 ya emite. Los otros 70 quedan como datos con `implementado: false`.
 - **Cualquier equipo puede jugar cualquier Rama.** El Injerto `_01` de cada Rama hace que los Quiebres de cualquier planeta apliquen su estado. Tener brujas del planeta mejora la Rama, pero no es requisito.
-- **Las maldiciones suman, no multiplican:** +25 % cada una, +125 % con cinco. Así la quinta vale lo mismo que la primera y el tope semanal sigue teniendo sentido (sección 6.1).
+- **Las maldiciones suman, no multiplican:** +25 % cada una, +125 % con cinco. Así la quinta vale lo mismo que la primera y el tope semanal sigue teniendo sentido (apartado 6.1).
 - **Una zona son 10 pisos.** El mapa de cada zona tiene 28 nodos en 3 carriles y cada ruta visita 10. Así hay bifurcaciones sin romper los "10 nodos por zona" del GDD.
 - **La cuenta cierra.** Una run típica da 300 000 almitas y 225 de Savia en unos 65 minutos. El tope semanal de 600 000 almitas equivale a dos runs y al 36 % de lo que cuesta subir una bruja al nivel 70. Los 500 Sales de Baño semanales salen de superar 8 zonas.
 - **"Lo que el Fresno se queda, vuelve al 30 %".** La misma tasa para una Mancha perdida y para lo que pasa del tope, para que perder nunca convenga más que ganar.
-- **El núcleo necesita cinco eventos nuevos** (retraso y adelanto, curación, escudo, derrota y comienzo de combate). El Fruto de Saturno que trae el GDD ya los necesita.
+- **El núcleo necesita cinco eventos nuevos** (retraso y adelanto, curación, escudo, derrota y comienzo de combate). El Fruto de Saturno que trae el GDD ya necesita el de retraso.
 
 ## Cómo leer este documento
 
@@ -21,13 +21,15 @@ Este documento propone el contenido que le falta al Fresno: Injertos, Frutos, Mu
 | ★ | Recomendado para implementar primero en la Fase 2: prueba bien el sistema y usa mecánicas que ya existen en la Fase 1 |
 | `saturno_03` | ID en snake_case, listo para JSON: planeta sin acento y número de dos cifras |
 | Común, Raro, Astral | Rareza del Injerto. Cada Rama tiene 8 comunes, 5 raros y 2 astrales |
-| Disparador | El momento en que ocurre el efecto. Cada uno corresponde a un evento del núcleo (sección 2.1) |
-| TUNING | Número propuesto sin probar. La lista completa está en la sección 14 |
+| Disparador | El momento en que ocurre el efecto. Cada uno corresponde a un evento del núcleo (apartado 2.1) |
+| TUNING | Número propuesto sin probar. La lista completa está en el apartado 14 |
 | ATQ | Ataque de la bruja que dispara el efecto |
 | Todas | Las cuatro brujas del equipo. La Invitada recibe los efectos solo mientras actúa |
 | Ronda | 100 AV; la primera, 150 (sección 9.2) |
 | Turnos de un estado | Se cuentan en los turnos de quien lo sufre |
 | Puente | Injerto que mejora algo de otra Rama |
+| Bruja de Sol, de Luna… | Bruja cuyo planeta dominante es ese; es el que forma los Aspectos (HUECOS.md, C-13) |
+| Sección y apartado | "Sección" remite al GDD; "apartado", a este documento |
 
 Los números siguen el formato del GDD: espacio para los miles (3 000) y punto decimal (1.25). Todos los números de las tablas son TUNING salvo los que cita el GDD.
 
@@ -35,11 +37,11 @@ Los números siguen el formato del GDD: espacio para los miles (3 000) y punto d
 
 1. **Cada Rama habla el idioma de su planeta** (sección 7.1). Sol quema en área, Luna protege y controla, Marte se concentra en un enemigo, Mercurio gana tiempo, Venus sostiene, Júpiter manda y Saturno retrasa. El Fruto lleva el nombre de la Quintaesencia de su planeta; un Injerto común lleva el de la sal Turbia y uno raro el de la Destilada.
 2. **Cualquier equipo puede jugar cualquier Rama.** El Injerto `_01` de cada Rama hace que los Quiebres de cualquier planeta apliquen el estado de esa Rama. Ninguna bruja queda fuera del Fresno por su planeta.
-3. **Las Ramas se cruzan.** Cada Rama tiene Injertos puente que mejoran una Reacción Híbrida o una mecánica de otra Rama. Los efectos del mismo tipo se suman entre Ramas: +1 turno de Quemadura de Sol más +1 turno de Saturno dan +2. La Jardinera castiga a quien crece en una sola Rama (sección 11.6).
+3. **Las Ramas se cruzan.** Cada Rama tiene Injertos puente que mejoran una Reacción Híbrida o una mecánica de otra Rama. Los efectos del mismo tipo se suman entre Ramas: +1 turno de Quemadura de Sol más +1 turno de Saturno dan +2. La Jardinera castiga a quien crece en una sola Rama (apartado 11.6).
 4. **Presupuesto por rareza.** Común: un número de +8 a +15 % o un disparador pequeño. Raro: un disparador fuerte o un bono de +20 a +40 % con condición. Astral: cambia una regla. Los bonos de daño entran en la suma ΣB de la fórmula de daño (sección 9.8), así que se suman y no se multiplican. Todo lo que se acumula dice su tope.
 5. **El Spark sigue siendo un acertijo de orden.** Ningún efecto da "probabilidad de Spark", agrega golpes ocultos ni mueve frames al azar. Los golpes extra, como los de Tempestad Mayor, tienen frame fijo y se ven en la Partitura antes de confirmar.
 6. **Sin tiradas nuevas en combate.** Injertos, Frutos, Mutaciones y maldiciones usan disparadores y contadores, nunca probabilidades. El azar del Fresno vive en el mapa, en las ofertas y en la Salmuera Turbia, y todo sale de la semilla.
-7. **Nada se vende y nada se duplica.** Injertos, Mutaciones, Raíces, Eco y Savia solo se ganan jugando (sección 16.4). Ningún efecto da brujas, copias ni grados. Ningún Injerto copia el truco protegido de una bruja "kk" (sección 17.4): no hay revivir, duplicar Granos, cancelar el ataque definitivo de un jefe ni veneno que escale con la vida máxima del enemigo.
+7. **Nada se vende y nada se duplica.** Injertos, Mutaciones, Raíces, Eco y Savia solo se ganan jugando (sección 16.4). Ningún efecto da brujas, copias ni grados. Ningún Injerto copia el truco protegido de una bruja "kk" (sección 17.4): no hay revivir (Axa), duplicar Granos (Topacia), cancelar el ataque definitivo de un jefe (Muertita) ni veneno que escale con la vida máxima del enemigo (Salitre).
 8. **Sin bucles y con el tono del juego.** Un efecto que dispara un Injerto no vuelve a disparar ese mismo Injerto en la misma acción. Los nombres vienen de la alquimia, la astrología, la sal, las almas y el árbol, sin tarot (sección 8.3) ni otras franquicias. Los estados se describen por su efecto, nunca por heridas: pavor antes que gore (sección 6.5).
 
 ## 2. Vocabulario común
@@ -74,13 +76,13 @@ Los 35 Injertos ★ y los 7 Frutos solo necesitan cinco eventos nuevos: BattleSt
 
 ### 2.2 Valores de referencia
 
-El GDD nombra los estados de Quiebre pero no les da números. El catálogo asume estos; si la Fase 1 fijó otros, mandan los de la Fase 1 y los porcentajes de los Injertos se mantienen.
+El GDD nombra los estados de Quiebre pero no les da números. El catálogo asume estos, que siguen la propuesta C-15 de HUECOS.md (daño por turno en % del ATQ durante 2 turnos). Si la Fase 1 fijó otros, mandan los de la Fase 1 y los porcentajes de los Injertos se mantienen.
 
 | Estado | Valor que asumo |
 | --- | --- |
 | Quemadura | 15 % del ATQ de quien la aplicó, al empezar cada turno del enemigo; 2 turnos |
 | Sangrado | 20 % del ATQ por turno; 2 turnos. El Sangrado fuerte del Quiebre de Marte hace 30 % |
-| Veneno | 12 % del ATQ por turno; 3 turnos |
+| Veneno | 15 % del ATQ por turno; 2 turnos |
 | Encanto | El siguiente ataque del enemigo hace −30 % |
 | Electrocución | 20 % del ATQ al objetivo y salta a 1 enemigo cercano |
 | Encierro | Retraso extra de 15 % y −10 % de Velocidad durante 2 turnos |
@@ -88,15 +90,15 @@ El GDD nombra los estados de Quiebre pero no les da números. El catálogo asume
 | Escudo | Dura hasta romperse o hasta 2 turnos de su dueña |
 | Regla general | Aplicar un estado que ya está renueva su duración; no se acumula salvo que el efecto lo diga |
 
-**Firmeza.** Referencia: un ataque básico de un planeta débil quita 10, un Hechizo 20, un eslabón de Cadena de 15 a 30 y un Cierre 30. Con esa escala, un enemigo normal tiene de 40 a 100 de Firmeza, una Élite de 150 a 260 y un Jefe de 400 a 600.
+**Firmeza.** Después de un Quiebre, la Firmeza se recupera completa al empezar el siguiente turno del enemigo (HUECOS.md, C-15); la Élite Despierta y varios Injertos lo asumen. Referencia: un ataque básico de un planeta débil quita 10, un Hechizo 20, un eslabón de Cadena de 15 a 30 y un Cierre 30. Con esa escala, un enemigo normal tiene de 40 a 100 de Firmeza, una Élite de 150 a 260 y un Jefe de 400 a 600.
 
 ## 3. Cómo se ganan y se combinan los Injertos
 
 ### 3.1 Ofertas
 
-- **Combate:** al ganar eliges 1 de 3 Injertos (más los que agregue la Bendición del Paria). De las tres opciones, una siempre es de una Rama que ya tienes (si tienes alguna) y otra es de la Rama de la semana (sección 3.5); la tercera es libre.
+- **Combate:** al ganar eliges 1 de 3 Injertos (más los que agregue la Bendición del Paria). De las tres opciones, una siempre es de una Rama que ya tienes (si tienes alguna) y otra es de una Rama del cielo de la semana, si ya está abierta (apartado 3.5); la tercera es libre.
 - **Jefe:** eliges 1 de 3 Injertos raros o astrales, con al menos un astral.
-- **Mercader:** vende 2 Injertos (sección 9.6). Algunos Eventos también dan uno.
+- **Mercader:** vende 2 Injertos (apartado 9.5). Algunos Eventos también dan uno.
 - **Reglas de toda oferta:** nunca un Injerto que ya tienes, nunca uno de una Rama bloqueada y como máximo un astral por oferta.
 
 Rareza de cada opción según la zona:
@@ -122,29 +124,30 @@ El Eco guarda 3 Injertos y 1 movimiento entrenado (sección 10.5). Propongo dos 
 
 ### 3.4 Desbloqueo de Ramas
 
-La sección 10.6 dice que la Ofrenda desbloquea Ramas nuevas. Propuesta:
+La sección 10.6 dice que la Ofrenda desbloquea Ramas nuevas. META_Y_ONBOARDING.md (apartado 4.3) ya fija cuándo: Sol, Luna y Marte desde el inicio, y las otras cuatro en Altura 12, 16, 20 y 25 (la Ofrenda acelera la Altura). Este catálogo propone el orden:
 
 | Ramas | Se abren |
 | --- | --- |
-| Sol, Luna, Marte y Venus | Desde la primera run |
-| Saturno | Ofrenda nivel 3 |
-| Mercurio | Ofrenda nivel 5 |
-| Júpiter | Ofrenda nivel 7 |
+| Sol, Luna y Marte | Desde que se abre el Fresno (Altura 10) |
+| Venus | Altura 12 |
+| Saturno | Altura 16 |
+| Mercurio | Altura 20, con el Fresno completo |
+| Júpiter | Altura 25 |
 
-Primero llegan las acciones simples (área, escudo, un solo objetivo, curación). Después llegan las de tiempo y mando, que piden dominar la Cadena (sección 9.9). En la Fase 2 todas se implementan; el bloqueo es solo un dato.
+Primero llegan las acciones simples (área, escudo, un solo objetivo y curación). Después llegan las de tiempo y mando, que piden dominar la Cadena (sección 9.9). En la Fase 2 todas se implementan; el bloqueo es solo un dato.
 
-### 3.5 Rama de la semana
+### 3.5 Cielo de la semana
 
-El GDD dice en las secciones 7.7 y 17.3 que los Tránsitos rotan cada semana, y en las 10.7 y 22.1 que cambian cada seis. Propongo las dos capas: un **Tránsito de temporada** de seis semanas (sección 7) y una **Rama de la semana**.
+El GDD dice en las secciones 7.7 y 17.3 que los Tránsitos rotan cada semana, y en las 10.7 y 22.1 que cambian cada seis. META_Y_ONBOARDING.md (MC-02) propone dos capas: un **Tránsito de temporada** de seis semanas (apartado 7) y un **cielo de la semana** pequeño que favorece dos planetas. Aquí está su contenido en el Fresno:
 
-- Rota en el orden caldeo, el mismo que da nombre a los días (sección 7.7): Saturno, Júpiter, Marte, Sol, Venus, Mercurio y Luna.
-- El ciclo de 7 semanas no coincide con las versiones de 6, así que cada versión empieza con una Rama distinta.
-- Efecto: una de las 3 opciones de cada Combate es de esa Rama, y madurar su Fruto da +10 % de almitas en esa run.
+- Los pares siguen el orden caldeo, el mismo que da nombre a los días (sección 7.7): Saturno y Júpiter; Marte y Sol; Venus y Mercurio; Luna y Saturno; Júpiter y Marte; Sol y Venus; Mercurio y Luna. En 7 semanas, cada planeta sale dos veces.
+- El ciclo de 7 semanas no coincide con las versiones de 6, así que cada versión empieza con un cielo distinto.
+- Efecto: una de las 3 opciones de cada Combate es de una de esas dos Ramas, y madurar el Fruto de una de ellas da +10 % de almitas en esa run.
 
 ### 3.6 Bendición del Paria: aclaraciones
 
 - +1 opción de Injerto por cada bruja 3★, con **tope de 5 opciones** en pantalla. A partir de la tercera 3★, cada una da 1 Relevo por zona (volver a sacar las opciones de un Injerto).
-- +10 % de almitas por cada 3★ y +5 % por cada 4★, sumados al resto de bonos (sección 12.2).
+- +10 % de almitas por cada 3★ y +5 % por cada 4★, sumados al resto de bonos (apartado 12.2).
 - La Invitada no cuenta: es la bruja de otra persona.
 
 ## 4. Las siete Ramas
@@ -194,7 +197,7 @@ El GDD dice en las secciones 7.7 y 17.3 que los Tránsitos rotan cada semana, y 
 |  | `luna_11` | Luz Prestada | Raro | Puente con Venus. La curación que pasa de la vida máxima se vuelve escudo, hasta el 20 % de la vida máxima | Al curar |
 |  | `luna_12` | Oposición Serena | Raro | La Oposición sube +10 de Salinidad a cada bruja en vez de +20 | Al formar Aspecto (Oposición) |
 |  | `luna_13` | Noche Clara | Raro | Mientras una bruja tiene escudo, sus Hechizos le suben +5 de Salinidad en vez de +10 | Al usar acción (Hechizo) |
-| ★ | `luna_14` | Eclipse Lunar | Astral | Cuando un golpe de Luna Quiebra a un enemigo, este pierde su siguiente turno (una vez por enemigo y combate). Contra Jefes: −50 % de Velocidad durante un turno | Al Quebrar |
+| ★ | `luna_14` | Luna Negra | Astral | Cuando un golpe de Luna Quiebra a un enemigo, este pierde su siguiente turno (una vez por enemigo y combate). Contra Jefes: −50 % de Velocidad durante un turno | Al Quebrar |
 |  | `luna_15` | Doble Reflejo | Astral | Cuando un enemigo golpea a una bruja con escudo, el daño se reparte en partes iguales entre todas las brujas que tienen escudo | Al recibir golpe |
 
 ### 4.3 Rama de Marte (Hierro)
@@ -229,7 +232,7 @@ El GDD dice en las secciones 7.7 y 17.3 que los Tránsitos rotan cada semana, y 
 
 | ★ | ID | Nombre | Rareza | Efecto | Disparador |
 | --- | --- | --- | --- | --- | --- |
-| ★ | `mercurio_01` | Humo Ácido | Común | Tus Quiebres, de cualquier planeta, también aplican Veneno (3 turnos) | Al Quebrar |
+| ★ | `mercurio_01` | Humo Ácido | Común | Tus Quiebres, de cualquier planeta, también aplican Veneno (2 turnos) | Al Quebrar |
 | ★ | `mercurio_02` | Pies Ligeros | Común | +8 de Velocidad a todas | Pasivo |
 |  | `mercurio_03` | Salida Rápida | Común | Al empezar el combate, la bruja más rápida se adelanta 20 % | Al iniciar combate |
 |  | `mercurio_04` | Veneno Lento | Común | El Veneno que aplicas dura 1 turno más | Al aplicar estado |
@@ -238,8 +241,8 @@ El GDD dice en las secciones 7.7 y 17.3 que los Tránsitos rotan cada semana, y 
 |  | `mercurio_07` | Trato de Mercader | Común | Los precios del Mercader de Almas bajan 20 % | Fuera de combate (Mercader) |
 |  | `mercurio_08` | Prisa Venenosa | Común | Los enemigos con Veneno tienen −10 de Velocidad | Pasivo |
 | ★ | `mercurio_09` | Azogue Vivo | Raro | El Sextil adelanta 25 % en vez de 15 % | Al formar Aspecto (Sextil) |
-| ★ | `mercurio_10` | Relevo | Raro | Al terminar una Cadena, la bruja que hizo la Apertura se adelanta 30 % | Al terminar Cadena |
-|  | `mercurio_11` | Tempestad Ácida | Raro | Puente con Júpiter. La Tempestad aplica Veneno (3 turnos) a todos los enemigos | Al formar Aspecto (Tempestad) |
+| ★ | `mercurio_10` | Estafeta | Raro | Al terminar una Cadena, la bruja que hizo la Apertura se adelanta 30 % | Al terminar Cadena |
+|  | `mercurio_11` | Tempestad Ácida | Raro | Puente con Júpiter. La Tempestad aplica Veneno (2 turnos) a todos los enemigos | Al formar Aspecto (Tempestad) |
 |  | `mercurio_12` | Veneno Volátil | Raro | Al derrotar a un enemigo con Veneno, su Veneno pasa a otro enemigo con la duración completa | Al derrotar enemigo |
 |  | `mercurio_13` | Hilo de Azogue | Raro | El Autohechizo de Hilos cuesta el 5 % de la vida en vez del 10 % | Al usar acción (Autohechizo) |
 |  | `mercurio_14` | Caduceo | Astral | Al empezar el combate, la bruja más rápida actúa dos veces seguidas | Al iniciar combate |
@@ -297,7 +300,7 @@ El GDD dice en las secciones 7.7 y 17.3 que los Tránsitos rotan cada semana, y 
 
 **Tema:** Saturno detiene el reloj del enemigo; cada retraso es una herida.
 
-**Fruto `saturno_fruto`, Hora Final (del GDD, sin cambios):** cada retraso que causas hace daño igual al 20 % de tu ataque. Aclaraciones para implementarlo: "tu ataque" es el ATQ de la bruja que causó el retraso; cuenta cada retraso por separado, sin importar su tamaño; incluye los retrasos del Quiebre, de las Reacciones, de las Salmueras y de los Injertos. Para que funcione, el núcleo debe emitir AVShifted (sección 2.1).
+**Fruto `saturno_fruto`, Hora Final (del GDD, sin cambios):** cada retraso que causas hace daño igual al 20 % de tu ataque. Aclaraciones para implementarlo: "tu ataque" es el ATQ de la bruja que causó el retraso; cuenta cada retraso por separado, sin importar su tamaño; incluye los retrasos del Quiebre, de las Reacciones, de las Salmueras y de los Injertos. Para que funcione, el núcleo debe emitir AVShifted (apartado 2.1).
 
 | ★ | ID | Nombre | Rareza | Efecto | Disparador |
 | --- | --- | --- | --- | --- | --- |
@@ -308,7 +311,7 @@ El GDD dice en las secciones 7.7 y 17.3 que los Tránsitos rotan cada semana, y 
 |  | `saturno_05` | Plomo Hondo | Común | El Plomo Líquido retrasa 30 % en vez de 20 % | Al usar poción |
 |  | `saturno_06` | Disciplina | Común | Los ataques básicos bajan −10 de Salinidad en vez de −5 | Al usar acción (básico) |
 |  | `saturno_07` | Hora Gris | Común | La Reacción Eclipse quita tres mejoras en vez de dos | Al formar Aspecto (Eclipse) |
-|  | `saturno_08` | Gravedad | Común | +10 % de daño contra enemigos más lentos que la bruja que ataca | Pasivo |
+|  | `saturno_08` | Lastre | Común | +10 % de daño contra enemigos más lentos que la bruja que ataca | Pasivo |
 | ★ | `saturno_09` | Plomo Lento | Raro | Cada retraso que causas también quita 5 de Firmeza | Al causar retraso |
 |  | `saturno_10` | Helada Honda | Raro | Puente con Luna. La Reacción Helada Negra también retrasa 15 % a los demás enemigos | Al formar Aspecto (Helada Negra) |
 |  | `saturno_11` | Memento | Raro | Si retrasas a un enemigo normal con menos del 10 % de vida, cae en el acto. No afecta a Élites ni a Jefes | Al causar retraso |
@@ -390,7 +393,7 @@ Al entrar a cada zona eliges de 0 a 5 maldiciones de esta lista. Duran solo esa 
 | ★ | `maldicion_hambre_sal` | Hambre de Sal | Cada bruja empieza cada combate con +20 de Salinidad |
 | ★ | `maldicion_coro_mudo` | Coro Mudo | La Resonancia que ganas baja 25 % |
 |  | `maldicion_santuario_frio` | Santuario Frío | El descanso del Santuario solo da −20 de Salinidad y +15 % de vida |
-|  | `maldicion_carta_borrada` | Carta Borrada | En cada combate, el enemigo con más vida se vuelve Sin Carta (sección 11.1). No afecta a Jefes |
+|  | `maldicion_carta_borrada` | Carta Borrada | En cada combate, el enemigo con más vida se vuelve Sin Carta (apartado 11.1). No afecta a Jefes |
 |  | `maldicion_agua_salobre` | Agua Salobre | Tu curación baja 30 % |
 |  | `maldicion_mercader_avaro` | Mercader Avaro | Los precios del Mercader suben 50 % y tiene una ranura menos |
 |  | `maldicion_elite_despierta` | Élite Despierta | La primera vez que Quiebras a una Élite, su Firmeza se rellena al 50 % |
@@ -414,8 +417,8 @@ La sección 10.3 dice que cada maldición "multiplica las almitas por 1.25". Eso
 
 1. **Cada maldición vale lo mismo.** En la versión multiplicativa, la quinta vale más del doble que la primera y empuja al "todo o nada". En la aditiva, eliges cada maldición según si la puedes manejar.
 2. **Se lee en una etiqueta.** "+75 % de almitas" cabe en un botón; "×1.95" pide calculadora.
-3. **Respeta el tope semanal.** Con ×3.05, una sola run da 915 000 almitas, una vez y media el tope: la cuarta y la quinta maldición solo producirían Savia. Con ×2.25, una run con cinco maldiciones da unas 675 000, casi justo el tope. La regla queda así: cinco maldiciones llenan el tope en una sola run.
-4. **Entra en la misma suma que los demás bonos** (sección 12.2), sin reglas de orden.
+3. **Respeta el tope semanal.** Con ×3.05, una sola run da 915 000 almitas, una vez y media el tope: la cuarta y la quinta maldición solo producirían Savia. Con ×2.25, una run con cinco maldiciones da unas 675 000, apenas por encima del tope. La regla queda así: cinco maldiciones llenan el tope en una sola run.
+4. **Entra en la misma suma que los demás bonos** (apartado 12.2), sin reglas de orden.
 
 Si se aprueba, la sección 10.3 debe decir "cada una suma +25 % de almitas".
 
@@ -455,7 +458,7 @@ La Jardinera es débil a los dos planetas que favorece el Tránsito, más uno oc
 | Sol exaltado en Aries | Jardinera Solar | Al podar, aplica Quemadura (1 turno) a todas tus brujas | Título *Alba en Aries*; color de sal "Brasa" |
 | Mercurio retrógrado | Jardinera de Azogue | Al podar, intercambia su lugar en la línea de turnos con tu bruja más rápida | Título *La que Leyó al Revés*; marco "Espejo" |
 | Marte exaltado en Capricornio | Jardinera de Obsidiana | Tiene una segunda barra de Firmeza | Título *Filo de Obsidiana*; decoración "Remolino de sal" |
-| Eclipse de Luna | Jardinera del Eclipse | Al podar, tapa un planeta como la Corneja (sección 11.6) | Título *Bajo la Sombra Roja*; marco "Luna roja" |
+| Eclipse de Luna | Jardinera del Eclipse | Al podar, tapa un planeta como la Corneja (apartado 11.6) | Título *Bajo la Sombra Roja*; marco "Luna roja" |
 
 Los títulos se ganan venciendo a la Jardinera de la temporada con 3 maldiciones o más en la Copa. El cosmético, con 5.
 
@@ -477,7 +480,7 @@ Los títulos se ganan venciendo a la Jardinera de la temporada con 3 maldiciones
 Reglas que siguen la doctrina 17.3:
 
 1. **Dos Tránsitos seguidos nunca favorecen el mismo planeta.** El orden de arriba lo cumple, también al volver de 1.9 a 1.0.
-2. **Un Tránsito nunca favorece el planeta principal de la Regente limitada de su versión.** Así el Fresno no empuja a tirar. En 1.0 las limitadas son Marisal (Marte) y Selenia (Luna); por eso 1.0 abre con la Gran Conjunción.
+2. **Un Tránsito nunca favorece el planeta principal de la Regente limitada de su versión.** Así el Fresno no empuja a tirar. En 1.0 las limitadas son Marisal (Marte) y Selenia (Luna); por eso 1.0 abre con la Gran Conjunción. Si una versión futura choca con esta regla, su Tránsito se cambia por otro de la lista que cumpla la regla 1.
 3. **En diez versiones, seis planetas quedan favorecidos 3 veces y Mercurio 2.** El siguiente Tránsito que se diseñe debe favorecer a Mercurio.
 
 ### 7.4 Hitos del Tránsito
@@ -494,7 +497,7 @@ Los 640 Sales de Baño por versión de la sección 16.3 salen de cuatro hitos qu
 
 ## 8. Raíces
 
-Las Raíces son talentos de cuenta con tope que se compran con Savia (sección 10.6). Sus bonos son pequeños para que el Fresno siga siendo de habilidad: con todas al máximo, un equipo gana un Grano al empezar, una ranura de poción y un 9 % de vida, no una victoria.
+Las Raíces son talentos de cuenta con tope que se compran con Savia (sección 10.6). Sus bonos son pequeños para que el Fresno siga siendo de habilidad. Con todas al máximo, lo más fuerte es un Grano extra al empezar cada combate; lo demás son una ranura de poción, un 9 % de vida y ventajas de información o de economía. Se suman a la Bendición del Fresno por Altura (+5 % de ATQ y vida como máximo, META_Y_ONBOARDING.md, apartado 4.3).
 
 | ★ | ID | Raíz | Efecto por nivel | Tope | Savia por nivel | Total |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -511,9 +514,9 @@ Las Raíces son talentos de cuenta con tope que se compran con Savia (sección 1
 |  | `raiz_libro` | Libro Abierto | +1 en los chequeos de los Eventos del Fresno | 3 | 100, 200, 300 | 600 |
 |  | `raiz_contadora` | Mano de Contadora | +3 % de almitas en el Fresno | 5 | 50, 100, 150, 200, 250 | 750 |
 |  | `raiz_caldero` | Caldero Hondo | El Caldero prepara 1 Salmuera más | 1 | 400 | 400 |
-|  |  | **Total** |  |  |  |  | **8 100** |
+|  |  | **Total** |  |  |  | **8 100** |
 
-Con unos 600 de Savia por semana, un jugador regular completa las Raíces en unas 13 semanas, poco más de dos versiones (sección 12.3).
+Con 525 a 600 de Savia por semana, un jugador regular completa las Raíces en 13 a 15 semanas, unas dos versiones y media (apartado 12.3).
 
 ## 9. Nodos
 
@@ -555,7 +558,7 @@ Con unos 600 de Savia por semana, un jugador regular completa las Raíces en una
 
 **En una ruta de 10 nodos** hay entre 3 y 6 Combates (típico: 4), de 0 a 2 Élites (típico: 1), de 0 a 3 Eventos (típico: 1), de 0 a 2 Santuarios y el Jefe. Una ruta puede no pasar por ningún Santuario si en el piso 9 eliges al Mercader: es la apuesta de gastar en lugar de guardar.
 
-La **Mancha de Sal** no es un tipo de nodo que genere el mapa: es una marca sobre un piso (sección 9.8).
+La **Mancha de Sal** no es un tipo de nodo que genere el mapa: es una marca sobre un piso (apartado 9.8).
 
 ### 9.2 Recompensas por tipo de nodo
 
@@ -564,10 +567,10 @@ La **Mancha de Sal** no es un tipo de nodo que genere el mapa: es una marca sobr
 | Combate | Almitas, 1 Injerto de 3 y 1 pizca de Sal Cruda del planeta que más daño hizo en el combate (ingrediente para el Caldero) |
 | Élite | Almitas, 1 Sal Negra y una Mutación de 2 (o ninguna) |
 | Jefe | Almitas, Savia, 1 Injerto raro o astral de 3, 1 material del Fresno, +25 % de vida y −20 de Salinidad a todas |
-| Evento LitRPG | Lo que diga el evento (sección 9.9) |
-| Santuario, Caldero, Mercader, Nido | Secciones 9.3 a 9.7 |
+| Evento LitRPG | Lo que diga el evento (apartado 9.9) |
+| Santuario, Caldero, Mercader, Nido | Apartados 9.3 a 9.6 |
 
-Las almitas exactas por nodo están en la sección 12.1.
+Las almitas exactas por nodo están en el apartado 12.1.
 
 ### 9.3 Santuario de Sal
 
@@ -606,13 +609,13 @@ Solo acepta almitas sueltas (sección 10.2). Tiene 6 ranuras y cada artículo se
 
 ### 9.6 Nido de Almas
 
-- Almitas (sección 12.1) y 1 **material del Fresno** de la zona: Raíz Negra, Corteza de Ceniza, Pluma de Eclipse u Hoja Astral. Propongo que sirvan para las armas Astrales y Quintaesencia (sección 15.2).
+- Almitas (apartado 12.1) y 1 **material del Fresno** de la zona: Raíz Negra, Corteza de Ceniza, Pluma de Eclipse u Hoja Astral. Propongo que sirvan para las armas Astrales y Quintaesencia (sección 15.2).
 - Eliges un extra: 1 carga de Salmuera básica, 1 Sal Negra o 1 Relevo.
 - Con Paralaje medio o más, la primera vez por zona y temporada el Nido también trae una **almita con nombre**: un fragmento de historia (sección 11.2).
 
 ### 9.7 Ascenso corto
 
-El Ascenso corto recorre una zona que ya hayas superado en una run completa. Usa el mismo mapa, las mismas recompensas y la misma Savia por zona. Al vencer al Jefe, la run termina y se guarda todo lo suelto. Cuenta para el tope semanal y para los hitos (sección 12.4).
+El Ascenso corto recorre una sola zona. Las Raíces están abiertas desde que se abre el Fresno (Altura 10, antes de la run completa en Altura 20), y cada zona siguiente se abre al vencer al Jefe de la anterior en cualquier modo. Usa el mismo mapa, las mismas recompensas y la misma Savia por zona. Al vencer al Jefe, la run termina y se guarda todo lo suelto. Cuenta para el tope semanal y para los hitos (apartado 12.4).
 
 ### 9.8 Mancha de Sal
 
@@ -636,7 +639,7 @@ El GDD dice que recuperas la Mancha "si llegas a ese nodo" (sección 10.4). Como
 | `evento_cristalizado` | **El Cristalizado que Susurra.** Una peregrina a medio volverse sal repite un nombre | Raíces | Escucharla: Temple 7 | Aprendes el nombre: una almita con nombre y eliges 1 Injerto raro de Luna o Saturno | El susurro se te queda: +20 de Salinidad a todas y +5 de Paralaje | Romper la sal y liberarla: +3 000 almitas. Que una bruja se coma su sal: +1 Sal Negra y +1 a sus Almas digeridas |
 | `evento_caldero_viejo` | **El Caldero Abandonado.** Un caldero frío con la costra de una receta olvidada | Raíces, Tronco | Raspar el fondo: Oficio 7 (10 en Tronco) | Aprendes una Salmuera que no tenías y ganas 2 cargas | 1 carga de Salmuera Turbia | Llevarte el caldero roto: +1 material del Fresno |
 | `evento_folio` | **Un Folio Mal Sumado.** Una hoja del Libro Mayor donde la cuenta de un alma no cuadra | Todas | Corregir la suma: Cálculo 7, 10, 13 o 16 según la zona | Eliges 1 Injerto entre 4 de cualquier Rama abierta | El folio se corrige solo y ahora lleva tu nombre: +10 de Paralaje | Arrancar el folio: +3 000 almitas ×zona; la siguiente Élite tiene +20 % de vida |
-| `evento_prestamista` | **La Balanza del Prestamista.** Un espíritu del Ducado de las Balanzas presta almitas | Tronco | Regatear: Encanto 10 | Respeta a quien sabe contar: te regala 5 000 almitas y presta sin interés | Se ofende: el siguiente Mercader cobra +25 % | Aceptar sin regatear: +15 000 almitas sueltas ahora; frente al Jefe pagas 22 500 sueltas, y si no las tienes, el Jefe tiene +25 % de vida. Rechazar: nada |
+| `evento_prestamista` | **La Balanza del Prestamista.** Un espíritu del Ducado de las Balanzas presta almitas | Tronco | Regatear: Encanto 10 | Respeta a quien sabe contar: te regala 7 500 almitas y te presta 15 000 sin interés | Se ofende: el siguiente Mercader cobra +25 % | Aceptar sin regatear: +15 000 almitas sueltas ahora; frente al Jefe pagas 22 500 sueltas, y si no las tienes, el Jefe tiene +25 % de vida. Rechazar: nada |
 | `evento_grifo_savia` | **El Grifo de Savia.** Una grieta en la corteza por la que corre savia tibia | Tronco | Recogerla con cuidado: Oficio 10 | +40 de Savia y +20 % de vida a todas | La corteza se cierra: −10 % de vida a todas | Beber directo de la grieta: −30 de Salinidad a todas y +5 de Paralaje |
 | `evento_emisaria` | **La Emisaria de la Casa.** Una bruja de una Casa también escala el Fresno | Tronco, Ramas | Negociar el paso: Temple 10 (13 en Ramas). Si la perdonaste en la historia, pasa sin chequeo (marca de Destino, sección 13.5) | Te comparte su Partitura: +15 % de daño de Cadena en esta zona | Te sigue: la siguiente Élite de la zona es ella, con +20 % de vida | Desafiarla: combate de Élite en el acto, con su recompensa. Ignorarla: nada |
 | `evento_cornejas` | **El Consejo de las Cornejas.** Aves posadas en fila juzgan a la Calculista | Ramas | Responder su acertijo: Cálculo 13 | Revelan todos los Eventos de la zona y ganas 1 Injerto común de Mercurio o Júpiter | Se llevan el 10 % de tus almitas sueltas | Darles 1 Sal Negra: la Corneja del Eclipse empieza con −20 % de Firmeza. Ahuyentarlas: combate contra 3 Grajas de Sal |
@@ -659,7 +662,7 @@ El GDD no dice qué cruza de un nodo a otro. Propuesta:
 | Granos de Sal | Vuelven a 3 | Es la regla del combate (sección 9.3). La Raíz Grano Heredado da +1 |
 | Cargas de pociones | Se conservan | No se recargan solas: Caldero, Mercader y Nido. Entras con el cinturón cargado desde tu inventario, una carga por ranura, y esas cargas se gastan del inventario |
 | Sal Negra | Inventario de la run | Empiezas con 1 (+2 con la Raíz) y cada Élite da 1. Al terminar la run, la que sobre pasa a tu inventario, con un máximo de 3. Gastarla o guardarla es una decisión |
-| Efectos de "una vez por combate" | Se reinician | Vislumbre, Cierre de la Invitada, Eclipse Lunar y similares |
+| Efectos de "una vez por combate" | Se reinician | Vislumbre, Cierre de la Invitada, Luna Negra y similares |
 | Estados, escudos y mejoras | Se borran | Nada del combate cruza al siguiente, salvo lo de esta tabla |
 | Éxtasis Abisal | Se resuelve | Si el combate termina durante el Éxtasis, la Salinidad baja a 60 como si hubiera terminado |
 | Injertos, Frutos, Mutaciones y movimientos entrenados | Toda la run |  |
@@ -676,10 +679,10 @@ La run se puede pausar en cualquier nodo (sección 10.1); el estado se guarda ta
 
 - **Nivel por zona:** Raíces 45, Tronco 52, Ramas 60 y Copa 70. Con eso, un equipo de 4★ y 3★ en grado B (nivel 50 a 60) supera hasta las Ramas con buen orden, y la Copa pide estrategia (sección 17.7).
 - **Debilidad oculta:** las Élites y los Jefes tienen una debilidad entre corchetes que solo se ve con Paralaje medio o más (sección 6.5).
-- **Paralaje alto:** los enemigos se vuelven aberrantes: +20 % de vida y una acción extra marcada en su patrón. A cambio, +20 % de almitas, o +30 % con Paralaje máximo. Escala propuesta: Bajo de 0 a 24, Medio de 25 a 49, Alto de 50 a 74 y Máximo de 75 a 100.
+- **Paralaje alto:** los enemigos se vuelven aberrantes: +20 % de vida y una acción extra marcada en su patrón. A cambio, +20 % de almitas, o +30 % con Paralaje máximo. Escala de HUECOS.md (H-15): medidor de 0 a 100 con bandas en 25, 50 y 80.
 - **Sin Carta:** no se forma un Aspecto si alguno de los dos eslabones o acciones golpea a un Sin Carta: no hay bono, ni Reacción, ni Injertos de "al formar Aspecto". No tienen debilidades fijas: cualquier golpe baja su Firmeza, los Hechizos y eslabones al 50 % de lo normal y los ataques básicos al 200 %. Obligan a pelear con básicos y Quiebres en lugar de Aspectos.
 - **Huéspedes:** nunca entran completos en cuadro. Se ven ojos en patrón de constelación y metal líquido que se pliega en el borde de la pantalla (secciones 6.5 y 19.1). Sin sustos: su turno se anuncia en la línea de turnos como cualquier otro.
-- **Cobertura:** en cada zona, cada planeta es debilidad de al menos dos enemigos, para que ninguna composición quede bloqueada.
+- **Cobertura:** en cada zona, cada planeta es debilidad de al menos un enemigo normal y de al menos dos enemigos si se cuentan las Élites. Así ninguna composición queda bloqueada.
 
 ### 11.2 Raíces Putrefactas
 
@@ -723,7 +726,7 @@ La run se puede pausar en cualquier nodo (sección 10.1); el estado se guarda ta
 | --- | --- | --- | --- | --- |
 | Hoja Madura | Normal | Luna, Venus | 50 | No ataca. Si sigue viva al terminar su tercer turno, se suelta y se va: el combate da −20 % de almitas |
 | Podadora | Normal | Marte, Saturno | 80 | Dos golpes cruzados a una bruja; al Quebrarla, cae y retrasa 20 % a otro enemigo |
-| Astro Caído | Normal | Júpiter, Saturno | 90 | Golpe en área cada 2 turnos; al vencerlo, +1 Grano |
+| Astro Caído | Normal | Sol, Júpiter, Saturno | 90 | Golpe en área cada 2 turnos; al vencerlo, +1 Grano |
 | Lucero Hambriento | Normal | Luna, Mercurio | 60 | Cada golpe quita 15 de Ánima a la bruja golpeada |
 | Hoja sin Carta | Normal, Sin Carta | Ninguna fija | 70 | Un alma sin carta natal que nadie vino a podar. Cada turno cura 10 % al enemigo con menos vida |
 | Mirada del Firmamento | Élite, Huésped menor | Rota con sus ojos, en orden visible: Sol y Saturno, Luna y Marte, Venus y Júpiter, Mercurio [ninguna] | 260 | Cada Aspecto que formas le suma 1 de Mirada; con 3, abre los ojos: golpe a todas y +20 de Salinidad. Quebrarla vuelve la Mirada a 0. Pelear contra ella sube +5 de Paralaje |
@@ -736,7 +739,7 @@ La run se puede pausar en cualquier nodo (sección 10.1); el estado se guarda ta
 | La Madre Raíz | Raíces | Sol, Marte [Júpiter] | 400 | **Raíces que salan.** Tiene tres raíces que son objetivos aparte (débiles a Sol y Marte, 40 de Firmeza cada una). Cada 3 turnos, cada raíz viva sube +10 de Salinidad a todas tus brujas. Si rompes las tres, ella queda Quebrada en el acto | Las raíces rebrotan una vez | Daño en área y manejar la Salinidad |
 | El Leñador Hueco | Tronco | Marte, Saturno [Luna] | 500 | **Tala anunciada.** Cada 3 turnos marca con su hacha a tu bruja más rápida, y la marca se ve en la línea de turnos. En su siguiente turno la tala: 60 % de su vida máxima. Si lo Quiebras antes, la tala se cancela | De su tronco salen dos Ámbares con Recuerdo | Orden, retrasos y Quiebres a tiempo |
 | La Corneja del Eclipse | Ramas | Saturno, Venus [Mercurio] | 550 | **Ala que eclipsa.** Al empezar cada ronda tapa un planeta y su glifo aparece sobre ella: los golpes de ese planeta hacen −50 % de daño y no forman Aspectos. Siempre tapa el planeta que más daño le hizo en la ronda anterior | Tapa dos planetas por ronda | Variar planetas y Ramas |
-| La Jardinera | Copa | Los dos planetas favorecidos del Tránsito [uno por temporada] | 600 | **Poda.** Cada 3 turnos anuncia la Poda sobre tu Rama con más Injertos. Si no la Quiebras antes de su siguiente turno, los Injertos de esa Rama y su Fruto se apagan hasta tu siguiente Quiebre. Cada temporada suma una regla (sección 7.2) | Anuncia la Poda cada 2 turnos | Builds cruzadas y Quiebres a tiempo |
+| La Jardinera | Copa | Los dos planetas favorecidos del Tránsito [uno por temporada] | 600 | **Poda.** Cada 3 turnos anuncia la Poda sobre tu Rama con más Injertos. Si no la Quiebras antes de su siguiente turno, los Injertos de esa Rama y su Fruto se apagan hasta tu siguiente Quiebre. Cada temporada suma una regla (apartado 7.2) | Anuncia la Poda cada 2 turnos | Builds cruzadas y Quiebres a tiempo |
 
 ## 12. Economía de la run
 
@@ -754,6 +757,8 @@ Cada zona multiplica la base: Raíces ×1, Tronco ×1.5, Ramas ×2 y Copa ×3.
 | Savia al vencer al Jefe | 30 | 45 | 60 | 90 | Directa, no pasa por el tope |
 | Santuario, Caldero, Mercader | 0 | 0 | 0 | 0 |  |
 
+**Escala de almitas.** Estos números usan la curva actual del GDD (Costo(n) = 100·n^1.5, sección 11.3). HUECOS.md (H-01) propone reescalar el nivel o los grados. Si cambia la curva, todo lo que está en almitas en este documento (nodos, precios, tope semanal y la paridad de la Savia) se multiplica por el mismo factor; por ejemplo, ×0.4 con 40·n^1.5. La Savia que se gana no cambia.
+
 **Spark en el Fresno:** la sección 9.6 da "una almita extra" por Spark, que no se nota en esta escala. Propongo +1 % de las almitas del nodo por cada Spark, con tope de +10 % por combate.
 
 ### 12.2 Bonos de almitas: una sola suma
@@ -768,7 +773,7 @@ Todos los bonos se suman en un porcentaje y multiplican la base una sola vez:
 | Raíz Mano de Contadora | Hasta +15 % |
 | Paralaje alto o máximo | +20 % o +30 % |
 | Luna llena real | +10 % (sección 7.7) |
-| Fruto de la Rama de la semana | +10 % en esa run |
+| Fruto de una Rama del cielo de la semana | +10 % en esa run |
 
 Ejemplo: tres maldiciones y dos brujas 3★ dan 75 % + 20 % = +95 %, es decir, ×1.95.
 
@@ -805,7 +810,7 @@ Ocho zonas son dos runs completas u ocho Ascensos cortos: unas 2 horas y 10 minu
 
 Según la ruta, varía entre 180 000 (sin Élites ni Nidos) y 390 000 (dos Élites y un Nido por zona).
 
-**Contra la sección 11.3.** Subir una bruja del nivel 1 al 70 cuesta 1 669 000 almitas. La meta de hacerlo en siete días pide unas 238 000 almitas diarias, 1.67 millones por semana. El tope del Fresno (600 000) es el 36 % de eso: es la mayor fuente semanal, pero no reemplaza el juego diario. Una run típica (300 000) paga los niveles 61 a 66 de una bruja (303 700), o dos veces y media el paso de A a S (116 640).
+**Contra la sección 11.3.** Subir una bruja del nivel 1 al 70 cuesta 1 669 000 almitas. La meta de hacerlo en siete días pide unas 238 000 almitas diarias, 1.67 millones por semana. El tope del Fresno (600 000) es el 36 % de eso: una fuente grande que no reemplaza el juego diario. Una run típica (300 000) paga los niveles 61 a 66 de una bruja (303 700), o dos veces y media el paso de A a S (116 640).
 
 **Con maldiciones:**
 
@@ -815,11 +820,11 @@ Según la ruta, varía entre 180 000 (sin Élites ni Nidos) y 390 000 (dos Élit
 | 3 | 525 000 | 1.15 |
 | 5 | 675 000 | 0.9; sobran 75 000, que dan 225 de Savia |
 
-En la práctica el Mercader se lleva del 10 al 20 % de lo ganado, así que sin maldiciones el tope llega a mitad de la tercera run.
+En la práctica el Mercader se lleva del 10 al 20 % de lo ganado, así que sin maldiciones el tope se llena durante la tercera run.
 
-**Contra la sección 16.3.** Los hitos de la sección 12.4 dan 500 Sales de Baño por semana, 3 000 por versión: lo mismo que la fila "Fresno semanal (500 × 6)". Los hitos del Tránsito (sección 7.4) dan los 640 de la fila "Tránsito de temporada".
+**Contra la sección 16.3.** Los hitos del apartado 12.4 dan 500 Sales de Baño por semana, 3 000 por versión: lo mismo que la fila "Fresno semanal (500 × 6)". Los hitos del Tránsito (apartado 7.4) dan los 640 de la fila "Tránsito de temporada".
 
-**Savia y Raíces.** Un jugador regular hace dos runs por semana (450 de Savia) y pierde una Mancha cada dos semanas. Por ejemplo, 50 000 almitas absorbidas dan 150 de Savia, unas 75 por semana. Con unos 525 a 600 por semana, completa las Raíces (8 100) en unas 13 a 15 semanas. Un jugador intensivo, con cinco runs y cinco maldiciones por semana, convierte cerca de 2.7 millones de almitas sobre el tope y las completa en una o dos semanas. Es aceptable porque las Raíces son pequeñas; después su Savia necesita un sumidero (pregunta 13 de la sección 14.2).
+**Savia y Raíces.** Un jugador regular hace dos runs por semana (450 de Savia) y pierde una Mancha cada dos semanas. Por ejemplo, 50 000 almitas absorbidas dan 150 de Savia, unas 75 por semana. Con unos 525 a 600 por semana, completa las Raíces (8 100) en unas 13 a 15 semanas. Un jugador intensivo, con cinco runs y cinco maldiciones por semana, convierte cerca de 2.7 millones de almitas sobre el tope (unos 8 100 de Savia) y las completa en cerca de una semana. Es aceptable porque las Raíces son pequeñas; después su Savia necesita un sumidero (pregunta 13 del apartado 14.2).
 
 ### 12.6 Tiempo de una run
 
@@ -839,54 +844,54 @@ Con más Élites o combates difíciles llega a 80 minutos: dentro de los 60 a 80
 
 | # | Sección | Qué dice | El problema | Qué propone este documento |
 | --- | --- | --- | --- | --- |
-| 1 | 7.7 y 17.3 contra 10.7 y 22.1 | Los Tránsitos son "semanales" y favorecen planetas "cada semana" | En 10.7 y 22.1 el Tránsito cambia cada seis semanas | Tránsito de temporada más Rama de la semana (sección 3.5) |
+| 1 | 7.7 y 17.3 contra 10.7 y 22.1 | Los Tránsitos son "semanales" y favorecen planetas "cada semana" | En 10.7 y 22.1 el Tránsito cambia cada seis semanas | Tránsito de temporada más cielo de la semana, como propone META_Y_ONBOARDING.md, MC-02 (apartado 3.5) |
 | 2 | 1 contra 10.1 | La sesión de "un anillo del Fresno" dura de 15 a 25 minutos | En 10.1 la unidad es la zona y el Ascenso corto dura de 15 a 20; "anillo" no aparece en otro lugar | Hablar de zonas y de 15 a 20 minutos |
-| 3 | 10.1 contra 23.2 | Cada zona tiene 10 nodos | La 23.2 pide rutas que se bifurcan; con solo 10 nodos no hay entre qué elegir | 10 pisos de 3 carriles: 28 nodos en el mapa, 10 por ruta (sección 9.1) |
-| 4 | 10.3 | Cada maldición "multiplica las almitas por 1.25" | No dice si es ×3.05 o +125 % con cinco | Aditivo (sección 6.1) |
-| 5 | 9.6 y 23.1 contra 11.3 | El Spark da "una almita extra" | Los costos son de cientos a cientos de miles de almitas; una almita no se nota | +1 % de las almitas del nodo por Spark, tope +10 % (sección 12.1) |
-| 6 | 23.1 contra 10.3 y 10.7 | La Fase 1 emite diez eventos | El Fruto de Saturno y Saturno en Domicilio dependen del retraso, que no tiene evento | Cinco eventos nuevos (sección 2.1) |
-| 7 | 10.4 contra 23.2 | Recuperas la Mancha "si llegas a ese nodo" | El generador con semilla cambia el mapa en cada run; ese nodo ya no existe | Anclarla a zona y piso (sección 9.8) |
-| 8 | 10.4 y 11.4 | Hay tope semanal y "una tasa menor" pasado el tope | No dan ningún número | 600 000 almitas y 30 % (sección 12.3) |
-| 9 | 16.3 | "Fresno semanal: 500 Sales de Baño" | Ninguna sección dice cómo se ganan | Hitos por zonas superadas (sección 12.4) |
-| 10 | 10.3 | +1 opción de Injerto por cada 3★ | Sin tope: cuatro 3★ dan siete cartas en un teléfono. No dice si la Invitada cuenta | Tope de 5 opciones; la Invitada no cuenta (sección 3.6) |
-| 11 | 14.2 | Una Salmuera por planeta | Júpiter (Sal Estánnea) no tiene ninguna | Pregunta 12 de la sección 14.2 |
-| 12 | 9.4 | Firmeza y Quiebre | No dice cuánta Firmeza quita cada golpe ni cuándo se recupera después del Quiebre | Escala de referencia (sección 2.2); la recuperación la decide la Fase 1 |
-| 13 | 6.5 y 14.2 | Paralaje en bandas; el Agua de Olvido resta 20 | Las bandas no tienen números | Escala de 0 a 100 (sección 11.1) |
-| 14 | 13.2 | Chequeos con umbrales fijos | Las estadísticas no tienen escala | Escala de 0 a 20 (sección 9.9) |
-| 15 | 10.5 | El Eco guarda 3 Injertos | Tres de la misma Rama darían un Fruto maduro desde el primer nodo | Máximo 2 por Rama y 1 astral (sección 3.3) |
-| 16 | 10.6 contra 23.2 | La Ofrenda desbloquea Ramas | La Fase 2 pide 7 Ramas sin decir cuáles empiezan abiertas | Sección 3.4 |
-| 17 | 10.2 | Élite: "ofrece una Mutación"; Santuario: "entrenar" | No dice si la Mutación se puede rechazar ni cuánto mejora el entrenamiento | 1 de 2 o ninguna (sección 5); +15 % y +5 de Firmeza por nivel (sección 9.3) |
-| 18 | 10.3 | Savia Negra: "−30 % de curación" | No dice si es curación hecha o recibida | Recibida (sección 5) |
-| 19 | 7.4 | Tras el Éxtasis, la bruja queda "Desalada un turno" | El estado Desalada no se define en ninguna sección | No lo uso; queda para la Fase 1 |
-| 20 | 17.4 | Los trucos de las brujas "kk" están protegidos | No prohíbe que un Injerto los copie | Regla 7 del catálogo (sección 1) |
-| 21 | 13.3 contra 10.3 | Contadora de Almas da +15 % de almitas | No dice cómo se combina con el Paria y las maldiciones | Una sola suma (sección 12.2) |
+| 3 | 10.1 contra 23.2 | Cada zona tiene 10 nodos | La 23.2 pide rutas que se bifurcan; con solo 10 nodos no hay entre qué elegir | 10 pisos de 3 carriles: 28 nodos en el mapa, 10 por ruta (apartado 9.1) |
+| 4 | 10.3 | Cada maldición "multiplica las almitas por 1.25" | No dice si es ×3.05 o +125 % con cinco | Aditivo (apartado 6.1) |
+| 5 | 9.6 y 23.1 contra 11.3 | El Spark da "una almita extra" | Los costos son de cientos a cientos de miles de almitas; una almita no se nota | +1 % de las almitas del nodo por Spark, tope +10 % (apartado 12.1) |
+| 6 | 23.1 contra 10.3 y 10.7 | La Fase 1 emite diez eventos | El Fruto de Saturno y Saturno en Domicilio dependen del retraso, que no tiene evento | Cinco eventos nuevos (apartado 2.1) |
+| 7 | 10.4 contra 23.2 | Recuperas la Mancha "si llegas a ese nodo" | El generador con semilla cambia el mapa en cada run; ese nodo ya no existe | Anclarla a zona y piso (apartado 9.8) |
+| 8 | 10.4 y 11.4 | Hay tope semanal y "una tasa menor" pasado el tope | No dan ningún número | 600 000 almitas y 30 % (apartado 12.3) |
+| 9 | 16.3 | "Fresno semanal: 500 Sales de Baño" | Ninguna sección dice cómo se ganan | Hitos por zonas superadas (apartado 12.4) |
+| 10 | 10.3 | +1 opción de Injerto por cada 3★ | Sin tope: cuatro 3★ dan siete cartas en un teléfono. No dice si la Invitada cuenta | Tope de 5 opciones; la Invitada no cuenta (apartado 3.6) |
+| 11 | 14.2 | Una Salmuera por planeta | Júpiter (Sal Estánnea) no tiene ninguna | Pregunta 12 del apartado 14.2 |
+| 12 | 9.4 | Firmeza y Quiebre | No dice cuánta Firmeza quita cada golpe ni cuándo se recupera después del Quiebre | Escala de referencia (apartado 2.2); recuperación en el siguiente turno del enemigo, como HUECOS.md C-15 |
+| 13 | 6.5 y 14.2 | Paralaje en bandas; el Agua de Olvido resta 20 | Las bandas no tienen números | Escala de 0 a 100 de HUECOS.md, H-15 (apartado 11.1) |
+| 14 | 13.2 | Chequeos con umbrales fijos | Las estadísticas no tienen escala | Escala de 0 a 20 (apartado 9.9) |
+| 15 | 10.5 | El Eco guarda 3 Injertos | Tres de la misma Rama darían un Fruto maduro desde el primer nodo | Máximo 2 por Rama y 1 astral (apartado 3.3) |
+| 16 | 10.6 contra 23.2 | La Ofrenda desbloquea Ramas | La Fase 2 pide 7 Ramas sin decir cuáles empiezan abiertas | Orden por Altura sobre META_Y_ONBOARDING.md (apartado 3.4) |
+| 17 | 10.2 | Élite: "ofrece una Mutación"; Santuario: "entrenar" | No dice si la Mutación se puede rechazar ni cuánto mejora el entrenamiento | 1 de 2 o ninguna (apartado 5); +15 % y +5 de Firmeza por nivel (apartado 9.3) |
+| 18 | 10.3 | Savia Negra: "−30 % de curación" | No dice si es curación hecha o recibida | Recibida (apartado 5) |
+| 19 | 7.4 | Tras el Éxtasis, la bruja queda "Desalada un turno" | El estado Desalada no se define en ninguna sección | HUECOS.md C-08 ya lo define; este catálogo no lo usa |
+| 20 | 17.4 | Los trucos de las brujas "kk" están protegidos | No prohíbe que un Injerto los copie | Regla 7 del catálogo (apartado 1) |
+| 21 | 13.3 contra 10.3 | Contadora de Almas da +15 % de almitas | No dice cómo se combina con el Paria y las maldiciones | Una sola suma (apartado 12.2) |
 
 ## 14. Valores TUNING y decisiones pendientes
 
 ### 14.1 Valores TUNING
 
-Todos los números de las tablas de las secciones 4 a 11 son TUNING, salvo los que cita el GDD: el Fruto de Saturno, Savia Negra, los dos Tránsitos del GDD, el 30 % de la Mancha, el descanso del Santuario y los 500 y 640 Sales de Baño. Los valores de sistema que más pesan:
+Todos los números de las tablas de los apartados 4 a 11 son TUNING, salvo los que cita el GDD: el Fruto de Saturno, Savia Negra, los dos Tránsitos del GDD, el 30 % de la Mancha, el descanso del Santuario y los 500 y 640 Sales de Baño. Los valores de sistema que más pesan:
 
-| Valor | Propuesta | Sección |
+| Valor | Propuesta | Apartado |
 | --- | --- | --- |
 | Pesos de rareza de Injertos por zona | 70/25/5, 60/30/10, 50/35/15 y 40/40/20 | 3.1 |
 | Tope de Frutos activos | 2 | 3.2 |
 | Límites del Eco | 2 por Rama y 1 astral | 3.3 |
-| Ofrenda para abrir Saturno, Mercurio y Júpiter | Niveles 3, 5 y 7 | 3.4 |
-| Bono de la Rama de la semana | +10 % de almitas | 3.5 |
+| Orden de las Ramas por Altura | Venus 12, Saturno 16, Mercurio 20 y Júpiter 25 | 3.4 |
+| Bono del cielo de la semana | +10 % de almitas | 3.5 |
 | Tope de opciones del Paria | 5 | 3.6 |
 | Valores de los estados | Quemadura 15 %, Sangrado 20 %, Veneno 12 %, Encanto −30 %, Electrocución 20 % | 2.2 |
 | Escala de Firmeza | Básico 10, Hechizo 20, Cierre 30; normales de 40 a 100, Élites de 150 a 260, Jefes de 400 a 600 | 2.2 y 11 |
 | Rejilla del mapa | 3 carriles, 10 pisos, 50 % de conexión diagonal | 9.1 |
-| Reparto de nodos por zona | Tabla de la sección 9.1 | 9.1 |
+| Reparto de nodos por zona | Tabla del apartado 9.1 | 9.1 |
 | Entrenamiento del Santuario | +15 % de daño y +5 de Firmeza por nivel, máximo 2 | 9.3 |
 | Cargas por ranura en la run | 3 | 9.4 |
-| Precios del Mercader | Tabla de la sección 9.5 | 9.5 |
+| Precios del Mercader | Tabla del apartado 9.5 | 9.5 |
 | Escala de estadísticas y umbrales | 0 a 20; umbrales 7, 10, 13 y 16; tope de +4 por brujas | 9.9 |
 | Persistencia | Revivir con 10 %, −20 de Salinidad por combate, tope de 140 al empezar, Ánima conservada hasta 100, Sal Negra guardada hasta 3, +25 % de vida tras un Jefe | 10 |
 | Nivel de enemigos por zona | 45, 52, 60 y 70 | 11.1 |
-| Escala de Paralaje y sus bonos | 0 a 100; +20 % y +30 % de almitas | 11.1 |
-| Almitas base y multiplicador por zona | Tabla de la sección 12.1; ×1, ×1.5, ×2 y ×3 | 12.1 |
+| Bonos de Paralaje alto y máximo | +20 % y +30 % de almitas | 11.1 |
+| Almitas base y multiplicador por zona | Tabla del apartado 12.1; ×1, ×1.5, ×2 y ×3 | 12.1 |
 | Almitas por Spark | +1 % por Spark, tope +10 % | 12.1 |
 | Luna llena | +10 % de almitas | 12.2 |
 | Tope semanal | 600 000 almitas | 12.3 |
@@ -896,11 +901,11 @@ Todos los números de las tablas de las secciones 4 a 11 son TUNING, salvo los q
 
 ### 14.2 Preguntas para el diseñador
 
-1. **¿Las maldiciones suman o multiplican?** Recomiendo que sumen: +25 % cada una (sección 6.1).
+1. **¿Las maldiciones suman o multiplican?** Recomiendo que sumen: +25 % cada una (apartado 6.1).
 2. **¿Cuántos Frutos puede haber activos?** Recomiendo 2, eligiendo al madurar el tercero.
 3. **¿La tasa pasado el tope es igual a la de la Mancha?** Recomiendo que sí, 30 %. La alternativa es 10 %, para que las Raíces duren más a los jugadores intensivos, pero así perder a propósito daría más Savia que ganar.
 4. **¿El tope semanal queda en 600 000 almitas?** Recomiendo que sí, revisándolo con datos del lanzamiento suave: es el 36 % del costo semanal de la meta de la sección 11.3.
-5. **¿Qué Ramas se abren desde el inicio?** Recomiendo Sol, Luna, Marte y Venus; Saturno, Mercurio y Júpiter con la Ofrenda.
+5. **¿En qué orden se abren las Ramas?** META_Y_ONBOARDING.md fija Sol, Luna y Marte al inicio y cuatro Alturas para las demás. Recomiendo Venus, Saturno, Mercurio y Júpiter, en ese orden.
 6. **¿La Bendición del Paria tiene tope y cuenta a la Invitada?** Recomiendo tope de 5 opciones, Relevos para la tercera y cuarta 3★, y que la Invitada no cuente.
 7. **¿El Eco puede traer 3 Injertos de la misma Rama?** Recomiendo que no: máximo 2 por Rama y 1 astral.
 8. **¿Vida y Salinidad persisten entre nodos?** Recomiendo que sí, con −20 de Salinidad por combate, tope de 140 al empezar y revivir con 10 % de vida tras ganar.
@@ -911,5 +916,6 @@ Todos los números de las tablas de las secciones 4 a 11 son TUNING, salvo los q
 13. **¿Qué hace la Savia cuando las Raíces están completas?** Recomiendo un canje semanal limitado: 100 de Savia por 1 Sal Negra, máximo 3 por semana, más decoraciones del Fresno para las Termas.
 14. **¿Los materiales del Fresno (Raíz Negra, Corteza de Ceniza, Pluma de Eclipse y Hoja Astral) entran al crafting?** Recomiendo que sí, en las armas Astrales y Quintaesencia, para conectar el Fresno con la sección 15.
 15. **¿Se adopta la regla de no favorecer el planeta de la Regente limitada de la versión?** Recomiendo que sí; protege la promesa de la sección 16 de no vender poder.
-16. **¿Cuál es la escala de estadísticas de la Calculista?** Recomiendo de 0 a 20, con los umbrales de la sección 9.9. Afecta también a la historia de la Fase 3.
-17. **¿Cuándo se recupera la Firmeza tras un Quiebre?** Lo decide la Fase 1, pero varios Injertos y la Élite Despierta dependen de eso. Recomiendo que se recupere completa al empezar el siguiente turno del enemigo, como en HSR.
+16. **¿Cuál es la escala de estadísticas de la Calculista?** Recomiendo de 0 a 20, con los umbrales del apartado 9.9. Afecta también a la historia de la Fase 3.
+17. **¿Se confirma C-15 de HUECOS.md (la Firmeza se recupera en el siguiente turno del enemigo)?** Recomiendo que sí: varios Injertos y la Élite Despierta lo asumen.
+18. **¿Qué escala de almitas se adopta (HUECOS.md, H-01)?** El Fresno se ajusta con un solo factor (apartado 12.1). Recomiendo decidirla antes de la Fase 2A, porque cambia el tope semanal y los precios.
