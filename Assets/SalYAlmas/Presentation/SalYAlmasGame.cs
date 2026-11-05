@@ -76,6 +76,7 @@ namespace SalYAlmas.Presentation
         private bool _chainWasOpen;
 
         public MetaHub Hub => _hub;
+        public bool InHub => _mode == Mode.Hub;
         public Core.Meta.MetaGame Game => _hub?.Game;
         public PortraitBank Art => _art;
         public BattleDirector Director => _director;

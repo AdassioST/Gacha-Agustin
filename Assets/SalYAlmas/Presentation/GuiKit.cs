@@ -140,13 +140,16 @@ namespace SalYAlmas.Presentation
 
         public static GUIStyle Style(int size, Color color, TextAnchor anchor = TextAnchor.MiddleLeft, bool bold = false, bool wrap = false)
         {
+            // Alegreya es de ojo chico: sube un punto todo, y nada baja de 16 (legibilidad en teléfono).
+            size = Mathf.Max(16, size + 2);
             string key = size + "|" + ColorUtility.ToHtmlStringRGBA(color) + "|" + anchor + "|" + bold + "|" + wrap;
             if (Styles.TryGetValue(key, out var s) && s != null) return s;
             s = new GUIStyle(GUI.skin.label)
             {
+                font = bold ? Theme.BoldFont : Theme.BodyFont,
                 fontSize = size,
                 alignment = anchor,
-                fontStyle = bold ? FontStyle.Bold : FontStyle.Normal,
+                fontStyle = FontStyle.Normal,
                 wordWrap = wrap,
                 richText = true,
                 clipping = TextClipping.Clip,
@@ -161,7 +164,7 @@ namespace SalYAlmas.Presentation
         {
             string key = "btn" + size;
             if (Styles.TryGetValue(key, out var s) && s != null) return s;
-            s = new GUIStyle(Theme.ButtonBase()) { fontSize = size, richText = true, wordWrap = true };
+            s = new GUIStyle(Theme.ButtonBase()) { fontSize = Mathf.Max(16, size + 2), richText = true, wordWrap = true };
             Styles[key] = s;
             return s;
         }
