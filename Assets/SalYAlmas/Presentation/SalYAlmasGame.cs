@@ -40,6 +40,7 @@ namespace SalYAlmas.Presentation
         public TextAsset LocJson;
         public TextAsset WitchesExtJson;
         public TextAsset OdysseyJson;
+        public TextAsset QuestsJson;
 
         [Header("Arte")]
         [Tooltip("Bustos y cuerpos del elenco. Los asigna el constructor de la escena.")]
@@ -130,6 +131,7 @@ namespace SalYAlmas.Presentation
                     var w = gameObject.AddComponent<ScreenWalk>();
                     w.Hub = _hub;
                     w.Folder = walk;
+                    _hub.EndBattleRequested = () => { _external = null; ClearSpawned(); _mode = Mode.Hub; };
                 }
 #endif
             }
@@ -202,6 +204,7 @@ namespace SalYAlmas.Presentation
                 Loc = LocJson.text,
                 WitchesExt = WitchesExtJson != null ? WitchesExtJson.text : null,
                 Odyssey = OdysseyJson != null ? OdysseyJson.text : null,
+                Quests = QuestsJson != null ? QuestsJson.text : null,
             };
         }
 
@@ -257,10 +260,14 @@ namespace SalYAlmas.Presentation
             _mode = Mode.Battle;
         }
 
+        private readonly List<Renderer> _hiddenFloor = new List<Renderer>();
+
         private void ClearSpawned()
         {
             foreach (var go in _spawned) if (go != null) Destroy(go);
             _spawned.Clear();
+            foreach (var r in _hiddenFloor) if (r != null) r.enabled = true;
+            _hiddenFloor.Clear();
         }
 
         private Vector3 Anchor(Transform[] anchors, int index, int count, bool enemy)
@@ -296,10 +303,45 @@ namespace SalYAlmas.Presentation
             for (int i = 0; i < b.Enemies.Count; i++)
             {
                 var e = b.Enemies[i];
-                float scale = e.IsBoss ? 2.1f : 1.3f;
+                // Con el arte de Codex (Art/Enemigos) el enemigo es un recorte; sin arte, la cápsula de prueba.
+                var art = _art?.Enemy(e.Def.Id);
+                float scale = art != null ? (e.IsBoss ? 2.3f : 1.7f) : e.IsBoss ? 2.1f : 1.3f; // TUNING: detrás de las brujas, más grandes para verse
                 Color c = Color.Lerp(Palette.Planet(e.Def.AttackPlanet), Palette.Abyss, 0.45f);
-                CreateFigure(e.Name, Anchor(EnemyAnchors, i, b.Enemies.Count, true), c, EnemyMaterial, scale, true, e.Id);
+                CreateFigure(e.Name, Anchor(EnemyAnchors, i, b.Enemies.Count, true), c, EnemyMaterial, scale, true, e.Id, art);
             }
+            SpawnBackdrop();
+        }
+
+        /// <summary>El fondo de la zona (Art/Ambientes) en un plano lejano que llena la vista de la cámara.</summary>
+        private void SpawnBackdrop()
+        {
+            if (_hub == null || BattleCamera == null) return;
+            var tex = _hub.CurrentBackdrop(out var tint);
+            var shader = Shader.Find("Sprites/Default");
+            if (tex == null || shader == null) return;
+            // Con fondo pintado, el suelo gris y los círculos de prueba estorban: se esconden mientras dure el combate.
+            foreach (var name in new[] { "Suelo de sal", "Círculo del aquelarre", "Círculo de las raíces" })
+            {
+                var go = GameObject.Find(name);
+                var rend = go != null ? go.GetComponent<Renderer>() : null;
+                if (rend != null && rend.enabled) { rend.enabled = false; _hiddenFloor.Add(rend); }
+            }
+            const float distance = 45f; // TUNING
+            var t = BattleCamera.transform;
+            float h = BattleCamera.orthographic ? BattleCamera.orthographicSize * 2f : 2f * distance * Mathf.Tan(BattleCamera.fieldOfView * 0.5f * Mathf.Deg2Rad);
+            float w = h * BattleCamera.aspect;
+            float texAspect = tex.width / (float)tex.height;
+            if (w / h > texAspect) h = w / texAspect; else w = h * texAspect;
+            var quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+            quad.name = "Fondo de zona";
+            RemoveCollider(quad);
+            quad.transform.position = t.position + t.forward * distance;
+            quad.transform.rotation = Quaternion.LookRotation(t.forward, t.up);
+            quad.transform.localScale = new Vector3(w * 1.04f, h * 1.04f, 1f);
+            var renderer = quad.GetComponent<Renderer>();
+            renderer.material = new Material(shader) { mainTexture = tex, color = tint };
+            renderer.material.renderQueue = 2900;
+            _spawned.Add(quad);
         }
 
         private Material MaterialFor(Planet p)

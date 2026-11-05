@@ -258,6 +258,18 @@ namespace SalYAlmas.Presentation
 
         public Texture2D Body(string id) => _byName.TryGetValue(ArtId(id) + "_f1_cuerpo", out var b) ? b : null;
 
+        /// <summary>Cualquier textura por nombre (fondos de Art/Ambientes: amb_aries_orilla, mapa_anillo).</summary>
+        public Texture2D Get(string name) => !string.IsNullOrEmpty(name) && _byName.TryGetValue(name, out var t) ? t : null;
+
+        /// <summary>Arte de un enemigo de Art/Enemigos. Los generados llevan sufijo (ferran#o0): se usa la base.</summary>
+        public Texture2D Enemy(string id)
+        {
+            if (string.IsNullOrEmpty(id)) return null;
+            int cut = id.IndexOf('#');
+            string baseId = cut >= 0 ? id.Substring(0, cut) : id;
+            return _byName.TryGetValue("enemigo_" + baseId, out var t) ? t : null;
+        }
+
         /// <summary>Dibuja una imagen recortándola para llenar el rectángulo. vAnchor 1 alinea arriba.</summary>
         public static void Fill(Rect r, Texture2D tex, float vAnchor = 1f, Color? tint = null)
         {

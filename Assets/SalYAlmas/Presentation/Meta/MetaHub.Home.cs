@@ -23,7 +23,7 @@ namespace SalYAlmas.Presentation
 
         private static readonly (Screen screen, string key)[] Destinations =
         {
-            (Screen.Story, "dest.story"), (Screen.Fresno, "dest.fresno"), (Screen.Summon, "dest.summon"), (Screen.Coven, "dest.trials"), (Screen.Ledger, "dest.ledger"),
+            (Screen.Story, "dest.story"), (Screen.Quests, "dest.quests"), (Screen.Fresno, "dest.fresno"), (Screen.Summon, "dest.summon"), (Screen.Coven, "dest.trials"), (Screen.Ledger, "dest.ledger"),
         };
 
         // ------------------------------------------------------------------ Home
@@ -146,7 +146,7 @@ namespace SalYAlmas.Presentation
         private void DestinationCard(Rect card, int index, bool center)
         {
             var (screen, key) = Destinations[index];
-            Color[] tops = { Palette.Hex("#8C4A30"), Palette.Hex("#3E6A4E"), Palette.Hex("#3E6A8E"), Palette.Hex("#7A3058"), Palette.Hex("#6E5A30") };
+            Color[] tops = { Palette.Hex("#8C4A30"), Palette.Hex("#5A4A7A"), Palette.Hex("#3E6A4E"), Palette.Hex("#3E6A8E"), Palette.Hex("#7A3058"), Palette.Hex("#6E5A30") };
             Theme.Panel(card, tops[index], Color.Lerp(tops[index], Palette.Abyss, 0.85f), center ? Palette.GoldBright : Palette.Gold, center ? 1f : 0.65f);
             var c = new Vector2(card.center.x, card.y + card.height * 0.38f);
             float s = Mathf.Min(card.width, card.height) * 0.26f;
@@ -155,16 +155,17 @@ namespace SalYAlmas.Presentation
                 switch (index)
                 {
                     case 0: Theme.BookGlyph(c, s, gc); break;
-                    case 1: Theme.TreeGlyph(c, s, gc, 5f); break;
-                    case 2: Theme.SpringGlyph(c, s, gc); break;
-                    case 3: Theme.FlameGlyph(c, s, gc); break;
+                    case 1: GuiKit.Diamond(c, s * 0.8f, gc); GuiKit.Diamond(c, s * 0.4f, Palette.Abyss); break;
+                    case 2: Theme.TreeGlyph(c, s, gc, 5f); break;
+                    case 3: Theme.SpringGlyph(c, s, gc); break;
+                    case 4: Theme.FlameGlyph(c, s, gc); break;
                     default: Theme.BookGlyph(c, s * 0.9f, gc); break;
                 }
             if (!center) return;
 
             Theme.Title(new Rect(card.x, card.yMax - card.height * 0.34f, card.width, 64), L(key), 50, Palette.FiveStar);
             GuiKit.Label(new Rect(card.x + 16, card.yMax - card.height * 0.34f + 66, card.width - 32, 56), L(key + ".sub"), 20, Palette.Parchment, TextAnchor.UpperCenter, false, true);
-            int badge = screen == Screen.Fresno && F.InRun ? 1 : screen == Screen.Story && Game.Story.InMission ? 1 : 0;
+            int badge = screen == Screen.Fresno && F.InRun ? 1 : screen == Screen.Story && (Game.Story.InMission || Game.Story.InExpedition) ? 1 : screen == Screen.Quests ? Game.Quests.Pending : 0;
             if (badge > 0) Badge(new Vector2(card.xMax - 28, card.y + 28), badge);
             if (GUI.Button(card, GUIContent.none, GUIStyle.none))
             {

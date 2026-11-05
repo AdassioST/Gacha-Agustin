@@ -19,7 +19,7 @@ namespace SalYAlmas.Presentation
     /// </summary>
     public sealed partial class MetaHub
     {
-        public enum Screen { Creator, Home, Coven, Witch, Forge, Cauldron, Termas, Summon, Shop, Mirror, Story, Scene, Fresno, Ledger, Settings, Odds }
+        public enum Screen { Creator, Home, Coven, Witch, Forge, Cauldron, Termas, Summon, Shop, Mirror, Story, Scene, Fresno, Ledger, Settings, Odds, Expedition, Quests }
 
         private const string Slot = "perfil";
         private static readonly DateTime Epoch = new DateTime(2026, 1, 1);
@@ -202,6 +202,8 @@ namespace SalYAlmas.Presentation
                 case Screen.Ledger: DrawLedger(area); break;
                 case Screen.Settings: DrawSettings(area); break;
                 case Screen.Odds: DrawOdds(area); break;
+                case Screen.Expedition: DrawExpedition(area); break;
+                case Screen.Quests: DrawQuests(area); break;
             }
             if (!inRun) DrawNav();
             DrawNote();
@@ -241,10 +243,9 @@ namespace SalYAlmas.Presentation
             GuiKit.Label(new Rect(left.x + 20, left.y + 6, 420, 32), c.Name.Length > 0 ? c.Name : "Calculista", 24, Palette.Parchment, TextAnchor.MiddleLeft, true);
             string sendero = _meta.World.Story.Sendero(c.Sendero)?.Name ?? "";
             GuiKit.Label(new Rect(left.x + 300, left.y + 6, 325, 32), sendero, 18, Palette.ParchmentShadow, TextAnchor.MiddleRight);
-            int height = F.OfrendaLevel + 1;
-            long prev = height <= 1 ? 0 : _meta.Fresno.Ofrenda.Threshold(height - 1), next = F.NextOfrendaThreshold;
-            float frac = next > prev ? (float)(Game.Profile.Fresno.OfrendaTotal - prev) / (next - prev) : 0f;
-            StatusBar(new Rect(left.x + 20, left.y + 40, 600, 28), L("top.level") + " " + height, frac, Theme.Ember, $"{Game.Profile.Fresno.OfrendaTotal:N0}/{next:N0}");
+            // Altura: el nivel de cuenta sale del Crecimiento por todo lo que juegas (META 4), no solo de la Ofrenda.
+            var (into, need) = Game.Quests.AlturaProgress();
+            StatusBar(new Rect(left.x + 20, left.y + 40, 600, 28), L("top.level") + " " + Game.Quests.Altura, need > 0 ? into / (float)need : 0f, Theme.Ember, $"{into:N0}/{need:N0}");
             float p = c.Paralaje / (float)Mathf.Max(1, _meta.World.Story.ParalajeMax);
             StatusBar(new Rect(left.x + 20, left.y + 72, 600, 28), L("top.parallax"), p, BandColor(story.Band), $"{c.Paralaje}/{_meta.World.Story.ParalajeMax}  ·  {story.Band}");
 
@@ -306,7 +307,7 @@ namespace SalYAlmas.Presentation
         {
             switch (s)
             {
-                case Screen.Home: return Game.Story.PrologueDone ? 0 : 1;
+                case Screen.Home: return (Game.Story.PrologueDone ? 0 : 1) + Game.Quests.Pending;
                 case Screen.Termas:
                     int talk = 0;
                     foreach (var id in Game.Base.Resting()) if (!Game.Base.Talked(id)) talk++;

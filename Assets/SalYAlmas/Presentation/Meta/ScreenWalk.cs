@@ -46,6 +46,21 @@ namespace SalYAlmas.Presentation
                 Hub.DebugShow(s);
                 yield return Shot(s.ToString());
             }
+            // La Odisea: Aries terminada, el mapa con Cáncer y Capricornio abiertos, encargos, una sección y una Expedición.
+            Hub.DebugOdyssey();
+            Hub.DebugShow(MetaHub.Screen.Story);
+            yield return Shot("Odisea");
+            Hub.DebugShow(MetaHub.Screen.Quests);
+            yield return Shot("Encargos");
+            Hub.DebugOdysseyScene();
+            yield return Shot("OdiseaEscena");
+            Hub.DebugExpedition();
+            yield return Shot("Expedicion");
+            Hub.DebugOdysseyBattle();
+            yield return new WaitForSecondsRealtime(2f);
+            yield return Shot("OdiseaCombate");
+            Hub.DebugEndBattle();
+            yield return new WaitForSecondsRealtime(0.5f);
             Hub.DebugRun();
             yield return Shot("FresnoRun");
             Hub.DebugBattle();
@@ -98,6 +113,47 @@ namespace SalYAlmas.Presentation
             Game.Story.Continue();
             Current = Screen.Scene;
         }
+
+        public void DebugOdyssey()
+        {
+            var s = _meta.World.Story;
+            var c = Game.Profile.Calculista;
+            if (!c.Created) Game.Story.Create("Noa", "Elle", s.Species[0], "aries");
+            foreach (var id in new[] { "vado", "aries" })
+            {
+                var region = s.Region(id);
+                foreach (var m in region.Missions) if (!c.MissionsDone.Contains(m.Id)) c.MissionsDone.Add(m.Id);
+                if (!c.RegionsDone.Contains(id)) c.RegionsDone.Add(id);
+                if (!region.Prologue && !c.RegionsVisited.Contains(id)) { c.RegionsVisited.Add(id); c.Arrival[id] = 0; }
+                foreach (var z in region.Zones) if (!z.IsEx && !c.ZonesDone.Contains(z.Id)) c.ZonesDone.Add(z.Id);
+            }
+            Game.Report("cadena");
+            Game.Report("seccion", 4);
+            _region = "cancer";
+            _zone = "";
+        }
+
+        public void DebugOdysseyScene()
+        {
+            Game.Story.StartMission("cancer", "can_1");
+            Game.Story.Continue();
+            Current = Screen.Scene;
+        }
+
+        public void DebugExpedition()
+        {
+            Game.Story.StartExpedition("aries", "aries_cielo", 0);
+            Current = Screen.Expedition;
+        }
+
+        public void DebugOdysseyBattle()
+        {
+            StartBattle?.Invoke(Game.Story.PrepareExpeditionBattle(Party(), 7), b => Game.Story.ResolveExpeditionBattle(b), "");
+        }
+
+        /// <summary>Termina el combate de prueba sin jugarlo, para seguir el recorrido.</summary>
+        public System.Action EndBattleRequested;
+        public void DebugEndBattle() => EndBattleRequested?.Invoke();
 
         public void DebugPullDemo()
         {

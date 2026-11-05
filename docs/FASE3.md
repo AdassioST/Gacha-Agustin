@@ -35,8 +35,14 @@ El Aquelarre es una grilla con marcos por planeta y rareza. La piel de oro y cir
 | Alcance del GDD | Estado | Detalle |
 | --- | --- | --- |
 | Motor de historia | Hecho | Decisiones con umbral fijo, bono por bruja, marcas, Títulos, Almas digeridas, Senderos, Relectura. Todo en `Data/story.json` |
-| Aries y Capricornio, cinco misiones cada una, en orden libre | Hecho, en borrador | Más un prólogo. El orden cambia lo que se ve, y Ferrán, si la perdonas en Aries, vuelve en Capricornio. El guion es propio y está sin aprobar (H-14) |
-| Reloj de eclipses | Parcial | Cuenta y corrompe las regiones sin visitar, y se ve en el anillo. Como las otras diez regiones no existen, todavía no cambia su contenido |
+| La Odisea: cuatro regiones cardinales | Hecho, en borrador | Aries, Cáncer, Libra y Capricornio, cinco misiones cada una, más el prólogo. Empiezas en la cardinal de tu elemento y la Tortuga sigue el anillo en sentido Directo o Retrógrado ([ODISEA](propuestas/ODISEA.md)). El guion de Cáncer y Libra es nuevo y está sin aprobar (H-14) |
+| Zonas, secciones y botín | Hecho | Cuatro zonas por región: orilla, subsuelo y corazón bajan; la EX sube. Cada combate de historia es una cadena de secciones que arrastra vida y Salinidad, con almitas, material regional, sal y tesoros |
+| Reloj de eclipses y Marea de Sal | Hecho | Cada dos regiones sube la Marea. El nivel y la capa de horror de una región dependen de cuántas llevabas al llegar, no de la región ni del equipo. Desde la Grieta entran Cristalizados; en el Abismo, Sin Carta y Huéspedes |
+| Expediciones | Hecho | Las zonas terminadas se repiten con la Marea que elijas. La misión en curso queda en pausa. Botín completo en 20 secciones al día y ×0.25 después |
+| Kits de las 24 brujas | Hecho | Las 18 que faltaban salen de `Tools/Content/gen_kits.py`. Salitre explota su intoxicación y Axa revive una vez (GDD 17). `kits` en el simulador vigila la regla del 5 % |
+| Enemigos con mecánica | Hecho | 25 enemigos regionales con rasgos: protector, reflejo, furia contra Hechizos, inmunes a Aspectos, ataque creciente, curanderos y efectos al caer. Cada uno con su pista en la placa |
+| Encargos, logros y Altura | Hecho | 4 diarios rotativos, semanales, 27 logros y Altura por Crecimiento. Todos los sistemas reportan eventos. Nunca piden tirar ni pagar |
+| Arte de ambientes y enemigos | En curso, por Codex | Fondos de las cuatro regiones, el vado y el mapa del anillo; enemigos en recorte. Encargo en [Ambientes para Codex](Ambientes%20para%20Codex.md) |
 | Ventanas del Libro Mayor y falla por Paralaje | Hecho | Folio por bruja y glifos con Paralaje alto. Es animación de interfaz, no shader |
 | Termas navegables | Parcial | Mapa 2D de la Tortuga con reposo, tocar, conversar, Confianza y baño. No son 3D |
 | Tirada completa de la 16.1 | Parcial | Sales, vapor por rareza, subida sorpresa, constelación, emergencia, sacudida por especie, tarjeta, saltar y modo de diez. Es secuencia 2D por código, no Timeline |
@@ -67,8 +73,10 @@ También hay un combate con recortes de las brujas y bustos en sus placas. Los e
 ## Pruebas y balance
 
 - La suite de la Fase 3 está en `Tests/EditMode/Phase3/WorldTests.cs`.
-- Con el piloto de combate, 40 cuentas nuevas terminaron la historia en los dos órdenes. Casi todos los combates salen al primer intento. La excepción es el jefe final de Capricornio, con unos 3 intentos de media y hasta 8.
-- Los combates de historia escalan con el nivel medio del equipo, así que no enseñan a subir de nivel. Eso queda para el Fresno.
+- La Odisea tiene su suite en `OdysseyTests.cs` y los encargos en `QuestTests.cs`.
+- `dotnet run --project Tests/Core.Sim -- historia 3` juega una cuenta nueva por cada signo cardinal y sentido, gastando sus almitas en niveles. Las ocho rutas terminan las cuatro regiones sin Expediciones extra, con el equipo de 1 a 4 niveles debajo de cada región.
+- Los enemigos de historia ya no escalan con el equipo: subir de nivel sí sirve (antes la historia era imposible de mejorar y el Fresno, imposible de alcanzar).
+- `dotnet run --project Tests/Core.Sim -- kits 10` mide el aporte de daño de las 24 brujas contra un maniquí y vigila el GDD 17.1.
 
 ## Cómo compilar para Android e iOS
 
@@ -85,7 +93,7 @@ También hay un combate con recortes de las brujas y bustos en sus placas. Los e
 | --- | --- | --- |
 | Marcos, iconos y fondo | Generados por código | Arte de interfaz |
 | 12 brujas sin arte | Silueta de color | Sus retratos |
-| Enemigos | Cápsulas | Arte de enemigos |
+| Enemigos | Recortes de Codex donde ya existen; cápsula si falta el archivo | Los de las otras ocho regiones |
 | Fases S y SS | Busto de fase 3 en 6 Regentes | El resto de los cuerpos y bustos |
 | Títulos, Casas, Ferrán, Tecuani, Valdehierro | Propuestas mías | Biblia narrativa (H-14) |
 | Música | Pistas temporales de Suno | Capas y FMOD (D-09, D-11, D-12) |
@@ -106,13 +114,19 @@ Los datos siguen usando `zarigueya` y `topo`, porque la Fase 1.5 no se ha corrid
 | Confianza | 20 por charla; 400 por nivel | `services.json` |
 | Tiempos de la tirada y subida sorpresa | 1 a 1.6 s por paso; 35 % | `PullSequence.cs` |
 | Altura del recorte en combate | 2.7 | `SalYAlmasGame.cs` |
+| Odisea: niveles, secciones, botín y Expediciones | Ver ODISEA 12 | `odyssey.json` (de `gen_odyssey.py`) |
+| Encargos, logros y Altura | 15 Sales y 5 000 almitas por diario; curva de la META 4.2 | `quests.json` |
+| Kits de las 18 brujas | Plantilla por papel; ×0.9 en 4★ y ×0.8 en 3★ | `witches_ext.json` (de `gen_kits.py`) |
+| Tope de la explosión de Salitre | 6 veces su ATQ | `Battle.Effects.cs` |
 
 ## Decisiones tomadas
 
 | Tema | Decisión |
 | --- | --- |
 | Orientación | Horizontal, como pide el GDD, aunque las referencias del home son verticales |
-| Regiones | Cada signo lleva a Aries o a Capricornio mientras no existan las otras (D-13 sin decidir) |
+| Regiones | Las cuatro cardinales, una por elemento (la recomendación de D-13). El orden lo da el anillo, no una lista |
+| Progresión | El lugar es libre (GDD 6) y el nivel es lineal (pedido del usuario): lo da la Marea al llegar ([ODISEA](propuestas/ODISEA.md)) |
+| Escala de almitas | Sigue en `100·n^1.5` (GDD 11.3) hasta que se decida D-02. Las secciones dan `100·nivel^1.5` para que la historia alcance |
 | Senderos | Alquimista da la ranura extra, sin las dos pociones por turno. Directora de Coro da daño de Spark, sin mover eslabones. Ambos faltantes se indican en `story.json` |
 | Reembolso con Perlas gastadas | El saldo queda como deuda que descuenta la siguiente compra |
 | Sales gastadas | Primero las ganadas; lo comprado solo baja cuando ya no alcanza |
@@ -123,7 +137,7 @@ Los datos siguen usando `zarigueya` y `topo`, porque la Fase 1.5 no se ha corrid
 1. **El gacha se decide en el cliente.** Sin servidor real se puede falsificar. Es el mayor riesgo y depende de D-04 y de las cuentas de UGS.
 2. **Sin validar runs ni grabarlas.** El Fresno entrega recompensas sin revisión (S-04), y no se ha probado que los combates den lo mismo en ARM64 (S-25).
 3. **Escala de almitas sin decidir (D-02).** La meta de nivel 70 en siete días no se puede cumplir con lo que da el juego hoy.
-4. **Solo 6 de 24 brujas pelean.** Un jugador puede sacar una bruja del banner que no sirve en combate (H-27). Esto choca con la promesa del gacha y hay que resolverlo antes de abrir tiradas a jugadores.
+4. **Kits generados por plantilla.** Las 24 pelean, pero las 18 nuevas comparten plantilla por papel; falta darles mecánicas propias y probarlas con personas.
 5. **Guion sin aprobar**, y sin revisión de tono ni legal.
 6. **Falta de producto (Fase 4):** cuenta real, borrar cuenta en servidor, privacidad, notificaciones, tutorial guionizado y revisión de tiendas.
 7. **Rendimiento desconocido.** Hay recortes de 977 × 1432 px por bruja sin Addressables, y nunca se ha medido en un teléfono.

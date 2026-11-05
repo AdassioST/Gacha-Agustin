@@ -21,7 +21,7 @@ Terraria funciona igual. El mapa no cambia: lo que cambia es el mundo después d
 | Dos sentidos | **Directo** (en el orden del zodiaco: Aries → Tauro → Géminis…) o **Retrógrado** (al revés). Son los nombres de la astrología para el movimiento de los planetas |
 | El arco | Las regiones visitadas forman un arco continuo alrededor de tu signo. Una región nueva se abre si es vecina de una terminada |
 | Dos frentes | El arco tiene dos puntas, así que puede haber dos regiones nuevas a medias, una por sentido. Si una te atora, sigues por la otra. Nunca te quedas sin camino |
-| Volver | Puedes regresar a cualquier región del arco: Expediciones, zona EX y la salina del día |
+| Volver | Puedes regresar a cualquier región del arco: Expediciones, zona EX y la salina del día. Una misión a medias queda en pausa mientras haces una Expedición |
 | Regiones sin construir | Mientras no estén las 12, el anillo salta a la siguiente región construida. Las que no existen siguen corrompiéndose y, cuando salgan en una versión, entran al nivel que le toca a cada quien |
 | El Descendente | La región opuesta a tu signo está siempre a seis pasos, así que **la visitas siempre en la Grieta o el Abismo**. Su Casa es tu rival personal: manda agentes a otras regiones desde el principio y la enfrentas tarde, en su versión extraña |
 
@@ -136,7 +136,7 @@ Costo de contenido por región: un esqueleto de misiones, los textos de bisagra 
 | `CalculistaState` | `ArrivalTide` por región; misión en curso con sección, vida, Salinidad y caídas |
 | `StoryService.CanStart` | Una región nueva se abre si es vecina en el anillo construido de una región terminada, o si es la de tu signo |
 | `StoryService.PrepareBattle` | Nivel por región, zona y sección. **Ya no escala con el equipo.** Usa `StartHp` y `StartSalinity` |
-| Pruebas que siguen igual | Las dos regiones en cualquier orden, el eclipse que corrompe lo no visitado y el mapeo de signo por elemento |
+| Pruebas que cambiaron | "Dos regiones en cualquier orden" pasó a "el anillo se abre en los dos sentidos desde tu signo". El eclipse que corrompe lo no visitado y el signo que da bono siguen igual |
 
 ## 9. Qué sale primero
 
@@ -159,3 +159,18 @@ Cardinal, fijo y mutable es la otra división de la astrología: lo que empieza,
 Reemplaza el párrafo "Estructura no lineal" cuando el usuario lo apruebe:
 
 > **Estructura:** el jugador empieza en la región de su signo y la Tortuga sigue el anillo en sentido Directo o Retrógrado. Las regiones visitadas forman un arco, y la siguiente se abre al terminar una vecina. Cada dos regiones hay un **eclipse** que sube la **Marea de Sal**. Las regiones no visitadas toman la Marea del momento en que llegas: su nivel, sus enemigos, sus eventos y su final local. Por eso la odisea va de lo sencillo a lo extraño en cualquier orden. El reloj de eclipses nunca bloquea al jugador ni le hace perder progreso. Las capas de la sección 6.5 se cuentan por el orden de visita.
+
+## 12. Estado de la implementación (2026-11-05)
+
+| Pieza | Estado |
+| --- | --- |
+| Anillo, Marea, nivel por llegada, cuatro zonas, secciones, botín, Expediciones, invasores | Hecho en el núcleo, con pruebas (`OdysseyTests`) |
+| Cuatro regiones cardinales | Aries y Capricornio con enemigos regionales; Cáncer y Libra nuevas, con guion en borrador |
+| Interludios del eclipse, folios reordenados y el Descendente | Diseño. Falta escribirlos: el núcleo ya marca el eclipse y sabe cuál es tu Descendente |
+| Textos de bisagra por capa | Algunos, con `minCorruption`. Faltan los del Abismo |
+| Huésped menor que cambia de debilidad | Falta: hoy se pliega y devuelve daño |
+| Fresno alineado con la Marea | Falta: su primera zona sigue en nivel 52 |
+
+Valores con que quedó (`Data/odyssey.json`, generado por `Tools/Content/gen_odyssey.py`): nivel `5 + 6·n`, zonas +0, +2, +4 y +8, jefe +2, fuerza de sección 0.9, almitas por sección `100 · nivel^1.5`, material al 60 %, sal al 35 %, tesoro al 20 %, 100 Sales por zona, 20 secciones diarias de Expedición con botín completo y ×0.25 después.
+
+Balance medido con `dotnet run --project Tests/Core.Sim -- historia 3`: las ocho rutas (cuatro signos, dos sentidos) terminan las cuatro regiones sin Expediciones extra. El equipo queda de 1 a 4 niveles debajo de cada región. Una cuenta nueva gana unas 4 000 Sales de Baño (25 tiradas) sin contar los diarios, 90 materiales regionales y llega a Altura 14.

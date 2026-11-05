@@ -16,6 +16,7 @@ namespace SalYAlmas.Presentation
 
         private void DrawStoryMap(Rect a)
         {
+            if (Game.Story.OdysseyEnabled) { DrawOdysseyMap(a); return; }
             var body = Header(a, L("dest.story"), $"Eclipses: {Game.Profile.Calculista.Eclipses}  ·  Almas digeridas: {Game.Profile.Calculista.Souls:N0}");
             var s = _meta.World.Story;
             var story = Game.Story;
@@ -99,7 +100,12 @@ namespace SalYAlmas.Presentation
             }
 
             var party = Party();
-            GuiKit.Fill(a, Palette.WithAlpha(Palette.Abyss, 0.35f));
+            // El fondo de la zona en su capa: la orilla, el subsuelo, el corazón (ODISEA 4).
+            var backdrop = CurrentBackdrop(out var backTint);
+            if (backdrop != null) PortraitBank.Fill(a, backdrop, 0.5f, backTint);
+            GuiKit.Fill(a, Palette.WithAlpha(Palette.Abyss, backdrop != null ? 0.18f : 0.35f));
+            if (story.CurrentZone != null)
+                GuiKit.Label(new Rect(30, 20, 900, 40), $"{story.CurrentRegion.Name} · {story.CurrentZone.Name} · nivel {story.ZoneLevel(story.CurrentRegion, story.CurrentZone)}", 22, Palette.Parchment, TextAnchor.MiddleLeft, true);
             string portrait = scene.Portrait;
             if (portrait.Length > 0)
             {
@@ -128,7 +134,14 @@ namespace SalYAlmas.Presentation
             if (scene.Battle != null)
             {
                 bool tutorial = scene.Battle.Tutorial;
-                if (GuiKit.Button(new Rect(text.x + 34, y, 460, 76), "Pelear", true, 34))
+                int sections = story.SectionCount;
+                if (sections > 1)
+                {
+                    SectionTrack(new Rect(text.x + 840, y + 4, text.width - 880, 34), story.SectionNumber, sections, scene.Battle.Boss);
+                    GuiKit.Label(new Rect(text.x + 840, y + 40, text.width - 880, 30), $"Sección {story.SectionNumber} de {sections} · la vida y la Salinidad se arrastran", 16, Palette.Ink, TextAnchor.MiddleCenter);
+                }
+                LootStrip(new Rect(text.x + 34, text.yMax - 64, text.width - 68, 50));
+                if (GuiKit.Button(new Rect(text.x + 34, y, 460, 76), sections > 1 ? $"Pelear · {story.SectionNumber}/{sections}" : "Pelear", true, 34))
                 {
                     var setup = story.PrepareBattle(party, NewSeed());
                     string hint = tutorial ? "Abre la Cadena y ordena a las brujas: hay un orden donde dos golpes caen juntos." : "";
