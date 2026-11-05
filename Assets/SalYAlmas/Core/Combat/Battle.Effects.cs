@@ -105,6 +105,7 @@ namespace SalYAlmas.Core.Combat
         internal void AddDot(Unit target, DotKind kind, double coef, int turns, Unit attacker, string name, double healShare = 0, double jumpShare = 0)
         {
             if (target == null || !target.IsAlive || attacker == null) return;
+            if (attacker.Side == Side.Ally) coef *= 1.0 + Mod(attacker, ModKeys.DotPct);
             var st = AddStatus(target, Status.KindForDot(kind), coef, turns, name, isDebuff: true, source: attacker);
             if (st == null) return;
             st.Planet = Status.PlanetForDot(kind);
@@ -120,6 +121,12 @@ namespace SalYAlmas.Core.Combat
         {
             if (w == null || w.IsGuest || !w.IsAlive || delta == 0) return;
             if (w.InEcstasy) return; // fija en 150 mientras el Ascendente tiene el control
+            if (delta > 0)
+            {
+                double gain = Mod(w, ModKeys.SalinityGainPct);
+                if (gain != 0) delta = Math.Max(0, (int)Math.Round(delta * (1.0 + gain), MidpointRounding.AwayFromZero));
+                if (delta == 0) return;
+            }
             int nv = Math.Max(0, Math.Min(Rules.Salinity.Max, w.Salinity + delta));
             if (nv == w.Salinity) return;
             SetSalinity(w, nv, reason);
@@ -157,6 +164,11 @@ namespace SalYAlmas.Core.Combat
         internal void ChangeAnima(WitchUnit w, int delta)
         {
             if (w == null || w.IsGuest || !w.IsAlive || delta == 0) return;
+            if (delta > 0)
+            {
+                double gain = Mod(w, ModKeys.AnimaGainPct);
+                if (gain != 0) delta = Math.Max(0, (int)Math.Round(delta * (1.0 + gain), MidpointRounding.AwayFromZero));
+            }
             int nv = Math.Max(0, Math.Min(Rules.Anima.Max, w.Anima + delta));
             if (nv == w.Anima) return;
             int old = w.Anima;
@@ -166,6 +178,11 @@ namespace SalYAlmas.Core.Combat
 
         internal void ChangeResonance(int delta, string reason)
         {
+            if (delta > 0)
+            {
+                double gain = _mods.Get(ModKeys.ResonanceGainPct);
+                if (gain != 0) delta = Math.Max(0, (int)Math.Round(delta * (1.0 + gain), MidpointRounding.AwayFromZero));
+            }
             int nv = Math.Max(0, Math.Min(Rules.Resonance.Max, Resonance + delta));
             if (nv == Resonance) return;
             int old = Resonance;
@@ -194,6 +211,8 @@ namespace SalYAlmas.Core.Combat
                 Emit(new Healed { UnitId = u.Id, UnitName = u.Name, Amount = -dmg, Hp = u.Hp, Inverted = true, Reason = reason });
                 return;
             }
+            double healing = Mod(u, ModKeys.HealingPct);
+            if (healing != 0) amount = Math.Max(0, (int)Math.Round(amount * (1.0 + healing), MidpointRounding.AwayFromZero));
             int healed = Math.Min(amount, u.MaxHp - u.Hp);
             if (healed <= 0) return;
             u.Hp += healed;
@@ -203,6 +222,8 @@ namespace SalYAlmas.Core.Combat
         internal void AddShield(Unit u, int amount, int turns, string name, Unit source)
         {
             if (u == null || !u.IsAlive || amount <= 0) return;
+            double bonus = Mod(u, ModKeys.ShieldPct);
+            if (bonus != 0) amount = Math.Max(1, (int)Math.Round(amount * (1.0 + bonus), MidpointRounding.AwayFromZero));
             AddStatus(u, StatusKind.Shield, amount, turns, name, isBuff: true, source: source, skipFirstTick: false);
             Emit(new ShieldGained { UnitId = u.Id, UnitName = u.Name, Amount = amount });
         }
@@ -283,8 +304,12 @@ namespace SalYAlmas.Core.Combat
                         ShiftAction(u, fx.Value, name);
                         break;
                     case EffectType.Delay:
-                        ShiftAction(u, -fx.Value, name);
+                    {
+                        double delay = fx.Value * (actor != null && actor.Side != u.Side ? 1.0 + Mod(actor, ModKeys.DelayPct) : 1.0);
+                        ShiftAction(u, -delay, name);
+                        if (actor != null && actor.Side != u.Side) OnDelayCaused(actor, u);
                         break;
+                    }
                     case EffectType.Buff:
                     case EffectType.Debuff:
                     {

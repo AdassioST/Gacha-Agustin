@@ -129,7 +129,7 @@ namespace SalYAlmas.Core.Combat
             {
                 var slot = b.Belt[i];
                 if (slot.Charges <= 0) continue;
-                var def = b.Db.Potion(slot.PotionId);
+                var def = b.PotionDef(slot.PotionId);
                 if (!def.UsableInCombat) continue;
                 foreach (var fx in def.Effects)
                 {

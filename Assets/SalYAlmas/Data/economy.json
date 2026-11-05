@@ -1,0 +1,125 @@
+// Recursos de la sección 11.1 del GDD. Cada recurso declara de dónde sale (sources) y en qué se gasta (sinks).
+// El libro contable rechaza cualquier movimiento que use una fuente o un sumidero no declarado aquí.
+// "sold": solo las Perlas del Manantial se venden por dinero real (GDD 11 y 16.4).
+{
+  "flows": {
+    "fresno.santuario": "Fresno: almitas guardadas en un Santuario de Sal",
+    "fresno.cima": "Fresno: almitas guardadas al vencer a la Jardinera",
+    "fresno.zona": "Fresno: Savia por zona superada",
+    "fresno.mancha": "Fresno: Mancha absorbida (vuelve el 30 % como Savia)",
+    "fresno.tope": "Fresno: excedente del tope semanal convertido en Savia",
+    "fresno.semanal": "Fresno: recompensa semanal",
+    "fresno.nido": "Fresno: Nido de Almas",
+    "fresno.elite": "Fresno: élites",
+    "fresno.evento": "Fresno: eventos LitRPG",
+    "misiones": "Misiones diarias",
+    "historia": "Historia y exploración",
+    "salinas": "Salinas y exploración",
+    "mazmorra": "Mazmorra del día planetario",
+    "eventos": "Eventos",
+    "logros": "Logros",
+    "pase": "Pase gratuito",
+    "luna_nueva": "Eventos de luna nueva",
+    "region": "Enemigos y jefes de región",
+    "altar.refinar": "Altar del Árbol: refinación",
+    "gacha.polvo": "Termas: resultado de una bruja que ya tienes",
+    "gacha.sal": "Termas: Aprendizas completas",
+    "ofrenda.hito": "Hitos de la Ofrenda al Fresno",
+    "compra": "Compra con dinero real",
+    "perlas": "Conversión de Perlas a Sales de Baño",
+    "prueba": "Perfil de prueba (solo desarrollo)",
+
+    "nivel": "Nivel de bruja",
+    "dignidad": "Dignidad del Ascendente",
+    "destilacion": "Grados de Destilación",
+    "talentos": "Talentos de Cadena",
+    "via": "Cambio de Vía",
+    "forja": "Yunque: fabricar armas",
+    "fusion": "Altar del Árbol: fusiones",
+    "reforja": "Yunque: reforja",
+    "salmuera": "Caldero: Salmueras",
+    "ofrenda": "Ofrenda al Fresno",
+    "raices": "Raíces del Fresno",
+    "tirada": "Tiradas en las Termas",
+    "cosmeticos": "Cosméticos",
+    "conversion": "Conversión a Sales de Baño",
+    "tienda_polvo": "Tienda cosmética rotativa",
+    "vislumbre": "Vislumbre y Frenesí",
+    "receta_maldita": "Recetas malditas"
+  },
+  "resources": [
+    {
+      "id": "almitas", "name": "Almitas", "sold": false,
+      "sources": ["fresno.santuario", "fresno.cima", "misiones", "historia", "eventos", "prueba"],
+      "sinks": ["nivel", "dignidad", "destilacion", "talentos", "via", "forja", "fusion", "reforja", "salmuera", "ofrenda", "altar.refinar"]
+    },
+    {
+      "id": "sal_cruda", "name": "Sal Cruda", "perPlanet": true, "sold": false,
+      "sources": ["salinas", "mazmorra", "historia", "fresno.nido", "gacha.sal", "eventos", "prueba"],
+      "sinks": ["altar.refinar", "salmuera", "reforja", "forja"]
+    },
+    {
+      "id": "sal_destilada", "name": "Sal Destilada", "perPlanet": true, "sold": false,
+      "sources": ["altar.refinar", "prueba"],
+      "sinks": ["destilacion", "forja", "salmuera", "altar.refinar"]
+    },
+    {
+      "id": "quintaesencia", "name": "Quintaesencia", "perPlanet": true, "sold": false,
+      "sources": ["altar.refinar", "prueba"],
+      "sinks": ["destilacion", "forja", "fusion", "salmuera"]
+    },
+    {
+      "id": "sal_negra", "name": "Sal Negra", "sold": false,
+      "sources": ["fresno.elite", "fresno.nido", "fresno.evento", "luna_nueva", "prueba"],
+      "sinks": ["vislumbre", "salmuera", "receta_maldita"]
+    },
+    {
+      "id": "savia", "name": "Savia", "sold": false,
+      "sources": ["fresno.zona", "fresno.mancha", "fresno.tope", "prueba"],
+      "sinks": ["raices", "salmuera"]
+    },
+    {
+      "id": "sales_de_bano", "name": "Sales de Baño", "sold": false,
+      "sources": ["historia", "logros", "eventos", "misiones", "fresno.semanal", "pase", "perlas", "prueba"],
+      "sinks": ["tirada"]
+    },
+    {
+      "id": "perlas", "name": "Perlas del Manantial", "sold": true,
+      "sources": ["compra", "prueba"],
+      "sinks": ["cosmeticos", "conversion"]
+    },
+    {
+      "id": "polvo_astral", "name": "Polvo Astral", "sold": false,
+      "sources": ["gacha.polvo", "ofrenda.hito", "prueba"],
+      "sinks": ["tienda_polvo"]
+    },
+    {
+      "id": "mat", "name": "Materiales regionales", "sold": false,
+      "sources": ["region", "fresno.nido", "eventos", "prueba"],
+      "sinks": ["forja", "fusion", "talentos", "salmuera"],
+      // Materiales de las doce regiones, reactivos y bases del Caldero. // TUNING: nombres y regiones propuestos.
+      "materials": [
+        { "id": "hierro_rojo", "name": "Mena de Hierro Rojo", "region": "Aries" },
+        { "id": "cobre_llano", "name": "Cobre de las Llanuras", "region": "Tauro" },
+        { "id": "vidrio_espejo", "name": "Vidrio de Espejo", "region": "Géminis" },
+        { "id": "nacar", "name": "Nácar de Concha", "region": "Cáncer" },
+        { "id": "arena_aurea", "name": "Arena Áurea", "region": "Leo" },
+        { "id": "hilo_hilandera", "name": "Hilo de Hilandera", "region": "Virgo" },
+        { "id": "pesa_ducal", "name": "Pesa Ducal", "region": "Libra" },
+        { "id": "azufre", "name": "Azufre del Pantano", "region": "Escorpio" },
+        { "id": "crin_centauro", "name": "Crin de Centauro", "region": "Sagitario" },
+        { "id": "obsidiana", "name": "Obsidiana de Salina", "region": "Capricornio" },
+        { "id": "hielo_eterno", "name": "Hielo Eterno", "region": "Acuario" },
+        { "id": "escama_ninfa", "name": "Escama de Ninfa", "region": "Piscis" },
+        { "id": "almita_espectro", "name": "Almita de Espectro", "region": "Fresno" },
+        { "id": "flor_de_sal", "name": "Flor de Sal", "region": "Caldero" },
+        { "id": "ceniza_fresno", "name": "Ceniza de Fresno", "region": "Caldero" },
+        { "id": "ambar_savia", "name": "Ámbar de Savia", "region": "Caldero" },
+        { "id": "pluma_corneja", "name": "Pluma de Corneja", "region": "Caldero" },
+        { "id": "raiz_amarga", "name": "Raíz Amarga", "region": "Caldero" },
+        { "id": "vinagre", "name": "Vinagre", "region": "Caldero" },
+        { "id": "leche_lunar", "name": "Leche Lunar", "region": "Caldero" }
+      ]
+    }
+  ]
+}

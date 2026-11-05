@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using SalYAlmas.Core.Data;
 using SalYAlmas.Core.Magic;
 
 namespace SalYAlmas.Core.Combat
@@ -35,6 +36,23 @@ namespace SalYAlmas.Core.Combat
         /// <summary>Desfase de frames por bruja (Fase 2: armas Rítmico y Pausado).</summary>
         public Dictionary<string, int> FrameShifts = new Dictionary<string, int>();
 
+        // ------------------------------------------------------------------ Fase 2
+
+        /// <summary>Nivel, arma, prefijo, Dignidad y talentos por bruja. Si falta, la bruja es la del JSON.</summary>
+        public Dictionary<string, WitchLoadout> Loadouts = new Dictionary<string, WitchLoadout>();
+        /// <summary>Modificadores de todo el combate: Injertos, Mutaciones, maldiciones y Raíces del Fresno.</summary>
+        public StatBlock Modifiers = new StatBlock();
+        /// <summary>Encuentro generado (Fresno o Juicio). Si no es null, se usa en lugar de EncounterId.</summary>
+        public EncounterDef CustomEncounter;
+        /// <summary>Enemigos generados para CustomEncounter; se buscan antes que los del JSON.</summary>
+        public List<EnemyDef> CustomEnemies = new List<EnemyDef>();
+        /// <summary>Salmueras con potencia mejorada o maestra y Salmueras Turbias; se buscan antes que las del JSON.</summary>
+        public List<PotionDef> CustomPotions = new List<PotionDef>();
+        /// <summary>Vida inicial por bruja como fracción de su vida máxima (las runs del Fresno arrastran el daño).</summary>
+        public Dictionary<string, double> StartHp = new Dictionary<string, double>();
+        /// <summary>Salinidad inicial por bruja (las runs del Fresno la arrastran entre nodos).</summary>
+        public Dictionary<string, int> StartSalinity = new Dictionary<string, int>();
+
         public BattleSetup Clone()
         {
             var c = (BattleSetup)MemberwiseClone();
@@ -44,6 +62,13 @@ namespace SalYAlmas.Core.Combat
             c.ViaOverrides = new Dictionary<string, Via>(ViaOverrides);
             c.GradeOverrides = new Dictionary<string, Grade>(GradeOverrides);
             c.FrameShifts = new Dictionary<string, int>(FrameShifts);
+            c.Loadouts = new Dictionary<string, WitchLoadout>();
+            foreach (var kv in Loadouts) c.Loadouts[kv.Key] = kv.Value?.Clone();
+            c.Modifiers = Modifiers?.Clone() ?? new StatBlock();
+            c.CustomEnemies = new List<EnemyDef>(CustomEnemies);
+            c.CustomPotions = new List<PotionDef>(CustomPotions);
+            c.StartHp = new Dictionary<string, double>(StartHp);
+            c.StartSalinity = new Dictionary<string, int>(StartSalinity);
             return c;
         }
     }

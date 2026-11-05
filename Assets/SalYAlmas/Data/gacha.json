@@ -1,0 +1,26 @@
+// Gacha de las Termas (GDD 12.2 y 16). Las tasas son canon del GDD; los montos de Polvo Astral y Sal Cruda son // TUNING.
+{
+  "costPerPull": 160,          // GDD 16.2: Sales de Baño por tirada
+  "base5": 0.006,              // GDD 16.2: 0.6 %
+  "softPityStart": 60,         // GDD 16.2: desde la tirada 60 (la 60 ya lleva +7 %)
+  "softPityStep": 0.07,        // GDD 16.2: +7 % por tirada
+  "hardPity": 70,              // GDD 16.2
+  "base4": 0.06,               // GDD 16.2: 6 %
+  "guarantee4Every": 10,       // GDD 16.2: una 4★ o más cada 10 tiradas
+  "featuredRate": 0.75,        // GDD 16.2: 75/25 con garantía
+  "selectorAt": 300,           // GDD 16.2: a las 300 tiradas del estándar eliges una 5★
+  "historyMax": 2000,          // TUNING: el GDD 16.6 pide un año de historial
+  "dust": { "5": 40, "4": 8 }, // TUNING: Polvo Astral cuando ya tienes a todas las brujas de esa rareza
+  "threeStarSalt": 3,          // TUNING: Sal Cruda cuando ya tienes a todas las 3★ (y una receta, si queda alguna)
+  "banners": [
+    { "id": "inicio", "name": "Manantial de Bienvenida", "type": "inicio", "maxPulls": 20,
+      "choices": ["solenne", "cervanda", "tormentina", "cupria"],
+      "description": "20 tiradas con una Regente garantizada a elegir entre cuatro (GDD 16.2)." },
+    { "id": "estandar", "name": "Manantial Estándar", "type": "estandar",
+      "description": "Regentes del banner estándar. A las 300 tiradas eliges una." },
+    { "id": "limitado_marisal", "name": "Juramento de Hierro", "type": "limitado", "featured": "marisal",
+      "description": "Marisal Hojadelobo destacada: 75/25 con garantía." },
+    { "id": "limitado_selenia", "name": "Elegía de Plata", "type": "limitado", "featured": "selenia",
+      "description": "Selenia de Plata destacada: 75/25 con garantía." }
+  ]
+}

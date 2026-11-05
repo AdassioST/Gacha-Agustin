@@ -81,7 +81,7 @@ namespace SalYAlmas.Core.Combat
         {
             var r = RequireAllyTurn(cmd.ActorId, out var w);
             if (!r.Ok) return r;
-            var move = w.Def.Basic;
+            var move = w.BasicMove;
             if (!PickTarget(move, cmd.TargetId, w, out var target, out var enemy)) return CommandResult.Fail("Objetivo inválido.");
 
             EmitAction(w, ActionKind.Basic, move, target);
@@ -121,7 +121,7 @@ namespace SalYAlmas.Core.Combat
             ApplyEffects(move.Effects, EffectTiming.End, w, target, move.Name);
 
             _magicThisTurn = true;
-            ChangeSalinity(w, Rules.Salinity.Spell, "Hechizo");
+            ChangeSalinity(w, Rules.Salinity.Spell + (int)Math.Round(Mod(w, ModKeys.SalinityPerSpell)), "Hechizo");
             ChangeAnima(w, Rules.Anima.Spell);
             ChangeResonance(Rules.Resonance.Spell, "Hechizo");
             FinishTurn();
@@ -155,7 +155,7 @@ namespace SalYAlmas.Core.Combat
                 case SelfCastForm.Hilos:
                 {
                     if (_isExtraTurn) return CommandResult.Fail("Los Hilos no se encadenan: ya es una acción extra.");
-                    int cost = (int)Math.Round(w.MaxHp * sc.HilosHpCost, MidpointRounding.AwayFromZero);
+                    int cost = (int)Math.Round(w.MaxHp * sc.HilosHpCost * Math.Max(0.0, 1.0 + Mod(w, ModKeys.HilosCostPct)), MidpointRounding.AwayFromZero);
                     if (w.Hp <= cost) return CommandResult.Fail("No le queda vida para los Hilos.");
                     EmitAction(w, ActionKind.SelfCast, null, w, "Hilos", name);
                     w.Hp -= cost;
@@ -217,7 +217,7 @@ namespace SalYAlmas.Core.Combat
             if (cmd.Slot < 0 || cmd.Slot >= _belt.Count) return CommandResult.Fail("Ranura vacía.");
             var slot = _belt[cmd.Slot];
             if (slot.Charges <= 0) return CommandResult.Fail("Esa ranura no tiene cargas.");
-            var def = Db.Potion(slot.PotionId);
+            var def = PotionDef(slot.PotionId);
             if (!def.UsableInCombat) return CommandResult.Fail(def.Name + " solo se usa fuera de combate.");
 
             Unit target;
@@ -232,9 +232,33 @@ namespace SalYAlmas.Core.Combat
             slot.Charges--;
             _potionsThisTurn++;
             EmitAction(w, ActionKind.Potion, null, target, def.Description, def.Name);
-            foreach (var fx in def.Effects) ApplyEffect(fx, w, target, def.Name);
+            double potency = Mod(w, ModKeys.PotionPotencyPct);
+            foreach (var fx in def.Effects) ApplyEffect(potency != 0 ? ScaleEffect(fx, 1.0 + potency) : fx, w, target, def.Name);
             AfterFreeAction();
             return CommandResult.Success;
+        }
+
+        /// <summary>Copia de un efecto con su valor escalado (Caldero de mano). Los Granos y los efectos sin número no cambian.</summary>
+        internal static EffectDef ScaleEffect(EffectDef fx, double scale)
+        {
+            switch (fx.Type)
+            {
+                case EffectType.Grains:
+                case EffectType.NextSpellDouble:
+                case EffectType.InvertHealing:
+                case EffectType.FreeVislumbre:
+                case EffectType.FeignDeath:
+                case EffectType.Cleanse:
+                case EffectType.Dispel:
+                case EffectType.GrainBoost:
+                case EffectType.Paralaje:
+                    return fx;
+            }
+            return new EffectDef
+            {
+                Type = fx.Type, Target = fx.Target, At = fx.At, Stat = fx.Stat, Dot = fx.Dot,
+                Value = fx.Value * scale, Turns = fx.Turns, Count = fx.Count, Name = fx.Name,
+            };
         }
 
         // ------------------------------------------------------------------ Ascensión
@@ -392,6 +416,7 @@ namespace SalYAlmas.Core.Combat
                     Emit(new ReactionTriggered { Reaction = reaction, TargetId = target.Id, TargetName = target.Name, Detail = $"quita {rr.EclipseDispel} mejoras y retrasa {rr.EclipseDelay:P0}" });
                     RemoveMatching(target, s => s.IsBuff && s.Dispellable, rr.EclipseDispel, "Eclipse");
                     ShiftAction(target, -rr.EclipseDelay, "Eclipse");
+                    OnDelayCaused(provoker, target);
                     break;
                 case HybridReaction.HeladaNegra:
                     if (target == null) return;

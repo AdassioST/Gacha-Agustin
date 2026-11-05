@@ -1,0 +1,103 @@
+// Progreso de brujas (GDD 8.1, 11.3, 12). Los valores con "GDD" son canon; el resto es // TUNING.
+{
+  "level": {
+    "max": 80,               // GDD 11.3
+    "costBase": 100,         // GDD 11.3: Costo(n) = 100 · n^1.5 (costo de subir al nivel n)
+    "costExponent": 1.5,
+    "statGrowth": 0.05       // TUNING: ATQ y VIDA crecen 5 % del valor de nivel 1 por nivel
+  },
+  "grades": {
+    "costBase": 20000,       // GDD 12.3: 20 000 · 1.8^k almitas (k = 0 para C)
+    "costFactor": 1.8,
+    "steps": [
+      // minLevel: nivel mínimo de la bruja; trialLevel: nivel del Ascendente en su Juicio (GDD 12.3).
+      // salt: sal refinada de su planeta dominante (tier 1 Destilada, 2 Quintaesencia). // TUNING: cantidades
+      { "grade": "C",  "minLevel": 40, "trialLevel": 40, "saltTier": 1, "saltAmount": 5,
+        "unlock": "Pasiva menor; mejora la Apertura de Cadena", "mods": { "chainMove.apertura": 0.10 } },
+      { "grade": "B",  "minLevel": 50, "trialLevel": 50, "saltTier": 1, "saltAmount": 10,
+        "unlock": "Elige Vía Mayor o Vía Menor; nuevo efecto de Hechizo", "mods": { "spellDamagePct": 0.10 } },
+      { "grade": "A",  "minLevel": 60, "trialLevel": 60, "saltTier": 2, "saltAmount": 5,
+        "unlock": "Mejora el Enlace, el Cierre y el Autohechizo", "mods": { "chainMove.enlace": 0.10, "chainMove.cierre": 0.10, "hilosCostPct": -0.2 } },
+      { "grade": "S",  "minLevel": 70, "trialLevel": 70, "saltTier": 2, "saltAmount": 10,
+        "unlock": "Ascensión III", "mods": {} },
+      { "grade": "SS", "minLevel": 80, "trialLevel": 80, "saltTier": 2, "saltAmount": 20,
+        "unlock": "Pasiva de firma y aura (Apoteosis)", "mods": { "damagePct": 0.05 } }
+    ]
+  },
+  "via": { "freeChanges": 1, "changeCost": 30000 }, // GDD 7.2: un cambio gratis y después con costo // TUNING: costo
+  "dignity": {
+    // GDD 8.1: Peregrina, Término, Triplicidad, Exaltación y Domicilio. Se sube comiendo almitas.
+    "names": ["Peregrina", "Término", "Triplicidad", "Exaltación", "Domicilio"],
+    "costs": [0, 15000, 40000, 90000, 180000],           // TUNING: almitas para llegar a cada dignidad
+    "ascendantDamage": [0, 0.04, 0.08, 0.12, 0.16]       // TUNING: daño del Ascendente
+  },
+  "chainTalents": {
+    "max": 10,                // GDD 12.6
+    "bonusPerLevel": 0.04,    // TUNING: +4 % al movimiento por nivel sobre el 1
+    "almitasBase": 2000,      // TUNING: costo de subir del nivel n al n+1 = 2000 · n^1.5 almitas
+    "almitasExponent": 1.5,
+    "materialPerLevel": 1,    // TUNING: n materiales del planeta dominante (ver planetMaterials)
+    "planetMaterials": { "sol": "arena_aurea", "luna": "nacar", "marte": "hierro_rojo", "mercurio": "vidrio_espejo",
+                         "venus": "cobre_llano", "jupiter": "crin_centauro", "saturno": "obsidiana" }
+  },
+  "trial": {
+    // El Juicio de Pureza (GDD 12.4): la bruja y hasta tres aliadas contra su propio Ascendente.
+    "hpAtReference": 60000,   // TUNING: vida del Ascendente a nivel 52 (escala con la curva de nivel)
+    "atkFactor": 0.85,        // TUNING: usa el ATQ de la bruja a ese nivel
+    "toughness": 160,         // TUNING
+    "actionsPerTurn": 2,      // TUNING: como el Guardián
+    "ownPlanetRes": 0.20,     // TUNING: su propia sal le resiste
+    "maxAllies": 3            // GDD 12.4
+  },
+  // Condiciones LitRPG (GDD 12.4). Juicio I no tiene; II, III y IV tienen una; V tiene dos.
+  "conditions": {
+    "salinidad80": { "type": "salinityAbove", "value": 80, "text": "Gana con la Salinidad de {bruja} arriba de 80" },
+    "sinAscensiones": { "type": "noAscensions", "text": "Gana sin usar Ascensiones" },
+    "soloAprendizas": { "type": "alliesRarity", "value": 3, "text": "Gana solo con aliadas 3★" },
+    "seisRondas": { "type": "maxCycles", "value": 6, "text": "Gana en seis rondas o menos" },
+    "sinCaidas": { "type": "noFalls", "text": "Gana sin que caiga ninguna bruja" },
+    "conCadena": { "type": "minChains", "value": 1, "text": "Gana cerrando al menos una Cadena" },
+    "sinSalmueras": { "type": "noPotions", "text": "Gana sin usar Salmueras" },
+    "dosBrujas": { "type": "maxTeam", "value": 2, "text": "Gana con dos brujas o menos" },
+    "cuatroSpark": { "type": "minSparks", "value": 4, "text": "Gana con cuatro Spark o más" }
+  },
+  "trialConditions": {
+    "default": { "C": [], "B": ["salinidad80"], "A": ["sinAscensiones"], "S": ["seisRondas"], "SS": ["sinCaidas", "soloAprendizas"] },
+    "zarigueya": { "B": ["conCadena"] },
+    "topo": { "B": ["sinCaidas"], "A": ["cuatroSpark"] },
+    "tormentina": { "S": ["cuatroSpark"] }
+  },
+  // Cada Juicio revela un recuerdo (GDD 12.4). Textos provisionales: la historia definitiva es de la Fase 3.
+  "memories": {
+    "marisal": { "C": "La primera mina que custodió se derrumbó con veinte mineros dentro. Ella sacó a diecinueve.",
+                 "B": "Aprendió a morder la sal de roca para no gritar mientras cavaba.",
+                 "A": "El Carnero apareció la noche en que juró no volver a dejar a nadie bajo tierra.",
+                 "S": "La Casa de Aries le ofreció un mando. Rechazarlo le costó su apellido.",
+                 "SS": "En el hierro de su báculo hay diecinueve muescas y un espacio vacío." },
+    "selenia": { "C": "Escribe poemas a los muertos y los deja en tazas de té frío.",
+                 "B": "Una vez un muerto le contestó. Desde entonces duerme poco.",
+                 "A": "Los Dos Peces no nadan: flotan como cenizas en el agua de su taza.",
+                 "S": "Su madre era polilla de biblioteca. Le dejó un libro sin palabras.",
+                 "SS": "En la última página del libro está su propio nombre, escrito con sal." },
+    "solenne": { "C": "Vendió sal de mar en el desierto y se hizo rica en una sola temporada.",
+                 "B": "El limón con chile se lo enseñó un caravanero que murió de sed.",
+                 "A": "El León no es suyo: lo ganó en una apuesta contra una Casa de Leo.",
+                 "S": "Debe dinero a seis ciudades y favores a una séptima.",
+                 "SS": "Lo único que nunca vendió fue el gajo de limón seco de su primera venta." },
+    "tormentina": { "C": "Llevó cien cartas en un día y ninguna llegó tarde.",
+                    "B": "Una carta que llevó declaró una guerra. No la abrió.",
+                    "A": "Las Mensajeras del Espejo le dicen la verdad a medias, cada una la mitad contraria.",
+                    "S": "Corre para no quedarse quieta con sus propios pensamientos.",
+                    "SS": "La carta que nunca entregó es la suya, dirigida a sí misma." },
+    "zarigueya": { "C": "Se hizo la muerta en su propio velorio para ver quién lloraba.",
+                   "B": "Lloraron tres. Les guarda sal a los tres desde entonces.",
+                   "A": "Su Ascendente le tiene más miedo a la vida que a la muerte.",
+                   "S": "Una vez se hizo la muerta tan bien que el Fresno vino por su alma.",
+                   "SS": "Le dijo que no. El Fresno, por primera vez, se fue con las manos vacías." },
+    "topo": { "C": "Encuentra sal donde nadie más escarba.",
+              "B": "Excavó un túnel de su pueblo al mar para que su abuela lo viera antes de morir.",
+              "A": "El Toro de Barro carga lo que ella no alcanza a cargar.",
+              "S": "Bajo las Raíces del Fresno hay túneles más viejos que los suyos.",
+              "SS": "Alguien más está cavando hacia arriba." }
+  }
+}

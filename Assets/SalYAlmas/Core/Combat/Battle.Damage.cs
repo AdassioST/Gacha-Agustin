@@ -24,6 +24,10 @@ namespace SalYAlmas.Core.Combat
         public bool IsReaction;
         public Planet ReactionA;
         public Planet ReactionB;
+        /// <summary>Tipo de movimiento (para los bonos de Hechizo, básico, Cadena o Ascensión de la Fase 2).</summary>
+        public MoveKind Kind;
+        /// <summary>El movimiento golpea a todos los enemigos (bono de daño en área).</summary>
+        public bool IsArea;
 
         public static HitContext For(HitSource source, int frame) => new HitContext
         {
@@ -33,6 +37,7 @@ namespace SalYAlmas.Core.Combat
             ToughnessMultiplier = 1.0,
             SkillScale = 1.0,
             ChainLink = -1,
+            Kind = source == HitSource.Chain ? MoveKind.Link : source == HitSource.Ascension ? MoveKind.Ascension : MoveKind.Basic,
         };
     }
 
@@ -70,10 +75,13 @@ namespace SalYAlmas.Core.Combat
 
             bool dealsDamage = !attacker.Def.DealsNoDamage && mHab > 0;
             bool crit = false;
-            if (dealsDamage) crit = _rng.NextDouble() < CritRate(attacker);
-            double critMult = crit ? 1.0 + attacker.Def.CritDamage : 1.0;
-            double bonus = DamageBonus(attacker, ctx.ByAscendant) + target.Sum(StatusKind.DamageTaken);
-            double vuln = target.Broken ? 1.0 + Rules.Break.Vulnerability : 1.0;
+            double critRate = CritRate(attacker);
+            if (target.Has(StatusKind.Bleed)) critRate = Math.Min(1.0, critRate + Mod(attacker, ModKeys.BleedingTargetCrit));
+            if (dealsDamage) crit = _rng.NextDouble() < critRate;
+            double critMult = crit ? 1.0 + attacker.Def.CritDamage + Mod(attacker, ModKeys.CritDamage) : 1.0;
+            double bonus = DamageBonus(attacker, ctx.ByAscendant) + target.Sum(StatusKind.DamageTaken) + SourceBonus(attacker, target, ctx);
+            double vuln = target.Broken ? 1.0 + Rules.Break.Vulnerability + Mod(attacker, ModKeys.BreakVulnerability) : 1.0;
+            double sparkMult = ctx.IsSpark ? 1.0 + Rules.Chain.SparkDamageBonus + Mod(attacker, ModKeys.SparkDamageBonus) : 1.0;
 
             double domDamage = 0, secDamage = 0;
             if (dealsDamage)
@@ -91,9 +99,9 @@ namespace SalYAlmas.Core.Combat
                         TargetLevel = target.Level,
                         DefenseReduction = DefenseReduction(target),
                         TargetRes = Res(target, parts[i].planet),
-                        Penetration = 0,
+                        Penetration = Mod(attacker, ModKeys.Penetration),
                         Vulnerability = vuln,
-                        Spark = ctx.IsSpark ? 1.0 + Rules.Chain.SparkDamageBonus : 1.0,
+                        Spark = sparkMult,
                         Aspect = ctx.Aspect,
                     };
                     double d = DamageFormula.Compute(input);
@@ -108,7 +116,7 @@ namespace SalYAlmas.Core.Combat
             double bestShare = -1;
             if (!target.Broken && toughness > 0)
             {
-                double extra = 1.0 + attacker.Sum(StatusKind.NextToughness);
+                double extra = 1.0 + attacker.Sum(StatusKind.NextToughness) + Mod(attacker, ModKeys.ToughnessPct);
                 foreach (var part in parts)
                 {
                     if (!target.IsWeakTo(part.planet) || part.toughShare <= 0) continue;
@@ -151,6 +159,46 @@ namespace SalYAlmas.Core.Combat
             outcome.Damage = dealt + absorbed;
             outcome.Broke = broke;
             return outcome;
+        }
+
+        /// <summary>Bonos de la Fase 2 que dependen del tipo de golpe y del objetivo (armas, Injertos y Frutos).</summary>
+        private double SourceBonus(WitchUnit attacker, EnemyUnit target, HitContext ctx)
+        {
+            if (attacker.Loadout == null && _mods.Count == 0) return 0;
+            double b = 0;
+            switch (ctx.Source)
+            {
+                case HitSource.Chain: b += Mod(attacker, ModKeys.ChainDamagePct); break;
+                case HitSource.Ascension: b += Mod(attacker, ModKeys.AscensionDamagePct); break;
+                case HitSource.Action:
+                    if (ctx.Kind == MoveKind.Spell) b += Mod(attacker, ModKeys.SpellDamagePct);
+                    else if (ctx.Kind == MoveKind.Basic) b += Mod(attacker, ModKeys.BasicDamagePct);
+                    break;
+            }
+            if (ctx.IsArea) b += Mod(attacker, ModKeys.AreaDamagePct);
+            if (target.Has(StatusKind.Burn)) b += Mod(attacker, ModKeys.BurningTargetDamage);
+            return b;
+        }
+
+        /// <summary>Fruto de Saturno (GDD 10.3): cada retraso que causa una bruja hace daño igual a un % de su ataque.</summary>
+        internal void OnDelayCaused(Unit attacker, Unit target)
+        {
+            if (!(attacker is WitchUnit w) || !(target is EnemyUnit e) || !e.IsAlive) return;
+            double coef = Mod(w, ModKeys.DelayDamageCoef);
+            if (coef <= 0) return;
+            var input = DamageInput.Neutral(Atk(w), coef, w.Level, e.Level);
+            input.DefenseReduction = DefenseReduction(e);
+            input.TargetRes = Res(e, Planet.Saturno);
+            int dmg = Math.Max(1, DamageFormula.Round(DamageFormula.Compute(input)));
+            int dealt = ApplyDamage(e, dmg, out int absorbed);
+            Emit(new HitLanded
+            {
+                AttackerId = w.Id, AttackerName = w.Name, TargetId = e.Id, TargetName = e.Name, Source = HitSource.Graft,
+                Frame = 0, Damage = dmg, Planet = Planet.Saturno, DominantDamage = dmg, ShieldAbsorbed = absorbed,
+                TargetHp = e.Hp, ChainLink = -1,
+            });
+            _ = dealt;
+            AnnounceDeath(e);
         }
 
         /// <summary>Golpe de enemigo contra una bruja (mismo GDD 9.8; los enemigos tienen un solo planeta, M_p = 1).</summary>
@@ -305,6 +353,7 @@ namespace SalYAlmas.Core.Combat
                     break;
             }
             ShiftAction(e, -delay, "Quiebre");
+            OnDelayCaused(attacker, e);
             ChangeResonance(Rules.Resonance.Break, "Quiebre");
 
             if (b.CancelsCharge && e.IsCharging)
@@ -333,6 +382,8 @@ namespace SalYAlmas.Core.Combat
                 var ctx = baseCtx;
                 ctx.Frame = baseCtx.Frame + hit.Frame + actor.FrameShift;
                 ctx.ByAscendant = move.ByAscendant;
+                ctx.Kind = move.Kind;
+                ctx.IsArea = move.Target == TargetMode.AllEnemies;
                 ctx.IsSpark = sparkForHit != null && sparkForHit(h);
                 if (move.Target == TargetMode.AllEnemies)
                 {
