@@ -70,7 +70,7 @@ Las tres primeras ya están corregidas en el GDD en esta revisión.
 | C-23 | 12.2 y 16.2 | Exclusión de duplicados con el 75/25: si pierdes y ya tienes todas las 5★ estándar, ¿sale Polvo Astral y cuenta como pérdida? ¿Qué pasa si ya tienes a la destacada? | El 25 % solo existe si queda alguna 5★ estándar que no tengas; si no, la 5★ es la destacada. Si ya tienes a la destacada, el banner lo avisa antes de tirar y la 5★ sale del estándar |
 | C-24 | 16.2 | ¿El banner de inicio comparte contador? ¿La garantía de destacada pasa entre banners limitados? | El de inicio tiene contador propio; la garantía pasa entre limitados, como el contador |
 | C-25 | 2 y 16.6 | Bélgica: "banners solo con moneda ganada jugando", pero las Sales de Baño se ganan y también se compran (Perlas 1:1) | El libro contable distingue Sales de Baño ganadas y compradas desde la Fase 2 |
-| C-26 | 18 y retratos | El GDD no nombra a las 4★ y 3★; el documento de retratos les da nombre y Ascendente (Brea, Cempa, Muertita, Salitre, Topacia, Axa). La Fase 1 usa "Zarigüeya" y "Topo" como nombres | Adoptar los nombres del documento de retratos en el GDD 18 y usarlos como IDs canónicos |
+| C-26 | 18 y retratos | El GDD no nombraba a las 4★ y 3★; el documento de retratos les da nombre y Ascendente. La Fase 1 usa "Zarigüeya" y "Topo" | **Decidido y aplicado en el GDD 17, 18 y 20:** Brea, Cempa, Muertita, Salitre, Topacia y Axa, con IDs canónicos. La Fase 1.5 renombra los IDs de datos |
 | C-27 | 7.7 | "+15 % de daño a las brujas de ese planeta" en su día: ¿dominante o cualquiera de los dos? | Solo el dominante |
 | C-28 | 21.2 y 23.3 | El backend puede ser UGS, Nakama o PlayFab, pero el prompt de la Fase 3 solo nombra UGS | Decidir antes de la Fase 3 (D-04 en la hoja de ruta) |
 | C-29 | 19 y 6 | "Combate, Termas y exploración son 3D", pero no hay diseño de exploración | Ver H-02 |
@@ -175,14 +175,14 @@ Ninguno de estos está en los tres prompts de la sección 23, y casi todos son o
 | S-26 | Compilaciones nocturnas de Android e iOS y subida a pruebas internas (TestFlight, Play) | 21.4. iOS necesita un runner de macOS y certificados de Apple |
 | S-27 | Distribución de contenido: Addressables con CDN, Play Asset Delivery, catálogo remoto | Descarga inicial de 2 GB como máximo (21.1) |
 | S-28 | Integración del arte: importación de retratos por ID, atlas, decisión de Spine o Live2D (con su licencia), rig base compartido, morphs de fase | Los retratos de Codex no tienen camino a Unity |
-| S-29 | Almacenamiento de archivos grandes: Git LFS o almacenamiento externo | Hoy hay 29 MB de PNG en Git; el juego completo tendrá varios GB |
+| S-29 | Almacenamiento de archivos grandes: Git LFS o almacenamiento externo | Hoy hay 29 MB de PNG en Git; el juego completo tendrá varios GB. **Decidido por ahora: sin LFS.** Revisar antes de que entren modelos 3D o audio |
 | S-30 | Protocolo de prueba con jugadores: guion, observación y encuesta | Los criterios de aceptación de las tres fases dependen de pruebas con jugadores |
 | S-31 | Comunidad y marketing: preinscripción, Discord, adelantos en redes (22.4) | Antes del lanzamiento suave |
 
 ## 6. Riesgos técnicos que conviene atacar pronto
 
 1. **Determinismo entre plataformas (S-25).** El núcleo de la Fase 1 calcula en `double`. En una misma máquina eso es determinista, pero el compilador de IL2CPP para ARM64 puede fusionar multiplicaciones y sumas y cambiar el último bit. Mitigación: redondear a entero en cada golpe y en cada cambio de estado, y correr los combates grabados en un teléfono antes de construir la validación del servidor.
-2. **Tamaño del repositorio (S-29).** Los retratos pesan 3 MB cada uno y vienen 37 más, luego modelos, texturas y audio. Decide LFS antes de que entren al historial; sacarlos después obliga a reescribirlo.
+2. **Tamaño del repositorio (S-29).** Los retratos pesan 3 MB cada uno y vienen 37 más, luego modelos, texturas y audio. Por ahora se quedan en Git sin LFS. Conviene revisarlo antes de que entren modelos 3D y audio, porque mover archivos a LFS después obliga a reescribir el historial.
 3. **Contenido a escala (S-23).** El cuello de botella del lanzamiento no es el código sino producir y equilibrar 24 brujas, 120 armas y 12 regiones. Sin herramientas, cada lote cuesta una sesión entera.
 4. **La Fase 3 no cabe en una sesión.** Mezcla historia, 3D, Timeline, tienda, servidor, audio, tres idiomas y rendimiento en dispositivos. La hoja de ruta la parte en tres.
 5. **Música generada con IA.** Los derechos de uso comercial dependen del plan de Suno y la música 100 % generada puede no tener protección de derechos de autor. Ver `docs/audio/SOUNDTRACK_SUNO.md`.

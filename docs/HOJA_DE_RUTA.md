@@ -101,7 +101,7 @@ Con esto, agregar el audio, la analítica o los logros no cambia una sola regla 
 
 1. Subir la rama de la Fase 1 y abrir un pull request contra `main`. La CI corre `dotnet test` sola.
 2. Leer su reporte y cruzar sus contradicciones y valores `// TUNING` con HUECOS C-05 a C-21. Donde coincidan, adoptar una sola respuesta en el GDD.
-3. Decidir los nombres canónicos (D-03) y renombrar IDs de datos si hace falta.
+3. Renombrar los IDs de datos a los nombres canónicos (D-03, ya decidido): lo hace la Fase 1.5.
 4. Correr la prueba con jugadores (sección 7) antes de empezar la Fase 2: si la Cadena no se entiende, es más barato cambiarla ahora.
 5. Correr la Fase 1.5.
 
@@ -140,9 +140,9 @@ Cada fase es una sesión de Claude Code. Si una no cabe, aplica la regla del GDD
 | --- | --- | --- | --- |
 | D-01 | Cómo se explora una región (H-13) | 3B | Mapa ilustrado con puntos de interés, escenas con retratos 2D y combates. Solo las Termas son 3D navegables. Los dioramas 3D, después del lanzamiento |
 | D-02 | Escala de almitas (H-01) | 2A | Bajar el costo de nivel a `40·n^1.5` y escribir la tabla de ingresos; revisar con la propuesta de crafting |
-| D-03 | Nombres de las 4★ y 3★ (C-26) | 1.5 | Adoptar Brea, Cempa, Muertita, Salitre, Topacia y Axa, y usarlos como IDs |
+| D-03 | Nombres de las 4★ y 3★ (C-26) | 1.5 | **Decidido:** Brea, Cempa, Muertita, Salitre, Topacia y Axa, también como IDs. Ya están en el GDD |
 | D-04 | Backend: UGS, Nakama o PlayFab (C-28) | 3A | **Unity Gaming Services.** Cloud Code acepta módulos en C#, así que el mismo núcleo determinista valida runs y tiradas en el servidor sin reescribirlo |
-| D-05 | Git LFS para arte y audio (S-29) | Ya | Sí, antes de que entren más retratos. Revisa la cuota de almacenamiento de tu plan de GitHub |
+| D-05 | Git LFS para arte y audio (S-29) | — | **Decidido: por ahora no.** Revisarlo antes de que entren modelos 3D o audio |
 | D-06 | Spine o Live2D para los retratos animados | 3B | Spine: licencia por puesto y sin regalías; Live2D cobra licencia de publicación según ingresos. Verifica los términos vigentes antes de firmar |
 | D-07 | Aceptar las propuestas de `docs/propuestas/` como base | 2A y 2B | Sí, como punto de partida marcado `// TUNING`; las ajustas con datos de las pruebas |
 | D-08 | Orden de la Fase 3 | 3 | Servicios primero (3A): es el mayor riesgo técnico y define los contratos que usan las demás |
@@ -182,7 +182,7 @@ ALCANCE
 1. Auditoría: tabla de cada regla de las secciones 7, 8, 9 y 14 → archivo donde vive → prueba que la cubre → estado. Incluye las decisiones C-05 a C-21 de docs/HUECOS.md. Corrige con prueba cada error que encuentres.
 2. Grabación y repetición (Core/Replay): formato versionado de semilla + entradas + versión de datos. Graba 10 combates de referencia con su lista de eventos esperada y una prueba que los repite. Este formato es el que validará el servidor en la Fase 3A.
 3. Determinismo entre plataformas: redondea a entero en cada golpe y cada cambio de estado (vida, Firmeza, Salinidad, Ánima, Resonancia). Documenta qué cálculos siguen en double y por qué son seguros.
-4. IDs canónicos: aplica la decisión D-03 de la hoja de ruta (renombra si ya está tomada).
+4. IDs canónicos (decisión D-03): renombra en datos, pruebas y registro de combate zarigueya → muertita y topo → topacia, con sus nombres Muertita y Topacia. Los IDs están en el GDD 18.
 5. Validador de datos: IDs referenciados, frames dentro de rango, campos obligatorios, schemaVersion, y lista de valores TUNING. Corre en dotnet test y desde el menú Sal y Almas > Validar datos.
 6. Editor de brujas: ventana de Unity para ver y editar el kit de una bruja, con vista previa de la Partitura contra otra bruja y los Spark calculados con PreviewChain.
 7. Simulador de balance como herramienta de línea de comandos y como prueba de la regla del +5 % de la sección 17.1, con un reporte en Markdown por bruja y papel.
@@ -432,13 +432,12 @@ El criterio de la Fase 1 pide que alguien nuevo venza al jefe en menos de 15 min
 ```
 
 - **Ramas:** una rama por fase. Los reportes viven en `docs/fases/`.
-- **Archivos grandes:** pendiente de D-05.
+- **Archivos grandes:** sin Git LFS por ahora (D-05). `.gitattributes` ya marca los binarios para que Git no intente fusionarlos.
 
 ## 9. Próximos pasos
 
-1. Decide D-03 y D-05, que afectan a la Fase 1 y al arte que ya está entrando.
-2. Cuando la Fase 1 termine, súbela y abre un pull request. La CI la prueba sola.
-3. Haz la prueba con jugadores de la sección 7.
-4. Revisa las propuestas de `docs/propuestas/` y responde sus preguntas (D-07).
-5. Corre la Fase 1.5 con su prompt.
-6. Mientras tanto, empieza la música con `docs/audio/SOUNDTRACK_SUNO.md` y la biblia narrativa (H-14).
+1. Cuando la Fase 1 termine, súbela y abre un pull request. La CI la prueba sola.
+2. Haz la prueba con jugadores de la sección 7.
+3. Revisa las propuestas de `docs/propuestas/` y responde sus preguntas (D-07).
+4. Corre la Fase 1.5 con su prompt.
+5. Mientras tanto, empieza la música con `docs/audio/SOUNDTRACK_SUNO.md` y la biblia narrativa (H-14).

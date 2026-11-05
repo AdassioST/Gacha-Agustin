@@ -953,18 +953,20 @@ El power creep se contiene con siete reglas. La más visible son las brujas "kk"
 
 | Bruja | Rareza | Mezcla | Debilidad aparente | Truco único |
 | --- | --- | --- | --- | --- |
-| Zarigüeya | 3★ | Saturno y Luna | Su Ascendente se hace el muerto y le baja 50 % el ataque | Su Cierre le pasa la *Muerte Fingida* al jefe: cancela su siguiente ataque definitivo, una vez por combate |
-| Cabra | 3★ | Venus y Saturno | Se intoxica con la primera pizca de sal y empieza envenenada | Convierte su intoxicación en una explosión de veneno que escala con la vida máxima del enemigo; brilla contra jefes |
-| Topo | 3★ | Saturno y Marte | No hace daño | Duplica la producción de Granos de Sal del equipo durante dos turnos; clave en peleas largas |
-| Ajolote | 3★ | Luna y Venus | Estadísticas bajas | Al caer, revive una vez con 30 % de vida y la Salinidad en cero; su Cierre da regeneración a todo el equipo |
+| Muertita (zarigüeya) | 3★ | Saturno y Luna | Su Ascendente se hace el muerto y le baja 50 % el ataque | Su Cierre le pasa la *Muerte Fingida* al jefe: cancela su siguiente ataque definitivo, una vez por combate |
+| Salitre (cabra) | 3★ | Venus y Saturno | Se intoxica con la primera pizca de sal y empieza envenenada | Convierte su intoxicación en una explosión de veneno que escala con la vida máxima del enemigo; brilla contra jefes |
+| Topacia (topo) | 3★ | Saturno y Marte | No hace daño | Duplica la producción de Granos de Sal del equipo durante dos turnos; clave en peleas largas |
+| Axa (ajolote) | 3★ | Luna y Venus | Estadísticas bajas | Al caer, revive una vez con 30 % de vida y la Salinidad en cero; su Cierre da regeneración a todo el equipo |
 
-La zarigüeya y la cabra vienen de Astral Salt, el topo de Sal y Almas y el ajolote es nuevo.
+La zarigüeya y la cabra vienen de Astral Salt, el topo de Sal y Almas y el ajolote es nuevo. Sus Ascendentes son Escorpio (Muertita), Capricornio (Salitre), Tauro (Topacia) y Cáncer (Axa).
 
 ## 18. Elenco de lanzamiento
 
 El juego sale con 24 brujas: 6 Regentes 5★, 10 Oficialas 4★ y 8 Aprendizas 3★. Juntas cubren los siete planetas y los seis papeles de combate. Dos Regentes son limitadas en la versión 1.0; las otras cuatro están en el banner estándar.
 
 **Papeles:** Ofensiva, Rompedora (Firmeza), Tejedora (mejoras y velocidad), Sanadora, Guardiana (escudos y provocación) y Saboteadora (retrasos y debuffs).
+
+**Nombres e IDs.** Cada bruja tiene un ID en `snake_case` sin acentos que comparten datos, arte, audio y localización: `marisal`, `selenia`, `solenne`, `cervanda`, `tormentina`, `cupria`, `brea`, `cempa`, `muertita`, `salitre`, `topacia` y `axa`. Los nombres de las 4★ y 3★ que faltan se asignan con el mismo criterio cuando entren al arte.
 
 ### 18.1 Principios de diseño de personaje
 
@@ -989,20 +991,20 @@ El juego sale con 24 brujas: 6 Regentes 5★, 10 Oficialas 4★ y 8 Aprendizas 3
 
 | Bruja | Mezcla | Papel |
 | --- | --- | --- |
-| Gata negra (kemonomimi) | Saturno y Luna | Rompedora |
+| Brea, gata negra (kemonomimi; Ascendente Libra) | Saturno y Luna | Rompedora |
 | Cuerva | Mercurio y Saturno | Saboteadora |
 | Osa | Venus y Marte | Guardiana |
 | Hiena | Marte y Mercurio | Ofensiva |
 | Nutria (kemonomimi) | Luna y Júpiter | Sanadora |
 | Lince | Júpiter y Marte | Rompedora |
 | Murciélaga | Saturno y Venus | Ofensiva con drenaje |
-| Coyota | Mercurio y Sol | Saboteadora (la embaucadora del folclor mexicano) |
+| Cempa, coyota (Ascendente Sagitario) | Mercurio y Sol | Saboteadora (la embaucadora del folclor mexicano) |
 | Jaguar | Sol y Saturno | Ofensiva (de las Salinas de Obsidiana) |
 | Lechuza (kemonomimi) | Luna y Mercurio | Tejedora |
 
 ### 18.4 Aprendizas 3★
 
-Las cuatro brujas "kk" de la sección 17 (zarigüeya, cabra, topo y ajolote) más ratona (Mercurio), oveja (Venus, kemonomimi), eriza (Marte) y pata (Luna). Todas se pueden reclutar gratis por la historia.
+Las cuatro brujas "kk" de la sección 17 (Muertita, zarigüeya; Salitre, cabra; Topacia, topo; y Axa, ajolote) más ratona (Mercurio), oveja (Venus, kemonomimi), eriza (Marte) y pata (Luna). Todas se pueden reclutar gratis por la historia.
 
 ## 19. Dirección de arte, animación y especificaciones
 
@@ -1091,7 +1093,7 @@ Base: guitarra acústica, laúd, salterio, violonchelo, flautas, campanas y cuen
 | Tormentina | Flauta dulce |
 | Cupria | Arpa |
 
-Entre las Oficialas, la coyota usa jarana jarocha y la jaguar, ocarina y tambor de madera.
+Entre las Oficialas, Cempa, la coyota, usa jarana jarocha y la jaguar, ocarina y tambor de madera.
 
 ### 20.3 Música adaptativa por capas
 
@@ -1222,7 +1224,7 @@ ALCANCE
    - Azar con semilla inyectable. Mismo estado y mismas entradas dan el mismo resultado.
    - Salida: lista de eventos tipados (TurnStarted, ActionUsed, HitLanded con frame, daño e isSpark, AspectFormed, BreakTriggered, SalinityBandChanged, ChainStarted, ChainEnded, AscensionCast, BattleEnded). La presentación solo consume eventos.
 2. Datos en JSON, cargados y validados por el núcleo:
-   - Seis brujas de la sección 18: Marisal, Selenia, Solenne, Tormentina, Zarigüeya y Topo. Cada una con estadísticas, mezcla, pureza de grado B, kit completo, tres movimientos de Cadena con frames de golpe, Autohechizo, Ascensiones y Regencia.
+   - Seis brujas de la sección 18: Marisal, Selenia, Solenne, Tormentina, Muertita (zarigüeya) y Topacia (topo). Cada una con estadísticas, mezcla, pureza de grado B, kit completo, tres movimientos de Cadena con frames de golpe, Autohechizo, Ascensiones y Regencia.
    - Tres enemigos normales y un jefe, el Guardián Corrupto del Fresno, con Firmeza, debilidades e IA por patrones.
    - Si un número no está en el GDD, propón uno, márcalo con // TUNING y lístalo en tu reporte.
 3. Presentación en Unity:
