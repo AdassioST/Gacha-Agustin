@@ -10,5 +10,8 @@ namespace SalYAlmas.Tests
         public static MetaDataSources Sources() => MetaDataSources.FromDirectory(TestKit.DataDir());
 
         public static MetaDatabase Meta() => _meta ?? (_meta = MetaLoader.Load(Sources(), TestKit.RealDb()));
+
+        /// <summary>Partida con el perfil de prueba: seis brujas, todas las recetas y recursos de sobra.</summary>
+        public static MetaGame NewGame(ulong seed = 7) => new MetaGame(Meta(), MetaGame.TestProfile(Meta(), seed, 300));
     }
 }
