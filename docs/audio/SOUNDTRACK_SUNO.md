@@ -31,7 +31,7 @@ Primero lo que necesita el vertical slice (Fase 3C de `docs/HOJA_DE_RUTA.md`, co
 
 | Lote | Qué se genera | Por qué en este orden |
 | --- | --- | --- |
-| 0. Calibración (1 o 2 días) | Tres pruebas del ADN (sección 7.1) | Medir cómo responde v6 al ADN, a los BPM, a la separación de voz y coro y al interruptor de instrumental antes de gastar en serio |
+| 0. Calibración (1 o 2 días) | Cuatro pruebas del ADN (sección 7.1) y una toma de P07 a 150 BPM (pregunta 15) | Medir cómo responde v6 al ADN, a los BPM, a la separación de voz y coro y al interruptor de instrumental antes de gastar en serio |
 | 1. Ancla | P01 `mus_titulo_tema` | Fija el sonido de todo el juego. De aquí sale la Persona de estilo y la referencia de mezcla |
 | 2. Combate | P07 combate y Partitura, P08 y P09 jingles, P10 jefe de Casa | Es lo que más se escucha: un combate dura de 60 a 90 s y se juegan cientos |
 | 3. Termas y tirada | P02, P03, P04, P05, P06 | Las Termas son la pantalla de inicio. La tirada es el momento de la compra y tiene que emocionar |
@@ -365,7 +365,7 @@ Si decides mantener el gaélico que dice el GDD 20.1 para Acuario, su sabor ser�
 | P | Percusión | Drums y Percussion | En combate siempre. En regiones y Fresno, al subir la tensión | `Tension` |
 | V | Voz | Lead Vocals (y Backing Vocals en cues sin coro) | Durante la Cadena y con un Ascendente activo; en regiones, desde la segunda vuelta | `EnCadena`, `AscendenteActivo` |
 | C | Coro | Backing Vocals | Ascensión III y jefes | `EsJefe` |
-| D | Desafinación | No se genera: DSP en el bus de música | Salinidad de 100 o más, o Paralaje alto | `Salinidad`, `Paralaje` |
+| D | Desafinación | No se genera: preset de DSP en cada evento de música que lleva D (`INTEGRACION_AUDIO.md` 5.5) | Salinidad de 100 o más, o Paralaje alto | `Salinidad`, `Paralaje` |
 | Estéreo | Mezcla completa | La mezcla de Suno, editada | Pistas sin capas | — |
 | +solista | Instrumento reservado aislado | Split from Mix o Advanced Split | Firma de la bruja en la tirada y en la tarjeta | — |
 
@@ -373,7 +373,7 @@ Cómo usa la música cada parámetro. Los rangos, el suavizado y la implementaci
 
 | Parámetro | Efecto en la música |
 | --- | --- |
-| `Tension` | En regiones y en el Fresno, sube la capa P en dos compases. En combate no se usa: P ya está activa |
+| `Tension` | En regiones y en el Fresno, sube la capa P en dos compases. En combate no mueve la percusión, que ya está activa; `INTEGRACION_AUDIO.md` la usa para empujar el coro en los jefes |
 | `Salinidad` | De 100 en adelante activa la Desafinación. En 150 hay transición a `mus_extasis_abisal` en la siguiente barra de compás |
 | `Paralaje` | Medio: entra `mus_horror_capa_paralaje` muy baja. Alto: sube esa capa y activa la Desafinación. Máximo: además, la capa V suena invertida (versión invertida del stem, preparada en la edición). **Nunca en las Termas** |
 | `EnCadena` | Entra la capa V (vocalización sin palabras: la Cadena es silente) |
@@ -495,8 +495,8 @@ No llevan prompt propio: se hacen con *Cover* o *Extend* de una pista ya aprobad
 
 #### P01 · `mus_titulo_tema` · Tema principal y pantalla de título
 
-**Título:** Istal Yolma
-**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3:30)
+- **Título:** Istal Yolma
+- **Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3:30)
 
 **Estilo**
 
@@ -563,8 +563,8 @@ Istal yolma... cuetor
 
 #### P17 · `mus_libro_mayor` · Libro Mayor y menús
 
-**Título:** Folio Cuatrocientos Diecisiete
-**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
+- **Título:** Folio Cuatrocientos Diecisiete
+- **Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
 
 **Estilo**
 
@@ -600,8 +600,8 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 
 #### P02 · `mus_termas_dia` · Termas de día
 
-**Título:** Vapor y Caparazón
-**Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
+- **Título:** Vapor y Caparazón
+- **Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
 
 **Estilo**
 
@@ -633,12 +633,12 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 **Uso**
 
 - 6 a 8 tomas. Bucle: 48 compases (96 s). Sin capas: es zona segura.
-- El cruce con P03 por hora del día es un fundido de 4 compases. Comparten armadura, así que no choca.
+- El cruce con P03 por hora del día es un fundido cruzado (duración y horario en `INTEGRACION_AUDIO.md` 5.6). Comparten armadura, así que no choca.
 
 #### P03 · `mus_termas_noche` · Termas de noche
 
-**Título:** Agua que Olvida
-**Ajustes:** Instrumental no · Weirdness 20 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Agua que Olvida
+- **Ajustes:** Instrumental no · Weirdness 20 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -691,8 +691,8 @@ Mmm... olvai...
 
 #### P04 · `mus_tirada_suspenso` · Suspenso de la tirada
 
-**Título:** El Termómetro
-**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
+- **Título:** El Termómetro
+- **Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
 
 **Estilo**
 
@@ -761,8 +761,8 @@ Acoustic one-shot, about 5 seconds: starts as a soft B-flat major psaltery arpeg
 
 #### P06 · `mus_tirada_emergencia_5` · Emergencia de la 5★
 
-**Título:** Lo que Sube del Agua
-**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible (si no, auto y recorta)
+- **Título:** Lo que Sube del Agua
+- **Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible (si no, auto y recorta)
 
 **Estilo**
 
@@ -802,8 +802,8 @@ Aaah... estlali!
 
 #### P07 · `mus_combate_normal` y `mus_cadena_partitura` · Combate normal y Partitura
 
-**Título:** Eztre Istal
-**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 2:30)
+- **Título:** Eztre Istal
+- **Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 2:30)
 
 **Estilo**
 
@@ -857,14 +857,14 @@ Aaah... ooh...
 - Mínimo 8 tomas: es la pista más escuchada del juego. Descarta las que tengan una sección que se "canse" en menos de dos vueltas.
 - **Intro:** 4 compases. **Bucle:** Verse más Chorus, 32 compases (60 s). **Break:** 8 compases (15 s), es `mus_cadena_partitura`. **Outro:** cola hacia la victoria.
 - **Stems:** B (todo menos percusión y voces), P (Drums y Percussion), V (Lead Vocals: la vocalización) y C (Backing Vocals: los cantos cortos).
-- **Capas:** B y P desde el primer compás. V entra con `EnCadena` o `AscendenteActivo`, en el siguiente compás y con fundido de un compás; la vocalización sin palabras respeta la magia silente (GDD 7.5). C entra 8 compases después de cada Ascensión III. D, con Salinidad de 100 o Paralaje alto.
+- **Capas:** B y P desde el primer compás. V entra con `EnCadena` o `AscendenteActivo`; la vocalización sin palabras respeta la magia silente (GDD 7.5). C solo con `EsJefe`: en la Ascensión III el coro viene en su propio cue. D, con Salinidad de 100 o Paralaje alto. Los tiempos de entrada y salida de cada capa están en `INTEGRACION_AUDIO.md` 5.4.
 - **Partitura:** al abrir la Cadena, transición al Break en la siguiente barra; al confirmar, regreso al bucle con V activa.
 - **Éxtasis:** P20 tiene el mismo tempo y tonalidad; el cambio es en barra de compás.
 
 #### P08 · `mus_jingle_victoria` y `mus_combate_resultados` · Victoria y resultados
 
-**Título:** Sal Guardada
-**Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode no · Duración auto
+- **Título:** Sal Guardada
+- **Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode no · Duración auto
 
 **Estilo**
 
@@ -895,8 +895,8 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 
 #### P09 · `mus_jingle_derrota` · Derrota
 
-**Título:** Mancha de Sal
-**Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode no · Duración personalizada lo más corta posible
+- **Título:** Mancha de Sal
+- **Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode no · Duración personalizada lo más corta posible
 
 **Estilo**
 
@@ -926,8 +926,8 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 
 #### P10 · `mus_jefe_casa` · Jefe de Casa
 
-**Título:** La Casa del Signo
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+- **Título:** La Casa del Signo
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
 
 **Estilo**
 
@@ -979,8 +979,8 @@ Frashna ishoc, huemag nelradi!
 
 #### P11 · `mus_region_aries` · Montes de Hierro Rojo
 
-**Título:** Fierristal
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Fierristal
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -1025,8 +1025,8 @@ Fiyolmade, cuetor
 
 #### P12 · `mus_region_capricornio` · Salinas de Obsidiana
 
-**Título:** Istaltli
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Istaltli
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -1073,8 +1073,8 @@ Istaltli, istaltli
 
 #### P13 · `mus_fresno_raices` · Raíces Putrefactas
 
-**Título:** Las que No Llegaron
-**Ajustes:** Instrumental no · Weirdness 35 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Las que No Llegaron
+- **Ajustes:** Instrumental no · Weirdness 35 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -1116,8 +1116,8 @@ Nelradi... micmor...
 
 #### P14 · `mus_jefe_madre_raiz` · La Madre Raíz
 
-**Título:** Cochum, Yolmi
-**Ajustes:** Instrumental no · Weirdness 35 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+- **Título:** Cochum, Yolmi
+- **Ajustes:** Instrumental no · Weirdness 35 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
 
 **Estilo**
 
@@ -1167,8 +1167,8 @@ Nantre! Nantre! Na cuetor!
 
 #### P15 · `mus_leitmotiv_marisal` · Leitmotiv de Marisal
 
-**Título:** Hojadelobo
-**Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Hojadelobo
+- **Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -1207,8 +1207,8 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 
 #### P16 · `mus_ascension_iii_marisal` · Ascensión III de Marisal
 
-**Título:** Eztre Istal, Cuetor
-**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+- **Título:** Eztre Istal, Cuetor
+- **Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
 
 **Estilo**
 
@@ -1243,15 +1243,15 @@ Eztre istal, tleugo, cuetor!
 
 - 8 tomas. Suno dará una pieza más larga: corta 7 s alrededor del clímax.
 - **Sincronía con la cámara (GDD 19.3):** a 120 BPM un pulso dura 0.5 s. Preparación de 0 a 1.5 s (3 pulsos), ritual de 1.5 a 2.5 s (2), manifestación cantada de 2.5 a 5.5 s (6) e impacto de 5.5 a 7 s (3). Marca los cortes del Timeline sobre esos pulsos.
-- **Versión corta (2 a 3 s):** ritual más impacto, como la cámara corta.
+- **Versión corta (2 a 3 s):** la cámara corta usa los cortes 2 y 4 (ritual e impacto), pero el canto ocurre en el corte 3. Para que la Ascensión siga siendo cantada, la versión corta lleva el último pulso del ritual, dos pulsos del canto y el impacto.
 - Candidata a vocalista humana: es el canto de firma de la Regente.
 
 ### 6.8 Combate avanzado y transformaciones
 
 #### P18 · `mus_ascension_iii_coro` · Ascensión III genérica
 
-**Título:** Estlali, Cuetor
-**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+- **Título:** Estlali, Cuetor
+- **Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
 
 **Estilo**
 
@@ -1289,8 +1289,8 @@ Estlali, yolma, cuetor!
 
 #### P19 · `mus_juicio_pureza` · Juicio de Pureza
 
-**Título:** Neyo Tuel
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+- **Título:** Neyo Tuel
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
 
 **Estilo**
 
@@ -1339,8 +1339,8 @@ Neyo tuel, tuel neyo
 
 #### P20 · `mus_extasis_abisal` · Éxtasis Abisal
 
-**Título:** Huemag Ishoc
-**Ajustes:** Instrumental no · Weirdness 55 · Style Influence 70 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Huemag Ishoc
+- **Ajustes:** Instrumental no · Weirdness 55 · Style Influence 70 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -1384,8 +1384,8 @@ Aaah...
 
 #### P21 · `mus_transformacion_destilada` · Transformación a Destilada (grado B)
 
-**Título:** Refinar es Transformarse
-**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+- **Título:** Refinar es Transformarse
+- **Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
 
 **Estilo**
 
@@ -1423,8 +1423,8 @@ Aaah... aaah... aaah...
 
 #### P22 · `mus_transformacion_quintaesencia` · Transformación a Quintaesencia (grado S)
 
-**Título:** Estlali Lucetl
-**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+- **Título:** Estlali Lucetl
+- **Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
 
 **Estilo**
 
@@ -1463,8 +1463,8 @@ Aaah... estlali!
 
 #### P23 · `mus_fresno_tronco` · Tronco de Ceniza
 
-**Título:** Remel
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Remel
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -1504,8 +1504,8 @@ Mmm...
 
 #### P24 · `mus_fresno_ramas` · Ramas del Eclipse
 
-**Título:** Vértigo de Ramas
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Vértigo de Ramas
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -1543,8 +1543,8 @@ Ooh...
 
 #### P25 · `mus_fresno_copa` · Copa Astral
 
-**Título:** Hojas que Son Almas
-**Ajustes:** Instrumental no · Weirdness 35 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Hojas que Son Almas
+- **Ajustes:** Instrumental no · Weirdness 35 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -1582,8 +1582,8 @@ Ooh...
 
 #### P26 · `mus_jefe_lenador_hueco` · El Leñador Hueco
 
-**Título:** Uarbe Neshcen
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+- **Título:** Uarbe Neshcen
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
 
 **Estilo**
 
@@ -1630,8 +1630,8 @@ Aaah... na olvai!
 
 #### P27 · `mus_jefe_corneja_eclipse` · La Corneja del Eclipse
 
-**Título:** Solatiu Na
-**Ajustes:** Instrumental no · Weirdness 35 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+- **Título:** Solatiu Na
+- **Ajustes:** Instrumental no · Weirdness 35 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
 
 **Estilo**
 
@@ -1678,8 +1678,8 @@ Solatiu, na! Cuetor!
 
 #### P28 · `mus_jefe_jardinera` · La Jardinera
 
-**Título:** Cosetl
-**Ajustes:** Instrumental no · Weirdness 35 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3:30)
+- **Título:** Cosetl
+- **Ajustes:** Instrumental no · Weirdness 35 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3:30)
 
 **Estilo**
 
@@ -1731,8 +1731,8 @@ Todas siguen el patrón de P11: **Bucle** de 24 a 48 compases, stems B, P y V, P
 
 #### P29 · `mus_region_tauro` · Llanuras de Cobre
 
-**Título:** Istalijk
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Istalijk
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -1771,8 +1771,8 @@ Mmm... mmm...
 
 #### P30 · `mus_region_geminis` · Ciudad Espejo
 
-**Título:** Ermai ze Ermai
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Ermai ze Ermai
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -1811,8 +1811,8 @@ Mareshae, mareshae, ilcel ze maresh
 
 #### P31 · `mus_region_cancer` · Costa de las Conchas
 
-**Título:** Mareshenn
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Mareshenn
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -1851,8 +1851,8 @@ Cuetorou atlua, nelradenn
 
 #### P32 · `mus_region_leo` · Desierto Áureo
 
-**Título:** Alistal Jarqel
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Alistal Jarqel
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -1891,8 +1891,8 @@ Aaah...
 
 #### P33 · `mus_region_virgo` · Abadía de las Herbolarias
 
-**Título:** Cuicantum Istalis
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Cuicantum Istalis
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -1932,8 +1932,8 @@ Cuicantum istalis, nantrae lucetlum
 
 #### P34 · `mus_region_libra` · Ducado de las Balanzas
 
-**Título:** Istaletta
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Istaletta
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -1972,8 +1972,8 @@ Cosetlina...
 
 #### P35 · `mus_region_escorpio` · Pantanos de Azufre
 
-**Título:** Micmorka
-**Ajustes:** Instrumental no · Weirdness 35 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Micmorka
+- **Ajustes:** Instrumental no · Weirdness 35 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -2012,8 +2012,8 @@ Yolmiya cuetorov, nochualka
 
 #### P36 · `mus_region_sagitario` · Estepas del Centauro
 
-**Título:** Estlalaar
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Estlalaar
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -2052,8 +2052,8 @@ Aaah...
 
 #### P37 · `mus_region_acuario` · Archipiélago de Hielo
 
-**Título:** Hvestlur
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Hvestlur
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -2092,8 +2092,8 @@ Aa-ooo...
 
 #### P38 · `mus_region_piscis` · Isla de la Ninfa
 
-**Título:** Cochumion
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Cochumion
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -2134,8 +2134,8 @@ Mmm...
 
 #### P39 · `mus_eclipse` y `mus_eclipse_aviso` · Eclipse
 
-**Título:** Solatiu Micmor
-**Ajustes:** Instrumental no · Weirdness 35 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Solatiu Micmor
+- **Ajustes:** Instrumental no · Weirdness 35 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -2174,8 +2174,8 @@ Solatiu... na...
 
 #### P40 · `mus_horror_capa_paralaje` · Capa de Paralaje
 
-**Título:** Lo que Mira
-**Ajustes:** Instrumental sí · Weirdness 60 · Style Influence 65 · Variety 0 · Max Mode sí · Duración auto · Modelo v6 (prueba también v6-wild)
+- **Título:** Lo que Mira
+- **Ajustes:** Instrumental sí · Weirdness 60 · Style Influence 65 · Variety 0 · Max Mode sí · Duración auto · Modelo v6 (prueba también v6-wild)
 
 **Estilo**
 
@@ -2211,8 +2211,8 @@ melody, chords, drums, beat, guitar, choir, singing, lyrics, jump scare, loud hi
 
 #### P41 · `mus_huesped_combate` · Combate contra Huéspedes
 
-**Título:** Cohsi Gameuh
-**Ajustes:** Instrumental no · Weirdness 55 · Style Influence 70 · Variety 0 · Max Mode sí · Duración auto · Modelo v6 (prueba también v6-wild)
+- **Título:** Cohsi Gameuh
+- **Ajustes:** Instrumental no · Weirdness 55 · Style Influence 70 · Variety 0 · Max Mode sí · Duración auto · Modelo v6 (prueba también v6-wild)
 
 **Estilo**
 
@@ -2255,8 +2255,8 @@ Ilaltse amloy...
 
 #### P42 · `mus_horror_revelacion` · Revelación
 
-**Título:** La Grieta
-**Ajustes:** Instrumental no · Weirdness 45 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** La Grieta
+- **Ajustes:** Instrumental no · Weirdness 45 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -2298,8 +2298,8 @@ Huemag ishoc...
 
 #### P43 · `mus_crafting_yunque` · Yunque Astral
 
-**Título:** Chispa y Martillo
-**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
+- **Título:** Chispa y Martillo
+- **Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
 
 **Estilo**
 
@@ -2330,8 +2330,8 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 
 #### P44 · `mus_crafting_caldero` · Caldero de Bruja
 
-**Título:** Salmuera Turbia
-**Ajustes:** Instrumental sí · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
+- **Título:** Salmuera Turbia
+- **Ajustes:** Instrumental sí · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
 
 **Estilo**
 
@@ -2366,8 +2366,8 @@ Todos siguen el patrón de P15: **ruta recomendada** con melodía humana y *Cove
 
 #### P45 · `mus_leitmotiv_selenia` · Selenia de Plata
 
-**Título:** Polilla de Plata
-**Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Polilla de Plata
+- **Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -2401,8 +2401,8 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 
 #### P46 · `mus_leitmotiv_solenne` · Solenne
 
-**Título:** Gajo de Limón
-**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Gajo de Limón
+- **Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -2436,8 +2436,8 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 
 #### P47 · `mus_leitmotiv_cervanda` · Cervanda
 
-**Título:** Salero de Plata
-**Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Salero de Plata
+- **Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -2470,8 +2470,8 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 
 #### P48 · `mus_leitmotiv_tormentina` · Tormentina
 
-**Título:** Mensajera
-**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Mensajera
+- **Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -2504,8 +2504,8 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 
 #### P49 · `mus_leitmotiv_cupria` · Cupria
 
-**Título:** Cardenillo
-**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Cardenillo
+- **Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -2539,8 +2539,8 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 
 #### P50 · `mus_leitmotiv_cempa` · Cempa, la coyota
 
-**Título:** Cempasúchil
-**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Cempasúchil
+- **Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -2573,8 +2573,8 @@ synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep,
 
 #### P51 · `mus_leitmotiv_jaguar` · La jaguar
 
-**Título:** Obsidiana
-**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+- **Título:** Obsidiana
+- **Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
 
 **Estilo**
 
@@ -2611,8 +2611,8 @@ Todas siguen el patrón de P16: 8 tomas, corte de 7 s sincronizado con los pulso
 
 #### P52 · `mus_ascension_iii_selenia` · Selenia
 
-**Título:** Metzlu Cochum
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+- **Título:** Metzlu Cochum
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
 
 **Estilo**
 
@@ -2645,8 +2645,8 @@ Metzlu, cochum, ishoc!
 
 #### P53 · `mus_ascension_iii_solenne` · Solenne
 
-**Título:** Solatiu Tleugo
-**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+- **Título:** Solatiu Tleugo
+- **Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
 
 **Estilo**
 
@@ -2679,8 +2679,8 @@ Solatiu, tleugo, istal!
 
 #### P54 · `mus_ascension_iii_cervanda` · Cervanda
 
-**Título:** Huemag Nelradi
-**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+- **Título:** Huemag Nelradi
+- **Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
 
 **Estilo**
 
@@ -2713,8 +2713,8 @@ Huemag nelradi, micmor!
 
 #### P55 · `mus_ascension_iii_tormentina` · Tormentina
 
-**Título:** Ermai Ermai
-**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+- **Título:** Ermai Ermai
+- **Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
 
 **Estilo**
 
@@ -2747,8 +2747,8 @@ Ermai, ermai, cuetor!
 
 #### P56 · `mus_ascension_iii_cupria` · Cupria
 
-**Título:** Nantre Lucetl
-**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+- **Título:** Nantre Lucetl
+- **Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
 
 **Estilo**
 
@@ -2785,8 +2785,8 @@ Los cuatro son variaciones del tema principal. **Ruta recomendada:** *Cover* de 
 
 #### P57 · `mus_final_cosecha` · Final Cosecha
 
-**Título:** Cosetl
-**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+- **Título:** Cosetl
+- **Ajustes:** Instrumental no · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
 
 **Estilo**
 
@@ -2831,8 +2831,8 @@ Cuetor... cosetl...
 
 #### P58 · `mus_final_ceniza` · Final Ceniza
 
-**Título:** Neshcen
-**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+- **Título:** Neshcen
+- **Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
 
 **Estilo**
 
@@ -2871,8 +2871,8 @@ Mmm...
 
 #### P59 · `mus_final_libro_en_blanco` · Final Libro en Blanco
 
-**Título:** Amolib Blaztac
-**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+- **Título:** Amolib Blaztac
+- **Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
 
 **Estilo**
 
@@ -2916,8 +2916,8 @@ Amolib blaztac...
 
 #### P60 · `mus_creditos` · Créditos
 
-**Título:** Istal Yolma (versión completa)
-**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración personalizada unos 4 min (o auto y luego *Extend*)
+- **Título:** Istal Yolma (versión completa)
+- **Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración personalizada unos 4 min (o auto y luego *Extend*)
 
 **Estilo**
 
@@ -3050,7 +3050,7 @@ Suno da dos canciones por pedido; una "toma" es una canción.
 
 - **Extracción:** desde Studio (Premier, sin tope de descargas) o con Auto Split (12 stems, 50 créditos). Si la voz y el coro no se separan, usa Advanced Split y elige voz principal y coro.
 - **Mapeo a capas:** tabla de la sección 5.1. Los stems Synth, Brass y FX deberían salir vacíos; si traen algo, la toma tiene instrumentos fuera del ADN: escúchala antes de aprobar.
-- **Suma de comprobación:** suma B, P, V y C a 0 dB, invierte la fase de la mezcla original y súmala. Si lo que queda se oye como música, y no solo como brillo o ruido, regenera los stems o elige otra toma. Los stems de Suno se regeneran con el modelo: no esperes que sumen idéntico, pero sí muy cerca.
+- **Suma de comprobación:** suma B, P, V y C a 0 dB, invierte la fase de la mezcla original y súmala. `INTEGRACION_AUDIO.md` (10.2) pide que el residuo quede 30 dB abajo. Los stems de Suno se regeneran con el modelo y pueden no llegar: si no llegan, prueba la exportación de Studio o Advanced Split; si aun así no, elige otra toma. Acepta una excepción solo si el residuo no se oye como música, y anótala en los metadatos.
 - **Alineación:** todos los stems de una generación empiezan en la muestra 0 y duran lo mismo. Si uno viene desplazado, alinéalo por correlación contra la mezcla antes de cortar.
 - **Una sola sesión:** cada corte, estiramiento y fundido se aplica a todos los stems a la vez, en las mismas posiciones.
 
@@ -3062,10 +3062,10 @@ Suno da dos canciones por pedido; una "toma" es una canción.
 4. Pon la rejilla en el primer tiempo fuerte del bucle.
 5. Elige N compases exactos (tabla 5.2) en una sección donde suenen todas las capas.
 6. **Corta en compás.** Duración en muestras = N × pulsos por compás × 60 / BPM × 48,000. Ejemplo, P07: 32 × 4 × 60 / 128 × 48,000 = 2,880,000 muestras, 60 s exactos.
-7. **Cola de reverb:** copia lo que suena después del final del bucle (de 1 a 3 s) y mézclalo sobre el inicio del bucle. Así, al repetirse, la reverb de la vuelta anterior sigue sonando.
-8. **Fundido cruzado** de 5 a 20 ms en la unión, en cruce por cero si se puede; más largo si hay notas sostenidas.
-9. **Exporta por separado** la intro (suena una vez), el bucle y el final, de cada stem, más la mezcla de referencia.
-10. Escucha el bucle diez vueltas seguidas con audífonos. Si notas la unión, repite desde el paso 7.
+7. **Cola de reverb:** deja en el archivo de 1 a 3 s de lo que suena después del final del bucle. En FMOD esa cola es una región aparte que suena encima del inicio de la siguiente vuelta (`INTEGRACION_AUDIO.md` 10.2), así la reverb de la vuelta anterior no se corta. Si la unión se sigue notando, la alternativa es mezclar la cola sobre el inicio del bucle en la edición; acuérdalo con quien integre.
+8. **Fundido cruzado** de 5 a 10 ms en la unión, en cruce por cero si se puede; un poco más largo solo si hay notas sostenidas.
+9. **Exporta un archivo por stem** con toda la pieza editada (intro, bucle, final y cola), más la mezcla de referencia. Anota en los metadatos, en muestras, dónde empieza y termina cada región: esos números pasan a `cues_musica.json` y a los marcadores de FMOD.
+10. Escucha el bucle diez vueltas seguidas con audífonos. Si notas la unión, repite desde el paso 6.
 
 ### 7.7 Sonoridad y formato de entrega
 
@@ -3073,36 +3073,41 @@ Suno da dos canciones por pedido; una "toma" es una canción.
 | --- | --- |
 | Formato | WAV, 48 kHz, 24 bits, estéreo. La compresión para móvil la define `INTEGRACION_AUDIO.md` |
 | Bucles y pistas largas | **−18 LUFS integrados ±1 LU**, medidos sobre una vuelta del bucle con todas las capas sumadas a 0 dB |
-| Stingers y jingles (menos de 10 s) | Sonoridad de corto plazo máxima de −16 LUFS |
-| Capa de Paralaje (P40) | 12 dB abajo, unos −30 LUFS: es una capa que se suma |
+| Stingers, jingles y cinemáticas (menos de 10 s) | El integrado no es estable en tan poco tiempo: ajústalos contra el máximo de corto plazo de su contexto en la tabla 5.7 de `INTEGRACION_AUDIO.md` (−10 LUFS en la Ascensión III, −16 en Termas y menús) |
+| Capa de Paralaje (P40) | También −18 LUFS. El bus `Musica/Paralaje` la baja a −18 o −9 dB según el nivel; no la entregues ya atenuada |
 | Pico real | **−1 dBTP** como máximo en todo |
 | Stems | No se normalizan por separado: conservan su nivel relativo para que la suma reproduzca la mezcla |
 
-**De dónde sale el valor.** El grupo de estándares de audio de Sony recomienda −18 LUFS para consolas portátiles, y la guía de niveles del IESD recomienda −16 LUFS integrados para juegos móviles como salida total ([IESD Mix Ref Levels](https://www.audiogang.org/wp-content/uploads/2015/04/IESD-Mix-Ref-Levels-v03.02.pdf), [Designing Sound](https://designingsound.org/2013/02/20/different-loudness-ranges-for-console-and-mobile-games)). Entregar la música 2 dB abajo del total deja espacio a efectos y voces. **El objetivo final de cada bus lo fija `INTEGRACION_AUDIO.md`; si difiere de este, manda aquel.**
+**De dónde sale el valor.** Es el valor de entrega de `INTEGRACION_AUDIO.md` (5.7 y 10.2), que parte de la recomendación de Sony (ASWG-R001) de −18 LUFS para portátiles. Otra referencia, la guía del IESD, propone −16 LUFS para juegos móviles ([IESD Mix Ref Levels](https://www.audiogang.org/wp-content/uploads/2015/04/IESD-Mix-Ref-Levels-v03.02.pdf), [Designing Sound](https://designingsound.org/2013/02/20/different-loudness-ranges-for-console-and-mobile-games)). La mezcla final se mide allá: combate −18 ±2 LU, Termas y menús −20 ±2 LU. **Si los dos documentos difieren, manda `INTEGRACION_AUDIO.md`.**
 
 Suno entrega audio ya masterizado. Si una toma llega muy aplastada (rango de sonoridad menor de 4 LU en una pieza que debería respirar), elige otra antes de intentar devolverle dinámica.
 
 ### 7.8 Nomenclatura y metadatos
 
-Estructura propuesta. Los WAV van en Git LFS (decisión D-05 de `docs/HOJA_DE_RUTA.md`); los JSON van en Git normal. Coordina la ruta final con `INTEGRACION_AUDIO.md`.
+Las rutas siguen la sección 11 de `INTEGRACION_AUDIO.md`. Las descargas crudas de Suno y las tomas descartadas viven **fuera de git**, en un almacenamiento con versiones; en git solo entran los WAV editados que usa FMOD y los metadatos.
 
 ```text
-audio/
-  fuentes/suno/<cue_id>/
-    <cue_id>__t01__<id8>.wav               descarga original de Suno (t = toma)
+Audio/
+  FMOD/Assets/Musica/<cue_id>/             entregables editados (Git LFS si se adopta)
+    <cue_id>_base.wav                      capas: _base, _perc, _voz, _coro
+    <cue_id>_estereo.wav                   cues sin capas (propuesta: el otro documento no lo nombra)
+    <cue_id>_solista.wav                   instrumento reservado aislado (propuesta)
+    <cue_id>_mix.wav                       mezcla de referencia (propuesta)
+  FMOD/Assets/Temporal/TEMP_<cue_id>_*.wav pistas temporales de la Fase 3C
+  Licencias/
+    registro.csv                           una fila por cue final
+    suno/<cue_id>.json                     metadatos y trazabilidad de este documento
+
+Almacenamiento externo (fuera de git):
+  suno/<cue_id>/
+    <cue_id>__t01__<id8>.wav               descarga original (t = toma)
     <cue_id>__t01__<id8>__stem_<nombre>.wav
-    <cue_id>.json                          metadatos y trazabilidad
     melodia/                               partitura y audio humano subido, si aplica
-  musica/<cue_id>/
-    <cue_id>_intro_<capa>.wav
-    <cue_id>_bucle_<capa>.wav
-    <cue_id>_final_<capa>.wav
-    <cue_id>_mix.wav                       referencia
 ```
 
-`<id8>` son los primeros 8 caracteres del ID de la canción en Suno. `<capa>` es `base`, `perc`, `voz`, `coro`, `estereo` o `solista`. Los cues que se cortan de otra generación (como `mus_cadena_partitura`) tienen su propia carpeta en `musica/` y apuntan a la fuente en su JSON.
+`<id8>` son los primeros 8 caracteres del ID de la canción en Suno. Los cues que se cortan de otra generación (como `mus_cadena_partitura`) tienen su propia carpeta y apuntan a su fuente en el JSON. Los sufijos `_estereo`, `_solista` y `_mix` son una propuesta para acordar con `INTEGRACION_AUDIO.md`.
 
-**Metadatos por cue** (`<cue_id>.json`):
+**Metadatos por cue** (`Audio/Licencias/suno/<cue_id>.json`):
 
 ```json
 {
@@ -3127,6 +3132,8 @@ audio/
     "semilla": null,
     "operaciones": ["replace_section 0:45-1:05", "auto_split 12 stems"]
   },
+  "regiones_muestras": { "intro": [0, 360000], "bucle": [360000, 3240000], "final": [3240000, 3480000], "cola": [3240000, 3384000] },
+  "residuo_suma_db": -31,
   "tomas_descartadas": ["t01 id8", "t02 id8", "t03 id8"],
   "intervencion_humana": ["melodía de X", "edición de bucle de Y", "voz grabada por Z"],
   "revision_parecido": { "fecha": "2026-11-13", "metodo": "escucha ciega e identificación de covers", "resultado": "sin coincidencias" },
@@ -3207,6 +3214,7 @@ Cómo se graba encima: exporta los stems sin V, la vocalista canta con metrónom
 | 12 | ¿Las Termas ignoran el Paralaje en la música aunque esté en máximo? | Sí. La regla de zona segura del GDD 6.5 pesa más |
 | 13 | ¿Publicarás la banda sonora en plataformas o a la venta? | No al lanzamiento. Después, solo las pistas con intervención humana sustancial, y con revisión legal |
 | 14 | ¿Agregamos al GDD 24 una regla de uso de IA en audio? | Sí: plan de pago, trazabilidad, intervención humana en lo principal y prohibición de nombrar obras o artistas en los prompts |
+| 15 | A 128 BPM los eslabones de la Cadena (24 frames, 400 ms) no caen en el pulso; a 150 BPM, sí (`INTEGRACION_AUDIO.md`, pregunta 5). ¿Subimos el combate a 150? | Todavía no. Genera en el lote 0 una toma extra de P07 a 150 BPM con sensación de medio tiempo y decide con la prueba con jugadores. Si se adopta, P07 y P20 cambian juntos: comparten tempo |
 
 ---
 
