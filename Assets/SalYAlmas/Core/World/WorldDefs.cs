@@ -126,6 +126,81 @@ namespace SalYAlmas.Core.World
         /// <summary>El prólogo no cuenta para los eclipses ni para el orden de regiones.</summary>
         public bool Prologue;
         public readonly List<MissionDef> Missions = new List<MissionDef>();
+
+        // Odisea (docs/propuestas/ODISEA.md). Vacío si odyssey.json no describe la región.
+        /// <summary>Enemigo que enseña la mecánica de la región.</summary>
+        public string Native = "";
+        /// <summary>Material regional que sueltan sus secciones (economy.json).</summary>
+        public string Material = "";
+        /// <summary>Planeta de su sal cruda.</summary>
+        public Magic.Planet Planet;
+        /// <summary>Estación de crafting que se abre al terminar la región.</summary>
+        public string Station = "";
+        public readonly List<ZoneDef> Zones = new List<ZoneDef>();
+
+        public ZoneDef Zone(string id) => Zones.Find(z => z.Id == id);
+        public ZoneDef ZoneOfMission(string missionId) => Zones.Find(z => z.Missions.Contains(missionId));
+    }
+
+    /// <summary>Las cuatro zonas de una región: tres bajan y la EX sube (ODISEA 4).</summary>
+    public enum ZoneKind { Orilla, Subsuelo, Corazon, Cielo }
+
+    /// <summary>Las tres capas del GDD 6.5, contadas por la Marea de Sal.</summary>
+    public enum SkyLayer { Superficie, Grieta, Abismo }
+
+    public sealed class ZoneDef
+    {
+        public string Id;
+        public string Name;
+        public string Description = "";
+        public ZoneKind Kind;
+        /// <summary>Misiones de historia de la zona, en orden. La EX no tiene.</summary>
+        public readonly List<string> Missions = new List<string>();
+        /// <summary>Enemigos de sus secciones.</summary>
+        public readonly List<string> Pool = new List<string>();
+        /// <summary>Jefe de la Expedición. Vacío: la última sección es una élite del nativo.</summary>
+        public string Boss = "";
+        /// <summary>Secciones antes de cada combate de historia; en la Expedición, secciones antes del jefe.</summary>
+        public int Sections = 1;
+        /// <summary>ID del fondo en Art/Ambientes, sin la capa: amb_aries_orilla.</summary>
+        public string Backdrop = "";
+        public bool IsEx => Kind == ZoneKind.Cielo;
+    }
+
+    /// <summary>Reglas de la Odisea. Todo número es // TUNING (ODISEA 3 y 4).</summary>
+    public sealed class OdysseyRules
+    {
+        public bool Enabled;
+        /// <summary>Nivel de una región = LevelBase + LevelStep · n, con n = regiones terminadas al llegar.</summary>
+        public int LevelBase = 5;
+        public int LevelStep = 6;
+        /// <summary>Nivel extra por zona: orilla, subsuelo, corazón y cielo.</summary>
+        public int[] ZoneAdd = { 0, 2, 4, 8 };
+        public int BossAdd = 2;
+        public int MaxTide = 5;
+        /// <summary>Vida extra de los nativos por punto de Marea (el rasgo del eclipse).</summary>
+        public double TideHp = 0.06;
+        /// <summary>Fuerza de una sección frente al combate de historia que la cierra.</summary>
+        public double WaveStrength = 0.8;
+        /// <summary>Almitas por sección: SectionAlmitas · nivel^SectionExponent.</summary>
+        public double SectionAlmitas = 60;
+        public double SectionExponent = 1.5;
+        public double MaterialChance = 0.6;
+        public int MaterialMin = 1;
+        public int MaterialMax = 3;
+        public double SaltChance = 0.35;
+        public double TreasureChance = 0.2;
+        public int ZoneSales = 100;
+        public int ExpeditionSections = 3;
+        /// <summary>Secciones de Expedición al día con botín completo; después, AfterCap.</summary>
+        public int DailyFull = 20;
+        public double AfterCap = 0.25;
+        /// <summary>Vida con la que vuelve una bruja caída a la siguiente sección.</summary>
+        public double FallenHp = 0.10;
+        /// <summary>Materiales de todas las regiones: la caravana comercia y los tesoros de Superficie dan cualquiera.</summary>
+        public readonly List<string> TradeMaterials = new List<string>();
+        public readonly List<string> GrietaInvaders = new List<string>();
+        public readonly List<string> AbismoInvaders = new List<string>();
     }
 
     public sealed class StoryRules
@@ -147,6 +222,7 @@ namespace SalYAlmas.Core.World
         public int SenderoXpPerLevel = 100;
         public int SenderoXpPerWin = 25;
         public double SenderoGrowth = 0.05;
+        public readonly OdysseyRules Odyssey = new OdysseyRules();
         public readonly List<TitleDef> Titles = new List<TitleDef>();
         public readonly List<RegionDef> Regions = new List<RegionDef>();
 

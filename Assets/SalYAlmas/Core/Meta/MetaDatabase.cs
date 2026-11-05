@@ -88,6 +88,8 @@ namespace SalYAlmas.Core.Meta
         public readonly long[] RefineAlmitas = { 0, 1000, 5000 };
 
         public readonly Dictionary<string, EnemyDef> FresnoEnemies = new Dictionary<string, EnemyDef>();
+        /// <summary>Enemigos de las regiones de la Odisea (odyssey.json).</summary>
+        public readonly Dictionary<string, EnemyDef> RegionEnemies = new Dictionary<string, EnemyDef>();
 
         public MetaDatabase(GameDatabase combat) { Combat = combat; }
 
@@ -108,6 +110,7 @@ namespace SalYAlmas.Core.Meta
         public EnemyDef Enemy(string id)
         {
             if (FresnoEnemies.TryGetValue(id, out var e)) return e;
+            if (RegionEnemies.TryGetValue(id, out var re)) return re;
             return Combat.Enemies.TryGetValue(id, out var c) ? c : null;
         }
 

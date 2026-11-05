@@ -59,13 +59,38 @@ namespace SalYAlmas.Tests
             Assert.IsFalse(g.Story.InMission, "la misión no terminó");
         }
 
+        /// <summary>Gasta las almitas en subir de nivel al equipo, parejo, como haría una jugadora (ODISEA 3).</summary>
+        public static void Train(MetaGame g, IReadOnlyList<string> team)
+        {
+            for (bool any = true; any;)
+            {
+                any = false;
+                foreach (var id in team.OrderBy(id => g.Profile.Witches[id].Level))
+                    if (g.Progress.LevelUp(id).Ok) { any = true; break; }
+            }
+        }
+
         public static void Region(MetaGame g, string region, IReadOnlyList<string> team, Func<List<ChoiceView>, ChoiceView> choose = null)
         {
             foreach (var m in g.Meta.World.Story.Region(region).Missions)
             {
+                if (g.Story.MissionDone(m.Id)) continue;
+                Train(g, team);
                 var ok = g.Story.StartMission(region, m.Id);
                 Assert.IsTrue(ok.Ok, ok.Message);
                 Run(g, team, choose);
+            }
+        }
+
+        /// <summary>Las regiones que faltan, por el anillo desde tu signo en sentido Directo.</summary>
+        public static void All(MetaGame g, IReadOnlyList<string> team, Func<List<ChoiceView>, ChoiceView> choose = null)
+        {
+            var ring = g.Story.BuiltRing;
+            int start = ring.FindIndex(r => r.Id == g.Story.StartRegion);
+            for (int i = 0; i < ring.Count; i++)
+            {
+                var region = ring[(start + i) % ring.Count];
+                if (!g.Story.RegionDone(region.Id)) Region(g, region.Id, team, choose);
             }
         }
 
@@ -86,10 +111,10 @@ namespace SalYAlmas.Tests
         }
 
         [Test]
-        public void HayDosRegionesConCincoMisiones()
+        public void HayCuatroRegionesCardinalesConCincoMisiones()
         {
             var s = Meta().World.Story;
-            foreach (var id in new[] { "aries", "capricornio" }) Assert.AreEqual(5, s.Region(id).Missions.Count, id);
+            foreach (var id in new[] { "aries", "cancer", "libra", "capricornio" }) Assert.AreEqual(5, s.Region(id).Missions.Count, id);
             Assert.AreEqual(4, s.Senderos.Count);
             Assert.AreEqual(12, s.Signs.Count);
             Assert.AreEqual(12, s.Ring.Count);
@@ -139,14 +164,19 @@ namespace SalYAlmas.Tests
             Assert.AreEqual(have < check.Def.Need, !check.Available);
         }
 
+        /// <summary>Gana todas las secciones del combate de la escena (los enemigos con 5 % de vida).</summary>
         private static void WinBattle(MetaGame g, IReadOnlyList<string> team)
         {
-            var setup = g.Story.PrepareBattle(team, 3);
-            setup.Modifiers.Add(ModKeys.EnemyHpPct, -0.95);
-            var b = new Battle(g.Combat, setup);
-            b.Start();
-            new AutoPilot().RunToEnd(b);
-            Assert.IsTrue(g.Story.ResolveBattle(b).Ok);
+            string scene = g.Story.CurrentScene.Id;
+            for (int guard = 0; guard < 10 && g.Story.CurrentScene?.Id == scene && g.Story.CurrentScene.Battle != null; guard++)
+            {
+                var setup = g.Story.PrepareBattle(team, 3);
+                setup.Modifiers.Add(ModKeys.EnemyHpPct, -0.95);
+                var b = new Battle(g.Combat, setup);
+                b.Start();
+                new AutoPilot().RunToEnd(b);
+                Assert.IsTrue(g.Story.ResolveBattle(b).Ok);
+            }
         }
 
         [Test]
@@ -176,25 +206,32 @@ namespace SalYAlmas.Tests
         }
 
         [Test]
-        public void LasDosRegionesSeTerminanEnCualquierOrdenYElOrdenSeNota()
+        public void LasRegionesSeAbrenPorElAnilloEnLosDosSentidosYElOrdenSeNota()
         {
-            foreach (var order in new[] { new[] { "aries", "capricornio" }, new[] { "capricornio", "aries" } })
+            // Aries es tu signo: de ahí se sigue en sentido Directo (Cáncer) o Retrógrado (Capricornio). ODISEA 2.
+            foreach (var next in new[] { "cancer", "capricornio" })
             {
                 var g = Ready();
                 string[] team = StoryPlayer.Team(g);
-                StoryPlayer.Region(g, order[0], team);
-                Assert.IsTrue(g.Profile.Calculista.Marks.Contains("primera_" + order[0]));
+                Assert.IsFalse(g.Story.StartMission(next, g.Meta.World.Story.Region(next).Missions[0].Id).Ok, "primero tu región");
+                StoryPlayer.Region(g, "aries", team);
+                Assert.IsTrue(g.Profile.Calculista.Marks.Contains("primera_aries"));
                 Assert.AreEqual(0, g.Profile.Calculista.Eclipses, "el eclipse llega cada dos regiones");
+                Assert.IsFalse(g.Story.StartMission("libra", "lib_1").Ok, "Libra no es vecina de Aries");
+                Assert.AreEqual(next == "cancer" ? "Directo" : "Retrógrado", g.Story.Direction(next));
 
-                Assert.IsTrue(g.Story.StartMission(order[1], g.Meta.World.Story.Region(order[1]).Missions[0].Id).Ok);
+                Assert.IsTrue(g.Story.StartMission(next, g.Meta.World.Story.Region(next).Missions[0].Id).Ok);
                 string opening = g.Story.SceneText(team);
                 var plain = g.Story.CurrentScene.Text;
                 Assert.AreNotEqual(plain, opening, "el orden cambia lo que se ve en la segunda región");
                 g.Story.LeaveMission();
 
-                StoryPlayer.Region(g, order[1], team);
-                Assert.IsTrue(g.Story.GameFinished);
+                StoryPlayer.Region(g, next, team);
                 Assert.AreEqual(1, g.Profile.Calculista.Eclipses);
+                Assert.AreEqual(1, g.Story.ArrivalIndex(next));
+                StoryPlayer.All(g, team);
+                Assert.IsTrue(g.Story.GameFinished);
+                Assert.AreEqual(2, g.Profile.Calculista.Eclipses);
             }
         }
 
@@ -204,6 +241,7 @@ namespace SalYAlmas.Tests
             var g = Ready();
             string[] team = StoryPlayer.Team(g);
             g.Profile.Calculista.Marks.Add("perdono_capitana");
+            g.Profile.Calculista.RegionsDone.Add("aries");
             g.Profile.Calculista.MissionsDone.AddRange(new[] { "cap_1", "cap_2", "cap_3" });
             g.Story.StartMission("capricornio", "cap_4");
             StringAssert.Contains("Ferrán", g.Story.SceneText(team));
@@ -233,7 +271,7 @@ namespace SalYAlmas.Tests
             string[] team = StoryPlayer.Team(g);
             StoryPlayer.Region(g, "aries", team);
             Assert.IsFalse(g.Story.StartMission("aries", "aries_4").Ok, "todavía no se termina el juego");
-            StoryPlayer.Region(g, "capricornio", team);
+            StoryPlayer.All(g, team);
 
             long almitas = g.Ledger.Balance(Res.Almitas);
             Assert.IsTrue(g.Story.StartMission("aries", "aries_4").Ok);
@@ -312,8 +350,7 @@ namespace SalYAlmas.Tests
             var g = Ready();
             foreach (var key in g.Profile.Calculista.Stats.Keys.ToList()) g.Profile.Calculista.Stats[key] = 0;
             string[] team = StoryPlayer.Team(g);
-            StoryPlayer.Region(g, "capricornio", team);
-            StoryPlayer.Region(g, "aries", team);
+            StoryPlayer.All(g, team);
             Assert.IsTrue(g.Story.GameFinished);
         }
     }

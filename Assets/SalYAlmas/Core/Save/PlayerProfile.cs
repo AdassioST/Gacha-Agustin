@@ -165,6 +165,30 @@ namespace SalYAlmas.Core.Save
         public string Scene = "";
         /// <summary>La misión en curso es una Relectura: no vuelve a entregar recursos.</summary>
         public bool Reread;
+
+        // Odisea (docs/propuestas/ODISEA.md)
+        /// <summary>Regiones terminadas cuando llegaste a cada región: fija su nivel.</summary>
+        public Dictionary<string, int> Arrival = new Dictionary<string, int>();
+        public List<string> ZonesDone = new List<string>();
+        /// <summary>Sección del combate en curso (0 = la primera).</summary>
+        public int Section;
+        /// <summary>Vida (fracción) y Salinidad que se arrastran dentro de la misión o la Expedición.</summary>
+        public Dictionary<string, double> CarryHp = new Dictionary<string, double>();
+        public Dictionary<string, int> CarrySalinity = new Dictionary<string, int>();
+        /// <summary>Expedición en curso: región, zona y Marea elegida. Vacío si no hay.</summary>
+        public string ExpRegion = "";
+        public string ExpZone = "";
+        public int ExpTide;
+        /// <summary>La Expedición lleva su propia sección y su propio arrastre: la misión en pausa no se pierde.</summary>
+        public int ExpSection;
+        public Dictionary<string, double> ExpHp = new Dictionary<string, double>();
+        public Dictionary<string, int> ExpSalinity = new Dictionary<string, int>();
+        public int DailyDay = -1;
+        public int DailySections;
+        /// <summary>Botín de la última sección, para la pantalla.</summary>
+        public List<string> LastLoot = new List<string>();
+        public int SectionsWon;
+        public int BossesWon;
     }
 
     public sealed class TermasState

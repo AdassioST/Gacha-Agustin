@@ -163,36 +163,89 @@ namespace SalYAlmas.Sim
         public static int Story(GameDatabase db, int n)
         {
             var meta = Load(db);
-            foreach (var order in new[] { new[] { "aries", "capricornio" }, new[] { "capricornio", "aries" } })
-            {
-                var attempts = new Dictionary<string, List<int>>();
-                var keys = new List<string>();
-                int finished = 0;
-                for (int c = 0; c < n; c++)
+            // Una cuenta nueva por cada signo cardinal y sentido: juega el anillo desde su región, gasta las almitas en niveles
+            // antes de cada misión (como una jugadora) y, si una sección no sale en 3 intentos, hace Expediciones para subir.
+            foreach (var sign in new[] { "aries", "cancer", "libra", "capricornio" })
+                foreach (bool direct in new[] { true, false })
                 {
-                    var g = new MetaGame(meta, MetaGame.NewProfile(meta, (ulong)(c + 1), 300));
-                    g.Story.Create("Sim", "Elle", meta.World.Story.Species[0], "aries");
-                    g.Story.StartMission("vado", "prologo");
-                    PlayMission(g, new[] { "marisal", "zarigueya", "topo" }, attempts, keys, c);
-                    g.Termas.SetStarterChoice("solenne");
-                    g.Termas.Pull("inicio", 20, out _);
-                    var team = g.Profile.Witches.Keys.Where(meta.HasKit).OrderBy(x => x, StringComparer.Ordinal).Take(4).ToArray();
-                    foreach (var region in order)
-                        foreach (var m in meta.World.Story.Region(region).Missions)
+                    var attempts = new Dictionary<string, List<int>>();
+                    var keys = new List<string>();
+                    var regionInfo = new Dictionary<string, List<string>>();
+                    int finished = 0, farmed = 0;
+                    long earned = 0;
+                    for (int c = 0; c < n; c++)
+                    {
+                        var g = new MetaGame(meta, MetaGame.NewProfile(meta, (ulong)(c + 1), 300));
+                        g.Story.Create("Sim", "Elle", meta.World.Story.Species[0], sign);
+                        g.Story.StartMission("vado", "prologo");
+                        PlayMission(g, new[] { "marisal", "zarigueya", "topo" }, attempts, keys, c);
+                        g.Termas.SetStarterChoice("solenne");
+                        g.Termas.Pull("inicio", 20, out _);
+                        var team = g.Profile.Witches.Keys.Where(meta.HasKit).OrderBy(x => x, StringComparer.Ordinal).Take(4).ToArray();
+                        var ring = g.Story.BuiltRing;
+                        int start = ring.FindIndex(r => r.Id == g.Story.StartRegion);
+                        long before = g.Ledger.Balance(Res.Almitas);
+                        for (int i = 0; i < ring.Count; i++)
                         {
-                            g.Story.StartMission(region, m.Id);
-                            PlayMission(g, team, attempts, keys, c);
+                            var region = ring[((start + (direct ? i : -i)) % ring.Count + ring.Count) % ring.Count];
+                            Train(g, team);
+                            string tag = $"{i + 1}. {region.Id}";
+                            if (!regionInfo.ContainsKey(tag)) regionInfo[tag] = new List<string>();
+                            regionInfo[tag].Add($"nv {g.Story.RegionLevel(region.Id)}-{g.Story.RegionLevel(region.Id) + 6} · equipo {team.Average(id => g.Profile.Witches[id].Level):0}");
+                            foreach (var m in region.Missions)
+                            {
+                                Train(g, team);
+                                if (!g.Story.StartMission(region.Id, m.Id).Ok) break;
+                                farmed += PlayMission(g, team, attempts, keys, c);
+                            }
                         }
-                    if (g.Story.GameFinished) finished++;
+                        earned += g.Ledger.Balance(Res.Almitas) - before;
+                        if (g.Story.GameFinished) finished++;
+                    }
+                    Console.WriteLine($"== Historia desde {sign} · {(direct ? "Directo" : "Retrógrado")} · {n} cuentas nuevas · terminadas {finished}/{n} · Expediciones extra {farmed / (double)n:0.0} por cuenta");
+                    foreach (var kv in regionInfo) Console.WriteLine($"   {kv.Key,-15} {kv.Value[0]}");
+                    foreach (var k in keys.Where(k => attempts[k].Average() > 1.2)) Console.WriteLine($"   {k,-18} intentos: media {attempts[k].Average():0.0}  máximo {attempts[k].Max()}");
                 }
-                Console.WriteLine($"== Historia {order[0]} → {order[1]} · {n} cuentas nuevas · terminadas {finished}/{n}");
-                foreach (var k in keys) Console.WriteLine($"   {k,-18} intentos: media {attempts[k].Average():0.0}  máximo {attempts[k].Max()}");
-            }
             return 0;
         }
 
-        private static void PlayMission(MetaGame g, IReadOnlyList<string> team, Dictionary<string, List<int>> attempts, List<string> keys, int c)
+        private static void Train(MetaGame g, IReadOnlyList<string> team)
         {
+            for (bool any = true; any;)
+            {
+                any = false;
+                foreach (var id in team.OrderBy(id => g.Profile.Witches[id].Level))
+                    if (g.Progress.LevelUp(id).Ok) { any = true; break; }
+            }
+        }
+
+        /// <summary>Una Expedición en la zona terminada más alta, para subir de nivel cuando la historia se atora.</summary>
+        private static bool Farm(MetaGame g, IReadOnlyList<string> team, int c)
+        {
+            foreach (var regionId in g.Profile.Calculista.RegionsVisited.ToList())
+            {
+                var region = g.Meta.World.Story.Region(regionId);
+                foreach (var z in region.Zones.AsEnumerable().Reverse())
+                {
+                    if (g.Story.CanExpedition(region.Id, z.Id, g.Story.MaxTideFor(region.Id)).Length > 0) continue;
+                    g.Story.StartExpedition(region.Id, z.Id, g.Story.MaxTideFor(region.Id));
+                    for (int guard = 0; guard < 40 && g.Story.InExpedition; guard++)
+                    {
+                        var b = new Battle(g.Combat, g.Story.PrepareExpeditionBattle(team, (ulong)(c * 977 + guard)));
+                        b.Start();
+                        new AutoPilot().RunToEnd(b);
+                        if (!g.Story.ResolveExpeditionBattle(b).Ok && guard > 8) g.Story.LeaveExpedition();
+                    }
+                    Train(g, team);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static int PlayMission(MetaGame g, IReadOnlyList<string> team, Dictionary<string, List<int>> attempts, List<string> keys, int c)
+        {
+            int farmed = 0;
             for (int guard = 0; guard < 400 && g.Story.InMission; guard++)
             {
                 var scene = g.Story.CurrentScene;
@@ -207,7 +260,12 @@ namespace SalYAlmas.Sim
                         b.Start();
                         new AutoPilot().RunToEnd(b);
                         r = g.Story.ResolveBattle(b);
-                    } while (!r.Ok && tries < 100);
+                        if (!r.Ok && tries % 3 == 0 && team.Count > 0)
+                        {
+                            // Se atoró: con la misión en pausa, hace una Expedición para subir y vuelve a la misma sección.
+                            if (Farm(g, team, c + tries)) farmed++;
+                        }
+                    } while (!r.Ok && tries < 60);
                     if (!attempts.ContainsKey(key)) { attempts[key] = new List<int>(); keys.Add(key); }
                     attempts[key].Add(tries);
                 }
@@ -218,6 +276,7 @@ namespace SalYAlmas.Sim
                 }
                 else g.Story.Continue();
             }
+            return farmed;
         }
 
         /// <summary>Juega cada Juicio con el piloto del combate e informa victorias y condiciones cumplidas.</summary>

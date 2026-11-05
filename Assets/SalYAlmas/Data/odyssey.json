@@ -1,0 +1,1504 @@
+// GENERADO por Tools/Content/gen_odyssey.py: cambia el generador, no este archivo.
+// La Odisea (docs/propuestas/ODISEA.md): reglas, enemigos regionales con sus rasgos y zonas de cada región.
+// Estadísticas de enemigos a nivel 50; el juego las escala al nivel de la zona. Todo número es // TUNING.
+{
+ "rules": {
+  "levelBase": 5,
+  "levelStep": 6,
+  "zoneAdd": [0, 2, 4, 8],
+  "bossAdd": 2,
+  "maxTide": 5,
+  "tideHp": 0.06,
+  "waveStrength": 0.9,
+  "sectionAlmitas": 100,
+  "sectionExponent": 1.5,
+  "materialChance": 0.6,
+  "materialMin": 1,
+  "materialMax": 3,
+  "saltChance": 0.35,
+  "treasureChance": 0.2,
+  "zoneSales": 100,
+  "expeditionSections": 3,
+  "dailyFull": 20,
+  "afterCap": 0.25,
+  "fallenHp": 0.1,
+  "grietaInvaders": ["cristalizado"],
+  "abismoInvaders": ["sin_carta", "huesped_menor"],
+  "tradeMaterials": ["hierro_rojo", "cobre_llano", "vidrio_espejo", "nacar", "arena_aurea", "hilo_hilandera", "pesa_ducal", "azufre", "crin_centauro", "obsidiana", "hielo_eterno", "escama_ninfa"]
+ },
+ "enemies": [
+  {
+   "id": "figura_sal",
+   "name": "Figura de Sal",
+   "shortName": "Figura de Sal",
+   "article": "la",
+   "description": "Alguien a medio volverse sal. Todavía susurra.",
+   "level": 50,
+   "hp": 14000,
+   "atk": 1050,
+   "spd": 104,
+   "toughness": 45,
+   "attackPlanet": "saturno",
+   "weaknesses": ["marte", "sol"],
+   "res": {
+    "saturno": 0.2
+   },
+   "skills": [
+    {
+     "id": "mano",
+     "name": "Mano Estirada",
+     "target": "random",
+     "multiplier": 1.2,
+     "hits": [8, 18]
+    },
+    {
+     "id": "susurro",
+     "name": "Susurro",
+     "target": "all",
+     "multiplier": 0.5,
+     "hits": [14]
+    }
+   ],
+   "pattern": ["mano", "mano", "susurro"],
+   "traits": {
+    "shape": "cristal",
+    "hint": "Sin trucos: aprende la Cadena."
+   }
+  },
+  {
+   "id": "escoria_viva",
+   "name": "Escoria Viva",
+   "shortName": "Escoria Viva",
+   "article": "la",
+   "description": "Masa de hierro fundido que se arrastra.",
+   "level": 50,
+   "hp": 14000,
+   "atk": 1050,
+   "spd": 104,
+   "toughness": 45,
+   "attackPlanet": "marte",
+   "weaknesses": ["saturno", "luna"],
+   "res": {
+    "marte": 0.2
+   },
+   "skills": [
+    {
+     "id": "salpicar",
+     "name": "Salpicar",
+     "target": "random",
+     "multiplier": 1.2,
+     "hits": [10]
+    },
+    {
+     "id": "fundir",
+     "name": "Fundirse",
+     "target": "lowestHp",
+     "multiplier": 1.0,
+     "hits": [8, 16],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "burn",
+       "value": 0.2,
+       "turns": 2,
+       "name": "Escoria"
+      }
+     ]
+    }
+   ],
+   "pattern": ["salpicar", "fundir"],
+   "traits": {
+    "shape": "masa",
+    "hint": "Al caer salpica escoria ardiente a todas.",
+    "onDeath": [
+     {
+      "type": "dot",
+      "dot": "burn",
+      "value": 0.15,
+      "turns": 2,
+      "name": "Salpicadura"
+     }
+    ]
+   }
+  },
+  {
+   "id": "perro_fragua",
+   "name": "Perro de Fragua",
+   "shortName": "Perro de Fragua",
+   "article": "el",
+   "description": "Perro de hierro remachado con brasas en el pecho.",
+   "level": 50,
+   "hp": 11000,
+   "atk": 1150,
+   "spd": 124,
+   "toughness": 40,
+   "attackPlanet": "marte",
+   "weaknesses": ["saturno", "venus"],
+   "res": {
+    "marte": 0.2
+   },
+   "skills": [
+    {
+     "id": "mordida",
+     "name": "Mordida",
+     "target": "lowestHp",
+     "multiplier": 1.3,
+     "hits": [6, 14]
+    },
+    {
+     "id": "aullido",
+     "name": "Aullido de Fuelle",
+     "target": "self",
+     "effects": [
+      {
+       "type": "buff",
+       "stat": "speed",
+       "value": 0.15,
+       "turns": 2,
+       "target": "self",
+       "name": "Fuelle"
+      }
+     ]
+    }
+   ],
+   "pattern": ["mordida", "mordida", "aullido"],
+   "traits": {
+    "shape": "bestia",
+    "hint": "Rápido: va por la bruja más herida."
+   }
+  },
+  {
+   "id": "soldada_crisol",
+   "name": "Soldada de Crisol",
+   "shortName": "Soldada de Crisol",
+   "article": "la",
+   "description": "Bebe sal sin refinar. Crece y olvida su nombre.",
+   "level": 50,
+   "hp": 17000,
+   "atk": 1100,
+   "spd": 106,
+   "toughness": 55,
+   "attackPlanet": "marte",
+   "weaknesses": ["saturno", "luna"],
+   "res": {
+    "marte": 0.2
+   },
+   "skills": [
+    {
+     "id": "tajo",
+     "name": "Tajo",
+     "target": "random",
+     "multiplier": 1.3,
+     "hits": [10, 20]
+    },
+    {
+     "id": "sorbo",
+     "name": "Sorbo de Crisol",
+     "target": "self",
+     "effects": [
+      {
+       "type": "buff",
+       "stat": "res",
+       "value": 0.15,
+       "turns": 2,
+       "target": "self",
+       "name": "Sal Fundida"
+      }
+     ]
+    }
+   ],
+   "pattern": ["tajo", "tajo", "sorbo"],
+   "traits": {
+    "shape": "torre",
+    "rampAtk": 0.1,
+    "hint": "Gana 10 % de ataque cada turno que sigue en pie: mátala pronto."
+   }
+  },
+  {
+   "id": "ave_a_medias",
+   "name": "El Ave a Medias",
+   "shortName": "El Ave a Medias",
+   "article": "el",
+   "description": "Algo de sal que tiene forma de ave y no la ha entendido del todo.",
+   "level": 50,
+   "hp": 30000,
+   "atk": 1250,
+   "spd": 102,
+   "toughness": 110,
+   "attackPlanet": "saturno",
+   "weaknesses": ["marte", "sol"],
+   "res": {
+    "saturno": 0.2
+   },
+   "skills": [
+    {
+     "id": "picotazo",
+     "name": "Picotazo de Cristal",
+     "target": "random",
+     "multiplier": 1.4,
+     "hits": [6, 12, 18]
+    },
+    {
+     "id": "aletazo",
+     "name": "Alas de Más",
+     "target": "all",
+     "multiplier": 0.6,
+     "hits": [10, 22],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "speed",
+       "value": 0.1,
+       "turns": 2,
+       "name": "Vértigo"
+      }
+     ]
+    }
+   ],
+   "pattern": ["picotazo", "aletazo"],
+   "traits": {
+    "shape": "ave",
+    "hint": "Baja la Velocidad de todas: abre la Cadena antes que ella."
+   }
+  },
+  {
+   "id": "ferran",
+   "name": "Capitana Ferrán",
+   "shortName": "Capitana Ferrán",
+   "article": "la",
+   "description": "Manda la Casa de Aries en estos montes.",
+   "level": 50,
+   "hp": 95000,
+   "atk": 1550,
+   "spd": 108,
+   "toughness": 230,
+   "attackPlanet": "marte",
+   "weaknesses": ["saturno", "luna", "venus"],
+   "res": {
+    "marte": 0.2
+   },
+   "skills": [
+    {
+     "id": "tajo",
+     "name": "Tajo de Capitana",
+     "target": "random",
+     "multiplier": 1.5,
+     "hits": [8, 20],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "bleed",
+       "value": 0.3,
+       "turns": 2,
+       "name": "Herida"
+      }
+     ]
+    },
+    {
+     "id": "carga",
+     "name": "Carga de Hierro",
+     "target": "all",
+     "multiplier": 0.75,
+     "hits": [12, 24]
+    },
+    {
+     "id": "grito",
+     "name": "Grito del Carnero",
+     "target": "self",
+     "effects": [
+      {
+       "type": "buff",
+       "stat": "atk",
+       "value": 0.25,
+       "turns": 2,
+       "target": "self",
+       "name": "Grito del Carnero"
+      }
+     ]
+    },
+    {
+     "id": "juramento",
+     "name": "Juramento Roto",
+     "target": "all",
+     "multiplier": 2.0,
+     "hits": [[10, 0.4], [30, 0.6]],
+     "ultimate": true,
+     "charge": true,
+     "chargeText": "Ferrán clava la espada en el suelo. El Carnero se levanta detrás de ella."
+    }
+   ],
+   "pattern": ["tajo", "carga", "grito", "tajo", "juramento"],
+   "boss": true,
+   "actionsPerTurn": 2,
+   "traits": {
+    "shape": "torre",
+    "hint": "Cuando grita, sube su ataque: rómpela antes de que cargue el Juramento."
+   },
+   "phase2": {
+    "hpBelow": 0.5,
+    "spdBonus": 15,
+    "text": "Ferrán suelta la espada. El Carnero mira por sus ojos.",
+    "pattern": ["tajo", "carga", "juramento"]
+   }
+  },
+  {
+   "id": "carnero_hierro",
+   "name": "Carnero de Hierro",
+   "shortName": "Carnero de Hierro",
+   "article": "el",
+   "description": "El espíritu de Ferrán, suelto sobre las islas de mena.",
+   "level": 50,
+   "hp": 80000,
+   "atk": 1500,
+   "spd": 110,
+   "toughness": 200,
+   "attackPlanet": "marte",
+   "weaknesses": ["saturno", "luna"],
+   "res": {
+    "marte": 0.2
+   },
+   "skills": [
+    {
+     "id": "embestida",
+     "name": "Embestida",
+     "target": "random",
+     "multiplier": 1.6,
+     "hits": [10, 24]
+    },
+    {
+     "id": "cuernos",
+     "name": "Cuernos en Espiral",
+     "target": "all",
+     "multiplier": 0.7,
+     "hits": [8, 20, 32]
+    },
+    {
+     "id": "estrella",
+     "name": "La Estrella del Pecho",
+     "target": "all",
+     "multiplier": 2.2,
+     "hits": [[10, 0.4], [30, 0.6]],
+     "ultimate": true,
+     "charge": true,
+     "chargeText": "La grieta del pecho se abre. Hay una estrella adentro que parpadea."
+    }
+   ],
+   "pattern": ["embestida", "cuernos", "embestida", "estrella"],
+   "boss": true,
+   "actionsPerTurn": 2,
+   "traits": {
+    "shape": "bestia",
+    "rampAtk": 0.06,
+    "hint": "Crece cada turno, como las soldadas que lo alimentan."
+   },
+   "phase2": {
+    "hpBelow": 0.5,
+    "spdBonus": 20,
+    "text": "La estrella del pecho deja de parpadear y te mira.",
+    "pattern": ["embestida", "estrella", "cuernos"]
+   }
+  },
+  {
+   "id": "medusa_salmuera",
+   "name": "Medusa de Salmuera",
+   "shortName": "Medusa de Salmuera",
+   "article": "la",
+   "description": "Medusa de salmuera con cristales flotando dentro.",
+   "level": 50,
+   "hp": 14000,
+   "atk": 1050,
+   "spd": 104,
+   "toughness": 45,
+   "attackPlanet": "luna",
+   "weaknesses": ["marte", "sol"],
+   "res": {
+    "luna": 0.2
+   },
+   "skills": [
+    {
+     "id": "roce",
+     "name": "Roce Turbio",
+     "target": "random",
+     "multiplier": 1.1,
+     "hits": [8, 16],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "poison",
+       "value": 0.2,
+       "turns": 2,
+       "name": "Salmuera"
+      }
+     ]
+    },
+    {
+     "id": "nube",
+     "name": "Nube de Sal",
+     "target": "all",
+     "multiplier": 0.45,
+     "hits": [14]
+    }
+   ],
+   "pattern": ["roce", "nube"],
+   "traits": {
+    "shape": "flor",
+    "hint": "Envenena: ten a mano una cura."
+   }
+  },
+  {
+   "id": "gaviota_hueca",
+   "name": "Gaviota Hueca",
+   "shortName": "Gaviota Hueca",
+   "article": "la",
+   "description": "Una gaviota con cuerpo de concha vacía.",
+   "level": 50,
+   "hp": 11000,
+   "atk": 1150,
+   "spd": 124,
+   "toughness": 40,
+   "attackPlanet": "luna",
+   "weaknesses": ["jupiter", "marte"],
+   "res": {
+    "luna": 0.2
+   },
+   "skills": [
+    {
+     "id": "picada",
+     "name": "Picada",
+     "target": "lowestHp",
+     "multiplier": 1.35,
+     "hits": [6, 12]
+    }
+   ],
+   "pattern": ["picada"],
+   "traits": {
+    "shape": "ave",
+    "hint": "Siempre ataca a la más herida."
+   }
+  },
+  {
+   "id": "cangrejo_salinero",
+   "name": "Cangrejo Salinero",
+   "shortName": "Cangrejo Salinero",
+   "article": "el",
+   "description": "Alza la pinza como escudo frente a los suyos.",
+   "level": 50,
+   "hp": 19000,
+   "atk": 1100,
+   "spd": 106,
+   "toughness": 70,
+   "attackPlanet": "luna",
+   "weaknesses": ["marte", "jupiter"],
+   "res": {
+    "luna": 0.2
+   },
+   "skills": [
+    {
+     "id": "pinza",
+     "name": "Pinza",
+     "target": "random",
+     "multiplier": 1.2,
+     "hits": [10, 20]
+    },
+    {
+     "id": "escudo",
+     "name": "Concha Alzada",
+     "target": "self",
+     "effects": [
+      {
+       "type": "buff",
+       "stat": "res",
+       "value": 0.2,
+       "turns": 2,
+       "target": "self",
+       "name": "Concha Alzada"
+      }
+     ]
+    }
+   ],
+   "pattern": ["pinza", "escudo"],
+   "traits": {
+    "shape": "cangrejo",
+    "protectAllies": 0.4,
+    "hint": "Mientras viva, los demás reciben 40 % menos de daño: rómpelo primero."
+   }
+  },
+  {
+   "id": "madre_tenaza",
+   "name": "Madre Tenaza",
+   "shortName": "Madre Tenaza",
+   "article": "la",
+   "description": "Un cangrejo colosal con un pueblo entero sobre el caparazón.",
+   "level": 50,
+   "hp": 95000,
+   "atk": 1550,
+   "spd": 108,
+   "toughness": 230,
+   "attackPlanet": "luna",
+   "weaknesses": ["marte", "jupiter", "sol"],
+   "res": {
+    "luna": 0.2
+   },
+   "skills": [
+    {
+     "id": "tenaza",
+     "name": "Tenaza",
+     "target": "lowestHp",
+     "multiplier": 1.6,
+     "hits": [10, 24]
+    },
+    {
+     "id": "marea",
+     "name": "Marea que Hunde",
+     "target": "all",
+     "multiplier": 0.7,
+     "hits": [14, 28],
+     "effects": [
+      {
+       "type": "delay",
+       "value": 0.1,
+       "name": "Marea"
+      }
+     ]
+    },
+    {
+     "id": "caparazon",
+     "name": "Caparazón de Pueblo",
+     "target": "self",
+     "effects": [
+      {
+       "type": "buff",
+       "stat": "res",
+       "value": 0.3,
+       "turns": 2,
+       "target": "self",
+       "name": "Caparazón"
+      }
+     ]
+    },
+    {
+     "id": "hundimiento",
+     "name": "Hundimiento",
+     "target": "all",
+     "multiplier": 2.1,
+     "hits": [[10, 0.4], [30, 0.6]],
+     "ultimate": true,
+     "charge": true,
+     "chargeText": "Madre Tenaza se sumerge. La campana del pueblo de su lomo empieza a sonar."
+    }
+   ],
+   "pattern": ["tenaza", "marea", "caparazon", "tenaza", "hundimiento"],
+   "boss": true,
+   "actionsPerTurn": 2,
+   "traits": {
+    "shape": "cangrejo",
+    "hint": "Su caparazón resiste: quiébrala con sus debilidades antes del Hundimiento."
+   },
+   "phase2": {
+    "hpBelow": 0.5,
+    "spdBonus": 10,
+    "text": "Las casitas del lomo encienden sus ventanas. Alguien sigue viviendo ahí.",
+    "pattern": ["tenaza", "hundimiento", "marea"]
+   }
+  },
+  {
+   "id": "medusa_cielo",
+   "name": "Medusa del Cielo",
+   "shortName": "Medusa del Cielo",
+   "article": "la",
+   "description": "Flota entre las nubes; sus tentáculos caen hacia arriba.",
+   "level": 50,
+   "hp": 80000,
+   "atk": 1500,
+   "spd": 110,
+   "toughness": 200,
+   "attackPlanet": "luna",
+   "weaknesses": ["marte", "sol"],
+   "res": {
+    "luna": 0.2
+   },
+   "skills": [
+    {
+     "id": "tentaculo",
+     "name": "Tentáculo que Sube",
+     "target": "random",
+     "multiplier": 1.4,
+     "hits": [8, 16, 24],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "poison",
+       "value": 0.25,
+       "turns": 2,
+       "name": "Agua de Arriba"
+      }
+     ]
+    },
+    {
+     "id": "lluvia",
+     "name": "Lluvia al Revés",
+     "target": "all",
+     "multiplier": 0.6,
+     "hits": [12, 24],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "poison",
+       "value": 0.15,
+       "turns": 2,
+       "name": "Agua de Arriba"
+      }
+     ]
+    },
+    {
+     "id": "marea_alta",
+     "name": "Marea del Cielo",
+     "target": "all",
+     "multiplier": 2.0,
+     "hits": [[10, 0.4], [30, 0.6]],
+     "ultimate": true,
+     "charge": true,
+     "chargeText": "El mar entero sube hacia la medusa."
+    }
+   ],
+   "pattern": ["tentaculo", "lluvia", "marea_alta"],
+   "boss": true,
+   "actionsPerTurn": 2,
+   "traits": {
+    "shape": "flor",
+    "healAllies": 0.04,
+    "hint": "Se cura sola cada turno: el veneno se acumula, la paciencia no."
+   }
+  },
+  {
+   "id": "moneda_andante",
+   "name": "Moneda Andante",
+   "shortName": "Moneda Andante",
+   "article": "la",
+   "description": "Una moneda de bronce con una cara que parpadea.",
+   "level": 50,
+   "hp": 21000,
+   "atk": 900,
+   "spd": 90,
+   "toughness": 75,
+   "attackPlanet": "venus",
+   "weaknesses": ["marte", "saturno"],
+   "res": {
+    "venus": 0.2
+   },
+   "skills": [
+    {
+     "id": "rodar",
+     "name": "Rodar de Canto",
+     "target": "random",
+     "multiplier": 1.1,
+     "hits": [10, 18]
+    }
+   ],
+   "pattern": ["rodar"],
+   "traits": {
+    "shape": "ojo",
+    "hint": "Mucha Firmeza: rómpela con sus debilidades."
+   }
+  },
+  {
+   "id": "guardia_contrapeso",
+   "name": "Guardia de Contrapeso",
+   "shortName": "Guardia de Contrapeso",
+   "article": "el",
+   "description": "Guardia del banco con una pesa colgada del brazo.",
+   "level": 50,
+   "hp": 14000,
+   "atk": 1050,
+   "spd": 104,
+   "toughness": 45,
+   "attackPlanet": "venus",
+   "weaknesses": ["marte", "mercurio"],
+   "res": {
+    "venus": 0.2
+   },
+   "skills": [
+    {
+     "id": "pesa",
+     "name": "Golpe de Pesa",
+     "target": "random",
+     "multiplier": 1.25,
+     "hits": [12]
+    },
+    {
+     "id": "peso",
+     "name": "Peso Muerto",
+     "target": "random",
+     "multiplier": 0.6,
+     "hits": [10],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "atk",
+       "value": 0.15,
+       "turns": 2,
+       "name": "Peso Muerto"
+      }
+     ]
+    }
+   ],
+   "pattern": ["pesa", "peso"],
+   "traits": {
+    "shape": "torre",
+    "hint": "Baja el ataque de una bruja: límpiala o cámbiala de turno."
+   }
+  },
+  {
+   "id": "tesorera_almas",
+   "name": "Tesorera de Almas",
+   "shortName": "Tesorera de Almas",
+   "article": "la",
+   "description": "Lleva el libro de cuentas encadenado a la muñeca.",
+   "level": 50,
+   "hp": 17000,
+   "atk": 1100,
+   "spd": 106,
+   "toughness": 55,
+   "attackPlanet": "venus",
+   "weaknesses": ["marte", "saturno"],
+   "res": {
+    "venus": 0.2
+   },
+   "skills": [
+    {
+     "id": "cobro",
+     "name": "Cobro",
+     "target": "random",
+     "multiplier": 1.1,
+     "hits": [8, 16],
+     "effects": [
+      {
+       "type": "stealGrains",
+       "value": 1,
+       "name": "Cobro"
+      }
+     ]
+    },
+    {
+     "id": "interes",
+     "name": "Interés",
+     "target": "all",
+     "multiplier": 0.5,
+     "hits": [14]
+    }
+   ],
+   "pattern": ["cobro", "interes"],
+   "traits": {
+    "shape": "torre",
+    "healAllies": 0.06,
+    "hint": "Cobra un Grano en cada golpe y paga a sus guardias con vida: es la prioridad."
+   }
+  },
+  {
+   "id": "duquesa_fiel",
+   "name": "La Duquesa del Fiel",
+   "shortName": "La Duquesa del Fiel",
+   "article": "la",
+   "description": "Pesa almas. Nunca se equivoca de gramo.",
+   "level": 50,
+   "hp": 95000,
+   "atk": 1550,
+   "spd": 108,
+   "toughness": 230,
+   "attackPlanet": "venus",
+   "weaknesses": ["marte", "saturno", "mercurio"],
+   "res": {
+    "venus": 0.2
+   },
+   "skills": [
+    {
+     "id": "fiel",
+     "name": "Aguja del Fiel",
+     "target": "highestSalinity",
+     "multiplier": 1.6,
+     "hits": [10, 22]
+    },
+    {
+     "id": "balanza",
+     "name": "Balanza Inclinada",
+     "target": "all",
+     "multiplier": 0.7,
+     "hits": [12, 26],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "damage",
+       "value": 0.1,
+       "turns": 2,
+       "name": "Deuda"
+      }
+     ]
+    },
+    {
+     "id": "pago",
+     "name": "Pago Pendiente",
+     "target": "self",
+     "effects": [
+      {
+       "type": "buff",
+       "stat": "atk",
+       "value": 0.2,
+       "turns": 2,
+       "target": "self",
+       "name": "Intereses"
+      }
+     ]
+    },
+    {
+     "id": "juicio",
+     "name": "Juicio de la Balanza",
+     "target": "all",
+     "multiplier": 2.0,
+     "hits": [[10, 0.4], [30, 0.6]],
+     "ultimate": true,
+     "charge": true,
+     "chargeText": "La Duquesa pone tu nombre en un platillo. El otro está vacío."
+    }
+   ],
+   "pattern": ["fiel", "balanza", "pago", "fiel", "juicio"],
+   "boss": true,
+   "actionsPerTurn": 2,
+   "traits": {
+    "shape": "espejo",
+    "reflect": 0.1,
+    "hint": "Te devuelve 10 % del daño: lo que pagas, te lo cobra."
+   },
+   "phase2": {
+    "hpBelow": 0.5,
+    "spdBonus": 15,
+    "text": "El platillo vacío baja solo. Algo invisible acaba de sentarse en él.",
+    "pattern": ["fiel", "juicio", "balanza"]
+   }
+  },
+  {
+   "id": "contador_sin_rostro",
+   "name": "Contador sin Rostro",
+   "shortName": "Contador sin Rostro",
+   "article": "el",
+   "description": "Una toga de páginas sin cara, con manos que escriben.",
+   "level": 50,
+   "hp": 80000,
+   "atk": 1500,
+   "spd": 110,
+   "toughness": 200,
+   "attackPlanet": "venus",
+   "weaknesses": ["marte", "saturno"],
+   "res": {
+    "venus": 0.2
+   },
+   "skills": [
+    {
+     "id": "borron",
+     "name": "Borrón",
+     "target": "all",
+     "multiplier": 0.6,
+     "hits": [10, 20],
+     "effects": [
+      {
+       "type": "dispel",
+       "count": 1,
+       "name": "Borrón"
+      }
+     ]
+    },
+    {
+     "id": "pluma",
+     "name": "Pluma en el Aire",
+     "target": "random",
+     "multiplier": 1.5,
+     "hits": [6, 14, 22]
+    },
+    {
+     "id": "saldo",
+     "name": "Saldo en Cero",
+     "target": "all",
+     "multiplier": 2.1,
+     "hits": [[10, 0.4], [30, 0.6]],
+     "ultimate": true,
+     "charge": true,
+     "chargeText": "Las páginas del cielo se ordenan en columnas. Tu nombre está en la de restar."
+    }
+   ],
+   "pattern": ["pluma", "borron", "pluma", "saldo"],
+   "boss": true,
+   "actionsPerTurn": 2,
+   "traits": {
+    "shape": "sombra",
+    "hint": "Borra tus mejoras: lánzalas justo antes de la Cadena."
+   }
+  },
+  {
+   "id": "gota_obsidiana",
+   "name": "Gota de Obsidiana",
+   "shortName": "Gota de Obsidiana",
+   "article": "la",
+   "description": "Una gota de vidrio negro que rebota.",
+   "level": 50,
+   "hp": 14000,
+   "atk": 1050,
+   "spd": 104,
+   "toughness": 45,
+   "attackPlanet": "saturno",
+   "weaknesses": ["sol", "luna"],
+   "res": {
+    "saturno": 0.2
+   },
+   "skills": [
+    {
+     "id": "rebote",
+     "name": "Rebote",
+     "target": "random",
+     "multiplier": 1.15,
+     "hits": [8, 18]
+    }
+   ],
+   "pattern": ["rebote"],
+   "traits": {
+    "shape": "masa",
+    "hint": "Al romperse suelta sal: +10 de Salinidad a todas.",
+    "onDeath": [
+     {
+      "type": "salinity",
+      "value": 10,
+      "name": "Esquirlas"
+     }
+    ]
+   }
+  },
+  {
+   "id": "garza_obsidiana",
+   "name": "Garza de Obsidiana",
+   "shortName": "Garza de Obsidiana",
+   "article": "la",
+   "description": "Plumas de vidrio negro y patas larguísimas.",
+   "level": 50,
+   "hp": 11000,
+   "atk": 1150,
+   "spd": 124,
+   "toughness": 40,
+   "attackPlanet": "saturno",
+   "weaknesses": ["jupiter", "sol"],
+   "res": {
+    "saturno": 0.2
+   },
+   "skills": [
+    {
+     "id": "navaja",
+     "name": "Pico de Navaja",
+     "target": "random",
+     "multiplier": 1.3,
+     "hits": [6, 14],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "bleed",
+       "value": 0.25,
+       "turns": 2,
+       "name": "Corte de Vidrio"
+      }
+     ]
+    }
+   ],
+   "pattern": ["navaja"],
+   "traits": {
+    "shape": "ave",
+    "hint": "Sus cortes sangran: termina rápido o cura."
+   }
+  },
+  {
+   "id": "sorbedor",
+   "name": "Sorbedor de Poza",
+   "shortName": "Sorbedor de Poza",
+   "article": "el",
+   "description": "Un remolino pequeño con boca.",
+   "level": 50,
+   "hp": 17000,
+   "atk": 1100,
+   "spd": 106,
+   "toughness": 55,
+   "attackPlanet": "saturno",
+   "weaknesses": ["sol", "jupiter"],
+   "res": {
+    "saturno": 0.2
+   },
+   "skills": [
+    {
+     "id": "sorbo",
+     "name": "Sorbo",
+     "target": "random",
+     "multiplier": 1.15,
+     "hits": [10]
+    },
+    {
+     "id": "remolino",
+     "name": "Remolino",
+     "target": "all",
+     "multiplier": 0.4,
+     "hits": [14],
+     "effects": [
+      {
+       "type": "delay",
+       "value": 0.1,
+       "name": "Remolino"
+      }
+     ]
+    }
+   ],
+   "pattern": ["sorbo", "remolino"],
+   "traits": {
+    "shape": "ojo",
+    "hint": "Cada dos turnos retrasa a todo el equipo: quiébralo antes del Remolino."
+   }
+  },
+  {
+   "id": "boca_vieja",
+   "name": "La Boca Vieja",
+   "shortName": "Boca Vieja",
+   "article": "la",
+   "description": "El remolino que se traga las barcas.",
+   "level": 50,
+   "hp": 55000,
+   "atk": 1550,
+   "spd": 108,
+   "toughness": 230,
+   "attackPlanet": "saturno",
+   "weaknesses": ["sol", "luna", "jupiter"],
+   "res": {
+    "saturno": 0.2
+   },
+   "skills": [
+    {
+     "id": "trago",
+     "name": "Trago",
+     "target": "random",
+     "multiplier": 1.6,
+     "hits": [10, 24]
+    },
+    {
+     "id": "giro",
+     "name": "Giro",
+     "target": "all",
+     "multiplier": 0.6,
+     "hits": [12, 26],
+     "effects": [
+      {
+       "type": "delay",
+       "value": 0.15,
+       "name": "Giro"
+      }
+     ]
+    },
+    {
+     "id": "traga_barcas",
+     "name": "Traga Barcas",
+     "target": "all",
+     "multiplier": 2.0,
+     "hits": [[10, 0.4], [30, 0.6]],
+     "ultimate": true,
+     "charge": true,
+     "chargeText": "La Boca Vieja se abre. Ya no se ve el fondo."
+    }
+   ],
+   "pattern": ["trago", "giro", "trago", "traga_barcas"],
+   "boss": true,
+   "actionsPerTurn": 1,
+   "traits": {
+    "shape": "ojo",
+    "hint": "Retrasa a todas cada dos turnos. Su gemela la cura: decide a cuál romper primero."
+   }
+  },
+  {
+   "id": "boca_nueva",
+   "name": "La Boca Nueva",
+   "shortName": "Boca Nueva",
+   "article": "la",
+   "description": "La gemela limpia. Se traga a la gente y deja las barcas.",
+   "level": 50,
+   "hp": 45000,
+   "atk": 1550,
+   "spd": 108,
+   "toughness": 230,
+   "attackPlanet": "saturno",
+   "weaknesses": ["sol", "marte", "jupiter"],
+   "res": {
+    "saturno": 0.2
+   },
+   "skills": [
+    {
+     "id": "sorbo",
+     "name": "Sorbo Amable",
+     "target": "lowestHp",
+     "multiplier": 1.4,
+     "hits": [8, 18]
+    },
+    {
+     "id": "canto",
+     "name": "Canto de Espuma",
+     "target": "all",
+     "multiplier": 0.5,
+     "hits": [14],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "speed",
+       "value": 0.1,
+       "turns": 2,
+       "name": "Espuma"
+      }
+     ]
+    }
+   ],
+   "pattern": ["sorbo", "canto"],
+   "boss": true,
+   "actionsPerTurn": 1,
+   "traits": {
+    "shape": "ojo",
+    "healAllies": 0.05,
+    "hint": "Cura a su gemela cada turno."
+   }
+  },
+  {
+   "id": "serpiente_nube",
+   "name": "Serpiente de Nube",
+   "shortName": "Serpiente de Nube",
+   "article": "la",
+   "description": "Larguísima, hecha de nubes de sal y escamas de obsidiana.",
+   "level": 50,
+   "hp": 80000,
+   "atk": 1500,
+   "spd": 110,
+   "toughness": 200,
+   "attackPlanet": "saturno",
+   "weaknesses": ["sol", "jupiter"],
+   "res": {
+    "saturno": 0.2
+   },
+   "skills": [
+    {
+     "id": "escamas",
+     "name": "Lluvia de Escamas",
+     "target": "all",
+     "multiplier": 0.55,
+     "hits": [6, 14, 22, 30],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "shock",
+       "value": 0.15,
+       "turns": 2,
+       "name": "Rayo de Sal"
+      }
+     ]
+    },
+    {
+     "id": "mordida",
+     "name": "Mordida de Nube",
+     "target": "random",
+     "multiplier": 1.5,
+     "hits": [10, 24]
+    },
+    {
+     "id": "tormenta",
+     "name": "Tormenta de Cacao",
+     "target": "all",
+     "multiplier": 2.1,
+     "hits": [[10, 0.4], [30, 0.6]],
+     "ultimate": true,
+     "charge": true,
+     "chargeText": "La serpiente se enrosca en las dos columnas. Huele a cacao quemado."
+    }
+   ],
+   "pattern": ["mordida", "escamas", "mordida", "tormenta"],
+   "boss": true,
+   "actionsPerTurn": 2,
+   "traits": {
+    "shape": "ave",
+    "hint": "Golpes en área con electrocución: reparte la vida."
+   }
+  },
+  {
+   "id": "sin_carta",
+   "name": "Sin Carta",
+   "shortName": "Sin Carta",
+   "article": "el",
+   "description": "No tiene carta natal. Los Aspectos no tienen dónde agarrarse.",
+   "level": 50,
+   "hp": 18000,
+   "atk": 1150,
+   "spd": 100,
+   "toughness": 70,
+   "attackPlanet": "saturno",
+   "weaknesses": ["sol", "marte"],
+   "res": {
+    "saturno": 0.2
+   },
+   "skills": [
+    {
+     "id": "vacio",
+     "name": "Vacío",
+     "target": "random",
+     "multiplier": 1.3,
+     "hits": [12]
+    },
+    {
+     "id": "borrar",
+     "name": "Borrar el Cielo",
+     "target": "all",
+     "multiplier": 0.5,
+     "hits": [16]
+    }
+   ],
+   "pattern": ["vacio", "borrar"],
+   "traits": {
+    "shape": "sombra",
+    "aspectImmune": true,
+    "hint": "Inmune a los Aspectos: gana con Spark, Firmeza y Ascensiones."
+   }
+  },
+  {
+   "id": "huesped_menor",
+   "name": "Huésped Menor",
+   "shortName": "Huésped Menor",
+   "article": "el",
+   "description": "Metal líquido que se pliega en ángulos que no deberían existir.",
+   "level": 50,
+   "hp": 24000,
+   "atk": 1150,
+   "spd": 100,
+   "toughness": 70,
+   "attackPlanet": "jupiter",
+   "weaknesses": ["saturno", "luna"],
+   "res": {
+    "jupiter": 0.2
+   },
+   "skills": [
+    {
+     "id": "plegar",
+     "name": "Plegarse",
+     "target": "random",
+     "multiplier": 1.4,
+     "hits": [8, 16, 24]
+    },
+    {
+     "id": "mirar",
+     "name": "Mirar con Todos",
+     "target": "all",
+     "multiplier": 0.6,
+     "hits": [12],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "res",
+       "value": 0.1,
+       "turns": 2,
+       "name": "Paralaje"
+      }
+     ]
+    }
+   ],
+   "pattern": ["plegar", "mirar"],
+   "traits": {
+    "shape": "ojo",
+    "reflect": 0.08,
+    "hint": "Devuelve parte del daño y baja tus resistencias."
+   },
+   "phase2": {
+    "hpBelow": 0.5,
+    "spdBonus": 25,
+    "text": "El Huésped se despliega. Tiene más ojos de los que cabían.",
+    "pattern": ["plegar", "plegar", "mirar"]
+   }
+  }
+ ],
+ "regions": [
+  {
+   "id": "aries",
+   "native": "soldada_crisol",
+   "material": "hierro_rojo",
+   "planet": "marte",
+   "station": "fragua_hierro_rojo",
+   "zones": [
+    {
+     "id": "aries_orilla",
+     "kind": "orilla",
+     "name": "Valdehierro",
+     "description": "El pueblo minero arde bajo las torres de hierro.",
+     "missions": ["aries_1"],
+     "pool": ["escoria_viva", "perro_fragua", "soldada_crisol"],
+     "sections": 1
+    },
+    {
+     "id": "aries_subsuelo",
+     "kind": "subsuelo",
+     "name": "El tiro de los Diecinueve",
+     "description": "Túneles de sal que respiran.",
+     "missions": ["aries_2"],
+     "pool": ["escoria_viva", "figura_sal", "perro_fragua"],
+     "sections": 2
+    },
+    {
+     "id": "aries_corazon",
+     "kind": "corazon",
+     "name": "Rojaforja",
+     "description": "La fortaleza de los crisoles y la catedral de sal.",
+     "missions": ["aries_3", "aries_4", "aries_5"],
+     "pool": ["soldada_crisol", "perro_fragua", "escoria_viva"],
+     "boss": "ferran",
+     "sections": 2
+    },
+    {
+     "id": "aries_cielo",
+     "kind": "cielo",
+     "name": "Islas de Mena",
+     "description": "Islas de hierro flotando sobre los montes. Hay una estrella de más.",
+     "pool": ["soldada_crisol", "perro_fragua", "ave_a_medias"],
+     "boss": "carnero_hierro",
+     "sections": 4
+    }
+   ]
+  },
+  {
+   "id": "cancer",
+   "native": "cangrejo_salinero",
+   "material": "nacar",
+   "planet": "luna",
+   "station": "",
+   "zones": [
+    {
+     "id": "cancer_orilla",
+     "kind": "orilla",
+     "name": "Kerbruma",
+     "description": "Marea baja entre barcas salineras varadas.",
+     "missions": ["can_1", "can_2"],
+     "pool": ["medusa_salmuera", "gaviota_hueca", "cangrejo_salinero"],
+     "sections": 1
+    },
+    {
+     "id": "cancer_subsuelo",
+     "kind": "subsuelo",
+     "name": "La Cueva de Nácar",
+     "description": "Solo se abre cuando el mar se retira.",
+     "missions": ["can_3"],
+     "pool": ["medusa_salmuera", "cangrejo_salinero", "figura_sal"],
+     "sections": 2
+    },
+    {
+     "id": "cancer_corazon",
+     "kind": "corazon",
+     "name": "El Pueblo del Caparazón",
+     "description": "La Casa vive sobre un cangrejo colosal.",
+     "missions": ["can_4", "can_5"],
+     "pool": ["cangrejo_salinero", "gaviota_hueca", "medusa_salmuera"],
+     "boss": "madre_tenaza",
+     "sections": 2
+    },
+    {
+     "id": "cancer_cielo",
+     "kind": "cielo",
+     "name": "La Marea del Cielo",
+     "description": "El agua sube en columnas y no vuelve.",
+     "pool": ["medusa_salmuera", "gaviota_hueca", "cangrejo_salinero"],
+     "boss": "medusa_cielo",
+     "sections": 4
+    }
+   ]
+  },
+  {
+   "id": "libra",
+   "native": "tesorera_almas",
+   "material": "pesa_ducal",
+   "planet": "venus",
+   "station": "",
+   "zones": [
+    {
+     "id": "libra_orilla",
+     "kind": "orilla",
+     "name": "La Aduana de Almas",
+     "description": "Canales, logias y faroles con almitas presas.",
+     "missions": ["lib_1", "lib_2"],
+     "pool": ["moneda_andante", "guardia_contrapeso", "tesorera_almas"],
+     "sections": 1
+    },
+    {
+     "id": "libra_subsuelo",
+     "kind": "subsuelo",
+     "name": "Las Bóvedas",
+     "description": "Pasillos que se repiten bajo el banco.",
+     "missions": ["lib_3"],
+     "pool": ["moneda_andante", "tesorera_almas", "figura_sal"],
+     "sections": 2
+    },
+    {
+     "id": "libra_corazon",
+     "kind": "corazon",
+     "name": "El Salón del Fiel",
+     "description": "Una balanza colosal entre sal y almas.",
+     "missions": ["lib_4", "lib_5"],
+     "pool": ["guardia_contrapeso", "tesorera_almas", "moneda_andante"],
+     "boss": "duquesa_fiel",
+     "sections": 2
+    },
+    {
+     "id": "libra_cielo",
+     "kind": "cielo",
+     "name": "El Libro del Cielo",
+     "description": "Páginas flotantes y balanzas colgadas de las estrellas.",
+     "pool": ["moneda_andante", "guardia_contrapeso", "tesorera_almas"],
+     "boss": "contador_sin_rostro",
+     "sections": 4
+    }
+   ]
+  },
+  {
+   "id": "capricornio",
+   "native": "sorbedor",
+   "material": "obsidiana",
+   "planet": "saturno",
+   "station": "horno_obsidiana",
+   "zones": [
+    {
+     "id": "capricornio_orilla",
+     "kind": "orilla",
+     "name": "Las Pozas de Zapotitlán",
+     "description": "Salinas como espejos negros.",
+     "missions": ["cap_1", "cap_2"],
+     "pool": ["gota_obsidiana", "garza_obsidiana", "sorbedor"],
+     "sections": 1
+    },
+    {
+     "id": "capricornio_subsuelo",
+     "kind": "subsuelo",
+     "name": "El Mercado de Abajo",
+     "description": "Cavernas de obsidiana y venas de magma.",
+     "missions": ["cap_3"],
+     "pool": ["gota_obsidiana", "sorbedor", "figura_sal"],
+     "sections": 2
+    },
+    {
+     "id": "capricornio_corazon",
+     "kind": "corazon",
+     "name": "Las Dos Bocas",
+     "description": "Dos columnas de sal que giran sin moverse.",
+     "missions": ["cap_4", "cap_5"],
+     "pool": ["sorbedor", "garza_obsidiana", "gota_obsidiana"],
+     "boss": "boca_vieja",
+     "sections": 2
+    },
+    {
+     "id": "capricornio_cielo",
+     "kind": "cielo",
+     "name": "El Ojo de Nube",
+     "description": "Las columnas terminan en una nube que mira.",
+     "pool": ["garza_obsidiana", "gota_obsidiana", "sorbedor"],
+     "boss": "serpiente_nube",
+     "sections": 4
+    }
+   ]
+  }
+ ]
+}

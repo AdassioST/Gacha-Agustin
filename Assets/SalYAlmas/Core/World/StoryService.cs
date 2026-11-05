@@ -23,7 +23,7 @@ namespace SalYAlmas.Core.World
     /// Motor de historia LitRPG (GDD 6 y 13): regiones en orden libre, misiones, decisiones con umbrales fijos y sin dados,
     /// marcas de Destino, Títulos, Almas digeridas, Senderos, Relectura, reloj de eclipses y Paralaje. Todo sale de datos.
     /// </summary>
-    public sealed class StoryService
+    public sealed partial class StoryService
     {
         private readonly MetaGame _g;
 
@@ -130,6 +130,8 @@ namespace SalYAlmas.Core.World
             int idx = region.Missions.FindIndex(m => m.Id == missionId);
             if (idx < 0) return "Misión desconocida.";
             if (!region.Prologue && !PrologueDone) return "Termina primero el prólogo.";
+            string ring = RingBlock(regionId);
+            if (ring.Length > 0) return ring;
             if (MissionDone(missionId)) return GameFinished ? "" : "La Relectura se abre al terminar el juego.";
             for (int i = 0; i < idx; i++) if (!MissionDone(region.Missions[i].Id)) return "Falta " + region.Missions[i].Name + ".";
             return "";
@@ -145,6 +147,7 @@ namespace SalYAlmas.Core.World
         {
             if (!C.Created) return OpResult.Fail("Crea primero a tu Calculista.");
             if (InMission) return OpResult.Fail("Ya hay una misión en curso.");
+            if (InExpedition) return OpResult.Fail("Termina primero la Expedición.");
             string why = CanStart(regionId, missionId);
             if (why.Length > 0) return OpResult.Fail(why);
             var region = R.Region(regionId);
@@ -152,7 +155,11 @@ namespace SalYAlmas.Core.World
             C.Reread = MissionDone(missionId);
             C.Mission = m.Id;
             C.MissionRegion = region.Id;
+            if (!region.Prologue && !C.Arrival.ContainsKey(region.Id)) C.Arrival[region.Id] = RegionsDoneCount;
             if (!region.Prologue && !C.RegionsVisited.Contains(region.Id)) C.RegionsVisited.Add(region.Id);
+            C.Section = 0;
+            C.CarryHp.Clear();
+            C.CarrySalinity.Clear();
             EnterScene(m.Start);
             return OpResult.Success(m.Name);
         }
@@ -258,6 +265,7 @@ namespace SalYAlmas.Core.World
             var mission = CurrentMission;
             Apply(mission.Rewards);
             if (!C.MissionsDone.Contains(mission.Id)) C.MissionsDone.Add(mission.Id);
+            bool reread = C.Reread;
             C.Mission = "";
             C.Scene = "";
             C.MissionRegion = "";
@@ -276,12 +284,18 @@ namespace SalYAlmas.Core.World
                     if (done % R.EclipseEvery == 0) Eclipse();
                 }
             }
+            C.Reread = reread;
+            OnOdysseyMissionFinished(region, mission);
+            C.Reread = false;
         }
 
         /// <summary>Abandona la misión: se vuelve a empezar desde su inicio. Lo ganado en sus escenas se queda.</summary>
         public OpResult LeaveMission()
         {
             if (!InMission) return OpResult.Fail("No hay misión.");
+            C.Section = 0;
+            C.CarryHp.Clear();
+            C.CarrySalinity.Clear();
             C.Mission = "";
             C.Scene = "";
             C.MissionRegion = "";
@@ -315,6 +329,7 @@ namespace SalYAlmas.Core.World
         public BattleSetup PrepareBattle(IReadOnlyList<string> team, ulong seed)
         {
             var battle = CurrentScene?.Battle ?? throw new InvalidOperationException("No hay combate en esta escena.");
+            if (OdysseyBattle(battle)) return PrepareOdysseyBattle(battle, team, seed);
             var ids = battle.Team.Count > 0 ? (IReadOnlyList<string>)battle.Team : team;
             BattleSetup setup;
             if (battle.Team.Count > 0)
@@ -356,6 +371,8 @@ namespace SalYAlmas.Core.World
             if (!b.IsOver) return OpResult.Fail("El combate no ha terminado.");
             if (b.Outcome != Events.BattleOutcome.Victory) return OpResult.Fail("Caíste. Puedes reintentar sin costo.");
             AddSenderoXp(R.SenderoXpPerWin);
+            if (OdysseyBattle(battle) && ResolveOdysseySection(battle, b))
+                return OpResult.Success($"Sección {C.Section} de {SectionCount}");
             foreach (var w in b.Witches) C.Souls += w.IsAlive ? 1 : 0;
             Go(battle.Next);
             return OpResult.Success("Victoria");

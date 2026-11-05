@@ -10,15 +10,114 @@ namespace SalYAlmas.Core.World
     /// <summary>Carga y valida story.json, services.json y loc.json. Junta todos los errores, como los otros cargadores.</summary>
     public static class WorldLoader
     {
-        public static WorldDatabase Load(string story, string services, string loc, MetaDatabase meta)
+        public static WorldDatabase Load(string story, string services, string loc, MetaDatabase meta, string odyssey = null)
         {
             var r = new Reader();
             var w = new WorldDatabase();
+            JsonNode odysseyRoot = null;
+            // Los enemigos de la Odisea van primero: la historia los usa en sus combates.
+            if (odyssey != null) r.Guard("odyssey.json", () =>
+            {
+                odysseyRoot = Json.Parse(odyssey, "odyssey.json");
+                DataLoader.ReadEnemies(odysseyRoot, r, id => meta.RegionEnemies.ContainsKey(id) || meta.FresnoEnemies.ContainsKey(id) || meta.Combat.Enemies.ContainsKey(id),
+                    e => meta.RegionEnemies.Add(e.Id, e));
+            });
             r.Guard("story.json", () => LoadStory(Json.Parse(story, "story.json"), w.Story, meta, r));
+            if (odysseyRoot != null && r.Errors.Count == 0) r.Guard("odyssey.json", () => LoadOdyssey(odysseyRoot, w.Story, meta, r));
             r.Guard("services.json", () => LoadServices(Json.Parse(services, "services.json"), w, meta, r));
             r.Guard("loc.json", () => LoadLoc(Json.Parse(loc, "loc.json"), w.Loc, r));
             if (r.Errors.Count > 0) throw new DataValidationException(r.Errors);
             return w;
+        }
+
+        // ------------------------------------------------------------------ Odisea (docs/propuestas/ODISEA.md)
+
+        private static readonly Dictionary<string, ZoneKind> ZoneKinds = new Dictionary<string, ZoneKind>
+        {
+            { "orilla", ZoneKind.Orilla }, { "subsuelo", ZoneKind.Subsuelo }, { "corazon", ZoneKind.Corazon }, { "cielo", ZoneKind.Cielo },
+        };
+
+        public static string KindId(ZoneKind k) => k == ZoneKind.Orilla ? "orilla" : k == ZoneKind.Subsuelo ? "subsuelo" : k == ZoneKind.Corazon ? "corazon" : "cielo";
+
+        private static void LoadOdyssey(JsonNode root, StoryRules s, MetaDatabase meta, Reader r)
+        {
+            var o = s.Odyssey;
+            o.Enabled = true;
+            var ru = r.Obj(root, "rules");
+            if (ru != null)
+            {
+                o.LevelBase = r.Int(ru, "levelBase", 1, 80);
+                o.LevelStep = r.Int(ru, "levelStep", 0, 20);
+                var za = r.Arr(ru, "zoneAdd");
+                if (za.Count != 4) r.Error(ru, "zoneAdd lleva cuatro valores: orilla, subsuelo, corazón y cielo");
+                else for (int i = 0; i < 4; i++) o.ZoneAdd[i] = (int)za[i].AsNumber;
+                o.BossAdd = r.Int(ru, "bossAdd", 0, 20);
+                o.MaxTide = r.Int(ru, "maxTide", 0, 10);
+                o.TideHp = r.Num(ru, "tideHp", 0, 1);
+                o.WaveStrength = r.Num(ru, "waveStrength", 0.1, 2);
+                o.SectionAlmitas = r.Num(ru, "sectionAlmitas", 0, 100000);
+                o.SectionExponent = r.Num(ru, "sectionExponent", 0, 3);
+                o.MaterialChance = r.Num(ru, "materialChance", 0, 1);
+                o.MaterialMin = r.Int(ru, "materialMin", 0, 50);
+                o.MaterialMax = r.Int(ru, "materialMax", 0, 50);
+                o.SaltChance = r.Num(ru, "saltChance", 0, 1);
+                o.TreasureChance = r.Num(ru, "treasureChance", 0, 1);
+                o.ZoneSales = r.Int(ru, "zoneSales", 0, 10000);
+                o.ExpeditionSections = r.Int(ru, "expeditionSections", 1, 10);
+                o.DailyFull = r.Int(ru, "dailyFull", 0, 1000);
+                o.AfterCap = r.Num(ru, "afterCap", 0, 1);
+                o.FallenHp = r.Num(ru, "fallenHp", 0.01, 1);
+                foreach (var n in r.Arr(ru, "grietaInvaders")) o.GrietaInvaders.Add(n.AsString);
+                foreach (var n in r.Arr(ru, "abismoInvaders")) o.AbismoInvaders.Add(n.AsString);
+                foreach (var n in r.Arr(ru, "tradeMaterials", required: false))
+                {
+                    if (!meta.Catalog.Has(Economy.Res.Mat(n.AsString))) r.Error(n, "material desconocido: " + n.AsString);
+                    else o.TradeMaterials.Add(n.AsString);
+                }
+            }
+            foreach (var id in o.GrietaInvaders) if (meta.Enemy(id) == null) r.Error(ru, "invasor desconocido: " + id);
+            foreach (var id in o.AbismoInvaders) if (meta.Enemy(id) == null) r.Error(ru, "invasor desconocido: " + id);
+
+            foreach (var n in r.Arr(root, "regions"))
+            {
+                var region = s.Region(r.Str(n, "id"));
+                if (region == null) { r.Error(n, "región desconocida en odyssey.json"); continue; }
+                region.Native = r.Str(n, "native");
+                region.Material = r.Str(n, "material");
+                region.Planet = r.PlanetOf(n, "planet");
+                region.Station = r.Str(n, "station", required: false);
+                if (meta.Enemy(region.Native) == null) r.Error(n, "nativo desconocido: " + region.Native);
+                if (!meta.Catalog.Has(Economy.Res.Mat(region.Material))) r.Error(n, "material desconocido: " + region.Material);
+                if (region.Station.Length > 0 && meta.Station(region.Station) == null) r.Error(n, "estación desconocida: " + region.Station);
+                foreach (var zn in r.Arr(n, "zones"))
+                {
+                    var z = new ZoneDef
+                    {
+                        Id = r.Str(zn, "id"), Name = r.Str(zn, "name"), Description = r.Str(zn, "description", required: false),
+                        Boss = r.Str(zn, "boss", required: false), Sections = r.Int(zn, "sections", 0, 8),
+                        Backdrop = r.Str(zn, "backdrop", required: false),
+                    };
+                    string kind = r.Str(zn, "kind");
+                    if (!ZoneKinds.TryGetValue(kind, out z.Kind)) r.Error(zn, "tipo de zona desconocido: " + kind);
+                    foreach (var m in r.Arr(zn, "missions", required: false))
+                    {
+                        if (region.Missions.Find(x => x.Id == m.AsString) == null) r.Error(m, "misión desconocida en la zona: " + m.AsString);
+                        else z.Missions.Add(m.AsString);
+                    }
+                    foreach (var e in r.Arr(zn, "pool"))
+                    {
+                        if (meta.Enemy(e.AsString) == null) r.Error(e, "enemigo desconocido en la zona: " + e.AsString);
+                        else z.Pool.Add(e.AsString);
+                    }
+                    if (z.Pool.Count == 0) r.Error(zn, "la zona necesita enemigos");
+                    if (z.Boss.Length > 0 && meta.Enemy(z.Boss) == null) r.Error(zn, "jefe desconocido: " + z.Boss);
+                    if (z.IsEx && z.Missions.Count > 0) r.Error(zn, "la zona EX no tiene historia");
+                    if (z.Backdrop.Length == 0) z.Backdrop = "amb_" + region.Id + "_" + KindId(z.Kind);
+                    region.Zones.Add(z);
+                }
+                foreach (var m in region.Missions)
+                    if (region.ZoneOfMission(m.Id) == null) r.Error(n, "misión sin zona: " + m.Id);
+            }
         }
 
         private static CalculistaStat ParseStat(Reader r, JsonNode at, string s)
