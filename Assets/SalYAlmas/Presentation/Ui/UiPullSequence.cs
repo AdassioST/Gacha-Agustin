@@ -49,6 +49,8 @@ namespace SalYAlmas.Ui
         private float _advanceLock;
         private Color _underColor = Color.white, _liveUnder = Color.white;
         private bool _emerging;
+        private bool _bestRevealed;
+        private int _revealVersion;
 
         private sealed class Cube
         {
@@ -313,7 +315,7 @@ namespace SalYAlmas.Ui
             _steam.Source = SteamEmitter(c, _best >= 5 ? 8f : 5.5f);
             UiSfx.Play("boil", _best >= 4 ? 0.9f : 0.5f);
             UiSfx.Play("steam");
-            if (_best >= 5) Tw.After(0.55f, () => { if (_phase == Phase.Churn) UiSfx.Play("riser"); });
+            if (_best >= 5) Tw.After(0.55f, () => { if (_phase == Phase.Churn) UiSfx.Play("riser"); }, this);
             if (_best >= 4)
             {
                 float wa = _best >= 5 ? 0.62f : 0.38f;
@@ -334,7 +336,10 @@ namespace SalYAlmas.Ui
 
         private void NextReveal()
         {
+            int version = ++_revealVersion;
+            UiSfx.Stop("boil", "steam", "riser", "reveal4", "reveal5", "star", "stamp");
             var r = _reveals.Dequeue();
+            if (r.Rarity == _best) _bestRevealed = true;
             _phase = Phase.Emerge;
             _t = 0;
             _emerging = true;
@@ -393,12 +398,13 @@ namespace SalYAlmas.Ui
             _sub.text = UiLoc.Get("rank." + entry.Rarity) + "  ·  " + entry.Species + "  ·  " + entry.Role;
             _line.text = g.Base.PullLineOf(r.WitchId);
             U.Clear(_stars);
-            Tw.After(0.85f, () => ShowName(r.Rarity, color));
+            Tw.After(0.85f, () => { if (version == _revealVersion) ShowName(r.Rarity, color); }, this);
         }
 
         private void ShowName(int rarity, Color color)
         {
             if (_phase != Phase.Emerge && _phase != Phase.Hold) return;
+            int version = _revealVersion;
             _nameRoot.gameObject.SetActive(true);
             U.Rise(_nameRoot, 26, 0.5f);
             UiSfx.Play("stamp", 0.8f);
@@ -413,12 +419,13 @@ namespace SalYAlmas.Ui
                 rt.localScale = Vector3.zero;
                 Tw.Run(0.34f, p => { if (rt != null) rt.localScale = Vector3.one * Mathf.LerpUnclamped(2.2f, 1f, p) * Mathf.Clamp01(p * 4); }, Ease.OutBack, 0.08f + 0.09f * k, () =>
                 {
+                    if (version != _revealVersion || (_phase != Phase.Emerge && _phase != Phase.Hold)) return;
                     UiSfx.Play("star", 0.7f, 0.9f + 0.09f * k);
                     if (_sparks == null || rt == null) return;
                     var world = (Vector2)_world.InverseTransformPoint(rt.position);
                     var e = new UiParticles.Emitter { VelMin = new Vector2(-180, -60), VelMax = new Vector2(180, 240), LifeMin = 0.4f, LifeMax = 0.8f, Size0Min = 18, Size0Max = 44, SizeGrow = 0.2f, RotVel = 180, ColorA = color, ColorB = Color.white };
                     _sparks.Burst(e, 8, world);
-                });
+                }, this);
             }
             Tw.Run(0.5f, p => { if (_hint != null) _hint.color = new Color(_hint.color.r, _hint.color.g, _hint.color.b, p * 0.85f); }, Ease.Linear, 1.1f);
         }
@@ -444,6 +451,8 @@ namespace SalYAlmas.Ui
 
         private void FadeHero(Action next)
         {
+            int version = ++_revealVersion;
+            UiSfx.Stop("star", "stamp");
             _advanceLock = 0.35f;
             UiSfx.Play("back", 0.5f);
             var g = U.Group(_nameRoot);
@@ -457,13 +466,22 @@ namespace SalYAlmas.Ui
                 var d = _rays2.color; d.a *= 1 - p; _rays2.color = d;
                 var e = _pillar.color; e.a *= 1 - p; _pillar.color = e;
                 var f = _glowHero.color; f.a *= 1 - p; _glowHero.color = f;
-            }, Ease.Linear, 0, () => next());
+            }, Ease.Linear, 0, () => { if (version == _revealVersion && _phase != Phase.Grid && _phase != Phase.Done) next(); }, this);
         }
 
         private void GoGrid()
         {
             if (_phase == Phase.Grid || _phase == Phase.Done) return;
+            ++_revealVersion;
+            Tw.Kill(this);
             _phase = Phase.Grid;
+            UiSfx.Stop("drop", "boil", "steam", "riser", "star", "stamp");
+            if (!_bestRevealed)
+            {
+                UiSfx.Stop("reveal4", "reveal5");
+                UiSfx.Play("reveal" + Mathf.Clamp(_best, 3, 5));
+                _bestRevealed = true;
+            }
             _t = 0;
             _reveals.Clear();
             _emerging = false;
@@ -523,14 +541,14 @@ namespace SalYAlmas.Ui
                 Tw.After(d, () =>
                 {
                     if (_phase != Phase.Grid) return;
-                    UiSfx.Play(rarity >= 5 ? "reveal4" : rarity == 4 ? "star" : "tick", rarity >= 5 ? 0.8f : 0.7f, rarity >= 4 ? 1f : 1.1f);
+                    UiSfx.Play(rarity >= 4 ? "star" : "tick", rarity >= 5 ? 0.45f : rarity == 4 ? 0.35f : 0.25f, rarity >= 4 ? 1f : 1.1f);
                     if (rarity >= 4 && card != null && _sparks != null)
                     {
                         var col_ = UiTheme.Rarity(rarity);
                         var e = new UiParticles.Emitter { VelMin = new Vector2(-260, -60), VelMax = new Vector2(260, 330), LifeMin = 0.5f, LifeMax = 1.1f, Size0Min = 22, Size0Max = 54, SizeGrow = 0.2f, RotVel = 150, ColorA = col_, ColorB = Color.white };
                         _sparks.Burst(e, rarity >= 5 ? 26 : 12, (Vector2)_world.InverseTransformPoint(card.position), 60, 90);
                     }
-                });
+                }, this);
                 delay += rarity >= 5 ? 0.17f : 0.075f;
                 bestDelayRarity = Mathf.Max(bestDelayRarity, rarity);
             }
@@ -629,21 +647,35 @@ namespace SalYAlmas.Ui
             U.Clear(root);
             var next = new UiPullSequence();
             app.Pull.Seq = next;
-            Tw.After(0.02f, () => next.Begin(app, root, results, banner, count, done));
+            Tw.After(0.02f, () => { if (app != null && root != null) next.Begin(app, root, results, banner, count, done); }, next);
         }
 
         private void Close()
         {
-            _phase = Phase.Done;
+            if (_phase == Phase.Done) return;
+            CancelAudio();
             var g = U.Group(_root);
             Tw.Run(0.32f, p => { if (g != null) g.alpha = 1 - p; }, Ease.OutCubic, 0, () =>
             {
                 Dispose();
                 _done?.Invoke();
-            });
+            }, this);
         }
 
-        private void Dispose() { _water?.Dispose(); _water = null; }
+        public void Dispose()
+        {
+            CancelAudio();
+            _water?.Dispose();
+            _water = null;
+        }
+
+        private void CancelAudio()
+        {
+            _phase = Phase.Done;
+            ++_revealVersion;
+            Tw.Kill(this);
+            UiSfx.Stop("drop", "boil", "steam", "riser", "reveal3", "reveal4", "reveal5", "star", "stamp");
+        }
 
         private void AddShake(float amount)
         {

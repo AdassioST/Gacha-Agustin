@@ -58,6 +58,7 @@ namespace SalYAlmas.Ui
             _scroll.movementType = ScrollRect.MovementType.Elastic;
             _scroll.decelerationRate = 0.12f;
             _scroll.scrollSensitivity = 60;
+            view.gameObject.AddComponent<UiScrollSound>();
         }
 
         public override void Refresh()
@@ -93,7 +94,9 @@ namespace SalYAlmas.Ui
             }
             int cols = col + (row > 0 ? 1 : 0);
             _content.sizeDelta = new Vector2(margin * 2 + cols * (cw * k + gap), 0);
+            _scroll.StopMovement();
             _scroll.horizontalNormalizedPosition = 0;
+            _scroll.GetComponent<UiScrollSound>().ResetMotion();
         }
 
         private RectTransform BuildCard(string id, int rarity)

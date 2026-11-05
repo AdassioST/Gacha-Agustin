@@ -44,8 +44,9 @@ namespace SalYAlmas.Ui
         public void Drop(Vector2 uv, float radius, float strength)
         {
             _drop.SetVector("_Center", new Vector4(uv.x, uv.y, radius, strength));
-            Graphics.Blit(_a, _b, _drop);
-            Swap();
+            var old = RenderTexture.active;
+            try { Graphics.Blit(_a, _b, _drop); Swap(); }
+            finally { RenderTexture.active = old; }
         }
 
         public void Tick(float dt, float damping = 0.992f)
@@ -54,21 +55,28 @@ namespace SalYAlmas.Ui
             _sim.SetVector("_Texel", new Vector4(1f / Width, 1f / Height, 0, 0));
             _sim.SetFloat("_Damp", damping);
             int steps = 0;
-            while (_accum >= StepTime && steps < 4)
+            var old = RenderTexture.active;
+            try
             {
-                Graphics.Blit(_a, _b, _sim);
-                Swap();
-                _accum -= StepTime;
-                steps++;
+                while (_accum >= StepTime && steps < 4)
+                {
+                    Graphics.Blit(_a, _b, _sim);
+                    Swap();
+                    _accum -= StepTime;
+                    steps++;
+                }
             }
+            finally { RenderTexture.active = old; }
         }
 
         private void Swap() { var t = _a; _a = _b; _b = t; }
 
         public void Dispose()
         {
+            if (RenderTexture.active == _a || RenderTexture.active == _b) RenderTexture.active = null;
             if (_a != null) { _a.Release(); Object.Destroy(_a); }
             if (_b != null) { _b.Release(); Object.Destroy(_b); }
+            _a = _b = null;
             Object.Destroy(_sim);
             Object.Destroy(_drop);
         }

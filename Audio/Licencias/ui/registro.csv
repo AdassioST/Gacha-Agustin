@@ -1,0 +1,17 @@
+archivo,metodo,licencia_resultante,generador,sha256
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/back.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,f08ceca73966af9b2937dd3758285ce877903369f31e9a2d47c0f4022b40bef7
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/boil.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,21064d41703350499d310543f719dae84606daa3cbe67260065a6864036b49ff
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/coin.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,7233ec41960ca07538e427205a85f6dae4764ef7d899a4dbcaa406c53c867ddb
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/confirm.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,f01ee98bcefdf58593a82eb109eae30719cb79f999a0bd85395b24d2e2050ba2
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/deny.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,62578125e3d1b9ba63d9d1c8fcf9839c38978386a17bd69a16c142a1449f32f5
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/drop.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,5e2edb3ac5d26bcf6ab2a0c50acac0a0aa96040a14b4a0a1e9379dc224ada734
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/enter.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,41777a76c298509d0cccb25cac54754005b9c506c7bb794a488e13797b2352f7
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/page.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,f8cd2f9875a06b1a52a041b274b5cbf5e5f8b335533bdb14fe8728419377feed
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/reveal3.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,a5eaa5de4c22c8acbdb8c5ec1cc93a067082c4c0cce1ab3c2aef1e3030fce34a
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/reveal4.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,d511f69b845fd2d28d043dc14ca4d3fc0b9bd1356fa7b4a6940240d03ec0431c
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/reveal5.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,db3aa896222025d99c6452d0942e6d69edfd78302bb5e91f11018861241fe7ef
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/riser.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,28e62856671aba1ea7b4e78d6a91caf0ccff05c33f8b02143ee66a38a63a5698
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/stamp.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,e3482f0ae10da7880e1cfbb17dca90bc28c7e48efbd6031ba34737654a45701c
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/star.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,7c9f969c8acc2739a6a6d4885f825438ffc4926be5daa6bdc64640fd5b07e7f9
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/steam.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,0e14a86e40687923c695ea3ad1af85ffbbaa28bc02a3011ad5b9b4f62380df12
+Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/tick.wav,sintético,"Propia del estudio (síntesis original, sin material de terceros)",scripts/ui_sfx.py,6dbec88e83d09b8129794310c1fd2a31cf240757d6b7c475320f2a46238a0c06

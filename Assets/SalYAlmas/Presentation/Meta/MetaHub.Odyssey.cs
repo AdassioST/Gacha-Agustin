@@ -18,6 +18,8 @@ namespace SalYAlmas.Presentation
         private int _expTide = -1;
         private int _questTab;
         private Vector2 _questScroll;
+        private float _questScrollDistance;
+        private bool _questScrollInput;
 
         // ------------------------------------------------------------------ Arte de las zonas
 
@@ -333,7 +335,7 @@ namespace SalYAlmas.Presentation
             for (int i = 0; i < tabs.Length; i++)
             {
                 var t = new Rect(body.x + 20 + i * 230, body.y + 44, 220, 56);
-                if (GuiKit.Button(t, tabs[i], true, 22)) { _questTab = i; _questScroll = Vector2.zero; }
+                if (GuiKit.Button(t, tabs[i], true, 22)) { _questTab = i; _questScroll = Vector2.zero; _questScrollDistance = 0f; _questScrollInput = false; }
                 if (_questTab == i) GuiKit.Frame(t, Palette.FiveStar, 3f);
             }
             var list = _questTab == 0 ? q.DailyBoard() : _questTab == 1 ? q.WeeklyBoard() : q.AchievementBoard().OrderBy(v => v.Claimed ? 2 : v.Claimable ? 0 : 1).ToList();
@@ -341,7 +343,17 @@ namespace SalYAlmas.Presentation
             Theme.GoldPanel(area, 0.9f);
             float rowH = 86;
             var view = new Rect(0, 0, area.width - 40, list.Count * (rowH + 8) + (_questTab == 0 ? rowH + 8 : 0));
+            var previousScroll = _questScroll;
+            var inputType = Event.current.rawType;
+            if (inputType == EventType.ScrollWheel || inputType == EventType.MouseDrag || inputType == EventType.MouseDown) _questScrollInput = true;
             _questScroll = GUI.BeginScrollView(new Rect(area.x + 10, area.y + 10, area.width - 20, area.height - 20), _questScroll, view);
+            if (_questScrollInput)
+            {
+                _questScrollDistance += Vector2.Distance(previousScroll, _questScroll);
+                if (_questScrollDistance >= 28f) { PullSequence.Sfx?.Invoke("sfx_ui_deslizar"); _questScrollDistance = 0f; }
+            }
+            // IMGUI puede aplicar la rueda en el siguiente pase de Layout/Repaint.
+            if (inputType == EventType.Repaint) _questScrollInput = false;
             float y = 0;
             foreach (var v in list)
             {

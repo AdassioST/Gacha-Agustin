@@ -622,6 +622,9 @@ namespace SalYAlmas.Presentation
         private MusicContext CurrentMusic()
         {
             if (_mode == Mode.Hub && _hub != null && (_hub.Current == MetaHub.Screen.Termas || _hub.Current == MetaHub.Screen.Summon || _hub.Current == MetaHub.Screen.Mirror)) return MusicContext.Termas;
+            if (_mode == Mode.Hub && _hub != null && _hub.Current == MetaHub.Screen.Fresno
+                && Game.Fresno.InRun && Game.Fresno.Run.Phase == Core.Fresno.RunPhase.Choice
+                && Game.Fresno.Run.Pending.Kind == Core.Fresno.ChoiceKind.Santuario) return MusicContext.FresnoSantuario;
             if (_mode == Mode.Formation || _mode == Mode.Hub) return MusicContext.Menu;
             if (_mode != Mode.Battle || _director == null) return MusicContext.None;
             if (_director.ResultReady)

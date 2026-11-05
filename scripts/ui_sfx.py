@@ -1,17 +1,22 @@
 """Sintetiza los sonidos de interfaz de Sal y Almas: vidrio, sal, agua, papel y campanas. Sin muestras de terceros.
 
 Uso: python scripts/ui_sfx.py
+     python scripts/ui_sfx.py --only drop page riser
 Salida: Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx/*.wav (mono, 44.1 kHz, 16 bits)
 Son temporales hasta que llegue el diseño de sonido de docs/audio/INTEGRACION_AUDIO.md.
 """
 import os
 import wave
+import argparse
+import csv
+import hashlib
 
 import numpy as np
 from scipy import signal
 
 SR = 44100
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "Assets", "SalYAlmas", "Art", "Ui", "Resources", "Ui", "sfx")
+ONLY = None
 
 
 def t(d):
@@ -71,10 +76,16 @@ def reverb(x, d=1.4, wet=0.22, seed=7):
     return out
 
 
-def save(name, x, gain=0.85):
+def save(name, x, gain=0.85, attack=0, release=0.01):
+    if ONLY is not None and name not in ONLY:
+        return
     x = x / (np.max(np.abs(x)) + 1e-9) * gain
-    fade = int(0.01 * SR)
-    x[-fade:] *= np.linspace(1, 0, fade)
+    if attack:
+        fade = min(len(x), int(attack * SR))
+        x[:fade] *= 0.5 - 0.5 * np.cos(np.linspace(0, np.pi, fade))
+    fade = min(len(x), int(release * SR))
+    # Conservar las recetas anteriores salvo el riser, que necesita una salida más larga y suave.
+    x[-fade:] *= np.linspace(1, 0, fade) if release == 0.01 else 0.5 + 0.5 * np.cos(np.linspace(0, np.pi, fade))
     os.makedirs(OUT, exist_ok=True)
     with wave.open(os.path.join(OUT, name + ".wav"), "wb") as w:
         w.setnchannels(1)
@@ -111,7 +122,7 @@ def main():
     d = 0.42
     x = t(d)
     e = np.exp(-((x - 0.16) / 0.1) ** 2)
-    save("page", band(noise(d, 3), 900, 7500) * e + grit(d, 4, 60, 2000, 6000) * e * 0.5, 0.55)
+    save("page", band(noise(d, 3), 900, 7500) * e + grit(d, 4, 60, 2000, 6000) * e * 0.5, 0.55, attack=0.003)
     # Moneda: tintineo de cristal
     save("coin", reverb(mix((bell(2637, 0.5, 0.09), 0, 1), (bell(3136, 0.5, 0.08), 0.06, 0.8), (bell(3951, 0.4, 0.06), 0.12, 0.5)), 0.6, 0.18), 0.55)
     # Sal que cae al agua: plop grave más crujido
@@ -120,7 +131,7 @@ def main():
     f = 240 + 520 * np.exp(-x / 0.05)
     plop = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-x / 0.13)
     splash = band(noise(d, 5), 900, 5200) * np.exp(-x / 0.12)
-    save("drop", reverb(mix((plop, 0.0, 1), (splash, 0.01, 0.35), (grit(0.2, 6, 240, 3000, 9000), 0, 0.3)), 1.0, 0.22), 0.75)
+    save("drop", reverb(mix((plop, 0.0, 1), (splash, 0.01, 0.35), (grit(0.2, 6, 240, 3000, 9000), 0, 0.3)), 1.0, 0.22), 0.75, attack=0.003)
     # Hervor: burbujas que crecen. Se dispara junto con el vapor.
     d = 2.6
     x = t(d)
@@ -154,7 +165,7 @@ def main():
     x = t(d)
     f = 180 * 2 ** (x / d * 2.6)
     riser = np.sin(2 * np.pi * np.cumsum(f) / SR) * (x / d) ** 2.2 + 0.4 * band(noise(d, 12), 2000, 9000) * (x / d) ** 3
-    save("riser", riser, 0.5)
+    save("riser", riser, 0.5, release=0.10)
     # Sello: golpe de lacre, para estrellas y hitos
     x = t(0.26)
     save("stamp", mix((low(band(noise(0.26, 13), 80, 1800) * np.exp(-x / 0.03), 1800), 0, 1), (np.sin(2 * np.pi * 96 * x) * np.exp(-x / 0.06), 0, 0.9)), 0.65)
@@ -164,5 +175,27 @@ def main():
     save("enter", reverb(mix((bell(196, 2.6, 0.8, ((1, 1), (2, 0.4), (3, 0.2))), 0, 1), (bell(784, 2.2, 0.4), 0.12, 0.5), (bell(1175, 2.2, 0.32), 0.22, 0.38)), 2.0, 0.36), 0.75)
 
 
+def register_sources():
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    folder = os.path.join(root, "Audio", "Licencias", "ui")
+    os.makedirs(folder, exist_ok=True)
+    with open(os.path.join(folder, "registro.csv"), "w", encoding="utf-8", newline="") as f:
+        writer = csv.writer(f, lineterminator="\n")
+        writer.writerow(("archivo", "metodo", "licencia_resultante", "generador", "sha256"))
+        for name in sorted(os.listdir(OUT)):
+            if not name.endswith(".wav"):
+                continue
+            path = os.path.join(OUT, name)
+            with open(path, "rb") as source:
+                digest = hashlib.sha256(source.read()).hexdigest()
+            writer.writerow((os.path.relpath(path, root).replace(os.sep, "/"), "sintético",
+                             "Propia del estudio (síntesis original, sin material de terceros)", "scripts/ui_sfx.py", digest))
+
+
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--only", nargs="+", help="Regenerar solo estos efectos")
+    args = parser.parse_args()
+    ONLY = set(args.only) if args.only else None
     main()
+    register_sources()

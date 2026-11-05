@@ -30,7 +30,7 @@ namespace SalYAlmas.Presentation
         private const string MutedKey = "SalYAlmas.EfectosSilenciados";
         public const int VoiceLimit = SfxVoicePool.Capacity;
 
-        [Range(0f, 1f)] public float MasterVolume = 0.75f; // TUNING
+        [Range(0f, 1f)] public float MasterVolume = 0.65f; // TUNING: margen para la suma de interfaz, combate y música.
         [Tooltip("Tiempo mínimo entre dos disparos del mismo efecto, para no saturar las Cadenas.")]
         public float MinRepeatSeconds = 0.03f; // TUNING
 
@@ -43,6 +43,7 @@ namespace SalYAlmas.Presentation
 
         private readonly List<string> _files = new List<string>();
         private readonly Dictionary<string, AudioClip> _clips = new Dictionary<string, AudioClip>();
+        private readonly Dictionary<string, AudioClip> _uiClips = new Dictionary<string, AudioClip>();
         private readonly Dictionary<string, float> _lastPlayed = new Dictionary<string, float>();
         private readonly List<Scheduled> _scheduled = new List<Scheduled>();
         private readonly Dictionary<string, List<string>> _variants = new Dictionary<string, List<string>>();
@@ -87,6 +88,11 @@ namespace SalYAlmas.Presentation
             _ambienceA.loop = _ambienceB.loop = true;
             Muted = PlayerPrefs.GetInt(MutedKey, 0) == 1;
             LoadIndex();
+            foreach (var clip in Resources.LoadAll<AudioClip>("Ui/sfx"))
+            {
+                if (clip.loadState == AudioDataLoadState.Unloaded) clip.LoadAudioData();
+                _uiClips[clip.name] = clip;
+            }
         }
 
         private AudioSource CreateSource(string sourceName)
@@ -176,6 +182,27 @@ namespace SalYAlmas.Presentation
         public void PlayCue(string id) => Play(id);
 
         public void PlayCue(string id, params string[] parts) => Play(id, 1f, 0f, parts);
+
+        /// <summary>La interfaz comparte silencios, prioridades y límite de voces con el combate.</summary>
+        public bool PlayUi(string id, float gain = 1f, float pitch = 1f)
+        {
+            if (Muted || string.IsNullOrEmpty(id) || !_uiClips.TryGetValue(id, out var clip)) return false;
+            string family = "ui_" + id;
+            float now = Time.unscaledTime;
+            if (_lastPlayed.TryGetValue(family, out var last) && now - last < 0.08f) return false;
+            if (!_voices.Play(clip, family, gain, MasterVolume, now, pitch)) return false;
+            _lastPlayed[family] = now;
+            if (id == "reveal5") DuckMusic(3.2f, 0.35f);
+            else if (id == "reveal4") DuckMusic(2f, 0.45f);
+            else if (id == "reveal3" || id == "enter") DuckMusic(1.2f, 0.6f);
+            else if (id == "riser") DuckMusic(1.3f, 0.65f);
+            return true;
+        }
+
+        public void StopUi(params string[] ids)
+        {
+            foreach (var id in ids) _voices.ReleaseFamily("ui_" + id, Time.unscaledTime, 0.08f);
+        }
 
         public void NotifyPull(int rarity)
         {
@@ -581,6 +608,7 @@ namespace SalYAlmas.Presentation
             if (_clips.TryGetValue(name, out var cached)) return cached;
             var clip = Resources.Load<AudioClip>(Folder + name);
             if (clip == null) Debug.LogWarning("Efectos temporales: no encontré Resources/" + Folder + name);
+            else if (clip.loadState == AudioDataLoadState.Unloaded) clip.LoadAudioData();
             _clips[name] = clip;
             return clip;
         }
