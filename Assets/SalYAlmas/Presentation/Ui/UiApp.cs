@@ -94,6 +94,8 @@ namespace SalYAlmas.Ui
                 // Si esta capa falla, el hub IMGUI sigue siendo jugable: nunca dejamos al jugador sin juego.
                 Debug.LogException(ex);
                 game.Hub.ExternalScreen = null;
+                game.Hub.ExternalChrome = null;
+                game.Hub.BackBlocked = null;
                 Destroy(go);
             }
         }
@@ -142,6 +144,7 @@ namespace SalYAlmas.Ui
             // El hub IMGUI no se dibuja cuando manda esta capa.
             Hub.ExternalScreen = s => Game.InHub && Owned(s);
             Hub.ExternalChrome = Framed;
+            Hub.BackBlocked = () => _wiping || _title != null || (Pull != null && Pull.Seq != null);
             UiTheme.ReduceFlashes = Game.Game.Profile.Settings.ReduceFlashes;
             SyncSettings();
 

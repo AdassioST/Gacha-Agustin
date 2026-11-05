@@ -107,6 +107,9 @@ namespace SalYAlmas.Core.Gacha
             bool forceFive = b.Type == BannerType.Inicio && !State.StarterFiveStar && State.StarterPulls + 1 >= b.MaxPulls;
             bool canLose = StandardFiveStars().Exists(id => !_g.Profile.Owns(id));
             var roll = Roll(Rules, pity, _g.Rng, b.Type == BannerType.Limitado && !_g.Profile.Owns(b.Featured), forceFive, canLose);
+            // El banner de inicio da una sola 5★ (GDD 16.2 y su página de probabilidades): si ya salió, las tiradas que
+            // quedan no dan otra. La 5★ natural se vuelve 4★.
+            if (b.Type == BannerType.Inicio && roll.Rarity == 5 && State.StarterFiveStar) roll.Rarity = 4;
             if (b.Type == BannerType.Inicio) State.StarterPulls++;
             if (b.Type == BannerType.Estandar) State.StandardPulls++;
 

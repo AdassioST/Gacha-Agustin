@@ -373,6 +373,22 @@ namespace SalYAlmas.Tests
         }
 
         [Test]
+        public void SinTiendaDePlataformaNadaSeCompraConDinero()
+        {
+            var g = Game();
+            g.Store.Platform = new UnavailableStorePlatform();
+            foreach (var p in g.Meta.World.Shop.Products)
+            {
+                StringAssert.Contains("no están disponibles", g.Store.CanBuy(p));
+                Assert.IsFalse(g.Store.Buy(p.Id).Ok, p.Id);
+            }
+            Assert.AreEqual(0, g.Ledger.Balance(Res.Perlas));
+            Assert.AreEqual(0, g.Store.Backend.Purchases.Count);
+            Assert.IsFalse(g.Profile.Store.GrimorioPremium);
+            Assert.IsFalse(g.Store.DiezmoActive);
+        }
+
+        [Test]
         public void ElServidorRechazaRecibosFalsosORepetidos()
         {
             var g = Game();
