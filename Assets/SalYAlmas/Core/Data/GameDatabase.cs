@@ -41,6 +41,17 @@ namespace SalYAlmas.Core.Data
             Rules = rules ?? new CombatRules();
         }
 
+        /// <summary>Copia con las mismas reglas y contenido, para sumar datos sin tocar la base de la Fase 1.</summary>
+        public GameDatabase Clone()
+        {
+            var c = new GameDatabase(Rules);
+            foreach (var id in _witchOrder) c.Add(_witches[id]);
+            foreach (var e in _enemies.Values) c.Add(e);
+            foreach (var id in _encounterOrder) c.Add(_encounters[id]);
+            foreach (var id in _potionOrder) c.Add(_potions[id]);
+            return c;
+        }
+
         public void Add(WitchDef w) { _witches.Add(w.Id, w); _witchOrder.Add(w.Id); }
         public void Add(EnemyDef e) { _enemies.Add(e.Id, e); }
         public void Add(EncounterDef e) { _encounters.Add(e.Id, e); _encounterOrder.Add(e.Id); }

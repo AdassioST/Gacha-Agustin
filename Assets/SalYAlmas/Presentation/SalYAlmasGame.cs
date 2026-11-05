@@ -34,6 +34,18 @@ namespace SalYAlmas.Presentation
         public TextAsset FresnoJson;
         public TextAsset FresnoEnemiesJson;
 
+        [Header("Datos de la Fase 3")]
+        public TextAsset StoryJson;
+        public TextAsset ServicesJson;
+        public TextAsset LocJson;
+        public TextAsset WitchesExtJson;
+        public TextAsset OdysseyJson;
+        public TextAsset QuestsJson;
+
+        [Header("Arte")]
+        [Tooltip("Bustos y cuerpos del elenco. Los asigna el constructor de la escena.")]
+        public Texture2D[] Portraits = new Texture2D[0];
+
         [Header("Escena")]
         public Camera BattleCamera;
         [Tooltip("Un material por planeta en el orden Sol, Luna, Marte, Mercurio, Venus, Júpiter, Saturno.")]
@@ -48,6 +60,8 @@ namespace SalYAlmas.Presentation
         private MetaHub _hub;
         /// <summary>Si no es null, el combate lo pidió el hub (Fresno o Juicio) y al terminar se le devuelve.</summary>
         private Action<Battle> _external;
+        private string _battleHint = "";
+        private PortraitBank _art;
         private string _error = "";
         private GameDatabase _db;
         private FormationScreen _formation;
@@ -64,6 +78,9 @@ namespace SalYAlmas.Presentation
         private TempSfxPlayer _sfx;
         private bool _chainWasOpen;
 
+        public MetaHub Hub => _hub;
+        public Core.Meta.MetaGame Game => _hub?.Game;
+        public PortraitBank Art => _art;
         public BattleDirector Director => _director;
         public GameDatabase Database => _db;
 
@@ -74,6 +91,7 @@ namespace SalYAlmas.Presentation
             _sfx = gameObject.AddComponent<TempSfxPlayer>();
             _sfx.MusicDuckRequested += _music.DuckFor;
             GuiKit.ButtonPressed += _sfx.OnButtonPressed;
+            PullSequence.Sfx = _sfx.PlayCue;
             _saved.Load();
             LoadData();
         }
@@ -93,17 +111,32 @@ namespace SalYAlmas.Presentation
                 if (src.Witches == null || src.Enemies == null || src.Encounters == null || src.Potions == null)
                     throw new InvalidOperationException("Faltan los JSON en el componente SalYAlmasGame. Vuelve a usar el menú Sal y Almas > Construir escena de combate.");
                 _db = DataLoader.Load(src);
+                var meta = MetaLoader.Load(MetaSources(), _db);
+                _db = meta.Combat; // con las 24 brujas
                 _formation = new FormationScreen(_db);
                 _formation.OnStart += StartBattle;
-                var meta = MetaLoader.Load(MetaSources(), _db);
-                _hub = new MetaHub(meta, new FileSaveStore(Path.Combine(Application.persistentDataPath, "guardado")))
+                _art = new PortraitBank(LoadPortraits());
+                BattleHud.Bust = id => _art.Bust(id);
+                _hub = new MetaHub(meta, new FileSaveStore(Path.Combine(Application.persistentDataPath, "guardado")), _art)
                 {
                     StartBattle = StartExternalBattle,
                     OpenFormation = () => _mode = Mode.Formation,
                     SoundRequested = (id, parts) => _sfx.PlayCue(id, parts),
                     PullRevealed = rarity => _sfx.NotifyPull(rarity),
+                    ApplySettings = ApplySettings,
                 };
+                ApplySettings();
                 _mode = Mode.Hub;
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+                var walk = ScreenWalk.Requested();
+                if (walk != null)
+                {
+                    var w = gameObject.AddComponent<ScreenWalk>();
+                    w.Hub = _hub;
+                    w.Folder = walk;
+                    _hub.EndBattleRequested = () => { _external = null; ClearSpawned(); _mode = Mode.Hub; };
+                }
+#endif
             }
             catch (DataValidationException ex)
             {
@@ -119,9 +152,37 @@ namespace SalYAlmas.Presentation
             }
         }
 
+        private IEnumerable<Texture2D> LoadPortraits()
+        {
+#if UNITY_EDITOR
+            // Una escena construida antes de este cambio no trae los retratos: en el Editor se buscan en la carpeta de arte.
+            if (Portraits == null || Portraits.Length == 0)
+            {
+                var list = new List<Texture2D>();
+                foreach (var guid in UnityEditor.AssetDatabase.FindAssets("t:Texture2D", new[] { "Assets/SalYAlmas/Art" }))
+                {
+                    var t = UnityEditor.AssetDatabase.LoadAssetAtPath<Texture2D>(UnityEditor.AssetDatabase.GUIDToAssetPath(guid));
+                    if (t != null) list.Add(t);
+                }
+                return list;
+            }
+#endif
+            return Portraits;
+        }
+
+        /// <summary>Aplica fps y gama (GDD 21.1). El ahorro de batería manda sobre la gama alta.</summary>
+        private void ApplySettings()
+        {
+            var s = _hub?.Game?.Profile.Settings;
+            if (s == null) return;
+            Application.targetFrameRate = s.BatterySaver || !s.HighQuality ? 30 : 60;
+            int levels = QualitySettings.names.Length;
+            if (levels > 0) QualitySettings.SetQualityLevel(s.HighQuality ? levels - 1 : 0, false);
+        }
+
         private MetaDataSources MetaSources()
         {
-            if (EconomyJson == null || RosterJson == null || ProgressionJson == null || WeaponsJson == null ||
+            if (StoryJson == null || ServicesJson == null || LocJson == null || EconomyJson == null || RosterJson == null || ProgressionJson == null || WeaponsJson == null ||
                 BrewingJson == null || GachaJson == null || FresnoJson == null || FresnoEnemiesJson == null)
             {
 #if UNITY_EDITOR
@@ -141,19 +202,27 @@ namespace SalYAlmas.Presentation
                 Gacha = GachaJson.text,
                 Fresno = FresnoJson.text,
                 FresnoEnemies = FresnoEnemiesJson.text,
+                Story = StoryJson.text,
+                Services = ServicesJson.text,
+                Loc = LocJson.text,
+                WitchesExt = WitchesExtJson != null ? WitchesExtJson.text : null,
+                Odyssey = OdysseyJson != null ? OdysseyJson.text : null,
+                Quests = QuestsJson != null ? QuestsJson.text : null,
             };
         }
 
         public void StartBattle(BattleSetup setup)
         {
             _external = null;
+            _battleHint = "";
             StartBattle(setup, null);
         }
 
         /// <summary>Combate pedido por el hub: mismo HUD y misma Cadena; al terminar, el botón Continuar devuelve el Battle.</summary>
-        private void StartExternalBattle(BattleSetup setup, Action<Battle> done)
+        private void StartExternalBattle(BattleSetup setup, Action<Battle> done, string hint)
         {
             _external = done;
+            _battleHint = hint ?? "";
             StartBattle(setup, null);
         }
 
@@ -194,10 +263,14 @@ namespace SalYAlmas.Presentation
             _mode = Mode.Battle;
         }
 
+        private readonly List<Renderer> _hiddenFloor = new List<Renderer>();
+
         private void ClearSpawned()
         {
             foreach (var go in _spawned) if (go != null) Destroy(go);
             _spawned.Clear();
+            foreach (var r in _hiddenFloor) if (r != null) r.enabled = true;
+            _hiddenFloor.Clear();
         }
 
         private Vector3 Anchor(Transform[] anchors, int index, int count, bool enemy)
@@ -214,8 +287,9 @@ namespace SalYAlmas.Presentation
             for (int i = 0; i < b.Witches.Count; i++)
             {
                 var w = b.Witches[i];
-                var view = CreateFigure(w.Name, Anchor(AllyAnchors, i, b.Witches.Count, false), Palette.Planet(w.Dominant), MaterialFor(w.Dominant), 1f, false, w.Id);
-                // El Ascendente: una esfera del planeta secundario que flota detrás de la bruja.
+                var view = CreateFigure(w.Name, Anchor(AllyAnchors, i, b.Witches.Count, false), Palette.Planet(w.Dominant), MaterialFor(w.Dominant), 1f, false, w.Id, _art?.Body(w.Key));
+                // Con arte, el Ascendente ya viene en el recorte. Sin arte: una esfera del planeta secundario detrás de la bruja.
+                if (_art?.Body(w.Key) != null) continue;
                 var asc = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 asc.name = "Ascendente";
                 RemoveCollider(asc);
@@ -232,10 +306,45 @@ namespace SalYAlmas.Presentation
             for (int i = 0; i < b.Enemies.Count; i++)
             {
                 var e = b.Enemies[i];
-                float scale = e.IsBoss ? 2.1f : 1.3f;
+                // Con el arte de Codex (Art/Enemigos) el enemigo es un recorte; sin arte, la cápsula de prueba.
+                var art = _art?.Enemy(e.Def.Id);
+                float scale = art != null ? (e.IsBoss ? 2.3f : 1.7f) : e.IsBoss ? 2.1f : 1.3f; // TUNING: detrás de las brujas, más grandes para verse
                 Color c = Color.Lerp(Palette.Planet(e.Def.AttackPlanet), Palette.Abyss, 0.45f);
-                CreateFigure(e.Name, Anchor(EnemyAnchors, i, b.Enemies.Count, true), c, EnemyMaterial, scale, true, e.Id);
+                CreateFigure(e.Name, Anchor(EnemyAnchors, i, b.Enemies.Count, true), c, EnemyMaterial, scale, true, e.Id, art);
             }
+            SpawnBackdrop();
+        }
+
+        /// <summary>El fondo de la zona (Art/Ambientes) en un plano lejano que llena la vista de la cámara.</summary>
+        private void SpawnBackdrop()
+        {
+            if (_hub == null || BattleCamera == null) return;
+            var tex = _hub.CurrentBackdrop(out var tint);
+            var shader = Shader.Find("Sprites/Default");
+            if (tex == null || shader == null) return;
+            // Con fondo pintado, el suelo gris y los círculos de prueba estorban: se esconden mientras dure el combate.
+            foreach (var name in new[] { "Suelo de sal", "Círculo del aquelarre", "Círculo de las raíces" })
+            {
+                var go = GameObject.Find(name);
+                var rend = go != null ? go.GetComponent<Renderer>() : null;
+                if (rend != null && rend.enabled) { rend.enabled = false; _hiddenFloor.Add(rend); }
+            }
+            const float distance = 45f; // TUNING
+            var t = BattleCamera.transform;
+            float h = BattleCamera.orthographic ? BattleCamera.orthographicSize * 2f : 2f * distance * Mathf.Tan(BattleCamera.fieldOfView * 0.5f * Mathf.Deg2Rad);
+            float w = h * BattleCamera.aspect;
+            float texAspect = tex.width / (float)tex.height;
+            if (w / h > texAspect) h = w / texAspect; else w = h * texAspect;
+            var quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+            quad.name = "Fondo de zona";
+            RemoveCollider(quad);
+            quad.transform.position = t.position + t.forward * distance;
+            quad.transform.rotation = Quaternion.LookRotation(t.forward, t.up);
+            quad.transform.localScale = new Vector3(w * 1.04f, h * 1.04f, 1f);
+            var renderer = quad.GetComponent<Renderer>();
+            renderer.material = new Material(shader) { mainTexture = tex, color = tint };
+            renderer.material.renderQueue = 2900;
+            _spawned.Add(quad);
         }
 
         private Material MaterialFor(Planet p)
@@ -244,11 +353,31 @@ namespace SalYAlmas.Presentation
             return PlanetMaterials != null && i < PlanetMaterials.Length ? PlanetMaterials[i] : null;
         }
 
-        private UnitView CreateFigure(string name, Vector3 position, Color color, Material material, float scale, bool enemy, int unitId)
+        private UnitView CreateFigure(string name, Vector3 position, Color color, Material material, float scale, bool enemy, int unitId, Texture2D art = null)
         {
             var root = new GameObject(name);
             root.transform.position = position;
             root.transform.localScale = Vector3.one * scale;
+            var shader = art != null ? Shader.Find("Sprites/Default") : null;
+            if (shader != null)
+            {
+                // Con arte: un recorte que mira a la cámara. Sin arte: la cápsula de prueba de la Fase 1.
+                var quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+                quad.name = "Recorte";
+                RemoveCollider(quad);
+                quad.transform.SetParent(root.transform, false);
+                const float height = 2.7f; // TUNING
+                quad.transform.localScale = new Vector3(height * art.width / art.height, height, 1f);
+                quad.transform.localPosition = new Vector3(0, height / 2f, 0);
+                if (BattleCamera != null) quad.transform.rotation = Quaternion.LookRotation(BattleCamera.transform.forward, Vector3.up);
+                var quadRenderer = quad.GetComponent<Renderer>();
+                quadRenderer.material = new Material(shader) { mainTexture = art };
+                var artView = root.AddComponent<UnitView>();
+                artView.Setup(unitId, enemy, Color.white, quadRenderer, null, height);
+                _spawned.Add(root);
+                _director.Views[unitId] = artView;
+                return artView;
+            }
             var body = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             body.name = "Cuerpo";
             body.transform.SetParent(root.transform, false);
@@ -298,6 +427,7 @@ namespace SalYAlmas.Presentation
         /// </summary>
         private MusicContext CurrentMusic()
         {
+            if (_mode == Mode.Hub && _hub != null && (_hub.Current == MetaHub.Screen.Termas || _hub.Current == MetaHub.Screen.Summon || _hub.Current == MetaHub.Screen.Mirror)) return MusicContext.Termas;
             if (_mode == Mode.Formation || _mode == Mode.Hub) return MusicContext.Menu;
             if (_mode != Mode.Battle || _director == null) return MusicContext.None;
             if (_director.ResultReady)
@@ -350,6 +480,12 @@ namespace SalYAlmas.Presentation
                     _hud.InputBlocked = _chain.IsOpen || _director.ResultReady;
                     _hud.Draw();
                     _chain.Draw();
+                    if (_battleHint.Length > 0 && !_director.ResultReady && _director.Chains.Count == 0)
+                    {
+                        var hint = new Rect(GuiKit.Width / 2 - 400, 166, 980, 60);
+                        Theme.Panel(hint, Palette.Hex("#EDE3CC"), Palette.Hex("#CFBE9A"), Palette.GoldBright);
+                        GuiKit.Label(hint, _battleHint, 22, Palette.Ink, TextAnchor.MiddleCenter, true, true);
+                    }
                     if (_director.ResultReady) DrawResult();
                     break;
             }

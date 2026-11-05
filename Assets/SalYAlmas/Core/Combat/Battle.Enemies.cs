@@ -42,7 +42,45 @@ namespace SalYAlmas.Core.Combat
                 }
                 UseOrCancel(e, skill);
             }
+            EnemyTraitsAfterTurn(e);
             FinishTurn();
+        }
+
+        /// <summary>Rasgos que actúan al final del turno del enemigo: el que crece y la que cura.</summary>
+        private void EnemyTraitsAfterTurn(EnemyUnit e)
+        {
+            if (!e.IsAlive) return;
+            var t = e.Def.Traits;
+            if (t.RampAtk > 0) AddStatus(e, StatusKind.AtkPct, t.RampAtk, -1, "Crece y olvida", isBuff: true, source: e);
+            if (t.HealAllies > 0)
+            {
+                EnemyUnit low = null;
+                foreach (var o in AliveEnemies())
+                    if (o.Hp < o.MaxHp && (low == null || o.Hp / (double)o.MaxHp < low.Hp / (double)low.MaxHp)) low = o;
+                if (low != null) Heal(low, (int)Math.Round(low.MaxHp * t.HealAllies, MidpointRounding.AwayFromZero), e.Name);
+            }
+        }
+
+        /// <summary>Rasgos que responden a un golpe de bruja: el reflejo y la furia contra Hechizos.</summary>
+        internal void EnemyTraitsOnHit(WitchUnit attacker, EnemyUnit target, int dealt, HitContext ctx)
+        {
+            var t = target.Def.Traits;
+            if (t.ReflectPct > 0 && dealt > 0 && attacker != null && attacker.IsAlive)
+            {
+                int back = (int)Math.Round(dealt * t.ReflectPct, MidpointRounding.AwayFromZero);
+                if (back > 0)
+                {
+                    int got = ApplyDamage(attacker, back, out _);
+                    Emit(new DotTicked { UnitId = attacker.Id, UnitName = attacker.Name, StatusName = "Reflejo de " + target.Name, Planet = target.Def.AttackPlanet, Damage = got, Hp = attacker.Hp });
+                    AnnounceDeath(attacker);
+                }
+            }
+            if (t.SpellEnrage > 0 && ctx.Kind == MoveKind.Spell && target.IsAlive)
+            {
+                var old = target.Find(StatusKind.DamagePct);
+                if (old == null || old.Name != "Furia")
+                    AddStatus(target, StatusKind.DamagePct, t.SpellEnrage, 2, "Furia", isBuff: true, source: attacker);
+            }
         }
 
         private void UseOrCancel(EnemyUnit e, EnemySkillDef skill)
@@ -73,6 +111,12 @@ namespace SalYAlmas.Core.Combat
             var alive = AliveWitches();
             var result = new List<WitchUnit>();
             if (alive.Count == 0) return result;
+            if (skill.TargetRule != EnemyTargetRule.All && skill.TargetRule != EnemyTargetRule.Self)
+            {
+                // Provocación: quien la lleva atrae los golpes dirigidos.
+                var taunter = alive.Find(w => w.Has(StatusKind.Taunt));
+                if (taunter != null) { result.Add(taunter); return result; }
+            }
             switch (skill.TargetRule)
             {
                 case EnemyTargetRule.All:

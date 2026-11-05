@@ -33,6 +33,9 @@ namespace SalYAlmas.Presentation
 
         private void DrawFresnoHome(Rect a)
         {
+            if (_team.Count == 0) _team.AddRange(Party());
+            if (GuiKit.Button(new Rect(a.x, a.y, 160, 50), L("menu.back"), true, 22)) { Back(); return; }
+            a = new Rect(a.x, a.y + 56, a.width, a.height - 56);
             var left = new Rect(a.x, a.y, 640, a.height);
             GuiKit.PanelBox(left);
             GuiKit.Label(new Rect(left.x + 16, left.y + 8, 600, 40), "Elige de 1 a 4 brujas", 26, Palette.GoldBright, TextAnchor.MiddleLeft, true);
@@ -230,6 +233,7 @@ namespace SalYAlmas.Presentation
             if (GuiKit.Button(new Rect(r.x + 16, y, 240, 52), "Piloto: un paso", true, 18)) AutoStep(1);
             if (GuiKit.Button(new Rect(r.x + 264, y, 280, 52), "Piloto: hasta el final", true, 18)) AutoStep(2000);
             if (GuiKit.Button(new Rect(r.xMax - 216, y, 200, 52), "Abandonar\n<size=13>cuenta como caer</size>", true, 17)) Apply(F.Abandon());
+            if (GuiKit.Button(new Rect(r.xMax - 446, y, 220, 52), "Pausar y volver\n<size=13>la run se guarda</size>", true, 17)) { Save(); GoRoot(Screen.Home); }
         }
 
         private void AutoStep(int steps)
@@ -277,7 +281,7 @@ namespace SalYAlmas.Presentation
             GuiKit.Label(new Rect(r.x, r.y, r.width, 40), $"{FresnoService.NodeName(node.Type)} en el nodo {node.Id}", 28, Palette.GoldBright, TextAnchor.MiddleLeft, true);
             GuiKit.Label(new Rect(r.x, r.y + 46, r.width, 60), "Lo que queda de vida y Salinidad pasa de un combate al siguiente.", 20, Palette.Parchment, TextAnchor.UpperLeft, false, true);
             if (GuiKit.Button(new Rect(r.x, r.y + 110, 340, 72), "Pelear", true, 30))
-                StartBattle?.Invoke(F.PrepareBattle(), b => { Apply(F.ResolveBattle(b)); });
+                StartBattle?.Invoke(F.PrepareBattle(), b => { Apply(F.ResolveBattle(b)); }, "");
         }
 
         private void DrawChoice(Rect r)

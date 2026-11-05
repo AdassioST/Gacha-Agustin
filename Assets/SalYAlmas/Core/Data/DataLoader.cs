@@ -58,6 +58,9 @@ namespace SalYAlmas.Core.Data
 
         // ------------------------------------------------------------------ Brujas
 
+        /// <summary>Suma brujas de otro archivo a una base ya cargada (el resto del elenco, GDD 18).</summary>
+        internal static void AddWitches(JsonNode root, GameDatabase db, Reader r) => LoadWitches(root, db, r);
+
         private static void LoadWitches(JsonNode root, GameDatabase db, Reader r)
         {
             foreach (var n in r.Arr(root, "witches"))
@@ -113,6 +116,8 @@ namespace SalYAlmas.Core.Data
                     w.PassiveDescription = r.Str(passive, "description", required: false);
                     w.PassiveAtkMultiplier = r.Num(passive, "atkMultiplier", 0, 5, required: false, def: 1.0);
                     w.DealsNoDamage = r.Bool(passive, "dealsNoDamage", false);
+                    w.ReviveOnceHp = r.Num(passive, "reviveOnce", 0, 1, required: false);
+                    w.StartPoison = r.Num(passive, "startPoison", 0, 5, required: false);
                 }
 
                 var sc = r.Obj(n, "selfCast");
@@ -249,10 +254,10 @@ namespace SalYAlmas.Core.Data
             return hits;
         }
 
-        internal static List<EffectDef> ReadEffects(Reader r, JsonNode n)
+        internal static List<EffectDef> ReadEffects(Reader r, JsonNode n, string key = "effects")
         {
             var list = new List<EffectDef>();
-            var arr = n.Get("effects");
+            var arr = n.Get(key);
             if (arr == null) return list;
             if (arr.Kind != JsonKind.Array) { r.Error(arr, "'effects' debe ser un arreglo"); return list; }
             foreach (var e in arr.Items)
@@ -370,6 +375,20 @@ namespace SalYAlmas.Core.Data
                         if (p.Kind != JsonKind.String || e.Skill(p.AsString) == null) r.Error(p, "la fase 2 usa una habilidad que no existe");
                         else e.Phase2.Pattern.Add(p.AsString);
                     }
+                }
+
+                var tr = n.Get("traits");
+                if (tr != null)
+                {
+                    e.Traits.ReflectPct = r.Num(tr, "reflect", 0, 1, required: false);
+                    e.Traits.AspectImmune = r.Bool(tr, "aspectImmune", false);
+                    e.Traits.ProtectAllies = r.Num(tr, "protectAllies", 0, 0.9, required: false);
+                    e.Traits.SpellEnrage = r.Num(tr, "spellEnrage", 0, 2, required: false);
+                    e.Traits.RampAtk = r.Num(tr, "rampAtk", 0, 1, required: false);
+                    e.Traits.HealAllies = r.Num(tr, "healAllies", 0, 1, required: false);
+                    e.Traits.Shape = r.Str(tr, "shape", required: false);
+                    e.Traits.Hint = r.Str(tr, "hint", required: false);
+                    e.Traits.OnDeath.AddRange(ReadEffects(r, tr, "onDeath"));
                 }
 
                 if (string.IsNullOrEmpty(e.Id)) continue;
@@ -505,7 +524,8 @@ namespace SalYAlmas.Core.Data
             { "feignDeath", EffectType.FeignDeath }, { "cleanse", EffectType.Cleanse }, { "dispel", EffectType.Dispel },
             { "nextSpellDouble", EffectType.NextSpellDouble }, { "invertHealing", EffectType.InvertHealing },
             { "freeVislumbre", EffectType.FreeVislumbre }, { "nextToughness", EffectType.NextToughness },
-            { "paralaje", EffectType.Paralaje },
+            { "paralaje", EffectType.Paralaje }, { "taunt", EffectType.Taunt },
+            { "maxHpBurst", EffectType.MaxHpBurst }, { "stealGrains", EffectType.StealGrains },
         };
 
         public static readonly Dictionary<string, EffectTarget> EffectTargets = new Dictionary<string, EffectTarget>

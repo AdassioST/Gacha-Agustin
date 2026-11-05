@@ -110,13 +110,15 @@ namespace SalYAlmas.Core.Progress
             var result = new TrialResult { Victory = battle.Outcome == BattleOutcome.Victory };
             result.Conditions = Evaluate(plan.Conditions, battle, plan.WitchId, plan.WitchName);
             result.Passed = result.Victory && result.Conditions.TrueForAll(c => c.Passed);
+            _g.Report("juicio_intento");
+            if (result.Victory) _g.Quests.ReportBattle(battle);
             if (!result.Passed)
             {
                 result.GradeUp = OpResult.Fail(result.Victory ? "No cumpliste la condición. Puedes reintentar sin costo." : "El Ascendente ganó. Puedes reintentar sin costo.");
                 return result;
             }
             result.GradeUp = _g.Progress.ApplyGradeUp(plan.WitchId, plan.Via);
-            if (result.GradeUp.Ok) result.Memory = _g.Meta.Progression.MemoryFor(plan.WitchId, plan.Target);
+            if (result.GradeUp.Ok) { result.Memory = _g.Meta.Progression.MemoryFor(plan.WitchId, plan.Target); _g.Report("juicio"); _g.Report("grado"); }
             return result;
         }
 

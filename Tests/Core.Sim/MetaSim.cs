@@ -4,6 +4,7 @@ using System.Linq;
 using SalYAlmas.Core.Combat;
 using SalYAlmas.Core.Data;
 using SalYAlmas.Core.Economy;
+using SalYAlmas.Core.Events;
 using SalYAlmas.Core.Fresno;
 using SalYAlmas.Core.Gacha;
 using SalYAlmas.Core.Magic;
@@ -30,6 +31,70 @@ namespace SalYAlmas.Sim
             Console.WriteLine($"   perdió el 75/25 {sim.LostFeatured:N0} veces de {sim.FiveStars:N0} 5★ ({(double)sim.LostFeatured / Math.Max(1, sim.FiveStars):P1})");
             bool ok = Math.Abs(sim.AveragePerFive - 53) <= 1 && Math.Abs(sim.AveragePerFeatured - 66) <= 1;
             Console.WriteLine(ok ? "   dentro de ±1 tirada" : "   FUERA de ±1 tirada");
+            return ok ? 0 : 1;
+        }
+
+        /// <summary>
+        /// Prueba estándar de daño (GDD 17.1). Cada bruja entra a un equipo con tres compañeras fijas contra un maniquí que no
+        /// muere (el Guardián con 50 veces su vida y 2 % de su ataque, para que nadie caiga, débil a los dos planetas de la bruja). Se mide el daño
+        /// total del equipo, con golpes y daño por estados, hasta el límite de turnos: así cuentan también las mejoras de las
+        /// Tejedoras. Ninguna 5★ nueva debe pasar en más de 5 % a la mejor de su papel, y ninguna 4★ o 3★ a la mejor 5★.
+        /// </summary>
+        public static int Kits(GameDatabase db, int n)
+        {
+            var meta = Load(db);
+            var combat = meta.Combat;
+            var fillers = new[] { "topo", "zarigueya", "selenia", "tormentina" };
+            var guardian = combat.Enemies["guardian"];
+            var rows = new List<(WitchDef def, double team, double own, double heal, double deaths)>();
+            foreach (var id in combat.WitchOrder)
+            {
+                var def = combat.Witch(id);
+                var team = new List<string> { id };
+                foreach (var f in fillers) if (f != id && team.Count < 4) team.Add(f);
+                double total = 0, own = 0, heal = 0, deaths = 0;
+                for (int i = 0; i < n; i++)
+                {
+                    var dummy = FresnoService.Scaled(guardian, "maniqui", 50, 0.02, -2, "");
+                    dummy.Name = dummy.ShortName = "Maniquí de Sal";
+                    dummy.Phase2 = null;
+                    dummy.Weaknesses.Clear();
+                    dummy.Weaknesses.Add(def.Primary);
+                    dummy.Weaknesses.Add(def.Secondary);
+                    dummy.Res.Clear();
+                    var enc = new EncounterDef { Id = "maniqui", Name = "Maniquí" };
+                    enc.Enemies.Add(dummy.Id);
+                    var setup = new BattleSetup { Team = team, Seed = (ulong)(500 + i), CustomEncounter = enc };
+                    setup.CustomEnemies.Add(dummy);
+                    foreach (var t in team) setup.Loadouts[t] = new WitchLoadout { Level = 50 };
+                    var b = new Battle(combat, setup);
+                    b.Start();
+                    new AutoPilot().RunToEnd(b);
+                    var unit = b.Witches.First(w => w.Key == id);
+                    var enemyIds = new HashSet<int>(b.Enemies.Select(e => e.Id));
+                    total += b.Events.OfType<HitLanded>().Where(h => enemyIds.Contains(h.TargetId)).Sum(h => (double)h.Damage);
+                    total += b.Events.OfType<DotTicked>().Where(d => enemyIds.Contains(d.UnitId)).Sum(d => (double)d.Damage);
+                    own += b.Events.OfType<HitLanded>().Where(h => h.AttackerId == unit.Id).Sum(h => (double)h.Damage);
+                    heal += b.Events.OfType<Healed>().Sum(h => (double)h.Amount);
+                    deaths += b.Events.OfType<UnitDefeated>().Count(d => d.Side == Side.Ally);
+                }
+                rows.Add((def, total / n, own / n, heal / n, deaths / n));
+            }
+            Console.WriteLine($"== Kits · {n} combates por bruja contra un maniquí · nivel 50 · grado B · límite de turnos");
+            Console.WriteLine("   bruja         ★  papel                   daño del equipo  golpes propios  curación  caídas");
+            foreach (var r in rows.OrderByDescending(r => r.team))
+                Console.WriteLine($"   {r.def.ShortName,-13} {r.def.Rarity}  {r.def.Role,-22} {r.team,15:N0}  {r.own,14:N0}  {r.heal,8:N0}  {r.deaths,6:0.0}");
+            bool ok = true;
+            var baseIds = new HashSet<string>(MetaGame.TestWitches);
+            foreach (var r in rows.Where(r => r.def.Rarity == 5 && !baseIds.Contains(r.def.Id)))
+            {
+                var best = rows.Where(o => baseIds.Contains(o.def.Id) && o.def.Role == r.def.Role).Select(o => o.team).DefaultIfEmpty(0).Max();
+                if (best > 0 && r.team > best * 1.05) { ok = false; Console.WriteLine($"   FALLA: {r.def.ShortName} pasa en más de 5 % a la mejor de su papel"); }
+            }
+            double topFive = rows.Where(r => r.def.Rarity == 5).Max(r => r.team);
+            foreach (var r in rows.Where(r => r.def.Rarity < 5 && r.team > topFive))
+            { ok = false; Console.WriteLine($"   FALLA: {r.def.ShortName} ({r.def.Rarity}★) pega más que la mejor 5★"); }
+            Console.WriteLine(ok ? "   dentro de las reglas del GDD 17.1" : "   FUERA de las reglas");
             return ok ? 0 : 1;
         }
 
@@ -92,6 +157,133 @@ namespace SalYAlmas.Sim
                 foreach (var line in rep.Log) Console.WriteLine(line);
             }
             return 0;
+        }
+
+        /// <summary>Juega la historia con una cuenta nueva, en los dos órdenes, y cuenta los intentos por combate.</summary>
+        public static int Story(GameDatabase db, int n)
+        {
+            var meta = Load(db);
+            // Una cuenta nueva por cada signo cardinal y sentido: juega el anillo desde su región, gasta las almitas en niveles
+            // antes de cada misión (como una jugadora) y, si una sección no sale en 3 intentos, hace Expediciones para subir.
+            foreach (var sign in new[] { "aries", "cancer", "libra", "capricornio" })
+                foreach (bool direct in new[] { true, false })
+                {
+                    var attempts = new Dictionary<string, List<int>>();
+                    var keys = new List<string>();
+                    var regionInfo = new Dictionary<string, List<string>>();
+                    int finished = 0, farmed = 0;
+                    long earned = 0, sales = 0, mats = 0;
+                    int altura = 0;
+                    for (int c = 0; c < n; c++)
+                    {
+                        var g = new MetaGame(meta, MetaGame.NewProfile(meta, (ulong)(c + 1), 300));
+                        g.Story.Create("Sim", "Elle", meta.World.Story.Species[0], sign);
+                        g.Story.StartMission("vado", "prologo");
+                        PlayMission(g, new[] { "marisal", "zarigueya", "topo" }, attempts, keys, c);
+                        g.Termas.SetStarterChoice("solenne");
+                        g.Termas.Pull("inicio", 20, out _);
+                        var team = g.Profile.Witches.Keys.Where(meta.HasKit).OrderBy(x => x, StringComparer.Ordinal).Take(4).ToArray();
+                        var ring = g.Story.BuiltRing;
+                        int start = ring.FindIndex(r => r.Id == g.Story.StartRegion);
+                        long before = g.Ledger.Balance(Res.Almitas);
+                        long salesBefore = g.Ledger.Balance(Res.SalesDeBano);
+                        for (int i = 0; i < ring.Count; i++)
+                        {
+                            var region = ring[((start + (direct ? i : -i)) % ring.Count + ring.Count) % ring.Count];
+                            Train(g, team);
+                            string tag = $"{i + 1}. {region.Id}";
+                            if (!regionInfo.ContainsKey(tag)) regionInfo[tag] = new List<string>();
+                            regionInfo[tag].Add($"nv {g.Story.RegionLevel(region.Id)}-{g.Story.RegionLevel(region.Id) + 6} · equipo {team.Average(id => g.Profile.Witches[id].Level):0}");
+                            foreach (var m in region.Missions)
+                            {
+                                Train(g, team);
+                                if (!g.Story.StartMission(region.Id, m.Id).Ok) break;
+                                farmed += PlayMission(g, team, attempts, keys, c);
+                            }
+                        }
+                        g.Quests.ClaimAll();
+                        earned += g.Ledger.Balance(Res.Almitas) - before;
+                        sales += g.Ledger.Balance(Res.SalesDeBano) - salesBefore;
+                        foreach (var r in ring) mats += g.Ledger.Balance(Res.Mat(r.Material));
+                        altura += g.Quests.Altura;
+                        if (g.Story.GameFinished) finished++;
+                    }
+                    Console.WriteLine($"== Historia desde {sign} · {(direct ? "Directo" : "Retrógrado")} · {n} cuentas nuevas · terminadas {finished}/{n} · Expediciones extra {farmed / (double)n:0.0} por cuenta");
+                    foreach (var kv in regionInfo) Console.WriteLine($"   {kv.Key,-15} {kv.Value[0]}");
+                    Console.WriteLine($"   por cuenta: {sales / (double)n:N0} Sales de Baño ({sales / (double)n / 160:0.0} tiradas) · {mats / (double)n:N0} materiales regionales · Altura {altura / (double)n:0.0}");
+                    foreach (var k in keys.Where(k => attempts[k].Average() > 1.2)) Console.WriteLine($"   {k,-18} intentos: media {attempts[k].Average():0.0}  máximo {attempts[k].Max()}");
+                }
+            return 0;
+        }
+
+        private static void Train(MetaGame g, IReadOnlyList<string> team)
+        {
+            for (bool any = true; any;)
+            {
+                any = false;
+                foreach (var id in team.OrderBy(id => g.Profile.Witches[id].Level))
+                    if (g.Progress.LevelUp(id).Ok) { any = true; break; }
+            }
+        }
+
+        /// <summary>Una Expedición en la zona terminada más alta, para subir de nivel cuando la historia se atora.</summary>
+        private static bool Farm(MetaGame g, IReadOnlyList<string> team, int c)
+        {
+            foreach (var regionId in g.Profile.Calculista.RegionsVisited.ToList())
+            {
+                var region = g.Meta.World.Story.Region(regionId);
+                foreach (var z in region.Zones.AsEnumerable().Reverse())
+                {
+                    if (g.Story.CanExpedition(region.Id, z.Id, g.Story.MaxTideFor(region.Id)).Length > 0) continue;
+                    g.Story.StartExpedition(region.Id, z.Id, g.Story.MaxTideFor(region.Id));
+                    for (int guard = 0; guard < 40 && g.Story.InExpedition; guard++)
+                    {
+                        var b = new Battle(g.Combat, g.Story.PrepareExpeditionBattle(team, (ulong)(c * 977 + guard)));
+                        b.Start();
+                        new AutoPilot().RunToEnd(b);
+                        if (!g.Story.ResolveExpeditionBattle(b).Ok && guard > 8) g.Story.LeaveExpedition();
+                    }
+                    Train(g, team);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static int PlayMission(MetaGame g, IReadOnlyList<string> team, Dictionary<string, List<int>> attempts, List<string> keys, int c)
+        {
+            int farmed = 0;
+            for (int guard = 0; guard < 400 && g.Story.InMission; guard++)
+            {
+                var scene = g.Story.CurrentScene;
+                if (scene.Battle != null)
+                {
+                    string key = g.Profile.Calculista.Mission + "/" + scene.Id;
+                    int tries = 0;
+                    Core.Meta.OpResult r;
+                    do
+                    {
+                        var b = new Battle(g.Combat, g.Story.PrepareBattle(team, (ulong)(c * 100 + ++tries)));
+                        b.Start();
+                        new AutoPilot().RunToEnd(b);
+                        r = g.Story.ResolveBattle(b);
+                        if (!r.Ok && tries % 3 == 0 && team.Count > 0)
+                        {
+                            // Se atoró: con la misión en pausa, hace una Expedición para subir y vuelve a la misma sección.
+                            if (Farm(g, team, c + tries)) farmed++;
+                        }
+                    } while (!r.Ok && tries < 60);
+                    if (!attempts.ContainsKey(key)) { attempts[key] = new List<int>(); keys.Add(key); }
+                    attempts[key].Add(tries);
+                }
+                else if (scene.Choices.Count > 0)
+                {
+                    var o = g.Story.Choices(team).First(x => x.Available);
+                    g.Story.Choose(o.Index, team);
+                }
+                else g.Story.Continue();
+            }
+            return farmed;
         }
 
         /// <summary>Juega cada Juicio con el piloto del combate e informa victorias y condiciones cumplidas.</summary>

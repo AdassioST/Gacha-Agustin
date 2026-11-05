@@ -29,9 +29,13 @@ namespace SalYAlmas.Presentation
             }
         }
 
+        private PullSequence _pull;
+
         private void DrawTermas(Rect a)
         {
             var rules = _meta.Gacha;
+            a = Header(a, L("dest.summon"), "El agua se calienta con cada tirada sin 5★. El número siempre está a la vista.");
+            if (GuiKit.Button(new Rect(a.xMax - 240, a.y - 64, 240, 56), L("menu.odds"), true, 20)) { Go(Screen.Odds); return; }
             var left = new Rect(a.x, a.y, 400, a.height);
             GuiKit.PanelBox(left);
             GuiKit.Label(new Rect(left.x + 12, left.y + 6, 376, 36), "Manantiales", 26, Palette.GoldBright, TextAnchor.MiddleLeft, true);
@@ -97,7 +101,7 @@ namespace SalYAlmas.Presentation
                 }
             }
 
-            string why1 = Game.Termas.CanPull(banner.Id, 1), why10 = Game.Termas.CanPull(banner.Id, 10);
+            string why1 = Game.GachaService.CanPull(banner.Id, 1), why10 = Game.GachaService.CanPull(banner.Id, 10);
             if (GuiKit.Button(new Rect(x, y, 300, 66), $"Una tirada\n<size=14>{rules.CostPerPull} Sales de Baño</size>", why1.Length == 0, 22)) Pull(banner.Id, 1);
             if (GuiKit.Button(new Rect(x + 310, y, 300, 66), $"Diez tiradas\n<size=14>{rules.CostPerPull * 10:N0} Sales de Baño</size>", why10.Length == 0, 22)) Pull(banner.Id, 10);
             y += 76;
@@ -128,11 +132,15 @@ namespace SalYAlmas.Presentation
 
         private void Pull(string banner, int count)
         {
-            var r = Game.Termas.Pull(banner, count, out var results);
+            var r = Game.GachaService.Pull(banner, count, out var results);
             _lastPull.Clear();
             _lastPull.AddRange(results);
             Apply(r);
-            if (r.Ok && results.Count > 0) PullRevealed?.Invoke(results.Max(p => p.Rarity));
+            if (!r.Ok) return;
+            Color water = Palette.Hex("#3E7E8E");
+            var spring = _meta.World.Shop.Cosmetic(Game.Store.Equipped("manantial"));
+            if (spring != null && ColorUtility.TryParseHtmlString(spring.Color, out var c)) water = c;
+            _pull = new PullSequence(Game, _art, results, water, () => _pull = null);
         }
 
         // ------------------------------------------------------------------ Libro contable
@@ -140,6 +148,7 @@ namespace SalYAlmas.Presentation
         private void DrawLedger(Rect a)
         {
             var l = Game.Ledger;
+            a = Header(a, L("dest.ledger"), "Cada recurso con su fuente y su sumidero");
             var left = new Rect(a.x, a.y, 560, a.height);
             GuiKit.PanelBox(left);
             GuiKit.Label(new Rect(left.x + 12, left.y + 6, 536, 36), "Saldos", 26, Palette.GoldBright, TextAnchor.MiddleLeft, true);

@@ -437,6 +437,8 @@ namespace SalYAlmas.Core.Combat
         /// <summary>Efectos de inicio de la Fase 2: Granos, Resonancia, Ánima, escudos y adelantos de Injertos y armas.</summary>
         private void ApplyStartModifiers()
         {
+            foreach (var w in _witches)
+                if (w.Def.StartPoison > 0) AddDot(w, DotKind.Poison, w.Def.StartPoison, 3, w, "Intoxicada"); // TUNING: 3 turnos
             int grains = (int)Math.Round(_mods.Get(ModKeys.StartGrains));
             foreach (var w in _witches) grains += (int)Math.Round(w.Loadout?.Mods.Get(ModKeys.StartGrains) ?? 0);
             if (grains != 0) AddGrains(grains, "Injertos y armas", allowBoost: false);
@@ -676,7 +678,16 @@ namespace SalYAlmas.Core.Combat
         {
             if (u.IsAlive || _deathAnnounced.Contains(u.Id)) return;
             _deathAnnounced.Add(u.Id);
-            if (u is EnemyUnit e) e.ChargedSkill = null;
+            if (u is EnemyUnit e)
+            {
+                e.ChargedSkill = null;
+                // Lo que suelta al caer: la trampa de los que explotan, siembran o maldicen.
+                foreach (var fx in e.Def.Traits.OnDeath)
+                {
+                    if (fx.Target == EffectTarget.Target) foreach (var w in AliveWitches()) ApplyEffect(fx, e, w, e.Name);
+                    else ApplyEffect(fx, e, e, e.Name);
+                }
+            }
             Emit(new UnitDefeated { UnitId = u.Id, UnitName = u.Name, Side = u.Side });
         }
 

@@ -93,6 +93,7 @@ namespace SalYAlmas.Core.Fresno
                 if (R.Ofrenda.Unlocks.TryGetValue(lvl, out var text)) notes.Add(text);
             }
             F.OfrendaLevelPaid = Math.Max(F.OfrendaLevelPaid, after);
+            _g.Report("ofrenda", almitas);
             return OpResult.Success($"El Fresno crece: nivel {after}" + (notes.Count > 0 ? ". " + string.Join(" ", notes) : ""));
         }
 
@@ -323,6 +324,7 @@ namespace SalYAlmas.Core.Fresno
             foreach (var id in Run.Curses[Math.Min(Run.Zone, Run.Curses.Count - 1)]) { var c = R.Curse(id); if (c != null) mods.AddAll(c.Mods); }
             mods.AddAll(RootMods());
             mods.AddAll(OfrendaBonus());
+            mods.AddAll(_g.Story.CombatMods());
             foreach (var kv in Run.RunMods) mods.Add(kv.Key, kv.Value);
             return mods;
         }
@@ -506,6 +508,7 @@ namespace SalYAlmas.Core.Fresno
             };
             d.Weaknesses.AddRange(src.Weaknesses);
             foreach (var kv in src.Res) d.Res[kv.Key] = kv.Value;
+            d.Traits = src.Traits;
             return d;
         }
 
@@ -515,6 +518,7 @@ namespace SalYAlmas.Core.Fresno
             if (Run == null || Run.Phase != RunPhase.Battle) return OpResult.Fail("No hay combate pendiente.");
             if (!battle.IsOver) return OpResult.Fail("El combate no ha terminado.");
             bool victory = battle.Outcome == BattleOutcome.Victory;
+            if (victory) { _g.Quests.ReportBattle(battle); _g.Report("fresno_nodo"); }
             foreach (var w in battle.Witches)
             {
                 double frac = w.MaxHp > 0 ? w.Hp / (double)w.MaxHp : 0;
@@ -568,6 +572,7 @@ namespace SalYAlmas.Core.Fresno
 
         private void ZoneCleared()
         {
+            _g.Report("fresno_zona");
             var zone = Zone;
             double pct = RunModifiers().Get(ModKeys.SaviaPct);
             long savia = (long)Math.Round(zone.Savia * (1.0 + pct));
@@ -672,6 +677,7 @@ namespace SalYAlmas.Core.Fresno
         /// <summary>Estadística de la Calculista para un chequeo: su base más el rasgo de cada bruja del equipo.</summary>
         public int Stat(CalculistaStat stat)
         {
+            if (_g.Story.Created) return _g.Story.Stat(stat, Run.Team);
             int v = R.CalculistaBase;
             foreach (var id in Run.Team)
             {
@@ -1000,6 +1006,8 @@ namespace SalYAlmas.Core.Fresno
         private void EndRun(RunOutcome outcome)
         {
             Run.Outcome = outcome;
+            if (outcome == RunOutcome.Victory) _g.Report("fresno_run");
+            _g.Analytics.Track(World.AnalyticsEvents.FresnoRunEnd, outcome + ":" + Run.NodeId);
             if (Run.Mancha != null && !Run.ManchaResolved)
             {
                 long savia = (long)Math.Round(Run.Mancha.Almitas * R.ManchaReturn, MidpointRounding.AwayFromZero);

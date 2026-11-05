@@ -140,6 +140,13 @@ namespace SalYAlmas.EditorTools
                 game.GachaJson = LoadJson("gacha.json");
                 game.FresnoJson = LoadJson("fresno.json");
                 game.FresnoEnemiesJson = LoadJson("fresno_enemies.json");
+                game.StoryJson = LoadJson("story.json");
+                game.ServicesJson = LoadJson("services.json");
+                game.LocJson = LoadJson("loc.json");
+                game.WitchesExtJson = LoadJson("witches_ext.json");
+                game.OdysseyJson = LoadJson("odyssey.json");
+                game.QuestsJson = LoadJson("quests.json");
+                game.Portraits = LoadPortraits();
                 game.PlanetMaterials = planetMaterials ?? new Material[7];
                 game.EnemyMaterial = enemyMaterial;
                 return game;
@@ -163,6 +170,17 @@ namespace SalYAlmas.EditorTools
             block.SetColor("_BaseColor", Palette.Hex("#3A3442"));
             block.SetColor("_Color", Palette.Hex("#3A3442"));
             renderer.SetPropertyBlock(block);
+        }
+
+        private static Texture2D[] LoadPortraits()
+        {
+            var list = new System.Collections.Generic.List<Texture2D>();
+            foreach (var guid in AssetDatabase.FindAssets("t:Texture2D", new[] { "Assets/SalYAlmas/Art" }))
+            {
+                var t = AssetDatabase.LoadAssetAtPath<Texture2D>(AssetDatabase.GUIDToAssetPath(guid));
+                if (t != null) list.Add(t);
+            }
+            return list.ToArray();
         }
 
         private static TextAsset LoadJson(string file)

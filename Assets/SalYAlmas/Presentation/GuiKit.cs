@@ -22,6 +22,20 @@ namespace SalYAlmas.Presentation
 
         public static Color Planet(Planet p)
         {
+            if (Theme.ColorSafe)
+            {
+                // Paleta de Okabe e Ito, distinguible con los daltonismos comunes. El nombre siempre acompaña al color.
+                switch (p)
+                {
+                    case Core.Magic.Planet.Sol: return Hex("#E69F00");
+                    case Core.Magic.Planet.Luna: return Hex("#F0F0F0");
+                    case Core.Magic.Planet.Marte: return Hex("#D55E00");
+                    case Core.Magic.Planet.Mercurio: return Hex("#56B4E9");
+                    case Core.Magic.Planet.Venus: return Hex("#009E73");
+                    case Core.Magic.Planet.Jupiter: return Hex("#0072B2");
+                    default: return Hex("#CC79A7");
+                }
+            }
             switch (p)
             {
                 case Core.Magic.Planet.Sol: return Hex("#F5B02E");
@@ -147,7 +161,7 @@ namespace SalYAlmas.Presentation
         {
             string key = "btn" + size;
             if (Styles.TryGetValue(key, out var s) && s != null) return s;
-            s = new GUIStyle(GUI.skin.button) { fontSize = size, richText = true, wordWrap = true };
+            s = new GUIStyle(Theme.ButtonBase()) { fontSize = size, richText = true, wordWrap = true };
             Styles[key] = s;
             return s;
         }
@@ -170,8 +184,7 @@ namespace SalYAlmas.Presentation
 
         public static void PanelBox(Rect r, float alpha = 0.88f)
         {
-            Fill(r, Palette.WithAlpha(Palette.Panel, alpha));
-            Frame(r, Palette.WithAlpha(Palette.Gold, 0.8f), 1.5f);
+            Theme.GoldPanel(r, alpha);
         }
 
         public static void Bar(Rect r, float fraction, Color fill, Color back)
@@ -236,6 +249,7 @@ namespace SalYAlmas.Presentation
 
         public static void Label(Rect r, string text, int size, Color color, TextAnchor anchor = TextAnchor.MiddleLeft, bool bold = false, bool wrap = false)
         {
+            if (Theme.LargeText) size = Mathf.RoundToInt(size * 1.12f);
             GUI.Label(r, text, Style(size, color, anchor, bold, wrap));
         }
 

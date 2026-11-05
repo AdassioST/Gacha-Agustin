@@ -109,6 +109,11 @@ namespace SalYAlmas.Core.Combat
                 }
             }
             int total = dealsDamage ? Math.Max(1, DamageFormula.Round(domDamage + secDamage)) : 0;
+            // Protector (Cangrejo Salinero): mientras viva, sus compañeros reciben menos daño.
+            double protect = 0;
+            foreach (var other in AliveEnemies())
+                if (other != target && other.Def.Traits.ProtectAllies > protect) protect = other.Def.Traits.ProtectAllies;
+            if (protect > 0 && total > 0) total = Math.Max(1, DamageFormula.Round(total * (1.0 - protect)));
 
             // Firmeza: solo los planetas débiles la bajan, cada uno con su parte de la pureza (GDD 9.4).
             double toughDamage = 0;
@@ -155,6 +160,7 @@ namespace SalYAlmas.Core.Combat
             });
 
             if (broke) TriggerBreak(target, attacker, breakPlanet);
+            EnemyTraitsOnHit(attacker, target, dealt, ctx);
             AnnounceDeath(target);
             outcome.Damage = dealt + absorbed;
             outcome.Broke = broke;
@@ -273,6 +279,14 @@ namespace SalYAlmas.Core.Combat
             }
             int dealt = Math.Min(remaining, target.Hp);
             target.Hp -= dealt;
+            if (target.Hp <= 0 && target is WitchUnit w && w.Def.ReviveOnceHp > 0 && !w.ReviveUsed)
+            {
+                // Axa (GDD 17): revive una vez, con la Salinidad en cero.
+                w.ReviveUsed = true;
+                w.Hp = Math.Max(1, (int)Math.Round(w.MaxHp * w.Def.ReviveOnceHp, MidpointRounding.AwayFromZero));
+                ChangeSalinity(w, -w.Salinity, "Revive");
+                Emit(new UnitRevived { UnitId = w.Id, UnitName = w.Name, Hp = w.Hp });
+            }
             return dealt;
         }
 

@@ -1,0 +1,4155 @@
+// GENERADO por Tools/Content/gen_kits.py: no lo edites a mano, cambia el generador.
+// Kits de las 18 brujas que faltaban (GDD 17 y 18). Se suman a witches.json en MetaLoader.
+// Plantilla por papel; estadísticas ×0.9 para 4★ y ×0.8 para 3★. Todo número es // TUNING.
+{
+ "witches": [
+  {
+   "id": "cervanda",
+   "name": "Cervanda",
+   "shortName": "Cervanda",
+   "species": "Cierva con cornamenta",
+   "rarity": 5,
+   "role": "Guardiana",
+   "ascendant": {
+    "sign": "Capricornio",
+    "name": "La Cabra de Plomo Real"
+   },
+   "ritual": "Sirve sal de un salero de plata con modales de corte",
+   "mix": {
+    "primary": "saturno",
+    "secondary": "jupiter",
+    "name": "Plomo Real"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 11000,
+    "atk": 1150,
+    "spd": 100,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "agujaYSello",
+    "name": "Sello de la Corte"
+   },
+   "moves": {
+    "basic": {
+     "id": "cervanda_reverencia_de_asta",
+     "name": "Reverencia de Asta",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      [
+       6,
+       0.5
+      ],
+      [
+       18,
+       0.5
+      ]
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "cervanda_audiencia_de_plomo",
+     "name": "Audiencia de Plomo",
+     "effects": [
+      {
+       "type": "taunt",
+       "target": "self",
+       "turns": 2,
+       "name": "Provocación"
+      },
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.12,
+       "turns": 2,
+       "name": "Escudo"
+      },
+      {
+       "type": "delay",
+       "target": "allEnemies",
+       "value": 0.05,
+       "name": "Gravedad"
+      }
+     ],
+     "target": "self",
+     "description": "Atrae los golpes dos turnos y escuda al aquelarre con 12 % de su vida."
+    },
+    "opening": {
+     "id": "cervanda_edicto",
+     "name": "Edicto",
+     "multiplier": 0.9,
+     "toughness": 15,
+     "hits": [
+      [
+       4,
+       0.5
+      ],
+      [
+       22,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "atk",
+       "value": 0.12,
+       "turns": 2,
+       "at": "start",
+       "name": "Peso"
+      }
+     ]
+    },
+    "link": {
+     "id": "cervanda_muralla_de_corte",
+     "name": "Muralla de Corte",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.4
+      ],
+      [
+       26,
+       0.6
+      ]
+     ],
+     "effects": [
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.05,
+       "turns": 2,
+       "name": "Muro"
+      }
+     ]
+    },
+    "closing": {
+     "id": "cervanda_sentencia_grave",
+     "name": "Sentencia Grave",
+     "multiplier": 1.8,
+     "toughness": 30,
+     "hits": [
+      [
+       10,
+       0.4
+      ],
+      [
+       34,
+       0.6
+      ]
+     ],
+     "effects": [
+      {
+       "type": "delay",
+       "value": 0.1,
+       "name": "Retraso"
+      }
+     ]
+    },
+    "ascension1": {
+     "id": "cervanda_cornamenta_de_plomo",
+     "name": "Cornamenta de Plomo",
+     "multiplier": 2.4,
+     "toughness": 30,
+     "hits": [
+      [
+       20,
+       0.5
+      ],
+      [
+       40,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.15,
+       "turns": 2,
+       "name": "Escudo"
+      }
+     ]
+    },
+    "ascension2": {
+     "id": "cervanda_corte_cerrada",
+     "name": "Corte Cerrada",
+     "multiplier": 3.4,
+     "toughness": 40,
+     "hits": [
+      [
+       16,
+       0.3
+      ],
+      [
+       36,
+       0.3
+      ],
+      [
+       56,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "taunt",
+       "target": "self",
+       "turns": 2,
+       "name": "Provocación"
+      },
+      {
+       "type": "buff",
+       "stat": "res",
+       "value": 0.2,
+       "turns": 2,
+       "target": "allAllies",
+       "name": "Firmeza"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "cervanda_la_corte_inmovil",
+     "name": "La Corte Inmóvil",
+     "multiplier": 6.0,
+     "toughness": 60,
+     "hits": [
+      [
+       30,
+       0.3
+      ],
+      [
+       60,
+       0.3
+      ],
+      [
+       90,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.3,
+       "turns": 2,
+       "name": "Gran Escudo"
+      }
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Corte de Plomo",
+    "description": "+15 % de vida a todo el aquelarre.",
+    "teamHp": 0.15
+   }
+  },
+  {
+   "id": "cupria",
+   "name": "Cupria",
+   "shortName": "Cupria",
+   "species": "Serpiente",
+   "rarity": 5,
+   "role": "Sanadora",
+   "ascendant": {
+    "sign": "Virgo",
+    "name": "La Doncella de Cobre"
+   },
+   "ritual": "Su Ascendente le pone la sal en la lengua",
+   "mix": {
+    "primary": "venus",
+    "secondary": "luna",
+    "name": "Leche de Cobre"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 8800,
+    "atk": 1250,
+    "spd": 112,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "agujaYSello",
+    "name": "Sello de Cobre"
+   },
+   "moves": {
+    "basic": {
+     "id": "cupria_lengua_bifida",
+     "name": "Lengua Bífida",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      [
+       8,
+       0.5
+      ],
+      [
+       20,
+       0.5
+      ]
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "cupria_remedio_ambiguo",
+     "name": "Remedio Ambiguo",
+     "effects": [
+      {
+       "type": "heal",
+       "value": 0.3,
+       "name": "Cura"
+      },
+      {
+       "type": "cleanse",
+       "count": 1,
+       "name": "Limpia"
+      }
+     ],
+     "target": "ally",
+     "description": "Cura 30 % de la vida a una aliada y le quita un estado."
+    },
+    "opening": {
+     "id": "cupria_muda_de_piel",
+     "name": "Muda de Piel",
+     "multiplier": 0.8,
+     "toughness": 10,
+     "hits": [
+      [
+       2,
+       0.5
+      ],
+      [
+       20,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.04,
+       "name": "Rocío"
+      }
+     ]
+    },
+    "link": {
+     "id": "cupria_savia_de_cobre",
+     "name": "Savia de Cobre",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.3
+      ],
+      [
+       14,
+       0.3
+      ],
+      [
+       26,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.05,
+       "name": "Rocío"
+      }
+     ]
+    },
+    "closing": {
+     "id": "cupria_veneno_que_cura",
+     "name": "Veneno que Cura",
+     "multiplier": 1.6,
+     "toughness": 25,
+     "hits": [
+      [
+       8,
+       0.5
+      ],
+      [
+       30,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.1,
+       "name": "Lluvia"
+      },
+      {
+       "type": "dot",
+       "dot": "poison",
+       "value": 0.2,
+       "turns": 2,
+       "name": "Veneno Moral"
+      }
+     ]
+    },
+    "ascension1": {
+     "id": "cupria_huerto_secreto",
+     "name": "Huerto Secreto",
+     "multiplier": 2.0,
+     "toughness": 30,
+     "hits": [
+      [
+       16,
+       0.5
+      ],
+      [
+       32,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.2,
+       "name": "Lluvia"
+      },
+      {
+       "type": "cleanse",
+       "target": "allAllies",
+       "count": 1,
+       "name": "Limpia"
+      }
+     ]
+    },
+    "ascension2": {
+     "id": "cupria_herbolaria_mayor",
+     "name": "Herbolaria Mayor",
+     "multiplier": 2.8,
+     "toughness": 40,
+     "hits": [
+      [
+       12,
+       0.3
+      ],
+      [
+       30,
+       0.3
+      ],
+      [
+       48,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.3,
+       "name": "Marea"
+      },
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.1,
+       "turns": 2,
+       "name": "Velo"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "cupria_el_jardin_que_perdona",
+     "name": "El Jardín que Perdona",
+     "multiplier": 5.0,
+     "toughness": 60,
+     "hits": [
+      [
+       20,
+       0.3
+      ],
+      [
+       50,
+       0.3
+      ],
+      [
+       80,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.45,
+       "name": "Gran Marea"
+      }
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Lengua de Cobre",
+    "description": "Empieza el combate con un Grano.",
+    "startGrains": 1
+   }
+  },
+  {
+   "id": "brea",
+   "name": "Brea",
+   "shortName": "Brea",
+   "species": "Gata negra (kemonomimi)",
+   "rarity": 4,
+   "role": "Rompedora",
+   "ascendant": {
+    "sign": "Libra",
+    "name": "La Balanza de Brea"
+   },
+   "ritual": "Lame sal de un plato de alquitrán frío",
+   "mix": {
+    "primary": "saturno",
+    "secondary": "luna",
+    "name": "Humo Óseo"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 8300,
+    "atk": 1350,
+    "spd": 104,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "agujaYSello",
+    "name": "Contrapeso"
+   },
+   "moves": {
+    "basic": {
+     "id": "brea_zarpazo_de_brea",
+     "name": "Zarpazo de Brea",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      [
+       6,
+       0.4
+      ],
+      [
+       16,
+       0.6
+      ]
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "brea_platillo_caido",
+     "name": "Platillo Caído",
+     "multiplier": 2.0,
+     "toughness": 35,
+     "hits": [
+      [
+       10,
+       0.5
+      ],
+      [
+       26,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "defenseDown",
+       "value": 0.15,
+       "turns": 2,
+       "name": "Grieta"
+      }
+     ],
+     "description": "Quita mucha Firmeza y baja 15 % la defensa dos turnos."
+    },
+    "opening": {
+     "id": "brea_fiel_torcido",
+     "name": "Fiel Torcido",
+     "multiplier": 1.0,
+     "toughness": 20,
+     "hits": [
+      [
+       4,
+       0.5
+      ],
+      [
+       26,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "nextToughness",
+       "target": "otherAllies",
+       "value": 0.15,
+       "at": "start",
+       "name": "Fisura"
+      }
+     ]
+    },
+    "link": {
+     "id": "brea_contrapeso",
+     "name": "Contrapeso",
+     "multiplier": 1.2,
+     "toughness": 25,
+     "hits": [
+      [
+       2,
+       0.4
+      ],
+      [
+       26,
+       0.6
+      ]
+     ]
+    },
+    "closing": {
+     "id": "brea_balanza_rota",
+     "name": "Balanza Rota",
+     "multiplier": 2.3,
+     "toughness": 45,
+     "hits": [
+      [
+       8,
+       0.3
+      ],
+      [
+       28,
+       0.3
+      ],
+      [
+       50,
+       0.4
+      ]
+     ]
+    },
+    "ascension1": {
+     "id": "brea_peso_muerto",
+     "name": "Peso Muerto",
+     "multiplier": 3.0,
+     "toughness": 45,
+     "hits": [
+      [
+       20,
+       0.5
+      ],
+      [
+       40,
+       0.5
+      ]
+     ]
+    },
+    "ascension2": {
+     "id": "brea_juicio_de_alquitran",
+     "name": "Juicio de Alquitrán",
+     "multiplier": 4.8,
+     "toughness": 60,
+     "hits": [
+      [
+       16,
+       0.3
+      ],
+      [
+       36,
+       0.3
+      ],
+      [
+       60,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "defenseDown",
+       "value": 0.2,
+       "turns": 2,
+       "name": "Quiebre"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "brea_la_balanza_negra",
+     "name": "La Balanza Negra",
+     "multiplier": 8.0,
+     "toughness": 90,
+     "hits": [
+      [
+       30,
+       0.3
+      ],
+      [
+       60,
+       0.3
+      ],
+      [
+       90,
+       0.4
+      ]
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Fiel de la Balanza",
+    "description": "+7 % de ataque a todo el aquelarre.",
+    "teamAtk": 0.07
+   }
+  },
+  {
+   "id": "grajilla",
+   "name": "Grajilla",
+   "shortName": "Grajilla",
+   "species": "Cuerva",
+   "rarity": 4,
+   "role": "Saboteadora",
+   "ascendant": {
+    "sign": "Acuario",
+    "name": "El Aguador de Hollín"
+   },
+   "ritual": "Roba sal brillante de los saleros ajenos",
+   "mix": {
+    "primary": "mercurio",
+    "secondary": "saturno",
+    "name": "Azogue de Plomo"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 7400,
+    "atk": 1300,
+    "spd": 116,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "hilos",
+    "name": "Hilos de Hollín"
+   },
+   "moves": {
+    "basic": {
+     "id": "grajilla_picotazo",
+     "name": "Picotazo",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      8,
+      20
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "grajilla_rapina",
+     "name": "Rapiña",
+     "multiplier": 1.6,
+     "toughness": 20,
+     "hits": [
+      [
+       12,
+       0.5
+      ],
+      [
+       28,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "dispel",
+       "count": 1,
+       "name": "Disipa"
+      },
+      {
+       "type": "delay",
+       "value": 0.15,
+       "name": "Retraso"
+      }
+     ],
+     "description": "Quita una mejora al objetivo y lo retrasa 15 %."
+    },
+    "opening": {
+     "id": "grajilla_graznido_torcido",
+     "name": "Graznido Torcido",
+     "multiplier": 0.8,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.5
+      ],
+      [
+       18,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "speed",
+       "value": 0.1,
+       "turns": 2,
+       "at": "start",
+       "name": "Torpeza"
+      }
+     ]
+    },
+    "link": {
+     "id": "grajilla_pluma_falsa",
+     "name": "Pluma Falsa",
+     "multiplier": 1.1,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.5
+      ],
+      [
+       26,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "damageTaken",
+       "value": 0.1,
+       "turns": 2,
+       "name": "Mal de Ojo"
+      }
+     ]
+    },
+    "closing": {
+     "id": "grajilla_nido_de_mentiras",
+     "name": "Nido de Mentiras",
+     "multiplier": 2.0,
+     "toughness": 25,
+     "hits": [
+      [
+       8,
+       0.4
+      ],
+      [
+       34,
+       0.6
+      ]
+     ],
+     "effects": [
+      {
+       "type": "delay",
+       "value": 0.1,
+       "name": "Retraso"
+      }
+     ]
+    },
+    "ascension1": {
+     "id": "grajilla_bandada",
+     "name": "Bandada",
+     "multiplier": 2.6,
+     "toughness": 30,
+     "hits": [
+      [
+       20,
+       0.5
+      ],
+      [
+       40,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "delay",
+       "value": 0.2,
+       "name": "Retraso"
+      }
+     ]
+    },
+    "ascension2": {
+     "id": "grajilla_ladrona_de_brillos",
+     "name": "Ladrona de Brillos",
+     "multiplier": 4.2,
+     "toughness": 40,
+     "hits": [
+      [
+       16,
+       0.3
+      ],
+      [
+       36,
+       0.3
+      ],
+      [
+       56,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "dispel",
+       "count": 2,
+       "name": "Disipa"
+      },
+      {
+       "type": "debuff",
+       "stat": "atk",
+       "value": 0.15,
+       "turns": 2,
+       "name": "Desgano"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "grajilla_el_cielo_de_hollin",
+     "name": "El Cielo de Hollín",
+     "multiplier": 7.2,
+     "toughness": 60,
+     "hits": [
+      [
+       30,
+       0.3
+      ],
+      [
+       60,
+       0.3
+      ],
+      [
+       90,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "delay",
+       "value": 0.3,
+       "name": "Gran Retraso"
+      }
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Nido Ladrón",
+    "description": "Los enemigos empiezan el combate retrasados 10 %.",
+    "startEnemyDelay": 0.105
+   }
+  },
+  {
+   "id": "madrona",
+   "name": "Madroña",
+   "shortName": "Madroña",
+   "species": "Osa",
+   "rarity": 4,
+   "role": "Guardiana",
+   "ascendant": {
+    "sign": "Tauro",
+    "name": "El Toro de Madroño"
+   },
+   "ritual": "Unta sal en miel de madroño",
+   "mix": {
+    "primary": "venus",
+    "secondary": "marte",
+    "name": "Herrumbre Dulce"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 10890,
+    "atk": 1040,
+    "spd": 98,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "agujaYSello",
+    "name": "Sello de Miel"
+   },
+   "moves": {
+    "basic": {
+     "id": "madrona_zarpa_pesada",
+     "name": "Zarpa Pesada",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      [
+       6,
+       0.5
+      ],
+      [
+       18,
+       0.5
+      ]
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "madrona_abrazo_de_osa",
+     "name": "Abrazo de Osa",
+     "effects": [
+      {
+       "type": "taunt",
+       "target": "self",
+       "turns": 2,
+       "name": "Provocación"
+      },
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.12,
+       "turns": 2,
+       "name": "Escudo"
+      }
+     ],
+     "target": "self",
+     "description": "Atrae los golpes dos turnos y escuda al aquelarre con 12 % de su vida."
+    },
+    "opening": {
+     "id": "madrona_grunido",
+     "name": "Gruñido",
+     "multiplier": 0.9,
+     "toughness": 15,
+     "hits": [
+      [
+       4,
+       0.5
+      ],
+      [
+       22,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "atk",
+       "value": 0.12,
+       "turns": 2,
+       "at": "start",
+       "name": "Peso"
+      }
+     ]
+    },
+    "link": {
+     "id": "madrona_panal",
+     "name": "Panal",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.4
+      ],
+      [
+       26,
+       0.6
+      ]
+     ],
+     "effects": [
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.05,
+       "turns": 2,
+       "name": "Muro"
+      }
+     ]
+    },
+    "closing": {
+     "id": "madrona_golpe_de_hibernacion",
+     "name": "Golpe de Hibernación",
+     "multiplier": 1.8,
+     "toughness": 30,
+     "hits": [
+      [
+       10,
+       0.4
+      ],
+      [
+       34,
+       0.6
+      ]
+     ],
+     "effects": [
+      {
+       "type": "delay",
+       "value": 0.1,
+       "name": "Retraso"
+      }
+     ]
+    },
+    "ascension1": {
+     "id": "madrona_cueva_tibia",
+     "name": "Cueva Tibia",
+     "multiplier": 2.4,
+     "toughness": 30,
+     "hits": [
+      [
+       20,
+       0.5
+      ],
+      [
+       40,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.15,
+       "turns": 2,
+       "name": "Escudo"
+      }
+     ]
+    },
+    "ascension2": {
+     "id": "madrona_madre_del_monte",
+     "name": "Madre del Monte",
+     "multiplier": 3.4,
+     "toughness": 40,
+     "hits": [
+      [
+       16,
+       0.3
+      ],
+      [
+       36,
+       0.3
+      ],
+      [
+       56,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "taunt",
+       "target": "self",
+       "turns": 2,
+       "name": "Provocación"
+      },
+      {
+       "type": "buff",
+       "stat": "res",
+       "value": 0.2,
+       "turns": 2,
+       "target": "allAllies",
+       "name": "Firmeza"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "madrona_el_bosque_cerrado",
+     "name": "El Bosque Cerrado",
+     "multiplier": 6.0,
+     "toughness": 60,
+     "hits": [
+      [
+       30,
+       0.3
+      ],
+      [
+       60,
+       0.3
+      ],
+      [
+       90,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.3,
+       "turns": 2,
+       "name": "Gran Escudo"
+      }
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Cueva de Invierno",
+    "description": "+10 % de vida máxima a todo el aquelarre.",
+    "teamHp": 0.105
+   }
+  },
+  {
+   "id": "risca",
+   "name": "Risca",
+   "shortName": "Risca",
+   "species": "Hiena",
+   "rarity": 4,
+   "role": "Ofensiva",
+   "ascendant": {
+    "sign": "Escorpio",
+    "name": "El Escorpión que Ríe"
+   },
+   "ritual": "Mastica sal gruesa con risa nerviosa",
+   "mix": {
+    "primary": "marte",
+    "secondary": "mercurio",
+    "name": "Chispa Herrumbrosa"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 7550,
+    "atk": 1580,
+    "spd": 108,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "agujaYSello",
+    "name": "Sello de Risa"
+   },
+   "moves": {
+    "basic": {
+     "id": "risca_dentellada",
+     "name": "Dentellada",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      [
+       6,
+       0.4
+      ],
+      [
+       16,
+       0.6
+      ]
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "risca_risa_de_sierra",
+     "name": "Risa de Sierra",
+     "multiplier": 2.3,
+     "toughness": 20,
+     "hits": [
+      [
+       10,
+       0.3
+      ],
+      [
+       24,
+       0.7
+      ]
+     ],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "bleed",
+       "value": 0.25,
+       "turns": 2,
+       "name": "Sangrado"
+      }
+     ]
+    },
+    "opening": {
+     "id": "risca_herida_abierta",
+     "name": "Herida Abierta",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      [
+       4,
+       0.5
+      ],
+      [
+       26,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "damageTaken",
+       "value": 0.12,
+       "turns": 2,
+       "at": "start",
+       "name": "Marca"
+      }
+     ]
+    },
+    "link": {
+     "id": "risca_carrona",
+     "name": "Carroña",
+     "multiplier": 1.4,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.3
+      ],
+      [
+       22,
+       0.3
+      ],
+      [
+       46,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "bleed",
+       "value": 0.25,
+       "turns": 2,
+       "name": "Sangrado"
+      }
+     ]
+    },
+    "closing": {
+     "id": "risca_jauria",
+     "name": "Jauría",
+     "multiplier": 2.5,
+     "toughness": 30,
+     "hits": [
+      [
+       8,
+       0.2
+      ],
+      [
+       28,
+       0.3
+      ],
+      [
+       50,
+       0.5
+      ]
+     ]
+    },
+    "ascension1": {
+     "id": "risca_cosquilla_de_hierro",
+     "name": "Cosquilla de Hierro",
+     "multiplier": 3.4,
+     "toughness": 30,
+     "hits": [
+      [
+       20,
+       0.4
+      ],
+      [
+       40,
+       0.6
+      ]
+     ]
+    },
+    "ascension2": {
+     "id": "risca_la_que_rie_ultima",
+     "name": "La Que Ríe Última",
+     "multiplier": 5.3,
+     "toughness": 40,
+     "hits": [
+      [
+       16,
+       0.25
+      ],
+      [
+       36,
+       0.25
+      ],
+      [
+       60,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "buff",
+       "stat": "atk",
+       "value": 0.12,
+       "turns": 2,
+       "target": "allAllies",
+       "name": "Arrojo"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "risca_el_escorpion_desatado",
+     "name": "El Escorpión Desatado",
+     "multiplier": 8.8,
+     "toughness": 60,
+     "hits": [
+      [
+       30,
+       0.2
+      ],
+      [
+       60,
+       0.3
+      ],
+      [
+       90,
+       0.5
+      ]
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Risa de Jauría",
+    "description": "+8 % de ataque a todo el aquelarre.",
+    "teamAtk": 0.084
+   }
+  },
+  {
+   "id": "nacarina",
+   "name": "Nacarina",
+   "shortName": "Nacarina",
+   "species": "Nutria (kemonomimi)",
+   "rarity": 4,
+   "role": "Sanadora",
+   "ascendant": {
+    "sign": "Cáncer",
+    "name": "El Cangrejo de Nácar"
+   },
+   "ritual": "Abre ostras con sal y las sorbe",
+   "mix": {
+    "primary": "luna",
+    "secondary": "jupiter",
+    "name": "Marea Tonante"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 7900,
+    "atk": 1120,
+    "spd": 110,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "hilos",
+    "name": "Hilos de Nácar"
+   },
+   "moves": {
+    "basic": {
+     "id": "nacarina_coletazo",
+     "name": "Coletazo",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      [
+       8,
+       0.5
+      ],
+      [
+       20,
+       0.5
+      ]
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "nacarina_perla_tibia",
+     "name": "Perla Tibia",
+     "effects": [
+      {
+       "type": "heal",
+       "value": 0.3,
+       "name": "Cura"
+      },
+      {
+       "type": "cleanse",
+       "count": 1,
+       "name": "Limpia"
+      },
+      {
+       "type": "advance",
+       "value": 0.15,
+       "name": "Corriente"
+      }
+     ],
+     "target": "ally",
+     "description": "Cura 30 % de la vida a una aliada y le quita un estado."
+    },
+    "opening": {
+     "id": "nacarina_corriente",
+     "name": "Corriente",
+     "multiplier": 0.8,
+     "toughness": 10,
+     "hits": [
+      [
+       2,
+       0.5
+      ],
+      [
+       20,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.04,
+       "name": "Rocío"
+      }
+     ]
+    },
+    "link": {
+     "id": "nacarina_oleaje",
+     "name": "Oleaje",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.3
+      ],
+      [
+       14,
+       0.3
+      ],
+      [
+       26,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.05,
+       "name": "Rocío"
+      }
+     ]
+    },
+    "closing": {
+     "id": "nacarina_concha_cerrada",
+     "name": "Concha Cerrada",
+     "multiplier": 1.6,
+     "toughness": 25,
+     "hits": [
+      [
+       8,
+       0.5
+      ],
+      [
+       30,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.1,
+       "name": "Lluvia"
+      }
+     ]
+    },
+    "ascension1": {
+     "id": "nacarina_marea_alta",
+     "name": "Marea Alta",
+     "multiplier": 2.0,
+     "toughness": 30,
+     "hits": [
+      [
+       16,
+       0.5
+      ],
+      [
+       32,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.2,
+       "name": "Lluvia"
+      },
+      {
+       "type": "cleanse",
+       "target": "allAllies",
+       "count": 1,
+       "name": "Limpia"
+      }
+     ]
+    },
+    "ascension2": {
+     "id": "nacarina_arrecife",
+     "name": "Arrecife",
+     "multiplier": 2.8,
+     "toughness": 40,
+     "hits": [
+      [
+       12,
+       0.3
+      ],
+      [
+       30,
+       0.3
+      ],
+      [
+       48,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.3,
+       "name": "Marea"
+      },
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.1,
+       "turns": 2,
+       "name": "Velo"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "nacarina_la_perla_del_fondo",
+     "name": "La Perla del Fondo",
+     "multiplier": 5.0,
+     "toughness": 60,
+     "hits": [
+      [
+       20,
+       0.3
+      ],
+      [
+       50,
+       0.3
+      ],
+      [
+       80,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.45,
+       "name": "Gran Marea"
+      }
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Corriente Tibia",
+    "description": "El aquelarre empieza con 21 de Resonancia.",
+    "startResonance": 21
+   }
+  },
+  {
+   "id": "centella",
+   "name": "Centella",
+   "shortName": "Centella",
+   "species": "Lince",
+   "rarity": 4,
+   "role": "Rompedora",
+   "ascendant": {
+    "sign": "Sagitario",
+    "name": "El Arquero de Rayo"
+   },
+   "ritual": "Frota sal entre las patas hasta que chispea",
+   "mix": {
+    "primary": "jupiter",
+    "secondary": "marte",
+    "name": "Rayo Férreo"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 8300,
+    "atk": 1350,
+    "spd": 104,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "agujaYSello",
+    "name": "Sello de Rayo"
+   },
+   "moves": {
+    "basic": {
+     "id": "centella_zarpazo_electrico",
+     "name": "Zarpazo Eléctrico",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      [
+       6,
+       0.4
+      ],
+      [
+       16,
+       0.6
+      ]
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "centella_descarga",
+     "name": "Descarga",
+     "multiplier": 2.0,
+     "toughness": 35,
+     "hits": [
+      [
+       10,
+       0.5
+      ],
+      [
+       26,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "defenseDown",
+       "value": 0.15,
+       "turns": 2,
+       "name": "Grieta"
+      },
+      {
+       "type": "dot",
+       "dot": "shock",
+       "value": 0.25,
+       "turns": 2,
+       "name": "Electrocución"
+      }
+     ],
+     "description": "Quita mucha Firmeza y baja 15 % la defensa dos turnos."
+    },
+    "opening": {
+     "id": "centella_mirada_de_lince",
+     "name": "Mirada de Lince",
+     "multiplier": 1.0,
+     "toughness": 20,
+     "hits": [
+      [
+       4,
+       0.5
+      ],
+      [
+       26,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "nextToughness",
+       "target": "otherAllies",
+       "value": 0.15,
+       "at": "start",
+       "name": "Fisura"
+      }
+     ]
+    },
+    "link": {
+     "id": "centella_rayo_partido",
+     "name": "Rayo Partido",
+     "multiplier": 1.2,
+     "toughness": 25,
+     "hits": [
+      [
+       2,
+       0.4
+      ],
+      [
+       26,
+       0.6
+      ]
+     ]
+    },
+    "closing": {
+     "id": "centella_trueno_seco",
+     "name": "Trueno Seco",
+     "multiplier": 2.3,
+     "toughness": 45,
+     "hits": [
+      [
+       8,
+       0.3
+      ],
+      [
+       28,
+       0.3
+      ],
+      [
+       50,
+       0.4
+      ]
+     ]
+    },
+    "ascension1": {
+     "id": "centella_flecha_de_rayo",
+     "name": "Flecha de Rayo",
+     "multiplier": 3.0,
+     "toughness": 45,
+     "hits": [
+      [
+       20,
+       0.5
+      ],
+      [
+       40,
+       0.5
+      ]
+     ]
+    },
+    "ascension2": {
+     "id": "centella_tormenta_ferrea",
+     "name": "Tormenta Férrea",
+     "multiplier": 4.8,
+     "toughness": 60,
+     "hits": [
+      [
+       16,
+       0.3
+      ],
+      [
+       36,
+       0.3
+      ],
+      [
+       60,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "defenseDown",
+       "value": 0.2,
+       "turns": 2,
+       "name": "Quiebre"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "centella_el_cielo_que_cae",
+     "name": "El Cielo que Cae",
+     "multiplier": 8.0,
+     "toughness": 90,
+     "hits": [
+      [
+       30,
+       0.3
+      ],
+      [
+       60,
+       0.3
+      ],
+      [
+       90,
+       0.4
+      ]
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Cielo Cargado",
+    "description": "+7 % de ataque a todo el aquelarre.",
+    "teamAtk": 0.07
+   }
+  },
+  {
+   "id": "vespera",
+   "name": "Véspera",
+   "shortName": "Véspera",
+   "species": "Murciélaga",
+   "rarity": 4,
+   "role": "Ofensiva con drenaje",
+   "ascendant": {
+    "sign": "Escorpio",
+    "name": "El Escorpión del Ocaso"
+   },
+   "ritual": "Bebe agua salada a la hora del ocaso",
+   "mix": {
+    "primary": "saturno",
+    "secondary": "venus",
+    "name": "Cobre Viejo"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 8100,
+    "atk": 1440,
+    "spd": 108,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "frenesiSalNegra",
+    "name": "Frenesí del Ocaso"
+   },
+   "moves": {
+    "basic": {
+     "id": "vespera_mordisco",
+     "name": "Mordisco",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      [
+       6,
+       0.5
+      ],
+      [
+       18,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "self",
+       "value": 0.03,
+       "name": "Sorbo"
+      }
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "vespera_sed_de_ocaso",
+     "name": "Sed de Ocaso",
+     "multiplier": 2.1,
+     "toughness": 20,
+     "hits": [
+      [
+       10,
+       0.5
+      ],
+      [
+       26,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "self",
+       "value": 0.12,
+       "name": "Sorbo"
+      }
+     ],
+     "description": "Golpea y se cura 12 % de su vida."
+    },
+    "opening": {
+     "id": "vespera_ala_negra",
+     "name": "Ala Negra",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.5
+      ],
+      [
+       26,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "self",
+       "value": 0.04,
+       "name": "Sorbo"
+      }
+     ]
+    },
+    "link": {
+     "id": "vespera_sorbo_largo",
+     "name": "Sorbo Largo",
+     "multiplier": 1.3,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.3
+      ],
+      [
+       22,
+       0.3
+      ],
+      [
+       46,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "self",
+       "value": 0.05,
+       "name": "Sorbo"
+      }
+     ]
+    },
+    "closing": {
+     "id": "vespera_noche_cerrada",
+     "name": "Noche Cerrada",
+     "multiplier": 2.4,
+     "toughness": 30,
+     "hits": [
+      [
+       8,
+       0.3
+      ],
+      [
+       30,
+       0.7
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "self",
+       "value": 0.08,
+       "name": "Trago"
+      }
+     ]
+    },
+    "ascension1": {
+     "id": "vespera_vuelo_bajo",
+     "name": "Vuelo Bajo",
+     "multiplier": 3.2,
+     "toughness": 30,
+     "hits": [
+      [
+       20,
+       0.5
+      ],
+      [
+       40,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "self",
+       "value": 0.15,
+       "name": "Trago"
+      }
+     ]
+    },
+    "ascension2": {
+     "id": "vespera_copa_roja",
+     "name": "Copa Roja",
+     "multiplier": 5.0,
+     "toughness": 40,
+     "hits": [
+      [
+       16,
+       0.3
+      ],
+      [
+       36,
+       0.3
+      ],
+      [
+       60,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.1,
+       "name": "Copa Compartida"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "vespera_el_ocaso_sin_fin",
+     "name": "El Ocaso Sin Fin",
+     "multiplier": 8.4,
+     "toughness": 60,
+     "hits": [
+      [
+       30,
+       0.3
+      ],
+      [
+       60,
+       0.3
+      ],
+      [
+       90,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "self",
+       "value": 0.3,
+       "name": "Banquete"
+      }
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Hora del Ocaso",
+    "description": "+7 % de vida máxima a todo el aquelarre.",
+    "teamHp": 0.07
+   }
+  },
+  {
+   "id": "cempa",
+   "name": "Cempa",
+   "shortName": "Cempa",
+   "species": "Coyota",
+   "rarity": 4,
+   "role": "Saboteadora",
+   "ascendant": {
+    "sign": "Sagitario",
+    "name": "El Arquero Embaucador"
+   },
+   "ritual": "Espolvorea sal con chile sobre fruta robada",
+   "mix": {
+    "primary": "mercurio",
+    "secondary": "sol",
+    "name": "Fango Sulfúrico"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 7400,
+    "atk": 1300,
+    "spd": 116,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "hilos",
+    "name": "Hilos de Trato"
+   },
+   "moves": {
+    "basic": {
+     "id": "cempa_mordida_ladina",
+     "name": "Mordida Ladina",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      8,
+      20
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "cempa_trato_hecho",
+     "name": "Trato Hecho",
+     "multiplier": 1.6,
+     "toughness": 20,
+     "hits": [
+      [
+       12,
+       0.5
+      ],
+      [
+       28,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "dispel",
+       "count": 1,
+       "name": "Disipa"
+      },
+      {
+       "type": "delay",
+       "value": 0.15,
+       "name": "Retraso"
+      },
+      {
+       "type": "resonance",
+       "target": "self",
+       "value": 10,
+       "name": "Ganancia"
+      }
+     ],
+     "description": "Quita una mejora al objetivo y lo retrasa 15 %."
+    },
+    "opening": {
+     "id": "cempa_cobro_por_adelantado",
+     "name": "Cobro por Adelantado",
+     "multiplier": 0.8,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.5
+      ],
+      [
+       18,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "speed",
+       "value": 0.1,
+       "turns": 2,
+       "at": "start",
+       "name": "Torpeza"
+      }
+     ]
+    },
+    "link": {
+     "id": "cempa_letra_chica",
+     "name": "Letra Chica",
+     "multiplier": 1.1,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.5
+      ],
+      [
+       26,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "damageTaken",
+       "value": 0.1,
+       "turns": 2,
+       "name": "Mal de Ojo"
+      }
+     ]
+    },
+    "closing": {
+     "id": "cempa_truco_viejo",
+     "name": "Truco Viejo",
+     "multiplier": 2.0,
+     "toughness": 25,
+     "hits": [
+      [
+       8,
+       0.4
+      ],
+      [
+       34,
+       0.6
+      ]
+     ],
+     "effects": [
+      {
+       "type": "delay",
+       "value": 0.1,
+       "name": "Retraso"
+      }
+     ]
+    },
+    "ascension1": {
+     "id": "cempa_la_coyota_cobra",
+     "name": "La Coyota Cobra",
+     "multiplier": 2.6,
+     "toughness": 30,
+     "hits": [
+      [
+       20,
+       0.5
+      ],
+      [
+       40,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "delay",
+       "value": 0.2,
+       "name": "Retraso"
+      }
+     ]
+    },
+    "ascension2": {
+     "id": "cempa_aqui_no_paso_nada",
+     "name": "Aquí No Pasó Nada",
+     "multiplier": 4.2,
+     "toughness": 40,
+     "hits": [
+      [
+       16,
+       0.3
+      ],
+      [
+       36,
+       0.3
+      ],
+      [
+       56,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "dispel",
+       "count": 2,
+       "name": "Disipa"
+      },
+      {
+       "type": "debuff",
+       "stat": "atk",
+       "value": 0.15,
+       "turns": 2,
+       "name": "Desgano"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "cempa_el_trato_final",
+     "name": "El Trato Final",
+     "multiplier": 7.2,
+     "toughness": 60,
+     "hits": [
+      [
+       30,
+       0.3
+      ],
+      [
+       60,
+       0.3
+      ],
+      [
+       90,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "delay",
+       "value": 0.3,
+       "name": "Gran Retraso"
+      }
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Trato de Coyota",
+    "description": "Los enemigos empiezan el combate retrasados 10 %.",
+    "startEnemyDelay": 0.105
+   }
+  },
+  {
+   "id": "ixbalam",
+   "name": "Ixbalam",
+   "shortName": "Ixbalam",
+   "species": "Jaguar",
+   "rarity": 4,
+   "role": "Ofensiva",
+   "ascendant": {
+    "sign": "Leo",
+    "name": "El León de Obsidiana"
+   },
+   "ritual": "Muerde sal negra de las Salinas de Obsidiana",
+   "mix": {
+    "primary": "sol",
+    "secondary": "saturno",
+    "name": "Oro Negro"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 7550,
+    "atk": 1580,
+    "spd": 108,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "frenesiSalNegra",
+    "name": "Frenesí del Jaguar"
+   },
+   "moves": {
+    "basic": {
+     "id": "ixbalam_garra_solar",
+     "name": "Garra Solar",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      [
+       6,
+       0.4
+      ],
+      [
+       16,
+       0.6
+      ]
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "ixbalam_sol_de_obsidiana",
+     "name": "Sol de Obsidiana",
+     "multiplier": 2.3,
+     "toughness": 20,
+     "hits": [
+      [
+       10,
+       0.3
+      ],
+      [
+       24,
+       0.7
+      ]
+     ],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "burn",
+       "value": 0.3,
+       "turns": 2,
+       "name": "Quemadura"
+      }
+     ]
+    },
+    "opening": {
+     "id": "ixbalam_acecho",
+     "name": "Acecho",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      [
+       4,
+       0.5
+      ],
+      [
+       26,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "damageTaken",
+       "value": 0.12,
+       "turns": 2,
+       "at": "start",
+       "name": "Marca"
+      }
+     ]
+    },
+    "link": {
+     "id": "ixbalam_zarpa_ardiente",
+     "name": "Zarpa Ardiente",
+     "multiplier": 1.4,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.3
+      ],
+      [
+       22,
+       0.3
+      ],
+      [
+       46,
+       0.4
+      ]
+     ]
+    },
+    "closing": {
+     "id": "ixbalam_mediodia_negro",
+     "name": "Mediodía Negro",
+     "multiplier": 2.5,
+     "toughness": 30,
+     "hits": [
+      [
+       8,
+       0.2
+      ],
+      [
+       28,
+       0.3
+      ],
+      [
+       50,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "burn",
+       "value": 0.3,
+       "turns": 2,
+       "name": "Quemadura"
+      }
+     ]
+    },
+    "ascension1": {
+     "id": "ixbalam_salto_del_jaguar",
+     "name": "Salto del Jaguar",
+     "multiplier": 3.4,
+     "toughness": 30,
+     "hits": [
+      [
+       20,
+       0.4
+      ],
+      [
+       40,
+       0.6
+      ]
+     ]
+    },
+    "ascension2": {
+     "id": "ixbalam_sol_devorado",
+     "name": "Sol Devorado",
+     "multiplier": 5.3,
+     "toughness": 40,
+     "hits": [
+      [
+       16,
+       0.25
+      ],
+      [
+       36,
+       0.25
+      ],
+      [
+       60,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "buff",
+       "stat": "atk",
+       "value": 0.12,
+       "turns": 2,
+       "target": "allAllies",
+       "name": "Arrojo"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "ixbalam_el_jaguar_del_eclipse",
+     "name": "El Jaguar del Eclipse",
+     "multiplier": 8.8,
+     "toughness": 60,
+     "hits": [
+      [
+       30,
+       0.2
+      ],
+      [
+       60,
+       0.3
+      ],
+      [
+       90,
+       0.5
+      ]
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Sol de Obsidiana",
+    "description": "+8 % de ataque a todo el aquelarre.",
+    "teamAtk": 0.084
+   }
+  },
+  {
+   "id": "estrige",
+   "name": "Estrige",
+   "shortName": "Estrige",
+   "species": "Lechuza (kemonomimi)",
+   "rarity": 4,
+   "role": "Tejedora",
+   "ascendant": {
+    "sign": "Piscis",
+    "name": "Los Peces de Medianoche"
+   },
+   "ritual": "Deja que la sal se le derrita en la lengua a medianoche",
+   "mix": {
+    "primary": "luna",
+    "secondary": "mercurio",
+    "name": "Plata Viva"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 7200,
+    "atk": 1220,
+    "spd": 128,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "hilos",
+    "name": "Hilos de Medianoche"
+   },
+   "moves": {
+    "basic": {
+     "id": "estrige_pico_de_plata",
+     "name": "Pico de Plata",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      4,
+      10,
+      16
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "estrige_vigilia",
+     "name": "Vigilia",
+     "effects": [
+      {
+       "type": "buff",
+       "stat": "atk",
+       "value": 0.12,
+       "turns": 2,
+       "target": "allAllies",
+       "name": "Hilo de Fuerza"
+      },
+      {
+       "type": "advance",
+       "value": 0.12,
+       "target": "otherAllies",
+       "name": "Adelanto"
+      }
+     ],
+     "target": "allAllies",
+     "description": "+12 % de ataque al aquelarre y adelanta 12 % a las demás."
+    },
+    "opening": {
+     "id": "estrige_ojo_abierto",
+     "name": "Ojo Abierto",
+     "multiplier": 0.8,
+     "toughness": 10,
+     "hits": [
+      2,
+      12,
+      22
+     ],
+     "effects": [
+      {
+       "type": "grains",
+       "value": 1,
+       "at": "start"
+      }
+     ]
+    },
+    "link": {
+     "id": "estrige_pluma_silenciosa",
+     "name": "Pluma Silenciosa",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      2,
+      14,
+      26
+     ],
+     "effects": [
+      {
+       "type": "buff",
+       "stat": "damage",
+       "value": 0.08,
+       "turns": 2,
+       "target": "allAllies",
+       "name": "Trama"
+      }
+     ]
+    },
+    "closing": {
+     "id": "estrige_buho_real",
+     "name": "Búho Real",
+     "multiplier": 1.8,
+     "toughness": 25,
+     "hits": [
+      6,
+      16,
+      26,
+      36,
+      50
+     ]
+    },
+    "ascension1": {
+     "id": "estrige_noche_larga",
+     "name": "Noche Larga",
+     "multiplier": 2.4,
+     "toughness": 30,
+     "hits": [
+      [
+       10,
+       0.5
+      ],
+      [
+       20,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "advance",
+       "value": 0.2,
+       "target": "otherAllies"
+      }
+     ]
+    },
+    "ascension2": {
+     "id": "estrige_medianoche_compartida",
+     "name": "Medianoche Compartida",
+     "multiplier": 3.2,
+     "toughness": 40,
+     "hits": [
+      8,
+      18,
+      28,
+      38,
+      48
+     ],
+     "effects": [
+      {
+       "type": "buff",
+       "stat": "atk",
+       "value": 0.18,
+       "turns": 2,
+       "target": "allAllies",
+       "name": "Gran Trama"
+      },
+      {
+       "type": "advance",
+       "value": 0.2,
+       "target": "otherAllies"
+      }
+     ],
+     "target": "allEnemies"
+    },
+    "ascension3": {
+     "id": "estrige_el_ojo_que_no_duerme",
+     "name": "El Ojo que No Duerme",
+     "multiplier": 6.0,
+     "toughness": 60,
+     "hits": [
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70
+     ],
+     "target": "allEnemies"
+    }
+   },
+   "regencia": {
+    "name": "Vigilia Larga",
+    "description": "+6 de Velocidad a todo el aquelarre.",
+    "teamSpdFlat": 6
+   }
+  },
+  {
+   "id": "salitre",
+   "name": "Salitre",
+   "shortName": "Salitre",
+   "species": "Cabra",
+   "rarity": 3,
+   "role": "Ofensiva contra jefes",
+   "ascendant": {
+    "sign": "Capricornio",
+    "name": "La Cabra Intoxicada"
+   },
+   "ritual": "Lame un bloque de sal hasta enfermarse",
+   "mix": {
+    "primary": "venus",
+    "secondary": "saturno",
+    "name": "Cobre Viejo"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 6400,
+    "atk": 1320,
+    "spd": 104,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "passive": {
+    "name": "Primera Pizca",
+    "description": "Empieza intoxicada. Su Hechizo convierte la intoxicación en una explosión que escala con la vida máxima del enemigo.",
+    "startPoison": 0.3
+   },
+   "selfCast": {
+    "form": "none"
+   },
+   "moves": {
+    "basic": {
+     "id": "salitre_topetazo",
+     "name": "Topetazo",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      [
+       6,
+       0.5
+      ],
+      [
+       18,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "poison",
+       "value": 0.15,
+       "turns": 2,
+       "name": "Intoxicación"
+      }
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "salitre_explosion_de_veneno",
+     "name": "Explosión de Veneno",
+     "multiplier": 0.6,
+     "toughness": 20,
+     "hits": [
+      [
+       14,
+       1.0
+      ]
+     ],
+     "effects": [
+      {
+       "type": "maxHpBurst",
+       "value": 0.08,
+       "name": "Explosión de Veneno"
+      }
+     ],
+     "description": "Convierte su intoxicación en una explosión: 8 % de la vida máxima del objetivo (la mitad si no está intoxicada)."
+    },
+    "opening": {
+     "id": "salitre_lamida",
+     "name": "Lamida",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      [
+       4,
+       0.5
+      ],
+      [
+       26,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "poison",
+       "value": 0.25,
+       "turns": 2,
+       "name": "Veneno"
+      }
+     ]
+    },
+    "link": {
+     "id": "salitre_cuerno_verde",
+     "name": "Cuerno Verde",
+     "multiplier": 1.3,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.5
+      ],
+      [
+       26,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "poison",
+       "value": 0.25,
+       "turns": 2,
+       "name": "Veneno"
+      }
+     ]
+    },
+    "closing": {
+     "id": "salitre_vomito_de_sal",
+     "name": "Vómito de Sal",
+     "multiplier": 2.2,
+     "toughness": 30,
+     "hits": [
+      [
+       8,
+       0.4
+      ],
+      [
+       34,
+       0.6
+      ]
+     ],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "poison",
+       "value": 0.35,
+       "turns": 2,
+       "name": "Veneno"
+      }
+     ]
+    },
+    "ascension1": {
+     "id": "salitre_cabra_brava",
+     "name": "Cabra Brava",
+     "multiplier": 3.0,
+     "toughness": 30,
+     "hits": [
+      [
+       20,
+       0.5
+      ],
+      [
+       40,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "maxHpBurst",
+       "value": 0.05,
+       "name": "Explosión"
+      }
+     ]
+    },
+    "ascension2": {
+     "id": "salitre_intoxicacion_total",
+     "name": "Intoxicación Total",
+     "multiplier": 4.6,
+     "toughness": 40,
+     "hits": [
+      [
+       16,
+       0.3
+      ],
+      [
+       36,
+       0.3
+      ],
+      [
+       60,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "dot",
+       "dot": "poison",
+       "value": 0.5,
+       "turns": 3,
+       "name": "Veneno Viejo"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "salitre_la_cabra_que_no_muere",
+     "name": "La Cabra que No Muere",
+     "multiplier": 7.6,
+     "toughness": 60,
+     "hits": [
+      [
+       30,
+       0.3
+      ],
+      [
+       60,
+       0.3
+      ],
+      [
+       90,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "maxHpBurst",
+       "value": 0.1,
+       "name": "Gran Explosión"
+      }
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Pizca Compartida",
+    "description": "El aquelarre empieza con 10 de Resonancia.",
+    "startResonance": 10
+   }
+  },
+  {
+   "id": "axa",
+   "name": "Axa",
+   "shortName": "Axa",
+   "species": "Ajolote",
+   "rarity": 3,
+   "role": "Sanadora",
+   "ascendant": {
+    "sign": "Cáncer",
+    "name": "El Cangrejo de Lodo"
+   },
+   "ritual": "Se sumerge en agua salada y sale sonriendo",
+   "mix": {
+    "primary": "luna",
+    "secondary": "venus",
+    "name": "Leche de Cobre"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 7050,
+    "atk": 1000,
+    "spd": 108,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "passive": {
+    "name": "Volver del Agua",
+    "description": "Al caer, revive una vez con 30 % de vida y la Salinidad en cero.",
+    "reviveOnce": 0.3
+   },
+   "selfCast": {
+    "form": "none"
+   },
+   "moves": {
+    "basic": {
+     "id": "axa_coletazo_blando",
+     "name": "Coletazo Blando",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      [
+       8,
+       0.5
+      ],
+      [
+       20,
+       0.5
+      ]
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "axa_agua_tibia",
+     "name": "Agua Tibia",
+     "effects": [
+      {
+       "type": "heal",
+       "value": 0.3,
+       "name": "Cura"
+      },
+      {
+       "type": "cleanse",
+       "count": 1,
+       "name": "Limpia"
+      }
+     ],
+     "target": "ally",
+     "description": "Cura 30 % de la vida a una aliada y le quita un estado."
+    },
+    "opening": {
+     "id": "axa_branquias",
+     "name": "Branquias",
+     "multiplier": 0.8,
+     "toughness": 10,
+     "hits": [
+      [
+       2,
+       0.5
+      ],
+      [
+       20,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.04,
+       "name": "Rocío"
+      }
+     ]
+    },
+    "link": {
+     "id": "axa_charco",
+     "name": "Charco",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.3
+      ],
+      [
+       14,
+       0.3
+      ],
+      [
+       26,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.05,
+       "name": "Rocío"
+      }
+     ]
+    },
+    "closing": {
+     "id": "axa_regeneracion",
+     "name": "Regeneración",
+     "multiplier": 1.6,
+     "toughness": 25,
+     "hits": [
+      [
+       8,
+       0.5
+      ],
+      [
+       30,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.1,
+       "name": "Lluvia"
+      }
+     ]
+    },
+    "ascension1": {
+     "id": "axa_lodo_sanador",
+     "name": "Lodo Sanador",
+     "multiplier": 2.0,
+     "toughness": 30,
+     "hits": [
+      [
+       16,
+       0.5
+      ],
+      [
+       32,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.2,
+       "name": "Lluvia"
+      },
+      {
+       "type": "cleanse",
+       "target": "allAllies",
+       "count": 1,
+       "name": "Limpia"
+      }
+     ]
+    },
+    "ascension2": {
+     "id": "axa_volver_del_agua",
+     "name": "Volver del Agua",
+     "multiplier": 2.8,
+     "toughness": 40,
+     "hits": [
+      [
+       12,
+       0.3
+      ],
+      [
+       30,
+       0.3
+      ],
+      [
+       48,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.3,
+       "name": "Marea"
+      },
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.1,
+       "turns": 2,
+       "name": "Velo"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "axa_el_ajolote_eterno",
+     "name": "El Ajolote Eterno",
+     "multiplier": 5.0,
+     "toughness": 60,
+     "hits": [
+      [
+       20,
+       0.3
+      ],
+      [
+       50,
+       0.3
+      ],
+      [
+       80,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.45,
+       "name": "Gran Marea"
+      }
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Agua que Vuelve",
+    "description": "El aquelarre empieza con 15 de Resonancia.",
+    "startResonance": 15
+   }
+  },
+  {
+   "id": "migaja",
+   "name": "Migaja",
+   "shortName": "Migaja",
+   "species": "Ratona",
+   "rarity": 3,
+   "role": "Tejedora",
+   "ascendant": {
+    "sign": "Géminis",
+    "name": "Las Gemelas Ratonas"
+   },
+   "ritual": "Guarda granitos de sal en los bolsillos",
+   "mix": {
+    "primary": "mercurio",
+    "secondary": "luna",
+    "name": "Plata Viva"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 6400,
+    "atk": 1080,
+    "spd": 126,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "none"
+   },
+   "moves": {
+    "basic": {
+     "id": "migaja_mordisquito",
+     "name": "Mordisquito",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      4,
+      10,
+      16
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "migaja_recado_corto",
+     "name": "Recado Corto",
+     "effects": [
+      {
+       "type": "buff",
+       "stat": "atk",
+       "value": 0.12,
+       "turns": 2,
+       "target": "allAllies",
+       "name": "Hilo de Fuerza"
+      },
+      {
+       "type": "advance",
+       "value": 0.2,
+       "target": "otherAllies",
+       "name": "Adelanto"
+      }
+     ],
+     "target": "allAllies",
+     "description": "+12 % de ataque al aquelarre y adelanta 12 % a las demás."
+    },
+    "opening": {
+     "id": "migaja_corre_que_corre",
+     "name": "Corre que Corre",
+     "multiplier": 0.8,
+     "toughness": 10,
+     "hits": [
+      2,
+      12,
+      22
+     ],
+     "effects": [
+      {
+       "type": "grains",
+       "value": 1,
+       "at": "start"
+      }
+     ]
+    },
+    "link": {
+     "id": "migaja_migaja_a_migaja",
+     "name": "Migaja a Migaja",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      2,
+      14,
+      26
+     ],
+     "effects": [
+      {
+       "type": "buff",
+       "stat": "damage",
+       "value": 0.08,
+       "turns": 2,
+       "target": "allAllies",
+       "name": "Trama"
+      }
+     ]
+    },
+    "closing": {
+     "id": "migaja_despensa",
+     "name": "Despensa",
+     "multiplier": 1.8,
+     "toughness": 25,
+     "hits": [
+      6,
+      16,
+      26,
+      36,
+      50
+     ]
+    },
+    "ascension1": {
+     "id": "migaja_atajo",
+     "name": "Atajo",
+     "multiplier": 2.4,
+     "toughness": 30,
+     "hits": [
+      [
+       10,
+       0.5
+      ],
+      [
+       20,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "advance",
+       "value": 0.2,
+       "target": "otherAllies"
+      }
+     ]
+    },
+    "ascension2": {
+     "id": "migaja_ratonera",
+     "name": "Ratonera",
+     "multiplier": 3.2,
+     "toughness": 40,
+     "hits": [
+      8,
+      18,
+      28,
+      38,
+      48
+     ],
+     "effects": [
+      {
+       "type": "buff",
+       "stat": "atk",
+       "value": 0.18,
+       "turns": 2,
+       "target": "allAllies",
+       "name": "Gran Trama"
+      },
+      {
+       "type": "advance",
+       "value": 0.2,
+       "target": "otherAllies"
+      }
+     ],
+     "target": "allEnemies"
+    },
+    "ascension3": {
+     "id": "migaja_las_mil_migajas",
+     "name": "Las Mil Migajas",
+     "multiplier": 6.0,
+     "toughness": 60,
+     "hits": [
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70
+     ],
+     "target": "allEnemies"
+    }
+   },
+   "regencia": {
+    "name": "Despensa Común",
+    "description": "+4 de Velocidad a todo el aquelarre.",
+    "teamSpdFlat": 4
+   }
+  },
+  {
+   "id": "vellon",
+   "name": "Vellón",
+   "shortName": "Vellón",
+   "species": "Oveja (kemonomimi)",
+   "rarity": 3,
+   "role": "Sanadora",
+   "ascendant": {
+    "sign": "Tauro",
+    "name": "El Toro de Lana"
+   },
+   "ritual": "Lame sal de la palma, como el ganado",
+   "mix": {
+    "primary": "venus",
+    "secondary": "luna",
+    "name": "Leche de Cobre"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 7050,
+    "atk": 1000,
+    "spd": 108,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "none"
+   },
+   "moves": {
+    "basic": {
+     "id": "vellon_topecito",
+     "name": "Topecito",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      [
+       8,
+       0.5
+      ],
+      [
+       20,
+       0.5
+      ]
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "vellon_lana_tibia",
+     "name": "Lana Tibia",
+     "effects": [
+      {
+       "type": "heal",
+       "value": 0.3,
+       "name": "Cura"
+      },
+      {
+       "type": "cleanse",
+       "count": 1,
+       "name": "Limpia"
+      },
+      {
+       "type": "shield",
+       "value": 0.1,
+       "turns": 2,
+       "name": "Lana"
+      }
+     ],
+     "target": "ally",
+     "description": "Cura 30 % de la vida a una aliada y le quita un estado."
+    },
+    "opening": {
+     "id": "vellon_balido",
+     "name": "Balido",
+     "multiplier": 0.8,
+     "toughness": 10,
+     "hits": [
+      [
+       2,
+       0.5
+      ],
+      [
+       20,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.04,
+       "name": "Rocío"
+      }
+     ]
+    },
+    "link": {
+     "id": "vellon_esquila",
+     "name": "Esquila",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.3
+      ],
+      [
+       14,
+       0.3
+      ],
+      [
+       26,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.05,
+       "name": "Rocío"
+      }
+     ]
+    },
+    "closing": {
+     "id": "vellon_manta",
+     "name": "Manta",
+     "multiplier": 1.6,
+     "toughness": 25,
+     "hits": [
+      [
+       8,
+       0.5
+      ],
+      [
+       30,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.1,
+       "name": "Lluvia"
+      }
+     ]
+    },
+    "ascension1": {
+     "id": "vellon_rebano",
+     "name": "Rebaño",
+     "multiplier": 2.0,
+     "toughness": 30,
+     "hits": [
+      [
+       16,
+       0.5
+      ],
+      [
+       32,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.2,
+       "name": "Lluvia"
+      },
+      {
+       "type": "cleanse",
+       "target": "allAllies",
+       "count": 1,
+       "name": "Limpia"
+      }
+     ]
+    },
+    "ascension2": {
+     "id": "vellon_abrigo_de_lana",
+     "name": "Abrigo de Lana",
+     "multiplier": 2.8,
+     "toughness": 40,
+     "hits": [
+      [
+       12,
+       0.3
+      ],
+      [
+       30,
+       0.3
+      ],
+      [
+       48,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.3,
+       "name": "Marea"
+      },
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.1,
+       "turns": 2,
+       "name": "Velo"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "vellon_la_nube_de_lana",
+     "name": "La Nube de Lana",
+     "multiplier": 5.0,
+     "toughness": 60,
+     "hits": [
+      [
+       20,
+       0.3
+      ],
+      [
+       50,
+       0.3
+      ],
+      [
+       80,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "heal",
+       "target": "allAllies",
+       "value": 0.45,
+       "name": "Gran Marea"
+      }
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Rebaño Tibio",
+    "description": "El aquelarre empieza con 15 de Resonancia.",
+    "startResonance": 15
+   }
+  },
+  {
+   "id": "pua",
+   "name": "Púa",
+   "shortName": "Púa",
+   "species": "Eriza",
+   "rarity": 3,
+   "role": "Rompedora",
+   "ascendant": {
+    "sign": "Aries",
+    "name": "El Carnero de Púas"
+   },
+   "ritual": "Se revuelca en sal hasta que se le pega a las púas",
+   "mix": {
+    "primary": "marte",
+    "secondary": "sol",
+    "name": "Brasa Roja"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 7350,
+    "atk": 1200,
+    "spd": 102,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "none"
+   },
+   "moves": {
+    "basic": {
+     "id": "pua_pinchazo",
+     "name": "Pinchazo",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      [
+       6,
+       0.4
+      ],
+      [
+       16,
+       0.6
+      ]
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "pua_bola_de_puas",
+     "name": "Bola de Púas",
+     "multiplier": 2.0,
+     "toughness": 35,
+     "hits": [
+      [
+       10,
+       0.5
+      ],
+      [
+       26,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "defenseDown",
+       "value": 0.15,
+       "turns": 2,
+       "name": "Grieta"
+      }
+     ],
+     "description": "Quita mucha Firmeza y baja 15 % la defensa dos turnos."
+    },
+    "opening": {
+     "id": "pua_erizarse",
+     "name": "Erizarse",
+     "multiplier": 1.0,
+     "toughness": 20,
+     "hits": [
+      [
+       4,
+       0.5
+      ],
+      [
+       26,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "nextToughness",
+       "target": "otherAllies",
+       "value": 0.15,
+       "at": "start",
+       "name": "Fisura"
+      }
+     ]
+    },
+    "link": {
+     "id": "pua_pua_suelta",
+     "name": "Púa Suelta",
+     "multiplier": 1.2,
+     "toughness": 25,
+     "hits": [
+      [
+       2,
+       0.4
+      ],
+      [
+       26,
+       0.6
+      ]
+     ]
+    },
+    "closing": {
+     "id": "pua_cerca_de_espinas",
+     "name": "Cerca de Espinas",
+     "multiplier": 2.3,
+     "toughness": 50,
+     "hits": [
+      [
+       8,
+       0.3
+      ],
+      [
+       28,
+       0.3
+      ],
+      [
+       50,
+       0.4
+      ]
+     ]
+    },
+    "ascension1": {
+     "id": "pua_rodar",
+     "name": "Rodar",
+     "multiplier": 3.0,
+     "toughness": 45,
+     "hits": [
+      [
+       20,
+       0.5
+      ],
+      [
+       40,
+       0.5
+      ]
+     ]
+    },
+    "ascension2": {
+     "id": "pua_espinas_al_rojo",
+     "name": "Espinas al Rojo",
+     "multiplier": 4.8,
+     "toughness": 60,
+     "hits": [
+      [
+       16,
+       0.3
+      ],
+      [
+       36,
+       0.3
+      ],
+      [
+       60,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "defenseDown",
+       "value": 0.2,
+       "turns": 2,
+       "name": "Quiebre"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "pua_la_eriza_de_mil_puas",
+     "name": "La Eriza de Mil Púas",
+     "multiplier": 8.0,
+     "toughness": 90,
+     "hits": [
+      [
+       30,
+       0.3
+      ],
+      [
+       60,
+       0.3
+      ],
+      [
+       90,
+       0.4
+      ]
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Cerca de Púas",
+    "description": "+5 % de ataque a todo el aquelarre.",
+    "teamAtk": 0.05
+   }
+  },
+  {
+   "id": "charca",
+   "name": "Charca",
+   "shortName": "Charca",
+   "species": "Pata",
+   "rarity": 3,
+   "role": "Guardiana",
+   "ascendant": {
+    "sign": "Cáncer",
+    "name": "El Cangrejo de Charco"
+   },
+   "ritual": "Chapotea en salmuera antes de pelear",
+   "mix": {
+    "primary": "luna",
+    "secondary": "jupiter",
+    "name": "Marea Tonante"
+   },
+   "via": "mayor",
+   "grade": "B",
+   "stats": {
+    "level": 50,
+    "hp": 8800,
+    "atk": 920,
+    "spd": 96,
+    "critRate": 0.05,
+    "critDmg": 0.5
+   },
+   "selfCast": {
+    "form": "none"
+   },
+   "moves": {
+    "basic": {
+     "id": "charca_picotazo",
+     "name": "Picotazo",
+     "multiplier": 1.0,
+     "toughness": 10,
+     "hits": [
+      [
+       6,
+       0.5
+      ],
+      [
+       18,
+       0.5
+      ]
+     ],
+     "byAscendant": false
+    },
+    "spell": {
+     "id": "charca_ala_abierta",
+     "name": "Ala Abierta",
+     "effects": [
+      {
+       "type": "taunt",
+       "target": "self",
+       "turns": 2,
+       "name": "Provocación"
+      },
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.12,
+       "turns": 2,
+       "name": "Escudo"
+      }
+     ],
+     "target": "self",
+     "description": "Atrae los golpes dos turnos y escuda al aquelarre con 12 % de su vida."
+    },
+    "opening": {
+     "id": "charca_cuac",
+     "name": "Cuac",
+     "multiplier": 0.9,
+     "toughness": 15,
+     "hits": [
+      [
+       4,
+       0.5
+      ],
+      [
+       22,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "debuff",
+       "stat": "atk",
+       "value": 0.12,
+       "turns": 2,
+       "at": "start",
+       "name": "Peso"
+      }
+     ]
+    },
+    "link": {
+     "id": "charca_charco_hondo",
+     "name": "Charco Hondo",
+     "multiplier": 1.0,
+     "toughness": 15,
+     "hits": [
+      [
+       2,
+       0.4
+      ],
+      [
+       26,
+       0.6
+      ]
+     ],
+     "effects": [
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.05,
+       "turns": 2,
+       "name": "Muro"
+      }
+     ]
+    },
+    "closing": {
+     "id": "charca_chapuzon",
+     "name": "Chapuzón",
+     "multiplier": 1.8,
+     "toughness": 30,
+     "hits": [
+      [
+       10,
+       0.4
+      ],
+      [
+       34,
+       0.6
+      ]
+     ],
+     "effects": [
+      {
+       "type": "delay",
+       "value": 0.1,
+       "name": "Retraso"
+      }
+     ]
+    },
+    "ascension1": {
+     "id": "charca_plumas_mojadas",
+     "name": "Plumas Mojadas",
+     "multiplier": 2.4,
+     "toughness": 30,
+     "hits": [
+      [
+       20,
+       0.5
+      ],
+      [
+       40,
+       0.5
+      ]
+     ],
+     "effects": [
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.15,
+       "turns": 2,
+       "name": "Escudo"
+      }
+     ]
+    },
+    "ascension2": {
+     "id": "charca_la_charca_entera",
+     "name": "La Charca Entera",
+     "multiplier": 3.4,
+     "toughness": 40,
+     "hits": [
+      [
+       16,
+       0.3
+      ],
+      [
+       36,
+       0.3
+      ],
+      [
+       56,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "taunt",
+       "target": "self",
+       "turns": 2,
+       "name": "Provocación"
+      },
+      {
+       "type": "buff",
+       "stat": "res",
+       "value": 0.2,
+       "turns": 2,
+       "target": "allAllies",
+       "name": "Firmeza"
+      }
+     ]
+    },
+    "ascension3": {
+     "id": "charca_el_estanque_sin_fondo",
+     "name": "El Estanque Sin Fondo",
+     "multiplier": 6.0,
+     "toughness": 60,
+     "hits": [
+      [
+       30,
+       0.3
+      ],
+      [
+       60,
+       0.3
+      ],
+      [
+       90,
+       0.4
+      ]
+     ],
+     "effects": [
+      {
+       "type": "shield",
+       "target": "allAllies",
+       "value": 0.3,
+       "turns": 2,
+       "name": "Gran Escudo"
+      }
+     ]
+    }
+   },
+   "regencia": {
+    "name": "Charco Hondo",
+    "description": "+8 % de vida máxima a todo el aquelarre.",
+    "teamHp": 0.075
+   }
+  }
+ ]
+}

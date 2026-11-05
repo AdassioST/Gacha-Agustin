@@ -254,3 +254,19 @@ Ninguno de estos está en los tres prompts de la sección 23, y casi todos son o
 3. **Contenido a escala (S-23).** El cuello de botella del lanzamiento no es el código sino producir y equilibrar 24 brujas, 120 armas y 12 regiones. Sin herramientas, cada lote cuesta una sesión entera.
 4. **La Fase 3 no cabe en una sesión.** Mezcla historia, 3D, Timeline, tienda, servidor, audio, tres idiomas y rendimiento en dispositivos. La hoja de ruta la parte en tres.
 5. **Música generada con IA.** Los derechos de uso comercial dependen del plan de Suno y la música 100 % generada puede no tener protección de derechos de autor. Ver `docs/audio/SOUNDTRACK_SUNO.md`.
+
+## Cómo los resolvieron las Fases 2 y 3
+
+| ID | Resolución | Dónde |
+| --- | --- | --- |
+| H-01 | Sin resolver. Se respetó `100·n^1.5` del GDD. Sigue pendiente la decisión D-02 | `docs/FASE2.md` |
+| H-14 | Borrador propio del prólogo, Aries y Capricornio, sin biblia narrativa. Por aprobar | `Data/story.json` |
+| H-15 | Paralaje de 0 a 100; bandas en 25, 50 y 80; un baño baja 20 con enfriamiento de un día | `Data/story.json`, `Data/services.json` |
+| H-16 | Tres estados por región; en cada eclipse suben las regiones sin visitar. Todavía no cambia eventos ni enemigos en regiones que no existen | `Core/World/StoryService.cs` |
+| H-17 | 10 niveles por Sendero; 25 de experiencia por victoria; +5 % al efecto por nivel | `Data/story.json` |
+| H-18 | Creador con nombre, pronombres, especie y signo. Faltan cuerpo y voz | `Presentation/Meta/MetaHub.Home.cs` |
+| H-19 | Reposo, tocar, conversar y Confianza. Faltan regalos y recompensas por nivel | `Core/World/Services.cs` |
+| H-20 | Catálogo de prueba, Grimorio de 5 niveles y Diezmo | `Data/services.json` |
+| C-23 | El 25 % solo existe si queda una 5★ estándar sin obtener; con la destacada ya obtenida, la 5★ sale del estándar | `Core/Gacha/Termas.cs` |
+| C-24 | Contador propio del banner de inicio; la garantía pasa entre limitados | `Data/gacha.json` |
+| C-25 | Las Sales compradas se cuentan aparte; en Bélgica solo se tira con las ganadas | `Core/World/Services.cs` |

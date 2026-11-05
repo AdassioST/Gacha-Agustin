@@ -140,12 +140,142 @@ namespace SalYAlmas.Core.Save
         public List<string> Grafts = new List<string>();
     }
 
+    /// <summary>La o el Calculista: la protagonista, su historia y lo que ha visto (GDD 6 y 13).</summary>
+    public sealed class CalculistaState
+    {
+        public bool Created;
+        public string Name = "";
+        public string Pronouns = "";
+        public string Species = "";
+        public string Sign = "";
+        public Dictionary<string, int> Stats = new Dictionary<string, int>();
+        public string Sendero = "";
+        public Dictionary<string, int> SenderoXp = new Dictionary<string, int>();
+        public List<string> Marks = new List<string>();
+        public List<string> Titles = new List<string>();
+        public int Souls;
+        public int Paralaje;
+        public int Eclipses;
+        public List<string> RegionsVisited = new List<string>();
+        public List<string> RegionsDone = new List<string>();
+        public List<string> MissionsDone = new List<string>();
+        public Dictionary<string, int> Corruption = new Dictionary<string, int>();
+        public string Mission = "";
+        public string MissionRegion = "";
+        public string Scene = "";
+        /// <summary>La misión en curso es una Relectura: no vuelve a entregar recursos.</summary>
+        public bool Reread;
+
+        // Odisea (docs/propuestas/ODISEA.md)
+        /// <summary>Regiones terminadas cuando llegaste a cada región: fija su nivel.</summary>
+        public Dictionary<string, int> Arrival = new Dictionary<string, int>();
+        public List<string> ZonesDone = new List<string>();
+        /// <summary>Sección del combate en curso (0 = la primera).</summary>
+        public int Section;
+        /// <summary>Vida (fracción) y Salinidad que se arrastran dentro de la misión o la Expedición.</summary>
+        public Dictionary<string, double> CarryHp = new Dictionary<string, double>();
+        public Dictionary<string, int> CarrySalinity = new Dictionary<string, int>();
+        /// <summary>Expedición en curso: región, zona y Marea elegida. Vacío si no hay.</summary>
+        public string ExpRegion = "";
+        public string ExpZone = "";
+        public int ExpTide;
+        /// <summary>La Expedición lleva su propia sección y su propio arrastre: la misión en pausa no se pierde.</summary>
+        public int ExpSection;
+        public Dictionary<string, double> ExpHp = new Dictionary<string, double>();
+        public Dictionary<string, int> ExpSalinity = new Dictionary<string, int>();
+        public int DailyDay = -1;
+        public int DailySections;
+        /// <summary>Botín de la última sección, para la pantalla.</summary>
+        public List<string> LastLoot = new List<string>();
+        public int SectionsWon;
+        public int BossesWon;
+    }
+
+    /// <summary>Lo que el jugador lleva de encargos y logros. Se guarda en el perfil.</summary>
+    public sealed class QuestsState
+    {
+        public int Day = -1;
+        public List<string> DailyIds = new List<string>();
+        public Dictionary<string, long> DailyProgress = new Dictionary<string, long>();
+        public List<string> DailyClaimed = new List<string>();
+        public bool BonusClaimed;
+        public int Week = -1;
+        public List<string> WeeklyIds = new List<string>();
+        public Dictionary<string, long> WeeklyProgress = new Dictionary<string, long>();
+        public List<string> WeeklyClaimed = new List<string>();
+        /// <summary>Contadores de por vida por evento, para los logros.</summary>
+        public Dictionary<string, long> Lifetime = new Dictionary<string, long>();
+        public List<string> AchievementsClaimed = new List<string>();
+        public long Growth;
+        /// <summary>Hasta qué nivel de Altura ya se pagaron las Sales del inicio.</summary>
+        public int AlturaPaid = 1;
+    }
+
+    public sealed class TermasState
+    {
+        public string Favorite = "";
+        public Dictionary<string, int> Trust = new Dictionary<string, int>();
+        public Dictionary<string, int> TalkedDay = new Dictionary<string, int>();
+        public int LastBathDay = -1;
+    }
+
+    public sealed class PurchaseRecord
+    {
+        public string Receipt;
+        public string Product;
+        public double Usd;
+        public int Day;
+        public long Perlas;
+        public bool Refunded;
+    }
+
+    public sealed class StoreState
+    {
+        public List<PurchaseRecord> Purchases = new List<PurchaseRecord>();
+        public double SpendLimitUsd;
+        /// <summary>Sales de Baño que salieron de Perlas compradas (HUECOS C-25).</summary>
+        public long PurchasedSales;
+        public long PerlasDebt;
+        public bool GrimorioPremium;
+        public int GrimorioXp;
+        public List<int> PassFreeClaimed = new List<int>();
+        public List<int> PassPremiumClaimed = new List<int>();
+        public int DiezmoUntilDay;
+        public int DiezmoDaily;
+        public int DiezmoClaimedDay = -1;
+        public HashSet<string> Cosmetics = new HashSet<string>();
+        public Dictionary<string, string> Equipped = new Dictionary<string, string>();
+        public bool FirstFiveDone;
+        public bool FirstChainDone;
+    }
+
+    /// <summary>Ajustes y accesibilidad (GDD 23.3 y HUECOS S-17 y S-18).</summary>
+    public sealed class SettingsState
+    {
+        public string Language = "es";
+        public string Country = "MX";
+        public bool ModestMode;
+        public bool LargeText;
+        public bool ColorSafe;
+        public bool SkipCinematics;
+        public bool ReduceFlashes;
+        public bool BatterySaver;
+        public bool HighQuality = true;
+        public float MusicVolume = 0.7f;
+    }
+
     /// <summary>
     /// Todo el estado persistente de una cuenta. Se guarda en JSON detrás de ISaveStore (local hoy; servidor en la Fase 3).
     /// </summary>
     public sealed class PlayerProfile
     {
-        public const int CurrentVersion = 1;
+        public const int CurrentVersion = 2;
+
+        public CalculistaState Calculista = new CalculistaState();
+        public TermasState TermasBase = new TermasState();
+        public StoreState Store = new StoreState();
+        public QuestsState Quests = new QuestsState();
+        public SettingsState Settings = new SettingsState();
 
         public int Version = CurrentVersion;
         public string Name = "Calculista";
@@ -155,6 +285,8 @@ namespace SalYAlmas.Core.Save
         public Dictionary<string, WitchProgress> Witches = new Dictionary<string, WitchProgress>();
         public List<WeaponInstance> Weapons = new List<WeaponInstance>();
         public int NextWeaponUid = 1;
+        /// <summary>Equipo del home: se usa en la historia y en el Fresno. La primera es la favorita.</summary>
+        public List<string> Party = new List<string>();
         /// <summary>Recetas de armas conocidas.</summary>
         public HashSet<string> Recipes = new HashSet<string>();
         /// <summary>Recetario de Salmueras descubiertas (GDD 14.1).</summary>

@@ -70,6 +70,8 @@ namespace SalYAlmas.Core.Save
             if (p.Version > PlayerProfile.CurrentVersion)
                 throw new InvalidOperationException($"El guardado es de una versión más nueva ({p.Version}).");
             while (p.Fresno.Eco.Count < 3) p.Fresno.Eco.Add(null);
+            // Versión 1 a 2: la Fase 3 agrega Calculista, Termas, tienda y ajustes. Lo que falta toma sus valores por defecto.
+            p.Version = PlayerProfile.CurrentVersion;
             return p;
         }
     }

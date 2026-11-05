@@ -9,7 +9,7 @@ namespace SalYAlmas.Core.Combat
         Shield,
         Burn, Bleed, Poison, Shock,
         Charm, Frozen, FeignDeath, InvertHealing, NextSpellDouble, FreeVislumbre, NextToughness,
-        GrainBoost, Desalada, Ecstasy, Vislumbre,
+        GrainBoost, Desalada, Ecstasy, Vislumbre, Taunt,
     }
 
     /// <summary>

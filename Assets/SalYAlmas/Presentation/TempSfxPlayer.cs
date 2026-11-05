@@ -173,6 +173,8 @@ namespace SalYAlmas.Presentation
         public void OnButtonPressed() => Play("sfx_ui_tocar", 0.8f);
 
         /// <summary>Acciones de la presentación; las variantes mantienen la afinación y no se repiten consecutivamente.</summary>
+        public void PlayCue(string id) => Play(id);
+
         public void PlayCue(string id, params string[] parts) => Play(id, 1f, 0f, parts);
 
         public void NotifyPull(int rarity)

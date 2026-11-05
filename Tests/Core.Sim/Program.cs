@@ -17,6 +17,7 @@ namespace SalYAlmas.Sim
     ///   dotnet run --project Tests/Core.Sim -- fresno [campañas]           balance del Fresno: tres runs seguidas por campaña
     ///   dotnet run --project Tests/Core.Sim -- fresno-log [semilla]        registro de tres runs seguidas
     ///   dotnet run --project Tests/Core.Sim -- juicio [bruja] [n]          victorias y condiciones de cada Juicio
+    ///   dotnet run --project Tests/Core.Sim -- kits [n]                    daño por turno de las 24 brujas (GDD 17.1: 5 %)
     /// </summary>
     public static class Program
     {
@@ -34,8 +35,10 @@ namespace SalYAlmas.Sim
                 case "gacha": return MetaSim.Gacha(db, args.Length > 1 ? long.Parse(args[1]) : 1000000L, args.Length > 2 ? ulong.Parse(args[2]) : 2026UL);
                 case "fresno": return MetaSim.Fresno(db, args.Length > 1 ? int.Parse(args[1]) : 100);
                 case "fresno-log": return MetaSim.FresnoLog(db, args.Length > 1 ? ulong.Parse(args[1]) : 1UL);
+                case "historia": return MetaSim.Story(db, args.Length > 1 ? int.Parse(args[1]) : 20);
+                case "kits": return MetaSim.Kits(db, encounter == "guardian" ? 40 : int.Parse(encounter));
                 case "juicio": return MetaSim.Trials(db, args.Length > 1 ? args[1] : "todas", args.Length > 2 ? int.Parse(args[2]) : 50);
-                default: Console.Error.WriteLine("Modos: log, balance, chains, tiempo, gacha, fresno, fresno-log, juicio"); return 1;
+                default: Console.Error.WriteLine("Modos: log, balance, chains, tiempo, gacha, fresno, fresno-log, juicio, historia"); return 1;
             }
         }
 

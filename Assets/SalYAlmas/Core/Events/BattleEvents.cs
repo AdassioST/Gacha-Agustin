@@ -326,6 +326,14 @@ namespace SalYAlmas.Core.Events
         public string Text { get; internal set; }
     }
 
+    /// <summary>Una bruja vuelve de la caída (el truco de Axa).</summary>
+    public sealed class UnitRevived : BattleEvent
+    {
+        public int UnitId { get; internal set; }
+        public string UnitName { get; internal set; }
+        public int Hp { get; internal set; }
+    }
+
     public sealed class UnitDefeated : BattleEvent
     {
         public int UnitId { get; internal set; }

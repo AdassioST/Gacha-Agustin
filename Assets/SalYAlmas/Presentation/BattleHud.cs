@@ -25,6 +25,8 @@ namespace SalYAlmas.Presentation
 
         /// <summary>Hay otra pantalla encima (Cadena o resultado): el HUD se dibuja pero no recibe toques.</summary>
         public bool InputBlocked;
+        /// <summary>Busto de una bruja por ID, para las placas del HUD.</summary>
+        public static System.Func<string, Texture2D> Bust;
 
         public BattleHud(BattleDirector director, ChainScreen chain, Camera camera)
         {
@@ -75,7 +77,13 @@ namespace SalYAlmas.Presentation
             DrawResonance(new Vector2(1290, 56));
             DrawLog(new Rect(16, 112, 520, 600));
             DrawGrainsAndBelt(new Rect(1600, 112, 304, 410));
-            for (int i = 0; i < B.Witches.Count; i++) DrawWitchPanel(B.Witches[i], new Rect(16 + i * 392, 790, 380, 278));
+            for (int i = 0; i < B.Witches.Count; i++)
+            {
+                var panel = new Rect(16 + i * 392, 790, 380, 278);
+                DrawWitchPanel(B.Witches[i], panel);
+                var bust = Bust?.Invoke(B.Witches[i].Key);
+                if (bust != null) GUI.DrawTexture(new Rect(panel.xMax - 82, panel.y + 36, 72, 72), bust, ScaleMode.ScaleToFit, true);
+            }
             DrawActions(new Rect(1600, 640, 304, 428));
             DrawChainPlayback();
             DrawBanner();

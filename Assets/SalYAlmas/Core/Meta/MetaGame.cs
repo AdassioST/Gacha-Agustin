@@ -43,6 +43,12 @@ namespace SalYAlmas.Core.Meta
         public Cauldron Cauldron { get; }
         public Termas Termas { get; }
         public FresnoService Fresno { get; }
+        public World.StoryService Story { get; }
+        public World.StoreService Store { get; }
+        public World.LocalGachaService GachaService { get; }
+        public World.TermasBase Base { get; }
+        public World.QuestService Quests { get; }
+        public World.IAnalytics Analytics { get; set; } = new World.LocalAnalytics();
 
         public MetaGame(MetaDatabase meta, PlayerProfile profile)
         {
@@ -57,7 +63,15 @@ namespace SalYAlmas.Core.Meta
             Cauldron = new Cauldron(this);
             Termas = new Termas(this);
             Fresno = new FresnoService(this);
+            Story = new World.StoryService(this);
+            Store = new World.StoreService(this);
+            GachaService = new World.LocalGachaService(this);
+            Base = new World.TermasBase(this);
+            Quests = new World.QuestService(this);
         }
+
+        /// <summary>Reporta un evento a los encargos, logros y Altura.</summary>
+        public void Report(string evt, long amount = 1) => Quests?.Report(evt, amount);
 
         public void SetDay(int day)
         {
@@ -121,12 +135,16 @@ namespace SalYAlmas.Core.Meta
         /// Perfil de prueba para el Editor: las seis brujas con kit (cuatro en grado B y nivel de la Fase 1, Zarigüeya y Topo
         /// en grado D para subirlas por sus Juicios), todas las estaciones y recetas, y recursos marcados con la fuente "prueba".
         /// </summary>
+        /// <summary>Las seis brujas de la Fase 1: el perfil de prueba no cambia aunque haya más kits.</summary>
+        public static readonly string[] TestWitches = { "marisal", "selenia", "solenne", "tormentina", "zarigueya", "topo" };
+
         public static PlayerProfile TestProfile(MetaDatabase meta, ulong seed, int day)
         {
             var p = NewProfile(meta, seed, day);
             var game = new MetaGame(meta, p);
-            foreach (var id in meta.Combat.WitchOrder)
+            foreach (var id in TestWitches)
             {
+                if (meta.Combat.Witch(id) == null) continue;
                 game.AddWitch(id);
                 var def = meta.Combat.Witch(id);
                 var wp = p.Witches[id];
