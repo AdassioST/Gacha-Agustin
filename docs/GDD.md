@@ -175,7 +175,7 @@ AS = Astral Salt. SyA = Sal y Almas. La columna Decisión es editable.
 | Zonas Raíces, Tronco, Ramas y Copa | AS | Adoptar | Las cuatro zonas del Fresno |
 | Árbol que crece con almas ofrendadas | SyA | Adoptar | Ofrenda al Fresno: progreso de cuenta y sumidero de almas |
 | Almas que se pierden al morir y se recuperan | AS | Adaptar | Tienes un intento; si fallas, el Fresno te devuelve el 30 % como Savia |
-| Reloj de eclipses con plazo | AS | Adaptar | Solo narrativo: cambia qué regiones se corrompen, nunca bloquea al jugador |
+| Reloj de eclipses con plazo | AS | Adaptar | Sube la Marea de Sal: fija el nivel, los enemigos y la capa de las regiones que faltan. Nunca bloquea al jugador |
 | Protagonista transferida con interfaz de cálculo silencioso | AS | Adoptar | Ella dirige la Cadena; su poder es calcular el orden |
 | Cámara de cuatro cortes en cada turno | AS | Adaptar | Solo en Ascensiones y Cierres; completa la primera vez, corta y saltable después |
 | Transformación tipo *mahou shoujo* al subir de grado | SyA | Adoptar | Una vez por grado, con opción de compartir |
@@ -261,13 +261,15 @@ Cada región es un capítulo con una **Casa** enemiga, un aquelarre regido por s
 | Acuario | Archipiélago de Hielo | Escandinavia e Islandia | Las sirenas | Cantos que atraen hacia el agua helada |
 | Piscis | Isla de la Ninfa | Bizancio y Grecia | Calipso | Una isla donde quedarse para siempre |
 
-**Estructura no lineal:** el jugador empieza en la región de su signo y avanza en el sentido que quiera. Cada dos regiones hay un **eclipse**. Las regiones no visitadas se corrompen un poco más: cambian sus eventos, sus enemigos y algunos finales locales. El reloj de eclipses nunca bloquea al jugador ni le hace perder progreso.
+**Estructura:** el jugador empieza en la región de su signo y la Tortuga sigue el anillo en sentido Directo o Retrógrado. Las regiones visitadas forman un arco, y la siguiente se abre al terminar una vecina. Cada dos regiones hay un **eclipse** que sube la **Marea de Sal**. Las regiones no visitadas toman la Marea del momento en que llegas: su nivel, sus enemigos, sus eventos y su final local. Por eso la odisea va de lo sencillo a lo extraño en cualquier orden. El reloj de eclipses nunca bloquea al jugador ni le hace perder progreso. Las capas de la sección 6.5 se cuentan por el orden de visita. Detalle en `docs/propuestas/ODISEA.md`.
 
 ### 6.5 Horror cósmico: lo que mira desde fuera del cielo
 
 Sobre la copa del Fresno está el **Firmamento Exterior**, y algunas estrellas no son luces. Son **los Huéspedes**: entidades inmensas que llegaron como "estrellas nuevas" que ningún astrólogo había registrado. No son malvadas. Son indiferentes, enormes e incomprensibles, y Halia les importa como un huerto le importa a quien lo cosecha.
 
 **Tres capas de revelación**
+
+Las regiones se cuentan por el orden en que las visitas, no por su signo (sección 6).
 
 1. **Superficie (regiones 1 a 4).** El Fresno está enfermo y las brujas comen sal. Parece un drama de fantasía.
 2. **Grieta (regiones 5 a 8).** Hay estrellas sin nombre en el cielo. Los Ascendentes no nacen de los signos: son fragmentos de los Huéspedes que miran Halia a través de la carta natal de cada bruja. Cada Ascendente es una ventana.

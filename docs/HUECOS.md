@@ -262,7 +262,7 @@ Ninguno de estos está en los tres prompts de la sección 23, y casi todos son o
 | H-01 | Sin resolver. Se respetó `100·n^1.5` del GDD. Sigue pendiente la decisión D-02 | `docs/FASE2.md` |
 | H-14 | Borrador propio del prólogo, Aries y Capricornio, sin biblia narrativa. Por aprobar | `Data/story.json` |
 | H-15 | Paralaje de 0 a 100; bandas en 25, 50 y 80; un baño baja 20 con enfriamiento de un día | `Data/story.json`, `Data/services.json` |
-| H-16 | Tres estados por región; en cada eclipse suben las regiones sin visitar. Todavía no cambia eventos ni enemigos en regiones que no existen | `Core/World/StoryService.cs` |
+| H-16 | La corrupción es la Marea de Sal, de 0 a 5. En cada eclipse sube en las regiones sin visitar, y al llegar fija su nivel, sus invasores y sus textos. Es el GDD 6 desde el 2026-11-05 | `Core/World/StoryService.Odyssey.cs`, `docs/propuestas/ODISEA.md` |
 | H-17 | 10 niveles por Sendero; 25 de experiencia por victoria; +5 % al efecto por nivel | `Data/story.json` |
 | H-18 | Creador con nombre, pronombres, especie y signo. Faltan cuerpo y voz | `Presentation/Meta/MetaHub.Home.cs` |
 | H-19 | Reposo, tocar, conversar y Confianza. Faltan regalos y recompensas por nivel | `Core/World/Services.cs` |

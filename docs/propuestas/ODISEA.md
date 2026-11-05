@@ -156,7 +156,7 @@ Cardinal, fijo y mutable es la otra división de la astrología: lo que empieza,
 
 ## 11. Texto propuesto para el GDD 6
 
-Reemplaza el párrafo "Estructura no lineal" cuando el usuario lo apruebe:
+El usuario lo aprobó el 2026-11-05, y ya está en el GDD 6. También se ajustaron el GDD 6.5 (las capas se cuentan por orden de visita) y la fila del reloj de eclipses del GDD 4.4. Texto aplicado:
 
 > **Estructura:** el jugador empieza en la región de su signo y la Tortuga sigue el anillo en sentido Directo o Retrógrado. Las regiones visitadas forman un arco, y la siguiente se abre al terminar una vecina. Cada dos regiones hay un **eclipse** que sube la **Marea de Sal**. Las regiones no visitadas toman la Marea del momento en que llegas: su nivel, sus enemigos, sus eventos y su final local. Por eso la odisea va de lo sencillo a lo extraño en cualquier orden. El reloj de eclipses nunca bloquea al jugador ni le hace perder progreso. Las capas de la sección 6.5 se cuentan por el orden de visita.
 

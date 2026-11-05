@@ -6,7 +6,7 @@ La sesión se cortó por límite de uso. **Lo de abajo de esta sección es el tr
 
 | Pieza | Estado | Dónde |
 | --- | --- | --- |
-| Diseño híbrido: lugar libre desde tu signo, nivel lineal por la Marea de Sal | Hecho; pide aprobación del texto para el GDD 6 | `docs/propuestas/ODISEA.md` (sección 11 trae el párrafo propuesto) |
+| Diseño híbrido: lugar libre desde tu signo, nivel lineal por la Marea de Sal | Hecho y aprobado. Ya está en el GDD 6, 6.5 y 4.4 (2026-11-05) | `docs/propuestas/ODISEA.md` |
 | Parche de trucos y rasgos de enemigos | Aplicado y conectado | `Core/Combat` |
 | Kits de las 18 brujas | Hecho, por plantilla | `Tools/Content/gen_kits.py`, `Data/witches_ext.json` |
 | Anillo, zonas, secciones, botín, Expediciones, 4 regiones cardinales, 25 enemigos | Hecho | `StoryService.Odyssey.cs`, `Tools/Content/gen_odyssey.py` y `odyssey_story.py`, `Data/odyssey.json` |
@@ -311,4 +311,4 @@ Revisa las capturas abriéndolas: varios errores solo se vieron así. `-recorrid
 | D-02: escala de almitas | `40·n^1.5`, como dice la hoja de ruta |
 | Subir y fusionar `fase/3` | Sí, después de integrar con `ui/interfaz` y el audio de `main` |
 | Guion | Es borrador mío, y hay que aprobarlo o sustituirlo (H-14) |
-| GDD 6: cambiar a progresión lineal | Ya lo pidió; falta reflejarlo en el GDD |
+| GDD 6: cambiar a progresión lineal | Resuelto: se aplicó el diseño híbrido de ODISEA, que el usuario aprobó |
