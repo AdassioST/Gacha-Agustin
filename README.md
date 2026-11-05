@@ -4,7 +4,13 @@ RPG gacha por turnos para móvil (iOS y Android, en horizontal), hecho con Unity
 
 ## Estado
 
-Preproducción. Por ahora el repositorio solo tiene documentación; todavía no hay proyecto de Unity.
+**Fase 1 (El Aquelarre) construida.** El núcleo de combate en C# está probado: 140 pruebas pasan con `dotnet test`. La escena de prueba de Unity compila, pero todavía hay que abrirla en Unity 6. Los detalles están en [docs/FASE1.md](docs/FASE1.md).
+
+```bash
+dotnet test Tests/Core.Tests
+```
+
+En Unity 6 LTS, abre la raíz del repositorio y usa el menú **Sal y Almas > Construir escena de combate**.
 
 ## Documentos
 
@@ -12,6 +18,7 @@ Preproducción. Por ahora el repositorio solo tiene documentación; todavía no 
 | --- | --- |
 | [docs/GDD.md](docs/GDD.md) | Documento de diseño. Manda sobre cualquier otro documento |
 | [docs/REFERENCIAS.md](docs/REFERENCIAS.md) | Referencias visuales, paleta, mapa de pantallas y antirreferencias |
+| [docs/FASE1.md](docs/FASE1.md) | Fase 1: qué se construyó, cómo probarlo, valores // TUNING y huecos del GDD |
 
 ## Cómo se construye
 

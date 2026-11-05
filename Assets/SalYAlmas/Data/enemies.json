@@ -64,7 +64,7 @@
       "description": "Custodiaba la entrada de las Raíces. La savia negra lo volvió contra todo lo que tiene sal.",
       "boss": true,
       "actionsPerTurn": 2, // TUNING: un jefe solo contra cuatro brujas actúa dos veces por turno
-      "level": 52, "hp": 120000, "atk": 1500, "spd": 110, "toughness": 260, // TUNING
+      "level": 52, "hp": 100000, "atk": 1600, "spd": 110, "toughness": 240, // TUNING
       "weaknesses": ["sol", "marte", "jupiter"],
       "res": { "saturno": 0.2, "luna": 0.1 }, // TUNING
       "attackPlanet": "saturno",

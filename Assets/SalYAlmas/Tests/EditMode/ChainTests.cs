@@ -158,7 +158,7 @@ namespace SalYAlmas.Tests
 
             int checkedOrders = 0;
             foreach (var size in new[] { 3, 4 })
-            foreach (var order in AutoPilot.Permutations(ids, size).Where((_, i) => i % 3 == 0))
+            foreach (var order in AutoPilot.Permutations(ids, size).Where((perm, i) => i % 3 == 0))
             foreach (var guest in new[] { false, true })
             {
                 var b = new Battle(db, setup);
