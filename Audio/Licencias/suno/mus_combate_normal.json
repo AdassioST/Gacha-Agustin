@@ -1,7 +1,7 @@
 {
   "cue_id": "mus_combate_normal",
   "ficha": "P07",
-  "estado": "temporal: se usan las dos tomas del lote 1 (plan Pro); t01 es la principal del cue y t02 tiene otro uso",
+  "estado": "temporal: las dos tomas se alternan al azar en combate normal; la t01 es la base para el bucle final",
   "toma_elegida": "t01",
   "especificacion": {
     "bpm": 128,
@@ -45,7 +45,7 @@
       "uso": {
         "cue": "mus_combate_normal",
         "contexto_prototipo": "Battle",
-        "nota": "Combates normales: tempo estable de unos 129 BPM"
+        "nota": "Combates normales: las dos tomas se alternan al azar. La t02 acelera de 129 a 136 BPM, así que no sirve para un bucle sincronizado con la Partitura"
       }
     },
     {
@@ -67,9 +67,9 @@
       },
       "letra_usada": "[Intro]\n[Instrumental: guitar and frame drums]\n[Verse]\nAaah... aaah...\n(Eztre! Istal!)\nAaah... ooh...\n(Tleugo! Eztre!)\n[Chorus]\nAaah... aaah...\n(Istal yolma, cuetor!)\nAaah... ooh...\n(Istal yolma, cuetor!)\n[Break]\n[Instrumental: psaltery and singing bowls only]\n[Verse]\nAaah... aaah...\n(Eztre! Istal!)\n[Chorus]\nAaah... ooh...\n(Istal yolma, cuetor!)\n[Outro]\n[End]",
       "uso": {
-        "cue": "jefe (temporal)",
-        "contexto_prototipo": "Boss",
-        "nota": "Combates contra jefe del prototipo (el Guardián). Acelera de 129 a 136 BPM y funciona como escalada; no sirve como bucle de combate normal. Se reemplaza con P10"
+        "cue": "mus_combate_normal",
+        "contexto_prototipo": "Battle",
+        "nota": "Combates normales: las dos tomas se alternan al azar. La t02 acelera de 129 a 136 BPM, así que no sirve para un bucle sincronizado con la Partitura"
       }
     }
   ],

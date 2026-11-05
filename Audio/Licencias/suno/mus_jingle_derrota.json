@@ -1,0 +1,79 @@
+{
+  "cue_id": "mus_jingle_derrota",
+  "ficha": "P09",
+  "estado": "temporal: lote 2, se usan las dos tomas al azar; generadas con plan Pro",
+  "toma_elegida": null,
+  "especificacion": {
+    "bpm": 60,
+    "tonalidad": "Re menor",
+    "compas": "3/4",
+    "bucle": "3 compases más cola (≈9 s), sin bucle"
+  },
+  "suno": {
+    "modelo": "POR CONFIRMAR: v6 o v6-wild (los dos están en Pro)",
+    "cuenta": "adassiost",
+    "plan_al_generar": "Pro (confirmado por el usuario el 2026-11-05): da derechos de uso comercial",
+    "canal_descarga": "Descarga de Suno en MP3 (las etiquetas dicen \"made with suno\")",
+    "terminos_vigentes": "PENDIENTE: guardar en PDF con fecha los términos, precios y derechos de Suno vigentes el 2026-11-05",
+    "ajustes_usados": "POR CONFIRMAR",
+    "audio_subido": null,
+    "semilla": null,
+    "operaciones": [],
+    "estilo": "Short defeat jingle: sorrowful and gentle, never punishing. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A sighing low cello phrase over one soft guitar chord, a single low bell, a crystalline psaltery fading away like salt. Stays in D minor, steady 60 BPM, 3/4. Form: 3-bar phrase, long reverb tail, then silence.",
+    "excluir": "synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, drums, frame drum, hand percussion, comedy, cartoon, key change",
+    "ajustes_ficha": "Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode no · Duración personalizada lo más corta posible"
+  },
+  "tomas": [
+    {
+      "toma": "t01",
+      "archivo": "Assets/SalYAlmas/Audio/Resources/MusicaTemporal/TEMP_mus_jingle_derrota__t01__60456c36.mp3",
+      "song_id": "60456c36-dea2-4ecf-8a27-30b8e2be899a",
+      "url": "https://suno.com/song/60456c36-dea2-4ecf-8a27-30b8e2be899a",
+      "titulo_suno": "D Minor Sigh",
+      "fecha_generacion": "2026-11-05T07:52:49Z",
+      "formato": "MP3 48 kHz estéreo, ~190 kbps (descarga de Suno)",
+      "duracion_s": 24.8,
+      "medicion": {
+        "lufs": -17.2,
+        "lra": 4.1,
+        "pico_real_dbtp": -4.1,
+        "bpm_estimado": "≈61",
+        "tonalidad_estimada": "Re menor"
+      },
+      "letra_usada": "[Instrumental]",
+      "uso": {
+        "cue": "mus_jingle_derrota",
+        "contexto_prototipo": "Defeat",
+        "nota": "Pantalla de derrota, una sola vez y luego silencio; al azar con t02"
+      }
+    },
+    {
+      "toma": "t02",
+      "archivo": "Assets/SalYAlmas/Audio/Resources/MusicaTemporal/TEMP_mus_jingle_derrota__t02__9ba780c4.mp3",
+      "song_id": "9ba780c4-9c7a-470d-980f-d9b89ed0f296",
+      "url": "https://suno.com/song/9ba780c4-9c7a-470d-980f-d9b89ed0f296",
+      "titulo_suno": "Three-Bar Sorrow",
+      "fecha_generacion": "2026-11-05T07:52:36Z",
+      "formato": "MP3 48 kHz estéreo, ~190 kbps (descarga de Suno)",
+      "duracion_s": 18.0,
+      "medicion": {
+        "lufs": -17.7,
+        "lra": 13.4,
+        "pico_real_dbtp": -4.7,
+        "bpm_estimado": "≈59",
+        "tonalidad_estimada": "Re menor"
+      },
+      "letra_usada": "[Instrumental]",
+      "uso": {
+        "cue": "mus_jingle_derrota",
+        "contexto_prototipo": "Defeat",
+        "nota": "Pantalla de derrota, una sola vez y luego silencio; al azar con t01"
+      }
+    }
+  ],
+  "regiones_muestras": null,
+  "residuo_suma_db": null,
+  "intervencion_humana": [],
+  "revision_parecido": null,
+  "aprobado_por": null
+}

@@ -1,7 +1,7 @@
 {
   "cue_id": "mus_termas_noche",
   "ficha": "P03",
-  "estado": "temporal: se usan las dos tomas del lote 1 (plan Pro); t01 es la principal del cue y t02 tiene otro uso",
+  "estado": "temporal: t01 para las Termas de noche y t02 para el Santuario del Fresno; ninguna de las dos pantallas existe todavía",
   "toma_elegida": "t01",
   "especificacion": {
     "bpm": "50 (negra con puntillo)",
@@ -67,9 +67,9 @@
       },
       "letra_usada": "[Intro]\n[Instrumental: slow guitar arpeggios]\n[Verse 1]\nAtlua cochum, atlua olvai\nNochual metzlu, cochum, ermai\nNa istal, na micmor\nAtlua olvai\n[Verse 2]\nYolmi cochum, nantre cuicant\nEstlali ilcel, na ishoc\nCochum, cochum, ermai\nAtlua olvai\n[Bridge]\nMmm... mmm...\nMmm... olvai...\n[Outro]\n[Instrumental: guitar and singing bowls]\n[End]",
       "uso": {
-        "cue": "mus_jingle_derrota (temporal)",
-        "contexto_prototipo": "Defeat",
-        "nota": "Pantalla de derrota del prototipo. Destino final: mus_fresno_santuario, que la lista de cues define como Cover de P03 con más cuerpo"
+        "cue": "mus_fresno_santuario",
+        "contexto_prototipo": "FresnoSantuario",
+        "nota": "Registrada para el Santuario del Fresno (Fase 2A). Ya no suena en la derrota: la cubre P09"
       }
     }
   ],

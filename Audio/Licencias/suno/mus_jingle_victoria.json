@@ -1,0 +1,81 @@
+{
+  "cue_id": "mus_jingle_victoria",
+  "ficha": "P08",
+  "estado": "temporal: lote 2, se usan las dos tomas al azar; generadas con plan Pro",
+  "toma_elegida": null,
+  "especificacion": {
+    "bpm": 96,
+    "tonalidad": "Re mayor",
+    "compas": "4/4",
+    "bucle": "Jingle de 2 compases y bucle de resultados de 8 compases (20 s)"
+  },
+  "suno": {
+    "modelo": "POR CONFIRMAR: v6 o v6-wild (los dos están en Pro)",
+    "cuenta": "adassiost",
+    "plan_al_generar": "Pro (confirmado por el usuario el 2026-11-05): da derechos de uso comercial",
+    "canal_descarga": "Descarga de Suno en MP3 (las etiquetas dicen \"made with suno\")",
+    "terminos_vigentes": "PENDIENTE: guardar en PDF con fecha los términos, precios y derechos de Suno vigentes el 2026-11-05",
+    "ajustes_usados": "POR CONFIRMAR",
+    "audio_subido": null,
+    "semilla": null,
+    "operaciones": [],
+    "estilo": "Victory fanfare and results screen: relief and quiet pride, warm. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A bright 2-bar flourish of strummed guitar and bells ending on D major, then a calm lilting loop: lute melody, soft low cello, flute, light tambourine. Stays in D major throughout, strict steady 96 BPM, 4/4. Form: 2-bar fanfare, 8-bar calm loop, gentle ending.",
+    "excluir": "synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, minor key, long intro, key change, modulation, tempo change, accelerando",
+    "ajustes_ficha": "Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode no · Duración auto"
+  },
+  "tomas": [
+    {
+      "toma": "t01",
+      "archivo": "Assets/SalYAlmas/Audio/Resources/MusicaTemporal/TEMP_mus_jingle_victoria__t01__308c6637.mp3",
+      "song_id": "308c6637-625c-481f-b411-a8a670807335",
+      "url": "https://suno.com/song/308c6637-625c-481f-b411-a8a670807335",
+      "titulo_suno": "Quiet Relief",
+      "fecha_generacion": "2026-11-05T07:51:34Z",
+      "formato": "MP3 48 kHz estéreo, ~190 kbps (descarga de Suno)",
+      "duracion_s": 187.9,
+      "medicion": {
+        "lufs": -16.2,
+        "lra": 5.0,
+        "pico_real_dbtp": -3.0,
+        "bpm_estimado": "≈96",
+        "tonalidad_estimada": "Re mayor",
+        "percusion": 0.024
+      },
+      "letra_usada": "[Instrumental]",
+      "uso": {
+        "cue": "mus_jingle_victoria",
+        "contexto_prototipo": "Victory",
+        "nota": "Pantalla de victoria del prototipo, al azar con t02. Es una canción completa de 3 min, no un jingle: el jingle de 6 s se corta al editar"
+      }
+    },
+    {
+      "toma": "t02",
+      "archivo": "Assets/SalYAlmas/Audio/Resources/MusicaTemporal/TEMP_mus_jingle_victoria__t02__4715f2ca.mp3",
+      "song_id": "4715f2ca-64e9-4760-abb0-55330e7e0785",
+      "url": "https://suno.com/song/4715f2ca-64e9-4760-abb0-55330e7e0785",
+      "titulo_suno": "Quiet Relief",
+      "fecha_generacion": "2026-11-05T07:51:06Z",
+      "formato": "MP3 48 kHz estéreo, ~190 kbps (descarga de Suno)",
+      "duracion_s": 178.6,
+      "medicion": {
+        "lufs": -15.5,
+        "lra": 5.0,
+        "pico_real_dbtp": -3.5,
+        "bpm_estimado": "≈99",
+        "tonalidad_estimada": "Re mayor",
+        "percusion": 0.027
+      },
+      "letra_usada": "[Instrumental]",
+      "uso": {
+        "cue": "mus_jingle_victoria",
+        "contexto_prototipo": "Victory",
+        "nota": "Pantalla de victoria del prototipo, al azar con t01"
+      }
+    }
+  ],
+  "regiones_muestras": null,
+  "residuo_suma_db": null,
+  "intervencion_humana": [],
+  "revision_parecido": null,
+  "aprobado_por": null
+}

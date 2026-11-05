@@ -4,15 +4,28 @@ using UnityEngine;
 
 namespace SalYAlmas.Presentation
 {
-    /// <summary>Qué pantalla está sonando. La decide la presentación, no el núcleo.</summary>
-    public enum MusicContext { None, Formation, Battle, Boss, Victory, Defeat, Termas }
+    /// <summary>
+    /// Qué pantalla está sonando. La decide la presentación, no el núcleo.
+    /// Title es la pantalla de inicio; Menu, el menú general (en el prototipo, la formación).
+    /// </summary>
+    public enum MusicContext { None, Title, Menu, Battle, Boss, Victory, Defeat, Termas, FresnoSantuario }
+
+    [Serializable]
+    internal sealed class TempMusicTrack
+    {
+        public string resource = "";
+        public float gainDb;
+    }
 
     [Serializable]
     internal sealed class TempMusicEntry
     {
         public string context = "";
-        public string resource = "";
-        public float gainDb;
+        /// <summary>loop: una pista al azar en bucle. shuffle: pistas al azar, una tras otra. once: una al azar y silencio.</summary>
+        public string mode = "loop";
+        /// <summary>Pista que suena la primera vez que se entra al contexto en la sesión (por ejemplo, el inicio).</summary>
+        public string first = "";
+        public TempMusicTrack[] tracks = new TempMusicTrack[0];
     }
 
     [Serializable]
@@ -22,9 +35,10 @@ namespace SalYAlmas.Presentation
     }
 
     /// <summary>
-    /// Música temporal del prototipo con las tomas de Suno del lote 1 (docs/audio/TOMAS_LOTE_1.md).
-    /// Lee Resources/MusicaTemporal/musica_temporal.json, que asigna una pista y su ganancia a cada contexto,
-    /// y cambia de pista con un fundido cruzado. La Fase 3C la reemplaza por FMOD (docs/audio/INTEGRACION_AUDIO.md).
+    /// Música temporal del prototipo con las tomas de Suno (docs/audio/TOMAS_LOTE_1.md y TOMAS_LOTE_2.md).
+    /// Lee Resources/MusicaTemporal/musica_temporal.json, que da a cada contexto una lista de pistas con su ganancia
+    /// y un modo de reproducción. Cambia de pista con un fundido cruzado. La Fase 3C la reemplaza por FMOD
+    /// (docs/audio/INTEGRACION_AUDIO.md). El azar de aquí es solo de presentación: no toca el núcleo determinista.
     /// </summary>
     public sealed class TempMusicPlayer : MonoBehaviour
     {
@@ -39,10 +53,13 @@ namespace SalYAlmas.Presentation
 
         private readonly Dictionary<MusicContext, TempMusicEntry> _entries = new Dictionary<MusicContext, TempMusicEntry>();
         private readonly Dictionary<string, AudioClip> _clips = new Dictionary<string, AudioClip>();
+        private readonly HashSet<MusicContext> _firstPlayed = new HashSet<MusicContext>();
+        private readonly Dictionary<MusicContext, string> _lastTrack = new Dictionary<MusicContext, string>();
         private AudioSource _current;
         private AudioSource _previous;
         private float _currentGain = 1f;
         private bool _ducked;
+        private bool _advancing;
         private MusicContext _context = MusicContext.None;
 
         public bool Muted { get; private set; }
@@ -62,7 +79,7 @@ namespace SalYAlmas.Presentation
             go.transform.SetParent(transform, false);
             var source = go.AddComponent<AudioSource>();
             source.playOnAwake = false;
-            source.loop = true;
+            source.loop = false;
             source.spatialBlend = 0f;
             source.volume = 0f;
             return source;
@@ -93,7 +110,19 @@ namespace SalYAlmas.Presentation
             _ducked = ducked;
             if (context == _context) return;
             _context = context;
+            PlayNext();
+        }
 
+        public void ToggleMute()
+        {
+            Muted = !Muted;
+            PlayerPrefs.SetInt(MutedKey, Muted ? 1 : 0);
+            PlayerPrefs.Save();
+        }
+
+        /// <summary>Elige la siguiente pista del contexto actual y hace el fundido cruzado hacia ella.</summary>
+        private void PlayNext()
+        {
             var old = _current;
             _current = _previous;
             _previous = old;
@@ -103,23 +132,33 @@ namespace SalYAlmas.Presentation
             _current.volume = 0f;
             _currentGain = 1f;
 
-            if (_entries.TryGetValue(context, out var entry))
-            {
-                var clip = Clip(entry.resource);
-                if (clip != null)
-                {
-                    _current.clip = clip;
-                    _currentGain = Mathf.Pow(10f, entry.gainDb / 20f);
-                    _current.Play();
-                }
-            }
+            if (!_entries.TryGetValue(_context, out var entry)) return;
+            var track = PickTrack(_context, entry);
+            if (track == null) return;
+            var clip = Clip(track.resource);
+            if (clip == null) return;
+
+            _current.clip = clip;
+            _current.loop = string.Equals(entry.mode, "loop", StringComparison.OrdinalIgnoreCase);
+            _currentGain = Mathf.Pow(10f, track.gainDb / 20f);
+            _current.Play();
+            _lastTrack[_context] = track.resource;
         }
 
-        public void ToggleMute()
+        private TempMusicTrack PickTrack(MusicContext context, TempMusicEntry entry)
         {
-            Muted = !Muted;
-            PlayerPrefs.SetInt(MutedKey, Muted ? 1 : 0);
-            PlayerPrefs.Save();
+            if (entry.tracks == null || entry.tracks.Length == 0) return null;
+
+            if (!string.IsNullOrEmpty(entry.first) && _firstPlayed.Add(context))
+                foreach (var t in entry.tracks)
+                    if (t != null && t.resource == entry.first) return t;
+
+            var candidates = new List<TempMusicTrack>();
+            _lastTrack.TryGetValue(context, out var last);
+            foreach (var t in entry.tracks)
+                if (t != null && (entry.tracks.Length == 1 || t.resource != last)) candidates.Add(t);
+            if (candidates.Count == 0) return entry.tracks[0];
+            return candidates[UnityEngine.Random.Range(0, candidates.Count)];
         }
 
         private AudioClip Clip(string resource)
@@ -134,6 +173,22 @@ namespace SalYAlmas.Presentation
 
         private void Update()
         {
+            // En modo shuffle, la siguiente pista entra con fundido cruzado cuando a la actual le queda lo que dura el fundido.
+            if (_current.clip != null && !_current.loop && _entries.TryGetValue(_context, out var entry)
+                && string.Equals(entry.mode, "shuffle", StringComparison.OrdinalIgnoreCase))
+            {
+                bool ending = !_current.isPlaying || _current.clip.length - _current.time <= FadeSeconds;
+                if (ending && !_advancing)
+                {
+                    _advancing = true;
+                    PlayNext();
+                }
+                else if (!ending)
+                {
+                    _advancing = false;
+                }
+            }
+
             float step = Time.unscaledDeltaTime / Mathf.Max(0.01f, FadeSeconds);
             float target = Muted || _current.clip == null ? 0f : MasterVolume * _currentGain * (_ducked ? DuckFactor : 1f);
             _current.volume = Mathf.MoveTowards(_current.volume, target, step);

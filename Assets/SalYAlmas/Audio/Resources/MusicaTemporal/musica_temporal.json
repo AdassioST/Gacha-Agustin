@@ -1,10 +1,74 @@
 {
   "entries": [
-    { "context": "Formation", "resource": "TEMP_mus_titulo_tema__t01__d4f143c4", "gainDb": -2.5 },
-    { "context": "Battle", "resource": "TEMP_mus_combate_normal__t01__bbba00ae", "gainDb": -2.4 },
-    { "context": "Boss", "resource": "TEMP_mus_combate_normal__t02__e8b5d28f", "gainDb": -2.3 },
-    { "context": "Victory", "resource": "TEMP_mus_titulo_tema__t02__0f9b9bd2", "gainDb": -3.1 },
-    { "context": "Defeat", "resource": "TEMP_mus_termas_noche__t02__7a9f3463", "gainDb": -5.8 },
-    { "context": "Termas", "resource": "TEMP_mus_termas_noche__t01__5fc7478b", "gainDb": -2.2 }
+    {
+      "context": "Title",
+      "mode": "loop",
+      "first": "",
+      "tracks": [
+        { "resource": "TEMP_mus_titulo_tema__t03__c7c90879", "gainDb": -1.7 }
+      ]
+    },
+    {
+      "context": "Menu",
+      "mode": "shuffle",
+      "first": "TEMP_mus_titulo_tema__t03__c7c90879",
+      "tracks": [
+        { "resource": "TEMP_mus_titulo_tema__t03__c7c90879", "gainDb": -1.7 },
+        { "resource": "TEMP_mus_titulo_tema__t01__d4f143c4", "gainDb": -2.5 },
+        { "resource": "TEMP_mus_titulo_tema__t02__0f9b9bd2", "gainDb": -3.1 }
+      ]
+    },
+    {
+      "context": "Battle",
+      "mode": "shuffle",
+      "first": "",
+      "tracks": [
+        { "resource": "TEMP_mus_combate_normal__t01__bbba00ae", "gainDb": -2.4 },
+        { "resource": "TEMP_mus_combate_normal__t02__e8b5d28f", "gainDb": -2.3 }
+      ]
+    },
+    {
+      "context": "Boss",
+      "mode": "shuffle",
+      "first": "",
+      "tracks": [
+        { "resource": "TEMP_mus_jefe_casa__t01__b3830b9b", "gainDb": -1.9 },
+        { "resource": "TEMP_mus_jefe_casa__t02__5006071e", "gainDb": -2.3 }
+      ]
+    },
+    {
+      "context": "Victory",
+      "mode": "shuffle",
+      "first": "",
+      "tracks": [
+        { "resource": "TEMP_mus_jingle_victoria__t01__308c6637", "gainDb": -1.8 },
+        { "resource": "TEMP_mus_jingle_victoria__t02__4715f2ca", "gainDb": -2.5 }
+      ]
+    },
+    {
+      "context": "Defeat",
+      "mode": "once",
+      "first": "",
+      "tracks": [
+        { "resource": "TEMP_mus_jingle_derrota__t01__60456c36", "gainDb": -0.8 },
+        { "resource": "TEMP_mus_jingle_derrota__t02__9ba780c4", "gainDb": -0.3 }
+      ]
+    },
+    {
+      "context": "Termas",
+      "mode": "loop",
+      "first": "",
+      "tracks": [
+        { "resource": "TEMP_mus_termas_noche__t01__5fc7478b", "gainDb": -2.2 }
+      ]
+    },
+    {
+      "context": "FresnoSantuario",
+      "mode": "loop",
+      "first": "",
+      "tracks": [
+        { "resource": "TEMP_mus_termas_noche__t02__7a9f3463", "gainDb": -5.8 }
+      ]
+    }
   ]
 }

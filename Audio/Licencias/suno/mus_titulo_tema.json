@@ -1,8 +1,8 @@
 {
   "cue_id": "mus_titulo_tema",
   "ficha": "P01",
-  "estado": "temporal: se usan las dos tomas del lote 1 (plan Pro); t01 es la principal del cue y t02 tiene otro uso",
-  "toma_elegida": "t01",
+  "estado": "temporal: t03 es el tema de inicio (elegido por el usuario); t01, t02 y t03 suenan al azar en el menú general",
+  "toma_elegida": "t03",
   "especificacion": {
     "bpm": 72,
     "tonalidad": "Re dórico",
@@ -43,9 +43,9 @@
       },
       "letra_usada": "[Intro]\n[Instrumental: guitar and lute, bells]\n[Verse 1]\nIstal yolma, cuetor frashna\nNantre ilcel, estlali nochual\nYolmime olvai, na remel\nNa olvai, ermai, neyo cuicant\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Instrumental: low cello and psaltery]\n[Verse 2]\nAtlua cochum, maresh olvai\nTleugo neshcen, eztre e micmor\nNosotl cuicant, nantre uarbe\nCuetor, cuetor, yolma\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Bridge]\nHuemag ishoc, ilcel blaztac\n(Aaah)\n[Outro]\nIstal yolma... cuetor\n[Outro]\nIstal yolma... cuetor\n[End]",
       "uso": {
-        "cue": "mus_titulo_tema",
-        "contexto_prototipo": "Formation",
-        "nota": "Pantalla de formación del prototipo; después, pantalla de título"
+        "cue": "mus_titulo_tema (menú general)",
+        "contexto_prototipo": "Menu",
+        "nota": "Una de las tres canciones que suenan al azar en el menú general (en el prototipo, la formación)"
       }
     },
     {
@@ -67,9 +67,34 @@
       },
       "letra_usada": "[Intro]\n[Instrumental: guitar and lute, bells]\n[Verse 1]\nIstal yolma, cuetor frashna\nNantre ilcel, estlali nochual\nYolmime olvai, na remel\nNa olvai, ermai, neyo cuicant\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Instrumental: low cello and psaltery]\n[Verse 2]\nAtlua cochum, maresh olvai\nTleugo neshcen, eztre e micmor\nNosotl cuicant, nantre uarbe\nCuetor, cuetor, yolma\n[Chorus]\nFrashna, frashna, cuetor\n(Istal yolma)\nNelradi e lucetl, cuetor\n(Istal yolma)\n[Bridge]\nHuemag ishoc, ilcel blaztac\n(Aaah)\n[Outro]\nIstal yolma... cuetor\n[End]",
       "uso": {
-        "cue": "mus_combate_resultados (temporal)",
-        "contexto_prototipo": "Victory",
-        "nota": "Pantalla de victoria del prototipo. Destino final por decidir al escuchar: mus_creditos o una variante del título. Está en Sol mayor, no en Re"
+        "cue": "mus_titulo_tema (menú general)",
+        "contexto_prototipo": "Menu",
+        "nota": "Una de las tres canciones que suenan al azar en el menú general (en el prototipo, la formación)"
+      }
+    },
+    {
+      "toma": "t03",
+      "archivo": "Assets/SalYAlmas/Audio/Resources/MusicaTemporal/TEMP_mus_titulo_tema__t03__c7c90879.mp3",
+      "song_id": "c7c90879-d5b5-478c-bd3c-92c975d773a4",
+      "url": "https://suno.com/song/c7c90879-d5b5-478c-bd3c-92c975d773a4",
+      "titulo_suno": "Golden Ascent",
+      "fecha_generacion": "2026-11-05T07:48:37Z",
+      "formato": "MP3 48 kHz estéreo, ~190 kbps (descarga de Suno)",
+      "duracion_s": 227.2,
+      "medicion": {
+        "lufs": -16.3,
+        "lra": 7.5,
+        "pico_real_dbtp": -3.2,
+        "bpm_estimado": "≈129 o 65 (ambiguo)",
+        "tonalidad_estimada": "Fa sostenido menor (no está en Re)",
+        "percusion": 0.011
+      },
+      "letra_usada": "[Instrumental]",
+      "prompt": "POR CONFIRMAR: no salió de la ficha P01; es un prompt propio del usuario. Copia aquí el estilo, las exclusiones y los ajustes exactos",
+      "uso": {
+        "cue": "mus_titulo_tema (inicio)",
+        "contexto_prototipo": "Title y primera pista de Menu",
+        "nota": "Elegida por el usuario como tema principal: suena al inicio y después entra al azar con t01 y t02 en el menú general"
       }
     }
   ],

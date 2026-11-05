@@ -58,6 +58,8 @@ Tres cosas para que siga así:
 
 ## Cómo se usan: las dos tomas de cada canción
 
+> **Actualizado con el lote 2.** La asignación vigente de todas las pistas está en [TOMAS_LOTE_2.md](TOMAS_LOTE_2.md): las tomas t01 y t02 del tema pasaron al menú general, la t02 de combate se alterna con la t01, y la derrota y el jefe ya tienen pistas propias. La tabla de abajo es la asignación original del lote 1.
+
 Por decisión del usuario se usan las seis tomas. La t01 de cada canción es la principal de su cue; la t02 cubre otra pantalla hasta que exista su pista propia.
 
 | Toma | Uso en el prototipo de la Fase 1 | Destino final |

@@ -194,10 +194,13 @@ namespace SalYAlmas.Presentation
             if (_music != null) _music.SetState(CurrentMusic(), _mode == Mode.Battle && _chain != null && _chain.IsOpen);
         }
 
-        /// <summary>Música temporal según la pantalla: formación, combate, jefe, victoria o derrota.</summary>
+        /// <summary>
+        /// Música temporal según la pantalla. La formación hace de menú general: al abrir el juego suena primero
+        /// el tema de inicio y después las tres canciones del menú al azar (musica_temporal.json).
+        /// </summary>
         private MusicContext CurrentMusic()
         {
-            if (_mode == Mode.Formation) return MusicContext.Formation;
+            if (_mode == Mode.Formation) return MusicContext.Menu;
             if (_mode != Mode.Battle || _director == null) return MusicContext.None;
             if (_director.ResultReady)
                 return _director.Battle.Outcome == Core.Events.BattleOutcome.Victory ? MusicContext.Victory : MusicContext.Defeat;

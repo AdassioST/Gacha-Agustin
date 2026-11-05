@@ -1,0 +1,81 @@
+{
+  "cue_id": "mus_jefe_casa",
+  "ficha": "P10",
+  "estado": "temporal: lote 2, se usan las dos tomas al azar; generadas con plan Pro",
+  "toma_elegida": null,
+  "especificacion": {
+    "bpm": 144,
+    "tonalidad": "Mi frigio",
+    "compas": "4/4",
+    "bucle": "Fase 1 y fase 2 de 32 compases (53 s cada una)"
+  },
+  "suno": {
+    "modelo": "POR CONFIRMAR: v6 o v6-wild (los dos están en Pro)",
+    "cuenta": "adassiost",
+    "plan_al_generar": "Pro (confirmado por el usuario el 2026-11-05): da derechos de uso comercial",
+    "canal_descarga": "Descarga de Suno en MP3 (las etiquetas dicen \"made with suno\")",
+    "terminos_vigentes": "PENDIENTE: guardar en PDF con fecha los términos, precios y derechos de Suno vigentes el 2026-11-05",
+    "ajustes_usados": "POR CONFIRMAR",
+    "audio_subido": null,
+    "semilla": null,
+    "operaciones": [],
+    "estilo": "Epic acoustic boss battle against a witch coven: grim, majestic, ritual intensity. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Phase one: relentless guitar and lute ostinato, heavy low cello, war frame drums, anvil and iron bells, psaltery runs. Phase two: same tempo, the full choir chants, the lead voice soars, drums double. Strict steady 144 BPM with no accelerando, stays in E Phrygian throughout, 4/4. Form: 4-bar intro, 32-bar phase one, 4-bar drum-roll transition, 32-bar phase two, final hit.",
+    "excluir": "synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, slow tempo, ballad, orchestral string section, tempo change, accelerando, key change, modulation",
+    "ajustes_ficha": "Instrumental no · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)"
+  },
+  "tomas": [
+    {
+      "toma": "t01",
+      "archivo": "Assets/SalYAlmas/Audio/Resources/MusicaTemporal/TEMP_mus_jefe_casa__t01__b3830b9b.mp3",
+      "song_id": "b3830b9b-cc0c-4955-9d81-e9fb749b6162",
+      "url": "https://suno.com/song/b3830b9b-cc0c-4955-9d81-e9fb749b6162",
+      "titulo_suno": "Asera",
+      "fecha_generacion": "2026-11-05T07:53:50Z",
+      "formato": "MP3 48 kHz estéreo, ~190 kbps (descarga de Suno)",
+      "duracion_s": 61.2,
+      "medicion": {
+        "lufs": -16.1,
+        "lra": 8.5,
+        "pico_real_dbtp": -3.6,
+        "bpm_estimado": "≈144",
+        "tonalidad_estimada": "Re menor (pedido: Mi frigio)",
+        "percusion": 0.106
+      },
+      "letra_usada": "[Intro]\n[Instrumental]\n[Phase One]\nAsera, veyra, cora na\nTalia, moren, esha va\nOrua, selene, vira no\nAsera, veyra, cora na\n[Instrumental]\n[Phase Two]\nAsera, veyra, cora na\nTalia, moren, esha va\nOrua, selene, vira no\nAsera, veyra, cora na\n[Choir]\nVera, vera, orai\nSola, sola, emai\nVera, vera, orai\nAsera, cora, nai\n[Final Hit]\n[Instrumental]",
+      "uso": {
+        "cue": "mus_jefe_casa",
+        "contexto_prototipo": "Boss",
+        "nota": "Jefes del prototipo, alternando al azar con t02. Dura 61 s. La letra no es la de la ficha: Suno escribió la suya"
+      }
+    },
+    {
+      "toma": "t02",
+      "archivo": "Assets/SalYAlmas/Audio/Resources/MusicaTemporal/TEMP_mus_jefe_casa__t02__5006071e.mp3",
+      "song_id": "5006071e-d01e-462c-a4ed-04d9b359c79f",
+      "url": "https://suno.com/song/5006071e-d01e-462c-a4ed-04d9b359c79f",
+      "titulo_suno": "Astra Ignarae",
+      "fecha_generacion": "2026-11-05T07:53:35Z",
+      "formato": "MP3 48 kHz estéreo, ~190 kbps (descarga de Suno)",
+      "duracion_s": 99.6,
+      "medicion": {
+        "lufs": -15.7,
+        "lra": 7.7,
+        "pico_real_dbtp": -3.7,
+        "bpm_estimado": "≈144",
+        "tonalidad_estimada": "Re mayor (pedido: Mi frigio)",
+        "percusion": 0.127
+      },
+      "letra_usada": "[Intro]\nEya, mora, vela\nAtra, saeva, ora\n[Phase One]\nSora, veyra, caligo\nMara, thessa, feral\nIra, ira, veyra\nNara, sola, thal\nEya, mora, vela\nAtra, saeva, ora\nCorda, ferrum, luna\nVeyra, veyra, thar\n[Phase Two]\nAeya, aeya, dominae\nVela, mora, ignarae\nSola, thessa, caelora\nEya, eya, tenebra\nAeya, aeya, dominae\nVela, mora, ignarae\nSora, veyra, caligo\nMara, thessa, feral\n[Final Hit]\nAtra!",
+      "uso": {
+        "cue": "mus_jefe_casa",
+        "contexto_prototipo": "Boss",
+        "nota": "Jefes del prototipo, alternando al azar con t01. Dura 100 s. La letra no es la de la ficha y usa palabras latinas reales (caligo, ferrum, luna, dominae)"
+      }
+    }
+  ],
+  "regiones_muestras": null,
+  "residuo_suma_db": null,
+  "intervencion_humana": [],
+  "revision_parecido": null,
+  "aprobado_por": null
+}
