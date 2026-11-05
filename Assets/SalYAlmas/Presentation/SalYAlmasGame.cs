@@ -87,6 +87,7 @@ namespace SalYAlmas.Presentation
             _music = gameObject.AddComponent<TempMusicPlayer>();
             _sfx = gameObject.AddComponent<TempSfxPlayer>();
             GuiKit.ButtonPressed += _sfx.OnButtonPressed;
+            PullSequence.Sfx = _sfx.PlayCue;
             _saved.Load();
             LoadData();
         }

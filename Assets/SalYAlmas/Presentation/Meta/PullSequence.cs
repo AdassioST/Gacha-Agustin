@@ -19,6 +19,9 @@ namespace SalYAlmas.Presentation
 
         private static readonly float[] Durations = { 1.0f, 1.3f, 1.2f, 1.6f, 0f, 0f }; // TUNING
 
+        /// <summary>Lo conecta la escena: reproduce un efecto de audio por su ID.</summary>
+        public static Action<string> Sfx;
+
         private readonly MetaGame _g;
         private readonly PortraitBank _art;
         private readonly List<PullResult> _results;
@@ -45,6 +48,7 @@ namespace SalYAlmas.Presentation
             _surprise = UnityEngine.Random.value < 0.35f; // TUNING
             _index = NextFull(-1);
             _step = Step.Fall;
+            Sfx?.Invoke("sfx_tirada_sales_caer");
             if (game.Profile.Settings.SkipCinematics) _step = Step.Summary;
         }
 
@@ -90,7 +94,11 @@ namespace SalYAlmas.Presentation
             }
 
             if (total > 0 && _time >= total) Advance();
-            if (_step != Step.Summary && GuiKit.Button(new Rect(GuiKit.Width - 230, 24, 200, 66), "Saltar", true, 26)) _step = Step.Summary;
+            if (_step != Step.Summary && GuiKit.Button(new Rect(GuiKit.Width - 230, 24, 200, 66), "Saltar", true, 26))
+            {
+                _step = Step.Summary;
+                Sfx?.Invoke("sfx_tirada_saltar");
+            }
             // Tocar la pantalla avanza a la siguiente parte.
             if (Event.current.type == EventType.MouseDown && Event.current.mousePosition.y > 110 && _step != Step.Summary && _step != Step.Card && total > 0)
             {
@@ -104,18 +112,36 @@ namespace SalYAlmas.Presentation
             _time = 0;
             switch (_step)
             {
-                case Step.Fall: _step = Step.Vapor; break;
+                case Step.Fall:
+                    _step = Step.Vapor;
+                    int best = BestRarity;
+                    Sfx?.Invoke(best == 5 ? (_surprise ? "mus_tirada_subida_dorada" : "mus_tirada_vapor_dorado") : best == 4 ? "mus_tirada_vapor_violeta" : "mus_tirada_vapor_blanco");
+                    break;
                 case Step.Vapor:
                     if (_index < 0) _step = Step.Summary;
-                    else _step = _results[_index].Rarity == 5 ? Step.Reflect : Step.Emerge;
+                    else EnterReveal();
                     break;
-                case Step.Reflect: _step = Step.Emerge; break;
-                case Step.Emerge: _step = Step.Card; break;
+                case Step.Reflect:
+                    _step = Step.Emerge;
+                    Sfx?.Invoke("sfx_tirada_emergencia");
+                    break;
+                case Step.Emerge:
+                    _step = Step.Card;
+                    Sfx?.Invoke("sfx_tirada_tarjeta");
+                    break;
                 case Step.Card:
                     _index = NextFull(_index);
-                    _step = _index < 0 ? Step.Summary : _results[_index].Rarity == 5 ? Step.Reflect : Step.Emerge;
+                    if (_index < 0) _step = Step.Summary;
+                    else EnterReveal();
                     break;
             }
+        }
+
+        private void EnterReveal()
+        {
+            bool five = _results[_index].Rarity == 5;
+            _step = five ? Step.Reflect : Step.Emerge;
+            Sfx?.Invoke(five ? "sfx_tirada_constelacion" : "sfx_tirada_emergencia");
         }
 
         private void DrawWater(Vector2 c)

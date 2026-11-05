@@ -80,6 +80,7 @@ namespace SalYAlmas.Presentation
             {
                 var r = Game.Base.Bathe();
                 _baseLine = r.Ok ? "Por un rato, no recuerdas qué era lo que mirabas." : r.Message;
+                if (r.Ok) PullSequence.Sfx?.Invoke("sfx_termas_bano");
                 Save();
             }
             y += 80;
@@ -102,7 +103,7 @@ namespace SalYAlmas.Presentation
                     _baseLine = r.Message;
                     Save();
                 }
-                if (GuiKit.Button(new Rect(x + w / 2 + 6, y, w / 2 - 6, 58), L("base.touch"), true, 22)) _baseLine = Game.Base.Touch(w0, ++_touches);
+                if (GuiKit.Button(new Rect(x + w / 2 + 6, y, w / 2 - 6, 58), L("base.touch"), true, 22)) { _baseLine = Game.Base.Touch(w0, ++_touches); PullSequence.Sfx?.Invoke("sfx_termas_tocar"); }
                 y += 66;
                 if (GuiKit.Button(new Rect(x, y, w, 46), "Hacerla tu favorita", Game.Profile.TermasBase.Favorite != w0, 18))
                 {

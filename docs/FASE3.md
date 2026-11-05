@@ -44,7 +44,7 @@ El Aquelarre es una grilla con marcos por planeta y rareza. La piel de oro y cir
 | Perlas, Grimorio y Diezmo | Hecho, sin dinero real | `StoreService` con plataforma y servidor falsos, sin Unity IAP |
 | Servidor autoritativo | Solo la interfaz | `IBackend` con `FakeBackend` en memoria, que se pierde al cerrar. Valida recibos, registra compras y tiradas. El gacha sigue decidiéndose en el cliente |
 | Configuración remota | Solo la interfaz | `IRemoteConfig` local: bandera de país y banners apagados |
-| Audio por capas con FMOD | No hecho | Sigue el `TempMusicPlayer` con pistas de Suno por pantalla. No hay capas, efectos ni voces |
+| Audio por capas con FMOD | Parcial | Música temporal de Suno por pantalla y efectos temporales en combate y en la tirada (`docs/audio/AUDIO_PROTOTIPO.md`). No hay FMOD, capas ni voces |
 | Gamas baja y alta | Parcial | El ajuste cambia fps y nivel de calidad. No hay LOD ni pelaje por capas |
 | Localización | Parcial | Tabla de la interfaz principal en español, inglés y japonés, sin revisar por una persona. La mayoría de los textos de pantalla y todo el guion siguen solo en español. No usa TextMeshPro ni fuentes CJK propias |
 | Accesibilidad | Parcial | Modo recatado, texto grande, colores seguros, saltar cinemáticas y reducir destellos. Reducir destellos solo cubre la tirada y las ventanas, todavía no el combate (S-18) |

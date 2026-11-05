@@ -131,6 +131,9 @@ namespace SalYAlmas.Presentation
 
         public void OnButtonPressed() => Play("sfx_ui_tocar", 0.8f);
 
+        /// <summary>Efecto suelto pedido por una pantalla (la tirada, las Termas).</summary>
+        public void PlayCue(string id) => Play(id);
+
         /// <summary>Traduce un evento del núcleo a sus efectos. Lo invoca BattleDirector.EventPresented.</summary>
         public void OnEvent(BattleEvent e)
         {
