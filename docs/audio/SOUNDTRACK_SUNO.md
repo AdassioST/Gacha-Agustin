@@ -1246,4 +1246,483 @@ Eztre istal, tleugo, cuetor!
 - **Versión corta (2 a 3 s):** ritual más impacto, como la cámara corta.
 - Candidata a vocalista humana: es el canto de firma de la Regente.
 
+### 6.8 Combate avanzado y transformaciones
+
+#### P18 · `mus_ascension_iii_coro` · Ascensión III genérica
+
+**Título:** Estlali, Cuetor
+**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+
+**Estilo**
+
+```text
+Ultimate attack sung invocation for a witch and her astral spirit: brief, radiant, sacred. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. A breath and a bell, rising psaltery tremolo, then the voice and full choir burst together over frame drums and bells; one final impact and ring-out. D Dorian, 120 BPM, 4/4. Form: 3-beat preparation, 2-beat ritual, 6-beat sung climax, 3-beat impact, ring-out.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, long intro, many verses, ballad
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: breath and bell]
+
+[Chorus]
+Estlali, yolma, cuetor!
+(Aaah!)
+
+[Outro]
+[Instrumental: impact and ringing bells]
+[End]
+```
+
+**Sentido:** ¡Estrella, alma, vuelve!
+
+**Uso**
+
+- Corte y sincronía como en P16.
+- Haz dos variantes del mismo cue cambiando el metal: *bright gold bells* para las sectas diurnas (Sol, Júpiter, Saturno) y *silver and copper singing bowls* para las nocturnas (Luna, Marte, Venus). Mercurio usa cualquiera. En FMOD son dos instrumentos del mismo evento.
+
+#### P19 · `mus_juicio_pureza` · Juicio de Pureza
+
+**Título:** Neyo Tuel
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+
+**Estilo**
+
+```text
+Battle against your own mirrored spirit: introspective, tense, tragic, like fighting your reflection. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Two guitars answer each other in mirrored phrases, lute and low cello in canon, psaltery echoes, frame drums, a ticking bell. The voice sings a phrase and the choir answers with the same phrase, lower and slower. A minor, 120 BPM, 4/4. Form: intro, 32-bar main section, 8-bar quiet reflection, 32-bar intensified return, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, ballad, bright major
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: two mirrored guitars]
+
+[Verse]
+Yolma istal, istal yolma
+(Istal yolma, yolma istal)
+Neyo tuel, tuel neyo
+(Tuel neyo, neyo tuel)
+
+[Break]
+[Instrumental: quiet reflection, ticking bell]
+
+[Chorus]
+Ishoc cuetor, cuetor ishoc
+(Cuetor ishoc, ishoc cuetor)
+Neyo tuel, tuel neyo
+(Aaah...)
+
+[Outro]
+[End]
+```
+
+**Sentido:** Alma y sal, sal y alma. Yo eres tú, tú eres yo. / Mira y vuelve, vuelve y mira. Las líneas son palíndromos de palabras: la bruja se pelea con su reflejo.
+
+**Uso**
+
+- 8 tomas. **Bucle principal:** Verse, 32 compases (64 s). **Reflexión:** Break, 8 compases; suena cuando el Juicio revela el recuerdo de la bruja (GDD 12.4). **Regreso:** Chorus, 32 compases, cuando el Ascendente baja de la mitad de su vida.
+- Capas: el Juicio cuenta como jefe (`EsJefe`), así que el coro suena siempre.
+- Posterior: un *Cover* por Regente con su instrumento solista (`mus_juicio_<bruja>`).
+
+#### P20 · `mus_extasis_abisal` · Éxtasis Abisal
+
+**Título:** Huemag Ishoc
+**Ajustes:** Instrumental no · Weirdness 55 · Style Influence 70 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Possession state in battle: the spirit takes control, ecstatic, frightening, sacred chaos. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Same pulse as a folk battle theme but heavier: pounding frame drums, scraping low cello, clustered choir, the voice wailing in long glissandi, bells struck hard, guitar slapped like a drum. Unstable but rhythmic. D minor, 128 BPM, 4/4. Form: 16-bar intense loop, 16-bar variation, short ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, calm, ballad, major key
+```
+
+**Letra**
+
+```text
+[Verse]
+Aaah! Aaah!
+(Micmor! Istal! Neshcen!)
+Aaah...
+(Huemag ishoc!)
+
+[Chorus]
+Aaah! Aaah!
+(Micmor! Micmor!)
+Aaah...
+(Huemag ishoc!)
+
+[Outro]
+[End]
+```
+
+**Sentido:** ¡Muerte, sal, ceniza! ¡El ojo inmenso!
+
+**Uso**
+
+- 8 tomas. Mismo tempo y tonalidad que P07: FMOD entra en la siguiente barra cuando la Salinidad llega a 150.
+- **Bucle:** Verse, 16 compases (30 s); el Chorus es la segunda vuelta. Dura los dos turnos del Éxtasis (GDD 7.4) y regresa a P07 en barra.
+- La Desafinación va **siempre activa** aquí. Prepara además una copia invertida del stem V (Salmódico al revés) y súmala unos 12 dB abajo.
+- Si Suno sale demasiado caótico para sostener un bucle, baja Weirdness a 45.
+
+#### P21 · `mus_transformacion_destilada` · Transformación a Destilada (grado B)
+
+**Título:** Refinar es Transformarse
+**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+
+**Estilo**
+
+```text
+Magical transformation sequence, alchemical refinement: wonder and rising elegance. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Psaltery and guitar arpeggios rise step by step, low cello swells, bells sparkle; the voice sings a rising vocalise and the choir joins on the last chord. D minor turning into F major, 120 BPM, 4/4. Form: four rising bars and one bright held chord.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, drums, long song, many verses
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: rising psaltery arpeggios]
+
+[Verse]
+Aaah... aaah... aaah...
+(Lucetl!)
+
+[Outro]
+[Instrumental: bright held chord, bells]
+[End]
+```
+
+**Sentido:** ¡Luz!
+
+**Uso**
+
+- 6 tomas. Corta los cuatro compases que suben (8 s) más la cola: de 9 a 10 s, lo que dura la transformación (GDD 12.5). Al terminar suena la firma de la bruja.
+- Se comparte en redes: tiene que sonar bien sola, sin contexto.
+
+#### P22 · `mus_transformacion_quintaesencia` · Transformación a Quintaesencia (grado S)
+
+**Título:** Estlali Lucetl
+**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+
+**Estilo**
+
+```text
+Ultimate magical transformation: celestial, radiant, almost overwhelming beauty. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Bells cascade like falling stars, psaltery tremolo, choir in high harmony, the voice soaring, frame drums swell, cello and guitar on a huge bright chord. D major with a Lydian raised fourth, 120 BPM, 4/4. Form: four rising bars and one luminous held chord.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, long song, many verses, minor key ending
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: falling-star bells]
+
+[Verse]
+Aaah... estlali!
+(Estlali, lucetl!)
+
+[Outro]
+[Instrumental: luminous held chord]
+[End]
+```
+
+**Sentido:** ¡Estrella! ¡Estrella, luz!
+
+**Uso**
+
+- Igual que P21. Esta es la de máxima presencia: si una toma suena modesta, descártala.
+
+### 6.9 El Fresno: zonas y jefes de lanzamiento
+
+#### P23 · `mus_fresno_tronco` · Tronco de Ceniza
+
+**Título:** Remel
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Dungeon theme inside the ashen trunk of a world tree: trapped memories, warm sap, dust, nostalgia that hurts. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Music-box-like psaltery melody, guitar waltz accompaniment, woody knocks on the cello body, soft frame drum, the voice faint and wordless like a memory. E Aeolian, 80 BPM, 3/4. Form: intro, 48-bar waltz theme, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, heavy drums, toy piano
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: music-box psaltery]
+
+[Verse]
+Ooh... remel...
+Ooh... remel... olvai...
+Ooh... remel...
+Mmm...
+
+[Instrumental: waltz continues]
+
+[Outro]
+[End]
+```
+
+**Sentido:** Recuerdo... recuerdo, olvido...
+
+**Uso**
+
+- 6 a 8 tomas. **Bucle:** 48 compases (108 s). Stems B, P y V; P con `Tension`. Tonalidad de zona: Mi.
+
+#### P24 · `mus_fresno_ramas` · Ramas del Eclipse
+
+**Título:** Vértigo de Ramas
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Dungeon theme in the high branches of a world tree during an eclipse: wind, birds, vertigo, eerie light. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Fluttering flute trills like birds, fast guitar tremolo, psaltery gusts of wind, low cello pulses, galloping frame drum, the voice floating wordless above. G Dorian, 64 BPM in 6/8 (dotted quarter), swaying. Form: intro, 48-bar theme, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, bird sound effects, slow ballad
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: flute trills and guitar tremolo]
+
+[Verse]
+Aaah...
+Ooh... aaah...
+Aaah...
+Ooh...
+
+[Instrumental: wind gusts on psaltery]
+
+[Outro]
+[End]
+```
+
+**Uso**
+
+- 6 a 8 tomas. **Bucle:** 48 compases (90 s). Stems B, P y V. Tonalidad de zona: Sol.
+
+#### P25 · `mus_fresno_copa` · Copa Astral
+
+**Título:** Hojas que Son Almas
+**Ajustes:** Instrumental no · Weirdness 35 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Dungeon theme in the astral crown of a world tree where leaves are souls: vast, luminous, serene and deeply wrong. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Slow constellations of bells, sustained bowls, psaltery shimmer, guitar harmonics, distant low cello. The voice sings very slowly, almost a prayer, with a second voice in close harmony. A Lydian, 60 BPM, 4/4. Form: intro, 24-bar theme, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, full choir, heavy drums, new age
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: constellations of bells]
+
+[Verse]
+Yolmime... estlali...
+Ilcel... cosetl...
+Yolmime... estlali...
+Ooh...
+
+[Outro]
+[End]
+```
+
+**Sentido:** Las almitas... estrellas... cielo... cosecha. Es la primera vez que suena *cosetl*: anuncia el final Cosecha.
+
+**Uso**
+
+- 6 a 8 tomas. **Bucle:** 24 compases (96 s). Stems B, P y V (las dos voces van juntas en V). Tonalidad de zona: La.
+
+#### P26 · `mus_jefe_lenador_hueco` · El Leñador Hueco
+
+**Título:** Uarbe Neshcen
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+
+**Estilo**
+
+```text
+Boss battle with a hollow woodcutter giant: relentless, mechanical, grim. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Chopping rhythms: woodblocks, log drums, low cello col legno and hard spiccato, muted guitar strums, lute ostinato, anvil-like hits on beats two and four. The choir chants low; the voice cries above in phase two. E minor, 128 BPM, 4/4. Form: intro, 32-bar phase one, 4-bar transition, 32-bar phase two, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, slow tempo, ballad, bright major
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: woodblocks and log drums]
+
+[Verse]
+(Uarbe! Neshcen! Uarbe!)
+(Uarbe! Neshcen! Uarbe!)
+(Uarbe! Neshcen! Uarbe!)
+(Uarbe! Neshcen!)
+
+[Pre-Chorus]
+[Instrumental: axe-like hits]
+
+[Chorus]
+Aaah... remel!
+(Uarbe, uarbe, neshcen!)
+Aaah... na olvai!
+(Uarbe, uarbe, neshcen!)
+
+[Outro]
+[End]
+```
+
+**Sentido:** ¡Árbol! ¡Ceniza! / ¡Recuerda! ¡No olvides!
+
+**Uso**
+
+- 8 tomas. Fases y capas como en P10.
+
+#### P27 · `mus_jefe_corneja_eclipse` · La Corneja del Eclipse
+
+**Título:** Solatiu Na
+**Ajustes:** Instrumental no · Weirdness 35 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+
+**Estilo**
+
+```text
+Boss battle with a giant crow that swallows the sun: frantic, airborne, ominous. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Shrieking flute trills, fast psaltery and guitar tremolo, frame drums beating like wings, low gong-like bells for the eclipse, the choir in dark held chords, the voice in sharp cries. G minor, 144 BPM, 4/4. Form: intro, 32-bar phase one, 4-bar transition, 32-bar phase two, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, slow tempo, ballad, bird sound effects
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: wing-beat drums]
+
+[Verse]
+(Solatiu! Micmor!)
+Aaah!
+(Solatiu! Micmor!)
+Aaah!
+
+[Pre-Chorus]
+[Instrumental: gong-like bells, the sun goes dark]
+
+[Chorus]
+Solatiu, na! Solatiu, na!
+(Ilcel neshcen!)
+Solatiu, na! Cuetor!
+(Ilcel neshcen!)
+
+[Outro]
+[End]
+```
+
+**Sentido:** ¡Sol, muerte! / ¡Sol, no! ¡Cielo de ceniza! ¡Vuelve!
+
+**Uso**
+
+- 8 tomas. Fases y capas como en P10. La transición coincide con el momento en que la Corneja se traga el sol: sincroniza la animación con los compases.
+
+#### P28 · `mus_jefe_jardinera` · La Jardinera
+
+**Título:** Cosetl
+**Ajustes:** Instrumental no · Weirdness 35 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3:30)
+
+**Estilo**
+
+```text
+Final boss of a world tree: a celestial gardener who prunes souls. Elegant macabre waltz, serene and merciless. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Fast waltz on guitar and lute, low cello pulses, psaltery snipping like scissors, bells in constellations, full choir in sublime chords, the voice calm and terrible. Harmony shifts between A minor and A Lydian. 150 BPM, 3/4. Form: intro, 48-bar phase one, 4-bar transition, 48-bar phase two with full choir, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, slow tempo, ballad, circus
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: waltz and constellation bells]
+
+[Verse]
+Yolmime cosetl, estlali huemag
+Cochum, cochum, na olvai
+Yolmime cosetl, ilcel blaztac
+Cochum, cochum, na olvai
+
+[Pre-Chorus]
+[Instrumental: scissors-like psaltery]
+
+[Chorus]
+(Cosetl! Cosetl!)
+Yolmime, cuetor ilcel!
+(Cosetl! Cosetl!)
+Huemag ishoc, cuetor!
+
+[Outro]
+[End]
+```
+
+**Sentido:** Las almitas son cosecha, estrella inmensa. Duerman, no olviden. Cielo en blanco. / ¡Cosecha! Almitas, vuelvan al cielo. El ojo inmenso: vuelve.
+
+**Uso**
+
+- 10 tomas: es la jefa más importante del Fresno. Fase 1: Verse, 48 compases (58 s). Transición: 4. Fase 2: Chorus, 48 compases.
+- **Tema base de temporada.** La Jardinera cambia cada seis semanas (GDD 10.1); su música no. Cada temporada se hace un *Cover* que conserva la melodía y cambia el metal y el modo al del planeta del Tránsito (sección 3.4): el jugador la reconoce aunque cambie de rostro.
+
 <!-- CONTINUA -->
