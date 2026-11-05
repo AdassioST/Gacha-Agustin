@@ -1,0 +1,94 @@
+// Reglas numéricas del combate. Cada valor sobrescribe el de SalYAlmas.Core.Data.CombatRules.
+// Los que dicen "GDD" son canon: una prueba falla si alguien los cambia aquí. Los // TUNING son propuestas.
+{
+  "turnOrder": {
+    "avBase": 10000,          // GDD 9.2
+    "firstCycleAv": 150,      // GDD 9.2
+    "cycleAv": 100            // GDD 9.2
+  },
+  "grains": {
+    "max": 5, "start": 3,     // GDD 9.3
+    "basicGain": 1, "spellCost": 1
+  },
+  "salinity": {
+    "max": 150,               // GDD 7.4
+    "spell": 10, "selfCast": 25, "blackSalt": 40, "vislumbre": 30,
+    "basic": -5, "turnWithoutMagic": -10,
+    "chainLink": 5,           // GDD 9.5
+    "salobreAt": 40, "sobresaladaAt": 70, "cristalizacionAt": 100, "extasisAt": 150,
+    "salobreCritRate": 0.10,
+    "sobresaladaDamage": 0.20, "sobresaladaDefenseDown": 0.15,
+    "cristalizacionAscendantDamage": 0.40, "cristalizacionHpLoss": 0.05,
+    "extasisTurns": 2, "extasisDamageMultiplier": 2.0, "extasisResetTo": 60, "desaladaTurns": 1,
+    "cristalizacionIsLethal": false, // TUNING
+    "ascension": 0                   // TUNING: el GDD no dice cuánta Salinidad suma una Ascensión
+  },
+  "purity": {
+    "d": 0.70, "c": 0.78, "b": 0.85, "a": 0.92, "s": 0.97, "ss": 0.999, // GDD 12.3
+    "dominantSlope": 0.8, "pivot": 0.7,                                // GDD 7.2
+    "gradeStatMultiplier": [1.00, 1.05, 1.10, 1.16, 1.22, 1.28]        // TUNING: D, C, B, A, S, SS (lo usa el Vislumbre)
+  },
+  "anima": {
+    "max": 300, "basic": 20, "spell": 30, "spark": 2,  // GDD 9.3, 9.6, 9.7
+    "level1Cost": 100, "level2Cost": 200, "level3Cost": 300,
+    "chainLink": 10,  // TUNING
+    "hitTaken": 8,    // TUNING
+    "ecstasy": 30     // TUNING
+  },
+  "resonance": {
+    "max": 100, "basic": 4, "spell": 8, "break": 15, "spark": 10, // GDD 9.5
+    "sparkCapPerChain": 20,                                      // GDD 9.6
+    "chainCost": 100,
+    "ecstasy": 8      // TUNING
+  },
+  "chain": {
+    "minWitches": 3, "maxWitches": 4, "linkSpacingFrames": 24,   // GDD 9.5
+    "sparkWindowFrames": 2, "sparkDamageBonus": 0.5, "sparkAlmitas": 1, // GDD 9.6
+    "maxLinkFrames": 108, "maxChainFrames": 360,                 // GDD 9.5: 1.8 s y 6 s a 60 fps
+    "ascensionOverlayOffsetFrames": 0                            // TUNING
+  },
+  "aspects": {
+    "conjunctionDamage": 0.25, "oppositionSalinity": 20, "sextileAdvance": 0.15, // GDD 7.3
+    "trineGrains": 1, "trineHeal": 0.05, "squareToughness": 0.40, "squareSalinity": 10
+  },
+  "reactions": {
+    "eclipseDispel": 2, "eclipseDelay": 0.30,                 // GDD 7.3
+    "heladaBossSpeedDown": 0.50, "heladaBossTurns": 1,
+    "espinasHealShare": 0.30, "tempestadExtraHits": 2,
+    "espinasBleedCoef": 0.6, "espinasTurns": 2,               // TUNING
+    "tempestadHitFrames": [10, 24], "tempestadCoef": 0.5, "tempestadToughness": 10 // TUNING
+  },
+  "break": {
+    "delay": 0.25, "vulnerability": 0.10,                     // GDD 9.4
+    "dotTurns": 2,                                            // TUNING
+    "solBurnCoef": 0.5,                                       // TUNING
+    "lunaExtraDelay": 0.20, "lunaSpeedDown": 0.10,            // TUNING (el −10 % de Velocidad es GDD)
+    "marteBleedCoef": 0.8,                                    // TUNING
+    "mercurioPoisonCoef": 0.4, "mercurioExtraDelay": 0.15,    // TUNING
+    "venusCharmDamageDown": 0.40,                             // TUNING
+    "jupiterShockCoef": 0.4, "jupiterJumpShare": 0.5,         // TUNING
+    "saturnoExtraDelay": 0.35,                                // TUNING
+    "cancelsCharge": true                                     // TUNING
+  },
+  "selfCast": {
+    "agujaAtk": 0.30, "agujaTurns": 2, "agujaGrains": 2,      // GDD 8.2
+    "hilosHpCost": 0.10,
+    "frenesiDamage": 1.0, "frenesiDefenseDown": 0.5, "frenesiTurns": 1,
+    "frenesiBlackSalt": 1                                     // TUNING
+  },
+  "vislumbre": {
+    "turns": 2, "blackSaltCost": 1,                           // GDD 8.2
+    "chainMoveBonus": 0.15,                                   // TUNING
+    "apoteosisDamage": 0.10                                   // TUNING
+  },
+  "combat": {
+    "baseCritRate": 0.05, "baseCritDamage": 0.50,             // TUNING
+    "enemyCritRate": 0.0,                                     // TUNING
+    "startingBlackSalt": 2,                                   // TUNING
+    "maxTurns": 400,                                          // TUNING
+    "planetaryDayDamage": 0.15                                // GDD 7.7
+  },
+  "potions": {
+    "beltSlots": 3, "perTurn": 1, "maxPerType": 5             // GDD 14
+  }
+}

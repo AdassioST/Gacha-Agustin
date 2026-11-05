@@ -1,0 +1,17 @@
+// Encuentros de la prueba con jugadores.
+{
+  "encounters": [
+    {
+      "id": "raices",
+      "name": "Raíces Putrefactas: la entrada",
+      "description": "Tres enemigos normales para aprender turnos, Granos y la primera Cadena.",
+      "enemies": ["cristalizado", "larva", "corneja"]
+    },
+    {
+      "id": "guardian",
+      "name": "El Guardián Corrupto del Fresno",
+      "description": "Jefe de la prueba. Carga un ataque definitivo: quiébralo o fíngele la muerte antes de que descargue.",
+      "enemies": ["guardian"]
+    }
+  ]
+}

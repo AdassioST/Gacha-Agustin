@@ -1,0 +1,100 @@
+// Tres enemigos normales de las Raíces Putrefactas y el jefe de la prueba, el Guardián Corrupto del Fresno.
+// La IA es por patrones: cada enemigo usa sus habilidades en el orden de "pattern" y lo repite.
+// "charge": true pasa un turno cargando (telegrafiado) y suelta el golpe en el siguiente; quebrarlo lo cancela.
+// "ultimate": true es un ataque definitivo: lo cancela la Muerte Fingida de la Zarigüeya.
+// Todos los números de este archivo son propuestas: // TUNING.
+{
+  "enemies": [
+    {
+      "id": "cristalizado",
+      "name": "Cristalizado Errante",
+      "shortName": "Cristalizado",
+      "article": "el",
+      "description": "Una persona a medio convertir en sal. Todavía susurra.",
+      "level": 50, "hp": 21000, "atk": 1100, "spd": 92, "toughness": 60, // TUNING
+      "weaknesses": ["sol", "jupiter", "marte"],
+      "res": { "saturno": 0.1 }, // TUNING
+      "attackPlanet": "saturno",
+      "skills": [
+        { "id": "abrazo_sal", "name": "Abrazo de Sal", "target": "random", "multiplier": 1.4, "hits": [12], // TUNING
+          "effects": [ { "type": "salinity", "value": 10 } ],
+          "description": "Abraza y le pega sal: +10 de Salinidad." },
+        { "id": "susurro", "name": "Susurro Cristalino", "target": "all", "multiplier": 0.6, "hits": [16] } // TUNING
+      ],
+      "pattern": ["abrazo_sal", "abrazo_sal", "susurro"]
+    },
+    {
+      "id": "larva",
+      "name": "Larva de Raíz",
+      "shortName": "Larva",
+      "article": "la",
+      "description": "Se alimenta de las almas que no llegaron al Fresno.",
+      "level": 50, "hp": 15000, "atk": 1000, "spd": 108, "toughness": 45, // TUNING
+      "weaknesses": ["sol", "mercurio"],
+      "attackPlanet": "mercurio",
+      "skills": [
+        { "id": "mordida_podrida", "name": "Mordida Podrida", "target": "lowestHp", "multiplier": 1.2, "hits": [8, 18], // TUNING
+          "effects": [ { "type": "dot", "dot": "poison", "value": 0.3, "turns": 2, "name": "Podredumbre" } ] },
+        { "id": "chillido", "name": "Chillido de Raíz", "target": "all", "multiplier": 0.5, "hits": [10] } // TUNING
+      ],
+      "pattern": ["mordida_podrida", "mordida_podrida", "chillido"]
+    },
+    {
+      "id": "corneja",
+      "name": "Corneja de Ceniza",
+      "shortName": "Corneja",
+      "article": "la",
+      "description": "Anida en las raíces y grazna cuando hay eclipse.",
+      "level": 50, "hp": 13000, "atk": 1200, "spd": 122, "toughness": 45, // TUNING
+      "weaknesses": ["luna", "jupiter", "saturno"],
+      "attackPlanet": "marte",
+      "skills": [
+        { "id": "picotazo", "name": "Picotazo", "target": "random", "multiplier": 1.3, "hits": [[6, 0.4], [14, 0.6]] }, // TUNING
+        { "id": "graznido", "name": "Graznido de Eclipse", "target": "self",
+          "effects": [ { "type": "buff", "stat": "damage", "value": 0.25, "turns": 2, "target": "self", "name": "Graznido de Eclipse" } ], // TUNING
+          "description": "Se envalentona: +25 % de daño." }
+      ],
+      "pattern": ["picotazo", "graznido", "picotazo"]
+    },
+    {
+      "id": "guardian",
+      "name": "Guardián Corrupto del Fresno",
+      "shortName": "Guardián",
+      "article": "el",
+      "description": "Custodiaba la entrada de las Raíces. La savia negra lo volvió contra todo lo que tiene sal.",
+      "boss": true,
+      "actionsPerTurn": 2, // TUNING: un jefe solo contra cuatro brujas actúa dos veces por turno
+      "level": 52, "hp": 120000, "atk": 1500, "spd": 110, "toughness": 260, // TUNING
+      "weaknesses": ["sol", "marte", "jupiter"],
+      "res": { "saturno": 0.2, "luna": 0.1 }, // TUNING
+      "attackPlanet": "saturno",
+      "skills": [
+        { "id": "raiz_punzante", "name": "Raíz Punzante", "target": "highestSalinity", "multiplier": 1.7, "hits": [[8, 0.4], [20, 0.6]], // TUNING
+          "effects": [ { "type": "salinity", "value": 10 } ],
+          "description": "Huele la sal: ataca a la bruja más salada y le clava más (+10 de Salinidad)." },
+        { "id": "barrido_ramas", "name": "Barrido de Ramas", "target": "all", "multiplier": 0.85, "hits": [12] }, // TUNING
+        { "id": "corteza_sal", "name": "Corteza de Sal", "target": "self",
+          "effects": [
+            { "type": "buff", "stat": "res", "value": 0.25, "turns": 3, "target": "self", "name": "Corteza de Sal" },
+            { "type": "buff", "stat": "damage", "value": 0.20, "turns": 3, "target": "self", "name": "Savia Negra" }
+          ], // TUNING
+          "description": "Se cubre de corteza (+25 % de resistencia) y se llena de savia negra (+20 % de daño). Un Eclipse se las quita." },
+        { "id": "juicio_fresno", "name": "Juicio del Fresno", "target": "all", "multiplier": 2.3, "ultimate": true, "charge": true,
+          "hits": [[20, 0.3], [40, 0.3], [60, 0.4]], // TUNING
+          "chargeText": "Las raíces se tensan bajo el aquelarre. Quiébralo o fíngele una muerte antes de que descargue.",
+          "effects": [ { "type": "salinity", "value": 15 } ],
+          "description": "Ataque definitivo a todo el aquelarre (+15 de Salinidad)." },
+        { "id": "lluvia_almas", "name": "Lluvia de Almas Podridas", "target": "all", "multiplier": 1.0, "hits": [[10, 0.5], [30, 0.5]], // TUNING
+          "effects": [ { "type": "dot", "dot": "poison", "value": 0.2, "turns": 2, "name": "Almas Podridas" } ] },
+        { "id": "furia_savia", "name": "Furia de Savia", "target": "self",
+          "effects": [ { "type": "buff", "stat": "atk", "value": 0.25, "turns": 3, "target": "self", "name": "Furia de Savia" } ] } // TUNING
+      ],
+      "pattern": ["raiz_punzante", "barrido_ramas", "corteza_sal", "raiz_punzante", "juicio_fresno"],
+      "phase2": {
+        "hpBelow": 0.5, "spdBonus": 15, // TUNING
+        "text": "La corteza se abre en dos: el Guardián late con savia negra y se acelera.",
+        "pattern": ["lluvia_almas", "raiz_punzante", "furia_savia", "barrido_ramas", "juicio_fresno"]
+      }
+    }
+  ]
+}
