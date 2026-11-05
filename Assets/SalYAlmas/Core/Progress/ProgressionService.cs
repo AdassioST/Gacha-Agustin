@@ -49,6 +49,7 @@ namespace SalYAlmas.Core.Progress
             int to = Math.Min(Rules.Level.Max, w.Level + Math.Max(1, levels));
             var cost = new Bundle().Add(Res.Almitas, Rules.LevelCostRange(w.Level, to));
             if (!_g.Ledger.TrySpend(cost, "nivel", $"{id} {w.Level} → {to}")) return OpResult.Fail(_g.Ledger.Missing(cost));
+            _g.Report("nivel", to - w.Level);
             w.Level = to;
             return OpResult.Success($"Nivel {to}");
         }
@@ -166,6 +167,7 @@ namespace SalYAlmas.Core.Progress
             var cost = ChainTalentCost(id, role);
             if (!_g.Ledger.TrySpend(cost, "talentos", $"{id} {role}")) return OpResult.Fail(_g.Ledger.Missing(cost));
             w.ChainTalents[i]++;
+            _g.Report("talento");
             return OpResult.Success($"{role} {w.ChainTalents[i]}");
         }
 

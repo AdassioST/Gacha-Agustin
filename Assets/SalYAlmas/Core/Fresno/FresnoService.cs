@@ -93,6 +93,7 @@ namespace SalYAlmas.Core.Fresno
                 if (R.Ofrenda.Unlocks.TryGetValue(lvl, out var text)) notes.Add(text);
             }
             F.OfrendaLevelPaid = Math.Max(F.OfrendaLevelPaid, after);
+            _g.Report("ofrenda", almitas);
             return OpResult.Success($"El Fresno crece: nivel {after}" + (notes.Count > 0 ? ". " + string.Join(" ", notes) : ""));
         }
 
@@ -517,6 +518,7 @@ namespace SalYAlmas.Core.Fresno
             if (Run == null || Run.Phase != RunPhase.Battle) return OpResult.Fail("No hay combate pendiente.");
             if (!battle.IsOver) return OpResult.Fail("El combate no ha terminado.");
             bool victory = battle.Outcome == BattleOutcome.Victory;
+            if (victory) { _g.Quests.ReportBattle(battle); _g.Report("fresno_nodo"); }
             foreach (var w in battle.Witches)
             {
                 double frac = w.MaxHp > 0 ? w.Hp / (double)w.MaxHp : 0;
@@ -570,6 +572,7 @@ namespace SalYAlmas.Core.Fresno
 
         private void ZoneCleared()
         {
+            _g.Report("fresno_zona");
             var zone = Zone;
             double pct = RunModifiers().Get(ModKeys.SaviaPct);
             long savia = (long)Math.Round(zone.Savia * (1.0 + pct));
@@ -1003,6 +1006,7 @@ namespace SalYAlmas.Core.Fresno
         private void EndRun(RunOutcome outcome)
         {
             Run.Outcome = outcome;
+            if (outcome == RunOutcome.Victory) _g.Report("fresno_run");
             _g.Analytics.Track(World.AnalyticsEvents.FresnoRunEnd, outcome + ":" + Run.NodeId);
             if (Run.Mancha != null && !Run.ManchaResolved)
             {

@@ -264,6 +264,7 @@ namespace SalYAlmas.Core.World
             var region = CurrentRegion;
             var mission = CurrentMission;
             Apply(mission.Rewards);
+            if (!C.MissionsDone.Contains(mission.Id) && !C.Reread) _g.Report(region.Prologue ? "prologo" : "mision");
             if (!C.MissionsDone.Contains(mission.Id)) C.MissionsDone.Add(mission.Id);
             bool reread = C.Reread;
             C.Mission = "";
@@ -276,6 +277,8 @@ namespace SalYAlmas.Core.World
             {
                 C.RegionsDone.Add(region.Id);
                 _g.Analytics.Track(AnalyticsEvents.StoryRegionDone, region.Id);
+                if (!region.Prologue) _g.Report("region");
+                if (region.Id == StartRegion) _g.Report("region_signo");
                 if (!region.Prologue)
                 {
                     int done = 0;
@@ -311,6 +314,7 @@ namespace SalYAlmas.Core.World
         private void Eclipse()
         {
             C.Eclipses++;
+            _g.Report("eclipse");
             foreach (var region in R.Ring)
             {
                 if (C.RegionsVisited.Contains(region)) continue;
@@ -371,6 +375,7 @@ namespace SalYAlmas.Core.World
             if (!b.IsOver) return OpResult.Fail("El combate no ha terminado.");
             if (b.Outcome != Events.BattleOutcome.Victory) return OpResult.Fail("Caíste. Puedes reintentar sin costo.");
             AddSenderoXp(R.SenderoXpPerWin);
+            _g.Quests.ReportBattle(b);
             if (OdysseyBattle(battle) && ResolveOdysseySection(battle, b))
                 return OpResult.Success($"Sección {C.Section} de {SectionCount}");
             foreach (var w in b.Witches) C.Souls += w.IsAlive ? 1 : 0;

@@ -47,6 +47,7 @@ namespace SalYAlmas.Core.Meta
         public World.StoreService Store { get; }
         public World.LocalGachaService GachaService { get; }
         public World.TermasBase Base { get; }
+        public World.QuestService Quests { get; }
         public World.IAnalytics Analytics { get; set; } = new World.LocalAnalytics();
 
         public MetaGame(MetaDatabase meta, PlayerProfile profile)
@@ -66,7 +67,11 @@ namespace SalYAlmas.Core.Meta
             Store = new World.StoreService(this);
             GachaService = new World.LocalGachaService(this);
             Base = new World.TermasBase(this);
+            Quests = new World.QuestService(this);
         }
+
+        /// <summary>Reporta un evento a los encargos, logros y Altura.</summary>
+        public void Report(string evt, long amount = 1) => Quests?.Report(evt, amount);
 
         public void SetDay(int day)
         {

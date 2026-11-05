@@ -137,10 +137,12 @@ namespace SalYAlmas.Tests
             var g = Ready();
             string[] team = StoryPlayer.Team(g);
             long sales = g.Ledger.Balance(Res.SalesDeBano);
+            int alturaBefore = System.Math.Min(5, g.Quests.Altura);
             StoryPlayer.Region(g, "aries", team);
             Assert.That(g.Profile.Calculista.ZonesDone, Is.SupersetOf(new[] { "aries_orilla", "aries_subsuelo", "aries_corazon" }));
-            // 400 de las misiones (80 + 80 + 80 + 160) más 100 por cada una de las tres zonas.
-            Assert.AreEqual(sales + 400 + 300, g.Ledger.Balance(Res.SalesDeBano));
+            // 400 de las misiones (80 + 80 + 80 + 160), 100 por cada una de las tres zonas y 80 por nivel de Altura hasta el 5.
+            int altura = (System.Math.Min(5, g.Quests.Altura) - alturaBefore) * 80;
+            Assert.AreEqual(sales + 400 + 300 + altura, g.Ledger.Balance(Res.SalesDeBano));
             Assert.IsTrue(g.Profile.Stations.Contains("fragua_hierro_rojo"), "Aries abre la Fragua de Hierro Rojo");
             Assert.Greater(g.Ledger.Balance(Res.Mat("hierro_rojo")), 0, "las secciones dan el material de la región");
         }

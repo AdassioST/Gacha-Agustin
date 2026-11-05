@@ -1,0 +1,82 @@
+// Encargos, logros y Altura (propuesta de meta-juego, secciones 4, 5 y 8; sin aprobar). Todo número es // TUNING.
+// Reglas que el cargador vigila: ningún encargo ni logro pide tirar, pagar ni entrar varios días seguidos (META 5.3 y 8.1).
+// Eventos que reportan los sistemas: victoria, cadena, spark, ascension, quiebre, seccion, jefe, mision, zona, region,
+// region_signo, expedicion, ex, eclipse, fresno_nodo, fresno_zona, fresno_run, juicio_intento, juicio, grado, nivel,
+// talento, conversar, tocar, bano, salmuera, refinar, forja, ofrenda, prologo, diarios_completos.
+{
+  "daily": {
+    // META 5.1: cuatro al día con 15 Sales cada uno; bono de 10 000 almitas por los cuatro (60 Sales al día).
+    "reward": { "sales_de_bano": 15, "almitas": 5000 },
+    "bonus": { "almitas": 10000, "sal_cruda.sol": 2, "sal_cruda.luna": 2 },
+    "growth": 100, "bonusGrowth": 100, "pass": 100,
+    // Un ancla (un combate), una hazaña que se cumple en ese combate, uno de Termas y uno de taller o progreso.
+    "pool": [
+      { "id": "d_victoria", "name": "Gana un combate cualquiera", "slot": "ancla", "event": "victoria", "need": 1 },
+      { "id": "d_secciones", "name": "Gana 3 secciones de la Odisea", "slot": "ancla", "event": "seccion", "need": 3 },
+      { "id": "d_fresno", "name": "Gana un nodo del Fresno", "slot": "ancla", "event": "fresno_nodo", "need": 1 },
+      { "id": "d_cadena", "name": "Abre una Cadena", "slot": "hazana", "event": "cadena", "need": 1 },
+      { "id": "d_spark", "name": "Logra 2 Spark", "slot": "hazana", "event": "spark", "need": 2 },
+      { "id": "d_ascension", "name": "Lanza una Ascensión", "slot": "hazana", "event": "ascension", "need": 1 },
+      { "id": "d_quiebre", "name": "Provoca 2 Quiebres", "slot": "hazana", "event": "quiebre", "need": 2 },
+      { "id": "d_conversar", "name": "Conversa con una bruja en las Termas", "slot": "termas", "event": "conversar", "need": 1 },
+      { "id": "d_tocar", "name": "Acaricia o reposa con una bruja", "slot": "termas", "event": "tocar", "need": 1 },
+      { "id": "d_bano", "name": "Báñate en las Termas (se vale meter solo los pies)", "slot": "termas", "event": "bano", "need": 1 },
+      { "id": "d_salmuera", "name": "Prepara una Salmuera", "slot": "taller", "event": "salmuera", "need": 1 },
+      { "id": "d_refinar", "name": "Refina sal en el Altar del Árbol", "slot": "taller", "event": "refinar", "need": 1 },
+      { "id": "d_forja", "name": "Fabrica o reforja un arma", "slot": "taller", "event": "forja", "need": 1 },
+      { "id": "d_nivel", "name": "Sube de nivel a una bruja", "slot": "taller", "event": "nivel", "need": 1 }
+    ]
+  },
+  "weekly": {
+    // META 5.4: sin Sales de Baño, para no mover las tiradas gratis de la 16.3.
+    "reward": { "almitas": 15000, "sal_destilada.sol": 2, "sal_destilada.saturno": 2, "mat.flor_de_sal": 3 },
+    "growth": 300, "pass": 1000, "random": 2,
+    "pool": [
+      { "id": "w_diarios", "name": "Termina tus encargos diarios 5 días", "slot": "fijo", "event": "diarios_completos", "need": 5 },
+      { "id": "w_secciones", "name": "Gana 30 secciones de la Odisea", "slot": "fijo", "event": "seccion", "need": 30 },
+      { "id": "w_spark", "name": "Logra 20 Spark", "slot": "azar", "event": "spark", "need": 20 },
+      { "id": "w_jefes", "name": "Vence a 3 jefes", "slot": "azar", "event": "jefe", "need": 3 },
+      { "id": "w_expediciones", "name": "Termina 3 Expediciones", "slot": "azar", "event": "expedicion", "need": 3 },
+      { "id": "w_salmueras", "name": "Prepara 5 Salmueras", "slot": "azar", "event": "salmuera", "need": 5 },
+      { "id": "w_fresno", "name": "Gana 10 nodos del Fresno", "slot": "azar", "event": "fresno_nodo", "need": 10 },
+      { "id": "w_ofrenda", "name": "Ofrenda 100 000 almitas al Fresno", "slot": "azar", "event": "ofrenda", "need": 100000 }
+    ]
+  },
+  // META 8.2, adaptados a lo que ya existe. Ninguno pide brujas del gacha.
+  "achievements": [
+    { "id": "a_cadena", "name": "El orden es poder", "description": "Abre tu primera Cadena.", "event": "cadena", "need": 1, "rewards": { "sales_de_bano": 80 }, "growth": 100 },
+    { "id": "a_spark", "name": "Nota dorada", "description": "Logra tu primer Spark.", "event": "spark", "need": 1, "rewards": { "sales_de_bano": 80 }, "growth": 100 },
+    { "id": "a_quiebre", "name": "Grieta en la Firmeza", "description": "Provoca tu primer Quiebre.", "event": "quiebre", "need": 1, "rewards": { "sales_de_bano": 80 }, "growth": 100 },
+    { "id": "a_ascension", "name": "Canto mayor", "description": "Lanza tu primera Ascensión.", "event": "ascension", "need": 1, "rewards": { "sales_de_bano": 80 }, "growth": 100 },
+    { "id": "a_salmuera", "name": "Primera Salmuera", "description": "Prepara una Salmuera en el Caldero.", "event": "salmuera", "need": 1, "rewards": { "sales_de_bano": 40, "mat.leche_lunar": 2 }, "growth": 50 },
+    { "id": "a_refinar", "name": "Sal que se aclara", "description": "Refina sal en el Altar del Árbol.", "event": "refinar", "need": 1, "rewards": { "sales_de_bano": 40 }, "growth": 50 },
+    { "id": "a_forja", "name": "Primer filo", "description": "Fabrica tu primera arma.", "event": "forja", "need": 1, "rewards": { "sales_de_bano": 40, "mat.hierro_rojo": 3 }, "growth": 50 },
+    { "id": "a_seccion_10", "name": "Paso a paso", "description": "Gana 10 secciones de la Odisea.", "event": "seccion", "need": 10, "rewards": { "sales_de_bano": 40 }, "growth": 100 },
+    { "id": "a_seccion_100", "name": "Cien pasos", "description": "Gana 100 secciones de la Odisea.", "event": "seccion", "need": 100, "rewards": { "sales_de_bano": 80 }, "growth": 200 },
+    { "id": "a_jefe", "name": "La Casa cae", "description": "Vence a tu primer jefe de región.", "event": "jefe", "need": 1, "rewards": { "sales_de_bano": 80 }, "growth": 100 },
+    { "id": "a_jefe_10", "name": "Cazadora de Casas", "description": "Vence a 10 jefes.", "event": "jefe", "need": 10, "rewards": { "sales_de_bano": 80, "quintaesencia.sol": 1 }, "growth": 200 },
+    { "id": "a_zona", "name": "Una zona entera", "description": "Termina la historia de una zona.", "event": "zona", "need": 1, "rewards": { "sales_de_bano": 40 }, "growth": 50 },
+    { "id": "a_zona_12", "name": "Cartógrafa", "description": "Termina 12 zonas.", "event": "zona", "need": 12, "rewards": { "sales_de_bano": 160 }, "growth": 200 },
+    { "id": "a_signo", "name": "Salada de nacimiento", "description": "Termina la región de tu propio signo.", "event": "region_signo", "need": 1, "rewards": { "sales_de_bano": 80 }, "growth": 200 },
+    { "id": "a_cuatro_puertas", "name": "Las cuatro puertas", "description": "Termina las cuatro regiones cardinales.", "event": "region", "need": 4, "rewards": { "sales_de_bano": 160, "sal_negra": 3 }, "growth": 400 },
+    { "id": "a_ex", "name": "El cielo de arriba", "description": "Vence al jefe de una zona EX.", "event": "ex", "need": 1, "rewards": { "sales_de_bano": 80 }, "growth": 200 },
+    { "id": "a_expedicion_10", "name": "La Tortuga vuelve", "description": "Termina 10 Expediciones.", "event": "expedicion", "need": 10, "rewards": { "sales_de_bano": 80 }, "growth": 200 },
+    { "id": "a_eclipse", "name": "Mirar el eclipse", "description": "Vive tu primer eclipse.", "event": "eclipse", "need": 1, "rewards": { "sales_de_bano": 40 }, "growth": 100 },
+    { "id": "a_grieta", "name": "La Grieta", "description": "Llega a la Marea 2: el cielo se abre.", "event": "eclipse", "need": 2, "rewards": { "sales_de_bano": 80, "sal_negra": 2 }, "growth": 200 },
+    { "id": "a_fresno_zona", "name": "Raíz pisada", "description": "Supera una zona del Fresno.", "event": "fresno_zona", "need": 1, "rewards": { "sales_de_bano": 80 }, "growth": 100 },
+    { "id": "a_fresno_run", "name": "La poda", "description": "Termina una run completa del Fresno.", "event": "fresno_run", "need": 1, "rewards": { "sales_de_bano": 160 }, "growth": 300 },
+    { "id": "a_grado", "name": "Destilada", "description": "Sube a una bruja de grado.", "event": "grado", "need": 1, "rewards": { "sales_de_bano": 80 }, "growth": 200 },
+    { "id": "a_juicio", "name": "Frente a tu espíritu", "description": "Gana un Juicio de Pureza.", "event": "juicio", "need": 1, "rewards": { "sales_de_bano": 80 }, "growth": 200 },
+    { "id": "a_nivel_50", "name": "Cincuenta escalones", "description": "Sube 50 niveles de bruja en total.", "event": "nivel", "need": 50, "rewards": { "sales_de_bano": 40 }, "growth": 100 },
+    { "id": "a_conversar", "name": "Buena plática", "description": "Conversa 10 veces en las Termas.", "event": "conversar", "need": 10, "rewards": { "sales_de_bano": 40 }, "growth": 100 },
+    { "id": "a_bano", "name": "Agua que olvida", "description": "Báñate 3 veces en las Termas.", "event": "bano", "need": 3, "rewards": { "sales_de_bano": 40 }, "growth": 100 },
+    { "id": "a_ofrenda", "name": "Al pie del árbol", "description": "Ofrenda 100 000 almitas al Fresno.", "event": "ofrenda", "need": 100000, "rewards": { "sales_de_bano": 80 }, "growth": 200 }
+  ],
+  "altura": {
+    // META 4.2: [hasta el nivel, Crecimiento por nivel]. De la 2 a la 5, 80 Sales por nivel (parte del inicio).
+    "curve": [[10, 600], [20, 2400], [30, 5000], [40, 8000], [50, 14000], [60, 20000]],
+    "sales": 80, "salesUntil": 5
+  },
+  // META 4.1: Crecimiento automático por lo que juegas.
+  "growth": { "prologo": 1200, "mision": 400, "zona": 200, "region": 600, "fresno_zona": 200, "juicio": 500, "expedicion": 50 }
+}

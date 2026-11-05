@@ -499,12 +499,14 @@ namespace SalYAlmas.Core.World
                 S.TalkedDay[id] = _g.Profile.Day;
                 S.Trust[id] = TrustOf(id) + R.TalkTrust;
                 _g.Store.AddGrimorioXp(5);
+                _g.Report("conversar");
             }
             return OpResult.Success(line);
         }
 
         public string Touch(string id, int touches)
         {
+            if (touches == 1) _g.Report("tocar");
             var list = R.GenericTouch;
             return list.Count == 0 ? "" : list[Math.Abs(touches + id.Length) % list.Count];
         }
@@ -520,6 +522,7 @@ namespace SalYAlmas.Core.World
             if (!CanBathe) return OpResult.Fail("El agua ya te hizo olvidar hoy. Vuelve mañana.");
             S.LastBathDay = _g.Profile.Day;
             _g.Story.AddParalaje(R.BathParalaje);
+            _g.Report("bano");
             return OpResult.Success($"Paralaje {_g.Profile.Calculista.Paralaje}");
         }
     }

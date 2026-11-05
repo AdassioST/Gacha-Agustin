@@ -38,7 +38,7 @@ namespace SalYAlmas.Core.Meta
             r.Guard("gacha.json", () => LoadGacha(Json.Parse(src.Gacha, "gacha.json"), db, r));
             r.Guard("fresno.json", () => LoadFresno(Json.Parse(src.Fresno, "fresno.json"), db, r));
             if (r.Errors.Count > 0) throw new DataValidationException(r.Errors);
-            if (src.Story != null) db.World = World.WorldLoader.Load(src.Story, src.Services, src.Loc, db, src.Odyssey);
+            if (src.Story != null) db.World = World.WorldLoader.Load(src.Story, src.Services, src.Loc, db, src.Odyssey, src.Quests);
             return db;
         }
 

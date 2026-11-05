@@ -191,6 +191,26 @@ namespace SalYAlmas.Core.Save
         public int BossesWon;
     }
 
+    /// <summary>Lo que el jugador lleva de encargos y logros. Se guarda en el perfil.</summary>
+    public sealed class QuestsState
+    {
+        public int Day = -1;
+        public List<string> DailyIds = new List<string>();
+        public Dictionary<string, long> DailyProgress = new Dictionary<string, long>();
+        public List<string> DailyClaimed = new List<string>();
+        public bool BonusClaimed;
+        public int Week = -1;
+        public List<string> WeeklyIds = new List<string>();
+        public Dictionary<string, long> WeeklyProgress = new Dictionary<string, long>();
+        public List<string> WeeklyClaimed = new List<string>();
+        /// <summary>Contadores de por vida por evento, para los logros.</summary>
+        public Dictionary<string, long> Lifetime = new Dictionary<string, long>();
+        public List<string> AchievementsClaimed = new List<string>();
+        public long Growth;
+        /// <summary>Hasta qué nivel de Altura ya se pagaron las Sales del inicio.</summary>
+        public int AlturaPaid = 1;
+    }
+
     public sealed class TermasState
     {
         public string Favorite = "";
@@ -254,6 +274,7 @@ namespace SalYAlmas.Core.Save
         public CalculistaState Calculista = new CalculistaState();
         public TermasState TermasBase = new TermasState();
         public StoreState Store = new StoreState();
+        public QuestsState Quests = new QuestsState();
         public SettingsState Settings = new SettingsState();
 
         public int Version = CurrentVersion;

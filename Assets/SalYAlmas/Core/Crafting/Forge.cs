@@ -127,6 +127,7 @@ namespace SalYAlmas.Core.Crafting
             if (!_g.Ledger.TrySpend(check.Resources, flow, rec.Id)) return OpResult.Fail(_g.Ledger.Missing(check.Resources));
             foreach (var uid in check.WeaponUids) Profile.Weapons.RemoveAll(w => w.Uid == uid);
             created = Grant(rec.Output);
+            _g.Report("forja");
             return OpResult.Success(Meta.Weapon(rec.Output).Name);
         }
 
@@ -169,6 +170,7 @@ namespace SalYAlmas.Core.Crafting
             var cost = ReforgeCost(uid);
             if (!_g.Ledger.TrySpend(cost, "reforja", DisplayName(w))) return OpResult.Fail(_g.Ledger.Missing(cost));
             w.Prefix = RollPrefix(_g.Rng).Id;
+            _g.Report("forja");
             return OpResult.Success(DisplayName(w));
         }
 
@@ -220,6 +222,7 @@ namespace SalYAlmas.Core.Crafting
             string note = $"{count} × {Planets.SaltName(planet)} → {(toTier == 1 ? "Destilada" : "Quintaesencia")}";
             if (!_g.Ledger.TrySpend(cost, "altar.refinar", note)) return OpResult.Fail(_g.Ledger.Missing(cost));
             _g.Ledger.Apply(Res.Salt(planet, toTier), count, "altar.refinar", note);
+            _g.Report("refinar", count);
             return OpResult.Success(note);
         }
     }

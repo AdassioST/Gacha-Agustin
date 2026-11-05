@@ -27,11 +27,13 @@ namespace SalYAlmas.Core.Meta
         public string WitchesExt;
         /// <summary>Zonas, secciones, botín y enemigos de la Odisea (opcional).</summary>
         public string Odyssey;
+        /// <summary>Encargos, logros y Altura (opcional).</summary>
+        public string Quests;
 
         public static readonly string[] FileNames =
         {
             "economy.json", "roster.json", "progression.json", "weapons.json", "brewing.json", "gacha.json", "fresno.json", "fresno_enemies.json", "story.json", "services.json", "loc.json",
-            "witches_ext.json", "odyssey.json",
+            "witches_ext.json", "odyssey.json", "quests.json",
         };
 
         public static MetaDataSources FromDirectory(string directory)
@@ -53,6 +55,7 @@ namespace SalYAlmas.Core.Meta
                 Loc = Read("loc.json"),
                 WitchesExt = Optional("witches_ext.json"),
                 Odyssey = Optional("odyssey.json"),
+                Quests = Optional("quests.json"),
             };
         }
     }

@@ -56,22 +56,22 @@
     },
     {
       "id": "sal_cruda", "name": "Sal Cruda", "perPlanet": true, "sold": false,
-      "sources": ["salinas", "mazmorra", "historia", "fresno.nido", "gacha.sal", "eventos", "prueba"],
+      "sources": ["salinas", "mazmorra", "historia", "fresno.nido", "gacha.sal", "eventos", "misiones", "logros", "prueba"],
       "sinks": ["altar.refinar", "salmuera", "reforja", "forja"]
     },
     {
       "id": "sal_destilada", "name": "Sal Destilada", "perPlanet": true, "sold": false,
-      "sources": ["altar.refinar", "historia", "prueba"],
+      "sources": ["altar.refinar", "historia", "misiones", "logros", "prueba"],
       "sinks": ["destilacion", "forja", "salmuera", "altar.refinar"]
     },
     {
       "id": "quintaesencia", "name": "Quintaesencia", "perPlanet": true, "sold": false,
-      "sources": ["altar.refinar", "historia", "prueba"],
+      "sources": ["altar.refinar", "historia", "logros", "prueba"],
       "sinks": ["destilacion", "forja", "fusion", "salmuera"]
     },
     {
       "id": "sal_negra", "name": "Sal Negra", "sold": false,
-      "sources": ["fresno.elite", "fresno.nido", "fresno.evento", "luna_nueva", "historia", "prueba"],
+      "sources": ["fresno.elite", "fresno.nido", "fresno.evento", "luna_nueva", "historia", "logros", "prueba"],
       "sinks": ["vislumbre", "salmuera", "receta_maldita"]
     },
     {
@@ -96,7 +96,7 @@
     },
     {
       "id": "mat", "name": "Materiales regionales", "sold": false,
-      "sources": ["region", "fresno.nido", "eventos", "prueba"],
+      "sources": ["region", "fresno.nido", "eventos", "misiones", "logros", "prueba"],
       "sinks": ["forja", "fusion", "talentos", "salmuera"],
       // Materiales de las doce regiones, reactivos y bases del Caldero. // TUNING: nombres y regiones propuestos.
       "materials": [

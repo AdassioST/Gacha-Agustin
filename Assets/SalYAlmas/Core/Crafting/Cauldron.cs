@@ -126,6 +126,7 @@ namespace SalYAlmas.Core.Crafting
             var recipe = Match(baseId, salt, reagentId);
             string note = recipe != null ? recipe.Potion : TurbidId;
             if (!source.TrySpend(cost, flow, note)) return new BrewResult { Message = "Faltan ingredientes: " + cost.Describe(_g.Meta.Catalog) };
+            _g.Report("salmuera");
 
             if (recipe == null)
             {

@@ -324,5 +324,6 @@ namespace SalYAlmas.Core.World
         public readonly TermasRules Termas = new TermasRules();
         public readonly ShopRules Shop = new ShopRules();
         public readonly LocTable Loc = new LocTable();
+        public readonly QuestRules Quests = new QuestRules();
     }
 }

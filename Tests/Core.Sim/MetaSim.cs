@@ -172,7 +172,8 @@ namespace SalYAlmas.Sim
                     var keys = new List<string>();
                     var regionInfo = new Dictionary<string, List<string>>();
                     int finished = 0, farmed = 0;
-                    long earned = 0;
+                    long earned = 0, sales = 0, mats = 0;
+                    int altura = 0;
                     for (int c = 0; c < n; c++)
                     {
                         var g = new MetaGame(meta, MetaGame.NewProfile(meta, (ulong)(c + 1), 300));
@@ -185,6 +186,7 @@ namespace SalYAlmas.Sim
                         var ring = g.Story.BuiltRing;
                         int start = ring.FindIndex(r => r.Id == g.Story.StartRegion);
                         long before = g.Ledger.Balance(Res.Almitas);
+                        long salesBefore = g.Ledger.Balance(Res.SalesDeBano);
                         for (int i = 0; i < ring.Count; i++)
                         {
                             var region = ring[((start + (direct ? i : -i)) % ring.Count + ring.Count) % ring.Count];
@@ -199,11 +201,16 @@ namespace SalYAlmas.Sim
                                 farmed += PlayMission(g, team, attempts, keys, c);
                             }
                         }
+                        g.Quests.ClaimAll();
                         earned += g.Ledger.Balance(Res.Almitas) - before;
+                        sales += g.Ledger.Balance(Res.SalesDeBano) - salesBefore;
+                        foreach (var r in ring) mats += g.Ledger.Balance(Res.Mat(r.Material));
+                        altura += g.Quests.Altura;
                         if (g.Story.GameFinished) finished++;
                     }
                     Console.WriteLine($"== Historia desde {sign} · {(direct ? "Directo" : "Retrógrado")} · {n} cuentas nuevas · terminadas {finished}/{n} · Expediciones extra {farmed / (double)n:0.0} por cuenta");
                     foreach (var kv in regionInfo) Console.WriteLine($"   {kv.Key,-15} {kv.Value[0]}");
+                    Console.WriteLine($"   por cuenta: {sales / (double)n:N0} Sales de Baño ({sales / (double)n / 160:0.0} tiradas) · {mats / (double)n:N0} materiales regionales · Altura {altura / (double)n:0.0}");
                     foreach (var k in keys.Where(k => attempts[k].Average() > 1.2)) Console.WriteLine($"   {k,-18} intentos: media {attempts[k].Average():0.0}  máximo {attempts[k].Max()}");
                 }
             return 0;

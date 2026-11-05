@@ -10,7 +10,7 @@ namespace SalYAlmas.Core.World
     /// <summary>Carga y valida story.json, services.json y loc.json. Junta todos los errores, como los otros cargadores.</summary>
     public static class WorldLoader
     {
-        public static WorldDatabase Load(string story, string services, string loc, MetaDatabase meta, string odyssey = null)
+        public static WorldDatabase Load(string story, string services, string loc, MetaDatabase meta, string odyssey = null, string quests = null)
         {
             var r = new Reader();
             var w = new WorldDatabase();
@@ -24,6 +24,7 @@ namespace SalYAlmas.Core.World
             });
             r.Guard("story.json", () => LoadStory(Json.Parse(story, "story.json"), w.Story, meta, r));
             if (odysseyRoot != null && r.Errors.Count == 0) r.Guard("odyssey.json", () => LoadOdyssey(odysseyRoot, w.Story, meta, r));
+            if (quests != null) r.Guard("quests.json", () => LoadQuests(Json.Parse(quests, "quests.json"), w.Quests, meta, r));
             r.Guard("services.json", () => LoadServices(Json.Parse(services, "services.json"), w, meta, r));
             r.Guard("loc.json", () => LoadLoc(Json.Parse(loc, "loc.json"), w.Loc, r));
             if (r.Errors.Count > 0) throw new DataValidationException(r.Errors);
@@ -36,6 +37,86 @@ namespace SalYAlmas.Core.World
         {
             { "orilla", ZoneKind.Orilla }, { "subsuelo", ZoneKind.Subsuelo }, { "corazon", ZoneKind.Corazon }, { "cielo", ZoneKind.Cielo },
         };
+
+        // ------------------------------------------------------------------ Encargos, logros y Altura
+
+        private static List<KeyValuePair<string, long>> Rewards(Reader r, JsonNode parent, string key, MetaDatabase meta, string source)
+        {
+            var list = new List<KeyValuePair<string, long>>();
+            var n = r.Obj(parent, key, required: false);
+            if (n == null) return list;
+            foreach (var kv in n.Properties)
+            {
+                if (!meta.Catalog.Has(kv.Key)) { r.Error(kv.Value, "recurso desconocido: " + kv.Key); continue; }
+                if (!meta.Catalog.Get(kv.Key).Sources.Contains(source)) r.Error(kv.Value, kv.Key + " no declara la fuente " + source + " en economy.json");
+                list.Add(new KeyValuePair<string, long>(kv.Key, (long)kv.Value.AsNumber));
+            }
+            return list;
+        }
+
+        private static QuestDef Quest(Reader r, JsonNode n, MetaDatabase meta, string source)
+        {
+            var q = new QuestDef
+            {
+                Id = r.Str(n, "id"), Name = r.Str(n, "name"), Description = r.Str(n, "description", required: false),
+                Slot = r.Str(n, "slot", required: false), Event = r.Str(n, "event"),
+                Need = (long)r.Num(n, "need", 1, 100000000), Growth = r.Int(n, "growth", 0, 100000, required: false),
+            };
+            q.Rewards.AddRange(Rewards(r, n, "rewards", meta, source));
+            return q;
+        }
+
+        private static void LoadQuests(JsonNode root, QuestRules q, MetaDatabase meta, Reader r)
+        {
+            q.Enabled = true;
+            var d = r.Obj(root, "daily");
+            if (d != null)
+            {
+                q.DailyReward.AddRange(Rewards(r, d, "reward", meta, "misiones"));
+                q.DailyBonus.AddRange(Rewards(r, d, "bonus", meta, "misiones"));
+                q.DailyGrowth = r.Int(d, "growth", 0, 10000);
+                q.DailyBonusGrowth = r.Int(d, "bonusGrowth", 0, 10000);
+                q.DailyPass = r.Int(d, "pass", 0, 10000);
+                foreach (var n in r.Arr(d, "pool"))
+                {
+                    var m = Quest(r, n, meta, "misiones");
+                    if (Array.IndexOf(q.DailySlots, m.Slot) < 0) r.Error(n, "hueco diario desconocido: " + m.Slot);
+                    q.Daily.Add(m);
+                }
+                foreach (var slot in q.DailySlots) if (!q.Daily.Exists(m => m.Slot == slot)) r.Error(d, "falta un encargo de " + slot);
+            }
+            var w = r.Obj(root, "weekly");
+            if (w != null)
+            {
+                q.WeeklyReward.AddRange(Rewards(r, w, "reward", meta, "misiones"));
+                q.WeeklyGrowth = r.Int(w, "growth", 0, 10000);
+                q.WeeklyPass = r.Int(w, "pass", 0, 100000);
+                q.WeeklyRandom = r.Int(w, "random", 0, 10);
+                foreach (var n in r.Arr(w, "pool")) q.Weekly.Add(Quest(r, n, meta, "misiones"));
+            }
+            foreach (var n in r.Arr(root, "achievements")) q.Achievements.Add(Quest(r, n, meta, "logros"));
+            var a = r.Obj(root, "altura");
+            if (a != null)
+            {
+                foreach (var n in r.Arr(a, "curve"))
+                    if (n.Kind == JsonKind.Array && n.Items.Count == 2) q.AlturaCurve.Add(new KeyValuePair<int, int>((int)n.Items[0].AsNumber, (int)n.Items[1].AsNumber));
+                    else r.Error(n, "cada tramo es [hasta el nivel, Crecimiento por nivel]");
+                q.AlturaSales = r.Int(a, "sales", 0, 10000);
+                q.AlturaSalesUntil = r.Int(a, "salesUntil", 1, 100);
+            }
+            var g = r.Obj(root, "growth", required: false);
+            if (g != null) foreach (var kv in g.Properties) q.GrowthPerEvent[kv.Key] = (int)kv.Value.AsNumber;
+            var ids = new HashSet<string>();
+            foreach (var m in q.Daily) if (!ids.Add(m.Id)) r.Error(root, "encargo repetido: " + m.Id);
+            foreach (var m in q.Weekly) if (!ids.Add(m.Id)) r.Error(root, "encargo repetido: " + m.Id);
+            foreach (var m in q.Achievements) if (!ids.Add(m.Id)) r.Error(root, "logro repetido: " + m.Id);
+            // META 5.3 y 8.1: nada de tirar, pagar ni entrar varios días seguidos.
+            foreach (var m in q.Daily) if (Forbidden(m.Event)) r.Error(root, m.Id + ": los encargos no piden tirar, pagar ni volver días seguidos");
+            foreach (var m in q.Weekly) if (Forbidden(m.Event)) r.Error(root, m.Id + ": los encargos no piden tirar, pagar ni volver días seguidos");
+            foreach (var m in q.Achievements) if (Forbidden(m.Event)) r.Error(root, m.Id + ": los logros no piden tirar, pagar ni volver días seguidos");
+        }
+
+        private static bool Forbidden(string evt) => evt == "tirada" || evt == "compra" || evt == "perlas" || evt == "racha";
 
         public static string KindId(ZoneKind k) => k == ZoneKind.Orilla ? "orilla" : k == ZoneKind.Subsuelo ? "subsuelo" : k == ZoneKind.Corazon ? "corazon" : "cielo";
 

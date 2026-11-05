@@ -158,7 +158,8 @@ namespace SalYAlmas.Core.World
             int level = ZoneLevel(region, zone) + (!wave && battle.Boss ? O.BossAdd : 0);
             Loot(level, region, Tide(region.Id), 1.0, !wave && battle.Boss);
             C.SectionsWon++;
-            if (!wave && battle.Boss) C.BossesWon++;
+            _g.Report("seccion");
+            if (!wave && battle.Boss) { C.BossesWon++; _g.Report("jefe"); }
             SaveCarry(b, C.CarryHp, C.CarrySalinity);
             if (!wave) { C.Section = 0; return false; }
             C.Section++;
@@ -176,6 +177,7 @@ namespace SalYAlmas.Core.World
             {
                 C.ZonesDone.Add(zone.Id);
                 Give(Res.SalesDeBano, O.ZoneSales, "historia");
+                _g.Report("zona");
             }
             if (RegionDone(region.Id) && region.Station.Length > 0) _g.Profile.Stations.Add(region.Station);
         }
@@ -255,6 +257,8 @@ namespace SalYAlmas.Core.World
             if (!b.IsOver) return OpResult.Fail("El combate no ha terminado.");
             if (b.Outcome != Events.BattleOutcome.Victory) return OpResult.Fail("Caíste. Puedes reintentar la sección sin costo.");
             AddSenderoXp(R.SenderoXpPerWin);
+            _g.Quests.ReportBattle(b);
+            _g.Report("seccion");
             if (C.DailyDay != _g.Profile.Day) { C.DailyDay = _g.Profile.Day; C.DailySections = 0; }
             C.DailySections++;
             double factor = C.DailySections <= O.DailyFull ? 1.0 : O.AfterCap;
@@ -270,6 +274,9 @@ namespace SalYAlmas.Core.World
                 return OpResult.Success($"Sección {C.ExpSection} de {ExpeditionSections(zone) + 1}");
             }
             C.BossesWon++;
+            _g.Report("jefe");
+            _g.Report("expedicion");
+            if (zone.IsEx) _g.Report("ex");
             if (zone.IsEx && !C.ZonesDone.Contains(zone.Id))
             {
                 C.ZonesDone.Add(zone.Id);
