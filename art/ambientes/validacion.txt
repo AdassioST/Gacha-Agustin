@@ -1,0 +1,62 @@
+VALIDACION DE ENTREGA - Sal y Almas: la Odisea
+Fecha local: 2026-11-05T06:14:14-06:00
+Contrato total: 148 archivos (82 fondos, 66 enemigos).
+Archivos presentes: 104 (53 fondos, 51 enemigos).
+Faltan por generar: 44.
+Presentes provisionales: 2.
+Errores tecnicos: 0.
+Controles: lectura PNG completa, nombres, dimensiones, RGBA, alfa real, margen >= 6 %, fuentes, prompts, SHA-256 sin duplicados.
+Orientacion, tono y composicion: revision visual del agente en imagenes y hojas de contacto; no se infieren con este script.
+No se ha abierto Unity ni verificado la integracion en combate.
+
+ERRORES:
+
+PROVISIONALES:
+amb_leo_subsuelo
+amb_virgo_subsuelo
+
+PENDIENTES:
+amb_sagitario_subsuelo
+amb_sagitario_corazon
+amb_sagitario_cielo
+enemigo_cria_estrella
+enemigo_corcel_meteorico
+enemigo_arquera_fieltro
+enemigo_gigante_ojo_unico
+enemigo_centauro_horizonte_roto
+amb_acuario_orilla
+amb_acuario_subsuelo
+amb_acuario_corazon
+amb_acuario_cielo
+enemigo_cantora_sumergida
+enemigo_foca_escarcha
+enemigo_farol_iceberg
+enemigo_senora_agua_quieta
+enemigo_ballena_aurora
+amb_piscis_orilla
+amb_piscis_subsuelo
+amb_piscis_corazon
+amb_piscis_cielo
+enemigo_ninfa_hospitalaria
+enemigo_pez_micelio
+enemigo_anfora_esporas
+enemigo_anfitriona_sin_despedida
+enemigo_sueno_dos_peces
+amb_aries_subsuelo_grieta
+amb_aries_subsuelo_abismo
+amb_aries_cielo_grieta
+amb_aries_cielo_abismo
+amb_cancer_subsuelo_grieta
+amb_cancer_subsuelo_abismo
+amb_cancer_cielo_grieta
+amb_cancer_cielo_abismo
+amb_libra_subsuelo_grieta
+amb_libra_subsuelo_abismo
+amb_libra_cielo_grieta
+amb_libra_cielo_abismo
+amb_capricornio_corazon_grieta
+amb_capricornio_corazon_abismo
+amb_capricornio_subsuelo_grieta
+amb_capricornio_subsuelo_abismo
+amb_capricornio_cielo_grieta
+amb_capricornio_cielo_abismo

@@ -1,0 +1,5 @@
+# amb_libra_cielo_abismo
+
+Prioridad 3. Referencia: imagen base `amb_libra_cielo.png`, objetivo de edición.
+
+Use case: precise-object-edit. Art for Sal y Almas: la Odisea. Edit the supplied scene into its ABISMO horror layer. Preserve the original camera, regional architecture, identifiable main landmarks, material palette, parchment painting and 16:9 composition. Bottom third remains QUIET EMPTY LOW-CONTRAST playable terrain or water, no huge foreground objects or characters. No text, labels, gore, blood, violence, jumpscares or border. The sky or high vault presses impossibly LOW, with sparse eyes arranged as distant star CONSTELLATIONS, never a giant foreground eyeball. Upper geometry gently folds into impossible repeating angles while preserving regional landmarks. Two or three TINY distant clothed adult figures half mineralized into quiet salt statues, no pain or wounds; absence and scale. Deep plum shadows, cold gold celestial edges. Structural uncanny changes, not simply a tint. Retain the existing floating landforms and upside-down gravity, deepen the wrongness above them.
