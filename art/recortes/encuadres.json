@@ -1,0 +1,201 @@
+{
+  "_nota": "Centro y lado del busto en pixeles del retrato original de 1024x1536. 'cara' marca el centro de la cara; el centro del encuadre baja un 10% del lado para dejar hombros.",
+  "marisal_f1": {
+    "cara": [
+      440,
+      280
+    ],
+    "centro": [
+      440,
+      320
+    ],
+    "lado": 400
+  },
+  "selenia_f1": {
+    "cara": [
+      410,
+      390
+    ],
+    "centro": [
+      410,
+      430
+    ],
+    "lado": 400
+  },
+  "solenne_f1": {
+    "cara": [
+      410,
+      375
+    ],
+    "centro": [
+      410,
+      415
+    ],
+    "lado": 400
+  },
+  "cervanda_f1": {
+    "cara": [
+      425,
+      300
+    ],
+    "centro": [
+      425,
+      340
+    ],
+    "lado": 400
+  },
+  "tormentina_f1": {
+    "cara": [
+      425,
+      400
+    ],
+    "centro": [
+      425,
+      440
+    ],
+    "lado": 400
+  },
+  "cupria_f1": {
+    "cara": [
+      450,
+      290
+    ],
+    "centro": [
+      490,
+      330
+    ],
+    "lado": 400
+  },
+  "brea_f1": {
+    "cara": [
+      480,
+      345
+    ],
+    "centro": [
+      480,
+      385
+    ],
+    "lado": 400
+  },
+  "cempa_f1": {
+    "cara": [
+      450,
+      365
+    ],
+    "centro": [
+      450,
+      405
+    ],
+    "lado": 400
+  },
+  "muertita_f1": {
+    "cara": [
+      370,
+      625
+    ],
+    "centro": [
+      370,
+      665
+    ],
+    "lado": 400
+  },
+  "salitre_f1": {
+    "cara": [
+      485,
+      236
+    ],
+    "centro": [
+      485,
+      276
+    ],
+    "lado": 400
+  },
+  "topacia_f1": {
+    "cara": [
+      455,
+      476
+    ],
+    "centro": [
+      455,
+      516
+    ],
+    "lado": 400
+  },
+  "axa_f1": {
+    "cara": [
+      450,
+      520
+    ],
+    "centro": [
+      450,
+      560
+    ],
+    "lado": 400
+  },
+  "marisal_f3": {
+    "cara": [
+      430,
+      535
+    ],
+    "centro": [
+      430,
+      575
+    ],
+    "lado": 400
+  },
+  "selenia_f3": {
+    "cara": [
+      490,
+      400
+    ],
+    "centro": [
+      490,
+      440
+    ],
+    "lado": 400
+  },
+  "solenne_f3": {
+    "cara": [
+      500,
+      535
+    ],
+    "centro": [
+      500,
+      575
+    ],
+    "lado": 400
+  },
+  "cervanda_f3": {
+    "cara": [
+      460,
+      585
+    ],
+    "centro": [
+      460,
+      625
+    ],
+    "lado": 400
+  },
+  "tormentina_f3": {
+    "cara": [
+      500,
+      590
+    ],
+    "centro": [
+      500,
+      630
+    ],
+    "lado": 400
+  },
+  "cupria_f3": {
+    "cara": [
+      420,
+      330
+    ],
+    "centro": [
+      450,
+      370
+    ],
+    "lado": 400
+  }
+}
