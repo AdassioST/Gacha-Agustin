@@ -13,8 +13,8 @@ namespace SalYAlmas.Presentation
     }
 
     /// <summary>
-    /// Figura de prueba de una unidad: una cápsula del color de su planeta y, en las brujas, una esfera
-    /// flotante que representa a su Ascendente. Solo anima; el estado real vive en el núcleo.
+    /// Figura de una unidad: un recorte con arte y sombra de contacto o, si falta el arte, la cápsula de prueba de
+    /// la Fase 1 con la esfera de su Ascendente. Solo anima; el estado real vive en el núcleo.
     /// </summary>
     public sealed class UnitView : MonoBehaviour
     {
@@ -23,6 +23,10 @@ namespace SalYAlmas.Presentation
         public Renderer Body;
         public Transform Ascendant;
         public float Height = 2f;
+        /// <summary>Sombra de contacto en el suelo, si la figura es un recorte.</summary>
+        public Renderer Shadow;
+        /// <summary>Recorte con arte: el destello aclara en vez de teñir.</summary>
+        public bool IsArt;
 
         public readonly List<FloatingText> Floats = new List<FloatingText>();
 
@@ -70,8 +74,9 @@ namespace SalYAlmas.Presentation
 
         public void Flash(Color c, float seconds = 0.25f)
         {
-            _flashColor = c;
+            _flashColor = IsArt ? new Color(c.r * 1.9f, c.g * 1.9f, c.b * 1.9f, 1f) : c;
             _flash = seconds;
+            if (IsArt) BattleFx.Hit(transform.position + Vector3.up * Height * 0.55f, c == Color.white ? Palette.GoldBright : c, seconds > 0.2f);
         }
 
         public void Shake(float seconds = 0.2f) => _shake = Mathf.Max(_shake, seconds);
@@ -87,6 +92,7 @@ namespace SalYAlmas.Presentation
             if (_dead) return;
             _dead = true;
             _deadTime = 0f;
+            if (IsArt) BattleFx.Salt(_home, Height);
         }
 
         public void AddFloat(string text, Color color, int size = 30)
@@ -118,7 +124,8 @@ namespace SalYAlmas.Presentation
             {
                 _lunge -= dt;
                 float t = Mathf.Sin(Mathf.Clamp01(_lunge / 0.35f) * Mathf.PI);
-                pos += (IsEnemy ? Vector3.back : Vector3.forward) * t * 0.6f;
+                // Vista lateral: las brujas embisten hacia la derecha y los enemigos hacia la izquierda.
+                pos += (IsEnemy ? Vector3.left : Vector3.right) * t * 0.9f;
             }
             if (_active) pos += Vector3.up * (0.12f + Mathf.Sin(Time.unscaledTime * 4f) * 0.05f);
             transform.position = pos;
@@ -127,6 +134,7 @@ namespace SalYAlmas.Presentation
             {
                 _deadTime += dt;
                 transform.localScale = Vector3.Lerp(_baseScale, new Vector3(_baseScale.x * 1.3f, 0.05f, _baseScale.z * 1.3f), Mathf.Clamp01(_deadTime / 0.6f));
+                if (Shadow != null) Shadow.enabled = _deadTime < 0.6f;
             }
             else if (_charging)
             {
@@ -136,7 +144,7 @@ namespace SalYAlmas.Presentation
             else transform.localScale = _baseScale;
 
             Color c = _baseColor;
-            if (_dead) c = Color.Lerp(_baseColor, Palette.SaltWhite, 0.8f);
+            if (_dead) c = Color.Lerp(_baseColor, Palette.SaltWhite, 0.8f) * new Color(1, 1, 1, IsArt ? 1f - Mathf.Clamp01((_deadTime - 0.3f) / 0.5f) : 1f);
             else if (_broken) c = Color.Lerp(_baseColor, Palette.SaltWhite, 0.35f + 0.15f * Mathf.Sin(Time.unscaledTime * 10f));
             else if (_ecstasy) c = Color.Lerp(_baseColor, Palette.Band(Core.Magic.SalinityBand.ExtasisAbisal), 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 6f));
             if (_flash > 0)

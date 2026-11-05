@@ -200,15 +200,20 @@ namespace SalYAlmas.Presentation
 
         public void Draw()
         {
-            GUI.DrawTexture(new Rect(0, 0, GuiKit.Width, GuiKit.Height), Theme.Sky, ScaleMode.StretchToFill);
-            DrawWheel();
+            if (ExternalScreen != null && ExternalScreen(Current)) return;
+            bool outerChrome = ExternalChrome != null && ExternalChrome(Current);
+            if (!outerChrome)
+            {
+                GUI.DrawTexture(new Rect(0, 0, GuiKit.Width, GuiKit.Height), Theme.Sky, ScaleMode.ScaleAndCrop);
+                DrawWheel();
+            }
 
             if (Current == Screen.Creator) { DrawCreator(new Rect(0, 0, GuiKit.Width, GuiKit.Height)); DrawNote(); return; }
             if (Current == Screen.Scene) { DrawScene(new Rect(0, 0, GuiKit.Width, GuiKit.Height)); DrawNote(); return; }
             if (_pull != null) { _pull.Draw(); return; }
 
             bool inRun = Current == Screen.Fresno && F.InRun;
-            DrawTopBar();
+            if (!outerChrome) DrawTopBar();
             var area = new Rect(14, TopHeight + 8, GuiKit.Width - 28, GuiKit.Height - TopHeight - (inRun ? 18 : NavHeight + 18));
             switch (Current)
             {
@@ -229,7 +234,7 @@ namespace SalYAlmas.Presentation
                 case Screen.Expedition: DrawExpedition(area); break;
                 case Screen.Quests: DrawQuests(area); break;
             }
-            if (!inRun) DrawNav();
+            if (!inRun && !outerChrome) DrawNav();
             DrawNote();
         }
 

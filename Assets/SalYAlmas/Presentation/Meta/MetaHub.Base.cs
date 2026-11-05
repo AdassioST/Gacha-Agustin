@@ -365,9 +365,12 @@ namespace SalYAlmas.Presentation
             float y = left.y + 90;
             foreach (var row in Game.GachaService.OddsPage(_banner))
             {
+                // La fila crece con el texto: la Garantía ocupa dos o tres líneas y antes se cortaba.
+                float vw = left.width - 350;
+                float h = Mathf.Max(40f, GuiKit.Style(20, Palette.Parchment, TextAnchor.UpperLeft, false, true).CalcHeight(new GUIContent(row.Value), vw) + 8);
                 GuiKit.Label(new Rect(left.x + 24, y, 300, 40), row.Key, 20, Palette.GoldBright, TextAnchor.MiddleLeft, true);
-                GuiKit.Label(new Rect(left.x + 330, y, left.width - 350, 40), row.Value, 20, Palette.Parchment, TextAnchor.MiddleLeft, false, true);
-                y += 46;
+                GuiKit.Label(new Rect(left.x + 330, y + (h > 40 ? 8 : 0), vw, h), row.Value, 20, Palette.Parchment, h > 40 ? TextAnchor.UpperLeft : TextAnchor.MiddleLeft, false, true);
+                y += h + 6;
             }
             var right = new Rect(left.xMax + 10, body.y, body.width - left.width - 10, body.height);
             Theme.GoldPanel(right, 0.92f);

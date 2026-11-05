@@ -138,15 +138,27 @@ namespace SalYAlmas.Presentation
             return new Vector2((screen.x - ox) / scale, (Screen.height - screen.y - oy) / scale);
         }
 
+        /// <summary>Lo inverso de ScreenToCanvas: un punto del lienzo virtual en píxeles de pantalla (origen abajo).</summary>
+        public static Vector3 CanvasToScreen(Vector2 canvas)
+        {
+            float scale = Mathf.Min(Screen.width / Width, Screen.height / Height);
+            float ox = (Screen.width - Width * scale) / 2f;
+            float oy = (Screen.height - Height * scale) / 2f;
+            return new Vector3(canvas.x * scale + ox, Screen.height - (canvas.y * scale + oy), 0f);
+        }
+
         public static GUIStyle Style(int size, Color color, TextAnchor anchor = TextAnchor.MiddleLeft, bool bold = false, bool wrap = false)
         {
+            // Alegreya es de ojo chico: sube un punto todo, y nada baja de 16 (legibilidad en teléfono).
+            size = Mathf.Max(16, size + 2);
             string key = size + "|" + ColorUtility.ToHtmlStringRGBA(color) + "|" + anchor + "|" + bold + "|" + wrap;
             if (Styles.TryGetValue(key, out var s) && s != null) return s;
             s = new GUIStyle(GUI.skin.label)
             {
+                font = bold ? Theme.BoldFont : Theme.BodyFont,
                 fontSize = size,
                 alignment = anchor,
-                fontStyle = bold ? FontStyle.Bold : FontStyle.Normal,
+                fontStyle = FontStyle.Normal,
                 wordWrap = wrap,
                 richText = true,
                 clipping = TextClipping.Clip,
@@ -161,7 +173,7 @@ namespace SalYAlmas.Presentation
         {
             string key = "btn" + size;
             if (Styles.TryGetValue(key, out var s) && s != null) return s;
-            s = new GUIStyle(Theme.ButtonBase()) { fontSize = size, richText = true, wordWrap = true };
+            s = new GUIStyle(Theme.ButtonBase()) { fontSize = Mathf.Max(16, size + 2), richText = true, wordWrap = true };
             Styles[key] = s;
             return s;
         }
@@ -237,11 +249,28 @@ namespace SalYAlmas.Presentation
         /// <summary>Se dispara cada vez que el jugador presiona un botón (para el sonido de la interfaz).</summary>
         public static event System.Action ButtonPressed;
 
+        private static readonly Dictionary<string, string> LegibleCache = new Dictionary<string, string>();
+        private static readonly System.Text.RegularExpressions.Regex SizeTag = new System.Text.RegularExpressions.Regex(@"<size=(\d+)>");
+
+        /// <summary>
+        /// Los <size=N> del texto enriquecido no pasan por Style: aquí reciben el mismo piso (+2 y mínimo 15), para que las
+        /// segundas líneas de los botones (costos, descripciones) se lean en un teléfono. // TUNING
+        /// </summary>
+        public static string Legible(string text)
+        {
+            if (string.IsNullOrEmpty(text) || text.IndexOf("<size=", System.StringComparison.Ordinal) < 0) return text;
+            if (LegibleCache.TryGetValue(text, out var done)) return done;
+            done = SizeTag.Replace(text, m => "<size=" + Mathf.Max(15, int.Parse(m.Groups[1].Value) + 2) + ">");
+            if (LegibleCache.Count > 2048) LegibleCache.Clear();
+            LegibleCache[text] = done;
+            return done;
+        }
+
         public static bool Button(Rect r, string text, bool enabled = true, int size = 22)
         {
             bool old = GUI.enabled;
             GUI.enabled = old && enabled;
-            bool pressed = GUI.Button(r, text, ButtonStyle(size));
+            bool pressed = GUI.Button(r, Legible(text), ButtonStyle(size));
             GUI.enabled = old;
             if (pressed) ButtonPressed?.Invoke();
             return pressed;
@@ -250,7 +279,7 @@ namespace SalYAlmas.Presentation
         public static void Label(Rect r, string text, int size, Color color, TextAnchor anchor = TextAnchor.MiddleLeft, bool bold = false, bool wrap = false)
         {
             if (Theme.LargeText) size = Mathf.RoundToInt(size * 1.12f);
-            GUI.Label(r, text, Style(size, color, anchor, bold, wrap));
+            GUI.Label(r, Legible(text), Style(size, color, anchor, bold, wrap));
         }
 
         /// <summary>Etiqueta de planeta: color más nombre, porque el color nunca va solo (REFERENCIAS, reglas de color).</summary>

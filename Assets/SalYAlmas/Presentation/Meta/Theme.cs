@@ -28,6 +28,8 @@ namespace SalYAlmas.Presentation
             get
             {
                 if (_sky != null) return _sky;
+                _sky = Resources.Load<Texture2D>("Ui/bg/abyss");
+                if (_sky != null) return _sky;
                 const int w = 256, h = 144;
                 _sky = new Texture2D(w, h, TextureFormat.RGBA32, false) { hideFlags = HideFlags.HideAndDontSave, wrapMode = TextureWrapMode.Clamp, filterMode = FilterMode.Bilinear };
                 for (int y = 0; y < h; y++)
@@ -88,10 +90,58 @@ namespace SalYAlmas.Presentation
         public static void Panel(Rect r, Color top, Color bottom, Color rim, float alpha = 1f)
         {
             var old = GUI.color;
-            GUI.color = new Color(1, 1, 1, alpha);
-            GUI.Box(r, GUIContent.none, FrameStyle(top, bottom, rim));
+            var leather = Kit("chrome/tile_leather");
+            if (leather == null)
+            {
+                GUI.color = new Color(1, 1, 1, alpha);
+                GUI.Box(r, GUIContent.none, FrameStyle(top, bottom, rim));
+                GUI.color = old;
+                return;
+            }
+            // Cuero repetido sin estirarse, teñido por el color que pidió el panel, con luz de arriba y marco repujado.
+            Color tint = Color.Lerp(top, bottom, 0.35f);
+            float lum = tint.r * 0.3f + tint.g * 0.59f + tint.b * 0.11f;
+            GUI.color = new Color(Mathf.Clamp01(0.75f + tint.r * 0.9f - lum * 0.5f), Mathf.Clamp01(0.75f + tint.g * 0.9f - lum * 0.5f), Mathf.Clamp01(0.75f + tint.b * 0.9f - lum * 0.5f), alpha);
+            var inner = new Rect(r.x + 2, r.y + 2, r.width - 4, r.height - 4);
+            GUI.DrawTextureWithTexCoords(inner, leather, new Rect(r.x / 256f, r.y / 256f, inner.width / 256f, inner.height / 256f));
+            var grad = Kit("chrome/shade_up");
+            if (grad != null)
+            {
+                GUI.color = new Color(1, 0.86f, 0.74f, 0.1f * alpha);
+                GUI.DrawTexture(new Rect(inner.x, inner.y, inner.width, Mathf.Min(inner.height, 90)), Kit("fx/grad_v"), ScaleMode.StretchToFill);
+            }
+            GUI.color = new Color(1, 1, 1, alpha * (rim.a <= 0 ? 0 : 1));
+            float small = Mathf.Min(r.width, r.height);
+            if (small >= 96) GUI.Box(r, GUIContent.none, KitStyle("chrome/frame_panel_1x", 56));
+            else if (small >= 34) GUI.Box(r, GUIContent.none, KitStyle("chrome/btn_secondary_1x", 15));
+            else GuiKit.Frame(r, Palette.WithAlpha(rim, alpha * 0.85f), 1f);
             GUI.color = old;
         }
+
+        private static readonly Dictionary<string, Texture2D> KitTex = new Dictionary<string, Texture2D>();
+        private static readonly Dictionary<string, GUIStyle> KitStyles = new Dictionary<string, GUIStyle>();
+
+        /// <summary>Texturas del kit de interfaz (scripts/ui_kit.py). Sin kit, el hub conserva su dibujo por código.</summary>
+        public static Texture2D Kit(string path)
+        {
+            if (KitTex.TryGetValue(path, out var t)) return t;
+            t = Resources.Load<Texture2D>("Ui/" + path);
+            KitTex[path] = t;
+            return t;
+        }
+
+        private static GUIStyle KitStyle(string path, int border)
+        {
+            if (KitStyles.TryGetValue(path, out var s) && s != null) return s;
+            s = new GUIStyle { border = new RectOffset(border, border, border, border) };
+            s.normal.background = Kit(path);
+            KitStyles[path] = s;
+            return s;
+        }
+
+        private static Font _body, _bold;
+        public static Font BodyFont => _body != null ? _body : (_body = Resources.Load<Font>("Ui/Fonts/Alegreya-Regular"));
+        public static Font BoldFont => _bold != null ? _bold : (_bold = Resources.Load<Font>("Ui/Fonts/Alegreya-Bold"));
 
         public static void GoldPanel(Rect r, float alpha = 0.96f) => Panel(r, Palette.Hex("#2C2234"), Palette.Hex("#17121E"), Palette.Gold, alpha);
 
@@ -118,6 +168,16 @@ namespace SalYAlmas.Presentation
             Set(_button.hover, Bevel(Palette.Hex("#6A4458"), Palette.Hex("#34223C"), Palette.GoldBright), Palette.SaltWhite);
             Set(_button.active, Bevel(Palette.Hex("#241830"), Palette.Hex("#4A3248"), Palette.GoldBright), Palette.GoldBright);
             Set(_button.focused, Bevel(Palette.Hex("#4A3248"), Palette.Hex("#241830"), Palette.Gold), Palette.Parchment);
+            if (Kit("chrome/btn_secondary_1x") != null)
+            {
+                _button.border = new RectOffset(15, 15, 15, 15);
+                Set(_button.normal, Kit("chrome/btn_secondary_1x"), Palette.Parchment);
+                Set(_button.hover, Kit("chrome/btn_primary_1x"), Palette.SaltWhite);
+                Set(_button.active, Kit("chrome/btn_primary_1x"), Palette.Spark);
+                Set(_button.focused, Kit("chrome/btn_secondary_1x"), Palette.Parchment);
+                if (BoldFont != null) _button.font = BoldFont;
+                _button.fontStyle = FontStyle.Normal;
+            }
             return _button;
         }
 
@@ -249,11 +309,29 @@ namespace SalYAlmas.Presentation
             foreach (var t in textures) if (t != null) _byName[t.name] = t;
         }
 
+        private readonly Dictionary<string, Texture2D> _smooth = new Dictionary<string, Texture2D>();
+
+        /// <summary>
+        /// Busto para la interfaz. Prefiere el de 320 px con filtro suave del kit (Ui/brujas); el de 160 px con filtro
+        /// Point de Bustos/ se escala a tamaños no enteros y se ve pixelado, así que queda solo de respaldo.
+        /// </summary>
         public Texture2D Bust(string id, bool thirdPhase = false)
         {
             string art = ArtId(id);
+            var smooth = Smooth(art, id, thirdPhase ? "_f3_busto" : "_f1_busto") ?? (thirdPhase ? Smooth(art, id, "_f1_busto") : null);
+            if (smooth != null) return smooth;
             if (thirdPhase && _byName.TryGetValue(art + "_f3_neutral", out var f3)) return f3;
             return _byName.TryGetValue(art + "_f1_neutral", out var f1) ? f1 : null;
+        }
+
+        private Texture2D Smooth(string art, string id, string suffix)
+        {
+            string key = art + suffix;
+            if (_smooth.TryGetValue(key, out var t)) return t;
+            // El kit guarda algunos con los IDs de la Fase 1 (topo, zarigueya).
+            t = Resources.Load<Texture2D>("Ui/brujas/" + key) ?? Resources.Load<Texture2D>("Ui/brujas/" + id + suffix);
+            _smooth[key] = t;
+            return t;
         }
 
         public Texture2D Body(string id) => _byName.TryGetValue(ArtId(id) + "_f1_cuerpo", out var b) ? b : null;
