@@ -73,7 +73,7 @@ namespace SalYAlmas.Core.Events
                 case HitLanded e:
                 {
                     if (!IncludeHits) return null;
-                    string spark = e.IsSpark ? " ✦ Spark" : "";
+                    string spark = e.IsSpark ? " ¡Spark!" : "";
                     string crit = e.IsCrit ? " ¡Crítico!" : "";
                     string shield = e.ShieldAbsorbed > 0 ? $" (escudo {N(e.ShieldAbsorbed)})" : "";
                     string tough = e.ToughnessDamage > 0 ? $" · Firmeza −{e.ToughnessDamage:0.#}" : "";

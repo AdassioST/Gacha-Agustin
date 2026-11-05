@@ -62,7 +62,8 @@
     "delay": 0.25, "vulnerability": 0.10,                     // GDD 9.4
     "dotTurns": 2,                                            // TUNING
     "solBurnCoef": 0.5,                                       // TUNING
-    "lunaExtraDelay": 0.20, "lunaSpeedDown": 0.10,            // TUNING (el −10 % de Velocidad es GDD)
+    "lunaExtraDelay": 0.20,                                   // TUNING
+    "lunaSpeedDown": 0.10,                                    // GDD 9.4
     "marteBleedCoef": 0.8,                                    // TUNING
     "mercurioPoisonCoef": 0.4, "mercurioExtraDelay": 0.15,    // TUNING
     "venusCharmDamageDown": 0.40,                             // TUNING

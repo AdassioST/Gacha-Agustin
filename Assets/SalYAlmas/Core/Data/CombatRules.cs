@@ -189,7 +189,7 @@ namespace SalYAlmas.Core.Data
         [Tuning] public int DotTurns = 2;
         [Tuning] public double SolBurnCoef = 0.5;
         [Tuning] public double LunaExtraDelay = 0.20;
-        [Tuning] public double LunaSpeedDown = 0.10;
+        [Gdd("9.4")] public double LunaSpeedDown = 0.10;
         [Tuning] public double MarteBleedCoef = 0.8;
         [Tuning] public double MercurioPoisonCoef = 0.4;
         [Tuning] public double MercurioExtraDelay = 0.15;
