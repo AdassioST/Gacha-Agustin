@@ -322,6 +322,7 @@ namespace SalYAlmas.Presentation
             Toggle(ref y, x, L("set.colorsafe"), ref s.ColorSafe);
             Toggle(ref y, x, L("set.skip"), ref s.SkipCinematics);
             Toggle(ref y, x, L("set.flash"), ref s.ReduceFlashes);
+            Toggle(ref y, x, L("set.motion"), ref s.ReduceMotion);
             Toggle(ref y, x, L("set.battery"), ref s.BatterySaver);
             Toggle(ref y, x, L("set.quality"), ref s.HighQuality);
 

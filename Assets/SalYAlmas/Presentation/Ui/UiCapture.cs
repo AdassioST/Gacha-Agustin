@@ -6,11 +6,12 @@ using SalYAlmas.Core.Gacha;
 using SalYAlmas.Presentation;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace SalYAlmas.Ui
 {
     /// <summary>
-    /// Revisión automática de la interfaz: con "-capturas carpeta [pantalla...]" recorre las pantallas, las toca de verdad y
+    /// Revisión automática de la interfaz: con "-capturas carpeta [pantalla...]" recorre las pantallas e invoca sus acciones.
     /// deja una captura por paso. Cualquier excepción queda en errores.txt. Solo existe en compilaciones de desarrollo.
     /// </summary>
     public sealed class UiCapture : MonoBehaviour
@@ -21,6 +22,8 @@ namespace SalYAlmas.Ui
         private static string[] _only;
         private static bool _checked;
         private string _errors = "";
+        private int _manualShot;
+        private bool _manual;
 
         public static bool Active
         {
@@ -32,7 +35,7 @@ namespace SalYAlmas.Ui
                 for (int i = 0; i + 1 < a.Length; i++)
                     if (a[i] == "-capturas")
                     {
-                        _folder = a[i + 1];
+                        _folder = Path.GetFullPath(a[i + 1]);
                         _only = a.Skip(i + 2).Where(s => !s.StartsWith("-", StringComparison.Ordinal)).ToArray();
                     }
                 return _folder != null;
@@ -40,6 +43,15 @@ namespace SalYAlmas.Ui
         }
 
         private bool Want(string n) => _only.Length == 0 || _only.Contains(n);
+
+        private void Update()
+        {
+            if (!_manual || !Input.GetKeyDown(KeyCode.F10)) return;
+            string file = Path.Combine(_folder, "interaccion_" + (++_manualShot).ToString("00"));
+            ScreenCapture.CaptureScreenshot(file + ".png");
+            var game = App.Game;
+            File.WriteAllText(file + ".txt", game.DebugTargetState());
+        }
 
         private IEnumerator Shot(string name, float wait = 1.0f)
         {
@@ -67,11 +79,34 @@ namespace SalYAlmas.Ui
             return null;
         }
 
+        private static void Tap(string name)
+        {
+            var b = FindBtn(name);
+            if (b == null) { Debug.LogError("Auditoría: falta el botón " + name); return; }
+            var rect = (RectTransform)b.transform;
+            var point = RectTransformUtility.WorldToScreenPoint(null, rect.TransformPoint(rect.rect.center));
+            var data = new PointerEventData(EventSystem.current) { position = point, button = PointerEventData.InputButton.Left };
+            var hits = new System.Collections.Generic.List<RaycastResult>();
+            EventSystem.current.RaycastAll(data, hits);
+            if (hits.Count == 0 || hits[0].gameObject.GetComponentInParent<UiBtn>() != b)
+            {
+                Debug.LogError("Auditoría: centro del botón bloqueado: " + name);
+                return;
+            }
+            ExecuteEvents.Execute(b.gameObject, data, ExecuteEvents.pointerDownHandler);
+            ExecuteEvents.Execute(b.gameObject, data, ExecuteEvents.pointerUpHandler);
+            ExecuteEvents.Execute(b.gameObject, data, ExecuteEvents.pointerClickHandler);
+            Debug.Log("Auditoría: raycast y toque correctos: " + name);
+        }
+
         private IEnumerator Start()
         {
+            Application.runInBackground = true;
             Directory.CreateDirectory(_folder);
             File.WriteAllText(Path.Combine(_folder, "errores.txt"), "");
             App.Hub.DebugTestProfile();
+            App.Hub.DebugAccessibility(_only.Contains("reducido"), _only.Contains("grande"));
+            _manual = _only.Contains("manual");
             var g = App.Game.Game;
             g.Ledger.Apply(Core.Economy.Res.SalesDeBano, 60000, "prueba", "Capturas");
             yield return null;
@@ -82,21 +117,21 @@ namespace SalYAlmas.Ui
                 App.ForceRefresh();
                 yield return Shot("home_entrada", 0.25f);
                 yield return Shot("home", 1.6f);
-                FindBtn("Favorita")?.Click?.Invoke();
+                Tap("Favorita");
                 yield return Shot("home_toque", 0.45f);
             }
             if (Want("coven"))
             {
                 App.DebugShow(MetaHub.Screen.Coven);
                 yield return Shot("coven", 1.5f);
-                FindBtn("selenia")?.Click?.Invoke();
+                Tap("selenia");
                 yield return Shot("coven_hoja", 1f);
             }
             if (Want("summon"))
             {
                 App.DebugShow(MetaHub.Screen.Summon);
                 yield return Shot("summon", 1.4f);
-                FindBtn("limitado_marisal")?.Click?.Invoke();
+                Tap("limitado_marisal");
                 yield return Shot("summon_limitado", 0.8f);
             }
             if (Want("pull"))
@@ -136,6 +171,7 @@ namespace SalYAlmas.Ui
                 yield return Shot("fresno_run", 1f);
                 App.Hub.DebugBattle();
                 yield return Shot("combate_1_inicio", 2.2f);
+                if (_manual) yield break; // Permite probar entradas reales; F10 conserva imagen y estado.
                 var game = FindAnyObjectByType<SalYAlmasGame>();
                 if (game != null && game.Director != null)
                 {
@@ -150,6 +186,7 @@ namespace SalYAlmas.Ui
                     yield return Shot("combate_4_resultado", 1.2f);
                 }
             }
+            if (_manual) yield break;
             Debug.Log("Capturas terminadas.");
             Application.Quit();
         }

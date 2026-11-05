@@ -1,0 +1,748 @@
+{
+  "baseline_commit": "e4ee1d2",
+  "tests": {
+    "Unity_EditMode": {
+      "total": "323",
+      "passed": "323",
+      "failed": "0",
+      "skipped": "0",
+      "result": "Passed"
+    },
+    "Core_dotnet": {
+      "total": "311",
+      "executed": "311",
+      "passed": "311",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    }
+  },
+  "captures": [
+    {
+      "file": "antes-1920/combate_1_inicio.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "ec3446c1ffe1848e55f091e9370effd2463b6910a47d72593e3c7aaef3d6dda1"
+    },
+    {
+      "file": "antes-1920/combate_2_golpes.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "766d4175bcb333f00a46e143ef7e1c45b942ef37b4c8f20d7057f55842c04cdd"
+    },
+    {
+      "file": "antes-1920/combate_3_avance.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "0a2c705b9c18d8ee6e00bcf3f3eb1d06ccd4b4802130b8d53bf4ced8599fd964"
+    },
+    {
+      "file": "antes-1920/combate_4_resultado.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "bc1ce48cf0a6d7deccb850b6214284e3c20f7b0c797122a2e0108091e1067927"
+    },
+    {
+      "file": "antes-1920/coven.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "2e0bbc448d96eeec5b89c5ac1fadf33c8a61fe232040166c057d669ae91b0708"
+    },
+    {
+      "file": "antes-1920/coven_hoja.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "451d295630c60c5e6fada1fd17690c896aad9897ca8bcb9af828b5ee31d8fc86"
+    },
+    {
+      "file": "antes-1920/fresno_run.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "9bfa179ac2ed03efc85b9ac0d4b3c74cb511764948f0dd7003b48599d3985541"
+    },
+    {
+      "file": "antes-1920/home.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "f77a035b161f0ba1893fa3ee507c6bf2dcd1d6c3fc6e03b1e7e783c299f405df"
+    },
+    {
+      "file": "antes-1920/home_entrada.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "60201c4f39518d2b4a5e2b44baf49e3d2e0555e2e387cfe0ad798fa2558747f6"
+    },
+    {
+      "file": "antes-1920/home_toque.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "078325a3646b9a6ce54a6546b6e5c37c586f63e8691828afbc452870218a91b7"
+    },
+    {
+      "file": "antes-1920/hub_Cauldron.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "97b3188297c7ce2ba9f0a2a18e5c0e7b1a1ce7f749e543a51ca3f055c74b212d"
+    },
+    {
+      "file": "antes-1920/hub_Forge.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "5f931cc5e7d58c30f1e58635e71be22b624e507e1b687b450dc6c1417b00666d"
+    },
+    {
+      "file": "antes-1920/hub_Fresno.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "02006f42cddd73fb26a6d6db066dae4f4b5e9fe75c52fc54e0d395624181bf1b"
+    },
+    {
+      "file": "antes-1920/hub_Ledger.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "64d50d76a71323eff991571e008dab6a0231eebfa0bc19f31415d5b2438eaa83"
+    },
+    {
+      "file": "antes-1920/hub_Mirror.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "020783a42f701a21f1062acffd6e1c240a20b245be8d845ac29be5c0f6c5f93b"
+    },
+    {
+      "file": "antes-1920/hub_Odds.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "90375ebab13fa5949ec3c4d089de6d04ef11f56a238a0ccb8234b33fe59fc436"
+    },
+    {
+      "file": "antes-1920/hub_Settings.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "b747a64621f53865ec67fa37f8410160c22b1a6d1d77486d2af4d8e6a6a2709d"
+    },
+    {
+      "file": "antes-1920/hub_Shop.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "794ddaad856e5dd62151737e5d8b9aceafb08bbed4da6650d595b44a4a9c679e"
+    },
+    {
+      "file": "antes-1920/hub_Story.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "0cca5668b71cc473bac412f42e4351eeee10efd4317397c5de68326ac253d64a"
+    },
+    {
+      "file": "antes-1920/summon.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "657c56442ba61aa8ed1fc566c440a5a063fd7ad6d641d34c9d18beae73b0d286"
+    },
+    {
+      "file": "antes-1920/summon_limitado.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "9968d1331c1097f964405f602d1394c0cbaf5ee589fa4e00445c3fbcd3bb231e"
+    },
+    {
+      "file": "entrega-1920/combate_1_inicio.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "6c3d97d351c5203587ef7c72c3756f1a23dd83812964708037d4cf9e037bbd8f"
+    },
+    {
+      "file": "entrega-1920/combate_2_golpes.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "6c72726c7050ca1649349ae52f91f0a256a70370ad7ab339bb1270a7b6ab3beb"
+    },
+    {
+      "file": "entrega-1920/combate_3_avance.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "b276c885907a690b1fa093db7e3ed3a225af175947b556c957368621b393ba88"
+    },
+    {
+      "file": "entrega-1920/combate_4_resultado.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "2ae0fac922ae21b2168e435d05bfe2df3d9cb5fcfb5fceb1bd4ed633cd0d55aa"
+    },
+    {
+      "file": "entrega-1920/coven.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "d3ad1f30c0380585cea7c74ba9eece8242214dfa3ca63be323a4d900b28af7fd"
+    },
+    {
+      "file": "entrega-1920/coven_hoja.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "6ad8281cc58380d28db121703140b228552f3ae6242b2128fc84d02c5438c76a"
+    },
+    {
+      "file": "entrega-1920/fresno_run.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "8d1f00b6cf2b3dc979120f64f3c532f86f080e793ad134241ee02200e15d58ba"
+    },
+    {
+      "file": "entrega-1920/home.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "5fde4713d50ba641760e9ec2234552996905170c80b930eb0536a74fe7786618"
+    },
+    {
+      "file": "entrega-1920/home_entrada.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "5a994be30e763e226f7627295c33e7246821b9400166b73a3c1e0d8dbda66e91"
+    },
+    {
+      "file": "entrega-1920/home_toque.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "cfdbf5db37966d436e59e9fe487e6e525567c050202ec0ef0fe170dd8204da1f"
+    },
+    {
+      "file": "entrega-1920/hub_Cauldron.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "c27cd4511b01a24cbc3508f613a788c298698bae294c5ecaa169ade02be84f25"
+    },
+    {
+      "file": "entrega-1920/hub_Forge.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "b9bd126a31b44047dd7a98a934bdc9b0a98c732dc8b967603952d4f1e468471d"
+    },
+    {
+      "file": "entrega-1920/hub_Fresno.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "383ca0a29d7de815b0418f83c46f61897cb1e00671539b6dc52736902bee4a52"
+    },
+    {
+      "file": "entrega-1920/hub_Ledger.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "d56d25520668c258a05a661276cd570541cc0de63e12c6cccf26759ec5b2d7d1"
+    },
+    {
+      "file": "entrega-1920/hub_Mirror.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "84953ac3723d2900c24fac2c336857d4e568037b1557279ee311cbdd7f654de7"
+    },
+    {
+      "file": "entrega-1920/hub_Odds.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "cb1644a6727c3ab0a6decfcb8b6229ebed5301eae467b3d00f05d53446425778"
+    },
+    {
+      "file": "entrega-1920/hub_Settings.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "02b713ca42aadbcb7e9f748b3e0f151646dcaa488a40143c1266a7a8b7432554"
+    },
+    {
+      "file": "entrega-1920/hub_Shop.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "531ef449863777de7f5b13ef382be85f39d53c700669538b0f171954d07a7787"
+    },
+    {
+      "file": "entrega-1920/hub_Story.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "eca564d3ca152737d2b2ab3c56950a56c370e47140a663cdf4e0321a7edc12f5"
+    },
+    {
+      "file": "entrega-1920/pull_1_caida.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "e2ddf13aad3a29e727b50e0f93e643f06e8042e463e8206e442a3a79e42c4981"
+    },
+    {
+      "file": "entrega-1920/pull_2_impactos.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "2683c8ce58c154518f93a56d6e5e32b51434e4e319e28cfbc5ea1408376fe7ee"
+    },
+    {
+      "file": "entrega-1920/pull_3_hervor.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "e29d0ccca278758f16de86f0bdbe84e57543477622c314aec2f4b3a9ce86df25"
+    },
+    {
+      "file": "entrega-1920/pull_4_estallido.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "13873971726e7d66edd4da019eb4af490305ad4d34cb12d2722fb82bad811cbc"
+    },
+    {
+      "file": "entrega-1920/pull_5_emerge.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "279fc9ddabc1e736aa27f8752fb9057c68ec99785379a1db6b9179c08f803a98"
+    },
+    {
+      "file": "entrega-1920/pull_6_pie.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "59b1cbd86010f0d6fa58450a0bbab4860491571cda3be847f4197cbfcc37c05d"
+    },
+    {
+      "file": "entrega-1920/pull_6b_siguiente.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "71f896be3ce80f15b051d502eda1a1dcf012d471914ed38228ddf509aa7435a9"
+    },
+    {
+      "file": "entrega-1920/pull_6c_cinco.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "848ffcca0e1cc5b9f4d99dbf4ecfa2f5508ba11c41a1f5931c3aaf0f0cd6b132"
+    },
+    {
+      "file": "entrega-1920/pull_7_cuadricula.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "a97c73c53269f54ac7bc08233d47c9bd7482951eedec04ce72c0dbbe50115b67"
+    },
+    {
+      "file": "entrega-1920/summon.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "cd1a7c41685f8174cd6c0caf4d3d58a93fc43c47f9898523de15ded04563422b"
+    },
+    {
+      "file": "entrega-1920/summon_limitado.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "f76bb0f49a70ad788a0b50179673b454082fa720d454b3b8eae2e0ebe77d8ffd"
+    },
+    {
+      "file": "entrega-2400/combate_1_inicio.png",
+      "size": [
+        2400,
+        1080
+      ],
+      "sha256": "fc421f281a752b347443998cb9ccf3e67d15c85b37473166f3e2763baaca93d4"
+    },
+    {
+      "file": "entrega-2400/combate_2_golpes.png",
+      "size": [
+        2400,
+        1080
+      ],
+      "sha256": "c5ccaa451e5bfee348a78170bfa0e3c51e80ae8e2563ffc58d26154256432d17"
+    },
+    {
+      "file": "entrega-2400/combate_3_avance.png",
+      "size": [
+        2400,
+        1080
+      ],
+      "sha256": "a5bf3e454db4192fecdde2c7fbc3a152933aec96b11bb26457ab8270b7ec7a0c"
+    },
+    {
+      "file": "entrega-2400/combate_4_resultado.png",
+      "size": [
+        2400,
+        1080
+      ],
+      "sha256": "7718c8b19006475706555e18f7c1ae4b461d3354906a9717946bd33b6150fa4f"
+    },
+    {
+      "file": "entrega-2400/fresno_run.png",
+      "size": [
+        2400,
+        1080
+      ],
+      "sha256": "77a7044738321fe879010f1464dcddbb9e30d1f5ca60e94eb1dc45bd2cb913bf"
+    },
+    {
+      "file": "entrega-2400/home.png",
+      "size": [
+        2400,
+        1080
+      ],
+      "sha256": "7a9962f10f5a5d1f0a08e94c9fa0a7446a1f786ae86a2b39cc53c9b4f7c212f3"
+    },
+    {
+      "file": "entrega-2400/home_entrada.png",
+      "size": [
+        2400,
+        1080
+      ],
+      "sha256": "856b90e72ac869dce8d00c772e03a0f243d0a6c9b0433d634833d70c2cc1995f"
+    },
+    {
+      "file": "entrega-2400/home_toque.png",
+      "size": [
+        2400,
+        1080
+      ],
+      "sha256": "40151b89ff6fd99db0187d30b2d6511069afd68f6f99ac02add1c905dcbc3359"
+    },
+    {
+      "file": "accesibilidad-1280/combate_1_inicio.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "b36e1cbffa57bd28df6fa84c2bc1a5664e9458f0d50f7a89b5a529ebf3980a82"
+    },
+    {
+      "file": "accesibilidad-1280/combate_2_golpes.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "1c691d94c1fdf08540b6e5a74ed3d9192a4448129ed56decbf5104f11cb3cc25"
+    },
+    {
+      "file": "accesibilidad-1280/combate_3_avance.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "eaf7a58960deedff52ca389890e5984abbbacfc64738ef7b7ac3854302a170d9"
+    },
+    {
+      "file": "accesibilidad-1280/combate_4_resultado.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "8dceaa5b00602a21d2f7dfc91d80b7a2dfa8a6fba0f4338eccc22345e3c7065c"
+    },
+    {
+      "file": "accesibilidad-1280/fresno_run.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "cd602179e2e0d35bdf9830079c70b44a5caabd3b3185218c2509b5df7a2148cd"
+    },
+    {
+      "file": "accesibilidad-1280/home.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "ab6b1b941188fb828b2ba8ab88c39d6cb2f1018c2290d9527d1f2fa60db35cd5"
+    },
+    {
+      "file": "accesibilidad-1280/home_entrada.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "ab6b1b941188fb828b2ba8ab88c39d6cb2f1018c2290d9527d1f2fa60db35cd5"
+    },
+    {
+      "file": "accesibilidad-1280/home_toque.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "2adf0d3ab3d3e8e8d1e7e9d0469a68e1f5baae844bd9be78a8759d049c5e627d"
+    },
+    {
+      "file": "accesibilidad-1280/hub_Cauldron.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "f9fbb2d96914575243c77b7d2ea76345a1fa59eb55a00a1fdabaafe488571c78"
+    },
+    {
+      "file": "accesibilidad-1280/hub_Forge.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "f509e19e232dab6d836ae3f8a9bf69e73488e657a5b26638a862af5f8dba62a6"
+    },
+    {
+      "file": "accesibilidad-1280/hub_Fresno.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "f949210959d9de6569853f03e373b15babc2d2b2a066f13bdeee10fb4cddbfec"
+    },
+    {
+      "file": "accesibilidad-1280/hub_Ledger.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "40b9c2f891ee730ac76304bf293dd8340a3eb3d5c9d8dce2693972c48e6d9110"
+    },
+    {
+      "file": "accesibilidad-1280/hub_Mirror.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "abf7c531e32bafddc7e0b6ad8a762c3c778bf18da1a5fb9490965c32ceb28a75"
+    },
+    {
+      "file": "accesibilidad-1280/hub_Odds.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "36f0c60abd200700293e402668071e98bed29bdb20687c3a3859c7c9150eb086"
+    },
+    {
+      "file": "accesibilidad-1280/hub_Settings.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "c5dfefb5a980fa5831345e47387147ad408c076925cfe1d95079803057aee000"
+    },
+    {
+      "file": "accesibilidad-1280/hub_Shop.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "512bd2663b1731b66328002abef5d506bc067aa3a8deef316a4b440b41d25e45"
+    },
+    {
+      "file": "accesibilidad-1280/hub_Story.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "d52b73df74e7f7f0581c6129af2ef4e85b36289ac8a9765ba7787f5991e8e714"
+    },
+    {
+      "file": "interaccion-1280/combate_1_inicio.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "bb725bc5a6c3f8592c8efd00b3d5c2c5529715db8a310df0257552d48cfcac9a"
+    },
+    {
+      "file": "interaccion-1280/fresno_run.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "2abebff98168b2ad88c9f4272f735c8f9a3c96627c31e347ec1a3c7e16a190c9"
+    },
+    {
+      "file": "interaccion-1280/interaccion_01.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "0b0bcea4e98870f776f427e27655e519d5c3574bb3409beba1f1503badff2792"
+    },
+    {
+      "file": "interaccion-1280/interaccion_02.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "e947b1c9da19b3de932141838e836d65829ec9a2d3aa9926ddc8422ac81cbf24"
+    },
+    {
+      "file": "interaccion-1280/interaccion_03.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "5ae5b1f6e2f7516233da31640cd6ea8906c365bd4bc795b94b929e4f253f0a26"
+    },
+    {
+      "file": "interaccion-1280/interaccion_04.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "dcd3c2d6daea911783dc8cddef831040b0d46e1f750024b177abbe58e4aa2deb"
+    },
+    {
+      "file": "interaccion-1280/interaccion_05.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "039ddb0507fccdc504ae87f93ab744d676d461aa284de4aab5d6853a73c8776b"
+    }
+  ],
+  "interaction_checks": {
+    "enemy_plate": "passed",
+    "ally_card": "passed",
+    "hud_click_through": "passed",
+    "command_target": "passed"
+  },
+  "declared_color_contrast": {
+    "Marte_anterior_sobre_abismo": {
+      "foreground": "#C7301A",
+      "background": "#0B0B14",
+      "ratio": 3.61
+    },
+    "Jupiter_anterior_sobre_abismo": {
+      "foreground": "#6262EA",
+      "background": "#0B0B14",
+      "ratio": 4.15
+    },
+    "Texto_planeta_actual_sobre_abismo": {
+      "foreground": "#EDE3CC",
+      "background": "#0B0B14",
+      "ratio": 15.35
+    },
+    "Aliada_sobre_abismo": {
+      "foreground": "#9CCDBA",
+      "background": "#0B0B14",
+      "ratio": 11.06
+    },
+    "Enemigo_sobre_abismo": {
+      "foreground": "#F09591",
+      "background": "#0B0B14",
+      "ratio": 8.78
+    },
+    "Texto_vida_actual_sobre_abismo": {
+      "foreground": "#F6F4EE",
+      "background": "#0B0B14",
+      "ratio": 17.81
+    }
+  },
+  "contrast_scope": "Colores sRGB declarados sobre abismo opaco, sin antialiasing ni textura. No acredita contraste de toda la interfaz.",
+  "render_sample_enemy_header": {
+    "rect": [
+      1490,
+      181,
+      1510,
+      207
+    ],
+    "foreground_declared": "#F09591",
+    "background_pixels": 520,
+    "min_ratio": 8.65,
+    "max_ratio": 8.71,
+    "scope": "Solo fondo de este rotulo; no incluye glifos antialias ni otras superficies."
+  }
+}

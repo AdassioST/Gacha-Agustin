@@ -1,0 +1,7 @@
+Enemigo: 101 / Corneja
+Aliada: 1 / Marisal
+Turno: 3
+Granos: 4
+Órdenes:
+Basic actor=4 target=101
+Advance actor=-1 target=-1

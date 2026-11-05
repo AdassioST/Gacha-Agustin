@@ -143,6 +143,7 @@ namespace SalYAlmas.Ui
             Hub.ExternalScreen = s => Game.InHub && Owned(s);
             Hub.ExternalChrome = Framed;
             UiTheme.ReduceFlashes = Game.Game.Profile.Settings.ReduceFlashes;
+            SyncSettings();
 
             // El título solo se ve al abrir el juego, y nunca si la revisión pide una pantalla concreta.
             if (!UiCapture.Active && Owned(Hub.Current))
@@ -254,8 +255,7 @@ namespace SalYAlmas.Ui
 
         /// <summary>
         /// Ajustes que la capa uGUI respeta: Ahorro de batería baja las partículas, Reducir destellos apaga los flashes y
-        /// la tecla N (efectos) también silencia los sonidos de interfaz. No hay ajuste de "reducir movimiento" en el
-        /// perfil todavía: MotionScale queda en 1 hasta que exista (docs/FASE_UI.md).
+        /// la tecla N (efectos) también silencia los sonidos de interfaz. Reducir movimiento detiene la decoración.
         /// </summary>
         private void SyncSettings()
         {
@@ -263,6 +263,8 @@ namespace SalYAlmas.Ui
             if (s == null) return;
             UiParticles.Density = s.BatterySaver ? 0.45f : 1f; // TUNING
             UiTheme.ReduceFlashes = s.ReduceFlashes;
+            UiTheme.MotionScale = s.ReduceMotion ? 0f : 1f;
+            Shader.SetGlobalFloat("_UiMotion", UiTheme.MotionScale);
             UiSfx.Muted = Game.SfxMuted;
         }
 

@@ -32,6 +32,7 @@ Shader "SalYAlmas/UI/Hero"
             #pragma target 2.0
             #include "UnityCG.cginc"
             #include "UnityUI.cginc"
+            float _UiMotion;
             struct a2v { float4 vertex : POSITION; float4 color : COLOR; float2 uv : TEXCOORD0; };
             struct v2f { float4 pos : SV_POSITION; fixed4 color : COLOR; float2 uv : TEXCOORD0; float4 world : TEXCOORD1; };
             sampler2D _MainTex;
@@ -49,7 +50,7 @@ Shader "SalYAlmas/UI/Hero"
             fixed4 frag(v2f i) : SV_Target
             {
                 float2 uv = i.uv;
-                float t = _Time.y;
+                float t = (_Time.y * _UiMotion);
                 // Respiración: el torso se ensancha y sube un poco; los pies no se mueven.
                 float chest = exp(-pow((uv.y - 0.68) / 0.20, 2.0));
                 float br = sin(t * 1.45) * _Breath;

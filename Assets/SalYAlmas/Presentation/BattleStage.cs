@@ -14,13 +14,13 @@ namespace SalYAlmas.Presentation
         // derecha a partir de 1590, así que las figuras viven dentro de ese hueco. // TUNING
         private static readonly Vector2[] WitchSlots =
         {
-            new Vector2(800, 862), new Vector2(470, 848), new Vector2(660, 738), new Vector2(330, 728),
+            new Vector2(790, 802), new Vector2(450, 796), new Vector2(620, 684), new Vector2(290, 674),
         };
         private static readonly Vector2[] EnemySlots =
         {
-            new Vector2(1170, 858), new Vector2(1430, 826), new Vector2(1060, 742), new Vector2(1310, 726), new Vector2(1500, 704),
+            new Vector2(1160, 802), new Vector2(1430, 790), new Vector2(1060, 742), new Vector2(1310, 726), new Vector2(1500, 704),
         };
-        private static readonly Vector2 BossSlot = new Vector2(1290, 860);
+        private static readonly Vector2 BossSlot = new Vector2(1290, 802);
 
         // Cámara lateral un poco elevada: la profundidad se lee sin que la fila de atrás se vuelva diminuta. // TUNING
         private static readonly Vector3 CameraPosition = new Vector3(0f, 3.4f, -12f);
@@ -121,7 +121,7 @@ namespace SalYAlmas.Presentation
             float aspect = Mathf.Max(_camera.aspect, 1f);
             float w = h * aspect;
             t.localScale = new Vector3(w, h, 1f);
-            var mat = new Material(shader) { mainTexture = tex, renderQueue = 2000 };
+            var mat = new Material(shader) { mainTexture = tex, color = new Color(0.68f, 0.68f, 0.72f), renderQueue = 2000 };
             float ta = tex.width / (float)tex.height;
             if (ta > aspect)
             {

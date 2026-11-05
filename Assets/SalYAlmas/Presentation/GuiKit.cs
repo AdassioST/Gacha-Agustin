@@ -287,7 +287,7 @@ namespace SalYAlmas.Presentation
         {
             Fill(r, Palette.WithAlpha(Palette.Abyss, 0.9f));
             Fill(new Rect(r.x, r.y, 6, r.height), Palette.Planet(p));
-            Label(new Rect(r.x + 10, r.y, r.width - 12, r.height), Planets.DisplayName(p), Mathf.RoundToInt(r.height * 0.62f), Palette.Planet(p), TextAnchor.MiddleLeft, bold);
+            Label(new Rect(r.x + 10, r.y, r.width - 12, r.height), Planets.DisplayName(p), Mathf.RoundToInt(r.height * 0.62f), Palette.Parchment, TextAnchor.MiddleLeft, bold);
         }
     }
 }

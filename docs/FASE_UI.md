@@ -1,5 +1,7 @@
 # Interfaz · El home de las Termas, la tirada y el combate lateral
 
+> Reporte histórico de la rama `ui/interfaz`, ya integrada en `main`. La revisión posterior, las pruebas actuales y las comparativas de combate están en [Auditoría de interfaz, noviembre de 2026](auditoria-ui/README.md).
+
 Rehechura de la interfaz de *Sal y Almas* sobre la Fase 3. Un home tipo gacha conecta todo, la tirada cae en agua simulada y el combate pasó a vista lateral, con las brujas a la izquierda y los enemigos a la derecha. Rama `ui/interfaz`, basada en `fase/3` (d4f6fb7). Nada de esto cambia reglas: `Core/` y `Data/` no se tocaron.
 
 ## Estado

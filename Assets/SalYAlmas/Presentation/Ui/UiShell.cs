@@ -12,7 +12,7 @@ namespace SalYAlmas.Ui
     public sealed class UiShell
     {
         private sealed class Wallet { public string Res; public TextMeshProUGUI Value; public long Shown; public RectTransform Icon; public long Target; }
-        private sealed class NavItem { public MetaHub.Screen Screen; public RectTransform Root; public Image Icon, Glow; public TextMeshProUGUI Label; public bool Center; }
+        private sealed class NavItem { public MetaHub.Screen Screen; public RectTransform Root; public Image Icon, Glow, Active; public TextMeshProUGUI Label; public bool Center; }
 
         private readonly UiApp _app;
         private readonly RectTransform _top, _nav, _topRoot, _navRoot;
@@ -42,7 +42,7 @@ namespace SalYAlmas.Ui
             _navRoot.sizeDelta = new Vector2(0, 132);
             _nav = _navRoot;
             var nbg = U.Img(_navRoot, "chrome/bar_bottom", null, "Fondo");
-            U.Fill(nbg.rectTransform, -200, -60, -200, -30);
+            U.Fill(nbg.rectTransform, -200, -60, -200, 0);
 
             BuildTop();
             BuildNav();
@@ -137,6 +137,9 @@ namespace SalYAlmas.Ui
                 it.Label = U.Txt(it.Root, UiLoc.Get(d.key), 23, UiTheme.ParchmentDim, UiTheme.Bold, TextAlignmentOptions.Center);
                 it.Label.fontSharedMaterial = UiTheme.Shadowed(UiTheme.Bold, new Color(0, 0, 0, 0.9f), 0.3f, -0.6f, 0.05f);
                 U.At(it.Label.rectTransform, 0.5f, 0, 0, 8, step, 30, 0.5f, 0);
+                it.Active = U.Img(it.Root, null, UiTheme.GoldBright, "Pestaña activa");
+                U.At(it.Active.rectTransform, 0.5f, 0, 0, 1, 132, 5, 0.5f, 0);
+                it.Active.gameObject.SetActive(false);
                 _items.Add(it);
             }
         }
@@ -162,8 +165,9 @@ namespace SalYAlmas.Ui
             foreach (var it in _items)
             {
                 bool on = it.Screen == current;
+                it.Active.gameObject.SetActive(on);
                 var c = it.Glow.color;
-                c.a = on ? 0.5f : (it.Center ? 0.16f : 0f);
+                c.a = on ? 0.5f : 0f;
                 it.Glow.color = c;
                 it.Label.color = on ? UiTheme.Spark : UiTheme.ParchmentDim;
                 if (!it.Center) it.Icon.rectTransform.localScale = Vector3.one * (on ? 1.12f : 1f);

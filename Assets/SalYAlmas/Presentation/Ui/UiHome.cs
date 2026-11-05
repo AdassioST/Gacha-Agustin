@@ -69,7 +69,7 @@ namespace SalYAlmas.Ui
             UiBackdrop.Scene(Root, 1f, out _layers);
             _layerHome = new Vector2[_layers.Length];
 
-            var wheel = U.Img(Root, "fx/astrolabe", new Color(1f, 0.85f, 0.6f, 0.16f), "Rueda natal");
+            var wheel = U.Img(Root, "fx/astrolabe", new Color(1f, 0.85f, 0.6f, 0.08f), "Rueda natal");
             wheel.material = UiTheme.Mat("Additive");
             U.At(wheel.rectTransform, 0.37f, 0.62f, 0, 0, 980, 980, 0.5f, 0.5f);
             wheel.gameObject.AddComponent<UiSpin>().Speed = 1.2f;
@@ -112,10 +112,10 @@ namespace SalYAlmas.Ui
         {
             _heroName = U.Txt(Root, "", 56, UiTheme.Spark, UiTheme.Gothic, TextAlignmentOptions.MidlineLeft);
             _heroName.fontSharedMaterial = UiTheme.Shadowed(UiTheme.Gothic, new Color(0.08f, 0.03f, 0.08f, 1), 0.5f, -1f, 0.12f);
-            U.At(_heroName.rectTransform, 0, 0, 36, 262, 620, 64, 0, 0);
+            U.At(_heroName.rectTransform, 0, 0, 36, 288, 620, 64, 0, 0);
             _heroInfo = U.Txt(Root, "", 25, UiTheme.Parchment, UiTheme.Bold);
             _heroInfo.fontSharedMaterial = UiTheme.Shadowed(UiTheme.Bold, new Color(0.08f, 0.03f, 0.08f, 1), 0.4f, -0.7f, 0.07f);
-            U.At(_heroInfo.rectTransform, 0, 0, 38, 226, 620, 34, 0, 0);
+            U.At(_heroInfo.rectTransform, 0, 0, 38, 252, 620, 34, 0, 0);
 
             _bubble = U.Paper(Root, "Diálogo");
             // Anclado a la favorita (x 0.36), no al borde: en pantallas 20:9 el ancla izquierda la ponía sobre su cara.
@@ -146,7 +146,7 @@ namespace SalYAlmas.Ui
             _party = U.Node(Root, "Equipo");
             U.At(_party, 0, 1, 30, -200, 130, 540, 0, 1);
             _actions = U.Node(Root, "Acciones");
-            U.At(_actions, 0, 0, 34, 132, 140, 0, 0, 0);
+            U.At(_actions, 0, 0, 34, 164, 140, 0, 0, 0);
         }
 
         private RectTransform MakeDestCard(string art, string title, string subtitle, MetaHub.Screen go, float x, float y, float w, float h, out TextMeshProUGUI sub, float titleSize = 42, string overlayWitch = null)
@@ -177,18 +177,26 @@ namespace SalYAlmas.Ui
             fx.Prewarm(5);
             var shade = U.Img(mask, "chrome/shade_down", null, "Sombra");
             U.Fill(shade.rectTransform);
-            var frame = U.Img(rt, "chrome/frame_panel", null, "Marco");
+            var frame = U.Img(rt, h > 250 ? "chrome/frame_panel" : null, h > 250 ? Color.white : UiTheme.Gold, "Marco");
+            if (h <= 250)
+            {
+                // TUNING: una sola regla de oro en las tarjetas secundarias, sin cuatro esquinas repetidas.
+                U.At(frame.rectTransform, 0, 0, 0, 0, w, 2, 0, 0);
+                var backing = U.Img(rt, null, UiTheme.Abyss, "Pie de lectura");
+                U.At(backing.rectTransform, 0, 0, 7, 7, w - 14, h > 150 ? 101 : h - 14, 0, 0);
+            }
             frame.fillCenter = false;
-            U.Fill(frame.rectTransform);
+            if (h > 250) U.Fill(frame.rectTransform);
             var tt = U.Txt(rt, title, titleSize, UiTheme.Spark, UiTheme.Title);
             tt.fontSharedMaterial = UiTheme.Shadowed(UiTheme.Title, new Color(0.04f, 0.01f, 0.05f, 1), 0.45f, -0.9f, 0.1f);
-            sub = U.Txt(rt, subtitle, Mathf.Min(26, titleSize * 0.66f), UiTheme.Parchment, UiTheme.Italic, TextAlignmentOptions.MidlineLeft);
+            sub = U.Txt(rt, subtitle, Mathf.Min(26, titleSize * 0.66f), UiTheme.Parchment, UiTheme.Italic, TextAlignmentOptions.MidlineLeft, true);
             sub.enableAutoSizing = true;
-            sub.fontSizeMin = 15;
+            sub.fontSizeMin = 22;
             sub.fontSizeMax = Mathf.Min(26, titleSize * 0.66f);
+            sub.overflowMode = TextOverflowModes.Ellipsis;
             sub.fontSharedMaterial = UiTheme.Shadowed(UiTheme.Italic, new Color(0.04f, 0.01f, 0.05f, 1), 0.4f, -0.7f, 0.05f);
-            U.At(tt.rectTransform, 0, 0, 30, h > 150 ? 54 : 22, w - 50, titleSize + 8, 0, 0);
-            U.At(sub.rectTransform, 0, 0, 32, h > 150 ? 20 : 2, w - 50, 32, 0, 0);
+            U.At(tt.rectTransform, 0, 0, 30, h > 150 ? 72 : 22, w - 50, titleSize + 8, 0, 0);
+            U.At(sub.rectTransform, 0, 0, 32, h > 150 ? 12 : 2, w - 50, 58, 0, 0);
             if (h <= 150) sub.gameObject.SetActive(false);
             var b = root.gameObject.AddComponent<UiBtn>();
             b.Background = null;
@@ -288,6 +296,10 @@ namespace SalYAlmas.Ui
             rt.anchoredPosition = new Vector2(i * 98, 0);
             var ic = U.Img(rt, "iconsg/" + icon, null, "Icono");
             U.Fill(ic.rectTransform, 15, 15, 15, 15);
+            var captionBacking = U.Img(rt, null, UiTheme.Abyss, "Fondo de etiqueta");
+            U.At(captionBacking.rectTransform, 0.5f, 0, 0, -28, 94, 28, 0.5f, 0);
+            var caption = U.Txt(rt, label, 22, UiTheme.Parchment, UiTheme.Body, TextAlignmentOptions.Center);
+            U.At(caption.rectTransform, 0.5f, 0, 0, -28, 94, 28, 0.5f, 0);
             badge = UiBadge.Make(rt, "", 30);
             return b;
         }
@@ -440,7 +452,7 @@ namespace SalYAlmas.Ui
             if (_bubble != null && _bubble.gameObject.activeSelf)
             {
                 _typeT += dt * 46f;
-                _bubbleText.maxVisibleCharacters = Mathf.Min(_typeTotal, Mathf.FloorToInt(_typeT));
+                _bubbleText.maxVisibleCharacters = UiTheme.MotionScale <= 0 ? _typeTotal : Mathf.Min(_typeTotal, Mathf.FloorToInt(_typeT));
                 _bubbleHide -= dt;
                 if (_bubbleHide <= 0) _bubble.gameObject.SetActive(false);
             }

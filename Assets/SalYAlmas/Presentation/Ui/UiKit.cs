@@ -49,12 +49,12 @@ namespace SalYAlmas.Ui
             }
         }
 
-        public static void Run(float duration, Action<float> step, Func<float, float> curve = null, float delay = 0, Action done = null, object owner = null)
+        public static void Run(float duration, Action<float> step, Func<float, float> curve = null, float delay = 0, Action done = null, object owner = null, bool respectMotion = true)
         {
-            I._adding.Add(new Item { Duration = Mathf.Max(0.0001f, duration * UiTheme.MotionScale), Delay = delay * UiTheme.MotionScale, Step = step, Curve = curve ?? Ease.OutCubic, Done = done, Owner = owner });
+            I._adding.Add(new Item { Duration = Mathf.Max(0.0001f, duration * (respectMotion ? UiTheme.MotionScale : 1f)), Delay = delay, Step = step, Curve = curve ?? Ease.OutCubic, Done = done, Owner = owner });
         }
 
-        public static void After(float seconds, Action done, object owner = null) => Run(seconds, null, Ease.Linear, 0, done, owner);
+        public static void After(float seconds, Action done, object owner = null) => Run(seconds, null, Ease.Linear, 0, done, owner, false);
 
         /// <summary>Cancela lo que esté corriendo de este dueño, para no pelear con la siguiente animación.</summary>
         public static void Kill(object owner)
@@ -384,6 +384,12 @@ namespace SalYAlmas.Ui
         }
 
         private void Start() { _base = transform.localScale; _started = true; }
+        private void OnDisable()
+        {
+            Tw.Kill(this);
+            if (_started) transform.localScale = _base;
+            _scale = 1;
+        }
 
         private void Apply(float s, float dur, Func<float, float> curve)
         {
@@ -400,14 +406,19 @@ namespace SalYAlmas.Ui
 
         public void OnPointerDown(PointerEventData e)
         {
+            if (e.button != PointerEventData.InputButton.Left || !_interactable) return;
             Apply(PressScale, 0.07f, Ease.OutCubic);
             if (_interactable) UiSfx.Play(Sound == "tap" ? "tick" : null);
         }
 
-        public void OnPointerUp(PointerEventData e) => Apply(1f, 0.28f, Ease.OutBack);
+        public void OnPointerUp(PointerEventData e)
+        {
+            if (e.button == PointerEventData.InputButton.Left) Apply(1f, 0.28f, Ease.OutBack);
+        }
 
         public void OnPointerClick(PointerEventData e)
         {
+            if (e.button != PointerEventData.InputButton.Left) return;
             if (!_interactable)
             {
                 UiSfx.Play("deny");

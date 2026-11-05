@@ -88,6 +88,17 @@ namespace SalYAlmas.Presentation
         /// <summary>Los efectos están silenciados (tecla N). La capa uGUI lo usa para sus sonidos de interfaz.</summary>
         public bool SfxMuted => _sfx != null && _sfx.Muted;
         public BattleDirector Director => _director;
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+        public string DebugTargetState()
+        {
+            if (_hud == null || _director == null) return "Sin combate";
+            var b = _director.Battle;
+            var commandLines = new List<string>();
+            foreach (var command in b.CommandLog) commandLines.Add(command.ToString());
+            string commands = string.Join("\n", commandLines);
+            return $"Enemigo: {_hud.EnemyTarget} / {b.FindEnemy(_hud.EnemyTarget)?.Name}\nAliada: {_hud.AllyTarget} / {b.FindWitch(_hud.AllyTarget)?.Name}\nTurno: {b.TurnNumber}\nGranos: {b.Grains}\nÓrdenes:\n{commands}";
+        }
+#endif
         public GameDatabase Database => _db;
 
         private void Awake()
@@ -133,6 +144,7 @@ namespace SalYAlmas.Presentation
                 _formation.OnStart += StartBattle;
                 _art = new PortraitBank(LoadPortraits());
                 BattleHud.Bust = id => _art.Bust(id);
+                BattleHud.Localize = key => _hub.Game.Meta.World.Loc.Get(key, _hub.Game.Profile.Settings.Language);
                 _hub = new MetaHub(meta, ReviewSaveStore(), _art)
                 {
                     StartBattle = StartExternalBattle,

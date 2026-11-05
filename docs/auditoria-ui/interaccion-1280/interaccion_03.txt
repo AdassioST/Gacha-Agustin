@@ -1,0 +1,5 @@
+Enemigo: 101 / Corneja
+Aliada: 1 / Marisal
+Turno: 1
+Granos: 3
+Órdenes:

@@ -1,0 +1,5 @@
+Enemigo: 100 / Cristalizado
+Aliada: 4 / Tormentina
+Turno: 1
+Granos: 3
+Órdenes:

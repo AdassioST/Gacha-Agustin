@@ -112,6 +112,7 @@ namespace SalYAlmas.Ui
 
         private void Update()
         {
+            if (UiTheme.MotionScale <= 0) return;
             Step(Mathf.Min(Time.unscaledDeltaTime, 0.05f));
             SetVerticesDirty();
         }

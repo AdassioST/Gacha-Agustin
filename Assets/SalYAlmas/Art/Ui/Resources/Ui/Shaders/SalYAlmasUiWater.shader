@@ -30,6 +30,7 @@ Shader "SalYAlmas/UI/Water"
             #pragma target 2.0
             #include "UnityCG.cginc"
             #include "UnityUI.cginc"
+            float _UiMotion;
             struct a2v { float4 vertex : POSITION; float4 color : COLOR; float2 uv : TEXCOORD0; };
             struct v2f { float4 pos : SV_POSITION; fixed4 color : COLOR; float2 uv : TEXCOORD0; float4 world : TEXCOORD1; };
             sampler2D _MainTex;
@@ -46,7 +47,7 @@ Shader "SalYAlmas/UI/Water"
             }
             fixed4 frag(v2f i) : SV_Target
             {
-                float t = _Time.y;
+                float t = (_Time.y * _UiMotion);
                 float2 n = float2(tex2D(_NoiseTex, i.uv * 2.6 + float2(t * 0.025, t * 0.018)).r, tex2D(_NoiseTex, i.uv * 2.6 + float2(-t * 0.02, t * 0.031)).g) - 0.5;
                 fixed4 c = tex2D(_MainTex, i.uv + n * _Strength) * i.color;
                 float ca = tex2D(_NoiseTex, i.uv * 5.0 + n * 0.5 + t * 0.012).g;

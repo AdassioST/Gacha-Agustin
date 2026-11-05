@@ -80,6 +80,13 @@ namespace SalYAlmas.Presentation
             NewTestProfile();
         }
 
+        public void DebugAccessibility(bool reduceMotion, bool largeText)
+        {
+            Game.Profile.Settings.ReduceMotion = reduceMotion;
+            Game.Profile.Settings.LargeText = largeText;
+            ApplyAccessibility();
+        }
+
         public void DebugBattle()
         {
             F.EnterNode(F.AvailableNodes()[0].Lane);

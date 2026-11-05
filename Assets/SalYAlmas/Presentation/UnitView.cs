@@ -105,11 +105,12 @@ namespace SalYAlmas.Presentation
         private void Update()
         {
             float dt = Time.unscaledDeltaTime;
+            float motion = Theme.ReduceMotion ? 0f : 1f;
             for (int i = Floats.Count - 1; i >= 0; i--)
             {
                 var f = Floats[i];
                 f.Age += dt;
-                f.World += Vector3.up * dt * 0.8f;
+                f.World += Vector3.up * dt * 0.8f * motion;
                 if (f.Age > 1.4f) Floats.RemoveAt(i);
                 else Floats[i] = f;
             }
@@ -118,16 +119,16 @@ namespace SalYAlmas.Presentation
             if (_shake > 0)
             {
                 _shake -= dt;
-                pos += new Vector3(Mathf.Sin(Time.unscaledTime * 90f), 0, Mathf.Cos(Time.unscaledTime * 70f)) * 0.08f;
+                pos += new Vector3(Mathf.Sin(Time.unscaledTime * 90f), 0, Mathf.Cos(Time.unscaledTime * 70f)) * (0.08f * motion);
             }
             if (_lunge > 0)
             {
                 _lunge -= dt;
                 float t = Mathf.Sin(Mathf.Clamp01(_lunge / 0.35f) * Mathf.PI);
                 // Vista lateral: las brujas embisten hacia la derecha y los enemigos hacia la izquierda.
-                pos += (IsEnemy ? Vector3.left : Vector3.right) * t * 0.9f;
+                pos += (IsEnemy ? Vector3.left : Vector3.right) * t * (0.9f * motion);
             }
-            if (_active) pos += Vector3.up * (0.12f + Mathf.Sin(Time.unscaledTime * 4f) * 0.05f);
+            if (_active) pos += Vector3.up * (0.12f + Mathf.Sin(Time.unscaledTime * 4f) * 0.05f * motion);
             transform.position = pos;
 
             if (_dead)
@@ -138,15 +139,15 @@ namespace SalYAlmas.Presentation
             }
             else if (_charging)
             {
-                float s = 1f + Mathf.Sin(Time.unscaledTime * 8f) * 0.06f;
+                float s = 1f + Mathf.Sin(Time.unscaledTime * 8f) * 0.06f * motion;
                 transform.localScale = _baseScale * s;
             }
             else transform.localScale = _baseScale;
 
             Color c = _baseColor;
             if (_dead) c = Color.Lerp(_baseColor, Palette.SaltWhite, 0.8f) * new Color(1, 1, 1, IsArt ? 1f - Mathf.Clamp01((_deadTime - 0.3f) / 0.5f) : 1f);
-            else if (_broken) c = Color.Lerp(_baseColor, Palette.SaltWhite, 0.35f + 0.15f * Mathf.Sin(Time.unscaledTime * 10f));
-            else if (_ecstasy) c = Color.Lerp(_baseColor, Palette.Band(Core.Magic.SalinityBand.ExtasisAbisal), 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 6f));
+            else if (_broken) c = Color.Lerp(_baseColor, Palette.SaltWhite, 0.35f + 0.15f * Mathf.Sin(Time.unscaledTime * 10f) * motion);
+            else if (_ecstasy) c = Color.Lerp(_baseColor, Palette.Band(Core.Magic.SalinityBand.ExtasisAbisal), 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 6f) * motion);
             if (_flash > 0)
             {
                 _flash -= dt;
@@ -157,7 +158,7 @@ namespace SalYAlmas.Presentation
             if (Ascendant != null)
             {
                 if (_glow > 0) _glow -= dt;
-                float bob = Mathf.Sin(Time.unscaledTime * 2f + UnitId) * 0.15f;
+                float bob = Mathf.Sin(Time.unscaledTime * 2f + UnitId) * 0.15f * motion;
                 Ascendant.localPosition = new Vector3(-0.6f, 1.6f + bob + (_glow > 0 ? 0.6f : 0f), -0.7f);
                 float scale = _glow > 0 ? 0.9f : 0.45f;
                 Ascendant.localScale = Vector3.one * scale;

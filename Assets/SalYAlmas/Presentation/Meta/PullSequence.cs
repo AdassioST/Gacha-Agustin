@@ -211,7 +211,7 @@ namespace SalYAlmas.Presentation
             if (r.Kind != "bruja") { DrawResultIcon(c, r); return; }
             var body = _art.Body(r.WitchId);
             float rise = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(t * 1.5f));
-            float shake = t > 0.65f && !Theme.ReduceFlashes ? Mathf.Sin(Time.unscaledTime * 40f) * (1 - t) * 40f : 0f;
+            float shake = t > 0.65f && !Theme.ReduceFlashes && !Theme.ReduceMotion ? Mathf.Sin(Time.unscaledTime * 40f) * (1 - t) * 40f : 0f;
             var box = new Rect(c.x - 340 + shake, Mathf.Lerp(c.y + 60, 100, rise), 680, 840);
             var clip = new Rect(0, 0, GuiKit.Width, c.y + 140);
             GUI.BeginGroup(clip);

@@ -259,6 +259,7 @@ namespace SalYAlmas.Core.Save
         public bool ColorSafe;
         public bool SkipCinematics;
         public bool ReduceFlashes;
+        public bool ReduceMotion;
         public bool BatterySaver;
         public bool HighQuality = true;
         public float MusicVolume = 0.7f;

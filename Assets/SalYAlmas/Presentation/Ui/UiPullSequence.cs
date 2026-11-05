@@ -647,7 +647,7 @@ namespace SalYAlmas.Ui
 
         private void AddShake(float amount)
         {
-            _shake = Mathf.Max(_shake, amount * (UiTheme.ReduceFlashes ? 0.3f : 1f));
+            _shake = Mathf.Max(_shake, amount * UiTheme.MotionScale * (UiTheme.ReduceFlashes ? 0.3f : 1f));
             _shakeSeed = UnityEngine.Random.value * 100;
         }
 

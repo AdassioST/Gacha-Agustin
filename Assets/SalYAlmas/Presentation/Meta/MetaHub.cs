@@ -168,6 +168,7 @@ namespace SalYAlmas.Presentation
             var s = Game.Profile.Settings;
             Theme.LargeText = s.LargeText;
             Theme.ReduceFlashes = s.ReduceFlashes;
+            Theme.ReduceMotion = s.ReduceMotion;
             Theme.ColorSafe = s.ColorSafe;
             ApplySettings?.Invoke();
         }

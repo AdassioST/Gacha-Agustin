@@ -30,6 +30,7 @@ Shader "SalYAlmas/UI/Veil"
             #pragma target 2.0
             #include "UnityCG.cginc"
             #include "UnityUI.cginc"
+            float _UiMotion;
             struct a2v { float4 vertex : POSITION; float4 color : COLOR; float2 uv : TEXCOORD0; };
             struct v2f { float4 pos : SV_POSITION; fixed4 color : COLOR; float2 uv : TEXCOORD0; float4 world : TEXCOORD1; };
             sampler2D _MainTex;
@@ -47,8 +48,8 @@ Shader "SalYAlmas/UI/Veil"
             fixed4 frag(v2f i) : SV_Target
             {
                 float2 uv = i.uv * float2(1.6, 0.9);
-                float n1 = tex2D(_NoiseTex, uv + _Flow.xy * _Time.y).b;
-                float n2 = tex2D(_NoiseTex, uv * 1.9 + _Flow.zw * _Time.y).r;
+                float n1 = tex2D(_NoiseTex, uv + _Flow.xy * (_Time.y * _UiMotion)).b;
+                float n2 = tex2D(_NoiseTex, uv * 1.9 + _Flow.zw * (_Time.y * _UiMotion)).r;
                 float v = saturate((n1 * 0.6 + n2 * 0.5 - 0.42) * 2.4);
                 fixed4 c = tex2D(_MainTex, i.uv) * i.color;
                 c.a *= v * v * _Density;

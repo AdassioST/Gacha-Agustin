@@ -18,6 +18,7 @@ namespace SalYAlmas.Presentation
         /// <summary>Ajustes de accesibilidad que afectan a toda la interfaz.</summary>
         public static bool LargeText;
         public static bool ReduceFlashes;
+        public static bool ReduceMotion;
 
         private static Texture2D _sky;
         private static readonly Dictionary<string, Texture2D> Frames = new Dictionary<string, Texture2D>();

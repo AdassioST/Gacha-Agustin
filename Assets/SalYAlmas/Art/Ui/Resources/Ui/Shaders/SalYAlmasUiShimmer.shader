@@ -31,6 +31,7 @@ Shader "SalYAlmas/UI/Shimmer"
             #pragma target 2.0
             #include "UnityCG.cginc"
             #include "UnityUI.cginc"
+            float _UiMotion;
             struct a2v { float4 vertex : POSITION; float4 color : COLOR; float2 uv : TEXCOORD0; };
             struct v2f { float4 pos : SV_POSITION; fixed4 color : COLOR; float2 uv : TEXCOORD0; float4 world : TEXCOORD1; };
             sampler2D _MainTex;
@@ -48,7 +49,7 @@ Shader "SalYAlmas/UI/Shimmer"
             fixed4 frag(v2f i) : SV_Target
             {
                 fixed4 c = tex2D(_MainTex, i.uv) * i.color;
-                float p = frac(_Time.y * _Speed) * (1.0 + _Pause) - 0.3;
+                float p = frac((_Time.y * _UiMotion) * _Speed) * (1.0 + _Pause) - 0.3;
                 float d = (i.uv.x + i.uv.y * 0.4) - p * 1.4;
                 float s = exp(-d * d / (_Width * _Width));
                 c.rgb += _Band.rgb * s * _Band.a * c.a;

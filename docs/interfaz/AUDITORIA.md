@@ -1,5 +1,7 @@
 # Auditoría de la interfaz
 
+> Esta auditoría corresponde a la construcción inicial de `ui/interfaz`. Consulta la [revisión posterior con pruebas antes/después y separación de bandos](../auditoria-ui/README.md) para el estado integrado de noviembre de 2026.
+
 Qué se quitó, qué se creó y qué se adaptó al rehacer la interfaz, y con qué evidencia. Acompaña a [../FASE_UI.md](../FASE_UI.md).
 
 ## Cuánto pesa cada evidencia
