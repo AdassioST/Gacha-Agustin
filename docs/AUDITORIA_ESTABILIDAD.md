@@ -7,9 +7,9 @@ Revisión del 5 de noviembre de 2026 sobre `main` (`5826537`), después de que e
 | Revisión | Resultado |
 |---|---|
 | Pruebas del núcleo (`dotnet test Tests/Core.Tests`) | 311 de 311 antes; 316 de 316 después |
-| Pruebas EditMode en Unity 6000.6.7f1 | 323 de 323 antes; 327 de 327 con el primer lote de arreglos |
+| Pruebas EditMode en Unity 6000.6.7f1 | 323 de 323 antes; 328 de 328 después, sin advertencias del compilador |
 | Prueba de estrés del meta-juego | 300 sesiones de 1 500 acciones al azar (≈450 000 operaciones, ≈25 000 combates): sin excepciones, sin saldos negativos, guardado y carga idénticos, mismo resultado con la misma semilla |
-| Compilación de producción (sin Development) | Windows: 0 errores. Android: ver el final |
+| Compilación de producción (sin Development) | Windows y Android (IL2CPP, ARM64): 0 errores |
 | Lectura de código | Guardado, gacha, tienda, encargos, historia, Odisea, hub, capa uGUI y los últimos commits del agente de interfaz |
 
 La prueba de estrés no está en el repositorio: es un programa de un solo uso que llama al núcleo real con tiradas, crafteo, Juicios, historia, Expediciones, runs del Fresno, tienda, encargos, Termas, cambios de día y guardado y carga cada pocas acciones.
@@ -34,6 +34,8 @@ La prueba de estrés no está en el repositorio: es un programa de un solo uso q
 
 Pruebas nuevas: banner de inicio sin segunda Regente, corte entre renombres, temporal a medio escribir, bloques en `null`, tienda sin plataforma.
 
+También se revisó una nota vieja de `HANDOFF_ODISEA.md`: los rasgos de enemigos (reflejo, inmunidad a Aspectos, protección, enfurecer, crecer, curar, efectos al morir) y las pasivas nuevas ya están conectados en el combate.
+
 ## Revisión del trabajo del agente de interfaz
 
 La integración en `main` es correcta: `fase/3`, `ui/interfaz` y el respaldo de Desktop son ancestros de `main`, las pruebas pasan y los registros de sus recorridos no tienen excepciones. Se encontraron dos defectos en su código y se corrigieron:
@@ -53,6 +55,8 @@ Sus pendientes siguen abiertos y están en [auditoria-ui/README.md](auditoria-ui
 | Límite de gasto mensual | Cuenta bloques de 30 días desde el 1 de enero de 2026, no meses de calendario | Definir el corte cuando exista la tienda real |
 | Arte fuente sin versionar | `art/ambientes` y `art/enemigos` (361 MB) solo existen en el disco de `gacha-fase3`. `main` tiene cambios locales y archivos nuevos en `art/bustos` | Decidir Git LFS o un almacenamiento aparte. El arte que usa el juego (`Assets/SalYAlmas/Art`) sí está en `main` |
 | Colores seguros | Solo los aplica el hub IMGUI; la capa uGUI no | Llevar el ajuste a `UiTheme` |
+| Tamaño y memoria en Android | El APK de producción pesa 290 MB. Las texturas suman 518 MB sin comprimir el paquete (90 % del juego), casi todas en carpetas `Resources`, y los retratos se cargan todos al abrir | Google Play pide AAB con un módulo base menor de 200 MB: hace falta Play Asset Delivery o Addressables. Medir memoria en un teléfono de gama media antes de publicar |
+| Versión de Unity (D-14) | 6000.6.7f1 no es LTS | Decidir si se publica en una LTS |
 | Volumen de música | `SettingsState.MusicVolume` se guarda pero no se usa; el volumen vive en `PlayerPrefs` | Unificar |
 
 ## Cómo reproducir
