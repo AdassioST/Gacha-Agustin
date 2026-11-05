@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Simulador de consola: juega combates con el piloto automático e imprime el registro LitRPG. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <AssemblyName>Core.Sim</AssemblyName>
+    <RootNamespace>SalYAlmas.Sim</RootNamespace>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Core.Lib/SalYAlmas.Core.csproj" />
+  </ItemGroup>
+</Project>

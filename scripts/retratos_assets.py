@@ -55,13 +55,13 @@ def review(data, payload):
     save(data)
 
 
-def sheets(data):
+def sheets(data, include_failed=False):
     font = ImageFont.truetype('C:/Windows/Fonts/segoeui.ttf', 16)
     small = ImageFont.truetype('C:/Windows/Fonts/segoeui.ttf', 12)
     title = ImageFont.truetype('C:/Windows/Fonts/segoeui.ttf', 23)
     for phase in (1, 3):
         rows = [x for x in data['images'] if x['phase'] == phase
-                and x['review']['status'].startswith('passed')
+                and (include_failed or x['review']['status'].startswith('passed'))
                 and x.get('kind', 'variant') == 'variant']
         if not rows:
             continue
@@ -71,7 +71,8 @@ def sheets(data):
         cw, ch = 240, 444
         sheet = Image.new('RGB', (cols*cw+24, ((len(rows)+cols-1)//cols)*ch+68), '#E9DFC8')
         draw = ImageDraw.Draw(sheet)
-        draw.text((16, 14), f'Sal y Almas - Fase {phase} - {len(rows)} variantes aprobadas', font=title, fill='#121016')
+        label = 'todas las variantes / descartes marcados' if include_failed else 'variantes aprobadas'
+        draw.text((16, 14), f'Sal y Almas - Fase {phase} - {len(rows)} {label}', font=title, fill='#121016')
         for index, row in enumerate(rows):
             x = 16 + (index % cols)*cw
             y = 60 + (index // cols)*ch
@@ -83,9 +84,13 @@ def sheets(data):
                 tiny.thumbnail((64, 64), Image.Resampling.LANCZOS)
                 sheet.paste(tiny, (x, y+354))
             draw.text((x, y+328), Path(row['file']).name, font=font, fill='#121016')
-            draw.text((x+51, y+372), '64 px' + (' / elegida' if row['selected'] else ''), font=small, fill='#3F4150')
-        sheet.save(BASE / f'hoja_f{phase}.png')
-        data['contact_sheets'][f'phase{phase}'] = {'file': f'art/retratos/hoja_f{phase}.png', 'status': 'current', 'variants': len(rows)}
+            failed = row['review']['status'] == 'failed'
+            state = ' / DESCARTADA' if failed else (' / elegida' if row['selected'] else '')
+            draw.text((x+51, y+372), '64 px' + state, font=small, fill='#7A1E2C' if failed else '#3F4150')
+        suffix = '_todas' if include_failed else ''
+        filename = f'hoja_f{phase}{suffix}.png'
+        sheet.save(BASE / filename)
+        data['contact_sheets'][f'phase{phase}{suffix}'] = {'file': f'art/retratos/{filename}', 'status': 'current', 'variants': len(rows)}
     save(data)
 
 
@@ -98,6 +103,8 @@ if __name__ == '__main__':
         review(data, json.load(sys.stdin))
     elif command == 'sheets':
         sheets(data)
+    elif command == 'sheets-all':
+        sheets(data, include_failed=True)
     else:
         raise ValueError(command)
     print(json.dumps({'generations': data['generations_used'], 'images': len(data['images']),

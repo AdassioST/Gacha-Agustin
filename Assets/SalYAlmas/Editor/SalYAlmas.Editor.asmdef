@@ -1,0 +1,19 @@
+{
+    "name": "SalYAlmas.Editor",
+    "rootNamespace": "SalYAlmas.EditorTools",
+    "references": [
+        "SalYAlmas.Core",
+        "SalYAlmas.Presentation"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

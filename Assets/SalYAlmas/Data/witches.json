@@ -1,0 +1,288 @@
+// Seis brujas de la sección 18 del GDD para la Fase 1, todas en grado B (pureza 85 %).
+// Formato de golpes: [frame, parte] a 60 fps; las partes de un movimiento suman 1. Un número solo = partes iguales.
+// Los frames de los movimientos de Cadena definen la Partitura: el eslabón n empieza 24·(n−1) frames después.
+// Todo número que no viene del GDD lleva // TUNING.
+{
+  "witches": [
+    {
+      "id": "marisal",
+      "name": "Marisal Hojadelobo",
+      "shortName": "Marisal",
+      "species": "Loba de las cumbres",
+      "rarity": 5,
+      "role": "Ofensiva",
+      "ascendant": { "sign": "Aries", "name": "El Carnero de Herrumbre" },
+      "ritual": "Muerde un cristal de sal de roca",
+      "mix": { "primary": "marte", "secondary": "saturno", "name": "Escarcha Sangrienta" },
+      "via": "mayor",
+      "grade": "B",
+      // Ficha del Libro Mayor (GDD 13.1): nivel 52, ATQ 1 840, VIDA 9 300, VEL 112.
+      "stats": { "level": 52, "hp": 9300, "atk": 1840, "spd": 112, "critRate": 0.05, "critDmg": 0.5 }, // TUNING: crítico
+      "selfCast": { "form": "agujaYSello", "name": "Sello del Carnero" },
+      "moves": {
+        "basic": { "id": "mordida_hierro", "name": "Mordida de Hierro", "multiplier": 1.0, "toughness": 10, "byAscendant": false,
+                   "hits": [[6, 0.4], [16, 0.6]] }, // TUNING
+        "spell": { "id": "embestida_herrumbre", "name": "Embestida de Herrumbre", "multiplier": 2.4, "toughness": 20,
+                   "hits": [[10, 0.3], [24, 0.7]], // TUNING
+                   "effects": [ { "type": "dot", "dot": "bleed", "value": 0.3, "turns": 2, "name": "Sangrado" } ],
+                   "description": "El Carnero embiste y deja la herida abierta." },
+        "opening": { "id": "marca_carnero", "name": "Marca del Carnero", "multiplier": 1.0, "toughness": 15,
+                     "hits": [[4, 0.5], [26, 0.5]], // TUNING
+                     "effects": [ { "type": "debuff", "stat": "damageTaken", "value": 0.15, "turns": 2, "at": "start", "name": "Marca del Carnero" } ],
+                     "description": "Marca al objetivo: recibe +15 % de daño." },
+        "link": { "id": "sangre_ferrea", "name": "Sangre Férrea", "multiplier": 1.4, "toughness": 15,
+                  "hits": [[2, 0.3], [22, 0.3], [46, 0.4]], // TUNING
+                  "effects": [ { "type": "dot", "dot": "bleed", "value": 0.4, "turns": 2, "name": "Sangre Férrea" } ] },
+        "closing": { "id": "acero_carmesi", "name": "Acero Carmesí", "multiplier": 2.6, "toughness": 30,
+                     "hits": [[8, 0.2], [28, 0.3], [50, 0.5]] }, // TUNING
+        "ascension1": { "id": "embestida_carnero", "name": "Embestida del Carnero", "multiplier": 3.5, "toughness": 30,
+                        "hits": [[20, 0.4], [40, 0.6]] }, // TUNING
+        "ascension2": { "id": "hierro_rojo", "name": "Juramento de Hierro Rojo", "multiplier": 5.5, "toughness": 40,
+                        "hits": [[16, 0.25], [36, 0.25], [60, 0.5]], // TUNING
+                        "effects": [ { "type": "buff", "stat": "atk", "value": 0.15, "turns": 2, "target": "allAllies", "name": "Juramento de Hierro" } ] },
+        "ascension3": { "id": "carnero_manifiesto", "name": "El Carnero de Acero Carmesí", "multiplier": 9.0, "toughness": 60,
+                        "hits": [[30, 0.2], [60, 0.3], [90, 0.5]] } // TUNING
+      },
+      "regencia": { "name": "Juramento de la Mina", "description": "+15 % de ataque a todo el aquelarre.", "teamAtk": 0.15 } // TUNING
+    },
+    {
+      "id": "selenia",
+      "name": "Selenia de Plata",
+      "shortName": "Selenia",
+      "species": "Polilla lunar (kemonomimi)",
+      "rarity": 5,
+      "role": "Saboteadora",
+      "ascendant": { "sign": "Piscis", "name": "Los Dos Peces de Ceniza" },
+      "ritual": "Disuelve sal en té negro y la bebe de un trago",
+      "mix": { "primary": "luna", "secondary": "saturno", "name": "Humo Óseo" },
+      "via": "mayor",
+      "grade": "B",
+      "stats": { "level": 50, "hp": 8200, "atk": 1500, "spd": 118, "critRate": 0.05, "critDmg": 0.5 }, // TUNING
+      "selfCast": { "form": "hilos", "name": "Hilos de Luna" },
+      "moves": {
+        "basic": { "id": "polvo_ala", "name": "Polvo de Ala", "multiplier": 1.0, "toughness": 10, "byAscendant": false,
+                   "hits": [8, 20] }, // TUNING
+        "spell": { "id": "marea_plata", "name": "Marea de Plata", "multiplier": 1.8, "toughness": 20,
+                   "hits": [[12, 0.5], [30, 0.5]], // TUNING
+                   "effects": [
+                     { "type": "delay", "value": 0.12, "name": "Marea de Plata" }, // TUNING
+                     { "type": "debuff", "stat": "speed", "value": 0.10, "turns": 2, "name": "Bruma" }
+                   ],
+                   "description": "Retrasa 12 % y baja 10 % la Velocidad." },
+        "opening": { "id": "velo_bruma", "name": "Velo de Bruma", "multiplier": 0.8, "toughness": 15,
+                     "hits": [[0, 0.5], [18, 0.5]], // TUNING
+                     "effects": [ { "type": "grains", "value": 1, "at": "start" } ],
+                     "description": "Abre la Cadena y genera un Grano." },
+        "link": { "id": "hilo_plata", "name": "Hilo de Plata", "multiplier": 1.2, "toughness": 15,
+                  "hits": [[2, 0.3], [24, 0.3], [44, 0.4]], // TUNING
+                  "effects": [ { "type": "delay", "value": 0.10 } ] },
+        "closing": { "id": "espejo_lunar", "name": "Espejo Lunar", "multiplier": 2.2, "toughness": 25,
+                     "hits": [[10, 0.5], [48, 0.5]], // TUNING
+                     "effects": [ { "type": "shield", "value": 0.10, "turns": 2, "target": "allAllies", "name": "Espejo Lunar" } ] },
+        "ascension1": { "id": "sueno_peces", "name": "Sueño de los Dos Peces", "multiplier": 3.0, "toughness": 30,
+                        "hits": [[24, 0.5], [48, 0.5]], // TUNING
+                        "effects": [ { "type": "delay", "value": 0.25 } ] },
+        "ascension2": { "id": "elegia_abisal", "name": "Elegía Abisal", "target": "allEnemies", "multiplier": 3.6, "toughness": 35,
+                        "hits": [[20, 0.3], [50, 0.7]], // TUNING
+                        "effects": [
+                          { "type": "delay", "value": 0.25, "target": "allEnemies" },
+                          { "type": "shield", "value": 0.15, "turns": 2, "target": "allAllies", "name": "Velo de Elegía" }
+                        ] },
+        "ascension3": { "id": "espejo_manifiesto", "name": "Espejo Lunar Manifiesto", "target": "allEnemies", "multiplier": 7.0, "toughness": 50,
+                        "hits": [[30, 0.3], [70, 0.7]], // TUNING
+                        "effects": [ { "type": "delay", "value": 0.40, "target": "allEnemies" } ] }
+      },
+      "regencia": { "name": "Vigilia de Polilla", "description": "Los enemigos empiezan el combate retrasados 20 %.", "startEnemyDelay": 0.20 } // TUNING
+    },
+    {
+      "id": "solenne",
+      "name": "Solenne",
+      "shortName": "Solenne",
+      "species": "Zorra del desierto",
+      "rarity": 5,
+      "role": "Ofensiva en área",
+      "ascendant": { "sign": "Leo", "name": "El León de Corona Pálida" },
+      "ritual": "Pone sal en un gajo de limón con chile",
+      "mix": { "primary": "sol", "secondary": "mercurio", "name": "Fango Sulfúrico" },
+      "via": "mayor",
+      "grade": "B",
+      "stats": { "level": 50, "hp": 7600, "atk": 1700, "spd": 104, "critRate": 0.05, "critDmg": 0.5 }, // TUNING
+      "selfCast": { "form": "frenesiSalNegra", "name": "Frenesí del León" },
+      "moves": {
+        "basic": { "id": "mordisco_limon", "name": "Mordisco de Limón", "multiplier": 1.0, "toughness": 10, "byAscendant": false,
+                   "hits": [6, 14] }, // TUNING
+        "spell": { "id": "fuego_palido", "name": "Fuego Pálido", "target": "allEnemies", "multiplier": 1.4, "toughness": 15,
+                   "hits": [[8, 0.3], [20, 0.3], [32, 0.4]], // TUNING
+                   "effects": [ { "type": "dot", "dot": "burn", "value": 0.25, "turns": 2, "target": "allEnemies", "name": "Fuego Pálido" } ],
+                   "description": "Fuego en área que deja quemadura." },
+        "opening": { "id": "chispa_chile", "name": "Chispa de Chile", "target": "allEnemies", "multiplier": 0.9, "toughness": 10,
+                     "hits": [[12, 0.5], [30, 0.5]], // TUNING
+                     "effects": [ { "type": "grains", "value": 1, "at": "start" } ] },
+        "link": { "id": "ceniza_salobre", "name": "Ceniza Salobre", "target": "allEnemies", "multiplier": 1.1, "toughness": 15,
+                  "hits": [[0, 0.25], [16, 0.25], [32, 0.25], [48, 0.25]], // TUNING
+                  "effects": [ { "type": "dot", "dot": "burn", "value": 0.3, "turns": 2, "target": "allEnemies", "name": "Ceniza Salobre" } ] },
+        "closing": { "id": "corona_solar", "name": "Corona Solar", "target": "allEnemies", "multiplier": 2.0, "toughness": 25,
+                     "hits": [[20, 0.3], [40, 0.3], [60, 0.4]] }, // TUNING
+        "ascension1": { "id": "rugido_leon", "name": "Rugido del León", "target": "allEnemies", "multiplier": 2.6, "toughness": 30,
+                        "hits": [[18, 0.5], [36, 0.5]] }, // TUNING
+        "ascension2": { "id": "trueque_sol", "name": "Trueque del Sol", "target": "allEnemies", "multiplier": 4.0, "toughness": 40,
+                        "hits": [[16, 0.3], [40, 0.3], [64, 0.4]], // TUNING
+                        "effects": [ { "type": "buff", "stat": "damage", "value": 0.15, "turns": 2, "target": "allAllies", "name": "Trato Hecho" } ] },
+        "ascension3": { "id": "corona_manifiesta", "name": "Corona Solar Manifiesta", "target": "allEnemies", "multiplier": 7.0, "toughness": 60,
+                        "hits": [[24, 0.3], [56, 0.3], [88, 0.4]] } // TUNING
+      },
+      "regencia": { "name": "Trueque del Desierto", "description": "El aquelarre empieza con un Grano de Sal extra.", "startGrains": 1 } // TUNING
+    },
+    {
+      "id": "tormentina",
+      "name": "Tormentina",
+      "shortName": "Tormentina",
+      "species": "Liebre (kemonomimi)",
+      "rarity": 5,
+      "role": "Tejedora",
+      "ascendant": { "sign": "Géminis", "name": "Las Mensajeras del Espejo" },
+      "ritual": "Lame sal del dorso de la pata",
+      "mix": { "primary": "jupiter", "secondary": "mercurio", "name": "Azogue Tonante" }, // TUNING: el GDD no nombra esta mezcla
+      "via": "mayor",
+      "grade": "B",
+      "stats": { "level": 50, "hp": 8000, "atk": 1350, "spd": 134, "critRate": 0.05, "critDmg": 0.5 }, // TUNING
+      "selfCast": { "form": "hilos", "name": "Hilos de Mensajera" },
+      "moves": {
+        "basic": { "id": "patada_liebre", "name": "Patada de Liebre", "multiplier": 1.0, "toughness": 10, "byAscendant": false,
+                   "hits": [4, 10, 16] }, // TUNING
+        "spell": { "id": "correo_tonante", "name": "Correo Tonante", "multiplier": 1.2, "toughness": 15,
+                   "hits": [2, 10, 18, 26], // TUNING
+                   "effects": [
+                     { "type": "buff", "stat": "atk", "value": 0.12, "turns": 2, "target": "allAllies", "name": "Correo Tonante" },
+                     { "type": "advance", "value": 0.10, "target": "otherAllies", "name": "Correo Tonante" }
+                   ],
+                   "description": "+12 % de ataque al aquelarre y adelanta 10 % a las demás." },
+        "opening": { "id": "recado_relampago", "name": "Recado Relámpago", "multiplier": 0.8, "toughness": 10,
+                     "hits": [2, 12, 22], // TUNING
+                     "effects": [ { "type": "buff", "stat": "speedFlat", "value": 10, "turns": 2, "target": "allAllies", "at": "start", "name": "Recado Relámpago" } ] },
+        "link": { "id": "estatica_gris", "name": "Estática Gris", "multiplier": 1.0, "toughness": 15,
+                  "hits": [0, 10, 20, 30], // TUNING
+                  "effects": [ { "type": "buff", "stat": "damage", "value": 0.10, "turns": 2, "target": "allAllies", "name": "Estática Gris" } ] },
+        "closing": { "id": "ley_tonante", "name": "Ley Tonante", "multiplier": 1.8, "toughness": 25,
+                     "hits": [6, 16, 26, 36, 46] }, // TUNING
+        "ascension1": { "id": "doble_mensaje", "name": "Doble Mensaje", "multiplier": 2.4, "toughness": 30,
+                        "hits": [[10, 0.5], [12, 0.5]], // TUNING
+                        "effects": [ { "type": "advance", "value": 0.20, "target": "otherAllies" } ] },
+        "ascension2": { "id": "tormenta_estano", "name": "Tormenta de Estaño", "target": "allEnemies", "multiplier": 3.2, "toughness": 40,
+                        "hits": [8, 18, 28, 38, 48], // TUNING
+                        "effects": [
+                          { "type": "buff", "stat": "atk", "value": 0.20, "turns": 2, "target": "allAllies", "name": "Tormenta de Estaño" },
+                          { "type": "advance", "value": 0.25, "target": "otherAllies" }
+                        ] },
+        "ascension3": { "id": "ley_manifiesta", "name": "Ley Tonante Manifiesta", "target": "allEnemies", "multiplier": 6.0, "toughness": 60,
+                        "hits": [10, 20, 30, 40, 50, 60, 70] } // TUNING
+      },
+      "regencia": { "name": "Correo Urgente", "description": "+8 de Velocidad a todo el aquelarre.", "teamSpdFlat": 8 } // TUNING
+    },
+    {
+      "id": "zarigueya",
+      "name": "Zarigüeya",
+      "shortName": "Zarigüeya",
+      "species": "Zarigüeya",
+      "rarity": 3,
+      "role": "Saboteadora",
+      "ascendant": { "sign": "Cáncer", "name": "La Concha del Velorio" }, // TUNING: el GDD no da su signo
+      "ritual": "Esconde la sal bajo la lengua y se desmaya",
+      "mix": { "primary": "saturno", "secondary": "luna", "name": "Humo Óseo" },
+      "via": "mayor",
+      "grade": "B",
+      "stats": { "level": 50, "hp": 9000, "atk": 1300, "spd": 96, "critRate": 0.05, "critDmg": 0.5 }, // TUNING
+      // Debilidad aparente (GDD 17): su Ascendente se hace el muerto y le baja 50 % el ataque.
+      "passive": { "name": "Ascendente Muerto de Miedo", "description": "Su Ascendente se hace el muerto: −50 % de ataque.", "atkMultiplier": 0.5 },
+      // Las Aprendizas 3★ no tienen Autohechizo (GDD 12.1).
+      "selfCast": { "form": "none" },
+      "moves": {
+        "basic": { "id": "aranazo_nervioso", "name": "Arañazo Nervioso", "multiplier": 1.0, "toughness": 10, "byAscendant": false,
+                   "hits": [10] }, // TUNING
+        "spell": { "id": "velo_sepelio", "name": "Velo de Sepelio", "multiplier": 1.2, "toughness": 20,
+                   "hits": [14], // TUNING
+                   "effects": [
+                     { "type": "delay", "value": 0.15 },
+                     { "type": "shield", "value": 0.15, "turns": 2, "target": "self", "name": "Velo de Sepelio" }
+                   ],
+                   "description": "Retrasa 15 % y se cubre con un escudo." },
+        "opening": { "id": "hacerse_muerta", "name": "Hacerse la Muerta", "multiplier": 0.6, "toughness": 15,
+                     "hits": [26], // TUNING
+                     "effects": [ { "type": "grains", "value": 1, "at": "start" } ] },
+        "link": { "id": "tierra_sepelio", "name": "Tierra de Sepelio", "multiplier": 0.8, "toughness": 20,
+                  "hits": [24], // TUNING
+                  "effects": [ { "type": "delay", "value": 0.15 } ] },
+        // Truco único (GDD 17): su Cierre le pasa la Muerte Fingida al jefe.
+        "closing": { "id": "muerte_fingida", "name": "Muerte Fingida", "multiplier": 1.2, "toughness": 20,
+                     "hits": [[2, 0.5], [26, 0.5]], // TUNING
+                     "effects": [ { "type": "feignDeath" } ],
+                     "description": "Cancela el siguiente ataque definitivo del enemigo. Una vez por combate." },
+        "ascension1": { "id": "funeral_falso", "name": "Funeral Falso", "multiplier": 2.0, "toughness": 25,
+                        "hits": [[30, 1.0]], // TUNING
+                        "effects": [ { "type": "delay", "value": 0.30 } ] },
+        "ascension2": { "id": "velorio", "name": "Velorio de Concha", "multiplier": 3.0, "toughness": 35,
+                        "hits": [[20, 0.5], [44, 0.5]], // TUNING
+                        "effects": [
+                          { "type": "delay", "value": 0.30 },
+                          { "type": "shield", "value": 0.15, "turns": 2, "target": "allAllies", "name": "Velorio de Concha" }
+                        ] },
+        "ascension3": { "id": "resurreccion_fingida", "name": "La Gran Resurrección Fingida", "target": "allEnemies", "multiplier": 5.0, "toughness": 50,
+                        "hits": [[40, 0.4], [80, 0.6]], // TUNING
+                        "effects": [ { "type": "delay", "value": 0.35, "target": "allEnemies" } ] }
+      },
+      "regencia": { "name": "Funeral Ensayado", "description": "+10 % de vida máxima a todo el aquelarre.", "teamHp": 0.10 } // TUNING
+    },
+    {
+      "id": "topo",
+      "name": "Topo",
+      "shortName": "Topo",
+      "species": "Topa",
+      "rarity": 3,
+      "role": "Tejedora",
+      "ascendant": { "sign": "Tauro", "name": "El Toro de Barro" }, // TUNING: el GDD no da su signo
+      "ritual": "Saca la sal de la tierra con las garras y la masca",
+      "mix": { "primary": "saturno", "secondary": "marte", "name": "Escarcha Sangrienta" },
+      "via": "mayor",
+      "grade": "B",
+      "stats": { "level": 50, "hp": 10000, "atk": 1000, "spd": 100, "critRate": 0.05, "critDmg": 0.5 }, // TUNING
+      // Debilidad aparente (GDD 17): no hace daño. Sus golpes sí quitan Firmeza y sí cuentan para el Spark.
+      "passive": { "name": "Garras de Excavar", "description": "No hace daño, pero sus golpes cuentan para el Spark y quitan Firmeza.", "dealsNoDamage": true },
+      "selfCast": { "form": "none" },
+      "moves": {
+        "basic": { "id": "escarbar", "name": "Escarbar", "multiplier": 1.0, "toughness": 10, "byAscendant": false,
+                   "hits": [0, 12] }, // TUNING
+        // Truco único (GDD 17): duplica la producción de Granos del equipo durante dos turnos.
+        "spell": { "id": "excavacion", "name": "Gran Excavación", "target": "self",
+                   "effects": [
+                     { "type": "grainBoost", "turns": 2, "target": "self", "name": "Excavación" },
+                     { "type": "grains", "value": 1 }
+                   ],
+                   "description": "Duplica la producción de Granos de Sal del aquelarre durante dos turnos de Topo." },
+        "opening": { "id": "primer_tunel", "name": "Primer Túnel", "multiplier": 1.0, "toughness": 15,
+                     "hits": [0, 12, 24, 36], // TUNING
+                     "effects": [ { "type": "grains", "value": 1, "at": "start" } ] },
+        "link": { "id": "galeria", "name": "Galería", "multiplier": 1.0, "toughness": 15,
+                  "hits": [0, 8, 16, 24, 32, 40] }, // TUNING
+        "closing": { "id": "derrumbe", "name": "Derrumbe", "multiplier": 1.0, "toughness": 25,
+                     "hits": [0, 24, 48], // TUNING
+                     "effects": [ { "type": "delay", "value": 0.20 } ] },
+        "ascension1": { "id": "madriguera", "name": "Madriguera", "multiplier": 1.0, "toughness": 20,
+                        "hits": [0, 24], // TUNING
+                        "effects": [ { "type": "grains", "value": 2 } ] },
+        "ascension2": { "id": "red_de_tuneles", "name": "Red de Túneles", "multiplier": 1.0, "toughness": 30,
+                        "hits": [0, 12, 24, 36], // TUNING
+                        "effects": [
+                          { "type": "grains", "value": 3 },
+                          { "type": "resonance", "value": 20 }
+                        ] },
+        "ascension3": { "id": "toro_de_barro", "name": "El Toro de Barro", "multiplier": 1.0, "toughness": 50,
+                        "hits": [0, 16, 32, 48, 64], // TUNING
+                        "effects": [
+                          { "type": "grains", "value": 5 },
+                          { "type": "shield", "value": 0.20, "turns": 2, "target": "allAllies", "name": "Muro de Barro" }
+                        ] }
+      },
+      "regencia": { "name": "Túneles Compartidos", "description": "El aquelarre empieza con 30 de Resonancia.", "startResonance": 30 } // TUNING
+    }
+  ]
+}

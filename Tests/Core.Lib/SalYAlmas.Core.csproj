@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Compila el núcleo (Assets/SalYAlmas/Core) fuera de Unity con el mismo perfil que usa Unity 6:
+    .NET Standard 2.1 y C# 9. Si algo compila aquí, compila en el asmdef SalYAlmas.Core.
+  -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <AssemblyName>SalYAlmas.Core</AssemblyName>
+    <RootNamespace>SalYAlmas.Core</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Assets/SalYAlmas/Core/**/*.cs" />
+  </ItemGroup>
+</Project>

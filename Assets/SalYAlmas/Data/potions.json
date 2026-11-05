@@ -1,0 +1,73 @@
+// Las once Salmueras del catálogo inicial (GDD 14.2). Los efectos vienen del GDD;
+// las duraciones que el GDD no fija llevan // TUNING.
+{
+  "potions": [
+    {
+      "id": "salmuera_aurea", "name": "Salmuera Áurea", "ingredients": "Sal Áurea y agua termal", "target": "ally",
+      "description": "+1 Grano de Sal y +10 % de ataque por dos turnos.",
+      "effects": [
+        { "type": "grains", "value": 1 },
+        { "type": "buff", "stat": "atk", "value": 0.10, "turns": 2, "name": "Salmuera Áurea" }
+      ]
+    },
+    {
+      "id": "destilado_rocio", "name": "Destilado de Rocío del Árbol", "ingredients": "Savia y Sal Argenta", "target": "ally",
+      "description": "−40 de Salinidad y adelanta 30 % la acción.",
+      "effects": [
+        { "type": "salinity", "value": -40, "name": "Destilado de Rocío" },
+        { "type": "advance", "value": 0.30, "name": "Destilado de Rocío" }
+      ]
+    },
+    {
+      "id": "elixir_sal_negra", "name": "Elixir de Sal Negra", "ingredients": "Sal Negra y vinagre", "target": "ally",
+      "description": "El siguiente Golpe Astral hace el doble de daño, pero las curaciones se invierten un turno.",
+      "effects": [
+        { "type": "nextSpellDouble", "name": "Elixir de Sal Negra" },
+        { "type": "invertHealing", "turns": 1, "name": "Curas invertidas" }
+      ]
+    },
+    {
+      "id": "esencia_alma", "name": "Esencia de Alma", "ingredients": "Almitas concentradas", "target": "ally",
+      "description": "+30 de Ánima a una bruja.",
+      "effects": [ { "type": "anima", "value": 30 } ]
+    },
+    {
+      "id": "filtro_pureza", "name": "Filtro de Pureza", "ingredients": "Sal Destilada y flor de sal", "target": "ally",
+      "description": "Permite un Vislumbre sin gastar Sal Negra.",
+      "effects": [ { "type": "freeVislumbre", "name": "Filtro de Pureza" } ]
+    },
+    {
+      "id": "leche_luna", "name": "Leche de Luna", "ingredients": "Sal Argenta y leche lunar", "target": "allAllies",
+      "description": "Escudo del 20 % de la vida máxima a todas.",
+      "effects": [ { "type": "shield", "value": 0.20, "turns": 2, "target": "allAllies", "name": "Leche de Luna" } ] // TUNING: duración
+    },
+    {
+      "id": "vinagre_marte", "name": "Vinagre de Marte", "ingredients": "Sal Férrea y vinagre", "target": "ally",
+      "description": "El siguiente golpe quita +50 % de Firmeza.",
+      "effects": [ { "type": "nextToughness", "value": 0.5, "name": "Vinagre de Marte" } ]
+    },
+    {
+      "id": "tonico_azogue", "name": "Tónico de Azogue", "ingredients": "Sal de Azogue y agua termal", "target": "ally",
+      "description": "+20 de Velocidad por dos turnos.",
+      "effects": [ { "type": "buff", "stat": "speedFlat", "value": 20, "turns": 2, "name": "Tónico de Azogue" } ]
+    },
+    {
+      "id": "balsamo_cuprico", "name": "Bálsamo Cúprico", "ingredients": "Sal Cúprica y savia", "target": "ally",
+      "description": "Cura 25 % y limpia un estado negativo.",
+      "effects": [
+        { "type": "heal", "value": 0.25, "name": "Bálsamo Cúprico" },
+        { "type": "cleanse", "count": 1 }
+      ]
+    },
+    {
+      "id": "plomo_liquido", "name": "Plomo Líquido", "ingredients": "Sal Plúmbea y vinagre", "target": "enemy",
+      "description": "Retrasa 20 % a un enemigo.",
+      "effects": [ { "type": "delay", "value": 0.20, "name": "Plomo Líquido" } ]
+    },
+    {
+      "id": "agua_olvido", "name": "Agua de Olvido", "ingredients": "Agua de las Termas", "target": "none", "inCombat": false,
+      "description": "Fuera de combate: −20 de Paralaje.",
+      "effects": [ { "type": "paralaje", "value": -20 } ]
+    }
+  ]
+}
