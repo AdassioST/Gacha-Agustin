@@ -12,6 +12,7 @@
     { "k": "dest.continue", "es": "Continuar", "en": "Continue", "ja": "続ける" },
     { "k": "dest.run", "es": "Hay una escalada en curso", "en": "A climb is under way", "ja": "登攀中" },
     { "k": "summon.title", "es": "El Manantial", "en": "The Spring", "ja": "泉" },
+    { "k": "summon.results", "es": "Lo que trajo el agua", "en": "What the water brought", "ja": "水が運んだもの" },
     { "k": "summon.odds", "es": "Probabilidades", "en": "Odds", "ja": "確率" },
     { "k": "summon.thermometer", "es": "Termómetro", "en": "Thermometer", "ja": "温度計" },
     { "k": "summon.boiling", "es": "El agua hierve", "en": "The water boils", "ja": "湯が沸いている" },

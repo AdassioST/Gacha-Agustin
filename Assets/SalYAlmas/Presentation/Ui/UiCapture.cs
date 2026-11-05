@@ -129,8 +129,40 @@ namespace SalYAlmas.Ui
                 }
                 App.DebugShow(MetaHub.Screen.Home);
             }
+            if (Want("combate"))
+            {
+                // Run del Fresno en la primera zona y su primer combate: vista lateral, bioma de Raíces.
+                App.Hub.DebugRun();
+                yield return Shot("fresno_run", 1f);
+                App.Hub.DebugBattle();
+                yield return Shot("combate_1_inicio", 2.2f);
+                var game = FindAnyObjectByType<SalYAlmasGame>();
+                if (game != null && game.Director != null)
+                {
+                    Debug.Log("Capturas: combate en automático.");
+                    game.Director.Auto = true;
+                    game.Director.Speed = 2f;
+                    StartCoroutine(Trace(game));
+                    yield return Shot("combate_2_golpes", 3.5f);
+                    yield return Shot("combate_3_avance", 6f);
+                    float limit = Time.realtimeSinceStartup + 90f;
+                    while (!game.Director.ResultReady && Time.realtimeSinceStartup < limit) yield return null;
+                    yield return Shot("combate_4_resultado", 1.2f);
+                }
+            }
             Debug.Log("Capturas terminadas.");
             Application.Quit();
+        }
+
+        /// <summary>Deja en el log el estado del combate cada segundo, para ubicar un atasco.</summary>
+        private IEnumerator Trace(SalYAlmasGame game)
+        {
+            while (game != null && game.Director != null && !game.Director.ResultReady)
+            {
+                var b = game.Director.Battle;
+                Debug.Log($"Capturas: turno {b.TurnNumber}, pendiente {b.Pending}, eventos {b.Events.Count}, reproduciendo {game.Director.IsPlaying}");
+                yield return new WaitForSecondsRealtime(1f);
+            }
         }
 
         /// <summary>Resultado fabricado para ver la secuencia completa con cada rareza, sin tocar el generador.</summary>

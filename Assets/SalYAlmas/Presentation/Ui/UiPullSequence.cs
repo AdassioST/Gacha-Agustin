@@ -492,7 +492,7 @@ namespace SalYAlmas.Ui
         {
             // La barrera de toque sigue, pero ya no avanza nada.
             _grid = U.Fill(U.Node(_ui, "Resultados"));
-            var title = U.Txt(_grid, UiLoc.Get("summon.title"), 62, UiTheme.Spark, UiTheme.Gothic, TextAlignmentOptions.Center);
+            var title = U.Txt(_grid, UiLoc.Get("summon.results"), 62, UiTheme.Spark, UiTheme.Gothic, TextAlignmentOptions.Center);
             title.fontSharedMaterial = UiTheme.Shadowed(UiTheme.Gothic, new Color(0.05f, 0.02f, 0.06f, 1), 0.5f, -1, 0.12f);
             U.At(title.rectTransform, 0.5f, 1, 0, -40, 900, 76, 0.5f, 1);
             var div = U.Img(_grid, "chrome/divider", null, "Filete");

@@ -249,6 +249,21 @@ namespace SalYAlmas.Ui
             Pull?.Seq?.Tick(dt);
             if (_shown != null || Shell.Visible) Shell.Tick(dt);
             if (Shell.Visible && Time.frameCount % 20 == 0) Shell.Refresh();
+            if (Time.frameCount % 15 == 0) SyncSettings();
+        }
+
+        /// <summary>
+        /// Ajustes que la capa uGUI respeta: Ahorro de batería baja las partículas, Reducir destellos apaga los flashes y
+        /// la tecla N (efectos) también silencia los sonidos de interfaz. No hay ajuste de "reducir movimiento" en el
+        /// perfil todavía: MotionScale queda en 1 hasta que exista (docs/FASE_UI.md).
+        /// </summary>
+        private void SyncSettings()
+        {
+            var s = Game?.Game?.Profile.Settings;
+            if (s == null) return;
+            UiParticles.Density = s.BatterySaver ? 0.45f : 1f; // TUNING
+            UiTheme.ReduceFlashes = s.ReduceFlashes;
+            UiSfx.Muted = Game.SfxMuted;
         }
 
         // -------------------------------------------------------------------------- Navegación

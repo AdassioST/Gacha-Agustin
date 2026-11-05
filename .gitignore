@@ -56,3 +56,6 @@ desktop.ini
 
 # Python
 __pycache__/
+
+# Capturas de revisión de la interfaz (UiCapture); la evidencia que vale se copia a docs/interfaz
+/capturas/

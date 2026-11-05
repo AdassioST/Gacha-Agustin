@@ -1457,7 +1457,7 @@ def stage_raices():
     pool = smooth(0.62, 0.68, fit(noise(H // 2, W // 2, 90, 806, 4), H, W)) * smooth(hor + 20, hor + 120, yy) * (1 - np.exp(-(((xx - W * 0.5) / (W * 0.4)) ** 2)) * smooth(0.2, 0.6, depth))
     g = over(g, hx("7c2448") + (noise(H, W, 18, 807, 2)[..., None] - 0.5) * 0.12, pool * 0.75)
     g = spores(g, 520, 808, hx("ffc48a"), 0.9, 2.4, 0.9)
-    g = spores(g, 240, 809, hx("c88cff"), 0.8, 3.4, 0.7)
+    g = spores(g, 130, 809, hx("c88cff"), 0.8, 2.2, 0.45)
     return np.clip(vignette(g, 0.72), 0, 1)
 
 
@@ -1642,34 +1642,74 @@ def cube_cluster(c, cubes, W_=(255, 255, 255, 255)):
         c.poly([(x, y - s), (x + s * .9, y - s * .5), (x + s * .9, y + s * .5), (x, y + s), (x - s * .9, y + s * .5), (x - s * .9, y - s * .5)], fill=W_)
 
 
+def leaf(c, x, y, ang, ln, wd, fill):
+    """Pluma u hoja: un huso afilado desde (x, y) en la dirección ang."""
+    ca, sa = math.cos(ang), math.sin(ang)
+    px, py = -sa, ca
+    pts = []
+    for i in range(9):
+        t = i / 8
+        w = wd * math.sin(min(1, t * 1.15) * math.pi) * (1 - t * 0.35)
+        pts.append((x + ca * ln * t + px * w, y + sa * ln * t + py * w))
+    for i in range(8, -1, -1):
+        t = i / 8
+        w = wd * math.sin(min(1, t * 1.15) * math.pi) * (1 - t * 0.35) * 0.55
+        pts.append((x + ca * ln * t - px * w, y + sa * ln * t - py * w))
+    c.poly(pts, fill=fill)
+
+
 def enemy_golem():
-    """Cristalizado: lo que queda cuando la sal termina de comerse a alguien. Cubos, nunca agujas."""
-    S = 1024
+    """Cristalizado: lo que queda cuando la sal termina de comerse a alguien. Una figura encorvada hecha de cubos,
+    nunca agujas, con el puño a ras del suelo y una brasa rosa entre las juntas."""
+    S = 1100
     rng = np.random.default_rng(901)
+    # esqueleto: segmentos (x0, y0, x1, y1, tamaño de cubo, densidad)
+    bones = [
+        (450, 1040, 470, 760, 54, 9), (640, 1040, 615, 760, 54, 9),        # piernas
+        (470, 760, 640, 760, 70, 6),                                       # cadera
+        (520, 740, 470, 470, 92, 14), (600, 740, 590, 470, 92, 14),         # torso ancho
+        (330, 470, 720, 450, 80, 12),                                      # hombros
+        (420, 430, 390, 330, 60, 5),                                       # cuello, adelantado
+        (330, 470, 250, 720, 58, 8), (250, 720, 230, 930, 52, 6),           # brazo delantero, hacia las brujas
+        (720, 450, 790, 680, 56, 8), (790, 680, 770, 860, 50, 6),           # brazo trasero
+    ]
     cubes = []
-    for i in range(170):
-        t = rng.random()
-        y = 180 + t * 760
-        w = 90 + 210 * math.sin(min(1, t * 1.25) * math.pi * 0.62)
-        x = 512 + (rng.random() - 0.5) * 2 * w
-        cubes.append((x, y, 26 + rng.random() * 62))
-    cubes.sort(key=lambda q: q[1])
+    for x0, y0, x1, y1, s, n in bones:
+        for i in range(n):
+            t = (i + rng.random() * 0.6) / n
+            cubes.append((x0 + (x1 - x0) * t + (rng.random() - 0.5) * s * 0.9, y0 + (y1 - y0) * t + (rng.random() - 0.5) * s * 0.6, s * (0.55 + rng.random() * 0.6)))
+    for (cx, cy, s) in [(370, 300, 76), (330, 290, 52), (400, 255, 48), (230, 960, 88), (770, 890, 74)]:  # cabeza y puños
+        cubes.append((cx, cy, s))
+    for _ in range(26):  # esquirlas sueltas al pie
+        cubes.append((300 + rng.random() * 560, 1000 + rng.random() * 60, 10 + rng.random() * 22))
+    cubes.sort(key=lambda q: q[1] + q[2] * 0.2)
     m = mask_of(lambda c: cube_cluster(c, cubes), S, S, 2)
-    # caras de cada cubo: horneadas para que lean como sólidos
+    # brasa interior: se ve por las juntas, antes de pintar los cubos
+    glow = ndi.gaussian_filter(m, 26)[..., None] * hx("ff8a8a") * 1.2
     c = SS(S, S, 2)
     for x, y, s in cubes:
-        v = 0.75 + rng.random() * 0.25
-        t_ = rgba(np.clip(hx("fff4ee") * v, 0, 1))
-        l_ = rgba(np.clip(hx("c7a3a8") * v, 0, 1))
-        r_ = rgba(np.clip(hx("6b4a60") * v, 0, 1))
-        c.poly([(x, y - s), (x + s * .9, y - s * .5), (x, y), (x - s * .9, y - s * .5)], fill=t_)
-        c.poly([(x - s * .9, y - s * .5), (x, y), (x, y + s), (x - s * .9, y + s * .5)], fill=l_)
-        c.poly([(x + s * .9, y - s * .5), (x, y), (x, y + s), (x + s * .9, y + s * .5)], fill=r_)
-    im = c.done()
+        v = 0.78 + rng.random() * 0.22
+        rim = 0.9 + 0.1 * rng.random()
+        t_ = rgba(np.clip(hx("fff6f0") * v, 0, 1))
+        l_ = rgba(np.clip(hx("d4aeb0") * v, 0, 1))
+        r_ = rgba(np.clip(hx("6e4a62") * v, 0, 1))
+        k = 0.86  # junta: el cubo pintado es un poco más chico que su silueta
+        c.poly([(x, y - s * k), (x + s * .9 * k, y - s * .5 * k), (x, y), (x - s * .9 * k, y - s * .5 * k)], fill=t_)
+        c.poly([(x - s * .9 * k, y - s * .5 * k), (x, y), (x, y + s * k), (x - s * .9 * k, y + s * .5 * k)], fill=l_)
+        c.poly([(x + s * .9 * k, y - s * .5 * k), (x, y), (x, y + s * k), (x + s * .9 * k, y + s * .5 * k)], fill=r_)
+        c.line([(x - s * .9 * k, y - s * .5 * k), (x, y - s * k), (x + s * .9 * k, y - s * .5 * k)], (255, 255, 255, int(150 * rim)), 1.4)
+    faces = np.asarray(c.done()).astype(float) / 255.0
+    fa = faces[..., 3]
+    rgb = lerp(np.clip(glow, 0, 1) * 0.9 + hx("3a2030") * 0.5, faces[..., :3], fa)
+    # textura de sal sobre las caras y oclusión hacia abajo
+    t = tile_to(cc0("Rock030", "Color", 1024).mean(axis=2), S, S)
+    rgb = rgb * (0.86 + 0.28 * (t - t.mean()))[..., None]
+    yy = np.mgrid[0:S, 0:S][0].astype(float)
+    rgb = rgb * (1 - 0.22 * smooth(500, 1080, yy))[..., None]
     e = SS(S, S, 2)
-    eyes_constellation(e, [(470, 300), (560, 330), (505, 410), (430, 455), (590, 470)], 9)
-    im.alpha_composite(e.done())
-    return im
+    eyes_constellation(e, [(340, 290), (385, 305), (362, 335)], 9)
+    eyes_constellation(e, [(540, 560), (600, 600), (520, 640)], 7)
+    return finalize(np.clip(rgb, 0, 1), m, e.done())
 
 
 def enemy_root():
@@ -1691,38 +1731,119 @@ def enemy_root():
     return finalize(rgb, m, e.done())
 
 
-def enemy_crow():
-    """Corneja: una mancha de plumas con ojo de eclipse."""
-    S = 1024
-    def draw(c):
-        rng = np.random.default_rng(921)
-        W_ = (255, 255, 255, 255)
-        # cuerpo
-        c.poly([(500, 380), (620, 440), (650, 610), (560, 760), (500, 820), (430, 740), (400, 560)], fill=W_)
-        c.circle(560, 340, 96, fill=W_)
-        c.poly([(630, 300), (800, 345), (640, 380)], fill=W_)
-        # alas abiertas con plumas
-        for sg in (-1, 1):
-            for i in range(11):
-                a = -0.3 - i * 0.14
-                ln = 380 - i * 13
-                bx, by = 512 + sg * 42, 480 + i * 7
-                ex = bx + sg * math.cos(a) * ln
-                ey = by + math.sin(a) * ln * 0.75 + i * 18
-                c.poly([(bx, by - 26), (ex, ey), (bx, by + 40)], fill=W_)
-        # cola
-        for i in range(7):
-            x = 470 + i * 15
-            c.poly([(x, 760), (x + (i - 3) * 28, 980), (x + 34, 770)], fill=W_)
+def feather(c, x, y, ang, ln, wd, fill):
+    """Pluma de ala: hoja ancha de punta roma, no aguja."""
+    ca, sa = math.cos(ang), math.sin(ang)
+    px, py = -sa, ca
+    side_a, side_b = [], []
+    for i in range(13):
+        t = i / 12
+        w = wd * min(1.0, t * 3.5 + 0.25) * (1 - t ** 5 * 0.85)
+        side_a.append((x + ca * ln * t + px * w * 0.5, y + sa * ln * t + py * w * 0.5))
+        side_b.append((x + ca * ln * t - px * w * 0.5, y + sa * ln * t - py * w * 0.5))
+    c.poly(side_a + side_b[::-1], fill=fill)
 
-    m = mask_of(draw, S, S, 2)
-    rgb = finish_enemy(m, hx("0b0810"), hx("2a2038"), "Leather030", 40, 0.5, 34)
-    # iridiscencia de pluma
+
+def crow_feathers():
+    """Plumas de la corneja: (x, y, ángulo, largo, ancho, capa). Capa 0 detrás del cuerpo, 1 delante."""
+    rng = np.random.default_rng(921)
+    f = []
+    # ala lejana, asomando detrás y arriba
+    for i in range(8):
+        t = i / 7
+        f.append((560 + t * 90, 460 - t * 10, math.radians(-100 + t * 50), 200 + 120 * t, 60, 0))
+    # cola, abajo y atrás (derecha), plegada
+    for i in range(7):
+        t = i / 6
+        f.append((690, 630 + t * 18, math.radians(14 + t * 22), 240 + rng.random() * 20, 60, 0))
+    # ala cercana, alzada y barrida hacia atrás: las primarias, largas, apuntan arriba a la derecha
+    for i in range(14):
+        t = i / 13
+        bx, by = 470 + t * 210, 470 + t * 20
+        a = math.radians(-84 + t * 66)
+        ln = 190 + 210 * t ** 0.8
+        f.append((bx, by, a, ln + rng.random() * 20, 74 - t * 12, 1))
+    return f
+
+
+def enemy_crow():
+    """Corneja del eclipse: cuervo grande de perfil hacia las brujas (izquierda), con el ala alzada en abanico como
+    amenaza. Plumas largas con borde iridiscente, pico de hueso viejo y un solo ojo de eclipse."""
+    S = 1024
+    W_ = (255, 255, 255, 255)
+    F = crow_feathers()
+
+    def body_shape(c):
+        # cuerpo inclinado: la cabeza arriba a la izquierda, la cola abajo a la derecha
+        cx, cy, rx, ry, rot = 545, 575, 235, 140, math.radians(-24)
+        pts = []
+        for i in range(48):
+            a = i / 48 * math.tau
+            x, y = math.cos(a) * rx, math.sin(a) * ry * (1.12 if math.sin(a) > 0 else 1)
+            pts.append((cx + x * math.cos(rot) - y * math.sin(rot), cy + x * math.sin(rot) + y * math.cos(rot)))
+        c.poly(pts, fill=W_)
+
+    def head(c):
+        c.poly([(320, 380), (420, 330), (480, 430), (430, 530), (330, 480)], fill=W_)  # cuello
+        c.circle(360, 362, 108, fill=W_)
+
+    def beak(c):
+        c.poly([(290, 322), (200, 340), (128, 392), (176, 394), (226, 388), (292, 406)], fill=W_)
+
+    def legs(c):
+        for x0, x1 in ((520, 505), (590, 588)):
+            c.line([(x0, 690), (x1, 830)], W_, 17)
+            for k in (-1, 0, 1):
+                c.line([(x1, 830), (x1 - 40 + k * 32, 862)], W_, 10)
+
+    def draw(layer):
+        def d(c):
+            if layer in (0, None):
+                for x, y, a, ln, wd, lay in F:
+                    if lay == 0:
+                        feather(c, x, y, a, ln, wd, W_)
+                legs(c)
+            if layer in (1, None):
+                body_shape(c)
+                beak(c)
+            if layer in (2, None):
+                for x, y, a, ln, wd, lay in reversed(F):
+                    if lay == 1:
+                        feather(c, x, y, a, ln, wd, W_)
+            if layer in (3, None):
+                head(c)
+                beak(c)
+        return d
+
+    m = mask_of(draw(None), S, S, 2)
+    back = mask_of(draw(0), S, S, 2)
+    wing = mask_of(draw(2), S, S, 2)
+    hd = mask_of(draw(3), S, S, 2)
+    wing = wing * (1 - hd)
+
+    def lines(c):
+        for x, y, a, ln, wd, lay in F:
+            c.line([(x, y), (x + math.cos(a) * ln * 0.96, y + math.sin(a) * ln * 0.96)], W_, 4)
+    ln_m = ndi.gaussian_filter(mask_of(lines, S, S, 2), 1.4)
+
+    rgb = finish_enemy(m, hx("07050b"), hx("2c2342"), "Leather030", 46, 0.55, 30)
+    # el ala cercana se ilumina como una capa propia: borde de luz arriba y sombra sobre el cuerpo
+    wing_h = ndi.gaussian_filter(wing, 10)
+    wing_rgb = shade(wing_h * 60 + ln_m * 6, np.full((S, S, 3), hx("17121f")), None, 0, 1.0, 0.6, 26, 0.55, 0.95)
+    shadow = np.clip(ndi.gaussian_filter(wing, 16) - wing, 0, 1)
+    rgb = rgb * (1 - 0.45 * shadow[..., None])
+    rgb = lerp(rgb, wing_rgb, wing)
+    rgb = lerp(rgb, rgb * 0.62, back * (1 - wing))  # lo de atrás, más oscuro
     yy, xx = np.mgrid[0:S, 0:S].astype(float)
-    ir = (np.sin(xx * 0.03 + yy * 0.02) * 0.5 + 0.5)[..., None]
-    rgb = rgb + (ir * hx("4e3e96") + (1 - ir) * hx("2a6e7e")) * 0.12 * m[..., None]
+    ir = (np.sin(xx * 0.02 - yy * 0.016) * 0.5 + 0.5)[..., None]
+    sheen = (ir * hx("7a62de") + (1 - ir) * hx("2f9aa8")) * m[..., None]
+    rgb = rgb + sheen * (0.08 + 0.3 * ln_m[..., None])
+    rgb = rgb * (1 - 0.3 * ln_m[..., None])
+    bk = mask_of(beak, S, S, 2)
+    beak_rgb = shade(ndi.gaussian_filter(bk, 7) * 50, lerp(np.full((S, S, 3), hx("2a2224")), np.full((S, S, 3), hx("8a7a70")), smooth(400, 300, yy)[..., None] * 0.6), None, 0, 1.0, 0.7, 34, 0.5, 0.9)
+    rgb = lerp(rgb, beak_rgb, bk)
     e = SS(S, S, 2)
-    eyes_constellation(e, [(585, 325)], 15)
+    eyes_constellation(e, [(330, 340)], 15)
     return finalize(np.clip(rgb, 0, 1), m, e.done())
 
 
@@ -1779,24 +1900,49 @@ def enemy_wisp():
 
 
 def enemy_larva():
-    """Larva de la raíz: segmentos húmedos, sin rasgos."""
+    """Larva de la raíz: segmentos húmedos y abultados, la cabeza hacia las brujas (izquierda), con cilios."""
     S = 1024
-    def draw(c):
-        W_ = (255, 255, 255, 255)
-        for i in range(10):
-            t = i / 9
-            x = 220 + t * 620
-            y = 690 - math.sin(t * 3.1) * 340 + t * 90
-            c.circle(x, y, 150 - abs(t - 0.45) * 130, fill=W_)
-
-    m = mask_of(draw, S, S, 2)
-    rgb = finish_enemy(m, hx("3a2030"), hx("b08a8a"), "Leather037", 60, 0.75, 44)
+    segs = []
+    for i in range(11):
+        t = i / 10
+        x = 190 + t * 650
+        y = 760 - math.sin(t * math.pi * 0.95) * 230 + t * 40
+        r = 118 + 34 * math.sin(min(1, t * 1.6) * math.pi * 0.85) - t * 70
+        segs.append((x, y, max(r, 46)))
     yy, xx = np.mgrid[0:S, 0:S].astype(float)
-    seg = (np.sin(xx * 0.05) * 0.5 + 0.5) ** 8 * m
-    rgb = rgb * (1 - seg[..., None] * 0.65)
+    hgt = np.zeros((S, S))
+    sid = np.full((S, S), -1)
+    for i, (x, y, r) in enumerate(reversed(segs)):  # la cabeza queda encima
+        d = np.clip(1 - ((xx - x) ** 2 + (yy - y) ** 2) / (r * r), 0, 1)
+        dome = np.sqrt(d) * r * 0.55
+        on = d > 0
+        hgt = np.where(on, dome, hgt)
+        sid = np.where(on, len(segs) - 1 - i, sid)
+    m = ndi.gaussian_filter((sid >= 0).astype(float), 1.0)
+    t = tile_to(cc0("Leather037", "Color", 1024).mean(axis=2), S, S)
+    nrm = tile_to(cc0("Leather037", "NormalGL", 1024), S, S)
+    t = np.clip((t - t.mean()) * 2.2 + 0.5, 0, 1)
+    base = lerp(hx("5a3044"), hx("d6aca6"), t * 0.5 + 0.3)
+    base = lerp(base, hx("3a1e2c"), (sid % 2 == 1)[..., None] * 0.22)
+    rgb = shade(ndi.gaussian_filter(hgt, 2), base, nrm, 0.4, 0.9, 0.85, 50, 0.4, 0.95)
+    # pliegues oscuros entre segmentos y vientre en sombra
+    crease = np.clip(1 - hgt / 14.0, 0, 1) * m
+    rgb = rgb * (1 - 0.55 * crease[..., None])
+    rgb = rgb + np.clip(ndi.gaussian_filter(hgt, 18) / 60.0, 0, 1)[..., None] * hx("ff9db0") * 0.08
+    c = SS(S, S, 2)
+    for x, y, r in segs[1:]:
+        for k in (-0.3, 0.3):
+            c.line([(x + k * r, y + r * 0.8), (x + k * r - 14, y + r * 0.8 + 46)], (40, 22, 30, 255), 6)
+    legs = c.done()
+    img = finalize(np.clip(rgb, 0, 1), m)
+    out = Image.new("RGBA", img.size)
+    out.alpha_composite(legs)
+    out.alpha_composite(img)
     e = SS(S, S, 2)
-    eyes_constellation(e, [(788, 620), (838, 590), (830, 660)], 8)
-    return finalize(np.clip(rgb, 0, 1), m, e.done())
+    hx0, hy0, hr = segs[0]
+    eyes_constellation(e, [(hx0 - hr * 0.55, hy0 - hr * 0.25), (hx0 - hr * 0.2, hy0 - hr * 0.5), (hx0 - hr * 0.35, hy0 + hr * 0.05)], 8)
+    out.alpha_composite(e.done())
+    return out
 
 
 def make_enemies():

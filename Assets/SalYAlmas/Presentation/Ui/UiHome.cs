@@ -118,7 +118,8 @@ namespace SalYAlmas.Ui
             U.At(_heroInfo.rectTransform, 0, 0, 38, 226, 620, 34, 0, 0);
 
             _bubble = U.Paper(Root, "Diálogo");
-            U.At(_bubble, 0, 1, 900, -118, 330, 196, 0, 1);
+            // Anclado a la favorita (x 0.36), no al borde: en pantallas 20:9 el ancla izquierda la ponía sobre su cara.
+            U.At(_bubble, 0.36f, 1, 222, -118, 330, 196, 0, 1);
             var tail = U.Img(_bubble, "chrome/bubble_tail", null, "Cola");
             U.At(tail.rectTransform, 0, 0, 18, -20, 44, 30, 0, 0);
             _bubbleText = U.Txt(_bubble, "", 25, UiTheme.Ink, UiTheme.Body, TextAlignmentOptions.MidlineLeft, true);

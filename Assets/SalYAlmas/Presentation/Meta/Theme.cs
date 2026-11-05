@@ -309,11 +309,29 @@ namespace SalYAlmas.Presentation
             foreach (var t in textures) if (t != null) _byName[t.name] = t;
         }
 
+        private readonly Dictionary<string, Texture2D> _smooth = new Dictionary<string, Texture2D>();
+
+        /// <summary>
+        /// Busto para la interfaz. Prefiere el de 320 px con filtro suave del kit (Ui/brujas); el de 160 px con filtro
+        /// Point de Bustos/ se escala a tamaños no enteros y se ve pixelado, así que queda solo de respaldo.
+        /// </summary>
         public Texture2D Bust(string id, bool thirdPhase = false)
         {
             string art = ArtId(id);
+            var smooth = Smooth(art, id, thirdPhase ? "_f3_busto" : "_f1_busto") ?? (thirdPhase ? Smooth(art, id, "_f1_busto") : null);
+            if (smooth != null) return smooth;
             if (thirdPhase && _byName.TryGetValue(art + "_f3_neutral", out var f3)) return f3;
             return _byName.TryGetValue(art + "_f1_neutral", out var f1) ? f1 : null;
+        }
+
+        private Texture2D Smooth(string art, string id, string suffix)
+        {
+            string key = art + suffix;
+            if (_smooth.TryGetValue(key, out var t)) return t;
+            // El kit guarda algunos con los IDs de la Fase 1 (topo, zarigueya).
+            t = Resources.Load<Texture2D>("Ui/brujas/" + key) ?? Resources.Load<Texture2D>("Ui/brujas/" + id + suffix);
+            _smooth[key] = t;
+            return t;
         }
 
         public Texture2D Body(string id) => _byName.TryGetValue(ArtId(id) + "_f1_cuerpo", out var b) ? b : null;

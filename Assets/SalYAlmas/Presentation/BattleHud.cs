@@ -70,21 +70,17 @@ namespace SalYAlmas.Presentation
 
         private void DrawAll()
         {
-            DrawFloatingTexts();
             DrawEnemyPlates();
+            DrawFloatingTexts();
             DrawTurnLine(new Rect(16, 12, 1180, 86));
             DrawTopRight(new Rect(1560, 12, 344, 86));
             DrawResonance(new Vector2(1290, 56));
-            DrawLog(new Rect(16, 112, 520, 600));
-            DrawGrainsAndBelt(new Rect(1600, 112, 304, 410));
+            DrawLog(new Rect(16, 112, 520, 560));
+            DrawGrainsAndBelt(new Rect(1600, 112, 304, 312));
+            // Placas de 196 px: dejan libre la franja del escenario lateral (GDD 9.1, vista estilo HSR y Brave Frontier).
             for (int i = 0; i < B.Witches.Count; i++)
-            {
-                var panel = new Rect(16 + i * 392, 790, 380, 278);
-                DrawWitchPanel(B.Witches[i], panel);
-                var bust = Bust?.Invoke(B.Witches[i].Key);
-                if (bust != null) GUI.DrawTexture(new Rect(panel.xMax - 82, panel.y + 36, 72, 72), bust, ScaleMode.ScaleToFit, true);
-            }
-            DrawActions(new Rect(1600, 640, 304, 428));
+                DrawWitchPanel(B.Witches[i], new Rect(16 + i * 392, 872, 380, 196));
+            DrawActions(new Rect(1600, 436, 304, 632));
             DrawChainPlayback();
             DrawBanner();
             DrawToast();
@@ -141,9 +137,16 @@ namespace SalYAlmas.Presentation
             GuiKit.Label(new Rect(c.x - 60, c.y + 6, 120, 20), "Resonancia", 14, Palette.ParchmentShadow, TextAnchor.MiddleCenter);
         }
 
-        private void DrawLog(Rect r)
+        /// <summary>El registro empieza plegado: abierto tapa a las brujas de la fila de atrás.</summary>
+        public bool LogOpen;
+
+        private void DrawLog(Rect full)
         {
-            GuiKit.PanelBox(r);
+            var tab = new Rect(full.x, full.y, 210, 40);
+            if (GuiKit.Button(tab, LogOpen ? "Registro ▾" : "Registro ▸", true, 17)) LogOpen = !LogOpen;
+            if (!LogOpen) return;
+            var r = new Rect(full.x, full.y + 46, full.width, full.height - 46);
+            GuiKit.PanelBox(r, 0.94f);
             GuiKit.Label(new Rect(r.x + 12, r.y + 4, 300, 26), "Libro Mayor · registro", 18, Palette.GoldBright, TextAnchor.MiddleLeft, true);
             bool hits = GUI.Toggle(new Rect(r.xMax - 150, r.y + 6, 140, 22), _d.ShowHits, " ver golpes");
             if (hits != _d.ShowHits) _d.ShowHits = hits;
@@ -173,22 +176,24 @@ namespace SalYAlmas.Presentation
         {
             GuiKit.PanelBox(r);
             GuiKit.Label(new Rect(r.x + 12, r.y + 4, 200, 26), "Granos de Sal", 18, Palette.GoldBright, TextAnchor.MiddleLeft, true);
+            string boost = B.GrainBoostActive ? " ×2" : "";
+            GuiKit.Label(new Rect(r.xMax - 112, r.y + 4, 100, 26), $"{_d.Grains}/{B.Rules.Grains.Max}{boost}", 17, Palette.Parchment, TextAnchor.MiddleRight, true);
+            float step = Mathf.Min(44f, (r.width - 40) / Mathf.Max(1, B.Rules.Grains.Max - 1));
             for (int i = 0; i < B.Rules.Grains.Max; i++)
             {
-                var c = new Vector2(r.x + 34 + i * 56, r.y + 62);
+                var c = new Vector2(r.x + 26 + i * step, r.y + 50);
                 bool on = i < _d.Grains;
-                GuiKit.Dot(c, 22, Palette.WithAlpha(Palette.Abyss, 0.9f));
-                GuiKit.Dot(c, 18, on ? Palette.SaltWhite : Palette.WithAlpha(Palette.ParchmentShadow, 0.18f));
+                GuiKit.Dot(c, 16, Palette.WithAlpha(Palette.Abyss, 0.9f));
+                GuiKit.Dot(c, 13, on ? Palette.SaltWhite : Palette.WithAlpha(Palette.ParchmentShadow, 0.18f));
             }
-            string boost = B.GrainBoostActive ? "  · Excavación: ×2" : "";
-            GuiKit.Label(new Rect(r.x + 12, r.y + 92, r.width - 20, 24), $"{_d.Grains}/{B.Rules.Grains.Max}{boost}", 17, Palette.Parchment);
-            GuiKit.Label(new Rect(r.x + 12, r.y + 116, r.width - 20, 24), "Sal Negra: " + B.BlackSalt, 17, Palette.Band(SalinityBand.ExtasisAbisal));
+            GuiKit.Label(new Rect(r.x + 12, r.y + 72, r.width - 20, 22), "Sal Negra: " + B.BlackSalt, 16, Palette.Band(SalinityBand.ExtasisAbisal));
 
-            GuiKit.Label(new Rect(r.x + 12, r.y + 150, 280, 24), "Cinturón (1 por turno)", 18, Palette.GoldBright, TextAnchor.MiddleLeft, true);
+            GuiKit.Label(new Rect(r.x + 12, r.y + 98, 280, 24), "Cinturón (1 por turno)", 17, Palette.GoldBright, TextAnchor.MiddleLeft, true);
             bool canUse = _d.AwaitingPlayer && !B.PotionUsedThisTurn;
+            float slotH = Mathf.Min(58f, (r.height - 132) / Mathf.Max(1, B.Rules.Potions.BeltSlots) - 4);
             for (int i = 0; i < B.Rules.Potions.BeltSlots; i++)
             {
-                var slot = new Rect(r.x + 12, r.y + 180 + i * 74, r.width - 24, 68);
+                var slot = new Rect(r.x + 12, r.y + 126 + i * (slotH + 4), r.width - 24, slotH);
                 if (i >= B.Belt.Count)
                 {
                     GuiKit.Fill(slot, Palette.WithAlpha(Palette.Abyss, 0.5f));
@@ -219,41 +224,48 @@ namespace SalYAlmas.Presentation
             int anima = _d.Anima.TryGetValue(w.Id, out var a) ? a : w.Anima;
             var band = SalinityBands.FromValue(sal, B.Rules.Salinity);
 
-            GuiKit.Fill(new Rect(r.x, r.y, r.width, 6), Palette.Planet(w.Dominant));
-            GuiKit.Label(new Rect(r.x + 12, r.y + 10, 240, 32), w.Name, 26, Palette.Parchment, TextAnchor.MiddleLeft, true);
+            GuiKit.Fill(new Rect(r.x, r.y, r.width, 5), Palette.Planet(w.Dominant));
+
+            // Busto a la izquierda, con marco del color de su planeta.
+            var bustRect = new Rect(r.x + 10, r.y + 12, 70, 70);
+            GuiKit.Fill(bustRect, Palette.WithAlpha(Palette.Abyss, 0.9f));
+            var bust = Bust?.Invoke(w.Key);
+            if (bust != null) PortraitBank.Fill(bustRect, bust, 1f, w.IsAlive ? (Color?)null : new Color(0.5f, 0.5f, 0.5f, 1f));
+            GuiKit.Frame(bustRect, Palette.Planet(w.Dominant), 2);
+
+            float tx = r.x + 90, tw = r.width - 90 - 84;
+            GuiKit.Label(new Rect(tx, r.y + 8, tw + 30, 30), w.Name, 24, Palette.Parchment, TextAnchor.MiddleLeft, true);
             string rank = w.Def.Rarity == 5 ? "Regente" : w.Def.Rarity == 4 ? "Oficiala" : "Aprendiza";
-            GuiKit.Label(new Rect(r.x + 12, r.y + 40, 240, 20), $"{rank} · grado {w.EffectiveGrade} · {w.Def.Role}", 14, Palette.ParchmentShadow);
+            GuiKit.Label(new Rect(tx, r.y + 36, tw + 30, 20), $"{rank} · grado {w.EffectiveGrade}", 15, Palette.ParchmentShadow);
             double p = B.Purity(w);
-            GuiKit.PlanetPill(new Rect(r.x + 12, r.y + 64, 128, 24), w.Dominant, true);
-            GuiKit.Label(new Rect(r.x + 144, r.y + 64, 50, 24), (p * 100).ToString("0") + "%", 15, Palette.Parchment);
-            GuiKit.PlanetPill(new Rect(r.x + 190, r.y + 64, 110, 24), w.Recessive);
+            GuiKit.PlanetPill(new Rect(tx, r.y + 58, 112, 22), w.Dominant, true);
+            GuiKit.Label(new Rect(tx + 116, r.y + 58, 60, 22), (p * 100).ToString("0") + "%", 15, Palette.Parchment);
 
-            // Vida
-            GuiKit.Bar(new Rect(r.x + 12, r.y + 98, 268, 18), hp / (float)w.MaxHp, Color.Lerp(Palette.Danger, Palette.Planet(Planet.Venus), hp / (float)w.MaxHp), Palette.WithAlpha(Palette.Abyss, 0.9f));
-            if (w.ShieldAmount > 0) GuiKit.Fill(new Rect(r.x + 12, r.y + 116, 268 * Mathf.Clamp01((float)(w.ShieldAmount / w.MaxHp)), 4), Palette.Planet(Planet.Luna));
-            GuiKit.Label(new Rect(r.x + 16, r.y + 98, 260, 18), $"Vida {hp:N0}/{w.MaxHp:N0}", 13, Palette.SaltWhite);
+            // Vida y Salinidad a lo ancho, debajo del busto.
+            float bw = r.width - 20 - 84;
+            GuiKit.Bar(new Rect(r.x + 10, r.y + 90, bw, 18), hp / (float)w.MaxHp, Color.Lerp(Palette.Danger, Palette.Planet(Planet.Venus), hp / (float)w.MaxHp), Palette.WithAlpha(Palette.Abyss, 0.9f));
+            if (w.ShieldAmount > 0) GuiKit.Fill(new Rect(r.x + 10, r.y + 108, bw * Mathf.Clamp01((float)(w.ShieldAmount / w.MaxHp)), 3), Palette.Planet(Planet.Luna));
+            Shadowed(new Rect(r.x + 14, r.y + 90, bw - 8, 18), $"Vida {hp:N0}/{w.MaxHp:N0}", 14);
 
-            // Salinidad coloreada por banda, con marcas en 40, 70, 100 y 150.
-            var salRect = new Rect(r.x + 12, r.y + 126, 268, 18);
+            var salRect = new Rect(r.x + 10, r.y + 114, bw, 16);
             GuiKit.Bar(salRect, sal / (float)B.Rules.Salinity.Max, Palette.Band(band), Palette.WithAlpha(Palette.Abyss, 0.9f));
             foreach (int mark in new[] { B.Rules.Salinity.SalobreAt, B.Rules.Salinity.SobresaladaAt, B.Rules.Salinity.CristalizacionAt })
                 GuiKit.Fill(new Rect(salRect.x + salRect.width * mark / B.Rules.Salinity.Max, salRect.y, 2, salRect.height), Palette.WithAlpha(Palette.Ink, 0.8f));
-            GuiKit.Label(new Rect(r.x + 12, r.y + 146, 268, 20), $"Salinidad {sal}/150 · {SalinityBands.DisplayName(band)}", 14, Palette.Band(band));
-            GuiKit.Label(new Rect(r.x + 12, r.y + 166, 268, 18), SalinityBands.EffectSummary(band), 12, Palette.ParchmentShadow);
+            Shadowed(new Rect(r.x + 14, r.y + 113, bw - 8, 18), $"Sal {sal}/150 · {SalinityBands.DisplayName(band)}", 13);
 
-            // Ánima: anillo de 0 a 300 con tres tramos.
-            var center = new Vector2(r.xMax - 50, r.y + 132);
-            GuiKit.Dot(center, 36, Palette.WithAlpha(Palette.Abyss, 0.9f));
+            // Ánima: anillo de 0 a 300 con tres tramos, a la derecha.
+            var center = new Vector2(r.xMax - 44, r.y + 82);
+            GuiKit.Dot(center, 32, Palette.WithAlpha(Palette.Abyss, 0.9f));
             for (int tier = 0; tier < 3; tier++)
             {
                 float frac = Mathf.Clamp01((anima - tier * 100) / 100f);
                 Color c = tier == 0 ? Palette.Gold : tier == 1 ? Palette.GoldBright : Palette.Spark;
-                GuiKit.Ring(center, 30 + tier * 7, frac, c, Palette.WithAlpha(Palette.ParchmentShadow, 0.15f), 24, 2.4f);
+                GuiKit.Ring(center, 26 + tier * 6, frac, c, Palette.WithAlpha(Palette.ParchmentShadow, 0.15f), 24, 2.2f);
             }
-            GuiKit.Label(new Rect(center.x - 30, center.y - 12, 60, 24), anima.ToString(), 20, Palette.Parchment, TextAnchor.MiddleCenter, true);
-            GuiKit.Label(new Rect(center.x - 40, center.y + 52, 80, 16), "Ánima", 13, Palette.ParchmentShadow, TextAnchor.MiddleCenter);
+            GuiKit.Label(new Rect(center.x - 30, center.y - 12, 60, 24), anima.ToString(), 19, Palette.Parchment, TextAnchor.MiddleCenter, true);
+            GuiKit.Label(new Rect(center.x - 40, center.y + 40, 80, 16), "Ánima", 13, Palette.ParchmentShadow, TextAnchor.MiddleCenter);
 
-            // Estados
+            // Estados: una línea sobre la placa, encima del escenario, para no robarle alto.
             var tags = new List<string>();
             if (w.InEcstasy) tags.Add("<color=#D5A4F4><b>ÉXTASIS ABISAL</b></color>");
             if (w.IsDesalada) tags.Add("<b>Desalada</b>");
@@ -262,13 +274,21 @@ namespace SalYAlmas.Presentation
                 if (st.Kind == StatusKind.Ecstasy || st.Kind == StatusKind.Desalada || st.Name.StartsWith("Regencia")) continue;
                 tags.Add(st.TurnsLeft > 0 ? $"{st.Name} ({st.TurnsLeft})" : st.Name);
             }
-            GuiKit.Label(new Rect(r.x + 12, r.y + 188, r.width - 24, 36), string.Join(" · ", tags.Distinct()), 13, Palette.Parchment, TextAnchor.UpperLeft, false, true);
+            if (tags.Count > 0)
+            {
+                string line = string.Join(" · ", tags.Distinct());
+                float tw2 = Mathf.Min(r.width, GuiKit.Style(14, Palette.Parchment).CalcSize(new GUIContent(line)).x + 20);
+                var tagRect = new Rect(r.x, r.y - 28, tw2, 24);
+                GuiKit.Fill(tagRect, Palette.WithAlpha(Palette.Abyss, 0.62f));
+                GuiKit.Label(new Rect(tagRect.x + 8, tagRect.y, tagRect.width - 16, tagRect.height), line, 14, Palette.Parchment, TextAnchor.MiddleLeft);
+            }
 
             // Ascensiones: se lanzan en cualquier momento e interrumpen el orden.
             bool window = !_d.IsPlaying && !_d.Auto && !_chain.IsOpen;
+            float ab = (r.width - 20 - 12) / 3f;
             for (int lvl = 1; lvl <= 3; lvl++)
             {
-                var b = new Rect(r.x + 12 + (lvl - 1) * 122, r.y + 230, 116, 40);
+                var b = new Rect(r.x + 10 + (lvl - 1) * (ab + 6), r.y + 144, ab, 42);
                 bool can = window && B.AscensionBlocker(w, lvl).Length == 0;
                 string label = "Asc. " + (lvl == 1 ? "I" : lvl == 2 ? "II" : "III");
                 if (GuiKit.Button(b, can ? "<b>" + label + "</b>" : label, can, 18))
@@ -282,55 +302,91 @@ namespace SalYAlmas.Presentation
 
             if (active) GuiKit.Frame(r, Palette.GoldBright, 4);
             else if (selected) GuiKit.Frame(r, Palette.Planet(Planet.Venus), 3);
-            if (active) GuiKit.Label(new Rect(r.xMax - 130, r.y + 10, 118, 20), "EN TURNO", 15, Palette.GoldBright, TextAnchor.MiddleRight, true);
+            if (active) GuiKit.Label(new Rect(r.xMax - 128, r.y + 8, 118, 18), "EN TURNO", 14, Palette.GoldBright, TextAnchor.MiddleRight, true);
             if (!w.IsAlive) GuiKit.Label(r, "CAÍDA", 40, Palette.Danger, TextAnchor.MiddleCenter, true);
         }
 
+        /// <summary>Texto claro con sombra de tinta, legible sobre cualquier relleno de barra.</summary>
+        private static void Shadowed(Rect r, string text, int size)
+        {
+            // Una cinta de tinta detrás del texto: sobre el amarillo de Salobre o el verde de la vida, sin ella no se lee.
+            float w = GuiKit.Style(size, Palette.SaltWhite, TextAnchor.MiddleLeft, true).CalcSize(new GUIContent(text)).x;
+            GuiKit.Fill(new Rect(r.x - 4, r.y + 1, Mathf.Min(r.width, w + 8), r.height - 2), Palette.WithAlpha(Palette.Abyss, 0.55f));
+            GuiKit.Label(new Rect(r.x + 1, r.y + 1, r.width, r.height), text, size, Palette.WithAlpha(Palette.Ink, 0.95f), TextAnchor.MiddleLeft, true);
+            GuiKit.Label(r, text, size, Palette.SaltWhite, TextAnchor.MiddleLeft, true);
+        }
+
+        private readonly List<Rect> _plates = new List<Rect>();
+
+        /// <summary>
+        /// Placas sobre la cabeza de cada enemigo, angostas, sin salir de la franja del escenario y sin encimarse:
+        /// si dos chocan, la de atrás sube.
+        /// </summary>
         private void DrawEnemyPlates()
         {
             if (_camera == null) return;
-            foreach (var e in B.Enemies)
+            _plates.Clear();
+            var order = B.Enemies.Where(e => _d.Views.ContainsKey(e.Id))
+                .OrderByDescending(e => _d.Views[e.Id].transform.position.z * -1f).ToList();
+            foreach (var e in order)
             {
-                if (!_d.Views.TryGetValue(e.Id, out var view)) continue;
-                var screen = _camera.WorldToScreenPoint(view.Head + Vector3.up * 0.4f);
+                var view = _d.Views[e.Id];
+                var screen = _camera.WorldToScreenPoint(view.Head + Vector3.up * 0.25f);
                 if (screen.z < 0) continue;
                 var p = GuiKit.ScreenToCanvas(screen);
-                float w = e.IsBoss ? 380 : 260;
-                var r = new Rect(p.x - w / 2, p.y - 150, w, 146);
+                float w = e.IsBoss ? 300 : 224;
+                const float ph = 112;
+                float x = Mathf.Clamp(p.x - w / 2, 560, 1588 - w);
+                float y = Mathf.Clamp(p.y - ph, 160, 760);
+                var r = new Rect(x, y, w, ph);
+                for (int guard = 0; guard < 6; guard++)
+                {
+                    bool hit = false;
+                    foreach (var o in _plates)
+                        if (o.Overlaps(new Rect(r.x - 4, r.y - 4, r.width + 8, r.height + 8))) { r.y = o.y - ph - 6; hit = true; }
+                    if (!hit) break;
+                }
+                if (r.y < 112) r.y = 112;
+                _plates.Add(r);
+
                 if (!e.IsAlive)
                 {
-                    GuiKit.Label(new Rect(r.x, r.yMax - 30, r.width, 30), e.Name + " · se deshizo en sal", 16, Palette.ParchmentShadow, TextAnchor.MiddleCenter);
+                    GuiKit.Label(new Rect(r.x - 20, r.yMax - 28, r.width + 40, 28), e.Name + " · se deshizo en sal", 15, Palette.ParchmentShadow, TextAnchor.MiddleCenter);
                     continue;
                 }
                 bool targeted = EnemyTarget == e.Id;
-                GuiKit.PanelBox(r, 0.85f);
+                GuiKit.PanelBox(r, 0.86f);
                 if (GUI.Button(r, GUIContent.none, GUIStyle.none)) _enemyTarget = e.Id;
 
                 int hp = _d.Hp.TryGetValue(e.Id, out var h) ? h : e.Hp;
                 double tough = _d.Toughness.TryGetValue(e.Id, out var t) ? t : e.Toughness;
-                GuiKit.Label(new Rect(r.x + 10, r.y + 4, r.width - 20, 26), e.Name + (e.IsBoss ? "  · JEFE" : ""), 20, Palette.Parchment, TextAnchor.MiddleLeft, true);
-                GuiKit.Bar(new Rect(r.x + 10, r.y + 34, r.width - 20, 16), hp / (float)e.MaxHp, Palette.Crimson, Palette.WithAlpha(Palette.Abyss, 0.9f));
-                GuiKit.Label(new Rect(r.x + 14, r.y + 34, r.width - 28, 16), $"{hp:N0}/{e.MaxHp:N0}", 12, Palette.SaltWhite);
-                GuiKit.Bar(new Rect(r.x + 10, r.y + 54, r.width - 20, 8), (float)(tough / e.MaxToughness), Palette.SaltWhite, Palette.WithAlpha(Palette.Abyss, 0.9f));
-                GuiKit.Label(new Rect(r.x + 10, r.y + 62, 120, 16), e.Broken ? "<b>QUEBRADO</b>" : "Firmeza " + tough.ToString("0"), 12, e.Broken ? Palette.FiveStar : Palette.ParchmentShadow);
+                GuiKit.Label(new Rect(r.x + 10, r.y + 4, r.width - 20, 24), e.Name + (e.IsBoss ? " · JEFE" : ""), 18, Palette.Parchment, TextAnchor.MiddleLeft, true);
+                GuiKit.Bar(new Rect(r.x + 10, r.y + 30, r.width - 20, 16), hp / (float)e.MaxHp, Palette.Crimson, Palette.WithAlpha(Palette.Abyss, 0.9f));
+                GuiKit.Label(new Rect(r.x + 14, r.y + 30, r.width - 28, 16), $"{hp:N0}/{e.MaxHp:N0}", 13, Palette.SaltWhite);
+                GuiKit.Bar(new Rect(r.x + 10, r.y + 49, r.width - 20, 7), (float)(tough / e.MaxToughness), Palette.SaltWhite, Palette.WithAlpha(Palette.Abyss, 0.9f));
 
+                // Debilidades como sellos pequeños a la derecha de la Firmeza.
                 float px = r.x + 10;
+                // Sin rótulo de Firmeza: la barra blanca basta y deja sitio a las debilidades.
+                float pw = Mathf.Min(66f, (r.width - 20 - (e.Def.Weaknesses.Count - 1) * 3f) / Mathf.Max(1, e.Def.Weaknesses.Count));
+                float sx = px;
+                if (e.Broken) GuiKit.Label(new Rect(r.xMax - 110, r.y + 4, 100, 24), "<b>QUEBRADO</b>", 14, Palette.FiveStar, TextAnchor.MiddleRight);
                 foreach (var weak in e.Def.Weaknesses)
                 {
-                    GuiKit.PlanetPill(new Rect(px, r.y + 82, 100, 22), weak);
-                    px += 104;
+                    GuiKit.PlanetPill(new Rect(sx, r.y + 59, pw, 19), weak);
+                    sx += pw + 3;
                 }
                 string intent;
                 Color intentColor = Palette.ParchmentShadow;
                 if (e.IsCharging)
                 {
-                    intent = "¡Carga " + e.ChargedSkill.Name + "! Quiébralo para cancelarlo";
+                    intent = "¡Carga " + e.ChargedSkill.Name + "! Quiébralo";
                     intentColor = Palette.Danger;
                 }
                 else intent = "Siguiente: " + e.NextSkill.Name;
-                var buffs = e.Statuses.Where(s => s.IsBuff).Select(s => s.Name).Distinct().ToList();
-                if (buffs.Count > 0) intent += "  · " + string.Join(", ", buffs);
-                GuiKit.Label(new Rect(r.x + 10, r.y + 108, r.width - 20, 34), intent, 14, intentColor, TextAnchor.UpperLeft, e.IsCharging, true);
+                var buffs = e.Statuses.Where(st => st.IsBuff).Select(st => st.Name).Distinct().ToList();
+                if (buffs.Count > 0) intent += " · " + string.Join(", ", buffs);
+                GuiKit.Label(new Rect(r.x + 10, r.y + 80, r.width - 20, 30), intent, 13, intentColor, TextAnchor.UpperLeft, e.IsCharging, true);
                 if (targeted) GuiKit.Frame(r, Palette.GoldBright, 3);
             }
         }
@@ -382,21 +438,21 @@ namespace SalYAlmas.Presentation
             var spell = w.Def.Spell;
             int spellTarget = spell.Target == TargetMode.Ally ? AllyTarget : EnemyTarget;
             bool canSpell = ready && w.CanCastMagic && B.Grains >= B.Rules.Grains.SpellCost;
-            if (GuiKit.Button(new Rect(r.x + 14, y, bw, 60), $"<b>Hechizo</b>: {spell.Name}\n<size=13>−1 Grano, +10 Salinidad. {Short(spell.Description)}</size>", canSpell, 17))
+            if (GuiKit.Button(new Rect(r.x + 14, y, bw, 88), $"<b>Hechizo</b>: {spell.Name}\n<size=13>−1 Grano, +10 Salinidad. {Short(spell.Description)}</size>", canSpell, 17))
                 _d.Submit(BattleCommand.Spell(w.Id, spellTarget));
-            y += 66;
+            y += 94;
 
             string selfText = SelfCastLabel(w);
             bool canSelf = ready && w.Def.SelfCast != SelfCastForm.None && w.CanCastMagic && !B.SelfCastUsedThisTurn;
-            if (GuiKit.Button(new Rect(r.x + 14, y, bw / 2 - 4, 66), selfText, canSelf, 14))
+            if (GuiKit.Button(new Rect(r.x + 14, y, bw / 2 - 4, 138), selfText, canSelf, 14))
                 _d.Submit(BattleCommand.SelfCast(w.Id));
             bool canVis = ready && w.CanCastMagic && !w.VislumbreUsed && (B.BlackSalt >= B.Rules.Vislumbre.BlackSaltCost || w.Has(StatusKind.FreeVislumbre));
-            if (GuiKit.Button(new Rect(r.x + 14 + bw / 2 + 4, y, bw / 2 - 4, 66), $"<b>Vislumbre</b>\n<size=12>1 Sal Negra, +30 Sal.\nGrado {w.Grade}→{PurityMath.Next(w.Grade)} 2 turnos</size>", canVis, 14))
+            if (GuiKit.Button(new Rect(r.x + 14 + bw / 2 + 4, y, bw / 2 - 4, 138), $"<b>Vislumbre</b>\n<size=12>1 Sal Negra, +30 Sal.\nGrado {w.Grade}→{PurityMath.Next(w.Grade)} 2 turnos</size>", canVis, 14))
                 _d.Submit(BattleCommand.Vislumbre(w.Id));
-            y += 72;
+            y += 144;
 
             bool canChain = ready && B.ChainBlocker().Length == 0;
-            var chainRect = new Rect(r.x + 14, y, bw, 70);
+            var chainRect = new Rect(r.x + 14, y, bw, Mathf.Min(70f, r.yMax - 10 - y));
             if (GuiKit.Button(chainRect, canChain ? "<b>Abrir Cadena</b>\n<size=13>−100 Resonancia · elige el orden</size>" : "Abrir Cadena\n<size=13>" + B.ChainBlocker() + "</size>", canChain, 20))
                 _chain.Show(EnemyTarget);
             if (canChain) GuiKit.Frame(chainRect, Color.Lerp(Palette.GoldBright, Palette.Spark, 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 6f)), 3);
@@ -414,7 +470,7 @@ namespace SalYAlmas.Presentation
             }
         }
 
-        private static string Short(string s) => string.IsNullOrEmpty(s) ? "" : (s.Length > 70 ? s.Substring(0, 68) + "…" : s);
+        private static string Short(string s) => string.IsNullOrEmpty(s) ? "" : (s.Length > 64 ? s.Substring(0, 62) + "…" : s);
 
         private void DrawChainPlayback()
         {
@@ -476,9 +532,24 @@ namespace SalYAlmas.Presentation
         public void HandleWorldClick(Vector2 screenPos)
         {
             if (_camera == null) return;
+            UnitView view = null;
             var ray = _camera.ScreenPointToRay(new Vector3(screenPos.x, screenPos.y, 0));
-            if (!Physics.Raycast(ray, out var hit, 100f)) return;
-            var view = hit.collider.GetComponentInParent<UnitView>();
+            if (Physics.Raycast(ray, out var hit, 100f)) view = hit.collider.GetComponentInParent<UnitView>();
+            // Los recortes no llevan collider: se elige la figura viva cuya silueta (pies a cabeza) contiene el toque.
+            if (view == null)
+            {
+                float best = float.MaxValue;
+                foreach (var v in _d.Views.Values)
+                {
+                    if (v == null || v.IsDead) continue;
+                    var feet = _camera.WorldToScreenPoint(v.transform.position);
+                    var head = _camera.WorldToScreenPoint(v.Head);
+                    if (feet.z < 0) continue;
+                    float halfW = (head.y - feet.y) * 0.3f;
+                    if (screenPos.y < feet.y || screenPos.y > head.y || Mathf.Abs(screenPos.x - feet.x) > halfW) continue;
+                    if (feet.z < best) { best = feet.z; view = v; }
+                }
+            }
             if (view == null) return;
             if (view.IsEnemy) _enemyTarget = view.UnitId;
             else _allyTarget = view.UnitId;

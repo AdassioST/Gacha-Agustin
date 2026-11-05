@@ -200,8 +200,14 @@ namespace SalYAlmas.Presentation
                     bool isCurrent = run.Floor == n.Floor && run.Lane == n.Lane;
                     bool isAvailable = available.Contains(n);
                     bool isPast = n.Floor < run.Floor || (isCurrent && run.Phase == RunPhase.ChooseNode);
-                    GuiKit.Fill(box, Palette.WithAlpha(NodeColor(n.Type), isPast && !isCurrent ? 0.3f : 0.95f));
-                    Color text = n.Type == NodeType.Mancha ? Palette.Ink : Palette.Parchment;
+                    // Sello de cuero teñido con marco repujado, no un bloque plano: luz arriba, sombra abajo.
+                    Color nc = NodeColor(n.Type);
+                    float fade = isPast && !isCurrent ? 0.35f : 1f;
+                    Theme.Panel(box, Color.Lerp(nc, Color.white, 0.12f), Color.Lerp(nc, Palette.Abyss, 0.45f), Palette.Gold, fade);
+                    // El tipo se reconoce por color y por nombre (el color nunca va solo): franja y texto del color del nodo.
+                    GuiKit.Fill(new Rect(box.x + 4, box.y + 4, box.width - 8, 5), Palette.WithAlpha(nc, 0.95f * fade));
+                    GuiKit.Fill(new Rect(box.x + 4, box.yMax - 9, box.width - 8, 5), Palette.WithAlpha(Color.Lerp(nc, Palette.Abyss, 0.3f), 0.95f * fade));
+                    Color text = Palette.WithAlpha(Color.Lerp(nc, Palette.Parchment, 0.55f), fade);
                     GuiKit.Label(box, FresnoService.NodeName(n.Type).Replace(" de Sal", "").Replace(" de Almas", "").Replace(" LitRPG", ""), 16, text, TextAnchor.MiddleCenter, isAvailable);
                     if (isCurrent) GuiKit.Frame(box, Palette.FiveStar, 4f);
                     else if (isAvailable) GuiKit.Frame(box, Palette.Spark, 2f);
