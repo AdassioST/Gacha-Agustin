@@ -476,38 +476,18 @@ namespace SalYAlmas.Ui
     /// <summary>Efectos de sonido de interfaz, sintetizados por scripts/ui_sfx.py. Varias voces para que los toques se encimen.</summary>
     public static class UiSfx
     {
-        private static AudioSource[] _voices;
-        private static int _next;
-        private static readonly Dictionary<string, AudioClip> Clips = new Dictionary<string, AudioClip>();
+        private static Presentation.TempSfxPlayer _player;
         public static float Volume = 0.8f;
-        public static bool Muted;
+        public static bool Muted => _player == null || _player.Muted;
+
+        public static void Bind(Presentation.TempSfxPlayer player) => _player = player;
+        public static void Unbind(Presentation.TempSfxPlayer player) { if (_player == player) _player = null; }
+        public static void Scroll() { if (_player != null) _player.PlayCue("sfx_ui_deslizar"); }
+        public static void Stop(params string[] ids) { if (_player != null) _player.StopUi(ids); }
 
         public static void Play(string id, float gain = 1f, float pitch = 1f)
         {
-            if (id == null || Muted) return;
-            if (_voices == null)
-            {
-                var go = new GameObject("Sonidos de interfaz");
-                UnityEngine.Object.DontDestroyOnLoad(go);
-                _voices = new AudioSource[8];
-                for (int i = 0; i < _voices.Length; i++)
-                {
-                    _voices[i] = go.AddComponent<AudioSource>();
-                    _voices[i].playOnAwake = false;
-                    _voices[i].ignoreListenerPause = true;
-                    _voices[i].spatialBlend = 0;
-                }
-            }
-            if (!Clips.TryGetValue(id, out var c))
-            {
-                c = Resources.Load<AudioClip>("Ui/sfx/" + id);
-                Clips[id] = c;
-            }
-            if (c == null) return;
-            var v = _voices[_next];
-            _next = (_next + 1) % _voices.Length;
-            v.pitch = pitch;
-            v.PlayOneShot(c, Volume * gain);
+            if (_player != null) _player.PlayUi(id, Volume * gain, pitch);
         }
     }
 

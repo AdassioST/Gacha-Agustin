@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
 using SalYAlmas.Presentation;
+using SalYAlmas.Ui;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,6 +13,67 @@ namespace SalYAlmas.Tests
     public class AudioIntegrationTests
     {
         private const string SfxPath = "Assets/SalYAlmas/Audio/Resources/SfxTemporal";
+        private const string UiSfxPath = "Assets/SalYAlmas/Art/Ui/Resources/Ui/sfx";
+
+        [Test]
+        public void LaInterfazConservaLosDieciseisEfectosSinCompresionConPerdida()
+        {
+            var paths = AssetDatabase.FindAssets("t:AudioClip", new[] { UiSfxPath }).Select(AssetDatabase.GUIDToAssetPath).ToArray();
+            Assert.That(paths.Length, Is.EqualTo(16));
+            foreach (var path in paths)
+            {
+                var importer = (AudioImporter)AssetImporter.GetAtPath(path);
+                Assert.That(importer.defaultSampleSettings.compressionFormat, Is.EqualTo(AudioCompressionFormat.PCM), path);
+                Assert.That(importer.defaultSampleSettings.loadType, Is.EqualTo(AudioClipLoadType.DecompressOnLoad), path);
+                Assert.That(importer.defaultSampleSettings.sampleRateSetting, Is.EqualTo(AudioSampleRateSetting.PreserveSampleRate), path);
+            }
+        }
+
+        [TestCase("drop")]
+        [TestCase("page")]
+        public void LosAtaquesPulidosComienzanEnCero(string id)
+        {
+            var clip = AssetDatabase.LoadAssetAtPath<AudioClip>(UiSfxPath + "/" + id + ".wav");
+            var samples = new float[clip.samples];
+            Assert.That(clip.GetData(samples, 0), Is.True);
+            Assert.That(samples[0], Is.EqualTo(0f).Within(1f / 32768));
+            Assert.That(samples[samples.Length - 1], Is.EqualTo(0f).Within(1f / 32768));
+        }
+
+        [Test]
+        public void ElRiserTerminaConUnaColaSuave()
+        {
+            var clip = AssetDatabase.LoadAssetAtPath<AudioClip>(UiSfxPath + "/riser.wav");
+            var samples = new float[clip.samples];
+            Assert.That(clip.GetData(samples, 0), Is.True);
+            double tail = samples.Skip(samples.Length - clip.frequency / 100).Average(x => (double)x * x);
+            Assert.That(tail, Is.LessThan(0.0001), "Los últimos 10 ms deben caer por debajo de −40 dBFS RMS.");
+        }
+
+        [Test]
+        public void LaInterfazSilenciadaNoCreaVocesNiReduceLaMusica()
+        {
+            var go = new GameObject("Prueba de silencio de interfaz");
+            try
+            {
+                var player = go.AddComponent<TempSfxPlayer>();
+                const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+                if (typeof(TempSfxPlayer).GetField("_voices", flags).GetValue(player) == null)
+                    typeof(TempSfxPlayer).GetMethod("Awake", flags).Invoke(player, null);
+                typeof(TempSfxPlayer).GetProperty("Muted").SetValue(player, true);
+                int sources = go.GetComponentsInChildren<AudioSource>().Length, requests = 0;
+                player.MusicDuckRequested += (seconds, factor) => requests++;
+                UiSfx.Bind(player);
+                UiSfx.Play("reveal5");
+                UiSfx.Scroll();
+                Assert.That(UiSfx.Muted, Is.True);
+                Assert.That(requests, Is.Zero);
+                Assert.That(go.GetComponentsInChildren<AudioSource>().Length, Is.EqualTo(sources));
+                Assert.That(go.GetComponentsInChildren<AudioSource>().Any(x => x.isPlaying), Is.False);
+                UiSfx.Unbind(player);
+            }
+            finally { Object.DestroyImmediate(go); }
+        }
 
         [Test]
         public void LosEfectosSilenciadosNoReducenElVolumenDeLaMusica()

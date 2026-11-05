@@ -4,6 +4,8 @@
     "references": [
         "SalYAlmas.Core",
         "SalYAlmas.Presentation",
+        "SalYAlmas.Ui",
+        "UnityEngine.UI",
         "SalYAlmas.Editor",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"

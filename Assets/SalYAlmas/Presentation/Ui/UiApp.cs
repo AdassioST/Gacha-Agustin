@@ -265,7 +265,13 @@ namespace SalYAlmas.Ui
             UiTheme.ReduceFlashes = s.ReduceFlashes;
             UiTheme.MotionScale = s.ReduceMotion ? 0f : 1f;
             Shader.SetGlobalFloat("_UiMotion", UiTheme.MotionScale);
-            UiSfx.Muted = Game.SfxMuted;
+            UiSfx.Bind(Game.GetComponent<TempSfxPlayer>());
+        }
+
+        private void OnDestroy()
+        {
+            Pull?.Seq?.Dispose();
+            if (Game != null) UiSfx.Unbind(Game.GetComponent<TempSfxPlayer>());
         }
 
         // -------------------------------------------------------------------------- Navegación

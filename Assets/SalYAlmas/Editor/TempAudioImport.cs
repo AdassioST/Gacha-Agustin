@@ -9,12 +9,12 @@ namespace SalYAlmas.EditorTools
     /// </summary>
     internal sealed class TempAudioImport : AssetPostprocessor
     {
-        public override uint GetVersion() => 2;
+        public override uint GetVersion() => 3;
 
         private void OnPreprocessAudio()
         {
             bool music = assetPath.Contains("/Resources/MusicaTemporal/");
-            bool sfx = assetPath.Contains("/Resources/SfxTemporal/");
+            bool sfx = assetPath.Contains("/Resources/SfxTemporal/") || assetPath.Contains("/Resources/Ui/sfx/");
             if (!music && !sfx) return;
 
             var importer = (AudioImporter)assetImporter;
