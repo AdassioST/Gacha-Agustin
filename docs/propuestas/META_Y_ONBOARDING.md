@@ -10,7 +10,7 @@ Propuesta por aprobar · 5 de noviembre de 2026 · diseño de producto y retenci
 
 **Cómo leer las referencias:** los números solos son secciones del GDD; los que llevan § son de esta propuesta; C-, H-, S- y D- son IDs de HUECOS y de la hoja de ruta; MP- y MC- son las preguntas y contradicciones de §16.
 
-**Abreviaturas:** SB = Sales de Baño. Altura = nivel de cuenta (§4). Los nombres de las 4★ y 3★ son los del documento de retratos (D-03, pendiente): Cempa (coyota), Topacia (topo), Muertita (zarigüeya), Axa (ajolote), Salitre (cabra) y Brea (gata negra).
+**Abreviaturas:** SB = Sales de Baño. Altura = nivel de cuenta (§4). Los nombres de las 4★ y 3★ son los oficiales del GDD 18 (D-03): Cempa (coyota), Topacia (topo), Muertita (zarigüeya), Axa (ajolote), Salitre (cabra) y Brea (gata negra). La jaguar y la lince todavía no tienen nombre.
 
 ## Lo más importante
 
