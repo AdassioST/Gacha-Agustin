@@ -12,14 +12,23 @@ Preproducción. Por ahora el repositorio solo tiene documentación; todavía no 
 | --- | --- |
 | [docs/GDD.md](docs/GDD.md) | Documento de diseño. Manda sobre cualquier otro documento |
 | [docs/REFERENCIAS.md](docs/REFERENCIAS.md) | Referencias visuales, paleta, mapa de pantallas y antirreferencias |
+| [docs/HUECOS.md](docs/HUECOS.md) | Contradicciones del GDD, huecos de diseño y sistemas que faltan para un producto final |
+| [docs/HOJA_DE_RUTA.md](docs/HOJA_DE_RUTA.md) | Cómo se integra cada sistema, plan de fases hasta el lanzamiento suave, decisiones pendientes y prompts |
+| [docs/propuestas/](docs/propuestas/) | Propuestas de contenido por aprobar: Fresno, crafting, meta-juego y onboarding |
+| [docs/audio/](docs/audio/) | Plan de integración de audio y banda sonora con prompts de Suno |
+| [docs/Retratos para Codex.md](docs/Retratos%20para%20Codex.md) | Prompts y control de calidad de los retratos 2D |
+| [CLAUDE.md](CLAUDE.md) | Reglas para los agentes que trabajan en el repositorio |
 
 ## Cómo se construye
 
-El desarrollo se divide en tres fases, con un prompt por sesión de Claude Code (sección 23 del GDD). Cada una se revisa y se sube antes de pasar a la siguiente:
+El desarrollo se divide en fases, con un prompt por sesión de Claude Code. El GDD (sección 23) define tres; la [hoja de ruta](docs/HOJA_DE_RUTA.md) las parte en sesiones que caben y agrega las que faltan para publicar. Cada una se revisa y se sube antes de pasar a la siguiente:
 
-1. **El Aquelarre:** núcleo de combate y magia.
-2. **La Ascensión:** progreso, Fresno, crafting y gacha.
-3. **El Mundo:** historia, Termas, presentación y producto.
+1. **El Aquelarre:** núcleo de combate y magia. Después, un cierre con herramientas de contenido (1.5).
+2. **La Ascensión:** Fresno y economía (2A); progreso, crafting y gacha (2B).
+3. **El Mundo:** servicios y cuenta (3A); historia (3B); Termas, tirada, vestidor y audio (3C).
+4. **Producto, servicio en vivo y contenido:** lo que piden las tiendas, el bucle de cada versión y el contenido del lanzamiento.
+
+La CI corre las pruebas del núcleo en cada push (`.github/workflows/ci.yml`).
 
 ## Reglas que no se negocian
 

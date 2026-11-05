@@ -1,6 +1,6 @@
 # SAL Y ALMAS — La Odisea del Fresno
 
-AñDocumento de Diseño de Juego (GDD) · título de trabajo · Nov 4, 2026 · @Adass
+Documento de Diseño de Juego (GDD) · título de trabajo · Nov 4, 2026 · @Adass
 
 ## 1. Resumen ejecutivo
 
@@ -153,7 +153,7 @@ AS = Astral Salt. SyA = Sal y Almas. La columna Decisión es editable.
 | Tres barras: BB, SBB y UBB | AS | Adaptar | Una sola barra de Ánima con tres niveles de Ascensión |
 | Equipo de cinco brujas | AS | Rechazar | Cuatro brujas más una Invitada; cinco activas saturan la pantalla |
 | Stands como unidades aparte | SyA | Rechazar | El Ascendente es parte de la bruja y no ocupa lugar en el equipo |
-| Salinidad individual con Cristalización Turbia | AS | Adoptar | Medidor de 0 a 150 con cuatro bandas (sección 7) |
+| Salinidad individual con Cristalización Turbia | AS | Adoptar | Medidor de 0 a 150 con cinco bandas (sección 7.4) |
 | Sobresalación con fallos de hechizo | SyA | Rechazar | Fallar al azar frustra en un juego por turnos; la banda alta baja la defensa |
 | Autohechizo: agujas, sellos, hilos, fusión | AS | Adoptar | Vocabulario visual oficial (sección 8) |
 | Echización: fusión temporal con la forma refinada | SyA | Adaptar | Se llama Vislumbre: dos turnos con el aspecto del siguiente grado; cuesta Sal Negra, no almas |
@@ -485,7 +485,16 @@ La Resonancia es un medidor de equipo de 0 a 100. Sube +4 por ataque básico, +8
 
 El jugador puede guardar sus órdenes favoritas como **Partituras guardadas**, y el modo automático las usa.
 
-&#91;embedded content: Flujo de la Cadena · 4 pasos de preparación, 1 decisión, 3 eslabones\]
+```mermaid
+flowchart LR
+    R["Resonancia en 100"] --> A["1. Abrir Cadena al inicio<br/>del turno de una aliada"]
+    A --> B["2. Elegir de 3 a 4 brujas<br/>(y la Invitada como Cierre)"]
+    B --> C["3. Ordenarlas: Apertura,<br/>Enlace y Cierre"]
+    C --> D["4. La Partitura muestra los golpes<br/>y los Spark previstos"]
+    D --> E{"¿Te convence?"}
+    E -- No --> C
+    E -- Sí --> F["Apertura"] --> G["Enlace"] --> H["Cierre"]
+```
 
 El jugador puede volver a ordenar las veces que quiera; la ejecución solo empieza cuando la Partitura le convence.
 
@@ -654,7 +663,16 @@ Todas las rarezas llegan a SS. En grado máximo, una 5★ tiene cerca de 12 % m�
 
 Cada subida pide almitas, sal refinada de su planeta, un nivel mínimo de la bruja y su Juicio.
 
-&#91;embedded content: Valores de diseño propuestos · costo base de 20 000 almitas con factor 1.8\]
+Valores de diseño propuestos: costo base de 20 000 almitas con factor 1.8 por grado. La sal refinada y el nivel mínimo de cada subida están en la tabla de arriba o por definir.
+
+| Subida | Almitas | Parte del total |
+| --- | --- | --- |
+| D a C | 20 000 | 4 % |
+| C a B | 36 000 | 8 % |
+| B a A | 64 800 | 14 % |
+| A a S | 116 640 | 26 % |
+| S a SS | 209 952 | 47 % |
+| **Total** | **447 392** | **100 %** |
 
 El último grado concentra casi la mitad del costo total; así SS se vuelve una meta de largo plazo sin bloquear el uso diario de la bruja.
 

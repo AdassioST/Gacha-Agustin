@@ -1,0 +1,106 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "claude/**", "fase/**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  nucleo:
+    name: Núcleo (dotnet test)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Buscar el proyecto de pruebas
+        id: buscar
+        shell: bash
+        run: |
+          if compgen -G "Tests/Core.Tests/*.csproj" > /dev/null; then
+            echo "existe=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "existe=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Todavía no existe Tests/Core.Tests; se omiten las pruebas del núcleo."
+          fi
+
+      - name: Instalar .NET
+        if: steps.buscar.outputs.existe == 'true'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+
+      - name: Correr las pruebas
+        if: steps.buscar.outputs.existe == 'true'
+        run: >
+          dotnet test Tests/Core.Tests
+          --configuration Release
+          --logger "trx;LogFileName=nucleo.trx"
+          --results-directory TestResults
+
+      - name: Guardar resultados
+        if: always() && steps.buscar.outputs.existe == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados-nucleo
+          path: TestResults
+          if-no-files-found: ignore
+
+  unity:
+    name: Unity (EditMode)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+      UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Revisar proyecto y licencia
+        id: revisar
+        shell: bash
+        run: |
+          if [ ! -f ProjectSettings/ProjectVersion.txt ]; then
+            echo "listo=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Todavía no hay proyecto de Unity; se omiten las pruebas EditMode."
+          elif [ -z "$UNITY_LICENSE" ]; then
+            echo "listo=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Falta el secreto UNITY_LICENSE (y UNITY_EMAIL, UNITY_PASSWORD); se omiten las pruebas EditMode."
+          else
+            echo "listo=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Caché de Library
+        if: steps.revisar.outputs.listo == 'true'
+        uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}
+          restore-keys: Library-
+
+      - name: Pruebas EditMode
+        if: steps.revisar.outputs.listo == 'true'
+        uses: game-ci/unity-test-runner@v4
+        with:
+          testMode: editmode
+          artifactsPath: resultados-unity
+
+      - name: Guardar resultados
+        if: always() && steps.revisar.outputs.listo == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados-unity
+          path: resultados-unity
+          if-no-files-found: ignore
