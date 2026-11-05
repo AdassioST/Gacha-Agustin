@@ -14,7 +14,11 @@ Este plan dice cómo entra el audio al juego: arquitectura, catálogo de efectos
 | Parámetros globales de FMOD | `Tension` (0 a 1), `Salinidad` (máxima del equipo, 0 a 150), `Paralaje` (0 a 3: bajo, medio, alto, máximo), `EnCadena` (0 o 1), `AscendenteActivo` (0 o 1), `EsJefe` (0 o 1) |
 | Efectos y voces | `sfx_<sistema>_<accion>` y `vo_<bruja>_<tipo>`. El ID de bruja va en snake_case y sin acentos |
 
-**Lo que este plan agrega sin tocar el contrato:** parámetros *locales* de evento (sección 3.1), el sistema `ambiente` para lechos (`sfx_ambiente_<lugar>`), snapshots `snap_*`, VCAs `vca_*` y los nombres de buses. También fija los IDs de bruja: `marisal`, `selenia`, `solenne`, `cervanda`, `tormentina` y `cupria` para las Regentes. Las Oficialas y Aprendizas todavía no tienen nombre en el GDD, así que su ID provisional es la especie: `gata_negra`, `cuerva`, `osa`, `hiena`, `nutria`, `lince`, `murcielaga`, `coyota`, `jaguar`, `lechuza`, `zarigueya`, `cabra`, `topo`, `ajolote`, `ratona`, `oveja`, `eriza` y `pata`. **El ID no es el nombre visible.** Si una bruja se renombra, su ID no cambia, porque todas las claves de voz dependen de él.
+**Lo que este plan agrega sin tocar el contrato:** parámetros *locales* de evento (sección 3.1), el sistema `ambiente` para lechos (`sfx_ambiente_<lugar>`), snapshots `snap_*`, VCAs `vca_*` y los nombres de buses.
+
+**IDs de bruja.** Uso los del GDD 18: `marisal`, `selenia`, `solenne`, `cervanda`, `tormentina`, `cupria`, `brea`, `cempa`, `muertita`, `salitre`, `topacia` y `axa`. Las otras 12 reciben su ID cuando tengan nombre. Mientras tanto, el audio temporal usa la especie (`cuerva`, `osa`, `hiena`, `nutria`, `lince`, `murcielaga`, `jaguar`, `lechuza`, `ratona`, `oveja`, `eriza`, `pata`) y se renombra una sola vez. **El ID no es el nombre visible:** si una bruja se renombra después, su ID no cambia, porque todas las claves de voz dependen de él.
+
+**Documentos relacionados:** la Fase 3C de [HOJA_DE_RUTA.md](../HOJA_DE_RUTA.md) construye este plan con pistas temporales; [HUECOS.md](../HUECOS.md) lista las contradicciones conocidas del GDD; la propuesta [META_Y_ONBOARDING.md](../propuestas/META_Y_ONBOARDING.md) define la voz de la Calculista y la Confianza. Todo número de este plan que no venga del GDD lleva `// TUNING` en código y datos.
 
 ## 1. Resumen de decisiones
 
@@ -23,7 +27,7 @@ Este plan dice cómo entra el audio al juego: arquitectura, catálogo de efectos
 - **Un solo reloj manda.** El sonido de cada golpe se agenda con el mismo frame de dato que usa la animación: `t = inicio + frame / (60 × velocidad)`. Se dispara antes, lo que tarde la salida de audio, para que llegue al oído junto con la imagen. El Spark suena con una sola campana por grupo de golpes, también a ×2.
 - **La sal tiene sonido propio.** Cada ritual termina en el mismo crujido de sal, con la cola del metal de su planeta: oro, plata, hierro, azogue, cobre, estaño o plomo. Un parámetro de Pureza cambia el grano de sal por tono limpio a medida que la bruja refina.
 - **La Partitura suena.** Cada golpe de una Cadena toca una nota en la escala del cue de música que esté sonando, con el timbre del metal de su planeta. El Spark es una campana. Es una capa discreta, con interruptor en ajustes y prueba A/B por configuración remota.
-- **Voces:** japonés e inglés completos y español latinoamericano en la historia principal, con tablas de audio localizadas de FMOD. Solo se carga un idioma por banco. Las voces quedan fuera de la descarga inicial, salvo las del tutorial. Calculo unas 106 líneas por Regente, 83 por Oficiala y 61 por Aprendiza, y entre 58 y 70 MB por idioma completo.
+- **Voces:** japonés e inglés completos y español latinoamericano en la historia principal, con tablas de audio localizadas de FMOD. Solo se carga un idioma por banco. Las voces quedan fuera de la descarga inicial, salvo las del tutorial. Calculo unas 108 líneas de sistema por Regente, 85 por Oficiala y 63 por Aprendiza, y entre 70 y 85 MB por idioma completo.
 - **Mezcla:** cinco buses (Música, SFX, Voz, Interfaz, Ambiente), VCAs para los volúmenes del jugador, diez snapshots y ducking por sidechain. Objetivo en móvil: −18 LUFS integrados ±2 LU y pico verdadero de −1 dBTP como máximo, medidos con BS.1770 en una captura automática y en el dispositivo.
 - **Formatos:** Vorbis en streaming para música y voces, FADPCM en memoria para efectos cortos y PCM solo para clics de interfaz. Los bancos van por región con Addressables. Presupuesto: hasta 120 MB de audio en la descarga inicial y hasta 40 MB de RAM en gama baja (64 MB en gama alta).
 - **Plataforma y háptica:** sesión `Ambient` en iOS, foco de audio con `USAGE_GAME` en Android, compensación de latencia para audífonos Bluetooth y callbacks estáticos para IL2CPP. La háptica marca Spark, Quiebre, Ascensión y la emergencia de 4★ y 5★, con tres niveles en ajustes.
@@ -88,9 +92,11 @@ flowchart LR
     NUL["NullAudioService<br/>pruebas, servidor, lotes"]
     REC["RecordingAudioService<br/>pruebas"]
   end
-  EVT --> PLAY
+  EVT --> BUS(("Bus de eventos"))
+  BUS --> PLAY
+  BUS -->|"eventos sin tiempo"| DIR
   PLAY -->|"en el frame t"| VFX
-  PLAY -->|"t menos compensación"| DIR
+  PLAY -->|"golpes: t menos compensación"| DIR
   CUES --> LOG
   MUS --> LOG
   DIR --> LOG --> IAS
@@ -112,49 +118,49 @@ La tabla vive en `Assets/SalYAlmas/Data/Audio/audio_cues.json`. Es JSON como el 
 
 ```json
 {
-  "version": 1,
-  "contrato": "1.0",
-  "reglas": [
+  "schemaVersion": 1,
+  "contractVersion": "1.0",
+  "rules": [
     {
       "id": "golpe_normal",
-      "evento": "HitLanded",
-      "condicion": { "origen": "arma" },
-      "fmod": "event:/SFX/Combate/sfx_combate_golpe",
-      "momento": "EnFrame",
-      "parametros": { "Arma": "familiaArmaAtacante", "Material": "materialObjetivo", "Peso": "pesoDelGolpe", "Velocidad": "velocidadReproduccion" },
-      "prioridad": 2,
-      "enfriamientoMs": 25,
-      "haptica": null
+      "event": "HitLanded",
+      "when": { "source": "weapon" },
+      "fmodEvent": "event:/SFX/Combate/sfx_combate_golpe",
+      "timing": "OnFrame",
+      "parameters": { "Arma": "attackerWeaponFamily", "Material": "targetMaterial", "Peso": "hitWeight", "Velocidad": "playbackSpeed" },
+      "priority": 2,
+      "cooldownMs": 25,
+      "haptic": null
     },
     {
       "id": "spark",
-      "evento": "HitLanded",
-      "condicion": { "isSpark": true },
-      "fmod": "event:/SFX/Cadena/sfx_cadena_spark",
-      "momento": "EnFrame",
-      "agrupar": "PorGrupoDeSpark",
-      "parametros": { "SparkIndice": "indiceDeSparkEnCadena", "Semitonos": "tonicaDelCueActual" },
-      "prioridad": 1,
-      "haptica": "spark"
+      "event": "HitLanded",
+      "when": { "isSpark": true },
+      "fmodEvent": "event:/SFX/Cadena/sfx_cadena_spark",
+      "timing": "OnFrame",
+      "group": "SparkGroup",
+      "parameters": { "SparkIndice": "sparkIndexInChain", "Semitonos": "currentCueTonic" },
+      "priority": 1,
+      "haptic": "spark"
     },
     {
       "id": "cadena_inicio",
-      "evento": "ChainStarted",
-      "fmod": "event:/SFX/Cadena/sfx_cadena_calculo",
-      "momento": "AlRecibir",
-      "globales": { "EnCadena": 1 },
+      "event": "ChainStarted",
+      "fmodEvent": "event:/SFX/Cadena/sfx_cadena_calculo",
+      "timing": "OnReceive",
+      "globals": { "EnCadena": 1 },
       "snapshot": "snap_cadena"
     }
   ],
-  "excepciones": [
-    { "evento": "EjemploDeDepuracion", "motivo": "Solo para registro; no tiene sonido" }
+  "exceptions": [
+    { "event": "DebugNote", "reason": "Solo para el registro de combate; no tiene sonido" }
   ]
 }
 ```
 
-- Los valores de `parametros` no son fórmulas. Son nombres de **extractores**, una lista cerrada de funciones en `AudioCueResolver` (por ejemplo, `pesoDelGolpe` o `familiaArmaAtacante`). Diseño elige; programación agrega extractores. Así no hay intérprete de expresiones ni reflexión en tiempo de ejecución, que es frágil con IL2CPP.
-- `momento` puede ser `AlRecibir` (al llegar el evento), `EnFrame` (agendado por frame de dato) o `AlTerminar` (al acabar la animación de la acción).
-- Toda regla sin sonido a propósito va en `excepciones` con su motivo. La prueba de cobertura (sección 12) falla si aparece un tipo de evento sin regla ni excepción.
+- Las claves van en inglés, como todo identificador de código (CLAUDE.md); los nombres de parámetros y eventos de FMOD siguen el contrato. Los valores de `parameters` no son fórmulas. Son nombres de **extractores**, una lista cerrada de funciones en `AudioCueResolver` (por ejemplo, `hitWeight` o `attackerWeaponFamily`). Diseño elige; programación agrega extractores. Así no hay intérprete de expresiones ni reflexión en tiempo de ejecución, que es frágil con IL2CPP.
+- `timing` puede ser `OnReceive` (al llegar el evento), `OnFrame` (agendado por frame de dato) u `OnActionEnd` (al acabar la animación de la acción).
+- Todo evento sin sonido a propósito va en `exceptions` con su motivo. La prueba de cobertura (sección 12) falla si aparece un tipo de evento sin regla ni excepción.
 - `FmodAudioService` resuelve cada ruta a su `EventDescription` y cada parámetro a su `PARAMETER_ID` al cargar el banco. En combate no busca por texto.
 
 ### 2.5 El servicio de audio
@@ -199,7 +205,7 @@ namespace SalYAlmas.Audio
 
 La sección 21.3 del GDD pide que lo que se ve y lo que se calcula nunca se separen. El audio entra a la misma regla con cuatro decisiones:
 
-1. **Un solo reloj.** `CombatPlayback` convierte los frames de dato del núcleo (60 por segundo) a tiempo real. Animación, efectos visuales, cámara, números de daño, audio y háptica leen ese mismo reloj. Nadie lleva su propio temporizador.
+1. **Un solo reloj.** `CombatPlayback` convierte los frames de dato del núcleo (60 por segundo) a tiempo real. Animación, efectos visuales, cámara, números de daño, audio y háptica leen ese mismo reloj. Nadie lleva su propio temporizador. El bus de eventos de la hoja de ruta (sección 2.4) entrega los eventos cuando el núcleo los calcula, no cuando se muestran: el Director los recibe del bus, pero agenda los que dependen del tiempo con el reloj de `CombatPlayback`.
 2. **Los golpes no salen de eventos de animación.** El sonido de un golpe sale del `HitLanded` con su frame, no de un evento puesto a mano en el clip. Los eventos de animación solo disparan foley decorativo: barridos de arma, ropa, pasos.
 3. **Se dispara antes, lo que tarde la salida.** El núcleo ya calculó todos los golpes de la acción, así que el Director los conoce por adelantado y puede disparar cada sonido antes de su frame. Lo adelanta lo que tarde el audio en llegar al oído menos lo que tarde la imagen en llegar a la pantalla.
 4. **El Spark se agrupa.** Golpes de brujas distintas a 2 frames o menos forman un grupo de Spark. El grupo suena con una sola campana en el frame del primer golpe. Cada golpe conserva su impacto, pero el segundo pierde el transitorio y baja 3 dB para que no suene a eco. Si el núcleo marca `isSpark` solo en uno de los golpes (el GDD 9.6 habla de "ese golpe"), el agrupador busca a su pareja en la lista ya calculada; no recalcula la regla.
@@ -286,7 +292,7 @@ sequenceDiagram
 | `Velocidad` | 1 o 2 | Colas más cortas a ×2 |
 | `RitualLargo` | 0 o 1 | Primer plano del ritual de 0.4 s (primera vez) o de 0.2 s |
 | `CapaVoz`, `CapaCoro` | 0 a 1 | Solo en música; se derivan de los parámetros del contrato (sección 5.4) |
-| `Cinematica` | 0 o 1 | Solo en música; deja solo la percusión a −6 dB durante la Ascensión III (sección 4.4) |
+| `Cinematica` | 0 o 1 | Solo en música de combate; la baja a silencio en 200 ms durante la Ascensión III (sección 4.4) |
 
 Los parámetros que usa un solo evento (por ejemplo `Forma` del Autohechizo, `Efecto` de las pociones, `Manantial` o `Pity` de la tirada) se documentan en ese evento.
 
@@ -334,6 +340,7 @@ Cada planeta suena a su metal. El mismo timbre aparece en el Golpe Astral, en el
 
 - **Por qué este orden de grados.** Es el orden clásico de las esferas, de la más cercana a la más lejana: Luna, Mercurio, Venus, Sol, Marte, Júpiter y Saturno. Saturno cae en el séptimo grado, el más inestable de la escala, y eso le queda a la *Hora Final*. La idea de que los planetas forman una escala viene de la *Harmonices Mundi* de Kepler (1619), de dominio público.
 - **Lectura sobre todo.** El metal distingue al planeta antes que la nota. Quien no distingue tonos igual reconoce el yunque de Marte o el cuenco de Venus.
+- **El mismo idioma que la música.** Los metales coinciden con la tabla 3.4 de SOUNDTRACK_SUNO.md (campanas de oro, cristal de plata, yunque de hierro, campanillas de azogue, cuencos de cobre, lámina de trueno de estaño, campanas apagadas de plomo). Música y efectos se refuerzan en vez de competir.
 - **Cuidado con la Campana de Bronce.** Esa familia de armas (GDD 15.1) también suena a campana. Su sonido va en registro grave y con onda diferida. La campana del Spark es aguda, corta y dorada. Nunca deben confundirse.
 
 ### 3.4 La Partitura que suena
@@ -353,7 +360,7 @@ Cada planeta suena a su metal. El mismo timbre aparece en el Golpe Astral, en el
 2. Nota = grado del planeta (sección 3.3) en el modo del cue. La octava sale del papel: Apertura grave, Enlace media y Cierre aguda con acorde.
 3. La campana del Spark toca la tónica, y cada Spark de la misma Cadena sube por las notas del acorde: 1.ª, 3.ª, 5.ª, 8.ª y 10.ª, según `SparkIndice`.
 4. La campana se graba en seis alturas, a cuatro semitonos de distancia (dos octavas), para no transportar ninguna muestra más de ±2 semitonos.
-5. **Cadena a tiempo (opcional).** Cada eslabón empieza 24 frames después del anterior: 400 ms, que es una negra a 150 BPM. A ×2 son 200 ms, una corchea al mismo tempo. Si los cues de combate van a 75 o 150 BPM, la ejecución puede esperar al siguiente tiempo (como máximo 400 ms) y toda la Cadena cae sobre el pulso. Necesita que SOUNDTRACK_SUNO.md fije esos tempos: es la pregunta 5 de la sección 14.2.
+5. **Cadena a tiempo (opcional).** SOUNDTRACK_SUNO.md fija el combate, la Partitura y el Éxtasis en Re menor a 128 BPM. A ese tempo, un tiempo dura 469 ms y los 24 frames entre eslabones (400 ms) no caen en el pulso. Lo que sí se puede: que la ejecución espere al siguiente tiempo (como máximo 469 ms) para que la Apertura caiga en el pulso. Las notas igual suenan en tonalidad. Si las pruebas con jugadores piden una Cadena rítmica completa, la salida es llevar el combate a 150 BPM, que también está en la lista de tempos de ese documento: ahí cada eslabón cae en una negra y, a ×2, en una corchea. Es la pregunta 5 de la sección 14.2.
 
 **Métricas de la prueba A/B:** porcentaje de Cadenas con al menos un Spark, uso del reordenamiento y del botón Escuchar, y cuántos jugadores apagan las notas en su primera semana.
 
@@ -409,7 +416,7 @@ Las variaciones cuentan archivos distintos que FMOD alterna sin repetir. Los bus
 | `sfx_magia_golpe_astral` | Impacto del Golpe Astral | `HitLanded` (origen Hechizo) | 4 × 7 planetas × 3 purezas | P2 | 3D | SFX/Magia |
 | `sfx_magia_autohechizo` | Agujas y sello (cristal y siseo, sin gore), hilos (cuerdas tensas) o frenesí (Sal Negra y gruñido del Ascendente) | `ActionUsed` (Autohechizo) | 3 × 3 formas | P2 | 3D | SFX/Magia |
 | `sfx_magia_vislumbre` | Fusión de 2 s con la forma del grado siguiente | `ActionUsed` (Vislumbre) | 2 × 3 fases | P2 | 2D | SFX/Magia |
-| `sfx_magia_sal_negra` | Capa de Sal Negra: crujido húmedo y grave | `ActionUsed` (gasta Sal Negra) | 3 | P2 | 3D | SFX/Magia |
+| `sfx_magia_sal_negra` | Capa de Sal Negra: crujido húmedo y grave, y un cuenco frotado hasta que gime (como en SOUNDTRACK_SUNO.md 3.4) | `ActionUsed` (gasta Sal Negra) | 3 | P2 | 3D | SFX/Magia |
 | `sfx_magia_ascendente_retira` | El Ascendente se retira | `anim:ascendente_retira` | 2 | P4 | 3D | SFX/Magia |
 
 #### 3.5.4 Salinidad por banda
@@ -507,13 +514,13 @@ Grupos de `Especie` para la sacudida, la emergencia y el tacto:
 
 | Grupo | Brujas | Sacudida |
 | --- | --- | --- |
-| `canida` | loba, zorra, coyota, hiena | Se sacude entera: ráfaga de agua y orejas que golpean |
-| `felina` | gata negra, lince, jaguar | Sacudida breve, molesta; se lame la pata una vez |
+| `canida` | loba (Marisal), zorra (Solenne), coyota (Cempa), hiena | Se sacude entera: ráfaga de agua y orejas que golpean |
+| `felina` | gata negra (Brea), lince, jaguar | Sacudida breve, molesta; se lame la pata una vez |
 | `ave` | cuerva, lechuza, pata | Esponja las plumas |
-| `alada` | polilla, murciélaga | Aleteo con polvo de escamas o membranas que se tensan |
-| `escamosa` | serpiente, ajolote | Deslizamiento y gotas que escurren |
-| `ungulada` | cierva, cabra, oveja | Sacude la cabeza y la cornamenta o la lana |
-| `pequena` | liebre, ratona, topo, zarigüeya, eriza | Sacudida rápida y aguda |
+| `alada` | polilla (Selenia), murciélaga | Aleteo con polvo de escamas o membranas que se tensan |
+| `escamosa` | serpiente (Cupria), ajolote (Axa) | Deslizamiento y gotas que escurren |
+| `ungulada` | cierva (Cervanda), cabra (Salitre), oveja | Sacude la cabeza y la cornamenta o la lana |
+| `pequena` | liebre (Tormentina), ratona, topo (Topacia), zarigüeya (Muertita), eriza | Sacudida rápida y aguda |
 | `robusta` | osa, nutria | Sacudida lenta y pesada |
 
 | ID | Cuándo suena | Disparador | Variaciones | Prioridad | Espacio | Bus |
@@ -529,7 +536,7 @@ Grupos de `Especie` para la sacudida, la emergencia y el tacto:
 | `sfx_tirada_vapor` | Vapor por rareza: blanco, violeta o dorado | `tl:vapor` (`Rareza`) | 2 × 3 | P1 | 2D | SFX/Lectura |
 | `sfx_tirada_subida` | El vapor pasa de violeta a dorado | `tl:vapor_sube` | 1 | P1 | 2D | SFX/Lectura |
 | `sfx_tirada_quietud` | El agua se aquieta: silencio dirigido y un brillo | `tl:agua_quieta` | 1 | P2 | 2D | SFX/Mundo |
-| `sfx_tirada_constelacion` | 5★: la constelación de su Ascendente se dibuja con las primeras notas de su leitmotiv | `tl:constelacion` | 1 por 5★ | P1 | 2D | SFX/Lectura |
+| `sfx_tirada_constelacion` | 5★: la constelación de su Ascendente se dibuja; cada estrella toca una nota de la firma de 2 compases de su leitmotiv (solista aislado de SOUNDTRACK_SUNO.md) | `tl:constelacion` | 1 por 5★ | P1 | 2D | SFX/Lectura |
 | `sfx_tirada_silueta` | Una silueta bajo el agua | `tl:silueta` | 2 | P2 | 3D | SFX/Mundo |
 | `sfx_tirada_emergencia` | La bruja emerge y el agua escurre de su pelaje | `tl:emerge` (`Especie`, `Rareza`) | 2 × 8 | P1 | 3D | SFX/Mundo |
 | `sfx_tirada_sacudida` | Se sacude según su especie | `tl:sacudida` (`Especie`) | 3 × 8 | P2 | 3D | SFX/Mundo |
@@ -538,7 +545,9 @@ Grupos de `Especie` para la sacudida, la emergencia y el tacto:
 | `sfx_tirada_termometro` | El agua se calienta con el pity y hierve desde la tirada 60 | `ui:termometro` (pity 0 a 70) | 1 bucle | P4 | 2D | SFX/Mundo |
 | `sfx_tirada_polvo_astral` | El resultado se vuelve Polvo Astral | `tl:polvo_astral` | 1 | P2 | 2D | Interfaz |
 
-Los **Manantiales cosméticos** (volcánico, lunar, de cerezos, de obsidiana) cambian el lecho y las capas de agua con un parámetro local `Manantial`. Son parte del producto que se vende.
+Los **Manantiales cosméticos** (volcánico, lunar, de cerezos, de obsidiana) cambian el lecho y las capas de agua con un parámetro local `Manantial`, y la música con su cue `mus_termas_<manantial>` (SOUNDTRACK_SUNO.md 5.3). Son parte del producto que se vende.
+
+**La música de la tirada** vive en SOUNDTRACK_SUNO.md y cae en los mismos marcadores de la Timeline: `mus_tirada_suspenso` (con una región tibia y otra que hierve en el pity suave), `mus_tirada_vapor_blanco`, `_violeta` y `_dorado`, `mus_tirada_subida_dorada` y `mus_tirada_emergencia_5`. Los efectos de esta tabla son el agua y el vapor; los stingers son la música. Cada uno va en su bus y ninguno se adelanta al color del vapor.
 
 #### 3.5.11 Libro Mayor e interfaz
 
@@ -589,7 +598,7 @@ Las reglas del GDD 6.5 mandan: pavor antes que gore, nada de sustos repentinos y
 | ID | Cuándo suena | Disparador | Variaciones | Prioridad | Espacio | Bus |
 | --- | --- | --- | --- | --- | --- | --- |
 | `sfx_horror_huesped` | Huéspedes: señales de radiotelescopio, pulsos y barridos | Escena o `anim:` | 6 | P2 | 3D | SFX/Horror |
-| `sfx_horror_coro` | Coro desafinado con Paralaje alto | `snap_paralaje_alto` | 1 bucle | P4 | 2D | Ambiente/Horror |
+| `mus_horror_capa_paralaje` | Coro desafinado y textura sin tono sobre cualquier cue, desde Paralaje medio. Es música (SOUNDTRACK_SUNO.md, P40), no efecto | `Paralaje` ≥ 1 | 1 bucle | P4 | 2D | Musica/Paralaje |
 | `sfx_horror_salmodico_reves` | Susurro de Salmódico al revés, con subtítulo de glifos | Escena con Paralaje 2 o más | 8 | P3 | 3D | SFX/Horror |
 | `sfx_horror_grave` | Grave casi inaudible. Lleva armónicos de 80 a 200 Hz para que exista en la bocina del teléfono | Lecho | 1 bucle | P4 | 2D | Ambiente/Horror |
 | `sfx_horror_cristalizado` | Estatuas de sal que todavía susurran | Emisores 3D | 4 | P4 | 3D | SFX/Horror |
@@ -652,22 +661,26 @@ Todas las rarezas llegan a SS, así que todas tienen Ascensión III (GDD 12.1 y 
 | `perfil` | Libro Mayor: presentación, su Ascendente, la sal, otras brujas | 8 | 6 | 4 |
 | `cuenta` | Cumpleaños, luna llena, luna nueva, aniversario | 4 | 3 | 2 |
 | `paralaje` | Líneas nuevas desde Paralaje medio | 4 | 2 | 1 |
-| **Total por bruja** | | **106** | **83** | **61** |
+| `confianza` | Recompensas de Confianza 2 y 8 (propuesta META_Y_ONBOARDING.md) | 2 | 2 | 2 |
+| **Total por bruja** | | **108** | **85** | **63** |
 
 ### 4.2 Totales del lanzamiento
 
 | Concepto | Líneas | Duración por idioma |
 | --- | --- | --- |
-| 6 Regentes × 106 | 636 | |
-| 10 Oficialas × 83 | 830 | |
-| 8 Aprendizas × 61 | 488 | |
-| **Sistema (combate, Termas, Juicio, perfil)** | **1 954** | **unos 81 min** (promedio de 2.5 s por línea) |
+| 6 Regentes × 108 | 648 | |
+| 10 Oficialas × 85 | 850 | |
+| 8 Aprendizas × 63 | 504 | |
+| **Sistema (combate, Termas, Juicio, perfil, Confianza)** | **2 002** | **unos 83 min** (promedio de 2.5 s por línea) |
 | Alternativas de modo recatado (cerca de 8 %) | unas 150 | unos 6 min |
 | Historia principal, por región | unas 350 | unos 20 min |
+| Recuerdos personales: 5 de Juicio (GDD 12.4) y 3 de Confianza (propuesta META), con voz parcial de 3 líneas clave por escena | 24 por bruja, 576 en total | unos 34 min |
 | Susurros de Ascendente en Salmódico (6 × 24, no se localizan) | 144 | unos 5 min, una sola vez |
-| Calculista: 4 juegos de voz sin palabras × 30 reacciones | 120 | unos 3 min, una sola vez |
+| Calculista: 4 voces por idioma × 30 reacciones sin frases (propuesta META 2.3) | 120 por idioma | unos 4 min por idioma |
 
-Con 4 regiones al lanzamiento (supuesto: el GDD no fija cuántas), cada idioma completo suma unos 160 a 170 min. El japonés y el inglés lo llevan todo. El español latinoamericano lleva solo la historia: unos 80 min.
+Con 4 regiones al lanzamiento (supuesto: el GDD no fija cuántas), cada idioma completo suma unos 200 min. El japonés y el inglés lo llevan todo. El español latinoamericano lleva solo la historia: unos 80 min.
+
+**Los recuerdos son el renglón que más mueve el presupuesto.** Si se graban completos (unas 25 líneas por escena), suman unos 280 min más por idioma y duplican el costo de voces. Por eso propongo voz parcial al lanzamiento (pregunta 15).
 
 ### 4.3 La Cadena es silente
 
@@ -679,26 +692,26 @@ Las Ascensiones son magia cantada (GDD 7.5). Se resuelven en tres capas:
 
 | Capa | Quién la canta | ¿Se localiza? | Bus |
 | --- | --- | --- | --- |
-| Canto principal en Salmódico | La vocalista principal del juego (GDD 20.1) | No: el Salmódico es igual en todos los idiomas | Música |
+| Canto principal en Salmódico | La vocalista principal (GDD 20.1), dentro del cue `mus_ascension_iii_<bruja>` de cada Regente o de `mus_ascension_iii_coro` para Oficialas y Aprendizas (SOUNDTRACK_SUNO.md) | No: el Salmódico es igual en todos los idiomas | Música |
 | Palabras de la bruja (3 a 6 en Salmódico) | La actriz de la bruja en cada idioma | Sí, por timbre: la voz debe ser la misma que en el resto del juego | Voz/Ascendente |
 | Coro y efectos | Stems y eventos de FMOD | No | Música y SFX/Magia |
 
-- El canto principal se trata como música. Su ID lo fija SOUNDTRACK_SUNO.md. Si no lo define, propongo `mus_ascension_<bruja>`.
-- **Todas las Ascensiones se cantan con centro tonal en Re** (el modo puede cambiar por bruja). Así dos Ascensiones encimadas, que también dan Spark (GDD 9.6), suenan como dúo y no como choque.
-- Durante la cinemática, la música de combate queda solo con percusión a −6 dB (parámetro local `Cinematica`), para no chocar de tonalidad. Las demás capas vuelven en el siguiente compás.
-- **La versión corta** de la Ascensión III usa solo los cortes 2 y 4 (GDD 19.3), y el canto ocurre en el corte 3. La versión corta necesita su propio fragmento de canto de 2 a 3 s sobre los cortes 2 y 4. Si no, deja de ser cantada.
+- El canto principal es música y lo produce SOUNDTRACK_SUNO.md: 120 BPM, en la tonalidad del leitmotiv de cada Regente, con versión de 7 s y corta de 2 a 3 s.
+- **Dos Ascensiones encimadas.** HUECOS C-12 decide que se reproducen encimadas desde el frame 0. Cada Regente canta en su propia tonalidad, así que dos cantos juntos chocarían. Regla: suena la música de la primera; de la segunda suenan sus palabras, sus efectos y la campana del Spark doble (`sfx_ascension_duo`).
+- Durante la cinemática, el cue de combate (128 BPM) baja a silencio en 200 ms con el parámetro local `Cinematica` y queda en pausa, porque la Ascensión va a 120 BPM y en otra tonalidad. Al terminar, retoma donde iba con un fundido de 500 ms.
+- **La versión corta** de la Ascensión III usa solo los cortes 2 y 4 (GDD 19.3), y en la cámara el canto ocurre en el corte 3. SOUNDTRACK_SUNO.md ya trae una versión corta de 2 a 3 s; hay que cuidar que conserve un fragmento de canto sobre los cortes 2 y 4, o la Ascensión deja de ser cantada.
 
 ### 4.5 Ascendentes y Calculista
 
 - **Ascendentes.** Con Paralaje medio "susurran líneas nuevas" (GDD 6.5). Esos susurros van en Salmódico, se graban una sola vez y no se localizan. Llevan subtítulo en glifos, y la traducción aparece con Paralaje máximo, como recompensa por mirar. Se nombran `vo_<bruja>_ascendente_<tipo>_NN`.
-- **Calculista.** El GDD la hace personalizable "en especie, cuerpo, voz y pronombres", pero también dice que calcula en silencio. Propuesta: cuatro juegos de voz **sin palabras** (reacciones, esfuerzos, sorpresa), de 30 sonidos cada uno, comunes a todos los idiomas. ID: `vo_calculista_<juego>_<tipo>_NN`, que extiende el contrato porque la Calculista no es bruja (pregunta 7).
+- **Calculista.** El GDD la hace personalizable "en especie, cuerpo, voz y pronombres", pero también dice que calcula en silencio. La propuesta META_Y_ONBOARDING.md (2.3) ya fija **4 voces por idioma** (dos agudas y dos graves) y un control de tono. Propuesta de audio: cada voz son 30 reacciones **sin frases** (sorpresa, duda, alivio, esfuerzo), y el control de tono mueve el tono del evento ±3 semitonos, sin grabar más. ID: `vo_calculista_<voz>_<tipo>_NN`, que extiende el contrato porque la Calculista no es bruja (pregunta 7).
 
 ### 4.6 Idiomas y cómo se cambian
 
 - **FMOD:** un evento de diálogo con instrumento de programador por categoría, y tablas de audio **localizadas**. Cada banco localizado se compila una vez por idioma: `VO_Sistema_ja.bank`, `VO_Sistema_en.bank`, `VO_Historia_ja.bank`, `VO_Historia_en.bank` y `VO_Historia_es-419.bank`. La clave de cada línea es el nombre del archivo sin extensión, igual en todos los idiomas. Según el manual de FMOD, la tabla localizada agrega el código de idioma a la carpeta de origen, y no debe ir en el banco maestro.
 - **Locales del proyecto de FMOD:** `ja`, `en` y `es-419`.
 - **Ajuste "Idioma de voz"**, independiente del idioma de texto: Japonés, Inglés o Español (historia). Si eliges Español, aparece "Voz en combate y Termas", con Japonés o Inglés como respaldo, porque esas líneas no existen en español. Se cargan dos bancos distintos: `VO_Historia_es-419` y `VO_Sistema_ja` (o `_en`).
-- **Por omisión según el idioma del sistema:** japonés para `ja`, inglés para `en`, y Español con respaldo en japonés para `es`. Es una recomendación (pregunta 1).
+- **Por omisión según el idioma del sistema**, que se elige en el primer arranque (propuesta META, paso F01): japonés para `ja`, inglés para `en`, y Español con respaldo en japonés para `es`. Es una recomendación (pregunta 1).
 - **Cambiar de idioma** se permite fuera de combate. Se descarga el banco si falta (la pantalla muestra el tamaño), se descarga de memoria el anterior y se carga el nuevo. Las claves no cambian, así que nada más se toca.
 
 ### 4.7 Subtítulos
@@ -714,7 +727,7 @@ Las Ascensiones son magia cantada (GDD 7.5). Se resuelven en tres capas:
 
 El GDD deja abierto si los retratos usan Spine o Live2D. La solución sirve para los dos:
 
-1. **Envolvente precalculada.** Al compilar las voces, una herramienta saca la amplitud de cada línea a 30 Hz y la guarda junto al banco (`vo_..._NN.env`, unos 30 bytes por segundo). Para 170 min de voz son unos 300 KB por idioma.
+1. **Envolvente precalculada.** Al compilar las voces, una herramienta saca la amplitud de cada línea a 30 Hz y la guarda junto al banco (`vo_..._NN.env`, unos 30 bytes por segundo). Para 200 min de voz son unos 360 KB por idioma.
 2. **En tiempo de ejecución,** el retrato lee la posición de reproducción del evento de diálogo y la envolvente, y mueve la boca: `ParamMouthOpenY` en Live2D, o una pista de boca mezclada por intensidad en Spine. A la posición se le resta la latencia de salida, para que la boca no se adelante con audífonos Bluetooth.
 3. **Forma de vocal (producción).** En escenas clave de la historia en japonés, cinco formas (a, i, u, e, o) por alineación forzada fuera de línea. El inglés y el español usan las mismas cinco formas más la boca cerrada.
 4. **En combate 3D** se usa la misma envolvente sobre el blendshape de mandíbula. Los 52 blendshapes faciales del GDD 19.5 deben incluir uno.
@@ -724,10 +737,10 @@ El GDD deja abierto si los retratos usan Spine o Live2D. La solución sirve para
 | Concepto | Valor |
 | --- | --- |
 | Formato | Vorbis mono a 32 kHz, cerca de 48 kbps (6 KB por segundo) |
-| Japonés o inglés completo | 58 a 70 MB cada uno |
+| Japonés o inglés completo | 70 a 85 MB cada uno |
 | Español (historia) | unos 30 MB |
 | Salmódico común (Ascendentes y cantos de palabras sueltas) | unos 3 MB |
-| Paquete del tutorial, en los tres idiomas | unos 3 MB por idioma, dentro de la descarga inicial |
+| Paquete del tutorial, en los tres idiomas | unos 3 MB por idioma, dentro de la descarga inicial: Cempa, Topacia, Muertita, la Calculista y las frases de emergencia de las cuatro Regentes del banner de inicio (propuesta META, pasos F03 a F11) |
 | Bruja nueva por versión | unos 2 MB por idioma |
 | RAM: frases de combate del equipo en memoria (5 brujas) | unos 3 MB |
 | RAM: historia y Termas | Streaming: un stream de diálogo y uno de reserva |
@@ -774,6 +787,8 @@ Expresiones que valida la prueba de nombres:
 ```text
 Master  (limitador a −1 dBTP; compresor de "rango dinámico")
 ├── Musica
+│   ├── Cues         el cue principal y sus capas
+│   └── Paralaje     mus_horror_capa_paralaje; la anulan las Termas y el ajuste de horror
 ├── SFX
 │   ├── Combate      golpes, armas, cuerpos
 │   ├── Magia        planetas, ritual, Ascensiones, pociones
@@ -794,18 +809,18 @@ Retornos de reverberación: rv_combate (por región), rv_termas (agua en cueva a
 
 Los volúmenes del jugador mueven **VCAs**, no buses: `vca_maestro`, `vca_musica`, `vca_efectos` (SFX), `vca_voz`, `vca_interfaz` y `vca_ambiente`. Así los snapshots y la mezcla de diseño nunca pisan lo que eligió el jugador.
 
-**Límites de voces por bus** (instancias reales): SFX/Combate 12, SFX/Magia 10, SFX/Lectura 4, SFX/Partitura 6, Voz 3 (un diálogo y dos frases), Ambiente 6, Música 8 streams (4 stems más 4 de la transición).
+**Límites de voces por bus** (instancias reales): SFX/Combate 12, SFX/Magia 10, SFX/Lectura 4, SFX/Partitura 6, Voz 3 (un diálogo y dos frases), Ambiente 6, Música 9 streams (4 stems, 4 de la transición y la capa de Paralaje).
 
 ### 5.2 Snapshots
 
 | Snapshot | Cuándo | Qué hace | Entrada y salida | Prioridad |
 | --- | --- | --- | --- | --- |
-| `snap_termas` | Termas y tirada: zona segura | Música propia de las Termas. Ambiente/Horror y SFX/Horror en silencio. Reverb de agua (1.8 s). La música de las Termas no lee Tension, Salinidad ni Paralaje | 2 s y 2 s | Alta: anula el horror |
+| `snap_termas` | Termas y tirada: zona segura | Música propia de las Termas. Ambiente/Horror, SFX/Horror y Musica/Paralaje en silencio. Reverb de agua (1.8 s). La música de las Termas no lee Tension, Salinidad ni Paralaje | 2 s y 2 s | Alta: anula el horror |
 | `snap_combate` | Escena de combate | Reverb de combate de la región; Ambiente −6 dB | 1 s | Base |
 | `snap_cadena` | `EnCadena = 1` | SFX/Combate −3 dB y Ambiente −6 dB para que se oigan las notas y la campana | 150 ms y 400 ms | Media |
-| `snap_extasis` | Éxtasis Abisal | Música con paso bajo a 1.2 kHz y −4 dB; Voz/Ascendente +3 dB; distorsión leve en SFX/Magia; lecho de horror +6 dB | 300 ms y 1 s | Alta |
-| `snap_paralaje_alto` | Paralaje 2 o 3, fuera de las Termas | Lecho de horror audible; capa de falla en Interfaz; reverb 30 % más larga | 4 s y 4 s | Media |
-| `snap_ascension3` | Cinemática de Ascensión III | Música −6 dB (el Director pone `Cinematica = 1` en el cue para dejar solo la percusión); SFX/Combate y Ambiente en silencio; Voz/Ascendente +2 dB; reverb astral de 3 s; caída de −20 dB durante los 50 ms de la pausa de impacto | 200 ms y 500 ms | Máxima |
+| `snap_extasis` | Éxtasis Abisal | La música pasa a `mus_extasis_abisal` en la siguiente barra de compás (SOUNDTRACK_SUNO.md 5.1), con la Desafinación fija de ese cue. Voz/Ascendente +3 dB; distorsión leve en SFX/Magia; Ambiente/Horror +6 dB | 300 ms y 1 s | Alta |
+| `snap_paralaje_alto` | Paralaje 2 o 3, fuera de las Termas | Musica/Paralaje de −18 dB (Paralaje medio) a −9 dB; lecho de Ambiente/Horror audible; capa de falla en Interfaz; reverb 30 % más larga | 4 s y 4 s | Media |
+| `snap_ascension3` | Cinemática de Ascensión III | El cue de combate se apaga con `Cinematica = 1` y suena `mus_ascension_iii_<bruja>`. SFX/Combate y Ambiente en silencio; Voz/Ascendente +2 dB; reverb astral de 3 s; caída de −20 dB durante los 50 ms de la pausa de impacto | 200 ms y 500 ms | Máxima |
 | `snap_dialogo` | Historia con retratos | Música −4 dB; Ambiente −6 dB | 500 ms | Media |
 | `snap_tirada` | Secuencia de tirada | Lecho de Termas −6 dB; SFX/Mundo +2 dB | 300 ms | Alta |
 | `snap_silencio` | Silencio largo del horror | Música y Ambiente a −30 dB de 4 a 8 s | 1.5 s y 3 s | Media |
@@ -828,7 +843,7 @@ El ducking usa el compresor con entrada de sidechain de FMOD (umbral cerca de �
 
 | Parámetro | Lo escribe | Regla |
 | --- | --- | --- |
-| `Tension` | `ContractParams`, tras cada evento de combate | 0 fuera de combate. En combate: 0.35 de base; +0.25 si alguna aliada está bajo 30 % de vida; +0.2 si un jefe está bajo 25 %; +0.2 en Éxtasis Abisal. Tope 1. Sube a 0.2 por segundo y baja a 0.1 |
+| `Tension` | `ContractParams` | En combate: 0.35 de base; +0.25 si alguna aliada está bajo 30 % de vida; +0.2 si un jefe está bajo 25 %; +0.2 en Éxtasis Abisal; tope 1. En el mapa de una región: 0.2. En el mapa del Fresno: 0.3, más 0.2 si el siguiente nodo es Élite y 0.4 si es Jefe. En historia, una etiqueta del guion lo fija de 0 a 1. Sube a 0.2 por segundo y baja a 0.1 |
 | `Salinidad` | `SalinityBandChanged` | Máximo del equipo. Hoy, piso de la banda (0, 40, 70, 100 o 150); con el valor exacto si el evento lo trae. Velocidad de búsqueda de 50 por segundo |
 | `Paralaje` | `meta:paralaje` | Nivel de cuenta: 0 bajo, 1 medio, 2 alto, 3 máximo. Se fija al cargar la escena y al cambiar |
 | `EnCadena` | `ChainStarted` y `ChainEnded` | 1 entre los dos |
@@ -840,16 +855,17 @@ El ducking usa el compresor con entrada de sidechain de FMOD (umbral cerca de �
 | Capa | Cuándo suena (GDD 20.3) | Cómo se controla |
 | --- | --- | --- |
 | Base | Siempre | 0 dB |
-| Percusión | Al entrar en combate | `Tension`: de silencio en 0 a −6 dB en 0.2 y 0 dB en 0.5. Un paso bajo se abre de 1.5 kHz a todo el espectro entre 0.5 y 1 |
-| Voz solista | Durante la Cadena y con un Ascendente activo | `CapaVoz = max(EnCadena, AscendenteActivo)`. Entra en un tiempo y sale en 2 compases |
-| Coro completo | Ascensión III y jefes | `CapaCoro`: 0.5 (−6 dB) si `EsJefe = 1`; 1 si además `Tension ≥ 0.6`. En la Ascensión III, el coro sale de la cinemática (sección 4.4) |
+| Percusión | Al entrar en combate | En combate, siempre a 0 dB: `Tension` no la mueve (SOUNDTRACK_SUNO.md 5.1). En regiones y en el Fresno entra en dos compases cuando `Tension` llega a 0.5 |
+| Voz solista | Durante la Cadena y con un Ascendente activo | `CapaVoz = max(EnCadena, AscendenteActivo)`. Entra en un tiempo y sale en 2 compases. En regiones suena desde la segunda vuelta del bucle. Con `Paralaje = 3` cambia por su versión invertida |
+| Coro completo | Ascensión III y jefes | `CapaCoro`: 0.5 (−6 dB) si `EsJefe = 1`; 1 si además `Tension ≥ 0.6`. En la Ascensión III, el coro viene en el cue de la cinemática (sección 4.4) |
+| Capa de Paralaje | Paralaje medio o más (GDD 6.5) | `mus_horror_capa_paralaje` como segundo evento en Musica/Paralaje: −18 dB con `Paralaje = 1`, −9 dB con 2 y 3. Nunca en las Termas |
 | Desafinación | Salinidad de 100 o más, o Paralaje alto | DSP de la sección 5.5 |
 
 `CapaVoz` y `CapaCoro` son parámetros **locales** del evento de música. Los calcula `ContractParams` a partir de los parámetros del contrato. Hacen falta porque, si dos parámetros automatizan el volumen de la misma pista, FMOD combina las dos curvas: con una en silencio, la capa calla aunque la otra esté arriba. Eso es un "y", y estas capas necesitan un "o". No agregan nada al contrato.
 
 ### 5.5 Desafinación
 
-La Desafinación es un preset de efectos compartido (`fx_desafinacion`) en todos los eventos de música adaptativa. Nunca va en la música de las Termas.
+La Desafinación es un preset de efectos compartido (`fx_desafinacion`) en cada cue que lleva la capa D en la tabla 5.2 de SOUNDTRACK_SUNO.md, incluido `mus_libro_mayor`. Va en el evento y no en el bus de música, como sugiere ese documento, para que la música de las Termas y las cinemáticas quede fuera sin depender de un snapshot.
 
 | Efecto | Con `Salinidad` (100 → 150) | Con `Paralaje` (2 → 3) | Gama baja |
 | --- | --- | --- | --- |
@@ -865,10 +881,12 @@ La Desafinación es un preset de efectos compartido (`fx_desafinacion`) en todos
 ### 5.6 Transiciones de música
 
 - **Marcadores de tempo y bucle:** cada evento de música usa el BPM, el compás y el bucle en compases de `cues_musica.json`. Las transiciones se cuantizan al siguiente compás (exploración a combate) o al siguiente tiempo (capas).
-- **Entrar a combate:** el cue de combate entra en el siguiente tiempo con un fundido de 500 ms.
-- **Victoria:** el combate se corta en el siguiente tiempo con 200 ms de fundido, suena el stinger de victoria (su ID lo fija SOUNDTRACK_SUNO.md) y el cue de región vuelve después de 2 compases.
-- **Derrota:** la percusión se corta al instante y la base se apaga en 2 s.
-- **Termas:** fundido cruzado de 2 s. Se elige el cue de día o de noche (`mus_termas_noche`) con la hora local del teléfono: noche de 19:00 a 5:59.
+- **Entrar a combate:** el cue de combate (`mus_combate_normal`, `mus_jefe_*` o el de región) entra en el siguiente tiempo con un fundido de 500 ms.
+- **Partitura:** al abrir la Cadena (`ui:cadena_abrir`) la música pasa a `mus_cadena_partitura` en la siguiente barra de compás; tiene el mismo tempo y tonalidad que el combate. Con `ChainStarted` vuelve el cue de combate con `CapaVoz` arriba.
+- **Éxtasis:** con `Salinidad = 150`, pasa a `mus_extasis_abisal` en la siguiente barra de compás; regresa cuando la Salinidad baja de 150.
+- **Victoria:** el combate se corta en el siguiente tiempo con 200 ms de fundido, suena `mus_jingle_victoria` y después `mus_combate_resultados` en la pantalla de resultados.
+- **Derrota:** la percusión se corta al instante, la base se apaga en 2 s y suena `mus_jingle_derrota`.
+- **Termas:** fundido cruzado de 2 s. Se elige `mus_termas_dia` o `mus_termas_noche` con la hora local del teléfono: noche de 19:00 a 5:59. Comparten armadura (Fa mayor y Re menor), así que el cruce no choca.
 - **Pulso para la Cadena:** si se adopta la "Cadena a tiempo" (sección 3.4), el Director lee los callbacks de tiempo de FMOD y guarda el reloj del último pulso.
 
 ### 5.7 Sonoridad: objetivos y medición
@@ -926,7 +944,7 @@ Las frecuencias de muestreo de la tabla anterior son iguales en las dos gamas. H
 | Frecuencia del mezclador | La nativa del dispositivo (casi siempre 48 kHz) | Igual |
 | Voces reales | 32 | 64 |
 | Voces virtuales | 256 | 512 |
-| Streams simultáneos | 10 | 14 |
+| Streams simultáneos | 12 | 16 |
 | Retornos de reverb | 1 compartido | 3 |
 | Desafinación | Tono, paso bajo y trémolo | Más chorus |
 | CPU de DSP en el pico de una Cadena | ≤ 10 % en el perfilador de FMOD | ≤ 6 % |
@@ -964,12 +982,12 @@ La gama se detecta al arrancar con la misma lógica que usa el render (GDD 21.1)
 | Concepto | Gama baja | Gama alta |
 | --- | --- | --- |
 | Muestras residentes: combate, magia, interfaz, rituales del equipo | 18 MB | 26 MB |
-| Búferes de streams (unos 100 KB cada uno) | 1 MB | 1.4 MB |
+| Búferes de streams (unos 100 KB cada uno) | 1.2 MB | 1.6 MB |
 | Pools de códec y DSP | 6 MB | 10 MB |
 | Metadatos de bancos | 3 MB | 3 MB |
 | Frases de combate del equipo | 3 MB | 3 MB |
 | Cinemáticas de Ascensión del equipo | 4 MB | 6 MB |
-| Margen | 5 MB | 14 MB |
+| Margen | 4.8 MB | 14.4 MB |
 | **Tope** | **40 MB** | **64 MB** |
 
 Se mide con las estadísticas de memoria de FMOD en la escena de prueba y en un combate contra el jefe.
@@ -981,10 +999,10 @@ Se mide con las estadísticas de memoria de FMOD en la escena de prueba y en un 
 | Audio en la descarga inicial | 70 a 80 MB; **tope de 120 MB** (6 % de los 2 GB) | Instalación |
 | Por región | Unos 30 MB | Al entrar a la región |
 | Fresno | Unos 45 MB | Primera run |
-| Voces de un idioma completo | 58 a 70 MB | Tras el tutorial, por wifi, en segundo plano |
+| Voces de un idioma completo | 70 a 85 MB | Tras el tutorial, por wifi, en segundo plano |
 | Kit de bruja nueva por versión | 8 a 10 MB con dos idiomas | Con la versión |
 
-Con 4 regiones, todo el audio del lanzamiento con un idioma de voz ocupa unos 340 MB en disco: inicial, regiones, Fresno, los bancos de las 24 brujas y las voces. Con los tres idiomas, unos 435 MB.
+Con 4 regiones, todo el audio del lanzamiento con un idioma de voz ocupa unos 355 MB en disco: inicial, regiones, Fresno, los bancos de las 24 brujas y las voces. Con los tres idiomas, unos 460 MB.
 
 ### 6.6 Modo ahorro de batería
 
@@ -1086,7 +1104,7 @@ La háptica marca lo que importa, no cada golpe. Cuatro momentos: Spark, Quiebre
 | Tamaño y fondo de subtítulos | 100 a 200 %; 0 a 100 % | 100 % y 60 % | Sección 4.7 |
 | Subtítulos de sonidos | Encendido o apagado | Apagado | Etiquetas como `[campana de Spark]` |
 | Indicadores visuales de sonido | Encendido o apagado | Apagado | Ícono en el borde de la pantalla, con dirección, para sonidos que solo se oyen |
-| Intensidad del horror sonoro | Completa, Reducida, Mínima | Completa | Reducida: SFX/Horror y Ambiente/Horror −6 dB, sin graves de horror, sin susurros al revés de más de 1 s. Mínima: solo las líneas necesarias para la historia, con subtítulo |
+| Intensidad del horror sonoro | Completa, Reducida, Mínima | Completa | Reducida: SFX/Horror, Ambiente/Horror y Musica/Paralaje −6 dB, sin graves de horror, sin susurros al revés de más de 1 s. Mínima: solo las líneas necesarias para la historia, con subtítulo |
 | Desafinación de la música | Encendida o apagada | Encendida | Apaga el preset `fx_desafinacion`. Ayuda a músicos y a personas sensibles a la disonancia |
 | Notas de la Partitura | Encendidas o apagadas | Encendidas (sujeto a la prueba A/B) | Sección 3.4 |
 | Sincronía de audio | 0 a 300 ms | Automática | Sección 7.3 |
@@ -1113,7 +1131,7 @@ La háptica marca lo que importa, no cada golpe. Cuatro momentos: Spark, Quiebre
 | **Paquete GDC de Sonniss** | Base de impactos, fuego, agua, ambientes y mecanismos | Coberturas de 2026 lo describen como gratis, libre de regalías para uso comercial y sin atribución. Coberturas de años anteriores mencionan que no se puede usar para entrenar IA. Lee la licencia de 2026 en el sitio de Sonniss antes de usarlo |
 | **Bibliotecas comerciales** | Lo que falte: cuerpos de criaturas, trueno, cadenas | Revisa si la licencia es por persona o por equipo, y si cubre juegos con compras dentro de la app. Registra cada archivo |
 | **Freesound** | Rarezas de grabación | Solo CC0 o CC BY (con crédito). Nunca CC BY-NC: prohíbe el uso comercial |
-| **Generadores de efectos con IA** | Pistas temporales de la Fase 3 y materia prima que una persona edita | ElevenLabs: el plan gratuito no da licencia comercial; los planes de pago sí, sin atribución. Hay fuentes que no coinciden sobre si lo hecho en el plan gratuito se puede usar después de pagar: **genera solo con cuenta de pago**. En Estados Unidos, la Oficina de Derechos de Autor reafirmó en enero de 2025 que solo protege la autoría humana: un efecto generado sin edición sustancial probablemente no se puede proteger. Úsalos como capa, nunca como firma (sal, metales, campana del Spark) |
+| **Generadores de efectos con IA** | Pistas temporales de la Fase 3C y materia prima que una persona edita | ElevenLabs: el plan gratuito no da licencia comercial; los planes de pago sí, sin atribución. Hay fuentes que no coinciden sobre si lo hecho en el plan gratuito se puede usar después de pagar: **genera solo con cuenta de pago**. En Estados Unidos, la Oficina de Derechos de Autor reafirmó en enero de 2025 que solo protege la autoría humana: un efecto generado sin edición sustancial probablemente no se puede proteger. Úsalos como capa, nunca como firma (sal, metales, campana del Spark) |
 | **Voces sintéticas** | Ninguno en el producto | No se clonan voces de actrices. El acuerdo de medios interactivos de SAG-AFTRA de 2025 exige consentimiento informado para cada uso de una réplica digital. Las voces temporales son "blips" por bruja (sección 13) |
 
 ### 10.2 Música de Suno: qué pasa antes de FMOD
@@ -1210,32 +1228,40 @@ Tests/Audio.Tests/                          dotnet test de SalYAlmas.Audio.Logic
 ```
 
 - **Rutas de FMOD:** `event:/Musica/…`, `event:/SFX/<Sistema>/…`, `event:/VO/…`, `event:/Ambiente/…`. El nombre del evento es su ID: `event:/SFX/Combate/sfx_combate_golpe`.
-- **Bancos en git:** sí, en LFS. Así programación puede correr el juego sin FMOD Studio. Un archivo `Assets/SalYAlmas/Audio/Banks/manifiesto.json` guarda el hash del proyecto de FMOD con el que se compilaron; una prueba avisa si los bancos están viejos.
+- **Bancos en git:** sí, para que programación corra el juego sin FMOD Studio (con LFS si se adopta; ver abajo). Un archivo `Assets/SalYAlmas/Audio/Banks/manifiesto.json` guarda el hash del proyecto de FMOD con el que se compilaron; una prueba avisa si los bancos están viejos.
 - **Un dueño por banco a la vez.** El XML de FMOD se puede fusionar, pero duele. Antes de editar un banco, se avisa en el canal del equipo.
 
-**¿Git LFS? Sí, y con plan.** Estimación de fuentes del lanzamiento:
+**¿Git LFS?** La hoja de ruta decidió por ahora no usarlo (D-05) y revisarlo antes de que entren modelos 3D o audio. El audio es ese momento. Estimación de fuentes del lanzamiento:
 
 | Fuente | Cálculo | Tamaño |
 | --- | --- | --- |
 | Stems de música (48 kHz, 24 bits, estéreo) | 40 cues (supuesto; la lista real está en SOUNDTRACK_SUNO.md) × 4 stems × 90 s × 288 KB/s | Unos 4.1 GB |
-| Voces (48 kHz, 24 bits, mono) | 160 min × 144 KB/s × 2.3 idiomas | Unos 3.2 GB |
+| Voces (48 kHz, 24 bits, mono) | 200 min × 144 KB/s × 2.2 idiomas | Unos 3.8 GB |
 | Efectos editados | — | Unos 1.5 GB |
-| **Primera versión** | | **Unos 9 GB**, y cada iteración suma |
+| **Primera versión** | | **Unos 9.5 GB**, y cada iteración suma |
 
-Las cuentas Free y Pro de GitHub incluyen 10 GiB de almacenamiento y 10 GiB de transferencia de LFS al mes; Team y Enterprise Cloud, 250 GiB de cada uno. La documentación de GitHub lista 0.07 USD por GiB al mes de almacenamiento y 0.0875 USD por GiB de transferencia extra en cuentas Enterprise. **Recomendación:** plan Team o un servidor LFS propio, y las grabaciones crudas (96 kHz, tomas descartadas, borradores de Suno) fuera de git, en un almacenamiento con versiones.
+Las cuentas Free y Pro de GitHub incluyen 10 GiB de almacenamiento y 10 GiB de transferencia de LFS al mes; Team y Enterprise Cloud, 250 GiB de cada uno. La documentación de GitHub lista 0.07 USD por GiB al mes de almacenamiento y 0.0875 USD por GiB de transferencia extra en cuentas Enterprise.
 
-Líneas que hay que agregar a `.gitattributes` cuando exista el proyecto de Unity (este plan no edita ese archivo):
+| Opción | Qué va en git | A favor | En contra |
+| --- | --- | --- | --- |
+| **A. LFS para audio** | Metadatos de FMOD, fuentes editadas (WAV) y bancos | Todo versionado junto, y cualquiera compila los bancos | Plan Team de GitHub o un servidor LFS propio |
+| **B. Sin LFS** (D-05 tal cual) | Metadatos de FMOD y bancos temporales chicos; los WAV en un almacenamiento externo con versiones | No cambia la decisión actual | Hay que sincronizar a mano el almacenamiento con el proyecto de FMOD, y los bancos finales tampoco caben en git |
+
+**Recomendación: opción A, decidida antes del primer commit con audio de la Fase 3C.** Mover archivos a LFS después obliga a reescribir el historial (HUECOS S-29). En las dos opciones, las grabaciones crudas (96 kHz, tomas descartadas, borradores de Suno) viven fuera de git.
+
+`.gitattributes` ya marca `*.wav`, `*.ogg`, `*.flac`, `*.aif`, `*.aiff` y `*.bank` como binarios. Con la opción A, esas líneas cambian a la forma de LFS y se agregan los bancos importados (este plan no edita ese archivo):
 
 ```text
 *.wav   filter=lfs diff=lfs merge=lfs -text
 *.aif   filter=lfs diff=lfs merge=lfs -text
+*.aiff  filter=lfs diff=lfs merge=lfs -text
 *.flac  filter=lfs diff=lfs merge=lfs -text
 *.ogg   filter=lfs diff=lfs merge=lfs -text
 *.bank  filter=lfs diff=lfs merge=lfs -text
 Assets/SalYAlmas/Audio/Banks/**/*.bytes filter=lfs diff=lfs merge=lfs -text
 ```
 
-Y a `.gitignore`: `Audio/FMOD/Build/`, `Audio/FMOD/.cache/` y `Audio/FMOD/.user/`.
+Con la opción B, falta marcar `Assets/SalYAlmas/Audio/Banks/**/*.bytes binary`. En los dos casos, `.gitignore` suma `Audio/FMOD/Build/`, `Audio/FMOD/.cache/` y `Audio/FMOD/.user/`.
 
 ## 12. Pruebas
 
@@ -1262,7 +1288,7 @@ Y a `.gitignore`: `Audio/FMOD/Build/`, `Audio/FMOD/.cache/` y `Audio/FMOD/.user/
 | --- | --- |
 | Memoria de FMOD en un combate de jefe | ≤ 40 MB en gama baja y ≤ 64 MB en gama alta |
 | CPU de DSP en el pico de una Cadena de 5 eslabones con Tempestad | ≤ 10 % en gama baja |
-| Streams activos | ≤ 10 en gama baja |
+| Streams activos | ≤ 12 en gama baja |
 | Tiempo de carga de bancos de una región | ≤ 1.5 s en gama baja, sin tirones |
 
 ### 12.3 Escena de prueba de audio
@@ -1310,26 +1336,26 @@ Se corre en un Android de gama baja, un Android de gama alta, un iPhone 11 y un 
 
 | Fase | Qué se hace | Con qué audio |
 | --- | --- | --- |
-| **Fase 3** (prompt del GDD 23.3: "música por capas de la sección 20.3 con FMOD, usando pistas temporales") | Arquitectura completa, tabla de mapeo, sincronía, música por capas, catálogo temporal de combate, Cadena, magia, interfaz, Termas y tirada; sesión de iOS y foco de Android; volúmenes y ajustes básicos; escena de prueba y todas las pruebas | Stems temporales de SOUNDTRACK_SUNO.md (o un tono por capa si todavía no existen); efectos `TEMP_` de fuentes registradas; voces como "blips" por bruja: un sonido corto afinado por especie, sin texto a voz |
-| **Producción** (antes del lanzamiento suave) | Foley de sal y metales, música final procesada, voces grabadas en tres idiomas, tablas localizadas, subtítulos, labios 2D, háptica, bancos remotos, accesibilidad completa, pase de mezcla y de sonoridad en dispositivo | Final |
+| **Fase 3C** de la hoja de ruta (la parte de audio del prompt 23.3 del GDD: "música por capas de la sección 20.3 con FMOD, usando pistas temporales") | Arquitectura completa, tabla de mapeo, sincronía, música por capas, catálogo temporal de combate, Cadena, magia, interfaz, Termas y tirada; sesión de iOS y foco de Android; volúmenes y ajustes básicos; escena de prueba y todas las pruebas | Stems temporales de SOUNDTRACK_SUNO.md (o un tono por capa si todavía no existen); efectos `TEMP_` de fuentes registradas; voces como "blips" por bruja: un sonido corto afinado por especie, sin texto a voz |
+| **Producción** (pistas finales antes de la Fase 4 de la hoja de ruta) | Foley de sal y metales, música final procesada, voces grabadas en tres idiomas, tablas localizadas, subtítulos, labios 2D, háptica, bancos remotos, accesibilidad completa, pase de mezcla y de sonoridad en dispositivo | Final |
 | **Live ops** (cada versión de seis semanas) | Kit de audio por bruja nueva, Manantiales y cosméticos con sonido, música de región y de temporada | Final |
 
 ### 13.2 Tareas ordenadas
 
 | # | Tarea | Depende de | Fase | Entregable |
 | --- | --- | --- | --- | --- |
-| A0 | Prueba de concepto: FMOD 2.03, Unity 6 LTS e IL2CPP en un Android de gama baja y un iPhone 11. Bancos desde Addressables (las dos rutas de la sección 6.3), paquete de recursos de Android, páginas de 16 KB, latencia | — | 3 | Reporte de memoria, CPU y latencia |
-| A1 | Ensamblados, `IAudioService`, `NullAudioService`, `RecordingAudioService` | — | 3 | Compila sin FMOD |
-| A2 | Esquema de `audio_cues.json`, extractores, validador y prueba de cobertura | A1 y los tipos de evento de la Fase 1 | 3 | Prueba en verde |
-| A3 | `AudioScheduler`: frame a tiempo, ×2, grupos de Spark, compensación | A1 | 3 | Pruebas de sincronía |
-| A4 | `AudioDirector` conectado a `CombatPlayback` y `ContractParams` | A2, A3 | 3 | Combate con sonido |
-| A5 | Proyecto de FMOD: buses, VCAs, snapshots, globales y eventos vacíos (por script) | A0 | 3 | Bancos esqueleto |
-| A6 | Música temporal por capas | A5 y borradores de SOUNDTRACK_SUNO.md | 3 | Capas que responden a los parámetros |
-| A7 | Catálogo temporal de efectos | A5 | 3 | Efectos `TEMP_` registrados |
-| A8 | Sesión de iOS, foco de Android, pausa | A0 | 3 | Checklist de plataforma en verde |
-| A9 | Ajustes: VCAs, mono, rango dinámico, sincronía | A5 | 3 | Pantalla de ajustes |
-| A10 | Escena de prueba y captura de sonoridad | A4 a A7 | 3 | Escena y CI nocturno |
-| A11 | `BankLoader` con Addressables | A0, A5 | 3 si cabe; si no, producción | Bancos por región |
+| A0 | Decidir D-05 (Git LFS, sección 11) y prueba de concepto: FMOD 2.03, Unity 6 LTS e IL2CPP en un Android de gama baja y un iPhone 11. Bancos desde Addressables (las dos rutas de la sección 6.3), paquete de recursos de Android, páginas de 16 KB, latencia | — | 3C | Reporte de memoria, CPU y latencia |
+| A1 | Ensamblados, `IAudioService`, `NullAudioService`, `RecordingAudioService` | — | 3C | Compila sin FMOD |
+| A2 | Esquema de `audio_cues.json`, extractores, validador y prueba de cobertura | A1 y los tipos de evento de la Fase 1 | 3C | Prueba en verde |
+| A3 | `AudioScheduler`: frame a tiempo, ×2, grupos de Spark, compensación | A1 | 3C | Pruebas de sincronía |
+| A4 | `AudioDirector` conectado a `CombatPlayback` y `ContractParams` | A2, A3 | 3C | Combate con sonido |
+| A5 | Proyecto de FMOD: buses, VCAs, snapshots, globales y eventos vacíos (por script) | A0 | 3C | Bancos esqueleto |
+| A6 | Música temporal por capas | A5 y borradores de SOUNDTRACK_SUNO.md | 3C | Capas que responden a los parámetros |
+| A7 | Catálogo temporal de efectos | A5 | 3C | Efectos `TEMP_` registrados |
+| A8 | Sesión de iOS, foco de Android, pausa | A0 | 3C | Checklist de plataforma en verde |
+| A9 | Ajustes: VCAs, mono, rango dinámico, sincronía | A5 | 3C | Pantalla de ajustes |
+| A10 | Escena de prueba y captura de sonoridad | A4 a A7 | 3C | Escena y CI nocturno |
+| A11 | `BankLoader` con Addressables | A0, A5 | 3C si cabe; si no, producción | Bancos por región |
 | P1 | Grabación de foley de sal, metales y Termas | Lista de A7 | Producción | Biblioteca propia |
 | P2 | Música final procesada (sección 10.2) | SOUNDTRACK_SUNO.md | Producción | Stems finales |
 | P3 | Guion, casting y grabación: japonés, inglés y español de la historia | Nombres finales del elenco | Producción | Voces |
@@ -1343,7 +1369,9 @@ Se corre en un Android de gama baja, un Android de gama alta, un iPhone 11 y un 
 ### 13.3 Prompt para una sesión de Claude Code
 
 ```
-Eres ingeniero senior de audio y gameplay para juegos móviles en Unity 6, con experiencia en FMOD Studio, IL2CPP, iOS y Android. Vas a construir la integración de audio de la FASE 3 de "Sal y Almas: La Odisea del Fresno", con pistas temporales, sobre las Fases 1 y 2 de este repositorio. Lee docs/audio/INTEGRACION_AUDIO.md (manda en audio), docs/audio/SOUNDTRACK_SUNO.md (cues de música) y docs/GDD.md, sobre todo las secciones 5, 7, 9, 16.1, 19.3, 20 y 21. Si algo contradice al GDD, gana el GDD y me lo reportas. No rompas pruebas anteriores.
+Eres ingeniero senior de audio y gameplay para juegos móviles en Unity 6, con experiencia en FMOD Studio, IL2CPP, iOS y Android. Vas a construir el audio de la FASE 3C de "Sal y Almas: La Odisea del Fresno", con pistas temporales, sobre las fases anteriores de este repositorio. Lee docs/audio/INTEGRACION_AUDIO.md (manda en audio), docs/audio/SOUNDTRACK_SUNO.md (cues, tempos y capas de música) y docs/GDD.md, sobre todo las secciones 5, 7, 9, 16.1, 19.3, 20 y 21. Si algo contradice al GDD, gana el GDD y me lo reportas.
+
+[PROTOCOLO COMÚN de docs/HOJA_DE_RUTA.md, sección 5]
 
 OBJETIVO
 Que el combate, la Cadena, las Termas y la tirada suenen de punta a punta con pistas temporales: música por capas de la sección 20.3 del GDD con FMOD y cada golpe sincronizado con su frame de dato. El núcleo de simulación no cambia ni una línea.
@@ -1355,9 +1383,9 @@ ALCANCE
    - SalYAlmas.Audio.Editor: validadores y el menú Sal y Almas > Construir escena de prueba de audio.
    - Todo lo que use FMOD va tras el símbolo SALYALMAS_FMOD. Si el paquete FMOD for Unity no está instalado, no lo descargues: el proyecto compila y corre con NullAudioService, y lo reportas.
 2. Tabla Assets/SalYAlmas/Data/Audio/audio_cues.json con el esquema de la sección 2.4: una regla por cada tipo de evento del núcleo (TurnStarted, ActionUsed, HitLanded, AspectFormed, BreakTriggered, SalinityBandChanged, ChainStarted, ChainEnded, AscensionCast, BattleEnded y cualquier otro que exista) o una excepción con motivo. Usa los tipos reales del código. Si un evento no trae un dato, no lo agregues al núcleo: usa el derivado o la excepción de la sección 3.6 y lístalo.
-3. AudioDirector: escucha el mismo reproductor de eventos que la presentación. Agenda cada HitLanded en t = inicio + frame / (60 × velocidad) − compensación, con una campana por grupo de Spark y el retraso máximo de 150 ms de la sección 2.6. Escribe los seis parámetros globales del contrato (Tension, Salinidad, Paralaje, EnCadena, AscendenteActivo, EsJefe) y las capas derivadas CapaVoz y CapaCoro con las reglas de la sección 5.4. Cero asignaciones de memoria por evento.
+3. AudioDirector: se cuelga del bus de eventos (HOJA_DE_RUTA.md, sección 2.4) y agenda con el reloj de CombatPlayback. Agenda cada HitLanded en t = inicio + frame / (60 × velocidad) − compensación, con una campana por grupo de Spark y el retraso máximo de 150 ms de la sección 2.6. Escribe los seis parámetros globales del contrato (Tension, Salinidad, Paralaje, EnCadena, AscendenteActivo, EsJefe) y las capas derivadas CapaVoz y CapaCoro con las reglas de la sección 5.4. Cero asignaciones de memoria por evento. Transiciones de música de la sección 5.6: combate, Partitura, Éxtasis, jingles de victoria y derrota, Termas de día y de noche.
 4. FMOD: un script de FMOD Studio en JavaScript (Audio/FMOD/Scripts/crear_esqueleto.js) que cree los buses de la sección 5.1, los VCAs, los snapshots de la 5.2, los seis parámetros globales con sus rangos y un evento vacío por cada ID de la tabla. No puedes abrir FMOD Studio: deja instrucciones para que una persona corra el script, ponga las pistas temporales y compile los bancos.
-5. Pistas temporales: música con los stems temporales de SOUNDTRACK_SUNO.md si ya existen, o un tono distinto por capa si no. Efectos con prefijo TEMP_, solo de fuentes registradas en Audio/Licencias/registro.csv y nunca generados con cuentas gratuitas. Voces como "blips" por bruja, sin texto a voz ni clonación.
+5. Pistas temporales: llena Data/Audio/cues_musica.json con los IDs, BPM, tonalidad, compás y bucle de la tabla 5.2 de SOUNDTRACK_SUNO.md. Música con sus stems temporales si ya existen, o un tono distinto por capa si no. Efectos con prefijo TEMP_, solo de fuentes registradas en Audio/Licencias/registro.csv y nunca generados con cuentas gratuitas. Voces como "blips" por bruja, sin texto a voz ni clonación.
 6. Plataforma (sección 7): categoría Ambient en iOS con interrupciones y cambio de ruta; foco de audio en Android con USAGE_GAME; pausa en segundo plano sin duplicar lo que ya hace la integración de FMOD; callbacks estáticos con MonoPInvokeCallback.
 7. Ajustes (sección 9): VCAs de Maestro, Música, Efectos, Voz, Interfaz y Ambiente; audio mono; rango dinámico; sincronía de audio con calibración; notas de la Partitura.
 8. Escena de prueba de la sección 12.3.
@@ -1381,14 +1409,14 @@ PRUEBAS
 Las de la sección 12.1 que no requieren bancos finales: cobertura de eventos, nombres, implementación nula con un combate grabado de 200 eventos, cero asignaciones, núcleo intacto, sincronía a ×1 y ×2 con RecordingAudioService, retraso por compensación, parámetros del contrato y licencias. Las de rutas de FMOD se saltan con un aviso si no hay bancos.
 
 CRITERIOS DE ACEPTACIÓN
-- Todas las pruebas de las tres fases pasan, con SALYALMAS_FMOD encendido y apagado.
+- Todas las pruebas, nuevas y anteriores, pasan con SALYALMAS_FMOD encendido y apagado.
 - Cada tipo de evento del núcleo tiene regla o excepción, y la prueba falla si aparece uno nuevo sin mapeo.
 - En la Cadena grabada, cada golpe se dispara a ±1 frame de su frame de dato a ×1 y a ×2, y cada Spark suena con una sola campana.
 - Con bancos compilados, el combate contra el jefe se juega completo en el Editor: la percusión entra al combate, la voz en la Cadena, el coro con el jefe y la Desafinación con Salinidad de 100 o más.
 - Una compilación IL2CPP de Android arranca, suena y retoma bien después de ir al fondo.
 
 AL TERMINAR, REPORTA
-Qué construiste, cómo correr las pruebas y la escena, los pasos manuales que quedan en FMOD Studio, la lista de excepciones de la tabla con su motivo, los datos que le faltan al núcleo, los valores // TUNING de audio y cualquier contradicción o hueco del GDD.
+En docs/fases/FASE_3C.md, sección Audio: qué construiste, cómo correr las pruebas y la escena, los pasos manuales que quedan en FMOD Studio, la lista de excepciones de la tabla con su motivo, los datos que le faltan al núcleo, los valores // TUNING de audio y cualquier contradicción o hueco del GDD.
 ```
 
 ## 14. Riesgos y preguntas
@@ -1409,7 +1437,7 @@ Qué construiste, cómo correr las pruebas y la escena, los pasos manuales que q
 | **Datos que faltan en el núcleo.** Sin crítico, sin valor de Salinidad ni Resonancia, el audio pierde detalle o la presentación tienta a recalcular reglas | Medio | Derivados solo de lo que la interfaz ya muestra; pedir los campos de la sección 3.6 para una versión del núcleo |
 | **Saturación de la Partitura.** Notas de más cansan | Bajo | Capa discreta, interruptor y prueba A/B |
 | **Cansancio por la Desafinación** en peleas largas con Salinidad alta | Medio | Habituación a los 60 s e interruptor en ajustes |
-| **Cuota de Git LFS.** Las fuentes del lanzamiento rondan 9 GB y GitHub Free incluye 10 GiB | Medio | Plan Team o servidor LFS; crudos fuera de git |
+| **Archivos grandes sin LFS (D-05).** Las fuentes del lanzamiento rondan 9.5 GB; sin LFS el historial crece sin remedio y GitHub Free incluye 10 GiB de LFS | Alto | Opción A de la sección 11 antes del primer commit con audio; plan Team o servidor LFS; crudos fuera de git |
 
 ### 14.2 Preguntas para el diseñador
 
@@ -1417,11 +1445,11 @@ Qué construiste, cómo correr las pruebas y la escena, los pasos manuales que q
 | --- | --- | --- |
 | 1 | Con voz en español, ¿en qué idioma suenan el combate y las Termas, que no tienen español? | Respaldo elegible; japonés por omisión |
 | 2 | La Cadena es silente (GDD 7.5), pero el plan pide líneas de Cadena. ¿Pueden hablar durante la ejecución? | No. Solo respiración en la Apertura, exhalación en el Cierre y una frase al terminar |
-| 3 | ¿Quién canta las Ascensiones: la vocalista del Salmódico o la actriz de cada idioma? | Las dos: la vocalista canta y la actriz dice las palabras clave (sección 4.4), todo con centro tonal en Re |
+| 3 | ¿Quién canta las Ascensiones: la vocalista del Salmódico o la actriz de cada idioma? | Las dos: la vocalista canta en el cue `mus_ascension_iii_*` de SOUNDTRACK_SUNO.md y la actriz de cada idioma dice las palabras clave (sección 4.4) |
 | 4 | ¿La Partitura suena con una nota por golpe? | Sí, discreta y desactivable, con prueba A/B |
-| 5 | ¿Los cues de combate van a 75 o 150 BPM para que la Cadena caiga a tiempo? Hay que acordarlo con SOUNDTRACK_SUNO.md | Sí para combate; las Termas quedan libres |
+| 5 | SOUNDTRACK_SUNO.md pone el combate a 128 BPM, y a ese tempo los eslabones no caen en el pulso. ¿Vale llevarlo a 150 BPM para tener una Cadena rítmica? | Todavía no. Con 128 solo la Apertura cae en el pulso y las notas siguen en tonalidad. Si la prueba con jugadores lo pide, 150 BPM |
 | 6 | ¿Los Ascendentes tienen voz? | Sí: susurros en Salmódico, grabados una vez, con glifos que se traducen con Paralaje máximo |
-| 7 | La Calculista tiene "voz" personalizable pero calcula en silencio. ¿Cuántos juegos de voz y con qué ID? | 4 juegos sin palabras, `vo_calculista_<juego>_<tipo>` como extensión del contrato |
+| 7 | La propuesta META da a la Calculista 4 voces por idioma, pero el GDD dice que calcula en silencio. ¿Habla o solo reacciona? ¿Con qué ID? | Solo reacciones sin frases; tono de ±3 semitonos; `vo_calculista_<voz>_<tipo>` como extensión del contrato |
 | 8 | ¿Qué cambia el modo recatado en el audio? El GDD no lo dice | La tabla 4.10 |
 | 9 | ¿Las cinemáticas corren a ×2 cuando el combate va a ×2? | No: siempre a ×1; la versión corta ya resuelve el ritmo |
 | 10 | ¿Cuántas regiones salen al lanzamiento? Cambia el presupuesto de voces y de descarga | Calculé con 4; confírmalo |
@@ -1429,21 +1457,23 @@ Qué construiste, cómo correr las pruebas y la escena, los pasos manuales que q
 | 12 | Los rituales de Oficialas y Aprendizas no están definidos | Uno propio por bruja, como dice el GDD 1; mientras tanto, una familia de las seis de la sección 3.2 |
 | 13 | ¿Los efectos de Spark cosméticos (GDD 16.5) pueden cambiar la campana? | Solo la cola y los armónicos. Nunca el ataque, la altura ni la duración: la campana es lectura de combate |
 | 14 | ¿Háptica encendida por omisión? | Sí: Completa en iOS y en Android con primitivas; Esencial en Android básico |
+| 15 | ¿Los recuerdos personales (5 de Juicio y 3 de Confianza por bruja) llevan voz completa? Duplican el costo de voces | Voz parcial al lanzamiento: 3 líneas clave por escena. Completa solo si el lanzamiento suave muestra que se escuchan |
+| 16 | ¿Se adopta Git LFS para el audio (D-05)? | Sí, antes del primer commit con audio (sección 11, opción A) |
 
 ### 14.3 Contradicciones y huecos del GDD
 
-Los números de sección de esta lista son del GDD.
+Los números de sección de esta lista son del GDD. Solo la 9 está ya en HUECOS.md (C-12); la 4 toca el hueco H-18. Las demás son nuevas.
 
 1. **Duración de las transformaciones.** La tabla de decisiones (sección 4.4) rechaza las cinemáticas de 8 a 10 s y fija un máximo de 6 a 8 s. Las secciones 12.5 y 19.2 piden transformaciones de fase de 8 a 10 s. Afecta la duración del stinger de música.
-2. **La versión corta de la Ascensión III pierde el canto.** La sección 19.3 pone el canto en el corte 3, y la versión corta usa solo los cortes 2 y 4. Pero la sección 7.5 dice que las Ascensiones son cantadas.
+2. **La versión corta de la Ascensión III pierde el canto.** La sección 19.3 pone el canto en el corte 3, y la versión corta usa solo los cortes 2 y 4. Pero la sección 7.5 dice que las Ascensiones son cantadas. SOUNDTRACK_SUNO.md trae una versión corta de 2 a 3 s; falta asegurar que lleve canto.
 3. **Cadena silente contra voz solista.** La Cadena es magia silente (7.5) y la capa de voz solista suena durante la Cadena (20.3). No es contradicción si la voz es la de la música, pero hay que decirlo para que nadie grabe incantaciones de Cadena.
-4. **Calculista sin voz con voz personalizable.** La sección 6 la hace personalizable "en especie, cuerpo, voz y pronombres" y también dice que calcula en silencio.
+4. **Calculista sin voz con voz personalizable.** La sección 6 la hace personalizable "en especie, cuerpo, voz y pronombres" y también dice que calcula en silencio. La propuesta META ya da 4 voces por idioma; falta que el GDD diga si habla.
 5. **El modo recatado no dice qué hace con el audio.** La sección 5 lo pide y la 19.5 solo habla de física.
 6. **Modo ahorro de batería a 30 fps** (21.1), cuando la gama baja ya corre a 30 fps. En gama baja el modo no cambia la imagen; el audio y la háptica son los que ahorran.
 7. **Datos de Salinidad.** La sección 21.3 habla de "cambio de Salinidad" y el prompt de la Fase 1 emite `SalinityBandChanged`. El audio pide un valor de 0 a 150 y solo recibe bandas.
 8. **Español de México contra español latinoamericano.** La sección 21.2 dice "español de México" en la localización de textos y la 18.1 dice "español latinoamericano" en voces. Conviene fijar `es-MX` para texto y `es-419` para voz, o unificar.
-9. **Dos Ascensiones encimadas.** La sección 9.6 dice que se reproducen encimadas y dan Spark, pero la Ascensión III es una cinemática de pantalla completa. No queda claro qué se ve, y por tanto qué se oye.
-10. **Rituales de 18 brujas sin definir.** La sección 1 dice que cada bruja tiene ritual propio; la 18.2 solo los da para las 6 Regentes.
+9. **Dos Ascensiones encimadas.** La sección 9.6 dice que se reproducen encimadas y dan Spark, y HUECOS C-12 decide que empiezan juntas desde el frame 0. Pero la Ascensión III es una cinemática de pantalla completa con su propia música en la tonalidad de cada Regente. Falta decidir qué se ve; el audio ya tiene regla (sección 4.4).
+10. **Rituales de 18 brujas sin definir.** La sección 1 dice que cada bruja tiene ritual propio; la 18.2 solo los da para las 6 Regentes, y las 4★ y 3★ con nombre nuevo (Brea, Cempa, Muertita, Salitre, Topacia y Axa) tampoco tienen ritual.
 11. **"FMOD o Wwise"** en la sección 20.3, y FMOD en el prompt de la Fase 3. El contrato lo resuelve: FMOD.
 
 ## Fuentes

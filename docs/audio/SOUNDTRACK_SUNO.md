@@ -20,7 +20,7 @@ Este documento cubre **qué música se genera y cómo se genera**. Cómo entra a
 ## 1. Resumen
 
 - **66 cues para el lanzamiento:** 22 del vertical slice y 44 de lanzamiento. Además hay 14 familias posteriores que se producen con *Cover* a partir de estas pistas.
-- **60 fichas de prompt** con 63 prompts listos para copiar (la ficha P05 trae cuatro de *Sounds*). Cuatro fichas producen dos cues cada una desde la misma generación.
+- **60 fichas de prompt** con 63 prompts listos para copiar (la ficha P05 trae cuatro de *Sounds*). Tres fichas (P07, P08 y P39) producen dos cues cada una desde la misma generación.
 - **Modelo:** Suno v6 en plan Premier, con una cuenta de la empresa. El plan gratuito no sirve: lo que generes ahí no se puede usar comercialmente nunca.
 - **Melodías humanas para lo que se repite:** el tema principal y los ocho leitmotivs conviene que los escriba una persona. Se suben a Suno como audio y se arreglan con *Cover*. Así los temas se reconocen entre pistas y la melodía sí tiene autor humano (sección 8).
 - **Voz humana para lo cantado más importante:** tema principal, Termas de noche, finales, créditos y Ascensiones III de las Regentes. El GDD 20.1 ya planeaba una vocalista y un lingüista; mi recomendación es mantenerlos.
@@ -195,7 +195,7 @@ El GDD 20.4 pide coro desafinado, Salmódico al revés, graves casi inaudibles y
 | Tirada | Pedal de Re que resuelve | 80 | 4/4 | La 5★ resuelve en Re mayor (Picardía) |
 | Combate, Partitura y Éxtasis | Re menor | 128 | 4/4 | Mismo tempo y tonalidad: FMOD cambia entre ellos en la barra de compás |
 | Victoria y derrota | Re mayor y Re menor | 96 y 60 | 4/4 y 3/4 | Cierran el combate en la casa |
-| Jefes | Frigio, de Mi a Sol | 120 a 150 | 4/4 y 3/4 | Más tensos y rápidos que el combate |
+| Jefes | Menores y frigios, de Re a La | 120 a 150 | 4/4 y 3/4 | Más tensos y rápidos que el combate |
 | Fresno | Re, Mi, Sol y La, de las raíces a la copa | 60 a 80 | Varía | La tonalidad sube contigo por el árbol |
 | Regiones | Según su cultura | 60 a 120 | Varía | Cada región tiene su modo |
 | Leitmotivs | Uno por bruja | 60 a 100 | Varía | Cada bruja tiene su tonalidad, y su Ascensión III la hereda |
@@ -256,7 +256,7 @@ El Salmódico es la lengua de los cantos de Ascensión y, en la capa de horror, 
 | Finales de palabra | vocal, -n, -s, -l, -r, -c, -tl | Mezcla |
 | Acento | Reglas del español: palabra que acaba en vocal, n o s, grave; las demás, agudas. Sin tildes | Así Suno la lee bien |
 
-**Ortografía para Suno:** escribe *sh* en vez de *x* (Suno leería "ks") y *ts* en vez de *tz*. No uses *ñ*, *ll*, *th*, *w* ni *k*: Suno las pronuncia de formas distintas según el idioma que crea leer.
+**Ortografía para Suno:** escribe *sh* en vez de *x* (Suno leería "ks") y *ts* en vez de *tz*. Fuera de los sabores regionales de la sección 4.6, no uses *ñ*, *ll*, *th*, *w* ni *k*: Suno las pronuncia de formas distintas según el idioma que crea leer.
 
 ### 4.2 Reglas
 
@@ -327,7 +327,7 @@ Ejemplo:
 5. **Repite las líneas** en las secciones que serán bucle. Un bucle con texto distinto en cada vuelta se nota.
 6. **Melismas:** un guion separa sílabas que quieres alargar (`cue-e-tor`). Úsalo poco.
 7. **El estilo dice que es un idioma inventado** (lo hace el ADN de voz). Sin eso, Suno puede tratar de leerlo como inglés.
-8. **Primera toma, primera revisión de pronunciación.** Si Suno lee mal una palabra, reescríbela como suena (*cuetor* → *kuetor* solo en la letra, nunca en el glosario) y anota el cambio en un diccionario de pronunciación junto a los metadatos (sección 7.8).
+8. **Primera toma, primera revisión de pronunciación.** Si Suno lee mal una palabra, reescríbela como suena, aunque rompa la regla de ortografía (*cuetor* → *kuetor* solo en la letra, nunca en el glosario) y anota el cambio en un diccionario de pronunciación junto a los metadatos (sección 7.8).
 
 ### 4.6 Variantes regionales
 
@@ -1725,4 +1725,1559 @@ Huemag ishoc, cuetor!
 - 10 tomas: es la jefa más importante del Fresno. Fase 1: Verse, 48 compases (58 s). Transición: 4. Fase 2: Chorus, 48 compases.
 - **Tema base de temporada.** La Jardinera cambia cada seis semanas (GDD 10.1); su música no. Cada temporada se hace un *Cover* que conserva la melodía y cambia el metal y el modo al del planeta del Tránsito (sección 3.4): el jugador la reconoce aunque cambie de rostro.
 
-<!-- CONTINUA -->
+### 6.10 Las otras diez regiones
+
+Todas siguen el patrón de P11: **Bucle** de 24 a 48 compases, stems B, P y V, P con `Tension`, V desde la segunda vuelta o en escenas de historia, de 6 a 8 tomas. Cada una suma como máximo dos instrumentos invitados de su cultura. La voz canta con el sabor fonético de su región (sección 4.6). Si un grupo de voces aparece, se suma a V: el coro completo no entra en exploración.
+
+#### P29 · `mus_region_tauro` · Llanuras de Cobre
+
+**Título:** Istalijk
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Exploration theme for copper plains of windmills inspired by the Low Countries: sweet, sleepy, slightly hollow, a village that forgets. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Carillon bells play a gentle waltz melody, barrel-organ-like drone, lute and guitar, soft frame drum like turning sails. The voice hums a sweet tune that slowly loses its words. F major, 72 BPM, 3/4. Form: intro, 24-bar theme, 24 bars with voice, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, polka, accordion, circus
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: carillon and lute]
+
+[Verse]
+[Instrumental: carillon waltz]
+
+[Chorus]
+Olvaien istalijk, cochumen
+Remelijk... olvaien...
+Istalijk... mmm...
+Mmm... mmm...
+
+[Outro]
+[End]
+```
+
+**Sentido:** Olvida, sal dulce, duerme. El recuerdo... olvida... Sal dulce... y las palabras se pierden. Es el pueblo de los lotófagos: la sal dulce borra recuerdos.
+
+**Uso:** invitados carillón y organillo. **Bucle:** 48 compases (120 s).
+
+#### P30 · `mus_region_geminis` · Ciudad Espejo
+
+**Título:** Ermai ze Ermai
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Exploration theme for a mirrored canal city inspired by Venice: elegant, playful, secretive, two sister messengers and a bottled wind. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Barcarolle rocking in 6/8, mandolin tremolo, harpsichord, guitar, airy flute sweeps like wind escaping a bottle. Two female voices sing in canon and in mirrored thirds. G minor, 60 BPM in 6/8 (dotted quarter). Form: intro, 24-bar theme, 24 bars with two voices, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, opera, accordion, recorder
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: barcarolle, mandolin tremolo]
+
+[Verse]
+[Instrumental: harpsichord and flute]
+
+[Chorus]
+Ermai ze ermai, ishocae cuetor
+(Ermai ze ermai)
+Mareshae, mareshae, ilcel ze maresh
+(Mareshae)
+
+[Outro]
+[End]
+```
+
+**Sentido:** Hermana es hermana: mira, regresa. Mar, mar: el cielo es mar.
+
+**Uso:** invitados mandolina y clavecín. **Bucle:** 48 compases (96 s). La segunda voz va entre paréntesis y se suma a V. La flauta dulce está excluida aunque Tormentina tenga Ascendente Géminis: es su instrumento reservado.
+
+#### P31 · `mus_region_cancer` · Costa de las Conchas
+
+**Título:** Mareshenn
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Exploration theme for a stormy shell coast inspired by Brittany: tides, salt spray, danger under the surface. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Bombarde-like double-reed melody over a drone, guitar and low cello swelling like waves, ocean drum, deep frame drum hits like crab claws. Call-and-response between the lead voice and two answering voices. E Dorian, 80 BPM, 4/4. Form: intro, 16-bar theme, 16 bars of call and response, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, sea shanty, pub song, harp
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: ocean drum and drone]
+
+[Verse]
+[Instrumental: double-reed melody over waves]
+
+[Chorus]
+Mareshenn, istalek!
+(Mareshenn, istalek!)
+Cuetorou atlua, nelradenn
+(Cuetorou atlua)
+
+[Outro]
+[End]
+```
+
+**Sentido:** ¡Mar, sal! El agua regresa, raíz.
+
+**Uso:** invitados bombarda y tambor oceánico. **Bucle:** 32 compases (96 s). Las voces que responden se suman a V.
+
+#### P32 · `mus_region_leo` · Desierto Áureo
+
+**Título:** Alistal Jarqel
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Exploration theme for a golden desert inspired by Al-Andalus and the Maghreb: heat shimmer, sacred sun herds, forbidden beauty. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Qanun-like psaltery runs, breathy end-blown reed flute, frame drum and goblet drum groove, guitar, low cello drone, small gold bells. The voice sings melismatic, ornamented lines. D Phrygian dominant (Hijaz), 96 BPM, 4/4. Form: free intro, 16-bar groove theme, 16 bars with voice, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, oud, belly dance pop
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: free qanun-like psaltery]
+
+[Verse]
+[Instrumental: frame drum and goblet drum groove]
+
+[Chorus]
+Alistal jarqel, solatiu qetmaa
+Aaah... alyolmah, cuetor
+Solatiu, solatiu, tleugo jarqel
+Aaah...
+
+[Outro]
+[End]
+```
+
+**Sentido:** La sal del rebaño, el sol que quema. Alma, vuelve. Sol, sol, fuego del rebaño. Es el ganado del Sol: tocarlo trae castigo.
+
+**Uso:** invitados qanun (como salterio) y darbuka. **Bucle:** 32 compases (80 s). El laúd árabe está excluido: es de Solenne, aunque su Ascendente sea Leo.
+
+#### P33 · `mus_region_virgo` · Abadía de las Herbolarias
+
+**Título:** Cuicantum Istalis
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Exploration theme for an abbey of herbalist witches inspired by Central European monasteries: serene chant, incense, hidden menace. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Three women sing a plainchant-like line in unison, portative organ drone, plucked psaltery, guitar, low cello, hand bells. Slowly, small dissonances creep in under the beauty. G Dorian, 60 BPM, 4/4. Form: intro, 12-bar chant, 12-bar chant with the lead voice above, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, full choir, gospel, harp, drums
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: organ drone and hand bells]
+
+[Verse]
+Cuicantum istalis, nantrae lucetlum
+Uarbis yolmae, cochumibus
+Cuicantum istalis, nantrae lucetlum
+Uarbis yolmae
+
+[Chorus]
+Cuicantum istalis, nantrae lucetlum
+(Uarbis yolmae, cochumibus)
+
+[Outro]
+[End]
+```
+
+**Sentido:** Canto de la sal, luz de la madre. Almas del árbol, en sueños. Las disonancias que entran poco a poco anuncian a Circe, que vuelve bestias a los visitantes.
+
+**Uso:** invitados órgano portativo y campanas de mano. **Bucle:** 24 compases (96 s). El arpa está excluida: es de Cupria, aunque su Ascendente sea Virgo. Las tres voces van en V.
+
+#### P34 · `mus_region_libra` · Ducado de las Balanzas
+
+**Título:** Istaletta
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Exploration theme for a rich merchant duchy inspired by Italian Renaissance city-states: courtly, polished, cold, everything has a price. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Stately pavane: lute and guitar, harpsichord, tambourine and clinking coin-like bells keeping time, low cello. Phrases alternate between A minor and C major like a scale weighing souls. 72 BPM, 4/4. Form: intro, 16-bar pavane, 16 bars with voice, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, opera, viola da gamba
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: pavane, coin-like bells]
+
+[Verse]
+[Instrumental: lute and harpsichord]
+
+[Chorus]
+Istaletta, yolmella, cosetlina
+Amolibetto, na olvaio
+Istaletta, yolmella
+Cosetlina...
+
+[Outro]
+[End]
+```
+
+**Sentido:** Salecita, almita, pequeña cosecha. Librito, no olvido. En el ducado todo se paga con almas.
+
+**Uso:** invitados clavecín y campanas de moneda. **Bucle:** 32 compases (107 s). La viola da gamba está excluida: es de Cervanda.
+
+#### P35 · `mus_region_escorpio` · Pantanos de Azufre
+
+**Título:** Micmorka
+**Ajustes:** Instrumental no · Weirdness 35 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Exploration theme for sulfur swamps inspired by Eastern European folklore: mist, ghosts, the way down to the river of souls. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Hammered dulcimer tremolo, scratchy folk fiddle, drone, guitar, low cello, slow frame drum. The lead voice uses an open-throated folk style with sharp ornaments, answered by two voices in close dissonant harmony. E Dorian with a raised fourth, 64 BPM in 6/8 (dotted quarter). Form: intro, 24-bar theme, 24 bars with voices, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, full choir, polka, accordion, clarinet
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: hammered dulcimer and drone]
+
+[Verse]
+[Instrumental: folk fiddle over mist]
+
+[Chorus]
+Micmorka, atluya, nelradzhe
+(Micmorka...)
+Yolmiya cuetorov, nochualka
+(Yolmiya...)
+
+[Outro]
+[End]
+```
+
+**Sentido:** Muerte, agua, raíz. Las almitas regresan, noche. Es el descenso al Río Lácteo.
+
+**Uso:** invitados címbalo y violín popular. **Bucle:** 48 compases (90 s). Si quieres probar un 7/8 de la región, hazlo como toma aparte; para el bucle de lanzamiento usa el 6/8 (sección 3.7).
+
+#### P36 · `mus_region_sagitario` · Estepas del Centauro
+
+**Título:** Estlalaar
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Exploration theme for endless centaur steppes inspired by Central Asian nomads: galloping, wind, vast sky, a one-eyed giant on the horizon. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Bowed horsehead-fiddle-like melody, galloping guitar and frame drum rhythm, low overtone drone, plucked lute, wooden flute in the wind. The voice sings long open calls. A minor pentatonic, 120 BPM, 4/4. Form: intro, 24-bar gallop theme, 24 bars with voice, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, western, country, banjo
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: galloping frame drum and drone]
+
+[Verse]
+[Instrumental: bowed fiddle melody]
+
+[Chorus]
+Estlalaar, ilceluun, cuetoraar
+Aaah...
+Ishocuun huemag, ilceluun
+Aaah...
+
+[Outro]
+[End]
+```
+
+**Sentido:** Estrellas, cielo, volver. El ojo inmenso en el cielo: el cíclope del paso, y lo que viene detrás.
+
+**Uso:** invitados violín de cabeza de caballo y bordón de armónicos. **Bucle:** 48 compases (96 s).
+
+#### P37 · `mus_region_acuario` · Archipiélago de Hielo
+
+**Título:** Hvestlur
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Exploration theme for a frozen archipelago inspired by Scandinavia and Iceland: icy silence, northern light, sirens luring you into cold water. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Keyed-fiddle-like resonant strings, sparse guitar harmonics, low cello, glassy bowed bowls, slow frame drum like a heartbeat in the cold. The voice sings high, piercing herding calls that echo across the water. B Dorian, 75 BPM, 3/4. Form: intro, 20-bar theme, 20 bars with voice calls, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, viking metal, war drums, horns
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: glassy bowls and harmonics]
+
+[Verse]
+[Instrumental: keyed fiddle over ice]
+
+[Chorus]
+Hvestlur istaley, kvetor yolmir
+Aa-ooo... aa-ooo...
+Atluur, atluur, cochumir
+Aa-ooo...
+
+[Outro]
+[End]
+```
+
+**Sentido:** Estrella de sal, vuelvan, almas. Agua, agua, duerman. Los llamados son el canto de las sirenas.
+
+**Uso:** invitados nyckelharpa y cuencos de cristal. **Bucle:** 40 compases (96 s). Versión gaélica si mantienes el GDD 20.1: cambia la región de inspiración y la letra por *Istalach yolmean, cuetorach / Atluach, cochumean* (pregunta 3 de la sección 9).
+
+#### P38 · `mus_region_piscis` · Isla de la Ninfa
+
+**Título:** Cochumion
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Exploration theme for a nymph's island inspired by Byzantium and Greece: warm sea, golden mosaics, a sweet trap where time stops. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. A low sung drone held under the melody, bowed lyra-like fiddle, hammered dulcimer, guitar, gentle frame drum. The lead voice sings slow, ornamented, hypnotic phrases that never fully resolve. E Phrygian over a constant drone, 60 BPM, 4/4. Form: intro, 12-bar theme, 12 bars with voice, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, full choir, bouzouki dance, harmonium
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: sung drone and lyra]
+
+[Verse]
+[Instrumental: hammered dulcimer over the drone]
+
+[Chorus]
+Cochumion maresis, atluathos
+Na cuetoros, na cuetoros
+Ermaion, cochumion
+Mmm...
+
+[Outro]
+[End]
+```
+
+**Sentido:** Sueño del mar, agua. No vuelvas, no vuelvas. Hermana, duerme. Es la isla de Calipso: quédate para siempre.
+
+**Uso:** invitados lira de arco y santur. **Bucle:** 24 compases (96 s). El bordón cantado va en V. El armonio está excluido: es de Selenia, aunque su Ascendente sea Piscis.
+
+### 6.11 Eclipse y horror
+
+#### P39 · `mus_eclipse` y `mus_eclipse_aviso` · Eclipse
+
+**Título:** Solatiu Micmor
+**Ajustes:** Instrumental no · Weirdness 35 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Eclipse event: the sun is swallowed, time holds its breath, awe and dread. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Choir: small mixed chamber choir, soft and distant. Opens with one deep bell and a choir swell that turns dark: the warning. Then a slow loop: low gong-like bells, low cello drone, guitar harmonics, the choir holding a chord that shifts from C major to C minor, sparse frame drum. No lead vocal, choir only. C minor, 60 BPM, 4/4. Form: 2-bar warning sting, 16-bar slow loop, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, solo singer, fast tempo, jump scare
+```
+
+**Letra**
+
+```text
+[Intro]
+Solatiu... micmor...
+
+[Verse]
+Ilcel... neshcen...
+Solatiu... na...
+Ilcel... neshcen...
+Solatiu... na...
+
+[Outro]
+[End]
+```
+
+**Sentido:** El sol... muere. / Cielo... ceniza. Sol... no.
+
+**Uso**
+
+- 6 tomas. **Aviso:** compases 1 y 2 (8 s), sin bucle; suena cuando el reloj de eclipses se cumple (cada dos regiones, GDD 6). **Bucle:** 16 compases (64 s) mientras dura el evento.
+- Stems: B, P y C. Como no hay voz solista, lo que Suno separe como voz va a C.
+
+#### P40 · `mus_horror_capa_paralaje` · Capa de Paralaje
+
+**Título:** Lo que Mira
+**Ajustes:** Instrumental sí · Weirdness 60 · Style Influence 65 · Variety 0 · Max Mode sí · Duración auto · Modelo v6 (prueba también v6-wild)
+
+**Estilo**
+
+```text
+Dark ambient horror texture, no melody, no pulse, no key: something huge watching from beyond the sky. Recorded live in a small stone chapel with natural reverb. Sub-bass rumble with a faint low-mid hum, breath-like air, singing bowls rubbed until they groan, bowed metal, distant reversed whispers, faint radio static and slow pulsar-like clicks, long silences between events. Sparse and quiet, never a jump scare. Free time. Form: one continuous evolving texture with long gaps.
+```
+
+**Excluir estilos**
+
+```text
+melody, chords, drums, beat, guitar, choir, singing, lyrics, jump scare, loud hits, EDM, synth pad, epic trailer music, braams, cinematic riser, heartbeat
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: low rumble and breath]
+[Verse]
+[Instrumental: groaning bowls, distant whispers]
+[Break]
+[Instrumental: near silence, faint static]
+[Outro]
+[End]
+```
+
+**Uso**
+
+- Es la única pieza sin ADN de estilo completo: no puede tener ensamble ni tonalidad porque se suma encima de cualquier cue. Su ADN de exclusión también es propio.
+- 6 tomas. Elige 60 a 90 s sin eventos fuertes y haz el bucle con un fundido cruzado de 4 s.
+- Revisa en la bocina de un celular: si no oyes nada, sube el zumbido de 100 a 200 Hz en la edición (sección 3.5).
+- Sube con `Paralaje`. **Nunca suena en las Termas.**
+
+#### P41 · `mus_huesped_combate` · Combate contra Huéspedes
+
+**Título:** Cohsi Gameuh
+**Ajustes:** Instrumental no · Weirdness 55 · Style Influence 70 · Variety 0 · Max Mode sí · Duración auto · Modelo v6 (prueba también v6-wild)
+
+**Estilo**
+
+```text
+Battle against a cosmic entity from beyond the sky: vast, indifferent, incomprehensible, slow dread. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Choir: small mixed chamber choir, soft and distant. Slow heavy pulse on deep frame drums, low cello clusters sliding in microtones, bowed bells, scraped psaltery, the choir holding dissonant clusters that drift out of tune, faint radio-signal static and pulsar-like clicks on top. No lead vocal. No clear key, centered on C sharp. 75 BPM, 4/4. Form: intro, 32-bar slow loop, 8 bars of near silence, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, vinyl crackle, solo singer, heroic, major key, jump scare
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: deep drums and bowed bells]
+
+[Verse]
+Cohsi gameuh... lecli...
+Ilaltse amloy...
+Cohsi gameuh... lecli...
+Ilaltse amloy...
+
+[Break]
+[Instrumental: near silence]
+
+[Outro]
+[End]
+```
+
+**Sentido:** Son *ishoc huemag ilcel* y *estlali yolma* escritos al revés: ojo inmenso, cielo; estrella, alma. Es la lengua de las estrellas.
+
+**Uso**
+
+- 8 tomas. **Bucle:** 32 compases (102 s). Los 8 compases de casi silencio son una segunda región que FMOD intercala: los silencios largos del GDD 20.4.
+- Stems: B, P y C. Los Huéspedes no cantan solos: se les oye. En el ADN de exclusión se quitó *lo-fi* para dejar pasar la estática.
+- Invierte además el stem C en la edición y súmalo bajo: es el Salmódico al revés de verdad.
+
+#### P42 · `mus_horror_revelacion` · Revelación
+
+**Título:** La Grieta
+**Ajustes:** Instrumental no · Weirdness 45 · Style Influence 75 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Story revelation cue: a truth too big to hold, sorrow turning into cosmic dread. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Solo guitar and voice begin tender, then the harmony slips, the choir enters out of tune, bells ring too long, everything sinks into a deep rumble and silence. D minor dissolving into no key. 60 BPM, 4/4, free at the end. Form: 8 tender bars, 8 bars of slow collapse, long silence.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, drums, jump scare, loud hit
+```
+
+**Letra**
+
+```text
+[Verse]
+Istal yolma, cuetor frashna
+Nantre ilcel...
+Istal yolma...
+
+[Bridge]
+Huemag ishoc...
+(Aaah...)
+
+[Outro]
+[Instrumental: deep rumble, then silence]
+[End]
+```
+
+**Sentido:** La sal es alma, vuelve al Fresno. Madre del cielo... / El ojo inmenso.
+
+**Uso**
+
+- **Ruta recomendada:** *Cover* de P01 con este estilo, para que la revelación arranque con la melodía del tema principal y se rompa.
+- Sin bucle, unos 70 s. Suena en las revelaciones de la Grieta (regiones 5 a 8) y el Abismo (9 a 12), GDD 6.5.
+
+### 6.12 Crafting
+
+#### P43 · `mus_crafting_yunque` · Yunque Astral
+
+**Título:** Chispa y Martillo
+**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
+
+**Estilo**
+
+```text
+Forge and crafting theme: proud work, sparks, the rhythm of the hammer, cozy but strong. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Anvil and hammer strikes on beats two and four, strummed guitar and lute riff, low cello groove, frame drum, iron bells, wooden flute melody on top. A minor, 100 BPM, 4/4. Form: short intro, 32-bar working loop, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, horror, industrial
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: anvil and guitar]
+[Verse]
+[Instrumental: working rhythm, flute melody]
+[Chorus]
+[Instrumental: lute riff, iron bells]
+[Outro]
+[End]
+```
+
+**Uso:** 6 tomas. **Bucle:** 32 compases (77 s). Zona segura. Los golpes en 2 y 4 permiten sincronizar la animación de forja; el sonido de la forja es un efecto aparte.
+
+#### P44 · `mus_crafting_caldero` · Caldero de Bruja
+
+**Título:** Salmuera Turbia
+**Ajustes:** Instrumental sí · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode no · Duración auto
+
+**Estilo**
+
+```text
+Witch's cauldron brewing theme: playful, mischievous, bubbling, a pinch of danger. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Waltz with plucked lute and guitar, pizzicato low cello, bubbling psaltery runs, flute giggles, small bells and wooden spoon-like clicks. E minor with sly major turns, 90 BPM, 3/4. Form: short intro, 48-bar loop, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, circus, cartoon
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: bubbling psaltery]
+[Verse]
+[Instrumental: lute waltz, flute giggles]
+[Chorus]
+[Instrumental: sly major turn]
+[Outro]
+[End]
+```
+
+**Uso:** 6 tomas. **Bucle:** 48 compases (96 s). En las Termas es zona segura; en los nodos de Caldero del Fresno sí admite la capa de Paralaje.
+
+### 6.13 Leitmotivs
+
+Todos siguen el patrón de P15: **ruta recomendada** con melodía humana y *Cover*; si no, 10 tomas. **Firma:** los dos primeros compases del motivo, solo el stem solista (Split from Mix o Advanced Split). **Bucle de escena:** del motivo a su regreso. La Ascensión III de cada Regente hereda su tonalidad.
+
+#### P45 · `mus_leitmotiv_selenia` · Selenia de Plata
+
+**Título:** Polilla de Plata
+**Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Character theme for a melancholic moth witch poet who speaks with the dead: moonlit, fragile, devoted. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A solo harmonium carries the melody, breathing softly. Guitar arpeggios, low cello, softly bowed glass bowls, psaltery glints like moth wings. No drums, no vocals. B minor, 72 BPM, 3/4. Form: 2-bar intro, 8-bar main motif on harmonium, 8-bar development, motif returns, quiet ending on harmonium alone.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, drums, church organ, accordion
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: guitar arpeggios]
+[Verse]
+[Instrumental: solo harmonium main motif]
+[Bridge]
+[Instrumental: development, glass bowls]
+[Chorus]
+[Instrumental: harmonium motif returns]
+[Outro]
+[Instrumental: harmonium alone]
+[End]
+```
+
+**Uso:** **Bucle de escena:** 16 compases (40 s). Selenia es limitada en la versión 1.0 (GDD 18.2): adelántala al principio del lote 6.
+
+#### P46 · `mus_leitmotiv_solenne` · Solenne
+
+**Título:** Gajo de Limón
+**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Character theme for a teasing desert fox merchant witch: sly, warm, sun-drenched, playful swagger. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A solo oud carries the melody with quick ornaments and slides, frame drum and goblet drum groove, guitar, low cello, finger cymbals, psaltery flourishes. No vocals. D Phrygian dominant, 100 BPM, 4/4. Form: 2-bar intro, 8-bar main motif on oud, 8-bar development, motif returns with full groove, ending on oud alone.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, belly dance pop
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: oud flourish]
+[Verse]
+[Instrumental: solo oud main motif, frame drum groove]
+[Bridge]
+[Instrumental: development, finger cymbals]
+[Chorus]
+[Instrumental: oud motif returns with full groove]
+[Outro]
+[Instrumental: oud alone]
+[End]
+```
+
+**Uso:** **Bucle de escena:** 16 compases (38 s).
+
+#### P47 · `mus_leitmotiv_cervanda` · Cervanda
+
+**Título:** Salero de Plata
+**Ajustes:** Instrumental sí · Weirdness 20 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Character theme for a regal deer witch, a sage who deserted the order of Saturn: courtly, grave, dignified, hiding guilt. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A solo viola da gamba carries the melody in a stately sarabande with weight on the second beat. Lute and guitar continuo, slow heavy low bells, psaltery ornaments. No drums, no vocals. G minor, 60 BPM, 3/4. Form: 2-bar intro, 8-bar main motif on viola da gamba, 8-bar development, motif returns, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, drums, violin solo, piano
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: lute continuo]
+[Verse]
+[Instrumental: solo viola da gamba main motif, sarabande]
+[Bridge]
+[Instrumental: development, heavy low bells]
+[Chorus]
+[Instrumental: viola da gamba motif returns]
+[Outro]
+[End]
+```
+
+**Uso:** **Bucle de escena:** 16 compases (48 s). Su Ascendente es Capricornio: si Cervanda sale en las escenas de esa región, su motivo puede sonar ahí en lugar de P12.
+
+#### P48 · `mus_leitmotiv_tormentina` · Tormentina
+
+**Título:** Mensajera
+**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Character theme for a hyperactive hare messenger witch: fast, cheeky, breathless, lightning in her feet. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A solo alto recorder carries the melody with quick trills, galloping guitar strums, lute, bouncing pizzicato low cello, frame drum and tambourine, bells like sparks. No vocals. A Mixolydian, 96 BPM in 6/8 (dotted quarter), jig feel. Form: 1-bar intro, 8-bar main motif on recorder, 8-bar development, motif returns, quick ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, tin whistle, bagpipes, pub song
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: galloping guitar]
+[Verse]
+[Instrumental: solo alto recorder main motif, jig]
+[Bridge]
+[Instrumental: development, bells like sparks]
+[Chorus]
+[Instrumental: recorder motif returns]
+[Outro]
+[End]
+```
+
+**Uso:** **Bucle de escena:** 32 compases (40 s); a este tempo 16 compases se quedan cortos.
+
+#### P49 · `mus_leitmotiv_cupria` · Cupria
+
+**Título:** Cardenillo
+**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Character theme for a gentle serpent herbalist witch with ambiguous morals: soothing, seductive, healing with a hidden sting. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A solo harp carries the melody with flowing arpeggios. Guitar, low cello, soft copper singing bowls, wooden flute echo. Sweet E major with sudden minor chords that slither in. No drums, no vocals. 80 BPM, 4/4. Form: 2-bar intro, 8-bar main motif on harp, 8-bar development, motif returns, ending on harp alone.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, drums, piano, new age
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: harp arpeggios]
+[Verse]
+[Instrumental: solo harp main motif]
+[Bridge]
+[Instrumental: development, copper bowls, minor chords slither in]
+[Chorus]
+[Instrumental: harp motif returns]
+[Outro]
+[Instrumental: harp alone]
+[End]
+```
+
+**Uso:** **Bucle de escena:** 16 compases (48 s).
+
+#### P50 · `mus_leitmotiv_cempa` · Cempa, la coyota
+
+**Título:** Cempasúchil
+**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Character theme for a trickster coyote witch: mischievous, festive, wily, with a wink of sadness. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A jarana jarocha strums a son jarocho groove with shifting 6/8 and 3/4 accents and leads the melodic riffs, zapateado footwork on a wooden platform, guitar, low cello, quicksilver bells. No vocals. D major, 96 BPM in 6/8 (dotted quarter). Form: 1-bar intro, 8-bar main motif led by the jarana, 8-bar development, motif returns, quick ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, mariachi, trumpet, accordion
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: jarana strum]
+[Verse]
+[Instrumental: jarana main motif, zapateado]
+[Bridge]
+[Instrumental: development, quicksilver bells]
+[Chorus]
+[Instrumental: jarana motif returns]
+[Outro]
+[End]
+```
+
+**Uso:** **Bucle de escena:** 32 compases (40 s). La jarana es sobre todo rítmica: si Suno no le da melodía, deja que la guitarra cante el motivo y que la jarana lo acompañe; sigue siendo su instrumento. Escúchala con alguien que conozca el son jarocho antes de aprobar (sección 8).
+
+#### P51 · `mus_leitmotiv_jaguar` · La jaguar
+
+**Título:** Obsidiana
+**Ajustes:** Instrumental sí · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración auto
+
+**Estilo**
+
+```text
+Character theme for a fierce jaguar witch of the obsidian salt flats: solemn, sun-scorched, predatory grace. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. A clay ocarina carries the melody, wooden slit drum and deep skin drum in a stalking rhythm, guitar drone, low cello, dry obsidian-like clicks, gold bells. No vocals. A minor pentatonic, 90 BPM, 4/4. Form: 2-bar intro, 8-bar main motif on ocarina, 8-bar development, motif returns over drums, ending.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, vocals, choir, pan flute, new age, tribal cliche
+```
+
+**Letra (estructura)**
+
+```text
+[Intro]
+[Instrumental: slit drum stalking rhythm]
+[Verse]
+[Instrumental: clay ocarina main motif]
+[Bridge]
+[Instrumental: development, obsidian clicks, gold bells]
+[Chorus]
+[Instrumental: ocarina motif returns over drums]
+[Outro]
+[End]
+```
+
+**Uso:** **Bucle de escena:** 16 compases (43 s). El ID `jaguar` es provisional: cuando tenga nombre, renombra el cue y sus archivos antes de integrarlos en FMOD.
+
+### 6.14 Ascensiones III de las Regentes
+
+Todas siguen el patrón de P16: 8 tomas, corte de 7 s sincronizado con los pulsos de la cámara (GDD 19.3), versión corta de 2 a 3 s y vocalista humana recomendada. Cada una toma el instrumento, el metal y el Ascendente de su Regente.
+
+#### P52 · `mus_ascension_iii_selenia` · Selenia
+
+**Título:** Metzlu Cochum
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+
+**Estilo**
+
+```text
+Ultimate attack sung invocation for a moth witch poet and her twin fish spirits of moonlight: dreamlike, hypnotic, haunting. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. A breath and a high silver bell, then a harmonium chord and the voice begin the invocation; the choir blooms in soft clusters like moonlit wings, glass bowls ring; one final hush and a shimmering impact. B minor, 120 BPM, 4/4. Form: 3-beat preparation, 2-beat ritual, 6-beat sung climax, 3-beat impact, ring-out.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, long intro, many verses, ballad
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: breath and high silver bell]
+
+[Chorus]
+Metzlu, cochum, ishoc!
+(Aaah...)
+
+[Outro]
+[Instrumental: shimmering impact]
+[End]
+```
+
+**Sentido:** Luna, sueño: ¡mira!
+
+#### P53 · `mus_ascension_iii_solenne` · Solenne
+
+**Título:** Solatiu Tleugo
+**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+
+**Estilo**
+
+```text
+Ultimate attack sung invocation for a desert fox witch and her lion spirit with a solar crown: blazing, proud, roaring. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. A breath and bright gold bells, a fast oud flourish and the voice launch the invocation; frame drums roll and the choir bursts in a blazing bright chord like a roar; one final impact and sizzling bells. D Phrygian dominant, 120 BPM, 4/4. Form: 3-beat preparation, 2-beat ritual, 6-beat sung climax, 3-beat impact, ring-out.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, long intro, many verses, ballad
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: breath and gold bells]
+
+[Chorus]
+Solatiu, tleugo, istal!
+(Aaah!)
+
+[Outro]
+[Instrumental: impact and sizzling bells]
+[End]
+```
+
+**Sentido:** Sol, fuego, ¡sal!
+
+#### P54 · `mus_ascension_iii_cervanda` · Cervanda
+
+**Título:** Huemag Nelradi
+**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+
+**Estilo**
+
+```text
+Ultimate attack sung invocation for a regal deer witch and her goat-fish spirit of gravity: grave, crushing, solemn. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. A breath and a deep heavy bell, a low viola da gamba stroke and the voice begin; a thunder sheet rumbles and the choir sinks into low grave chords as time slows; one final crushing impact and dull bells. G minor, 120 BPM, 4/4. Form: 3-beat preparation, 2-beat ritual, 6-beat sung climax, 3-beat impact, ring-out.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, long intro, many verses, ballad
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: breath and deep heavy bell]
+
+[Chorus]
+Huemag nelradi, micmor!
+(Ooh...)
+
+[Outro]
+[Instrumental: crushing impact and dull bells]
+[End]
+```
+
+**Sentido:** Raíz inmensa: ¡muerte! El plomo de Saturno y el trueno de Júpiter, su mezcla.
+
+#### P55 · `mus_ascension_iii_tormentina` · Tormentina
+
+**Título:** Ermai Ermai
+**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+
+**Estilo**
+
+```text
+Ultimate attack sung invocation for a hare messenger witch and her twin mirrored spirits: lightning fast, dazzling, double strikes. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. A breath and quick tin bells, alto recorder trills doubled in echo and the voice begin; a thunder sheet cracks, frame drums hit twice, the choir answers in two mirrored halves; a double impact and ringing bells. A Mixolydian, 120 BPM, 4/4. Form: 3-beat preparation, 2-beat ritual, 6-beat sung climax, 3-beat impact, ring-out.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, long intro, many verses, ballad
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: breath and quick tin bells]
+
+[Chorus]
+Ermai, ermai, cuetor!
+(Ermai!)
+
+[Outro]
+[Instrumental: double impact and ringing bells]
+[End]
+```
+
+**Sentido:** ¡Hermana, hermana, vuelve! Las dos figuras en espejo de su Ascendente Géminis.
+
+#### P56 · `mus_ascension_iii_cupria` · Cupria
+
+**Título:** Nantre Lucetl
+**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 85 · Variety 0 · Max Mode sí · Duración personalizada lo más corta posible
+
+**Estilo**
+
+```text
+Ultimate attack sung invocation for a serpent herbalist witch and her wheat-maiden spirit: warm, precise, healing with a sting. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. A breath and warm copper bowls, a harp glissando and the voice begin; the choir wraps around in a sweet enveloping chord that turns suddenly minor; one precise impact and copper bells. E major, 120 BPM, 4/4. Form: 3-beat preparation, 2-beat ritual, 6-beat sung climax, 3-beat impact, ring-out.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, long intro, many verses, ballad
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: breath and copper bowls]
+
+[Chorus]
+Nantre, lucetl, yolmi!
+(Aaah...)
+
+[Outro]
+[Instrumental: precise impact and copper bells]
+[End]
+```
+
+**Sentido:** Madre, luz, ¡almita!
+
+### 6.15 Finales y créditos
+
+Los cuatro son variaciones del tema principal. **Ruta recomendada:** *Cover* de la toma aprobada de P01 con el estilo de cada ficha y Audio Influence de 60 a 70, para que la melodía sea la misma y cambie todo lo demás. Los cuatro son candidatos a vocalista humana.
+
+#### P57 · `mus_final_cosecha` · Final Cosecha
+
+**Título:** Cosetl
+**Ajustes:** Instrumental no · Weirdness 30 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+
+**Estilo**
+
+```text
+Ending theme where every soul is refined and harvested by something beyond the sky: overwhelming beauty with a wrong note that never leaves. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. The voice and then the full choir sing the main hymn in radiant D major, bells cascade, psaltery shimmers, but a low cello holds a dissonant pedal under everything. 72 BPM, 4/4. Form: voice and guitar intro, verse, choir chorus, bright climax, ending on an unresolved chord.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, fast tempo, heavy drums, happy ending
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: voice and guitar]
+
+[Verse]
+Istal yolma, cuetor frashna
+Yolmime lucetl, ilcel cosetl
+Nantre ilcel, estlali nochual
+Yolmime lucetl, cuetor
+
+[Chorus]
+Cosetl, cosetl, frashna
+(Istal yolma)
+Huemag ishoc, cosetl
+(Istal yolma)
+
+[Bridge]
+Aaah...
+(Aaah...)
+
+[Outro]
+Cuetor... cosetl...
+[End]
+```
+
+**Sentido:** La sal es alma, vuelve al Fresno. Las almitas son luz: el cielo es cosecha. / Cosecha, cosecha, Fresno. El ojo inmenso cosecha. Todo se refinó y todo alimentó a los Huéspedes: es hermoso y está mal.
+
+#### P58 · `mus_final_ceniza` · Final Ceniza
+
+**Título:** Neshcen
+**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+
+**Estilo**
+
+```text
+Ending theme where the world tree dies and souls stop returning: ashes, silence, love that remains. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Only guitar, low cello and the voice, very sparse: the main hymn melody in D minor, slower and broken, a single bell, long silences between phrases. No choir, no drums. 60 BPM, 4/4. Form: guitar intro, one verse, a fragment of the chorus, voice alone, silence.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, choir, drums, major key, big climax
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: guitar alone]
+
+[Verse]
+Neshcen yolma, na cuetor
+Frashna micmor, istal olvai
+Nosotl cuicant... nosotl...
+Na cuetor
+
+[Chorus]
+Frashna... frashna...
+Na cuetor...
+
+[Outro]
+Mmm...
+[End]
+```
+
+**Sentido:** Alma de ceniza, no vuelve. El Fresno muere, la sal olvida. Nosotras cantamos... nosotras... No vuelve. La magia turbia mató al árbol: ya no hay reencarnación, pero quedan ellas.
+
+#### P59 · `mus_final_libro_en_blanco` · Final Libro en Blanco
+
+**Título:** Amolib Blaztac
+**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración auto (unos 3 min)
+
+**Estilo**
+
+```text
+Secret ending theme: a blank page, a soul that was never written, a new beginning. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. The voice alone, unaccompanied, sings the main hymn melody; guitar enters softly, then psaltery and bells like turning pages; the choir joins in open fifths without thirds, light and unfinished. D Dorian, 72 BPM, 4/4. Form: a cappella verse, verse with guitar, gentle choir chorus, ending on an open fifth.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, heavy drums, dark, horror
+```
+
+**Letra**
+
+```text
+[Verse 1]
+Amolib blaztac, neyo e tuel
+Na istal, na micmor
+Amolib blaztac, neyo e tuel
+Cuetor...
+
+[Verse 2]
+Amolib blaztac, cuetor
+Nosotl remel
+Na istal, na micmor
+Nosotl remel
+
+[Chorus]
+Frashna, frashna, cuetor
+(Aaah...)
+Amolib blaztac
+(Aaah...)
+
+[Outro]
+Amolib blaztac...
+[End]
+```
+
+**Sentido:** Libro en blanco, tú y yo. Ni sal ni muerte. / Libro en blanco: vuelve. Nosotras recordamos. Es el final de la Calculista, el alma que nadie escribió.
+
+#### P60 · `mus_creditos` · Créditos
+
+**Título:** Istal Yolma (versión completa)
+**Ajustes:** Instrumental no · Weirdness 25 · Style Influence 80 · Variety 0 · Max Mode sí · Duración personalizada unos 4 min (o auto y luego *Extend*)
+
+**Estilo**
+
+```text
+End credits song: the main hymn as a complete ballad, gratitude and farewell, bittersweet hope. Melancholic acoustic chamber folk for a dark fantasy game. Recorded live in a small stone chapel: natural medium reverb, warm close mics, organic human timing. Core ensemble: nylon-string guitar, lute, psaltery, low cello, wooden flute, small metal bells, singing bowls. Lead vocal: adult female mezzo-soprano, pure airy tone, light vibrato, invented language sung with Spanish and Latin vowels. Choir: small mixed chamber choir, soft and distant. Guitar and lute intro, verses and choruses, a low cello and flute interlude, frame drum in the last chorus, choir and voice together at the end, bells ring out. D Dorian, 72 BPM, 4/4. Form: intro, verse, chorus, interlude, verse, chorus, bridge, final chorus, outro. About four minutes.
+```
+
+**Excluir estilos**
+
+```text
+synthesizer, synth pad, EDM, electronic drums, drum machine, 808, trap, dubstep, rock drum kit, electric guitar, distortion, brass section, epic trailer music, hybrid orchestral, braams, pop vocals, autotune, rap, vocal chops, English lyrics, lo-fi, vinyl crackle, fast tempo, rock ballad, musical theater belting
+```
+
+**Letra**
+
+```text
+[Intro]
+[Instrumental: guitar and lute]
+
+[Verse 1]
+Istal yolma, cuetor frashna
+Nantre ilcel, estlali nochual
+Yolmime olvai, na remel
+Na olvai, ermai, neyo cuicant
+
+[Chorus]
+Frashna, frashna, cuetor
+(Istal yolma)
+Nelradi e lucetl, cuetor
+(Istal yolma)
+
+[Instrumental: low cello and flute]
+
+[Verse 2]
+Nosotl, ermai, nosotl cuicant
+Istal e yolma, cuetor
+Neyo remel, tuel remel
+Na olvai, na olvai
+
+[Chorus]
+Frashna, frashna, cuetor
+(Istal yolma)
+Nelradi e lucetl, cuetor
+(Istal yolma)
+
+[Bridge]
+Atlua cochum, estlali ishoc
+Nosotl cuicant, cuetor
+(Aaah...)
+
+[Chorus]
+Frashna, frashna, cuetor
+(Istal yolma)
+Nelradi e lucetl, cuetor
+(Istal yolma, istal yolma)
+
+[Outro]
+Istal yolma... cuetor
+[End]
+```
+
+**Sentido:** El verso 2 es nuevo: Nosotras, hermana, nosotras cantamos. Sal y alma, vuelve. Yo recuerdo, tú recuerdas. No olvides, no olvides. / Puente: El agua duerme, la estrella mira. Nosotras cantamos: vuelve.
+
+**Uso:** sin bucle. Si sale corta, *Extend* desde el último coro. Es la versión que se publicaría como canción del juego (sección 8, riesgos).
+
+---
+
+## 7. Flujo de producción
+
+### 7.1 Antes de empezar: cuenta y lote 0
+
+- **Una cuenta Premier a nombre del estudio**, con el correo de la empresa y verificación en dos pasos. Nadie genera desde cuentas personales: los derechos de uso comercial van con la cuenta que generó y pagó.
+- **Guarda en PDF, con fecha,** los términos, la página de precios y la de derechos de Suno. Repítelo cada mes y cada vez que Suno anuncie cambios.
+- **Lote 0** (unos 300 créditos). Cuatro pruebas antes de producir:
+
+| Prueba | Qué haces | Qué decides |
+| --- | --- | --- |
+| Instrumental | Genera P02 dos veces: con Instrumental encendido y la estructura en la letra, y con Instrumental encendido sin letra | Cuál respeta mejor la forma; esa es la regla para todas las instrumentales |
+| Stems | Genera P07 y saca Auto Split | Si la vocalización cae en Lead y los cantos en Backing; si las campanas caen en Percussion; si la suma de stems suena como la mezcla |
+| Tempo | Mide el BPM real de cuatro tomas de P07 y P10 | Si se desvían más de 2 %, agrega *steady tempo, no tempo changes* al final de los estilos de bucle |
+| Pronunciación | Genera P03 y revisa cada palabra del Salmódico | El diccionario de pronunciación (sección 4.5) |
+
+### 7.2 Cuántas tomas y cómo elegir
+
+Suno da dos canciones por pedido; una "toma" es una canción.
+
+| Tipo de cue | Tomas |
+| --- | --- |
+| Ancla (P01) | 10 a 12 |
+| Leitmotivs | 10 sin melodía humana; 4 a 6 con *Cover* de una melodía humana |
+| Combate, jefes, Juicio, Éxtasis | 8 |
+| Regiones y Fresno | 6 a 8 |
+| Ascensiones III | 8 |
+| Jingles, stingers y transformaciones | 4 a 6 |
+| Finales y créditos (*Cover* de la ancla) | 6 |
+
+**Rúbrica.** Escuchan tres personas, sin saber cuál es cuál, con audífonos y luego en la bocina de un celular. La toma pasa si cumple todo:
+
+| Criterio | Pasa si |
+| --- | --- |
+| ADN | Puesta junto a la ancla, al mismo volumen, suena a la misma sala y los mismos instrumentos |
+| Bucle | Tiene una sección estable del largo pedido, sin cambios de tempo ni de instrumentación a la mitad |
+| Tempo | Deriva menor de 1 % dentro del bucle |
+| Tonalidad | La pedida, o una vecina que no choque con sus transiciones (sección 3.7) |
+| Voz | Salmódico claro, sin palabras en inglés, sin timbre metálico |
+| Artefactos | Sin chasquidos, saltos, finales cortados ni instrumentos que aparecen y desaparecen |
+| Memoria | Al día siguiente alguien tararea la melodía (tema y leitmotivs) |
+| Parecido | Nadie la asocia con una obra concreta (sección 8) |
+
+**Reparar antes de regenerar.** *Replace Section* corrige un tramo malo. *Extend* alarga una sección corta o agrega un final. *Cover* hace variaciones con la misma melodía.
+
+### 7.3 Coherencia entre pistas
+
+1. **ADN idéntico** en todos los prompts (sección 3.8).
+2. **La ancla primero.** P01 se aprueba antes que todo lo demás. Cada toma nueva se compara lado a lado con ella.
+3. **Persona de estilo.** Créala desde la toma aprobada de P01 (menú Voices) y úsala en todos los cues con voz. Si arrastra demasiado el estilo del himno (un combate que suena a balada), quítala en ese cue y confía en el ADN de voz.
+4. ***Cover* para variaciones:** finales, revelación, Jardinera de temporada y familias posteriores.
+5. **Una sola sala** en la edición, si hace falta igualar (sección 3.8).
+6. **Una sola persona aprueba el ADN:** quien dirija la música.
+
+### 7.4 Leitmotivs con melodía humana
+
+- **Quién:** una compositora o compositor, aunque sea por proyecto. Escribe nueve melodías: el tema principal y los ocho leitmotivs. Cada una de 8 compases, en la tonalidad, el compás y el tempo de la tabla.
+- **Cómo se graba:** la melodía sola o con acordes mínimos, en un instrumento o un MIDI con sonido limpio, con metrónomo al BPM exacto. De 30 a 60 s.
+- **En Suno:** sube el audio, elige *Cover*, pega el estilo de la ficha y prueba Audio Influence entre 60 y 80.
+- **Qué ganas:** la misma melodía en el tema, la Ascensión III, el Juicio, la transformación y los finales; autoría humana de la melodía (sección 8); menos riesgo de parecido, porque sabes de dónde salió.
+- **Qué guardas:** partitura, audio subido, fecha, autor y contrato de cesión de derechos al estudio, junto a los metadatos del cue.
+
+### 7.5 Stems y alineación
+
+- **Extracción:** desde Studio (Premier, sin tope de descargas) o con Auto Split (12 stems, 50 créditos). Si la voz y el coro no se separan, usa Advanced Split y elige voz principal y coro.
+- **Mapeo a capas:** tabla de la sección 5.1. Los stems Synth, Brass y FX deberían salir vacíos; si traen algo, la toma tiene instrumentos fuera del ADN: escúchala antes de aprobar.
+- **Suma de comprobación:** suma B, P, V y C a 0 dB, invierte la fase de la mezcla original y súmala. Si lo que queda se oye como música, y no solo como brillo o ruido, regenera los stems o elige otra toma. Los stems de Suno se regeneran con el modelo: no esperes que sumen idéntico, pero sí muy cerca.
+- **Alineación:** todos los stems de una generación empiezan en la muestra 0 y duran lo mismo. Si uno viene desplazado, alinéalo por correlación contra la mezcla antes de cortar.
+- **Una sola sesión:** cada corte, estiramiento y fundido se aplica a todos los stems a la vez, en las mismas posiciones.
+
+### 7.6 De canción a bucle sin cortes
+
+1. Convierte a 48 kHz y 24 bits si la descarga viene en otro formato.
+2. Mide el tempo real con el detector del DAW o con marcadores sobre 8 compases.
+3. Si no coincide con la tabla, **estira todos los stems a la vez** hasta el BPM objetivo, solo si el cambio es menor de 2 %. Si es mayor, cambia el BPM del cue en la tabla en lugar de estirar más, y avísalo en `INTEGRACION_AUDIO.md`.
+4. Pon la rejilla en el primer tiempo fuerte del bucle.
+5. Elige N compases exactos (tabla 5.2) en una sección donde suenen todas las capas.
+6. **Corta en compás.** Duración en muestras = N × pulsos por compás × 60 / BPM × 48,000. Ejemplo, P07: 32 × 4 × 60 / 128 × 48,000 = 2,880,000 muestras, 60 s exactos.
+7. **Cola de reverb:** copia lo que suena después del final del bucle (de 1 a 3 s) y mézclalo sobre el inicio del bucle. Así, al repetirse, la reverb de la vuelta anterior sigue sonando.
+8. **Fundido cruzado** de 5 a 20 ms en la unión, en cruce por cero si se puede; más largo si hay notas sostenidas.
+9. **Exporta por separado** la intro (suena una vez), el bucle y el final, de cada stem, más la mezcla de referencia.
+10. Escucha el bucle diez vueltas seguidas con audífonos. Si notas la unión, repite desde el paso 7.
+
+### 7.7 Sonoridad y formato de entrega
+
+| Parámetro | Valor |
+| --- | --- |
+| Formato | WAV, 48 kHz, 24 bits, estéreo. La compresión para móvil la define `INTEGRACION_AUDIO.md` |
+| Bucles y pistas largas | **−18 LUFS integrados ±1 LU**, medidos sobre una vuelta del bucle con todas las capas sumadas a 0 dB |
+| Stingers y jingles (menos de 10 s) | Sonoridad de corto plazo máxima de −16 LUFS |
+| Capa de Paralaje (P40) | 12 dB abajo, unos −30 LUFS: es una capa que se suma |
+| Pico real | **−1 dBTP** como máximo en todo |
+| Stems | No se normalizan por separado: conservan su nivel relativo para que la suma reproduzca la mezcla |
+
+**De dónde sale el valor.** El grupo de estándares de audio de Sony recomienda −18 LUFS para consolas portátiles, y la guía de niveles del IESD recomienda −16 LUFS integrados para juegos móviles como salida total ([IESD Mix Ref Levels](https://www.audiogang.org/wp-content/uploads/2015/04/IESD-Mix-Ref-Levels-v03.02.pdf), [Designing Sound](https://designingsound.org/2013/02/20/different-loudness-ranges-for-console-and-mobile-games)). Entregar la música 2 dB abajo del total deja espacio a efectos y voces. **El objetivo final de cada bus lo fija `INTEGRACION_AUDIO.md`; si difiere de este, manda aquel.**
+
+Suno entrega audio ya masterizado. Si una toma llega muy aplastada (rango de sonoridad menor de 4 LU en una pieza que debería respirar), elige otra antes de intentar devolverle dinámica.
+
+### 7.8 Nomenclatura y metadatos
+
+Estructura propuesta. Los WAV van en Git LFS (decisión D-05 de `docs/HOJA_DE_RUTA.md`); los JSON van en Git normal. Coordina la ruta final con `INTEGRACION_AUDIO.md`.
+
+```text
+audio/
+  fuentes/suno/<cue_id>/
+    <cue_id>__t01__<id8>.wav               descarga original de Suno (t = toma)
+    <cue_id>__t01__<id8>__stem_<nombre>.wav
+    <cue_id>.json                          metadatos y trazabilidad
+    melodia/                               partitura y audio humano subido, si aplica
+  musica/<cue_id>/
+    <cue_id>_intro_<capa>.wav
+    <cue_id>_bucle_<capa>.wav
+    <cue_id>_final_<capa>.wav
+    <cue_id>_mix.wav                       referencia
+```
+
+`<id8>` son los primeros 8 caracteres del ID de la canción en Suno. `<capa>` es `base`, `perc`, `voz`, `coro`, `estereo` o `solista`. Los cues que se cortan de otra generación (como `mus_cadena_partitura`) tienen su propia carpeta en `musica/` y apuntan a la fuente en su JSON.
+
+**Metadatos por cue** (`<cue_id>.json`):
+
+```json
+{
+  "cue_id": "mus_combate_normal",
+  "ficha": "P07",
+  "toma_elegida": "t05",
+  "suno": {
+    "song_id": "id completo de la canción",
+    "url": "enlace de la canción en Suno",
+    "modelo": "v6",
+    "cuenta": "cuenta del estudio",
+    "plan_al_generar": "Premier",
+    "fecha_generacion": "2026-11-12",
+    "fecha_descarga": "2026-11-12",
+    "canal_descarga": "Studio",
+    "terminos_vigentes": "PDF de términos con fecha",
+    "estilo": "texto exacto",
+    "excluir": "texto exacto",
+    "letra": "texto exacto",
+    "ajustes": { "weirdness": 25, "style_influence": 80, "variety": 0, "max_mode": true, "instrumental": false, "duracion": "auto", "persona": "nombre o null" },
+    "audio_subido": "ruta en melodia/ o null",
+    "semilla": null,
+    "operaciones": ["replace_section 0:45-1:05", "auto_split 12 stems"]
+  },
+  "tomas_descartadas": ["t01 id8", "t02 id8", "t03 id8"],
+  "intervencion_humana": ["melodía de X", "edición de bucle de Y", "voz grabada por Z"],
+  "revision_parecido": { "fecha": "2026-11-13", "metodo": "escucha ciega e identificación de covers", "resultado": "sin coincidencias" },
+  "aprobado_por": "dirección musical"
+}
+```
+
+- **La semilla queda en `null`:** no encontré que Suno la muestre. El ID y el enlace de la canción son la referencia.
+- **Guarda las tomas descartadas** (solo su ID, no el audio): documentan la selección humana.
+- **Nunca borres** una descarga original que llegó al juego.
+
+### 7.9 Presupuesto de créditos y descargas
+
+Estimado para los 66 cues de lanzamiento. Los costos de Max Mode y de las operaciones de edición no están verificados.
+
+| Concepto | Cálculo | Créditos |
+| --- | --- | --- |
+| Lote 0 | Unas 30 canciones | 150 a 300 |
+| Generaciones | 60 fichas × unos 4 pedidos × 10 | Unos 2,400 |
+| Max Mode | Supón el doble en las fichas que lo usan | Unos 2,000 más |
+| Stems | Unos 45 cues × 50 | Unos 2,250 |
+| Reparaciones y *Cover* | Unas 100 operaciones | Unos 1,000 |
+| **Total** | | **Unos 8,000** |
+
+Premier (10,000 al mes) alcanza en uno o dos meses. Las descargas de canción también importan: son 66 cues y Premier da 60 al mes fuera de Studio, así que exporta desde Studio (sin tope) o reparte en dos meses. Pro (20 descargas al mes) no alcanza.
+
+---
+
+## 8. Riesgos legales y de calidad
+
+Esto no es asesoría legal. La tabla resume lo que encontré; pide a un abogado de propiedad intelectual que la revise antes de la Fase 4.
+
+| Riesgo | Qué puede pasar | Mitigación |
+| --- | --- | --- |
+| Derechos según el plan | Lo generado en el plan gratuito, o con la suscripción vencida, no se puede usar comercialmente, y suscribirte después no lo arregla | Premier del estudio activo durante toda la producción. Nunca usar v6-mini. Descargar cada toma por el canal de Suno. Registrar plan y fecha por toma |
+| Los términos cambian | Ya cambiaron dos veces en un año: la redacción de propiedad tras el acuerdo con Warner y los límites de descarga de septiembre de 2026 | PDF de los términos con fecha en cada lote. Revisión mensual. Pregunta a tu abogado qué versión rige cada pista |
+| Sin derechos de autor sobre música 100 % generada | En EE. UU. una pista hecha solo con prompts no tiene autor. Cualquiera podría reutilizarla y no podrías reclamar | Intervención humana sustancial y documentada: melodías humanas (7.4), letra en Salmódico escrita por personas (el texto sí se protege), voz e instrumentos solistas grabados por intérpretes, arreglo y edición. Al registrar, declara y excluye lo generado |
+| Parecido accidental | Una toma recuerda una obra existente, incluida la de NieR | Nunca nombrar obras en los prompts. Escucha ciega con alguien que conozca bien bandas sonoras de JRPG. Pasar las tomas finales por un servicio de identificación de covers por melodía, como el de [ACRCloud](https://acrcloud.com/cover-song-identification). Ante la duda, descartar. Las melodías humanas bajan el riesgo |
+| Litigios de Suno | Universal, Sony, GEMA y Koda siguen contra Suno. Un fallo puede cambiar el servicio o sus términos | No depender de Suno para lo más visible. Archivar fuentes y metadatos. Tener plan B: regrabar con músicos los cues más escuchados. Revisión legal antes de publicar en Alemania y Dinamarca |
+| Tiendas | No encontré reglas de Apple ni de Google Play específicas para audio generado con IA en juegos; la política de Google Play apunta a apps que generan contenido dentro de la app ([Google Play](https://support.google.com/googleplay/android-developer/answer/14094294)). Steam (el puerto de PC) pide declarar el contenido generado con IA que el jugador consume, audio incluido ([PC Gamer](https://www.pcgamer.com/software/ai/steam-updates-ai-disclosure-form-to-specify-that-its-focused-on-ai-generated-content-that-is-consumed-by-players-not-efficiency-tools-used-behind-the-scenes/)) | Con los metadatos de la sección 7.8 tienes el inventario listo para el formulario de Steam. Revisa las guías vigentes antes de cada envío |
+| Content ID y creadores | Un streamer recibe una reclamación porque alguien registró algo parecido; o tu distribuidora no acepta música generada | No registrar en Content ID pistas 100 % generadas. Publicar una política de uso para creadores. Si sale la banda sonora a la venta, solo con pistas con intervención humana y revisando las reglas de la distribuidora |
+| Reputación | Parte del público de gacha y del fandom rechaza lo generado con IA | Voz humana en lo más visible, créditos claros a compositora, vocalista, lingüista e intérpretes, y transparencia |
+| Representación cultural | Regiones y brujas toman culturas reales: Mesoamérica, Magreb, son jarocho, estepas | Excluir clichés en los prompts (ya están). Escuchar con personas de esas tradiciones antes de aprobar: un músico de son jarocho para Cempa, hablantes de náhuatl para Capricornio. Ninguna palabra real ni canto sagrado |
+| Voz clonada | Si se crea un modelo de voz de la vocalista con Voices | Contrato explícito de uso de su voz en IA: alcance, pago, duración y revocación. Suno pide verificar en vivo que la voz es suya |
+| Calidad | Artefactos, timbre metálico, tempo que deriva, stems que no suman | Rúbrica de 7.2, prueba en bocina de celular, reemplazo progresivo de lo más escuchado |
+
+### ¿Conviene una intérprete humana?
+
+**Sí, en un modelo híbrido.** El GDD 20.1 ya planeaba una vocalista principal y un lingüista, y es la mejor protección legal y de calidad al menor costo.
+
+| Parte | Recomendación | Por qué |
+| --- | --- | --- |
+| Melodías del tema y de los 8 leitmotivs | Compositora o compositor humano | Coherencia entre pistas y autoría |
+| Letras en Salmódico | Lingüista y equipo | El texto es protegible y el idioma se mantiene coherente |
+| Voz del tema principal, Termas de noche, finales, créditos y las seis Ascensiones III de Regente | Vocalista humana, grabada sobre los stems de Suno en lugar de la capa V | Es lo más escuchado y lo más visible |
+| Instrumentos solistas de los leitmotivs | Intérpretes humanos al menos para la firma de 2 compases; si alcanza, el leitmotiv completo | El timbre del solista es la identidad de la bruja |
+| Combate, regiones, Fresno, horror, crafting y menús | Suno con edición humana | Son muchas horas de música; aquí Suno da la mejor relación costo y calidad |
+
+Cómo se graba encima: exporta los stems sin V, la vocalista canta con metrónomo al BPM del cue y su toma sustituye a V. El resultado tiene melodía humana, interpretación humana y arreglo de Suno.
+
+---
+
+## 9. Preguntas para el diseñador
+
+| # | Pregunta | Mi recomendación |
+| --- | --- | --- |
+| 1 | ¿Contratas a la vocalista y al lingüista del GDD 20.1, o todo con Suno? | Contrátalos. Vocalista para los cues de la sección 8; lingüista por horas para fijar el Salmódico a partir de la sección 4 |
+| 2 | ¿Las melodías del tema y los leitmotivs las compone una persona? | Sí. Son nueve melodías de 8 compases; es el cambio que más mejora coherencia y derechos |
+| 3 | Acuario: ¿nórdico (sección 6 del GDD) o gaélico (20.1)? | Nórdico en Acuario, que es lo que dice su inspiración cultural. Si quieres sabor celta, va mejor en Cáncer (Bretaña) |
+| 4 | La Cadena es silente (7.5), pero la capa de voz suena en la Cadena (20.3). ¿Aceptas que esa voz sea una vocalización sin palabras? | Sí: la voz suena, pero nadie pronuncia hechizos. El Salmódico con palabras queda para las Ascensiones |
+| 5 | ¿Suscribes Premier en una cuenta del estudio durante dos o tres meses? | Sí. Pro no alcanza por las descargas y no tiene Studio ni Advanced Split |
+| 6 | ¿La Jardinera cambia de música cada temporada? | Sí, con un *Cover* del tema base: misma melodía, metal y modo del planeta del Tránsito |
+| 7 | ¿Combate genérico al lanzamiento, o uno por región? | Genérico al lanzamiento (P07). Los regionales, por *Cover*, con cada región nueva |
+| 8 | ¿Los Manantiales cosméticos cambian también la música de las Termas? | Sí. Es un cosmético más y suma valor al producto estrella de la tienda sin vender progreso |
+| 9 | Los Huéspedes suenan "como un radiotelescopio" en un juego acústico. ¿Aceptas un toque de estática y clics? | Sí, pero poco en la música y reforzado como diseño sonoro en la capa de horror |
+| 10 | ¿Llevamos un registro de instrumentos solistas reservados para las Regentes futuras? | Sí. Con una o dos Regentes por versión, los instrumentos se acaban rápido. Propongo reservar: tiorba, bandurria, nyckelharpa, kantele, duduk, marimba, santur y armónica de cristal. Si uno de ellos ya es invitado de una región, solo puede ser solista de una Regente con Ascendente en esa región |
+| 11 | ¿Cómo se llama la jaguar? | Decídelo antes de generar P51 y su Ascensión. Mientras, el ID es `jaguar` |
+| 12 | ¿Las Termas ignoran el Paralaje en la música aunque esté en máximo? | Sí. La regla de zona segura del GDD 6.5 pesa más |
+| 13 | ¿Publicarás la banda sonora en plataformas o a la venta? | No al lanzamiento. Después, solo las pistas con intervención humana sustancial, y con revisión legal |
+| 14 | ¿Agregamos al GDD 24 una regla de uso de IA en audio? | Sí: plan de pago, trazabilidad, intervención humana en lo principal y prohibición de nombrar obras o artistas en los prompts |
+
+---
+
+## 10. Contradicciones y huecos del GDD
+
+| # | Dónde | Qué pasa | Cómo lo resolví aquí |
+| --- | --- | --- | --- |
+| 1 | 6 y 20.1 | La sección 6 dice que Acuario se inspira en Escandinavia e Islandia; la 20.1 le asigna gaélico (y está escrito "gélico"). El gaélico es celta, no nórdico | Acuario con sabor nórdico; la variante gaélica queda en la ficha P37. Pregunta 3 |
+| 2 | 7.5 y 20.3 | La Cadena es magia silente "sin cantar", pero la capa de voz solista suena durante la Cadena | La voz de la Cadena vocaliza sin palabras. Pregunta 4 |
+| 3 | 20.3 | Dice "FMOD o Wwise"; el contrato de audio fija FMOD | Uso FMOD. Hay que actualizar el GDD |
+| 4 | 20.2 y 20.3 | La paleta base incluye violonchelo y flautas, pero el violonchelo es el solista de Marisal y la flauta dulce el de Tormentina | En la base, violonchelo grave y flauta traversa; la melodía de violonchelo y la flauta dulce quedan reservadas |
+| 5 | 20.3 | "Base (cuerdas y guitarra)" deja fuera flautas, salterio, campanas y cuencos, que también están en la paleta. No dice en qué capa van | Todo lo que no es percusión ni voz va en la base. Las campanas que Suno separe como percusión se mueven a la base si hace falta |
+| 6 | 20.3 | El coro completo es para Ascensión III y jefes; no dice nada del tema principal, los finales, el eclipse ni las regiones | Regla del coro de la sección 3.2: momentos cumbre sí; exploración, Termas y menús nunca |
+| 7 | 10.1 | La Jardinera es la jefa de la Copa y cambia cada temporada: hay cuatro jefes de zona, no cuatro más la Jardinera | Cuatro jefes; la Jardinera tiene un tema base y variaciones por temporada |
+| 8 | 20.4 y 20 | La música es acústica, pero los Huéspedes suenan "como señales de radiotelescopio", que es un sonido electrónico | Poco en la música, reforzado en diseño sonoro. Pregunta 9 |
+| 9 | 20.3 | El parámetro `Tension` del contrato no existe en el GDD, que solo dice que la percusión entra "al entrar en combate" | `Tension` gobierna la percusión en regiones y Fresno; en combate siempre está activa |
+| 10 | 6.5 y 20.3 | El Paralaje alto activa la Desafinación, y las Termas bajan el Paralaje y son zona segura. No dice qué pasa si entras a las Termas con Paralaje alto | La música de las Termas lo ignora siempre. Pregunta 12 |
+| 11 | 18.3 | La coyota y la jaguar no tienen nombre en el GDD; el documento de retratos llama Cempa a la coyota (con Ascendente Sagitario), y la jaguar sigue sin nombre | IDs `cempa` y `jaguar` (provisional). Pregunta 11 |
+| 12 | 20.2 y 22.1 | Cada Regente tiene un instrumento solista y salen una o dos Regentes por versión, pero no hay un plan de instrumentos futuros | Registro de instrumentos reservados. Pregunta 10 |
+| 13 | 20.1 y 24 | El GDD planea vocalista y lingüista, pero no dice nada sobre música generada con IA, sus derechos ni su trazabilidad | Secciones 7.8 y 8. Pregunta 14 |
+| 14 | 20 | El GDD nombra a los compositores y a la cantante de NieR como referencia | Correcto en un documento interno, pero esos nombres nunca entran a un prompt (sección 3.1) |
+
+---
+
+## 11. Fuentes
+
+**Suno: producto** (consultadas el 5 de noviembre de 2026 por buscador; suno.com no se pudo abrir desde esta sesión)
+
+- [Introducing v6 — Suno](https://suno.com/blog/introducing-v6) y [notas de versión](https://suno.com/release-notes/introducing-v6)
+- [What's new in v6? — Suno Help](https://help.suno.com/en/articles/13924801)
+- [v6 FAQ: Max Mode y Variety — Suno Help](https://help.suno.com/en/articles/13924481)
+- [How do I get stems? — Suno Help](https://help.suno.com/en/articles/13925185)
+- [Advanced Stem Separation — Suno Help](https://help.suno.com/en/articles/12702337)
+- [How to Use: Audio Uploads — Suno Help](https://help.suno.com/en/articles/6141569)
+- [Make loops and samples from scratch with Sounds — Suno](https://suno.com/release-notes/make-loops-and-samples-from-scratch-with-sounds)
+- [Studio 2.0 — Suno](https://blog.suno.com/release-notes/studio-2) y [Dubspot](https://blog.dubspot.com/suno-studio-2-0)
+- [Límites de caracteres — HookGenius](https://hookgenius.app/learn/suno-character-limits/) y [MySoniq](https://www.mysoniq.com/blog/suno-prompts)
+- [Suno v6: canciones de 8 minutos — GenMediaLab](https://www.genmedialab.com/news/suno-v6-launch/)
+- [Variety, Style Influence y Weirdness — PopularAITools](https://popularaitools.ai/blog/suno-v6-variety-style-influence-weirdness-2026)
+- [Create en v6: Simple, Advanced y Sounds — Jack Righteous](https://jackrighteous.com/en-us/blogs/guides-using-suno-ai-music-creation/inside-suno-v6-create-simple-advanced-sounds-guide)
+- [Guía de metaetiquetas — Jack Righteous](https://jackrighteous.com/pages/suno-ai-meta-tags-guide) y [HookGenius](https://hookgenius.app/learn/suno-metatags-complete-list/)
+- [Tempo en Suno — Jack Righteous](https://jackrighteous.com/en-gb/blogs/guides-using-suno-ai-music-creation/master-tempo-in-music-comprehensive-guide-to-tempo-tags) y [prueba de la API de v6 — Challenging Voice](https://www.challengingvoice.com/suno-v6-api-podcast-audio-kit/)
+- [Bloqueo de nombres de artistas — dev.ua](https://dev.ua/en/news/suno-v6-1788958562) y [Jack Righteous](https://jackrighteous.com/en-us/blogs/guides-using-suno-ai-music-creation/suno-prompt-contained-inappropriate-material)
+- [Voices en v5.5 — Sonilo](https://sonilo.com/blog/suno-v5-5-voices-how-to)
+- [Precios — DIYAI](https://diyai.io/ai-tools/audio-generation/suno-pricing/) y [Krater](https://krater.ai/pricing/suno)
+- [Sounds: límites — Kyeo](https://kyeo.ai/en/models/suno-sounds)
+
+**Suno: términos, descargas y licencias**
+
+- [Límites de descarga desde el 3 de septiembre de 2026 — Jack Righteous](https://jackrighteous.com/en-us/blogs/guides-using-suno-ai-music-creation/suno-premier-60-song-download-limit-september-3-2026), [Mubert](https://mubert.com/blog/suno-download-caps) y [UseSuno](https://usesuno.com/articles/suno-download-limits-september-3-2026/)
+- [Suno ajusta sus términos de propiedad tras el acuerdo con Warner — Music in Africa](https://www.musicinafrica.net/magazine/suno-adjusts-ai-music-ownership-terms-after-warner-music-partnership)
+- [Derechos comerciales por plan — Dynamoi](https://dynamoi.com/learn/ai-music-distribution/suno-commercial-rights-explained) y [Veena](https://www.veena.studio/blog/suno-commercial-use-rules)
+- [v6 con catálogo licenciado — DataNorth](https://datanorth.ai/news/suno-launches-v6-v6-wild-and-v6-mini) y [Boing Boing](https://boingboing.net/2026/09/16/mixed-reviews-for-ai-music-generator-sunos-industry-approved-new-model.html)
+
+**Disqueras y tribunales**
+
+- [Warner llega a un acuerdo con Suno — Music Business Worldwide](https://www.musicbusinessworldwide.com/warner-music-group-settles-with-suno-strikes-first-of-its-kind-deal-with-ai-song-generator/) y [TheWrap](https://www.thewrap.com/warner-music-group-partnership-suno-settles-lawsuit-ai-music-company)
+- [GEMA gana contra Suno en Alemania — Music Business Worldwide](https://www.musicbusinessworldwide.com/suno-infringed-copyright-in-gema-case-german-court-rules/) y [Forbes](https://www.forbes.com/sites/virginieberger/2026/08/05/suno-lost-to-gema-why-the-ruling-should-worry-ai-music-companies/)
+- [Universal y Sony contra Suno — CourtDocket](https://courtdocket.org/suno-lawsuit-explained-warner-settlement-umg-and-sony-next/) y [ChartLex](https://www.chartlex.com/blog/business/music-industry-ai-lawsuits-tracker-2026)
+- [Suno (plataforma) — Wikipedia](https://en.wikipedia.org/wiki/Suno_(platform))
+
+**Derechos de autor**
+
+- [Copyright and Artificial Intelligence, Part 2: Copyrightability — U.S. Copyright Office (PDF)](https://www.copyright.gov/ai/Copyright-and-Artificial-Intelligence-Part-2-Copyrightability-Report.pdf)
+- [Comunicado de la Library of Congress sobre la Parte 2](https://newsroom.loc.gov/news/copyright-office-releases-part-2-of-artificial-intelligence-report/s/f3959c36-d616-498d-b8f9-67641fd18bab)
+- [Thaler v. Perlmutter — SCOTUSblog](https://www.scotusblog.com/cases/case-files/thaler-v-perlmutter) y [JD Supra](https://www.jdsupra.com/legalnews/supreme-court-denies-review-in-ai-2865518/)
+
+**Tiendas, parecido y sonoridad**
+
+- [Política de contenido generado con IA — Google Play](https://support.google.com/googleplay/android-developer/answer/14094294)
+- [Steam y la divulgación de IA — PC Gamer](https://www.pcgamer.com/software/ai/steam-updates-ai-disclosure-form-to-specify-that-its-focused-on-ai-generated-content-that-is-consumed-by-players-not-efficiency-tools-used-behind-the-scenes/)
+- [Cover Song Identification — ACRCloud](https://acrcloud.com/cover-song-identification)
+- [IESD Mix Reference Levels (PDF)](https://www.audiogang.org/wp-content/uploads/2015/04/IESD-Mix-Ref-Levels-v03.02.pdf) y [rangos de sonoridad en consola y móvil — Designing Sound](https://designingsound.org/2013/02/20/different-loudness-ranges-for-console-and-mobile-games)
+
