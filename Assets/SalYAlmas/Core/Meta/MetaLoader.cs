@@ -20,6 +20,13 @@ namespace SalYAlmas.Core.Meta
         public static MetaDatabase Load(MetaDataSources src, GameDatabase combat)
         {
             var r = new Reader();
+            if (src.WitchesExt != null)
+            {
+                // El resto del elenco se suma sobre una copia: la base de la Fase 1 sigue con sus seis brujas.
+                combat = combat.Clone();
+                r.Guard("witches_ext.json", () => DataLoader.AddWitches(Json.Parse(src.WitchesExt, "witches_ext.json"), combat, r));
+                if (r.Errors.Count > 0) throw new DataValidationException(r.Errors);
+            }
             var db = new MetaDatabase(combat);
             r.Guard("economy.json", () => LoadEconomy(Json.Parse(src.Economy, "economy.json"), db, r));
             r.Guard("roster.json", () => LoadRoster(Json.Parse(src.Roster, "roster.json"), db, r));

@@ -4,6 +4,7 @@ using System.Linq;
 using SalYAlmas.Core.Combat;
 using SalYAlmas.Core.Data;
 using SalYAlmas.Core.Economy;
+using SalYAlmas.Core.Events;
 using SalYAlmas.Core.Fresno;
 using SalYAlmas.Core.Gacha;
 using SalYAlmas.Core.Magic;
@@ -30,6 +31,70 @@ namespace SalYAlmas.Sim
             Console.WriteLine($"   perdió el 75/25 {sim.LostFeatured:N0} veces de {sim.FiveStars:N0} 5★ ({(double)sim.LostFeatured / Math.Max(1, sim.FiveStars):P1})");
             bool ok = Math.Abs(sim.AveragePerFive - 53) <= 1 && Math.Abs(sim.AveragePerFeatured - 66) <= 1;
             Console.WriteLine(ok ? "   dentro de ±1 tirada" : "   FUERA de ±1 tirada");
+            return ok ? 0 : 1;
+        }
+
+        /// <summary>
+        /// Prueba estándar de daño (GDD 17.1). Cada bruja entra a un equipo con tres compañeras fijas contra un maniquí que no
+        /// muere (el Guardián con 50 veces su vida y 2 % de su ataque, para que nadie caiga, débil a los dos planetas de la bruja). Se mide el daño
+        /// total del equipo, con golpes y daño por estados, hasta el límite de turnos: así cuentan también las mejoras de las
+        /// Tejedoras. Ninguna 5★ nueva debe pasar en más de 5 % a la mejor de su papel, y ninguna 4★ o 3★ a la mejor 5★.
+        /// </summary>
+        public static int Kits(GameDatabase db, int n)
+        {
+            var meta = Load(db);
+            var combat = meta.Combat;
+            var fillers = new[] { "topo", "zarigueya", "selenia", "tormentina" };
+            var guardian = combat.Enemies["guardian"];
+            var rows = new List<(WitchDef def, double team, double own, double heal, double deaths)>();
+            foreach (var id in combat.WitchOrder)
+            {
+                var def = combat.Witch(id);
+                var team = new List<string> { id };
+                foreach (var f in fillers) if (f != id && team.Count < 4) team.Add(f);
+                double total = 0, own = 0, heal = 0, deaths = 0;
+                for (int i = 0; i < n; i++)
+                {
+                    var dummy = FresnoService.Scaled(guardian, "maniqui", 50, 0.02, -2, "");
+                    dummy.Name = dummy.ShortName = "Maniquí de Sal";
+                    dummy.Phase2 = null;
+                    dummy.Weaknesses.Clear();
+                    dummy.Weaknesses.Add(def.Primary);
+                    dummy.Weaknesses.Add(def.Secondary);
+                    dummy.Res.Clear();
+                    var enc = new EncounterDef { Id = "maniqui", Name = "Maniquí" };
+                    enc.Enemies.Add(dummy.Id);
+                    var setup = new BattleSetup { Team = team, Seed = (ulong)(500 + i), CustomEncounter = enc };
+                    setup.CustomEnemies.Add(dummy);
+                    foreach (var t in team) setup.Loadouts[t] = new WitchLoadout { Level = 50 };
+                    var b = new Battle(combat, setup);
+                    b.Start();
+                    new AutoPilot().RunToEnd(b);
+                    var unit = b.Witches.First(w => w.Key == id);
+                    var enemyIds = new HashSet<int>(b.Enemies.Select(e => e.Id));
+                    total += b.Events.OfType<HitLanded>().Where(h => enemyIds.Contains(h.TargetId)).Sum(h => (double)h.Damage);
+                    total += b.Events.OfType<DotTicked>().Where(d => enemyIds.Contains(d.UnitId)).Sum(d => (double)d.Damage);
+                    own += b.Events.OfType<HitLanded>().Where(h => h.AttackerId == unit.Id).Sum(h => (double)h.Damage);
+                    heal += b.Events.OfType<Healed>().Sum(h => (double)h.Amount);
+                    deaths += b.Events.OfType<UnitDefeated>().Count(d => d.Side == Side.Ally);
+                }
+                rows.Add((def, total / n, own / n, heal / n, deaths / n));
+            }
+            Console.WriteLine($"== Kits · {n} combates por bruja contra un maniquí · nivel 50 · grado B · límite de turnos");
+            Console.WriteLine("   bruja         ★  papel                   daño del equipo  golpes propios  curación  caídas");
+            foreach (var r in rows.OrderByDescending(r => r.team))
+                Console.WriteLine($"   {r.def.ShortName,-13} {r.def.Rarity}  {r.def.Role,-22} {r.team,15:N0}  {r.own,14:N0}  {r.heal,8:N0}  {r.deaths,6:0.0}");
+            bool ok = true;
+            var baseIds = new HashSet<string>(MetaGame.TestWitches);
+            foreach (var r in rows.Where(r => r.def.Rarity == 5 && !baseIds.Contains(r.def.Id)))
+            {
+                var best = rows.Where(o => baseIds.Contains(o.def.Id) && o.def.Role == r.def.Role).Select(o => o.team).DefaultIfEmpty(0).Max();
+                if (best > 0 && r.team > best * 1.05) { ok = false; Console.WriteLine($"   FALLA: {r.def.ShortName} pasa en más de 5 % a la mejor de su papel"); }
+            }
+            double topFive = rows.Where(r => r.def.Rarity == 5).Max(r => r.team);
+            foreach (var r in rows.Where(r => r.def.Rarity < 5 && r.team > topFive))
+            { ok = false; Console.WriteLine($"   FALLA: {r.def.ShortName} ({r.def.Rarity}★) pega más que la mejor 5★"); }
+            Console.WriteLine(ok ? "   dentro de las reglas del GDD 17.1" : "   FUERA de las reglas");
             return ok ? 0 : 1;
         }
 

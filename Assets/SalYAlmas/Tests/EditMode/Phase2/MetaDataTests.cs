@@ -20,7 +20,7 @@ namespace SalYAlmas.Tests
             Assert.AreEqual(6, meta.Roster.Values.Count(w => w.Rarity == 5));
             Assert.AreEqual(10, meta.Roster.Values.Count(w => w.Rarity == 4));
             Assert.AreEqual(8, meta.Roster.Values.Count(w => w.Rarity == 3));
-            Assert.AreEqual(6, meta.Roster.Values.Count(w => w.HasKit), "las seis brujas con kit de la Fase 1");
+            Assert.AreEqual(24, meta.Roster.Values.Count(w => w.HasKit), "las 24 brujas tienen kit (Fase 3)");
         }
 
         [Test]

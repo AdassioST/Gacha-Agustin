@@ -386,7 +386,7 @@ namespace SalYAlmas.Core.Combat
             if (actor != null)
                 intoxicated = RemoveMatching(actor, s => s.Kind == StatusKind.Poison, 99, "se vuelve explosión") > 0;
             double raw = target.MaxHp * fraction * (intoxicated ? 1.0 : 0.5);
-            double cap = actor != null ? Atk(actor) * 12.0 : raw; // TUNING
+            double cap = actor != null ? Atk(actor) * 6.0 : raw; // TUNING: tope de 6 veces su ATQ
             int dmg = (int)Math.Round(Math.Min(raw, cap), MidpointRounding.AwayFromZero);
             int dealt = ApplyDamage(target, dmg, out _);
             Emit(new DotTicked { UnitId = target.Id, UnitName = target.Name, StatusName = name, Planet = Planet.Venus, Damage = dealt, Hp = target.Hp });

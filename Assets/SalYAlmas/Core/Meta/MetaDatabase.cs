@@ -23,15 +23,21 @@ namespace SalYAlmas.Core.Meta
         public string Story;
         public string Services;
         public string Loc;
+        /// <summary>Kits de las 18 brujas que no están en witches.json (opcional: sin él, solo pelean las seis de la Fase 1).</summary>
+        public string WitchesExt;
+        /// <summary>Zonas, secciones, botín y enemigos de la Odisea (opcional).</summary>
+        public string Odyssey;
 
         public static readonly string[] FileNames =
         {
             "economy.json", "roster.json", "progression.json", "weapons.json", "brewing.json", "gacha.json", "fresno.json", "fresno_enemies.json", "story.json", "services.json", "loc.json",
+            "witches_ext.json", "odyssey.json",
         };
 
         public static MetaDataSources FromDirectory(string directory)
         {
             string Read(string name) => File.ReadAllText(Path.Combine(directory, name));
+            string Optional(string name) => File.Exists(Path.Combine(directory, name)) ? Read(name) : null;
             return new MetaDataSources
             {
                 Economy = Read("economy.json"),
@@ -45,6 +51,8 @@ namespace SalYAlmas.Core.Meta
                 Story = Read("story.json"),
                 Services = Read("services.json"),
                 Loc = Read("loc.json"),
+                WitchesExt = Optional("witches_ext.json"),
+                Odyssey = Optional("odyssey.json"),
             };
         }
     }

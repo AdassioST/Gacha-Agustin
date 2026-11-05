@@ -38,6 +38,8 @@ namespace SalYAlmas.Presentation
         public TextAsset StoryJson;
         public TextAsset ServicesJson;
         public TextAsset LocJson;
+        public TextAsset WitchesExtJson;
+        public TextAsset OdysseyJson;
 
         [Header("Arte")]
         [Tooltip("Bustos y cuerpos del elenco. Los asigna el constructor de la escena.")]
@@ -107,9 +109,10 @@ namespace SalYAlmas.Presentation
                 if (src.Witches == null || src.Enemies == null || src.Encounters == null || src.Potions == null)
                     throw new InvalidOperationException("Faltan los JSON en el componente SalYAlmasGame. Vuelve a usar el menú Sal y Almas > Construir escena de combate.");
                 _db = DataLoader.Load(src);
+                var meta = MetaLoader.Load(MetaSources(), _db);
+                _db = meta.Combat; // con las 24 brujas
                 _formation = new FormationScreen(_db);
                 _formation.OnStart += StartBattle;
-                var meta = MetaLoader.Load(MetaSources(), _db);
                 _art = new PortraitBank(LoadPortraits());
                 BattleHud.Bust = id => _art.Bust(id);
                 _hub = new MetaHub(meta, new FileSaveStore(Path.Combine(Application.persistentDataPath, "guardado")), _art)
@@ -197,6 +200,8 @@ namespace SalYAlmas.Presentation
                 Story = StoryJson.text,
                 Services = ServicesJson.text,
                 Loc = LocJson.text,
+                WitchesExt = WitchesExtJson != null ? WitchesExtJson.text : null,
+                Odyssey = OdysseyJson != null ? OdysseyJson.text : null,
             };
         }
 

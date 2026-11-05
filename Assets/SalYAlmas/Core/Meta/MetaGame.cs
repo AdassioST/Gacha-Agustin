@@ -130,12 +130,16 @@ namespace SalYAlmas.Core.Meta
         /// Perfil de prueba para el Editor: las seis brujas con kit (cuatro en grado B y nivel de la Fase 1, Zarigüeya y Topo
         /// en grado D para subirlas por sus Juicios), todas las estaciones y recetas, y recursos marcados con la fuente "prueba".
         /// </summary>
+        /// <summary>Las seis brujas de la Fase 1: el perfil de prueba no cambia aunque haya más kits.</summary>
+        public static readonly string[] TestWitches = { "marisal", "selenia", "solenne", "tormentina", "zarigueya", "topo" };
+
         public static PlayerProfile TestProfile(MetaDatabase meta, ulong seed, int day)
         {
             var p = NewProfile(meta, seed, day);
             var game = new MetaGame(meta, p);
-            foreach (var id in meta.Combat.WitchOrder)
+            foreach (var id in TestWitches)
             {
+                if (meta.Combat.Witch(id) == null) continue;
                 game.AddWitch(id);
                 var def = meta.Combat.Witch(id);
                 var wp = p.Witches[id];

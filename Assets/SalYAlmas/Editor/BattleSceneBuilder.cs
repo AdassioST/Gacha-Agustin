@@ -143,6 +143,8 @@ namespace SalYAlmas.EditorTools
                 game.StoryJson = LoadJson("story.json");
                 game.ServicesJson = LoadJson("services.json");
                 game.LocJson = LoadJson("loc.json");
+                game.WitchesExtJson = LoadJson("witches_ext.json");
+                game.OdysseyJson = LoadJson("odyssey.json");
                 game.Portraits = LoadPortraits();
                 game.PlanetMaterials = planetMaterials ?? new Material[7];
                 game.EnemyMaterial = enemyMaterial;
