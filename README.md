@@ -11,6 +11,7 @@ Preproducción. Por ahora el repositorio solo tiene documentación; todavía no 
 | Archivo | Contenido |
 | --- | --- |
 | [docs/GDD.md](docs/GDD.md) | Documento de diseño. Manda sobre cualquier otro documento |
+| [docs/REFERENCIAS.md](docs/REFERENCIAS.md) | Referencias visuales, paleta, mapa de pantallas y antirreferencias |
 
 ## Cómo se construye
 
