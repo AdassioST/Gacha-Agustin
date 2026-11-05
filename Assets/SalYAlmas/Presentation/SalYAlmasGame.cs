@@ -103,6 +103,15 @@ namespace SalYAlmas.Presentation
             LoadData();
         }
 
+        // Las capturas nunca leen ni sobrescriben el perfil del jugador.
+        private static ISaveStore ReviewSaveStore()
+        {
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+            if (Array.IndexOf(Environment.GetCommandLineArgs(), "-capturas") >= 0) return new MemorySaveStore();
+#endif
+            return new FileSaveStore(Path.Combine(Application.persistentDataPath, "guardado"));
+        }
+
         private void LoadData()
         {
             try
@@ -124,7 +133,7 @@ namespace SalYAlmas.Presentation
                 _formation.OnStart += StartBattle;
                 _art = new PortraitBank(LoadPortraits());
                 BattleHud.Bust = id => _art.Bust(id);
-                _hub = new MetaHub(meta, new FileSaveStore(Path.Combine(Application.persistentDataPath, "guardado")), _art)
+                _hub = new MetaHub(meta, ReviewSaveStore(), _art)
                 {
                     StartBattle = StartExternalBattle,
                     OpenFormation = () => _mode = Mode.Formation,

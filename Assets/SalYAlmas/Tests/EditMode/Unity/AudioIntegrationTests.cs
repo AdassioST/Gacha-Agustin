@@ -40,7 +40,7 @@ namespace SalYAlmas.Tests
             profile.Version = SalYAlmas.Core.Save.PlayerProfile.CurrentVersion + 1;
             string json = SalYAlmas.Core.Save.ProfileSerializer.ToJson(profile);
             store.Save("perfil", json);
-            Assert.Throws<System.InvalidOperationException>(() => new MetaHub(Phase2Kit.Meta(), store));
+            Assert.Throws<System.InvalidOperationException>(() => new MetaHub(Phase2Kit.Meta(), store, null));
             Assert.That(store.Load("perfil"), Is.EqualTo(json));
         }
 

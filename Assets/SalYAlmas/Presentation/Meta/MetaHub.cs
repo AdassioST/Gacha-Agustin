@@ -94,7 +94,13 @@ namespace SalYAlmas.Presentation
             }
         }
 
-        private static ulong NewSeed() => (ulong)(DateTime.Now.Ticks % 1000000007L);
+        private static ulong NewSeed()
+        {
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+            if (Array.IndexOf(Environment.GetCommandLineArgs(), "-capturas") >= 0) return 20261105UL;
+#endif
+            return (ulong)(DateTime.Now.Ticks % 1000000007L);
+        }
 
         /// <summary>Una cuenta nueva empieza por crear a la Calculista.</summary>
         private void NewPlayer()
