@@ -1,0 +1,53 @@
+# Unity (el proyecto de la Fase 1 vive en la raíz del repositorio)
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+/Assets/AssetStoreTools*
+
+# Archivos generados por Unity y los IDE
+.vs/
+.vscode/
+.idea/
+.gradle/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Compilaciones móviles
+*.apk
+*.aab
+*.unitypackage
+*.app
+crashlytics-build.properties
+
+# Pruebas del núcleo con dotnet (Tests/Core.Tests)
+/Tests/**/bin/
+/Tests/**/obj/
+/Tests/**/TestResults/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ajustes locales de Claude Code
+.claude/settings.local.json
