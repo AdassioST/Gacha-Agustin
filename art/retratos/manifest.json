@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "generating_phase1",
+  "status": "portraits_complete_2k_rerenders_unavailable_in_builtin_interface",
   "source_document": "docs/Retratos para Codex.md",
   "tool": "built-in image_gen",
   "model_requested": "gpt-image-2",
@@ -189,13 +189,15 @@
           "hands_paws_no_extra_digits": "pass",
           "no_text_logos_signatures_frames": "pass",
           "opaque_phase_appropriate_clothing": "pass",
-          "silhouette_64px": "pass",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "style_matches_anchor": "pass",
           "phase3_identity": "not_applicable",
-          "no_recognizable_franchise_copy": "pass"
+          "no_recognizable_franchise_copy": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Vista tres cuartos; figura fuerte y protectora; mejor candidata inicial al ancla.",
-        "failure_reasons": []
+        "notes": "Ancla v3 elegida por el usuario; loba adulta, cristal de sal y báculo.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       },
       "regenerations": 0,
       "rejected_prompt": false
@@ -230,13 +232,15 @@
           "hands_paws_no_extra_digits": "pass",
           "no_text_logos_signatures_frames": "pass",
           "opaque_phase_appropriate_clothing": "pass",
-          "silhouette_64px": "pass",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "style_matches_anchor": "pass",
           "phase3_identity": "not_applicable",
-          "no_recognizable_franchise_copy": "pass"
+          "no_recognizable_franchise_copy": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Sombrero con ambos rizos muy legibles; postura mas frontal y rostro de perfil.",
-        "failure_reasons": []
+        "notes": "Ancla v3 elegida por el usuario; loba adulta, cristal de sal y báculo.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       },
       "regenerations": 0,
       "rejected_prompt": false
@@ -271,13 +275,15 @@
           "hands_paws_no_extra_digits": "pass",
           "no_text_logos_signatures_frames": "pass",
           "opaque_phase_appropriate_clothing": "pass",
-          "silhouette_64px": "pass",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "style_matches_anchor": "pass",
           "phase3_identity": "not_applicable",
-          "no_recognizable_franchise_copy": "pass"
+          "no_recognizable_franchise_copy": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Mayor contraste en la capa; postura y baston forman una silueta mas abierta.",
-        "failure_reasons": []
+        "notes": "Ancla v3 elegida por el usuario; loba adulta, cristal de sal y báculo.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       },
       "regenerations": 0,
       "rejected_prompt": false
@@ -306,7 +312,7 @@
       "sha256": "e7fc4f4e3a187d58081f3744bd165aa82ad4b40a2a1e15157191b28d37bc294e",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -316,11 +322,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Species, ritual and adult proportions preserved; some fingers naturally occluded by props.",
-        "failure_reasons": []
+        "notes": "Rostro humano adulto, antenas de polilla y té negro con sal.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -347,7 +355,7 @@
       "sha256": "69ca6dbd83bc1dc4a309a6f2ff705e69ae4951e52b18875e876138bf28bd9b23",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -357,11 +365,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Species, ritual and adult proportions preserved; some fingers naturally occluded by props.",
-        "failure_reasons": []
+        "notes": "Rostro humano adulto, antenas de polilla y té negro con sal.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -388,7 +398,7 @@
       "sha256": "36a2fd7ed450818374d88a5dcfd172c71244224535622cb42ad23c1a3c721ab6",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -398,11 +408,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Species, ritual and adult proportions preserved; some fingers naturally occluded by props.",
-        "failure_reasons": []
+        "notes": "Fénec adulta, sombrero con monedas y limón con sal y chile.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -429,7 +441,7 @@
       "sha256": "27f972d348a73350d0c489748a7bf9e809752ba4b1acf9bea79394ea7d326676",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -439,11 +451,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Species, ritual and adult proportions preserved; some fingers naturally occluded by props.",
-        "failure_reasons": []
+        "notes": "Fénec adulta, sombrero con monedas y limón con sal y chile.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -483,9 +497,9 @@
           "silhouette_64px": "pending",
           "phase3_identity": "not_applicable"
         },
-        "notes": "Long bushy canine tail copied from style reference; red deer requires short tail.",
+        "notes": "Descartada; conservada para auditoría de la generación.",
         "failure_reasons": [
-          "Cola larga y peluda de canido en lugar de cola corta de cierva."
+          "Cola larga y peluda de cánido en lugar de cola corta de cierva."
         ]
       }
     },
@@ -526,9 +540,9 @@
           "silhouette_64px": "pending",
           "phase3_identity": "not_applicable"
         },
-        "notes": "Long bushy canine tail copied from style reference; red deer requires short tail.",
+        "notes": "Descartada; conservada para auditoría de la generación.",
         "failure_reasons": [
-          "Cola larga y peluda de canido en lugar de cola corta de cierva."
+          "Cola larga y peluda de cánido en lugar de cola corta de cierva."
         ]
       }
     },
@@ -556,7 +570,7 @@
       "sha256": "aa85e10e335e29ce2b95a4683bcc2ae330dd7bebfba235447f0b504cee12b046",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -566,11 +580,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Reviewed species, visible fingers, limb connections, ear count and ritual; naturally occluded fingers are not independently countable.",
-        "failure_reasons": []
+        "notes": "Solo dos orejas de liebre; cabello sobre las sienes y sal en el dorso.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -610,9 +626,9 @@
           "silhouette_64px": "pending",
           "phase3_identity": "not_applicable"
         },
-        "notes": "Oreja humana visible ademas del par de orejas de liebre.",
+        "notes": "Descartada; conservada para auditoría de la generación.",
         "failure_reasons": [
-          "Oreja humana visible ademas del par de orejas de liebre."
+          "Oreja humana visible además del par de orejas de liebre."
         ]
       }
     },
@@ -640,7 +656,7 @@
       "sha256": "83442cc1947d03977afd68f8d34dd0a2d08b841d8f009a08ee4001156e61e75b",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -650,11 +666,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Reviewed species, visible fingers, limb connections, ear count and ritual; naturally occluded fingers are not independently countable.",
-        "failure_reasons": []
+        "notes": "Serpiente con dos brazos y dos piernas; mano del Ascendente separada.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -681,7 +699,7 @@
       "sha256": "8234abc804890097d3349e5c508369d7abc5fed7a5be0bbc818d04252227d976",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -691,11 +709,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Reviewed species, visible fingers, limb connections, ear count and ritual; naturally occluded fingers are not independently countable.",
-        "failure_reasons": []
+        "notes": "Serpiente con dos brazos y dos piernas; mano del Ascendente separada.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -722,7 +742,7 @@
       "sha256": "c447e2ed6880823617c21b19870f9ed3024191fac11054eaae3e4e5b098aa6e0",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -732,11 +752,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Reviewed species, visible fingers, limb connections, ear count and ritual; naturally occluded fingers are not independently countable.",
-        "failure_reasons": []
+        "notes": "Rostro humano, orejas y cola de gata; balanza con sal.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -763,7 +785,7 @@
       "sha256": "3cbd9ee6db88bdea0d0c39cc5770871e3224ddc433f0c979509c345ea618b8e8",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -773,11 +795,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Reviewed species, visible fingers, limb connections, ear count and ritual; naturally occluded fingers are not independently countable.",
-        "failure_reasons": []
+        "notes": "Rostro humano, orejas y cola de gata; balanza con sal.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -805,7 +829,7 @@
       "sha256": "c9c8c7c3b7943426f15a2fa188312f1c34fc25a8bebf581771487c99b5cfd846",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -815,11 +839,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Reviewed species, visible fingers, limb connections, ear count and ritual; naturally occluded fingers are not independently countable.",
-        "failure_reasons": []
+        "notes": "Cola corta de cierva corregida; salero de plata y cornamenta.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -860,9 +886,9 @@
           "silhouette_64px": "pending",
           "phase3_identity": "not_applicable"
         },
-        "notes": "Persiste cola larga de canido despues del primer reintento.",
+        "notes": "Descartada; conservada para auditoría de la generación.",
         "failure_reasons": [
-          "Persiste cola larga de canido despues del primer reintento."
+          "Persiste una cola larga de cánido después del primer reintento."
         ]
       }
     },
@@ -890,7 +916,7 @@
       "sha256": "3736885d869b6f8e89c5f79e03d61d30c0415e5e5d75790872d4115ae08dd39a",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -900,11 +926,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Anatom?a visible coherente: dos brazos, dos piernas y un par de orejas; dedos parcialmente ocultos por agarres cuando corresponde. Especie, sombrero y ritual legibles.",
-        "failure_reasons": []
+        "notes": "Pañuelo de sal corregido y visible; zarigüeya recostada con cola desnuda.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -944,9 +972,9 @@
           "silhouette_64px": "pending",
           "phase3_identity": "not_applicable"
         },
-        "notes": "Pa?uelo negro con sal sobre el pecho no identificable. Dos brazos y par de orejas sin duplicaci?n visible.",
+        "notes": "Descartada; conservada para auditoría de la generación.",
         "failure_reasons": [
-          "El pa?uelo negro con sal sobre el pecho no resulta legible."
+          "El pañuelo negro con sal sobre el pecho no resulta legible."
         ]
       }
     },
@@ -974,7 +1002,7 @@
       "sha256": "cfcfbad94e535e25b62f3429177ad6095dfe583fbf338eb5601fedfc02355c67",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -984,11 +1012,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Anatom?a visible coherente: dos brazos, dos piernas y un par de orejas; dedos parcialmente ocultos por agarres cuando corresponde. Especie, sombrero y ritual legibles.",
-        "failure_reasons": []
+        "notes": "Coyota con cempasúchil, papel picado y salero de barro.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1015,7 +1045,7 @@
       "sha256": "240a7417c21bd596bd29ab7e603caffd78c6936f1f2e7c96f69c54ffc94174cb",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1025,11 +1055,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Anatom?a visible coherente: dos brazos, dos piernas y un par de orejas; dedos parcialmente ocultos por agarres cuando corresponde. Especie, sombrero y ritual legibles.",
-        "failure_reasons": []
+        "notes": "Coyota con cempasúchil, papel picado y salero de barro.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1056,7 +1088,7 @@
       "sha256": "8c8430ec6453b573cc5ddde2b05efd3ef297b71c308c467d3379d5d052d9baeb",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1066,11 +1098,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Anatom?a visible coherente: dos brazos, dos piernas y un par de orejas; dedos parcialmente ocultos por agarres cuando corresponde. Especie, sombrero y ritual legibles.",
-        "failure_reasons": []
+        "notes": "Cabra con cuernos y orejas distintos; bloque de sal para ganado.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1097,7 +1131,7 @@
       "sha256": "c28c1df67c5abcb329b5ed59d01fd43583dd428574b4e41562d45213e66eb849",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1107,11 +1141,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Anatom?a visible coherente: dos brazos, dos piernas y un par de orejas; dedos parcialmente ocultos por agarres cuando corresponde. Especie, sombrero y ritual legibles.",
-        "failure_reasons": []
+        "notes": "Cabra con cuernos y orejas distintos; bloque de sal para ganado.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1139,7 +1175,7 @@
       "sha256": "17c52ad2092fae02ba5d83631457ce39f1cf3c7e72d858489c8609b7759911ef",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1149,11 +1185,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Preferida tras comparar de nuevo las sienes: el cabello cubre ambos laterales de la cabeza, con solo el par de orejas de liebre visible. Dos brazos y agarres naturales.",
-        "failure_reasons": []
+        "notes": "Solo dos orejas de liebre; cabello sobre las sienes y sal en el dorso.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1181,7 +1219,7 @@
       "sha256": "c79414caba80cd0a98120707ebc550bb11b1ab08f204ba4d4dd9dee33cdadef9",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1191,11 +1229,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
-          "phase3_identity": "not_applicable"
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
+          "phase3_identity": "not_applicable",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Anatom?a visible coherente: dos brazos, dos piernas y un par de orejas; dedos parcialmente ocultos por agarres cuando corresponde. Especie, sombrero y ritual legibles.",
-        "failure_reasons": []
+        "notes": "Cola corta de cierva corregida; salero de plata y cornamenta.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1222,7 +1262,7 @@
       "sha256": "7e6891898f6ce66c7378fad4ce8c109722d329932038b32b65cc52917077a4b6",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1232,12 +1272,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "not_applicable",
-          "prescribed_pose": "pass"
+          "prescribed_pose": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Ritual legible, dos brazos sin duplicaci?n y cinco dedos por mano con oclusiones naturales. Sin anatom?a extra visible.",
-        "failure_reasons": []
+        "notes": "Topo adulto robusto; farol de vela y dos puñados de sal.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1264,7 +1306,7 @@
       "sha256": "c648875b90753da3f3501ac46add60ff7286fa6ad727835da62da39889268194",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1274,12 +1316,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "not_applicable",
-          "prescribed_pose": "pass"
+          "prescribed_pose": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Ritual legible, dos brazos sin duplicaci?n y cinco dedos por mano con oclusiones naturales. Sin anatom?a extra visible.",
-        "failure_reasons": []
+        "notes": "Topo adulto robusto; farol de vela y dos puñados de sal.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1320,9 +1364,9 @@
           "phase3_identity": "not_applicable",
           "prescribed_pose": "fail_water_only_at_ankles_or_calves"
         },
-        "notes": "La concha y las seis branquias son correctas, sin orejas adicionales; el nivel del agua no alcanza la mitad del cuerpo.",
+        "notes": "Descartada; conservada para auditoría de la generación.",
         "failure_reasons": [
-          "Axa no est? medio sumergida: el agua solo cubre tobillos o pantorrillas."
+          "No está medio sumergida: el agua solo cubre los tobillos."
         ]
       }
     },
@@ -1364,9 +1408,9 @@
           "phase3_identity": "not_applicable",
           "prescribed_pose": "fail_water_only_at_ankles_or_calves"
         },
-        "notes": "La concha y las seis branquias son correctas, sin orejas adicionales; el nivel del agua no alcanza la mitad del cuerpo.",
+        "notes": "Descartada; conservada para auditoría de la generación.",
         "failure_reasons": [
-          "Axa no est? medio sumergida: el agua solo cubre tobillos o pantorrillas."
+          "No está medio sumergida: el agua solo cubre las pantorrillas."
         ]
       }
     },
@@ -1395,7 +1439,7 @@
       "sha256": "bbc2a0569bf78f8d29ce92ba110b65bfb27fcc545cca447cb8bdd6cd12c77de0",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1405,12 +1449,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "not_applicable",
-          "prescribed_pose": "pass"
+          "prescribed_pose": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Ritual legible, dos brazos sin duplicaci?n y cinco dedos por mano con oclusiones naturales. Sin anatom?a extra visible.",
-        "failure_reasons": []
+        "notes": "Pañuelo de sal corregido y visible; zarigüeya recostada con cola desnuda.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1452,9 +1498,9 @@
           "phase3_identity": "not_applicable",
           "eye_color": "fail_amber_instead_of_dark"
         },
-        "notes": "Repetir con correcci?n espec?fica sin cambiar los bloques originales.",
+        "notes": "Descartada; conservada para auditoría de la generación.",
         "failure_reasons": [
-          "Los ojos salieron ?mbar; la ficha pide ojos peque?os oscuros."
+          "Ojos ámbar; la ficha pide ojos pequeños oscuros."
         ]
       }
     },
@@ -1497,9 +1543,9 @@
           "phase3_identity": "not_applicable",
           "eye_color": "fail_amber_instead_of_dark"
         },
-        "notes": "Repetir con correcci?n espec?fica sin cambiar los bloques originales.",
+        "notes": "Descartada; conservada para auditoría de la generación.",
         "failure_reasons": [
-          "Los ojos salieron ?mbar; la ficha pide ojos peque?os oscuros."
+          "Ojos ámbar; la ficha pide ojos pequeños oscuros."
         ]
       }
     },
@@ -1541,7 +1587,7 @@
           "phase3_identity": "pass",
           "eye_color": "pass"
         },
-        "notes": "Repetir con correcci?n espec?fica sin cambiar los bloques originales.",
+        "notes": "Descartada; conservada para auditoría de la generación.",
         "failure_reasons": [
           "El carnero aparece recortado e incompleto."
         ]
@@ -1585,9 +1631,9 @@
           "phase3_identity": "pass",
           "eye_color": "pass"
         },
-        "notes": "Repetir con correcci?n espec?fica sin cambiar los bloques originales.",
+        "notes": "Descartada; conservada para auditoría de la generación.",
         "failure_reasons": [
-          "Tres brazos: espada elevada, mano con sal y un brazo extra colgante.",
+          "Tres brazos: espada elevada, mano con sal y brazo extra colgante.",
           "El carnero aparece recortado e incompleto."
         ]
       }
@@ -1616,7 +1662,7 @@
       "sha256": "7a9befc911af5032adba5a2d1c39c1704663a270739f6c40a84b7d83d75d23e0",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1626,12 +1672,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "pass",
-          "eye_color": "pass"
+          "eye_color": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Misma cara humana adulta, antenas y alas de polilla, dos brazos, taza y mano abierta; dos peces completos detr?s.",
-        "failure_reasons": []
+        "notes": "Misma identidad, alas desplegadas, té y dos peces completos.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1658,7 +1706,7 @@
       "sha256": "f94d2919fd660626b81c0daadb3d6ef35d6a905161406bba5305cafd327e43ac",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1668,12 +1716,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "pass",
-          "eye_color": "pass"
+          "eye_color": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Misma cara humana adulta, antenas y alas de polilla, dos brazos, taza y mano abierta; dos peces completos detr?s.",
-        "failure_reasons": []
+        "notes": "Misma identidad, alas desplegadas, té y dos peces completos.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1701,7 +1751,7 @@
       "sha256": "7baebb700bc8a18861e124d07538e4cf9c6c941a92904bea7b24835e127847c4",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1711,12 +1761,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "not_applicable",
-          "eye_color": "pass"
+          "eye_color": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Ojos oscuros con reflejo lunar, seis branquias sin orejas mam?feras, agua hasta la cintura y concha con sal. Dos manos de cinco dedos con oclusi?n natural por la concha.",
-        "failure_reasons": []
+        "notes": "Ojos oscuros y agua a la cintura corregidos; seis branquias y concha con sal.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1744,7 +1796,7 @@
       "sha256": "e70a2bc2f6a95abe07cc4ac727a5e7ccd48f808e11f42719ac1ae433fc5498d5",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1754,12 +1806,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "not_applicable",
-          "eye_color": "pass"
+          "eye_color": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Ojos oscuros con reflejo lunar, seis branquias sin orejas mam?feras, agua hasta la cintura y concha con sal. Dos manos de cinco dedos con oclusi?n natural por la concha.",
-        "failure_reasons": []
+        "notes": "Ojos oscuros y agua a la cintura corregidos; seis branquias y concha con sal.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1787,7 +1841,7 @@
       "sha256": "110cbab378744f2ad606954221f45a7043b6cc695f52f1a9000326f989ff0349",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1797,12 +1851,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "pass",
-          "eye_color": "pass"
+          "eye_color": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Correcci?n v?lida: dos brazos, espada y cristal de sal; carnero entero dentro del encuadre. Mantiene cara, cicatriz, ojos y pelaje del ancla.",
-        "failure_reasons": []
+        "notes": "Dos brazos corregidos, espada roja y cristal de sal; carnero completo.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1830,7 +1886,7 @@
       "sha256": "87f1f877a8a55bcec501b04b20cf5f805e0c41988cfa7fd824ef079854194908",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1840,12 +1896,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "pass",
-          "eye_color": "pass"
+          "eye_color": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Correcci?n v?lida: dos brazos, espada y cristal de sal; carnero entero dentro del encuadre. Mantiene cara, cicatriz, ojos y pelaje del ancla.",
-        "failure_reasons": []
+        "notes": "Dos brazos corregidos, espada roja y cristal de sal; carnero completo.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1872,7 +1930,7 @@
       "sha256": "17dde9cce6ee18dca4378d37a9d4ae71765ce35ae0e037d7d099a3a5acb109b2",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1882,12 +1940,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "pass",
-          "eye_color": "pass"
+          "eye_color": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "F?nec adulta con la misma cara y pelaje; dos brazos, lim?n salado y sal convertida en soles; le?n entero detr?s.",
-        "failure_reasons": []
+        "notes": "Misma fénec, giro con sal convertida en soles, limón y león completo.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1914,7 +1974,7 @@
       "sha256": "199ef0caad81b83fa479225bad571dff59ce8c8b1b5a71675dc8646622ae2d9f",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1924,12 +1984,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "pass",
-          "eye_color": "pass"
+          "eye_color": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "F?nec adulta con la misma cara y pelaje; dos brazos, lim?n salado y sal convertida en soles; le?n entero detr?s.",
-        "failure_reasons": []
+        "notes": "Misma fénec, giro con sal convertida en soles, limón y león completo.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1956,7 +2018,7 @@
       "sha256": "0b881dad502111c72a81606c9cea0a9a54ededf4cbb258e43033d73183fd5eb6",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -1966,12 +2028,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "pass",
-          "requested_resolution": "pass"
+          "requested_resolution": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Anatom?a visible, identidad y ritual revisados. Las manos que sujetan objetos ocultan parte de los dedos de forma natural.",
-        "failure_reasons": []
+        "notes": "Misma cierva, cola corta, aros en la cornamenta y cabra marina completa.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -1998,7 +2062,7 @@
       "sha256": "7c2170a79cba4ec19f942851d106c341d6c18a5ca90722624f498eacd03b39cc",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -2008,12 +2072,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "pass",
-          "requested_resolution": "pass"
+          "requested_resolution": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Anatom?a visible, identidad y ritual revisados. Las manos que sujetan objetos ocultan parte de los dedos de forma natural.",
-        "failure_reasons": []
+        "notes": "Misma cierva, cola corta, aros en la cornamenta y cabra marina completa.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -2054,9 +2120,9 @@
           "phase3_identity": "pass",
           "requested_resolution": "pass"
         },
-        "notes": "Anatom?a visible, identidad y ritual revisados. Las manos que sujetan objetos ocultan parte de los dedos de forma natural.",
+        "notes": "Descartada; conservada para auditoría de la generación.",
         "failure_reasons": [
-          "Forma de oreja humana bajo el cabello junto a la sien; se descarta por posible duplicaci?n con las orejas de liebre."
+          "Forma de oreja humana bajo el cabello junto a la sien; descarte conservador por posible duplicación."
         ]
       }
     },
@@ -2098,9 +2164,9 @@
           "phase3_identity": "pass",
           "requested_resolution": "pass"
         },
-        "notes": "Anatom?a visible, identidad y ritual revisados. Las manos que sujetan objetos ocultan parte de los dedos de forma natural.",
+        "notes": "Descartada; conservada para auditoría de la generación.",
         "failure_reasons": [
-          "Forma de oreja humana bajo el cabello junto a la sien; se descarta por posible duplicaci?n con las orejas de liebre."
+          "Forma de oreja humana bajo el cabello junto a la sien; descarte conservador por posible duplicación."
         ]
       }
     },
@@ -2128,7 +2194,7 @@
       "sha256": "e02a9d958c42840d198b898560ed4cc6d6c3ca9f8c02cc128fdd6ed0d0236dd5",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -2138,12 +2204,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "pass",
-          "requested_resolution": "pass"
+          "requested_resolution": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Anatom?a visible, identidad y ritual revisados. Las manos que sujetan objetos ocultan parte de los dedos de forma natural.",
-        "failure_reasons": []
+        "notes": "Misma serpiente con dos brazos y dos piernas; trigo y ritual del Ascendente.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -2185,9 +2253,9 @@
           "phase3_identity": "not_applicable",
           "requested_resolution": "fail_1024x1536_instead_of_2048x3072"
         },
-        "notes": "Prueba t?cnica conservada fuera de las selecciones.",
+        "notes": "Descartada; conservada para auditoría de la generación.",
         "failure_reasons": [
-          "La solicitud de 2048x3072 produjo otra imagen de 1024x1536; la interfaz integrada no expone un par?metro de tama?o."
+          "Se pidió 2048×3072 y la herramienta devolvió 1024×1536."
         ]
       }
     },
@@ -2215,7 +2283,7 @@
       "sha256": "5795265339984b647def52123bbc536b4d028ba72170d7ccf8a44098d0b98964",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -2225,12 +2293,14 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "pass",
-          "requested_resolution": "pass"
+          "requested_resolution": "pass",
+          "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Anatom?a visible, identidad y ritual revisados. Las manos que sujetan objetos ocultan parte de los dedos de forma natural.",
-        "failure_reasons": []
+        "notes": "Misma serpiente con dos brazos y dos piernas; trigo y ritual del Ascendente.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -2258,7 +2328,7 @@
       "sha256": "3ef0346a34e361a7908fff005cb5bb43ebb595a52f8361d6049a14d5709677c0",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -2268,12 +2338,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "pass",
           "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Dos brazos, dos piernas, solo dos orejas de liebre. Mano extendida con cinco dedos separados y mano con sal en agarre natural. Gemelas completas detr?s, sin cubrir la cara.",
-        "failure_reasons": []
+        "notes": "Solo dos orejas de liebre; mano extendida con cinco dedos separados.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     },
     {
@@ -2301,7 +2372,7 @@
       "sha256": "f4c0f4c22d22e15bf81948c0fda0b6e3a6f1d39fde2a99608d4bbee82678b9a6",
       "review": {
         "method": "view_image",
-        "status": "passed_pending_contact_sheet",
+        "status": "passed",
         "checks": {
           "species_and_scale": "pass",
           "adult_face_and_proportions": "pass",
@@ -2311,12 +2382,13 @@
           "hands_arms_ears": "pass_visible_anatomy_naturally_occluded_digits",
           "no_text_opaque_clothing": "pass",
           "style": "pass",
-          "silhouette_64px": "pending",
+          "silhouette_64px": "pass_reviewed_on_pillow_contact_sheet",
           "phase3_identity": "pass",
           "franchise_originality": "no_recognizable_franchise_elements"
         },
-        "notes": "Dos brazos y dos piernas; el cabello cubre las sienes y no se ve otra pareja de orejas. Dedos superpuestos por el ?ngulo en la mano extendida, sin duplicaci?n visible.",
-        "failure_reasons": []
+        "notes": "Solo dos orejas de liebre; mano extendida con cinco dedos separados.",
+        "failure_reasons": [],
+        "visible_anatomy_limit": "Los agarres y la ropa pueden ocultar dedos; la revisión evalúa la anatomía visible y no certifica dedos ocultos."
       }
     }
   ],
@@ -2348,17 +2420,297 @@
   "notes": [
     "Source document is named docs/Retratos para Codex.md in this checkout.",
     "The built-in tool exposes no selectable model argument or returned model identifier. gpt-image-2 is the requested model.",
-    "Final 2K rerenders specified in section 3 remain pending after selection."
+    "All five original prompt blocks were checked verbatim and in order against sections 2, 5 and 6 of the source document.",
+    "QC additions implement the user anatomy correction and clarify existing species, poses and rituals without replacing the original blocks.",
+    "The main contact sheets contain only approved variants, per section 7. The _todas sheets also show all discarded character variants, clearly labeled.",
+    "All outputs are native 1024x1536. Native 2K rerenders remain unavailable through the integrated interface; no upscaling was substituted.",
+    "Visible anatomy was reviewed using view_image. Fingers hidden by grips, objects or clothing cannot be independently counted."
   ],
   "anchor_recommendation": {
     "file": "art/retratos/marisal/marisal_f1_v1.png",
     "reason": "Clear three-quarter view, strong adult athletic silhouette, readable salt ritual and guardian separate from face."
   },
-  "failures": [],
+  "failures": [
+    {
+      "file": "art/retratos/cervanda/cervanda_f1_v1.png",
+      "kind": "variant",
+      "reasons": [
+        "Cola larga y peluda de cánido en lugar de cola corta de cierva."
+      ],
+      "resolved_by": "art/retratos/cervanda/cervanda_f1_v1_r1.png"
+    },
+    {
+      "file": "art/retratos/cervanda/cervanda_f1_v2.png",
+      "kind": "variant",
+      "reasons": [
+        "Cola larga y peluda de cánido en lugar de cola corta de cierva."
+      ],
+      "resolved_by": "art/retratos/cervanda/cervanda_f1_v2_r2.png"
+    },
+    {
+      "file": "art/retratos/tormentina/tormentina_f1_v2.png",
+      "kind": "variant",
+      "reasons": [
+        "Oreja humana visible además del par de orejas de liebre."
+      ],
+      "resolved_by": "art/retratos/tormentina/tormentina_f1_v2_r1.png"
+    },
+    {
+      "file": "art/retratos/cervanda/cervanda_f1_v2_r1.png",
+      "kind": "variant",
+      "reasons": [
+        "Persiste una cola larga de cánido después del primer reintento."
+      ],
+      "resolved_by": "art/retratos/cervanda/cervanda_f1_v2_r2.png"
+    },
+    {
+      "file": "art/retratos/muertita/muertita_f1_v1.png",
+      "kind": "variant",
+      "reasons": [
+        "El pañuelo negro con sal sobre el pecho no resulta legible."
+      ],
+      "resolved_by": "art/retratos/muertita/muertita_f1_v1_r1.png"
+    },
+    {
+      "file": "art/retratos/axa/axa_f1_v1.png",
+      "kind": "variant",
+      "reasons": [
+        "No está medio sumergida: el agua solo cubre los tobillos."
+      ],
+      "resolved_by": "art/retratos/axa/axa_f1_v1_r2.png"
+    },
+    {
+      "file": "art/retratos/axa/axa_f1_v2.png",
+      "kind": "variant",
+      "reasons": [
+        "No está medio sumergida: el agua solo cubre las pantorrillas."
+      ],
+      "resolved_by": "art/retratos/axa/axa_f1_v2_r2.png"
+    },
+    {
+      "file": "art/retratos/axa/axa_f1_v1_r1.png",
+      "kind": "variant",
+      "reasons": [
+        "Ojos ámbar; la ficha pide ojos pequeños oscuros."
+      ],
+      "resolved_by": "art/retratos/axa/axa_f1_v1_r2.png"
+    },
+    {
+      "file": "art/retratos/axa/axa_f1_v2_r1.png",
+      "kind": "variant",
+      "reasons": [
+        "Ojos ámbar; la ficha pide ojos pequeños oscuros."
+      ],
+      "resolved_by": "art/retratos/axa/axa_f1_v2_r2.png"
+    },
+    {
+      "file": "art/retratos/marisal/marisal_f3_v1.png",
+      "kind": "variant",
+      "reasons": [
+        "El carnero aparece recortado e incompleto."
+      ],
+      "resolved_by": "art/retratos/marisal/marisal_f3_v1_r1.png"
+    },
+    {
+      "file": "art/retratos/marisal/marisal_f3_v2.png",
+      "kind": "variant",
+      "reasons": [
+        "Tres brazos: espada elevada, mano con sal y brazo extra colgante.",
+        "El carnero aparece recortado e incompleto."
+      ],
+      "resolved_by": "art/retratos/marisal/marisal_f3_v2_r1.png"
+    },
+    {
+      "file": "art/retratos/tormentina/tormentina_f3_v1.png",
+      "kind": "variant",
+      "reasons": [
+        "Forma de oreja humana bajo el cabello junto a la sien; descarte conservador por posible duplicación."
+      ],
+      "resolved_by": "art/retratos/tormentina/tormentina_f3_v1_r1.png"
+    },
+    {
+      "file": "art/retratos/tormentina/tormentina_f3_v2.png",
+      "kind": "variant",
+      "reasons": [
+        "Forma de oreja humana bajo el cabello junto a la sien; descarte conservador por posible duplicación."
+      ],
+      "resolved_by": "art/retratos/tormentina/tormentina_f3_v2_r1.png"
+    },
+    {
+      "file": "art/retratos/marisal/marisal_f1_v3_2k_probe.png",
+      "kind": "resolution_probe",
+      "reasons": [
+        "Se pidió 2048×3072 y la herramienta devolvió 1024×1536."
+      ],
+      "resolved_by": null
+    }
+  ],
   "user_anatomy_addendum": "Anatomy requirements: exactly two arms, two legs, and five digits on each hand (one thumb and four fingers); anatomically connected elbows and wrists, clean separated fingers and natural grips. Only one species-appropriate pair of ears; no second human ear pair beneath animal ears, no duplicated ears, no extra limbs or fused hands. Keep the guardian separate from the witch. Do not add mammalian ears to a serpent or axolotl.",
   "anchor_choice": {
     "selected_by": "user",
     "variant": 3,
     "anatomy_constraints": "Anatomy requirements: exactly two arms, two legs, and five digits on each hand (one thumb and four fingers); anatomically connected elbows and wrists, clean separated fingers and natural grips. Only one species-appropriate pair of ears; no second human ear pair beneath animal ears, no duplicated ears, no extra limbs or fused hands. Keep the guardian separate from the witch. Do not add mammalian ears to a serpent or axolotl."
+  },
+  "selection": [
+    {
+      "id": "marisal",
+      "phase": 1,
+      "file": "art/retratos/marisal/marisal_f1_v3.png",
+      "observations": "Ancla v3 elegida por el usuario; loba adulta, cristal de sal y báculo."
+    },
+    {
+      "id": "selenia",
+      "phase": 1,
+      "file": "art/retratos/selenia/selenia_f1_v1.png",
+      "observations": "Rostro humano adulto, antenas de polilla y té negro con sal."
+    },
+    {
+      "id": "solenne",
+      "phase": 1,
+      "file": "art/retratos/solenne/solenne_f1_v1.png",
+      "observations": "Fénec adulta, sombrero con monedas y limón con sal y chile."
+    },
+    {
+      "id": "cervanda",
+      "phase": 1,
+      "file": "art/retratos/cervanda/cervanda_f1_v1_r1.png",
+      "observations": "Cola corta de cierva corregida; salero de plata y cornamenta."
+    },
+    {
+      "id": "tormentina",
+      "phase": 1,
+      "file": "art/retratos/tormentina/tormentina_f1_v2_r1.png",
+      "observations": "Solo dos orejas de liebre; cabello sobre las sienes y sal en el dorso."
+    },
+    {
+      "id": "cupria",
+      "phase": 1,
+      "file": "art/retratos/cupria/cupria_f1_v2.png",
+      "observations": "Serpiente con dos brazos y dos piernas; mano del Ascendente separada."
+    },
+    {
+      "id": "brea",
+      "phase": 1,
+      "file": "art/retratos/brea/brea_f1_v1.png",
+      "observations": "Rostro humano, orejas y cola de gata; balanza con sal."
+    },
+    {
+      "id": "cempa",
+      "phase": 1,
+      "file": "art/retratos/cempa/cempa_f1_v1.png",
+      "observations": "Coyota con cempasúchil, papel picado y salero de barro."
+    },
+    {
+      "id": "muertita",
+      "phase": 1,
+      "file": "art/retratos/muertita/muertita_f1_v1_r1.png",
+      "observations": "Pañuelo de sal corregido y visible; zarigüeya recostada con cola desnuda."
+    },
+    {
+      "id": "salitre",
+      "phase": 1,
+      "file": "art/retratos/salitre/salitre_f1_v2.png",
+      "observations": "Cabra con cuernos y orejas distintos; bloque de sal para ganado."
+    },
+    {
+      "id": "topacia",
+      "phase": 1,
+      "file": "art/retratos/topacia/topacia_f1_v1.png",
+      "observations": "Topo adulto robusto; farol de vela y dos puñados de sal."
+    },
+    {
+      "id": "axa",
+      "phase": 1,
+      "file": "art/retratos/axa/axa_f1_v2_r2.png",
+      "observations": "Ojos oscuros y agua a la cintura corregidos; seis branquias y concha con sal."
+    },
+    {
+      "id": "marisal",
+      "phase": 3,
+      "file": "art/retratos/marisal/marisal_f3_v1_r1.png",
+      "observations": "Dos brazos corregidos, espada roja y cristal de sal; carnero completo."
+    },
+    {
+      "id": "selenia",
+      "phase": 3,
+      "file": "art/retratos/selenia/selenia_f3_v2.png",
+      "observations": "Misma identidad, alas desplegadas, té y dos peces completos."
+    },
+    {
+      "id": "solenne",
+      "phase": 3,
+      "file": "art/retratos/solenne/solenne_f3_v1.png",
+      "observations": "Misma fénec, giro con sal convertida en soles, limón y león completo."
+    },
+    {
+      "id": "cervanda",
+      "phase": 3,
+      "file": "art/retratos/cervanda/cervanda_f3_v2.png",
+      "observations": "Misma cierva, cola corta, aros en la cornamenta y cabra marina completa."
+    },
+    {
+      "id": "tormentina",
+      "phase": 3,
+      "file": "art/retratos/tormentina/tormentina_f3_v1_r1.png",
+      "observations": "Solo dos orejas de liebre; mano extendida con cinco dedos separados."
+    },
+    {
+      "id": "cupria",
+      "phase": 3,
+      "file": "art/retratos/cupria/cupria_f3_v1.png",
+      "observations": "Misma serpiente con dos brazos y dos piernas; trigo y ritual del Ascendente."
+    }
+  ],
+  "generation_summary": {
+    "base_variants": 37,
+    "qc_regenerations": 13,
+    "resolution_probes": 1,
+    "total": 51,
+    "approved_variants": 37,
+    "selected": 18,
+    "qc_discarded": 13,
+    "generator_refusals": 0
+  },
+  "rerender_2k": {
+    "status": "unavailable_in_builtin_interface",
+    "requested_size": [
+      2048,
+      3072
+    ],
+    "probe_file": "art/retratos/marisal/marisal_f1_v3_2k_probe.png",
+    "observed_size": [
+      1024,
+      1536
+    ],
+    "reason": "The integrated tool exposes no size parameter; the explicit 2K prompt returned 1024x1536.",
+    "pending_selected_files": [
+      "art/retratos/marisal/marisal_f1_v3.png",
+      "art/retratos/selenia/selenia_f1_v1.png",
+      "art/retratos/solenne/solenne_f1_v1.png",
+      "art/retratos/cervanda/cervanda_f1_v1_r1.png",
+      "art/retratos/tormentina/tormentina_f1_v2_r1.png",
+      "art/retratos/cupria/cupria_f1_v2.png",
+      "art/retratos/brea/brea_f1_v1.png",
+      "art/retratos/cempa/cempa_f1_v1.png",
+      "art/retratos/muertita/muertita_f1_v1_r1.png",
+      "art/retratos/salitre/salitre_f1_v2.png",
+      "art/retratos/topacia/topacia_f1_v1.png",
+      "art/retratos/axa/axa_f1_v2_r2.png",
+      "art/retratos/marisal/marisal_f3_v1_r1.png",
+      "art/retratos/selenia/selenia_f3_v2.png",
+      "art/retratos/solenne/solenne_f3_v1.png",
+      "art/retratos/cervanda/cervanda_f3_v2.png",
+      "art/retratos/tormentina/tormentina_f3_v1_r1.png",
+      "art/retratos/cupria/cupria_f3_v1.png"
+    ]
+  },
+  "delivery_validation": {
+    "original_blocks_verbatim": true,
+    "all_files_hash_verified": true,
+    "all_images_viewed": true,
+    "contact_sheets_64px_reviewed": true,
+    "selected_phase3_identity_references_match": true,
+    "retry_limit_two_respected": true,
+    "completed_at": "2026-11-05T01:22:12.956451-06:00"
   }
 }
